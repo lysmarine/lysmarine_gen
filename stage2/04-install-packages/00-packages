@@ -1,0 +1,1 @@
+cmake build-essential dialog curl dirmngr apt-transport-https lsb-release cpanminus perl-base git

@@ -3,4 +3,4 @@
 locales	locales/locales_to_be_generated	multiselect	en_GB.UTF-8 UTF-8
 # Default locale for the system environment:
 # Choices: None, C.UTF-8, en_GB.UTF-8
-locales	locales/default_environment_locale	select	en_GB.UTF-8
+locales	locales/default_environment_locale	select	en_US.UTF-8

@@ -1,0 +1,14 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=XyGrib
+Comment=GRIB File Viewer
+Comment[fr]=Visualisation de données météo au format GRIB
+Terminal=false
+Categories=Education
+Icon=/usr/local/share/openGribs/XyGrib/data/img/xyGrib_32.xpm
+Exec=/usr/local/bin/XyGrib
+Name[fr_FR]=XyGrib

@@ -54,3 +54,25 @@
 
 # Enable audio (loads snd_bcm2835)
 dtparam=audio=on
+
+## http://www.raspberrypiwiki.com/index.php/7_inch_HDMI_TFT_Capacitive_Touch_Screen_800x480_SKU:400579
+#max_usb_current=1
+#hdmi_group=2
+#hdmi_mode=1
+#hdmi_mode=87
+#hdmi_cvt 800 480 60 6 0 0 0
+#hdmi_driver=1
+
+## Generic 7Inch screen
+#hdmi_cvt=800 480 60 0 0
+#hdmi_group=2
+#hdmi_mode=87
+#hdmi_drive=2
+
+## http://www.raspberrypiwiki.com/index.php/7_inch_HDMI_LCD_(H)
+#max_usb_current=1
+#hdmi_force_hotplug=1
+#config_hdmi_boost=10
+#hdmi_group=2
+#hdmi_mode=87
+#hdmi_cvt 1024 600 60 6 0 0 0

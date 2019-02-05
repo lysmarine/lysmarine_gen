@@ -1,0 +1,10 @@
+[Service]
+ExecStart=/home/pi/.signalk/signalk-server
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+WorkingDirectory=/home/pi/.signalk
+User=pi
+Environment=EXTERNALPORT=443
+[Install]
+WantedBy=multi-user.target

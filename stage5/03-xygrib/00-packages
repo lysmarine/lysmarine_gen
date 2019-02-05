@@ -1,0 +1,1 @@
+cmake qt5-default qttools5-dev libpng-dev libopenjp2-7-dev libnova-dev libproj-dev zlib1g-dev libbz2-dev
