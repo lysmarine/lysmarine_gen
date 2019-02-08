@@ -1,6 +1,6 @@
 #!/bin/bash -e
-install -d "${ROOTFS_DIR}/home/pi/.themes"
-install -d "${ROOTFS_DIR}/home/pi/.icons"
+install  -d -o 1000 -g 1000 -m 755 -d "${ROOTFS_DIR}/home/pi/.themes"
+install  -d -o 1000 -g 1000 -m 755 -d "${ROOTFS_DIR}/home/pi/.icons"
 
 on_chroot << EOF
 rm -rf openbox-theme-collections
@@ -24,12 +24,12 @@ EOF
 
 
 
-
-install -d -o 1000 -g 1000 "${ROOTFS_DIR}/home/pi/.config/feh/"
-install -d -o 1000 -g 1000 "${ROOTFS_DIR}/home/pi/.config/gtk-3.0/"
-install -d -o 1000 -g 1000 "${ROOTFS_DIR}/home/pi/.config/openbox/"
-install -d -o 1000 -g 1000 "${ROOTFS_DIR}/home/pi/.config/terminator/"
-install -d -o 1000 -g 1000 "${ROOTFS_DIR}/home/pi/.config/tint2/"
+install -d -o 1000 -g 1000 -m 755 "${ROOTFS_DIR}/home/pi/.config/"
+install -d -o 1000 -g 1000 -m 755 "${ROOTFS_DIR}/home/pi/.config/feh/"
+install -d -o 1000 -g 1000 -m 755 "${ROOTFS_DIR}/home/pi/.config/gtk-3.0/"
+install -d -o 1000 -g 1000 -m 755 "${ROOTFS_DIR}/home/pi/.config/openbox/"
+install -d -o 1000 -g 1000 -m 755 "${ROOTFS_DIR}/home/pi/.config/terminator/"
+install -d -o 1000 -g 1000 -m 755 "${ROOTFS_DIR}/home/pi/.config/tint2/"
 install -o 1000 -g 1000  -v files/.gtkrc-2.0    "${ROOTFS_DIR}/home/pi/"
 install -o 1000 -g 1000  -v files/deep-blue.jpg "${ROOTFS_DIR}/home/pi/.config/feh/"
 install -o 1000 -g 1000  -v files/settings.ini  "${ROOTFS_DIR}/home/pi/.config/gtk-3.0/"
