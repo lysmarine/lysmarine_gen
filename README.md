@@ -1,8 +1,25 @@
 # LysMarine-gen
-
 _Tool used to create the lysMarine images_
 
-This is a fork of pi-gen used to build the raspbianOS.  
+This is a fork of [pi-gen](https://github.com/RPi-Distro/pi-gen) used to build the raspbianOS.  
+You have to do` git checkout lysmarine` before building or make any changes.
+
+ > The LysMarine NOOB image and the project information (including contributions guidelines) can be found at [pi-gen](https://gitlab.com/lysmarine/lysmarine)
+
+
+
+# Quick build
+```
+apt-get -y install coreutils quilt parted qemu-user-static debootstrap zerofree pxz zip \
+dosfstools bsdtar libcap2-bin grep rsync xz-utils file git curl
+```
+```
+git clone https://gitlab.com/lysmarine/lysmarine-gen
+git checkout lysmarine
+```
+```
+sudo CLEAN=1 ./build.sh
+```
 
 
 
@@ -19,13 +36,7 @@ dosfstools bsdtar libcap2-bin grep rsync xz-utils file git curl
 
 
 
-## Quick build
-
-`sudo CLEAN=1 ./build.sh`
-
-
-
-## Config
+# Config
 
 The file `depends` contains a list of tools needed to use this tool. The format of this
 package is `<tool>[:<debian-package>]`.
@@ -223,7 +234,7 @@ and modularity.
 
  - **Stage 5** - And now all the Desktop applications.
 
- - **Stage 6** - Compiling opencpn.
+ - **Stage 6** - Compiling openplotter software.
 
 
 
