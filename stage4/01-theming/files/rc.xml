@@ -43,7 +43,7 @@
   </placement>
   <theme>
     <name>Numix-Clone</name>
-    <titleLayout>NLIMC</titleLayout>
+    <titleLayout>LIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
       N: window icon
@@ -85,7 +85,7 @@
     </font>
     <font place="MenuItem">
       <name>sans</name>
-      <size>9</size>
+      <size>11</size>
       <!-- font size in points -->
       <weight>normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -706,7 +706,7 @@
   </menu>
 <applications>
   <application class="*">
-    
+
     <maximized>yes</maximized>
   </application>
 </applications>
