@@ -16,5 +16,5 @@ EOF
 
 
 
-install -d "${ROOTFS_DIR}/home/pi/.local/share/applications/"
+install -o 1000 -g 1000 -d "${ROOTFS_DIR}/home/pi/.local/share/applications/"
 install -o 1000 -g 1000  -v files/open-openbox-menu.desktop    "${ROOTFS_DIR}/home/pi/.local/share/applications/"
