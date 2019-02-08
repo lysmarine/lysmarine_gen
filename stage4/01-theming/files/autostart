@@ -2,4 +2,3 @@ tint2 &
 nm-applet &
 onboard &
 feh --randomize --bg-fill ~/.config/feh/* &
-# pcmanfm --desktop &
