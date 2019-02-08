@@ -219,9 +219,11 @@ and modularity.
  - **Stage 3** - For lysMarine, this is where the "server level" stuff is added.
    If lysmarine would have a headless version, this is where the image would be build.
 
- - **Stage 4** - For lysMarine, this is where the Desktop environment related material.
+ - **Stage 4** - For lysMarine, this is where we add material related to the Desktop environment.
 
- - **Stage 5** - Desktop applications.
+ - **Stage 5** - And now all the Desktop applications.
+
+ - **Stage 6** - Compiling opencpn.
 
 
 
