@@ -5,6 +5,9 @@ install files/XyGrib.desktop "${ROOTFS_DIR}/usr/share/applications/"
 install -d "${ROOTFS_DIR}/usr/local/share/openGribs/XyGrib/data/img/"
 install files/logo_grib.jpg "${ROOTFS_DIR}/usr/local/share/openGribs/XyGrib/data/img/"
 
+install -d -o 1000 -g 1000 "${ROOTFS_DIR}/home/pi/.local/share/applications/openGrib/XyGrib/data/"
+
+
 on_chroot << EOF
 # For Ubuntu/Debian build and install new version of XyGrib from archive file on https://opengribbs.org
 # DomH, 28/08/2018 (modified 21/08/2018, 03/10/2018)
@@ -40,8 +43,6 @@ rm -rf /usr/local/share/openGribs/XyGrib/data
 cd ../
 mv ./data /usr/local/share/openGribs/XyGrib/data
 echo "Successfull new build installed"
-
-      mkdir -p /home/pi/.local/share/applications/openGrib/XyGrib/data
 
 #mv /usr/local/share/openGrib/XyGrib/data/colors /home/pi/.local/share/applications/openGrib/XyGrib/data
 #ln -s /home/pi/.local/share/applications/openGrib/XyGrib/data/colors /usr/local/share/openGribs/XyGrib/data/colors
