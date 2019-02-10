@@ -5,6 +5,6 @@ StandardOutput=syslog
 StandardError=syslog
 WorkingDirectory=/home/pi/.signalk
 User=pi
-Environment=EXTERNALPORT=443
+Environment=EXTERNALPORT=80
 [Install]
 WantedBy=multi-user.target
