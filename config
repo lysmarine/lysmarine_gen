@@ -5,3 +5,4 @@ FIRST_USER_NAME='pi'
 FIRST_USER_PASS='raspberry'
 ENABLE_SSH=0
 STAGE_LIST='stage*'
+IMG_DATE=""
