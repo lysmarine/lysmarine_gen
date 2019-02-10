@@ -9,6 +9,6 @@ Comment=GRIB File Viewer
 Comment[fr]=Visualisation de données météo au format GRIB
 Terminal=false
 Categories=Education
-Icon=/usr/local/share/openGribs/XyGrib/data/img/xyGrib_32.xpm
+Icon=/usr/local/share/openGribs/XyGrib/logo_grib.jpg
 Exec=/usr/local/bin/XyGrib
 Name[fr_FR]=XyGrib

@@ -13,18 +13,12 @@ on_chroot << EOF
 
 # Requested parameters
 # Local folders
-DefaultInstallDir="/"
-AppDir="/usr/local/bin"
-DataDir="/usr/local/share/openGribs/XyGrib"
-DownloadDir=$(pwd)
-
-
 
 wget https://github.com/opengribs/XyGrib/archive/v1.2.4.tar.gz
 tar xf v1.2.4.tar.gz
 mv XyGrib-1.2.4 XyGribSrc
-# create build directory
 mkdir -p XyGribSrc/build
+rm v1.2.4.tar.gz
 
 # Build and install XyGrib new version
 cd XyGribSrc/build
@@ -43,7 +37,8 @@ rm -rf /usr/local/bin/XyGrib
 mv /XyGrib/XyGrib /usr/local/bin/
 mkdir -p /usr/local/share/openGribs/XyGrib
 rm -rf /usr/local/share/openGribs/XyGrib/data
-mv /XyGrib/data /usr/local/bin/
+cd ../
+mv ./data /usr/local/share/openGribs/XyGrib/data
 echo "Successfull new build installed"
 
       mkdir -p /home/pi/.local/share/applications/openGrib/XyGrib/data
@@ -52,7 +47,6 @@ echo "Successfull new build installed"
 #ln -s /home/pi/.local/share/applications/openGrib/XyGrib/data/colors /usr/local/share/openGribs/XyGrib/data/colors
 rm -rf /XyGrib
 rm -rf /XyGribSrc
-rm -rf /XyGribv1.2.4.tar.gz
 
 echo "Done building XyGrib"
 EOF
