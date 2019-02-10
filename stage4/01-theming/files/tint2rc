@@ -132,12 +132,13 @@ launcher_icon_theme_override = 0
 startup_notifications = 0
 launcher_tooltip = 1
 launcher_item_app = ~/.local/share/applications/open-openbox-menu.desktop
-launcher_item_app = /usr/share/applications/opencpn.desktop
-launcher_item_app = /usr/share/applications/chromium-browser.desktop
-launcher_item_app = /usr/share/applications/XyGrib.desktop
-launcher_item_app = /usr/share/applications/pcmanfm.desktop
-launcher_item_app = /usr/share/applications/terminator.desktop
-launcher_item_app = /usr/share/applications/leafpad.desktop
+
+#launcher_item_app = /usr/share/applications/opencpn.desktop
+#launcher_item_app = /usr/share/applications/chromium-browser.desktop
+#launcher_item_app = /usr/share/applications/XyGrib.desktop
+#launcher_item_app = /usr/share/applications/pcmanfm.desktop
+#launcher_item_app = /usr/share/applications/terminator.desktop
+#launcher_item_app = /usr/share/applications/leafpad.desktop
 
 #-------------------------------------
 # Clock
