@@ -108,5 +108,6 @@ our $SCHEMA = [
     ## This option uses the default Openbox's "Exit" action
     #{exit => ['Exit', 'application-exit']},
 
-    {item => ['sudo shutdown -h now','Shutdown']},
+    {item => ['reboot','Reboot']},
+    {item => ['shutdown -h now','Shutdown']},
 ]
