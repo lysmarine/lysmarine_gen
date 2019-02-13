@@ -31,83 +31,30 @@ our $SCHEMA = [
     {sep => 'Navigation'},
 
     #          COMMAND                 LABEL              ICON
-    {item => ['opencpn','Opencpn','']},
-    {item => ['chromium-browser http://localhost:80','Signalk','']},
+    {item => ['opencpn','Opencpn','opencpn']},
     {item => ['chromium-browser http://localhost:4999','Tuktuk','web-browser']},
-    {item => ['XyGrib','XyGrib','']},
-
-
+    {item => ['XyGrib','XyGrib','/usr/local/share/openGribs/XyGrib/data/img/logo_grib.jpg']},
+    {item => ['chromium-browser http://localhost:80','Signalk','/home/pi/.local/share/icons/signalk.png']},
 
     {sep => 'General Applications'},
 
-    #          NAME            LABEL                ICON
-    {cat => ['utility',     'Accessories', 'applications-utilities']},
-    {cat => ['development', 'Development', 'applications-development']},
-    {cat => ['education',   'Education',   'applications-science']},
-    {cat => ['game',        'Games',       'applications-games']},
-    {cat => ['graphics',    'Graphics',    'applications-graphics']},
-    {cat => ['audiovideo',  'Multimedia',  'applications-multimedia']},
-    {cat => ['network',     'Network',     'applications-internet']},
-    {cat => ['office',      'Office',      'applications-office']},
-        {cat => ['other',       'Other',       'applications-other']},
-    {cat => ['settings',    'Settings',    'applications-accessories']},
-    {cat => ['system',      'System',      'applications-system']},
+    {item => ['terminator','Terminal','terminator']},
+    {item => ['chromium-browser','Browser','web-browser']},
+    {item => ['leafpad','Text editor','text-x-generic']},
 
-
-    #             LABEL          ICON
-    #{beg => ['My category',  'cat-icon']},
-    #          ... some items ...
-    #{end => undef},
-
-    #            COMMAND     LABEL        ICON
-    #{pipe => ['obbrowser', 'Disk', 'drive-harddisk']},
-
-    ## Generic advanced settings
-    #{sep       => undef},
-    #{obgenmenu => ['Openbox Settings', 'applications-engineering']},
-    #{sep       => undef},
-
-    ## Custom advanced settings
-    #{sep => undef},
-    #{beg => ['Advanced Settings', 'applications-engineering']},
-
-      # Configuration files
-      #{item => ["$editor ~/.conkyrc",              'Conky RC',    'text-x-generic']},
-      #{item => ["$editor ~/.config/tint2/tint2rc", 'Tint2 Panel', 'text-x-generic']},
-
-      # obmenu-generator category
-      #{beg => ['Obmenu-Generator', 'accessories-text-editor']},
-      #  {item => ["$editor ~/.config/obmenu-generator/schema.pl", 'Menu Schema', 'text-x-generic']},
-      #  {item => ["$editor ~/.config/obmenu-generator/config.pl", 'Menu Config', 'text-x-generic']},
-
-        #{sep  => undef},
-        #{item => ['obmenu-generator -s -c',    'Generate a static menu',             'accessories-text-editor']},
-        #{item => ['obmenu-generator -s -i -c', 'Generate a static menu with icons',  'accessories-text-editor']},
-        #{sep  => undef},
-        #{item => ['obmenu-generator -p',       'Generate a dynamic menu',            'accessories-text-editor']},
-        ##{item => ['obmenu-generator -p -i',    'Generate a dynamic menu with icons', 'accessories-text-editor']},
-        #{sep  => undef},
-
-       # {item => ['obmenu-generator -d', 'Refresh cache', 'view-refresh']},
-      #{end => undef},
-
-      # Openbox category
-      #{beg => ['Openbox', 'openbox']},
-      #  {item => ["$editor ~/.config/openbox/autostart", 'Openbox Autostart',   'text-x-generic']},
-      #  {item => ["$editor ~/.config/openbox/rc.xml",    'Openbox RC',          'text-x-generic']},
-      #  {item => ["$editor ~/.config/openbox/menu.xml",  'Openbox Menu',        'text-x-generic']},
-      #  {item => ['openbox --reconfigure',               'Reconfigure Openbox', 'openbox']},
-      #{end => undef},
-    #{end => undef},
+    {cat => ['utility',     'Accessories', ]},
+    {cat => ['development', 'Development', ]},
+    {cat => ['education',   'Education',   ]},
+    {cat => ['game',        'Games',       ]},
+    {cat => ['graphics',    'Graphics',    ]},
+    {cat => ['audiovideo',  'Multimedia',  ]},
+    {cat => ['network',     'Network',     ]},
+    {cat => ['office',      'Office',      ]},
+    {cat => ['other',       'Other',       ]},
+    {cat => ['settings',    'Settings',    ]},
+    {cat => ['system',      'System',      ]},
 
     {sep => undef},
-
-    ## The xscreensaver lock command
-    # {item => ['xscreensaver-command -lock', 'Lock', 'system-lock-screen']},
-
-    ## This option uses the default Openbox's "Exit" action
-    #{exit => ['Exit', 'application-exit']},
-
     {item => ['reboot','Reboot']},
     {item => ['shutdown -h now','Shutdown']},
 ]
