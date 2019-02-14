@@ -1,6 +1,8 @@
 [global_config]
+  broadcast_default = off
   dbus = False
-  enabled_plugins = ,
+  inactive_color_offset = 1.0
+  title_transmit_bg_color = "#2e3436"
 [keybindings]
 [layouts]
   [[default]]

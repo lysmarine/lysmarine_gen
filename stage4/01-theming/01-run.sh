@@ -37,4 +37,5 @@ install -o 1000 -g 1000  -v files/deep-blue.jpg "${ROOTFS_DIR}/home/pi/.config/f
 install -o 1000 -g 1000  -v files/settings.ini  "${ROOTFS_DIR}/home/pi/.config/gtk-3.0/"
 install -o 1000 -g 1000  -v files/autostart     "${ROOTFS_DIR}/home/pi/.config/openbox/"
 install -o 1000 -g 1000  -v files/rc.xml        "${ROOTFS_DIR}/home/pi/.config/openbox/"
+install -o 1000 -g 1000  -v files/config        "${ROOTFS_DIR}/home/pi/.config/terminator/"
 install -o 1000 -g 1000  -v files/tint2rc       "${ROOTFS_DIR}/home/pi/.config/tint2/"
