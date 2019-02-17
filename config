@@ -4,5 +4,4 @@ USE_QEMU=0
 FIRST_USER_NAME='pi'
 FIRST_USER_PASS='raspberry'
 ENABLE_SSH=0
-STAGE_LIST='stage*'
-IMG_DATE=""
+STAGE_LIST='stage* 90-tuktuk 91-xygrib 95-opencpn 99-package'
