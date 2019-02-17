@@ -14,5 +14,5 @@ cd RTIMULib2/Linux/python
 python setup.py build
 python setup.py install
 cd ../../
-rm -rf RTIMULib2
+rm -rf /RTIMULib2
 EOF
