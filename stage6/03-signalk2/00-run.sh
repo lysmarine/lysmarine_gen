@@ -1,5 +1,6 @@
 #!/bin/bash -e
 
+install -o 1000 -g 1000 -d "${ROOTFS_DIR}/home/pi/.config"
 on_chroot << EOF
   cd /home/pi/.config/
   git clone https://github.com/SignalK/signalk-server-node.git
@@ -10,5 +11,5 @@ on_chroot << EOF
   chown -R pi:pi signalk-server-node
 
 EOF
-
+install -o 1000 -g 1000 -d "${ROOTFS_DIR}/home/pi/.signalk"
 install -o 1000 -g 1000 files/security.json "${ROOTFS_DIR}/home/pi/.signalk/security.json"
