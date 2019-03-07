@@ -2,7 +2,8 @@ gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base gstreamer1.0-plugins-g
 nodejs libavahi-compat-libdnssd-dev network-manager git
 
 terminator pcmanfm feh network-manager-gnome
-xorg openbox xbacklight lxappearance tint2 gmrun xdotool xsettingsd
+openbox xbacklight lxappearance tint2 gmrun xdotool xsettingsd
+xserver-xorg xinit xserver-xorg-video-fbdev
 libgtk2-perl
 notify-osd
 chromium-browser leafpad gsimplecal
