@@ -6,22 +6,21 @@ on_chroot << EOF
 rm -rf openbox-theme-collections
 rm -rf flat-remix
 rm -rf gtk-theme-collections
+rm -rf Ant-Dracula
 git clone -q https://github.com/addy-dclxvi/openbox-theme-collections
 git clone -q https://github.com/daniruiz/flat-remix
 git clone -q https://github.com/EliverLara/Ant-Dracula
 
-
-cp -r ./openbox-theme-collections/Numix-Clone /home/pi/.themes/
+cp -rf ./openbox-theme-collections/Numix-Clone /home/pi/.themes/
 chown -R pi:pi /home/pi/.themes/Numix-Clone
-cp -r flat-remix/Flat-Remix-Dark /home/pi/.icons/
+cp -rf flat-remix/Flat-Remix-Red-Dark /home/pi/.icons/Flat-Remix-Dark
 chown -R pi:pi /home/pi/.icons/Flat-Remix-Dark
-cp -r ./Ant-Dracula /home/pi/.themes/
+cp -rf ./Ant-Dracula /home/pi/.themes/
 chown -R pi:pi /home/pi/.themes
 
 rm -rf openbox-theme-collections
 rm -rf flat-remix
 rm -rf Ant-Dracula
-
 EOF
 
 
