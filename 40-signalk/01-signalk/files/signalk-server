@@ -1,2 +1,2 @@
 #!/bin/sh
-/usr/lib/node_modules/signalk-server/bin/signalk-server -c /home/pi/.signalk $*
+/usr/lib/node_modules/signalk-server/bin/signalk-server -c /home/signalk/.signalk $*
