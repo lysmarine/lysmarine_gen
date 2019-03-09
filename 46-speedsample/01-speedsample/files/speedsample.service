@@ -1,0 +1,8 @@
+[Service]
+ExecStart=/usr/bin/node /opt/speedSample/app.js -P 80 -w 4998
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+WorkingDirectory=/opt/speedSample
+[Install]
+WantedBy=multi-user.target
