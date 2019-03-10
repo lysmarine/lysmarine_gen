@@ -705,8 +705,7 @@
     <!-- show the manage desktops section in the client-list-(combined-)menu -->
   </menu>
 <applications>
-  <application class="*">
-
+  <application type="normal">
     <maximized>yes</maximized>
   </application>
 </applications>
