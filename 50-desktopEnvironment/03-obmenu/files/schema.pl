@@ -32,15 +32,20 @@ our $SCHEMA = [
 
     #          COMMAND                 LABEL              ICON
     {item => ['opencpn','Opencpn','opencpn']},
-    {item => ['chromium-browser http://localhost:4999','Tuktuk','web-browser']},
+    {item => ['chromium-browser http://localhost:4999','Tuktuk','android-studio']},
     {item => ['XyGrib','XyGrib','/usr/local/share/openGribs/XyGrib/data/img/logo_grib.jpg']},
     {item => ['chromium-browser http://localhost:80','Signalk','/home/pi/.local/share/icons/signalk.png']},
+    {item => ['chromium-browser http://localhost:4998','SpeedSample','utilities-system-monitor']},
 
     {sep => 'General Applications'},
 
-    {item => ['terminator','Terminal','terminator']},
-    {item => ['chromium-browser','Browser','web-browser']},
+    {item => ['x-terminal-emulator','Terminal','terminator']},
+    {item => ['x-www-browser','Browser','web-browser']},
     {item => ['leafpad','Text editor','text-x-generic']},
+    {item => ['pcmanfm','File Manager','file-manager']},
+    {item => ['pavucontrol','Volume','pavucontrol']},
+
+    {sep => '---------------'},
 
     {cat => ['utility',     'Accessories', ]},
     {cat => ['development', 'Development', ]},
