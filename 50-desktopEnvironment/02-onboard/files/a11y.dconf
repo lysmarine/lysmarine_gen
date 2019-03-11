@@ -1,0 +1,5 @@
+[gnome/desktop/a11y/applications]
+toolkit-accessibility=true
+
+[org/gnome/desktop/interface]
+toolkit-accessibility=true
