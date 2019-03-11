@@ -4,4 +4,5 @@ USE_QEMU=0
 FIRST_USER_NAME='pi'
 FIRST_USER_PASS='raspberry'
 ENABLE_SSH=0
-STAGE_LIST='stage* 20-boot 30-gpsd 40-signalk 45-tuktuk 46-speedsample 50-desktopEnvironment 91-xygrib 95-opencpn 99-EXPORT'
+#STAGE_LIST='stage* 20-boot 21-time 22-networkInterfaces 30-gpsd 40-signalk 45-tuktuk 46-speedsample 50-desktopEnvironment 91-xygrib 95-opencpn 98-cleanup 99-EXPORT'
+STAGE_LIST=' stage* 20-boot 22-networkInterfaces  30-gpsd 50-desktopEnvironment 98-cleanup 99-EXPORT'
