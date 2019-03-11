@@ -12,7 +12,7 @@ dtoverlay=w1-gpio
 
 
 
-### screen preset ################################
+### lysmarine - screen preset ####################
 ## http://www.raspberrypiwiki.com/index.php/7_inch_HDMI_TFT_Capacitive_Touch_Screen_800x480_SKU:400579
 #max_usb_current=1
 #hdmi_group=2
