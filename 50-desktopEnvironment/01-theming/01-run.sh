@@ -13,7 +13,7 @@ git clone -q https://github.com/EliverLara/Ant-Dracula
 
 cp -rf ./openbox-theme-collections/Numix-Clone /home/pi/.themes/
 chown -R pi:pi /home/pi/.themes/Numix-Clone
-cp -rf flat-remix/Flat-Remix-Red-Dark /home/pi/.icons/Flat-Remix-Dark
+cp -rf flat-remix/Flat-Remix-Blue /home/pi/.icons/Flat-Remix-Dark
 chown -R pi:pi /home/pi/.icons/Flat-Remix-Dark
 cp -rf ./Ant-Dracula /home/pi/.themes/
 chown -R pi:pi /home/pi/.themes
