@@ -9,5 +9,4 @@ libgtk2-perl
 chromium-browser leafpad gsimplecal
 pavucontrol
 cpanminus perl-base dialog
-wicd wicd-curses wicd-gtk
 lxterminal
