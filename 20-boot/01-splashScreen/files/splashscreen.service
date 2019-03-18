@@ -4,7 +4,7 @@ DefaultDependencies=no
 After=local-fs.target
 
 [Service]
-ExecStart=/bash/sh /bin/splashScreen
+ExecStart=/bin/sh /bin/splashScreen
 StandardInput=tty
 StandardOutput=tty
 
