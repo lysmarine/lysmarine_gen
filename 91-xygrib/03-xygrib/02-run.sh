@@ -3,53 +3,29 @@ install -d "${ROOTFS_DIR}/usr/share/applications/"
 install files/XyGrib.desktop "${ROOTFS_DIR}/usr/share/applications/"
 
 install -d "${ROOTFS_DIR}/usr/local/share/openGribs/XyGrib/data/img/"
-
-
 install -d -o 1000 -g 1000 "${ROOTFS_DIR}/home/pi/.local/share/applications/openGrib/XyGrib/data/"
 
 
 on_chroot << EOF
-# For Ubuntu/Debian build and install new version of XyGrib from archive file on https://opengribbs.org
-# DomH, 28/08/2018 (modified 21/08/2018, 03/10/2018)
-# Based of the script found at https://github.com/dominiquehausser/XyGrib/releases/download/v1.1.1/Xygrib_download_build.sh
-
-
-# Requested parameters
-# Local folders
 
 wget https://github.com/opengribs/XyGrib/archive/v1.2.4.tar.gz
 tar xf v1.2.4.tar.gz
-mv XyGrib-1.2.4 XyGribSrc
-mkdir -p XyGribSrc/build
 rm v1.2.4.tar.gz
+mv -f XyGrib-1.2.4 XyGrib
 
-# Build and install XyGrib new version
-cd XyGribSrc/build
-cmake -DCMAKE_INSTALL_PREFIX= ..
-echo "==cmakedone============="
+cd XyGrib
+mkdir -p build
+cd build
 
-make 1>Xygrib.std 2>Xygrib.err
-echo "==============="
-cat Xygrib.err
-echo "==============="
-
-echo "make Done, now running make install "
-
+cmake ..
+make
 make install
-rm -rf /usr/local/bin/XyGrib
-mv /XyGrib/XyGrib /usr/local/bin/
-mkdir -p /usr/local/share/openGribs/XyGrib
-rm -rf /usr/local/share/openGribs/XyGrib/data
-cd ../
-mv ./data /usr/local/share/openGribs/XyGrib/data
-echo "Successfull new build installed"
 
-#mv /usr/local/share/openGrib/XyGrib/data/colors /home/pi/.local/share/applications/openGrib/XyGrib/data
-#ln -s /home/pi/.local/share/applications/openGrib/XyGrib/data/colors /usr/local/share/openGribs/XyGrib/data/colors
+cd /
 rm -rf /XyGrib
-rm -rf /XyGribSrc
 
-echo "Done building XyGrib"
 EOF
 
+install files/XyGrib -m755 "${ROOTFS_DIR}/bin/"
+install files/XyGrib.desktop "${ROOTFS_DIR}/usr/share/applications"
 install files/logo_grib.jpg "${ROOTFS_DIR}/usr/local/share/openGribs/XyGrib/data/img/"
