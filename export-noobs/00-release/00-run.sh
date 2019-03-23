@@ -6,9 +6,9 @@ install -v -m 744	files/partition_setup.sh	"${NOOBS_DIR}/"
 install -v		files/partitions.json		"${NOOBS_DIR}/"
 install -v		files/os.json			"${NOOBS_DIR}/"
 install -v		files/OS.png			"${NOOBS_DIR}/"
-install -v		files/release_notes.txt		"${NOOBS_DIR}/"
 
-tar -v -c -C		files/marketing			-f "${NOOBS_DIR}/marketing.tar" .
+
+
 
 BOOT_SIZE="$(xz --robot -l "${NOOBS_DIR}/boot.tar.xz"  | grep totals | cut -f 5)"
 ROOT_SIZE="$(xz --robot -l "${NOOBS_DIR}/root.tar.xz"  | grep totals | cut -f 5)"
@@ -31,6 +31,5 @@ sed "${NOOBS_DIR}/os.json" -i -e "s|UNRELEASED|${IMG_DATE}|"
 sed "${NOOBS_DIR}/os.json" -i -e "s|NOOBS_NAME|${NOOBS_NAME}|"
 sed "${NOOBS_DIR}/os.json" -i -e "s|NOOBS_DESCRIPTION|${NOOBS_DESCRIPTION}|"
 
-sed "${NOOBS_DIR}/release_notes.txt" -i -e "s|UNRELEASED|${IMG_DATE}|"
 
 cp -a "${NOOBS_DIR}" "${DEPLOY_DIR}/"

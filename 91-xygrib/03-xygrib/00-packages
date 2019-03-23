@@ -1,0 +1,3 @@
+git cmake build-essential
+qt5-default qttools5-dev qtbase5-dev libqt5widgets5
+libpng-dev libopenjp2-7-dev libnova-dev libproj-dev zlib1g-dev libbz2-dev

@@ -1,0 +1,7 @@
+[Unit]
+Description=GPS Daemon for the devices managed by lysMarine
+After=chronyd.service
+
+[Service]
+EnvironmentFile=-/etc/default/gpsd
+ExecStart=/usr/sbin/gpsd -N $GPSD_OPTIONS -S 2947%i /dev/ttyLYS_gps_%i

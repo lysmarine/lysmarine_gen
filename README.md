@@ -1,14 +1,38 @@
-# pi-gen
+# LysMarine-gen
+_Tool used to create the lysMarine images_
 
-_Tool used to create the raspberrypi.org Raspbian images_
+This is a fork of [pi-gen](https://github.com/RPi-Distro/pi-gen) used to build the raspbianOS.  
+You have to do` git checkout lysmarine` before building or make any changes.
+
+ > The LysMarine NOOB image and the project information (including contributions guidelines) can be found at [pi-gen](https://gitlab.com/lysmarine/lysmarine)
+
+
+
+# Quick build
+```
+apt-get -y install coreutils quilt parted qemu-user-static debootstrap zerofree pxz zip \
+dosfstools bsdtar libcap2-bin grep rsync xz-utils file git curl
+```
+```
+git clone https://gitlab.com/lysmarine/lysmarine-gen
+git checkout lysmarine
+```
+```
+sudo CLEAN=1 ./build.sh
+```
+
 
 
 ## Dependencies
 
+
+Pi-gen is currently supported only on Debian Stretch and Ubuntu Xenial
+=======
 pi-gen runs on Debian based operating systems. Currently it is only supported on
 either Debian Stretch or Ubuntu Xenial and is known to have issues building on
 earlier releases of these systems. On other Linux distributions it may be possible
 to use the Docker build described below.
+
 
 To install the required dependencies for pi-gen you should run:
 
@@ -17,11 +41,12 @@ apt-get install coreutils quilt parted qemu-user-static debootstrap zerofree zip
 dosfstools bsdtar libcap2-bin grep rsync xz-utils file git curl
 ```
 
-The file `depends` contains a list of tools needed.  The format of this
+
+
+# Config
+
+The file `depends` contains a list of tools needed to use this tool. The format of this
 package is `<tool>[:<debian-package>]`.
-
-
-## Config
 
 Upon execution, `build.sh` will source the file `config` in the current
 working directory.  This bash shell fragment is intended to set needed
@@ -62,7 +87,7 @@ The following environment variables are supported:
    be built and cached.  Note, `WORK_DIR` stores a complete copy of the target
    system for each build stage, amounting to tens of gigabytes in the case of
    Raspbian.
-   
+
    **CAUTION**: If your working directory is on an NTFS partition you probably won't be able to build. Make sure this is a proper Linux filesystem.
 
  * `DEPLOY_DIR`  (Default: `"$BASE_DIR/deploy"`)
@@ -98,19 +123,7 @@ The following environment variables are supported:
 
     If set, then instead of working through the numeric stages in order, this list will be followed. For example setting to `stage0 stage1 mystage stage2` will run the contents of `mystage` before stage2. An absolute or relative path can be given for stages outside the pi-gen directory.
 
-A simple example for building Raspbian:
 
-```bash
-IMG_NAME='Raspbian'
-```
-
-The config file can also be specified on the command line as an argument the `build.sh` or `build-docker.sh` scripts.
-
-```
-./build.sh -c myconfig
-```
-
-This is parsed after `config` so can be used to override values set there.
 
 ## How the build process works
 
@@ -201,13 +214,11 @@ starting the `./build-docker.sh` script (or using your own docker build
 solution).
 
 
-## Stage Anatomy
 
-### Raspbian Stage Overview
+## lysMarine Stage Anatomy
 
-The build of Raspbian is divided up into several stages for logical clarity
-and modularity.  This causes some initial complexity, but it simplifies
-maintenance and allows for more easy customization.
+The build of lysMarine is divided up into several stages for logical clarity
+and modularity.
 
  - **Stage 0** - bootstrap.  The primary purpose of this stage is to create a
    usable filesystem.  This is accomplished largely through the use of
@@ -219,7 +230,7 @@ maintenance and allows for more easy customization.
 
  - **Stage 1** - truly minimal system.  This stage makes the system bootable by
    installing system files like `/etc/fstab`, configures the bootloader, makes
-   the network operable, and installs packages like raspi-config.  At this
+   the network operable, and installs some packages.  At this
    stage the system should boot to a local console from which you have the
    means to perform basic tasks needed to configure and install the system.
    This is as minimal as a system can possibly get, and its arguably not
@@ -233,27 +244,20 @@ maintenance and allows for more easy customization.
    creates necessary groups and gives the pi user access to sudo and the
    standard console hardware permission groups.
 
-   There are a few tools that may not make a whole lot of sense here for
-   development purposes on a minimal system such as basic Python and Lua
-   packages as well as the `build-essential` package.  They are lumped right
-   in with more essential packages presently, though they need not be with
-   pi-gen.  These are understandable for Raspbian's target audience, but if
-   you were looking for something between truly minimal and Raspbian-Lite,
-   here's where you start trimming.
+   For lysMarine this is where we add sources and others underlying things
+   we will be need to create what make lysMarine.
 
- - **Stage 3** - desktop system.  Here's where you get the full desktop system
-   with X11 and LXDE, web browsers, git for development, Raspbian custom UI
-   enhancements, etc.  This is a base desktop system, with some development
-   tools installed.
+ - **Stage 3** - For lysMarine, this is where the "server level" stuff is added.
+   If lysmarine would have a headless version, this is where the image would be build.
 
- - **Stage 4** - Raspbian system meant to fit on a 4GB card.  More development
-   tools, an email client, learning tools like Scratch, specialized packages
-   like sonic-pi, system documentation, office productivity, etc.  This is the
-   stage that installs all of the things that make Raspbian friendly to new
-   users.
+ - **Stage 4** - For lysMarine, this is where we add material related to the Desktop environment.
 
- - **Stage 5** - The official Raspbian Desktop image. Right now only adds
-   Mathematica.
+ - **Stage 5** - And now all the Desktop applications.
+
+ - **Stage 6** - Compiling openplotter software.
+
+
+
 
 ### Stage specification
 

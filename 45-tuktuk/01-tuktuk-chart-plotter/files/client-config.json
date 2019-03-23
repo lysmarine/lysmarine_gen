@@ -1,0 +1,30 @@
+{
+  "data": [
+    {
+      "type": "signalk",
+      "address": "localhost:80"
+    }
+  ],
+  "course": "COG",
+  "follow": true,
+  "showInstruments": true,
+  "zoom": 1,
+  "charts": [
+    {
+      "index": 1,
+      "type": "signalk",
+      "address": ":80",
+      "enabled": true
+    },
+    {
+      "index": 2,
+      "enabled": false,
+      "type": "tilelayer",
+      "maxzoom": 15,
+      "minzoom": 1,
+      "name": "OpenStreetMap",
+      "description": "OSM charts.",
+      "tilemapUrl": "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    }
+  ]
+}
