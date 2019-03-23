@@ -11,13 +11,13 @@ opencpn-plugin-dr
 opencpn-plugin-rtlsdr
 opencpn-plugin-s63
 opencpn-plugin-iacfleet
-opencpn-plugin-climatology-data
+#opencpn-plugin-climatology-data
 opencpn-plugin-vdr
 opencpn-plugin-launcher
 opencpn-plugin-aisradar
 opencpn-plugin-wmm
 opencpn-plugin-projections
-opencpn-plugin-climatology
+#opencpn-plugin-climatology
 opencpn-plugin-weatherfax
 opencpn-plugin-rotationctrl
 opencpn-plugin-draw
