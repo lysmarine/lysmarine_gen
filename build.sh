@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# shellcheck disable=SC2119,SC1091
+# shellcheck disable=SC2119
 run_sub_stage()
 {
 	log "Begin ${SUB_STAGE_DIR}"
@@ -102,7 +102,7 @@ run_stage(){
 			./prerun.sh
 			log "End ${STAGE_DIR}/prerun.sh"
 		fi
-		for SUB_STAGE_DIR in ${STAGE_DIR}/*; do
+		for SUB_STAGE_DIR in "${STAGE_DIR}"/*; do
 			if [ -d "${SUB_STAGE_DIR}" ] &&
 			   [ ! -f "${SUB_STAGE_DIR}/SKIP" ]; then
 				run_sub_stage
@@ -124,6 +124,7 @@ fi
 
 
 if [ -f config ]; then
+	# shellcheck disable=SC1091
 	source config
 fi
 
@@ -132,10 +133,16 @@ do
 	case "$flag" in
 		c)
 			EXTRA_CONFIG="$OPTARG"
+			# shellcheck disable=SC1090
 			source "$EXTRA_CONFIG"
+			;;
+		*)
 			;;
 	esac
 done
+
+export PI_GEN=${PI_GEN:-pi-gen}
+export PI_GEN_REPO=${PI_GEN_REPO:-https://github.com/RPi-Distro/pi-gen}
 
 if [ -z "${IMG_NAME}" ]; then
 	echo "IMG_NAME not set" 1>&2
@@ -196,6 +203,11 @@ if [[ ! "$FIRST_USER_NAME" =~ ^[a-z][-a-z0-9_]*$ ]]; then
 	exit 1
 fi
 
+if [[ -n "${APT_PROXY}" ]] && ! curl --silent ${APT_PROXY} >/dev/null ; then
+	echo "Could not reach APT_PROXY server:" ${APT_PROXY}
+	exit 1
+fi
+
 dependencies_check "${BASE_DIR}/depends"
 
 mkdir -p "${WORK_DIR}"
@@ -203,8 +215,8 @@ log "Begin ${BASE_DIR}"
 
 STAGE_LIST=${STAGE_LIST:-${BASE_DIR}/stage*}
 
-for STAGE_DIR_ in $STAGE_LIST; do
-	STAGE_DIR=`realpath "${STAGE_DIR_}"`
+for STAGE_DIR in $STAGE_LIST; do
+	STAGE_DIR=$(realpath "${STAGE_DIR}")
 	run_stage
 done
 
