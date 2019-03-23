@@ -8,9 +8,9 @@ EOF
 
 on_chroot << EOF
   cd /opt/
-  git clone https://github.com/sailoog/openplotter.git
+  git clone https://gitlab.com/FredericGuilbault/openplotter.git
   cd openplotter
-  git checkout v2.x.x ; # We should use a fix commit hash to have reproductive builds
+  git checkout  lysmarine_flavor
 EOF
 
 install -d -o 1000 -g 1000 "${ROOTFS_DIR}/home/pi/.local/share/applications/"
