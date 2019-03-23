@@ -5,11 +5,10 @@ on_chroot << EOF
    cd /opt/
    git clone https://gitlab.com/FredericGuilbault/tuktuk-chart-plotter
    cd tuktuk-chart-plotter
+   pwd
    git checkout lysmarine/master
-   #npm install sqlite3 --unsafe-perm ;
-   echo " - Sqlite 3 done"
 
-   npm install --unsafe-perm ;
+   npm install --unsafe-perm --cache /tmp/empty-cache;
    echo " -package Install done"
 
    NODE_ENV=production npm run bundle:js

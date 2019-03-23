@@ -1,5 +1,3 @@
-feh --randomize --bg-fill ~/.config/feh/* &
-#lxpanel &
-tint2 &
-sleep 1 ; nm-applet &
-sleep 1 ; onboard &
+feh --randomize --bg-fill ~/.config/feh/* > /dev/null &
+nm-applet &
+onboard &

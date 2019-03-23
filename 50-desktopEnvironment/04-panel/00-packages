@@ -1,2 +1,6 @@
-lxpanel
+#lxpanel
+#tint2
 gsimplecal pavucontrol
+#alacarte
+#fbpanel
+libgtk2.0-dev

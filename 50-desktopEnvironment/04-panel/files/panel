@@ -16,7 +16,7 @@ Global {
   usefontsize=1
   fontsize=20
   background=1
-  backgroundfile=/usr/share/panelbg.png
+  backgroundfile=/home/pi/.icons/Flat-Remix-Dark/categories/scalable/applications-boardgames.svg
   iconsize=38
   align=left
 }
@@ -30,25 +30,25 @@ Plugin {
   type=menu
   Config {
     image=/usr/share/splash.png
-    system {
-    }
-    separator {
-    }
     item {
       command=run
     }
     separator {
     }
+    system {
+    }
+    separator {
+    }
     item {
-      image=gnome-logout
-      command=logout
+      image=gnome-shutdown
+      command=shutdown
     }
   }
 }
 Plugin {
   type=space
   Config {
-    Size=65
+    Size=60
   }
 }
 Plugin {
@@ -56,14 +56,14 @@ Plugin {
   expand=1
   Config {
     tooltips=1
-    IconsOnly=-1
+    IconsOnly=1
     AcceptSkipPager=1
     ShowIconified=1
     ShowMapped=1
     ShowAllDesks=-1
     UseMouseWheel=1
     UseUrgencyHint=1
-    FlatButton=-1
+    FlatButton=true
     MaxTaskWidth=23
     spacing=5
     DisableUpscale=0
@@ -75,16 +75,9 @@ Plugin {
   Config {
     ClockFmt=%H%n%M
     TooltipFmt=%A %x
-    BoldFont=0
+    BoldFont=1
     IconOnly=0
-    CenterText=0
-  }
-}
-Plugin {
-  type=volume
-  Config {
-    CardNumber=0
-    MasterChannel=PCM
+    CenterText=1
   }
 }
 Plugin {
