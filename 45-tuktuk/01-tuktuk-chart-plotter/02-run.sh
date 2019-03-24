@@ -5,7 +5,6 @@ on_chroot << EOF
    cd /opt/
    git clone https://gitlab.com/FredericGuilbault/tuktuk-chart-plotter
    cd tuktuk-chart-plotter
-   pwd
    git checkout lysmarine/master
 
    npm install --unsafe-perm --cache /tmp/empty-cache;

@@ -5,4 +5,4 @@ StandardOutput=syslog
 StandardError=syslog
 WorkingDirectory=/opt/tuktuk-chart-plotter
 [Install]
-WantedBy=multi-user.target
+WantedBy=graphical.target
