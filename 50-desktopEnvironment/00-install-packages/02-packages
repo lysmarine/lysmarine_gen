@@ -10,3 +10,5 @@ chromium-browser leafpad gsimplecal
 pavucontrol
 cpanminus perl-base dialog
 lxterminal
+tightvncserver
+luakit
