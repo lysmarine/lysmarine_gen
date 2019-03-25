@@ -10,4 +10,7 @@ on_chroot << EOF
 EOF
 
 install -m 644 -v files/speedsample.service  "${ROOTFS_DIR}/etc/systemd/system/speedsample.service"
-ln -sf "${ROOTFS_DIR}/etc/systemd/system/speedsample.service" "${ROOTFS_DIR}/etc/systemd/system/multi-user.target.wants/speedsample.service"
+#ln -sf "${ROOTFS_DIR}/etc/systemd/system/speedsample.service" "${ROOTFS_DIR}/etc/systemd/system/graphical.target.wants/speedsample.service"
+on_chroot << EOF
+  systemctl enable speedsample.service
+EOF
