@@ -148,7 +148,13 @@ Plugin {
     type = dclock
     config {
         TooltipFmt = %A %x
-        Action = xmessage Please define some command &
+        Action = gsimplecal
         Color = #ffffff
+    }
+}
+Plugin {
+    type = space
+    config {
+        size = 5
     }
 }
