@@ -5,6 +5,9 @@ apt-get update -y
 EOF
 
 install -m 755 -o 1001 -g 1001  -d "${ROOTFS_DIR}/home/signalk/.signalk"
+install -m 755 -o 1001 -g 1001  -d "${ROOTFS_DIR}/home/signalk/.signalk/plugin-config-data"
+install -m 644 -o 1001 -g 1001   files/set-system-time.json  "${ROOTFS_DIR}/home/signalk/.signalk/plugin-config-data/"
+
 install -m 644 -o 1001 -g 1001   files/defaults.json  "${ROOTFS_DIR}/home/signalk/.signalk/defaults.json"
 install -m 644 -o 1001 -g 1001   files/package.json   "${ROOTFS_DIR}/home/signalk/.signalk/package.json"
 install -m 644 -o 1001 -g 1001   files/settings.json  "${ROOTFS_DIR}/home/signalk/.signalk/settings.json"
@@ -22,3 +25,9 @@ install -m 644 -v files/signalk.socket  "${ROOTFS_DIR}/etc/systemd/system/signal
 
 ln -sf "${ROOTFS_DIR}/etc/systemd/system/signalk.service" "${ROOTFS_DIR}/etc/systemd/system/multi-user.target.wants/signalk.service"
 ln -sf "${ROOTFS_DIR}/etc/systemd/system/signalk.socket"  "${ROOTFS_DIR}/etc/systemd/system/multi-user.target.wants/signalk.socket"
+
+
+
+on_chroot << EOF
+  echo "signalk ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+EOF

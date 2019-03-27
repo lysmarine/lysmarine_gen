@@ -32,7 +32,7 @@ install -d -o 1000 -g 1000 -m 755 "${ROOTFS_DIR}/home/pi/.config/openbox/"
 install -d -o 1000 -g 1000 -m 755 "${ROOTFS_DIR}/home/pi/.config/terminator/"
 
 install -o 1000 -g 1000  -v files/.gtkrc-2.0    "${ROOTFS_DIR}/home/pi/"
-install -o 1000 -g 1000  -v files/deep-blue.jpg "${ROOTFS_DIR}/home/pi/.config/feh/"
+install -o 1000 -g 1000  -v files/water.jpg     "${ROOTFS_DIR}/home/pi/.config/feh/"
 install -o 1000 -g 1000  -v files/settings.ini  "${ROOTFS_DIR}/home/pi/.config/gtk-3.0/"
 install -o 1000 -g 1000  -v files/autostart     "${ROOTFS_DIR}/home/pi/.config/openbox/"
 install -o 1000 -g 1000  -v files/rc.xml        "${ROOTFS_DIR}/home/pi/.config/openbox/"
