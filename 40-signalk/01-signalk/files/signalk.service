@@ -11,4 +11,4 @@ User=signalk
 Environment=EXTERNALPORT=80
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=graphical.target

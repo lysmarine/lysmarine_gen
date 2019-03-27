@@ -1,3 +1,7 @@
+[Unit]
+Require=signalk.service
+After=graphical.target
+
 [Service]
 ExecStart=/usr/bin/node /opt/tuktuk-chart-plotter/index.js
 Restart=always
