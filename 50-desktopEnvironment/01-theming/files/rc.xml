@@ -643,7 +643,7 @@
     </context>
     <context name="Root">
       <!-- Menus -->
-      <mousebind button="Middle" action="Press">
+      <!-- <mousebind button="Middle" action="Press">
         <action name="ShowMenu">
           <menu>client-list-combined-menu</menu>
         </action>
@@ -652,10 +652,10 @@
         <action name="ShowMenu">
           <menu>root-menu</menu>
         </action>
-      </mousebind>
+      </mousebind> -->
     </context>
     <context name="MoveResize">
-      <mousebind button="Up" action="Click">
+      <!-- <mousebind button="Up" action="Click">
         <action name="GoToDesktop">
           <to>previous</to>
         </action>
@@ -674,7 +674,7 @@
         <action name="GoToDesktop">
           <to>next</to>
         </action>
-      </mousebind>
+      </mousebind> -->
     </context>
   </mouse>
   <menu>

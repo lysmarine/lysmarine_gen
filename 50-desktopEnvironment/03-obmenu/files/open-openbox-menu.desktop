@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Menu
-Exec=xdotool mousemove 42 10 && xdotool key ctrl+alt+space
-Terminal=false
-Icon=/home/pi/.icons/Flat-Remix-Dark/categories/scalable/applications-boardgames.svg
