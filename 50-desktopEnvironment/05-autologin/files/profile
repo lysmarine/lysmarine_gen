@@ -22,6 +22,8 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
+clear;
+cat /etc/motd;
 exec startx &> /dev/null
 logout
 fi
