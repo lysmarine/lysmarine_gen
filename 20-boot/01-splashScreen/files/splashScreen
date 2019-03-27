@@ -1,4 +1,4 @@
 #!/bin/sh
 chvt 8
 clear
-fbi -once -timeout 20 -noverbose -nocomments -noedit /usr/share/splash.png &> /dev/null
+fbi -once -timeout 30 -noverbose -nocomments -noedit /usr/share/splash.png 2> /dev/null
