@@ -63,7 +63,7 @@ Plugin {
         item {
             icon = utilities-system-monitor
             name = SpeedSample
-            action = chromium-browser http://localhost:4998
+            action = luakit http://localhost:4998
         }
         separator {
         }
@@ -97,7 +97,6 @@ Plugin {
         systemmenu {
         }
         separator {
-        name = ---SYSTEM---
         }
         item {
             icon = reboot
