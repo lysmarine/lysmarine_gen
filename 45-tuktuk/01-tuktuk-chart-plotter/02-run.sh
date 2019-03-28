@@ -23,4 +23,7 @@ install -m 644 -v files/tuktuk.service  "${ROOTFS_DIR}/etc/systemd/system/tuktuk
 
 on_chroot << EOF
   systemctl enable tuktuk.service
+
+  rm -rf /opt/tuktuk-chart-plotter/charts
+  ln -s /srv/charts /opt/tuktuk-chart-plotter/charts;
 EOF

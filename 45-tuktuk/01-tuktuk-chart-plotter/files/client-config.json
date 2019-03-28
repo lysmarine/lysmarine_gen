@@ -2,7 +2,7 @@
   "data": [
     {
       "type": "signalk",
-      "address": "localhost:80"
+      "address": ":80"
     }
   ],
   "course": "COG",
@@ -10,6 +10,11 @@
   "showInstruments": true,
   "zoom": 1,
   "charts": [
+    {
+        "index": 0,
+        "type": "local",
+        "enabled":true
+    },
     {
       "index": 1,
       "type": "signalk",
