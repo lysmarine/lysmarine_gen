@@ -1,6 +1,7 @@
-ofc-pi oesenc-pi
+ofc-pi
+#oesenc-pi
 opencpn
-opencpn-plugin-ocpndebugger
+#opencpn-plugin-ocpndebugger
 opencpn-plugin-otcurrent
 opencpn-plugin-chartdldr
 opencpn-plugin-statusbar
