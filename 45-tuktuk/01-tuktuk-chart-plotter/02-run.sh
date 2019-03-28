@@ -15,10 +15,12 @@ on_chroot << EOF
    echo " - Bundle done"
 
    cd /
-   echo " It's Done for tuktuk"
+   echo " Compiling Done for tuktuk"
 EOF
 
 install files/client-config.json "${ROOTFS_DIR}/opt/tuktuk-chart-plotter/client-config.json"
-
 install -m 644 -v files/tuktuk.service  "${ROOTFS_DIR}/etc/systemd/system/tuktuk.service"
-ln -sf "${ROOTFS_DIR}/etc/systemd/system/tuktuk.service" "${ROOTFS_DIR}/etc/systemd/system/multi-user.target.wants/tuktuk.service"
+
+on_chroot << EOF
+  systemctl enable tuktuk.service
+EOF
