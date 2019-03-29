@@ -1,0 +1,7 @@
+IMG_NAME='lysmarine'
+DEPLOY_ZIP=0
+USE_QEMU=0
+FIRST_USER_NAME='pi'
+FIRST_USER_PASS='raspberry'
+ENABLE_SSH=0
+STAGE_LIST='stage* 10-add-sources 20-boot 21-time 22-networkInterfaces 30-gpsd 31-kplex 32-pypilot 40-signalk 45-tuktuk 46-speedsample 48-openplotter 50-desktopEnvironment 91-xygrib 95-opencpn 98-cleanup 99-EXPORT'

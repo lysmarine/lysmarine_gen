@@ -1,0 +1,14 @@
+[Unit]
+After=graphical.target
+
+[Service]
+ExecStart=/home/signalk/.signalk/signalk-server
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+WorkingDirectory=/home/signalk/.signalk
+User=signalk
+Environment=EXTERNALPORT=80
+
+[Install]
+WantedBy=graphical.target

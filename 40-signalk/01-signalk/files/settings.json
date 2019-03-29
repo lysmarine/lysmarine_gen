@@ -1,0 +1,155 @@
+{
+  "interfaces": {},
+  "ssl": false,
+  "pipedProviders": [
+
+
+
+    {
+      "id": "ttyLYS_gps_0",
+      "pipeElements": [
+        {
+          "type": "providers/gpsd",
+          "options": {
+            "hostname": "127.0.0.1",
+            "port": 29470,
+            "providerId": "gpsdProvider"
+          }
+        },
+        {
+          "type": "providers/nmea0183-signalk",
+          "optionMappings": [
+            {
+              "fromAppProperty": "selfId",
+              "toOption": "selfId"
+            },
+            {
+              "fromAppProperty": "selfType",
+              "toOption": "selfType"
+            }
+          ]
+        }
+      ]
+    },
+
+
+
+    {
+      "id": "ttyLYS_gps_1",
+      "pipeElements": [
+        {
+          "type": "providers/gpsd",
+          "options": {
+            "hostname": "127.0.0.1",
+            "port": 29471,
+            "providerId": "gpsdProvider"
+          }
+        },
+        {
+          "type": "providers/nmea0183-signalk",
+          "optionMappings": [
+            {
+              "fromAppProperty": "selfId",
+              "toOption": "selfId"
+            },
+            {
+              "fromAppProperty": "selfType",
+              "toOption": "selfType"
+            }
+          ]
+        }
+      ]
+    },
+
+
+
+    {
+      "id": "ttyLYS_gps_2",
+      "pipeElements": [
+        {
+          "type": "providers/gpsd",
+          "options": {
+            "hostname": "127.0.0.1",
+            "port": 29472,
+            "providerId": "gpsdProvider"
+          }
+        },
+        {
+          "type": "providers/nmea0183-signalk",
+          "optionMappings": [
+            {
+              "fromAppProperty": "selfId",
+              "toOption": "selfId"
+            },
+            {
+              "fromAppProperty": "selfType",
+              "toOption": "selfType"
+            }
+          ]
+        }
+      ]
+    },
+
+
+    {
+      "id": "ttyLYS_gps_3",
+      "pipeElements": [
+        {
+          "type": "providers/gpsd",
+          "options": {
+            "hostname": "127.0.0.1",
+            "port": 29473,
+            "providerId": "gpsdProvider"
+          }
+        },
+        {
+          "type": "providers/nmea0183-signalk",
+          "optionMappings": [
+            {
+              "fromAppProperty": "selfId",
+              "toOption": "selfId"
+            },
+            {
+              "fromAppProperty": "selfType",
+              "toOption": "selfType"
+            }
+          ]
+        }
+      ]
+    },
+
+
+    {
+      "id": "ttyLYS_gps_4",
+      "pipeElements": [
+        {
+          "type": "providers/gpsd",
+          "options": {
+            "hostname": "127.0.0.1",
+            "port": 29474,
+            "providerId": "gpsdProvider"
+          }
+        },
+        {
+          "type": "providers/nmea0183-signalk",
+          "optionMappings": [
+            {
+              "fromAppProperty": "selfId",
+              "toOption": "selfId"
+            },
+            {
+              "fromAppProperty": "selfType",
+              "toOption": "selfType"
+            }
+          ]
+        }
+      ]
+    }
+
+
+
+  ],
+  "security": {
+    "strategy": "./tokensecurity"
+  }
+}

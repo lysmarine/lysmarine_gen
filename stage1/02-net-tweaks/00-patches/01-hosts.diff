@@ -5,5 +5,5 @@ Index: jessie-stage1/rootfs/etc/hosts
 @@ -3,3 +3,4 @@
  ff02::1		ip6-allnodes
  ff02::2		ip6-allrouters
- 
-+127.0.1.1	raspberrypi
+
++127.0.1.1	lysmarine
