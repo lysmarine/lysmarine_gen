@@ -2,9 +2,8 @@
 _Tool used to create the lysMarine images_
 
 This is a fork of [pi-gen](https://github.com/RPi-Distro/pi-gen) used to build the raspbianOS.  
-You have to do` git checkout lysmarine` before building or make any changes.
 
- > The LysMarine NOOB image and the project information (including contributions guidelines) can be found at [pi-gen](https://gitlab.com/lysmarine/lysmarine)
+ > All the documentation and installation procedure for lysmarineOS  [https://gitlab.com/lysmarine/lysmarine](https://gitlab.com/lysmarine/lysmarine)
 
 
 
@@ -15,16 +14,14 @@ dosfstools bsdtar libcap2-bin grep rsync xz-utils file git curl
 ```
 ```
 git clone https://gitlab.com/lysmarine/lysmarine-gen
-git checkout lysmarine
 ```
 ```
-sudo CLEAN=1 ./build.sh
+sudo ./build.sh
 ```
 
 
 
 ## Dependencies
-
 
 Pi-gen is currently supported only on Debian Stretch and Ubuntu Xenial
 =======
@@ -212,49 +209,6 @@ because `binfmt-support` _must be enabled on the underlying kernel_. An easy
 fix is to ensure `binfmt-support` is installed on the host machine before
 starting the `./build-docker.sh` script (or using your own docker build
 solution).
-
-
-
-## lysMarine Stage Anatomy
-
-The build of lysMarine is divided up into several stages for logical clarity
-and modularity.
-
- - **Stage 0** - bootstrap.  The primary purpose of this stage is to create a
-   usable filesystem.  This is accomplished largely through the use of
-   `debootstrap`, which creates a minimal filesystem suitable for use as a
-   base.tgz on Debian systems.  This stage also configures apt settings and
-   installs `raspberrypi-bootloader` which is missed by debootstrap.  The
-   minimal core is installed but not configured, and the system will not quite
-   boot yet.
-
- - **Stage 1** - truly minimal system.  This stage makes the system bootable by
-   installing system files like `/etc/fstab`, configures the bootloader, makes
-   the network operable, and installs some packages.  At this
-   stage the system should boot to a local console from which you have the
-   means to perform basic tasks needed to configure and install the system.
-   This is as minimal as a system can possibly get, and its arguably not
-   really usable yet in a traditional sense yet.  Still, if you want minimal,
-   this is minimal and the rest you could reasonably do yourself as sysadmin.
-
- - **Stage 2** - lite system.  This stage produces the Raspbian-Lite image.  It
-   installs some optimized memory functions, sets timezone and charmap
-   defaults, installs fake-hwclock and ntp, wifi and bluetooth support,
-   dphys-swapfile, and other basics for managing the hardware.  It also
-   creates necessary groups and gives the pi user access to sudo and the
-   standard console hardware permission groups.
-
-   For lysMarine this is where we add sources and others underlying things
-   we will be need to create what make lysMarine.
-
- - **Stage 3** - For lysMarine, this is where the "server level" stuff is added.
-   If lysmarine would have a headless version, this is where the image would be build.
-
- - **Stage 4** - For lysMarine, this is where we add material related to the Desktop environment.
-
- - **Stage 5** - And now all the Desktop applications.
-
- - **Stage 6** - Compiling openplotter software.
 
 
 
