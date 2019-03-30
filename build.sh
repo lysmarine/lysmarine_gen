@@ -95,6 +95,8 @@ run_stage(){
 		if [ "${CLEAN}" = "1" ]; then
 			if [ -d "${ROOTFS_DIR}" ]; then
 				rm -rf "${ROOTFS_DIR}"
+				mv	${ROOTFS_DIR} ${ROOTFS_DIR}-deleteme
+				rm -rf "${ROOTFS_DIR}-deleteme" &
 			fi
 		fi
 		if [ -x prerun.sh ]; then
