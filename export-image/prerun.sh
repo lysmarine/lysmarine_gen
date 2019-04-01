@@ -4,11 +4,16 @@ IMG_FILE="${STAGE_WORK_DIR}/${IMG_FILENAME}${IMG_SUFFIX}.img"
 
 unmount_image "${IMG_FILE}"
 
-mv "${IMG_FILE}" "${IMG_FILE}-delme"
-rm -f "${IMG_FILE}-delme" &
+if [ -f "${IMG_FILE}" ]; then
+	mv -f "${IMG_FILE}" "${IMG_FILE}-delme"
+	rm -f "${IMG_FILE}-delme" &
+fi
 
-mv "${ROOTFS_DIR}" "${ROOTFS_DIR}-delme"
-rm -rf "${ROOTFS_DIR}-delme" &
+if [ -d "${ROOTFS_DIR}" ]; then
+	mv -f "${ROOTFS_DIR}" "${ROOTFS_DIR}-delme"
+	rm -rf "${ROOTFS_DIR}-delme" &
+
+fi
 mkdir -p "${ROOTFS_DIR}"
 
 BOOT_SIZE=$(du --apparent-size -s "${EXPORT_ROOTFS_DIR}/boot" --block-size=1 | cut -f 1)

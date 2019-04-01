@@ -94,7 +94,6 @@ run_stage(){
 	if [ ! -f SKIP ]; then
 		if [ "${CLEAN}" = "1" ]; then
 			if [ -d "${ROOTFS_DIR}" ]; then
-				rm -rf "${ROOTFS_DIR}"
 				mv	${ROOTFS_DIR} ${ROOTFS_DIR}-deleteme
 				rm -rf "${ROOTFS_DIR}-deleteme" &
 			fi
