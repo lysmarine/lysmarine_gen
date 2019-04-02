@@ -1,6 +1,6 @@
 #!/bin/bash -e
 on_chroot <<EOF
-
+### For manual build ###
 #wget http://download.savannah.nongnu.org/releases/gpsd/gpsd-3.18.1.tar.gz
 #tar -xzf gpsd-3.18.1.tar.gz
 #rm gpsd-3.18.1.tar.gz
