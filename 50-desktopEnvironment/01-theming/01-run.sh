@@ -37,3 +37,4 @@ install -o 1000 -g 1000  -v files/settings.ini  "${ROOTFS_DIR}/home/pi/.config/g
 install -o 1000 -g 1000  -v files/autostart     "${ROOTFS_DIR}/home/pi/.config/openbox/"
 install -o 1000 -g 1000  -v files/rc.xml        "${ROOTFS_DIR}/home/pi/.config/openbox/"
 install -o 1000 -g 1000  -v files/config        "${ROOTFS_DIR}/home/pi/.config/terminator/"
+install -o 1000 -g 1000  -v files/.conkyrc        "${ROOTFS_DIR}/home/pi/.conkyrc"

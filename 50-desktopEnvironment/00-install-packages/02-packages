@@ -11,3 +11,4 @@ pavucontrol
 cpanminus perl-base dialog
 lxterminal
 luakit
+conky-all
