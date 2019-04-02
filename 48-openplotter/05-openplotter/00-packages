@@ -1,3 +1,5 @@
 python-pip sudo whois
 x11vnc
 python-wxtools
+hostapd
+dnsmasq

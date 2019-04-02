@@ -1,14 +1,16 @@
 #!/bin/bash -e
 
 on_chroot << EOF
+
    echo " - Install tuktuk"
    cd /opt/
    git clone https://gitlab.com/FredericGuilbault/tuktuk-chart-plotter
    cd tuktuk-chart-plotter
    git checkout lysmarine/master
 
-   npm install --unsafe-perm --cache /tmp/empty-cache;
+   npm install -g --unsafe-perm --loglevel error # --cache /tmp/empty-cache;
    echo " -package Install done"
+   npm install --unsafe-perm webpack
 
    NODE_ENV=production npm run bundle:js
    NODE_ENV=production npm run bundle:css

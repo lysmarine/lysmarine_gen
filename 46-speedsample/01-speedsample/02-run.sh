@@ -5,7 +5,7 @@ on_chroot << EOF
    cd /opt/
    git clone https://gitlab.com/FredericGuilbault/speedSample
    cd speedSample;
-   npm install --unsafe-perm ;
+   npm install -g --unsafe-perm --loglevel error;
    cd /
 EOF
 
