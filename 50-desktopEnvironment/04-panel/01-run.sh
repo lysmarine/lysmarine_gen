@@ -29,6 +29,6 @@ git checkout develop
 ./configure --prefix=/usr/
 make
 make install
-cd ../
-# rm -rf fbpanel
+cd /
+rm -rf fbpanel
 EOF
