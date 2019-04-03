@@ -2,7 +2,7 @@
 
 on_chroot << EOF
    echo " - Install speedsample"
-   cd /opt/
+   cd /var/www/
    git clone https://gitlab.com/FredericGuilbault/speedSample
    cd speedSample;
    npm install -g --unsafe-perm --loglevel error;
@@ -10,7 +10,9 @@ on_chroot << EOF
 EOF
 
 install -m 644 -v files/speedsample.service  "${ROOTFS_DIR}/etc/systemd/system/speedsample.service"
-#ln -sf "${ROOTFS_DIR}/etc/systemd/system/speedsample.service" "${ROOTFS_DIR}/etc/systemd/system/graphical.target.wants/speedsample.service"
+
 on_chroot << EOF
+  chown -R www-data:www-data /var/www/speedSample
+
   systemctl enable speedsample.service
 EOF
