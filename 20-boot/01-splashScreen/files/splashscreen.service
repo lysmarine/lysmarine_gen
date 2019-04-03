@@ -1,5 +1,5 @@
 [Unit]
-Description=Splash screen
+Description=Display a splash screen on boot
 DefaultDependencies=no
 Before=boot.mount
 

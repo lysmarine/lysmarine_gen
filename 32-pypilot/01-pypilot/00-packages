@@ -1,1 +1,1 @@
-python-gps python-serial libpython-dev python-numpy python-scipy swig python-opengl python-pip wiringpi
+python-gps python-serial libpython-dev python-numpy python-scipy swig python-pillow python-flask python-socketio python-pip python-pylirc

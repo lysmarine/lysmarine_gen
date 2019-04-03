@@ -11,6 +11,9 @@ on_chroot << EOF
   git clone https://gitlab.com/FredericGuilbault/openplotter.git
   cd openplotter
   git checkout  lysmarine_flavor
+
+  wget http://www.fars-robotics.net/install-wifi -O /usr/bin/install-wifi
+  chmod +x /usr/bin/install-wifi
 EOF
 
 install -d -o 1000 -g 1000 "${ROOTFS_DIR}/home/pi/.local/share/applications/"

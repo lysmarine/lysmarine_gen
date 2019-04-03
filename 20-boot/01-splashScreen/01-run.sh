@@ -8,6 +8,5 @@ install -v files/splash.png "${ROOTFS_DIR}/usr/share/splash.png"
 install -v -m644 files/splashscreen.service "${ROOTFS_DIR}/etc/systemd/system/splashscreen.service"
 
 on_chroot << EOF
-   apt-get remove -y plymouth
    systemctl enable splashscreen.service
 EOF

@@ -9,10 +9,24 @@ on_chroot << EOF
 EOF
 
 on_chroot << EOF
-git clone https://github.com/seandepagnier/RTIMULib2
-cd RTIMULib2/Linux/python
-python setup.py build
-python setup.py install
-cd ../../
-rm -rf /RTIMULib2
+
+  git clone https://github.com/seandepagnier/RTIMULib2
+  cd RTIMULib2/Linux/python
+  python setup.py build
+  python setup.py install
+  cd ../../
+  rm -rf /RTIMULib2
+
+  echo " Pypilot : "
+
+  cd /
+  git clone https://github.com/pypilot/pypilot.git
+  cd pypilot
+  python setup.py install
+  cd scripts/debian/
+  cp -r etc/systemd/system/* /etc/systemd/system/
+  cd /
+  rm -rf pypilot
+
+
 EOF

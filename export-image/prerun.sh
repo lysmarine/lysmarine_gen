@@ -4,9 +4,16 @@ IMG_FILE="${STAGE_WORK_DIR}/${IMG_FILENAME}${IMG_SUFFIX}.img"
 
 unmount_image "${IMG_FILE}"
 
-rm -f "${IMG_FILE}"
+if [ -f "${IMG_FILE}" ]; then
+	mv -f "${IMG_FILE}" "${IMG_FILE}-delme"
+	rm -f "${IMG_FILE}-delme" &
+fi
 
-rm -rf "${ROOTFS_DIR}"
+if [ -d "${ROOTFS_DIR}" ]; then
+	mv -f "${ROOTFS_DIR}" "${ROOTFS_DIR}-delme"
+	rm -rf "${ROOTFS_DIR}-delme" &
+
+fi
 mkdir -p "${ROOTFS_DIR}"
 
 BOOT_SIZE=$(du --apparent-size -s "${EXPORT_ROOTFS_DIR}/boot" --block-size=1 | cut -f 1)
@@ -14,7 +21,7 @@ TOTAL_SIZE=$(du --apparent-size -s "${EXPORT_ROOTFS_DIR}" --exclude var/cache/ap
 
 ROUND_SIZE="$((4 * 1024 * 1024))"
 ROUNDED_ROOT_SECTOR=$(((2 * BOOT_SIZE + ROUND_SIZE) / ROUND_SIZE * ROUND_SIZE / 512 + 8192))
-IMG_SIZE=$(((BOOT_SIZE + TOTAL_SIZE + (800 * 1024 * 1024) + ROUND_SIZE - 1) / ROUND_SIZE * ROUND_SIZE))
+IMG_SIZE=$(((BOOT_SIZE + TOTAL_SIZE + (1000 * 1024 * 1024) + ROUND_SIZE - 1) / ROUND_SIZE * ROUND_SIZE))
 
 truncate -s "${IMG_SIZE}" "${IMG_FILE}"
 fdisk -H 255 -S 63 "${IMG_FILE}" <<EOF
