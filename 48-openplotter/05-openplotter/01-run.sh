@@ -14,6 +14,8 @@ on_chroot << EOF
 
   wget http://www.fars-robotics.net/install-wifi -O /usr/bin/install-wifi
   chmod +x /usr/bin/install-wifi
+  find /opt/openplotter/Network/ -type f -name *.sh -exec chmod +x \{\} \; # make .sh file executable
+
 EOF
 
 install -d -o 1000 -g 1000 "${ROOTFS_DIR}/home/pi/.local/share/applications/"
