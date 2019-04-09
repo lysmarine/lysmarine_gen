@@ -21,7 +21,7 @@ EOF
 
 
 on_chroot << EOF
-git clone https://github.com/FredericGuilbault/fbpanel
+git clone --depth=1 https://github.com/FredericGuilbault/fbpanel
 
 cd fbpanel
 git checkout develop

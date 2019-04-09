@@ -13,7 +13,7 @@ EOF
 on_chroot << EOF
 
   echo " RTIMULib2 : "
-  git clone https://github.com/seandepagnier/RTIMULib2
+  git clone --depth=1 https://github.com/seandepagnier/RTIMULib2
   cd RTIMULib2/Linux/python
   python setup.py build
   python setup.py install
@@ -22,7 +22,8 @@ on_chroot << EOF
 
   echo " Pypilot : "
   cd /
-  git clone https://github.com/pypilot/pypilot.git
+  git clone --depth=1 https://github.com/pypilot/pypilot.git
+  git clone --depth=1 https://github.com/pypilot/pypilot_data.git
   cd pypilot
   python setup.py install
   cd scripts/debian/

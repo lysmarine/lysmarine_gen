@@ -3,7 +3,7 @@
 on_chroot << EOF
    echo " - Install speedsample"
    cd /var/www/
-   git clone https://gitlab.com/FredericGuilbault/speedSample
+   git clone --depth=1 https://gitlab.com/FredericGuilbault/speedSample
    cd speedSample;
    npm install -g --unsafe-perm --loglevel error;
    cd /

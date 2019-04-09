@@ -8,7 +8,7 @@ EOF
 
 on_chroot << EOF
   cd /opt/
-  git clone https://gitlab.com/FredericGuilbault/openplotter.git
+  git clone --depth=1 https://gitlab.com/FredericGuilbault/openplotter.git
   cd openplotter
   git checkout  lysmarine_flavor
 
