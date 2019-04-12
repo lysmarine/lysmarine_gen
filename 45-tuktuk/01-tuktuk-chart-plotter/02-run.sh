@@ -6,7 +6,7 @@ on_chroot << EOF
    mkdir /var/www
    chown www-data:www-data /var/www
    cd /var/www
-   git clone --depth=1 https://gitlab.com/FredericGuilbault/tuktuk-chart-plotter
+   git clone https://gitlab.com/FredericGuilbault/tuktuk-chart-plotter
    cd tuktuk-chart-plotter
    git checkout lysmarine/master
 

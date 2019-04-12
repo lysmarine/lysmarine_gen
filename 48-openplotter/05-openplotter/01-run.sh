@@ -2,8 +2,8 @@
 install -d  "${ROOTFS_DIR}/opt/openplotter/"
 
 on_chroot << EOF
-  pip install setuptools
-  pip install requests ujson websocket websocket-client paho-mqtt geomag     pyudev serial smbus      websocket websocket-client python-can    pynmea2
+  pip install setuptools  --no-cache-dir
+  pip install requests ujson websocket websocket-client paho-mqtt geomag     pyudev serial smbus      websocket websocket-client python-can    pynmea2  --no-cache-dir
 EOF
 
 on_chroot << EOF
