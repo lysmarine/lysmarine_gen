@@ -6,4 +6,5 @@ on_chroot << EOF
   make install
   cd /
   rm -rf create_ap
+  
 EOF
