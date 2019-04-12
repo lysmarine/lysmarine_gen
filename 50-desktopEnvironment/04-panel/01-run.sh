@@ -11,14 +11,9 @@ install    -o 1000 -g 1000 files/default "${ROOTFS_DIR}/home/pi/.config/fbpanel/
 install -d -o 1000 -g 1000 -m 755 "${ROOTFS_DIR}/home/pi/.config/tint2/"
 install    -o 1000 -g 1000  -v files/tint2rc       "${ROOTFS_DIR}/home/pi/.config/tint2/"
 
-
-
 on_chroot << EOF
-  echo '#lxpanel &' >> /home/pi/.config/openbox/autostart
   echo 'fbpanel &' >> /home/pi/.config/openbox/autostart
-  echo '#tint2 &' >> /home/pi/.config/openbox/autostart
 EOF
-
 
 on_chroot << EOF
 git clone https://github.com/FredericGuilbault/fbpanel

@@ -40,6 +40,6 @@ conky.config = {
 
 conky.text = [[
  $alignr ${template0 LysMarine}
- $alignr ${template1 v0.8.1}
+ $alignr ${template1 v0.8.2}
 
 ]];

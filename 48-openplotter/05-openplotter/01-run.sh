@@ -2,8 +2,8 @@
 install -d  "${ROOTFS_DIR}/opt/openplotter/"
 
 on_chroot << EOF
-  pip install setuptools
-  pip install requests ujson websocket websocket-client paho-mqtt geomag     pyudev serial smbus      websocket websocket-client python-can    pynmea2
+  pip install setuptools  --no-cache-dir
+  pip install requests ujson websocket websocket-client paho-mqtt geomag     pyudev serial smbus      websocket websocket-client python-can    pynmea2  --no-cache-dir
 EOF
 
 on_chroot << EOF
@@ -14,6 +14,8 @@ on_chroot << EOF
 
   wget http://www.fars-robotics.net/install-wifi -O /usr/bin/install-wifi
   chmod +x /usr/bin/install-wifi
+  find /opt/openplotter/Network/ -type f -name *.sh -exec chmod +x \{\} \; # make .sh file executable
+
 EOF
 
 install -d -o 1000 -g 1000 "${ROOTFS_DIR}/home/pi/.local/share/applications/"

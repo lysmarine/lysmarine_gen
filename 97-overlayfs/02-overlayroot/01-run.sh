@@ -5,6 +5,7 @@ on_chroot << EOF
 
 
   git clone https://github.com/chesty/overlayroot.git
+  git clone --depth=1 https://github.com/chesty/overlayroot.git
   cd overlayroot
 
 EOF
