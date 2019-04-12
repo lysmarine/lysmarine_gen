@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Pypilot Webapp
+Exec=/usr/bin/luakit http://localhost:8080
+Terminal=false
+Icon=go-jump
+Categories=Utility

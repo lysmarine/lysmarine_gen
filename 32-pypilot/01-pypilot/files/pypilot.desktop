@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Pypilot Control
+Exec=/usr/local/bin/pypilot_control
+Terminal=false
+Icon=go-jump
+Categories=Utility
