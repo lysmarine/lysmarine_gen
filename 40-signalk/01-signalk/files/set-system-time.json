@@ -3,6 +3,7 @@
   "enabledLogging": false,
   "configuration":{
     "interval":30,
-    "sudo":true
+    "sudo":true,
+    "preferNetworkTime": true
   }
 }
