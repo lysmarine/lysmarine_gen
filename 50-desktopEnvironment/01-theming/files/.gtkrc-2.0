@@ -1,8 +1,8 @@
 include "/home/pi/.gtkrc-2.0.mine"
-gtk-theme-name="Ant-Dracula"
+gtk-theme-name="Adwaita-dark"
 gtk-icon-theme-name="Flat-Remix-Dark"
 gtk-font-name="Sans 11"
-gtk-cursor-theme-name="Flat-Remix-Dark"
+gtk-cursor-theme-name="PiX"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_BOTH
 gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
@@ -13,3 +13,4 @@ gtk-enable-input-feedback-sounds=1
 gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle="hintfull"
+gtk-modules="gail:atk-bridge"

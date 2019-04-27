@@ -9,18 +9,15 @@ rm -rf gtk-theme-collections
 rm -rf Ant-Dracula
 git clone -q --depth=1 https://github.com/addy-dclxvi/openbox-theme-collections
 git clone -q --depth=1 https://github.com/daniruiz/flat-remix
-git clone -q --depth=1 https://github.com/EliverLara/Ant-Dracula
 
 cp -rf ./openbox-theme-collections/Numix-Clone /home/pi/.themes/
 chown -R pi:pi /home/pi/.themes/Numix-Clone
 cp -rf flat-remix/Flat-Remix-Blue /home/pi/.icons/Flat-Remix-Dark
 chown -R pi:pi /home/pi/.icons/Flat-Remix-Dark
-cp -rf ./Ant-Dracula /home/pi/.themes/
-chown -R pi:pi /home/pi/.themes
 
 rm -rf openbox-theme-collections
 rm -rf flat-remix
-rm -rf Ant-Dracula
+
 EOF
 
 
