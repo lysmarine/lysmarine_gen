@@ -7,6 +7,7 @@ EOF
 install -m 755 -o 1001 -g 1001  -d "${ROOTFS_DIR}/home/signalk/.signalk"
 install -m 755 -o 1001 -g 1001  -d "${ROOTFS_DIR}/home/signalk/.signalk/plugin-config-data"
 install -m 644 -o 1001 -g 1001   files/set-system-time.json  "${ROOTFS_DIR}/home/signalk/.signalk/plugin-config-data/"
+install -m 644 -o 1001 -g 1001   files/charts.json  "${ROOTFS_DIR}/home/signalk/.signalk/plugin-config-data/"
 
 install -m 644 -o 1001 -g 1001   files/defaults.json  "${ROOTFS_DIR}/home/signalk/.signalk/defaults.json"
 install -m 644 -o 1001 -g 1001   files/package.json   "${ROOTFS_DIR}/home/signalk/.signalk/package.json"
@@ -18,6 +19,8 @@ install -m 644 -o 1000 -g 1000   files/signalk.png "${ROOTFS_DIR}/home/pi/.local
 
 on_chroot << EOF
   npm install --loglevel error -g --unsafe-perm signalk-server
+  cd /home/signalk/.signalk
+  su signalk -c "npm install @signalk/charts-plugin --unsafe-perm --loglevel error"
 EOF
 
 install -m 644 -v files/signalk.service "${ROOTFS_DIR}/etc/systemd/system/signalk.service"

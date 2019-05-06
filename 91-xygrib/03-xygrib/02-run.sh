@@ -26,9 +26,9 @@ rm -rf /XyGrib
 
 EOF
 
-install files/XyGrib -m755 "${ROOTFS_DIR}/bin/"
+install files/XyGrib -m755 "${ROOTFS_DIR}/usr/local/bin/"
 install files/XyGrib.desktop "${ROOTFS_DIR}/usr/share/applications"
-install files/logo_grib.jpg "${ROOTFS_DIR}/usr/local/share/openGribs/XyGrib/data/img/"
-install -d -o 1000 -g 1000   "${ROOTFS_DIR}/home/pi/.local/share/icons/"
+#install files/logo_grib.jpg "${ROOTFS_DIR}/usr/local/share/openGribs/XyGrib/data/img/"
+#install -d -o 1000 -g 1000   "${ROOTFS_DIR}/home/pi/.local/share/icons/"
 
-install -o 1000 -g 1000 files/logo_grib.png "${ROOTFS_DIR}/home/pi/.local/share/icons/"
+ install -o 1000 -g 1000 files/logo_grib.png "${ROOTFS_DIR}/usr/share/icons/"
