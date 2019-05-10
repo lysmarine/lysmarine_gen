@@ -1,8 +1,9 @@
-deploy/*
+
 work/*
-postrun.sh
-SKIP
-SKIP_IMAGES
-.pc
-*-pc
-apt-cacher-ng/
+!work/.gitkeep
+
+cache/*
+!cache/.gitkeep
+
+release/*
+!release/.gitkeep
