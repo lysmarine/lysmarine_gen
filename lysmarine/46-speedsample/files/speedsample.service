@@ -1,0 +1,13 @@
+[Unit]
+Requires=signalk.service
+After=graphical.target
+
+[Service]
+ExecStart=/usr/bin/node /var/www/speedSample/app.js -P 80 -w 4998
+StandardOutput=syslog
+StandardError=syslog
+WorkingDirectory=/var/www/speedSample
+User=www-data
+
+[Install]
+WantedBy=graphical.target
