@@ -56,9 +56,17 @@ on_chroot $thisArch "$(pwd)/work/$thisArch/rootfs/" "${cmds[@]}"
 mv ./work/$thisArch/rootfs/etc/resolv.conf.lysmarinebak ./work/$thisArch/rootfs/etc/resolv.conf
 umount_image ./work/$thisArch/$image "./work/$thisArch/rootfs/boot/" "./work/$thisArch/rootfs/"
 
+#shrink the image size
+if [ ! -f ./cache/pishrink ] ; then
+        cd ./cache
+        wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
+        chmod +x pishrink.sh
+        cd ..
+fi
+./cache/pishrink.sh ./work/$thisArch/$image
+
 # renaming the OS and moving it to the release folder.
 cp -v ./work/$thisArch/$image  ./release/$thisSbc/LysMarine_$thisSbc-0.9.0.img
-#sudo: no tty present and no askpass program specified
 
 log "DONE."
 # read -n 1 -s -r -p " .-=|~| PAUSE |~|=-."
