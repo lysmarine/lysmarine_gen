@@ -2,8 +2,7 @@
 work/*
 !work/.gitkeep
 
-cache/*
-!cache/.gitkeep
+cache
 
 release/*
 !release/.gitkeep
