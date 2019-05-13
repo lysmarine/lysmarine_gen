@@ -43,7 +43,7 @@ AUTO_SETUP_SWAPFILE_SIZE=1
 AUTO_SETUP_SWAPFILE_LOCATION=/var/swap
 
 # Unmask (enable) systemd-logind service, which is masked by default on DietPi
-AUTO_UNMASK_LOGIND=0
+AUTO_UNMASK_LOGIND=1
 
 ##### Software Automation Options #####
 
@@ -101,7 +101,7 @@ AUTO_SETUP_WEB_SERVER_INDEX=0
 #    DietPi-Autostart | Requires AUTO_SETUP_AUTOMATED=1
 #    After installation is completed, which program should the system boot to?
 #        0=Console 7=Console+auto root login | 1=Kodi 2=Desktops (LXDE/MATE etc) 5=DietPi-Cloudshell 6=Uae4ARM (Fastboot) 8=Uae4ARM (standard boot) 9=dxx-rebirth
-AUTO_SETUP_AUTOSTART_TARGET_INDEX=2
+AUTO_SETUP_AUTOSTART_TARGET_INDEX=0
 
 #    Language/Regional settings | Requires AUTO_SETUP_AUTOMATED=1
 #        Timezone eg: Europe/London America/New_York | Full list (TZ*): https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -133,7 +133,7 @@ AUTO_SETUP_HEADLESS=0
 #------------------------------------------------------------------------------------------------------
 
 #Cpu Governor | ondemand | powersave | performance | conservative
-CONFIG_CPU_GOVERNOR=ondemand
+CONFIG_CPU_GOVERNOR=powersave
 CONFIG_CPU_USAGE_THROTTLE_UP=50
 
 #CPU Frequency Limits
@@ -165,7 +165,7 @@ CONFIG_PROXY_PASSWORD=
 CONFIG_BOOT_WAIT_FOR_NETWORK=1
 
 #DietPi checks for updates (allows dietpi to check for updates on a daily basis and boot using a <1kb file download.)
-CONFIG_CHECK_DIETPI_UPDATES=1
+CONFIG_CHECK_DIETPI_UPDATES=0
 #	Optional: Automatically update DietPi when updates are available. | requires CONFIG_CHECK_DIETPI_UPDATES=1
 CONFIG_AUTO_DIETPI_UPDATES=0
 
