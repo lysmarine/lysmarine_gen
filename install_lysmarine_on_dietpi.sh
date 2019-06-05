@@ -2,33 +2,41 @@
 source ./lib.sh
 
 if [ -z "$1" ]; then
-        logError "Please specify the architecture ( RPi-ARMv6 )"; exit 1 ;
+        logError "Please specify the architecture ( RPi-ARMv6 | NativePC-BIOS-x86_64 )"; exit 1 ;
 fi
 
 thisArch=$1
 debianVersion="Stretch"
 image=DietPi_$thisArch-$debianVersion.img
 
-# create hierarchy to work with this architecture
+# Create folder hierarchy to work with this architecture
 mkdir -p ./cache/$thisArch
 mkdir -p ./work/$thisArch
 mkdir -p ./work/$thisArch/rootfs
 mkdir -p ./work/$thisArch/bootfs
 mkdir -p ./release/$thisArch
 
-# download or copy the official image from cache
+# Needed to shrink the image size at the end.
+if [ ! -f ./cache/pishrink ] ; then
+        cd ./cache
+        wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
+        chmod +x pishrink.sh
+        cd ..
+fi
+
+# Download or copy the official image from cache
 downloadDietpiImgFor $thisArch $debianVersion
 cp -fv ./cache/$thisArch/$image ./work/$thisArch/$image
 
-# add space to the image drive
+# Add temporary add space to the image drive.
 truncate -s "5G" ./work/$thisArch/$image
 partQty=$(sudo fdisk -l ./work/$thisArch/$image | grep -e "^./work/$thisArch/$image"|wc -l  )
 parted ./work/$thisArch/$image --script "resizepart $partQty 100%" ;
 
-# mount the image and make the binds required to chroot.
+# Mount the image and make the binds required to chroot.
 mount_image ./work/$thisArch/$image "./work/$thisArch/rootfs/boot/" "./work/$thisArch/rootfs/"
 
-# resize the root file system to fill the new drive size;
+# Resize the root file system to fill the new drive size;
 loop=$(losetup -j $IMAGE |  cut -d":" -f1 | sed "s/\/dev\/loop//g" ) #
 IFS=$'\n'
 loop=$(echo "${loop[*]}" | sort -nr | head -n1)
@@ -48,7 +56,7 @@ cp -vf /etc/resolv.conf ./work/$thisArch/rootfs/etc/resolv.conf
 
 # Define the commands to pass to the chroot environement
 cmds=" export ARCH=$thisArch ;cd /lysmarine; ./build.sh; exit 0 "
- #cmds='/bin/bash' # drop to shell prompt
+ #cmds='/bin/bash' # drop to manual shell prompt
 
 on_chroot $thisArch "$(pwd)/work/$thisArch/rootfs/" "${cmds[@]}"
 
@@ -56,17 +64,12 @@ on_chroot $thisArch "$(pwd)/work/$thisArch/rootfs/" "${cmds[@]}"
 mv ./work/$thisArch/rootfs/etc/resolv.conf.lysmarinebak ./work/$thisArch/rootfs/etc/resolv.conf
 umount_image ./work/$thisArch/$image "./work/$thisArch/rootfs/boot/" "./work/$thisArch/rootfs/"
 
-#shrink the image size
-if [ ! -f ./cache/pishrink ] ; then
-        cd ./cache
-        wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
-        chmod +x pishrink.sh
-        cd ..
-fi
+# Shrink the image size.
 ./cache/pishrink.sh ./work/$thisArch/$image
 
-# renaming the OS and moving it to the release folder.
+# Renaming the OS and moving it to the release folder.
 cp -v ./work/$thisArch/$image  ./release/$thisSbc/LysMarine_$thisSbc-0.9.0.img
 
 log "DONE."
+
 # read -n 1 -s -r -p " .-=|~| PAUSE |~|=-."
