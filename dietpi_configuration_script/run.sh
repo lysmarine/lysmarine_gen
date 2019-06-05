@@ -1,6 +1,15 @@
 #!/bin/bash
+
+# Lysmarine script to modify the default DietPi image prior to install lysmarine on it.
+# Mainly fonfiguration and hacks to make it play nice with Lysmarine.
+
+# Usage:
+# - This script take no arguments
+#-------------------------------------------------------
+
  systemctl enable dietpi-fs_partition_resize.service
  systemctl enable dietpi-ramlog.service
+ systemctl enable dietpi-firstboot.service
  systemctl enable dietpi-ramdisk.service
  systemctl enable dietpi-preboot.service
  systemctl disable dietpi-boot.service
