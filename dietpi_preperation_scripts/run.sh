@@ -7,6 +7,9 @@
 # - This script take no arguments
 #-------------------------------------------------------
 
+# the install process of lysmarine will make dietpi run his first boot process.
+# We need to reset this
+
  systemctl enable dietpi-fs_partition_resize.service
  systemctl enable dietpi-ramlog.service
  systemctl enable dietpi-firstboot.service
@@ -17,6 +20,7 @@
 # systemctl disable dietpi-kill_ssh.service
 # systemctl disable dietpi-wifi-monitor.service
 
+
 systemctl unmask systemd-logind.service
 
 cp ./dietpi.txt /boot/
@@ -24,4 +28,4 @@ cp ./dietpi.txt /boot/
 cp ./firstBoot.sh /
 chmod a+x /firstBoot.sh
 
-sed -i 's/#ADD_POINT/\/firstBoot.sh/g' /home/dietpi/.profile
+sed -i 's/#ADD_POINT/\/lysmarineFirstBoot.sh/g' /home/dietpi/.profile
