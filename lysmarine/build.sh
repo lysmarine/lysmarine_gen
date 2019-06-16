@@ -49,5 +49,7 @@ else
   done ;
 
 
-
+  echo "";
+  echo "Done Installing script for Lysmarine $ARCH :)"
+  echo "";
 fi
