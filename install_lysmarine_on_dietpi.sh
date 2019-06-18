@@ -21,7 +21,7 @@ image=DietPi_$thisArch-$debianVersion.img
 
 
 # Needed to shrink the image size at the end.
-        if [ ! -f ./cache/pishrink ] ; then
+        if [ ! -f ./cache/pishrink.sh ] ; then
                 cd ./cache
                 wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
                 chmod +x pishrink.sh
