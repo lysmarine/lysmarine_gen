@@ -1,5 +1,5 @@
 #!/bin/bash -e
-apt-get install libgtk2.0-dev
+apt-get install -y libgtk2.0-dev
 
 install -vd "/etc/systemd/system/getty@tty1.service.d"
 install -v $FILE_FOLDER/autologin.conf "/etc/systemd/system/getty@tty1.service.d"
