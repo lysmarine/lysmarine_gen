@@ -8,9 +8,9 @@
 systemctl enable dietpi-fs_partition_resize.service
 systemctl enable dietpi-firstboot.service
 
-systemctl disable dietpi-preboot.service  # atm preboot is for led and cpu management
+systemctl enable dietpi-preboot.service  # atm preboot is for led and cpu management
 systemctl enable dietpi-boot.service # there is part of the install process in this
-systemctl disable dietpi-postboot.service
+systemctl enable dietpi-postboot.service
 
 systemctl enable dietpi-ramdisk.service
 systemctl enable dietpi-ramlog.service
