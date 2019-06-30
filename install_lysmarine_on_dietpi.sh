@@ -5,6 +5,15 @@ if [ -z "$1" ]; then
         logError "Please specify the architecture ( RPi-ARMv6 | NativePC-BIOS-x86_64 )"; exit 1 ;
 fi
 
+if [ -z "$2" ]; then
+        logError "Please specify a point to drop to manual shell. Default is none. Options are ( preLysBuild | )";
+
+        manualShell="none"
+else
+        manualShell=$2
+fi
+
+
 thisArch=$1
 debianVersion="Stretch"
 image=DietPi_$thisArch-$debianVersion.img
@@ -59,10 +68,8 @@ image=DietPi_$thisArch-$debianVersion.img
 #Copy the lysmarine and dietpi config files in the mounted rootfs
         log "copying lysmarine and dietpi_configuration_script on the image"
         cp -r lysmarine ./work/$thisArch/rootfs/
-        cp -r dietpi_configuration_script ./work/$thisArch/rootfs/
         chmod 0775 ./work/$thisArch/rootfs/lysmarine/*.sh
         chmod 0775 ./work/$thisArch/rootfs/lysmarine/*/*.sh
-        chmod 0775 ./work/$thisArch/rootfs/dietpi_configuration_script/*.sh
 
 
 
@@ -73,9 +80,17 @@ image=DietPi_$thisArch-$debianVersion.img
 
 
 # Define the commands to pass to the chroot environement
-        cmds=" export ARCH=$thisArch ;cd /lysmarine; ./build.sh; exit 0 "
-        #cmds='/bin/bash' # drop to manual shell prompt
-        on_chroot $thisArch "$(pwd)/work/$thisArch/rootfs/" "${cmds[@]}"
+        if [ $manualShell == "preLysBuild" ] ; then
+
+                echo "\n  export ARCH=$thisArch ;cd /lysmarine; /bin/bash -e  "
+                on_chroot $thisArch "$(pwd)/work/$thisArch/rootfs/"
+echo "out of CHROOT"
+        else
+                cmds=" export ARCH=$thisArch ;cd /lysmarine; ./build.sh; exit 0 "
+                on_chroot $thisArch "$(pwd)/work/$thisArch/rootfs/" "${cmds[@]}"
+                echo "out of CHROOT"
+
+        fi
 
 
 
