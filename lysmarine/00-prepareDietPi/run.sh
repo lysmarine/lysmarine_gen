@@ -18,13 +18,6 @@ systemctl enable dietpi-ramlog.service
 systemctl disable dietpi-kill_ssh.service
 systemctl disable dietpi-wifi-monitor.service
 
-
-
-# Needed to allow GUI reboot and other session management
-systemctl unmask systemd-logind.service
-
-
-
 # Apply our dietpi config file
 cp -v $FILE_FOLDER/dietpi.txt /boot/
 
