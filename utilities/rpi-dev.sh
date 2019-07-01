@@ -106,7 +106,7 @@ cmds='/bin/bash -e ' # drop to shell prompt
         wd=$(pwd)
         cd $ROOTFS
         echo "";
-        echo "export ARCH=$thisArch ;cd /lysmarine; ./build.sh 00 10 20 50 55 98"
+        echo "export ARCH=$thisArch ;cd /lysmarine; ./build.sh 00 10 50 51 55 98; exit"
         echo "";
         sudo proot -r $ROOTFS -q qemu-arm -S $ROOTFS
 

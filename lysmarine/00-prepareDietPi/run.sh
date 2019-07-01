@@ -10,7 +10,7 @@ systemctl enable dietpi-firstboot.service
 
 systemctl enable dietpi-preboot.service  # atm preboot is for led and cpu management
 systemctl enable dietpi-boot.service # there is part of the install process in this
-systemctl enable dietpi-postboot.service
+systemctl disable dietpi-postboot.service
 
 systemctl enable dietpi-ramdisk.service
 systemctl enable dietpi-ramlog.service
