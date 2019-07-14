@@ -3,7 +3,7 @@ source ../lib.sh
 
 
 thisArch=NativePC-BIOS-x86_64
-debianVersion="Stretch"
+debianVersion="Buster"
 image=DietPi_$thisArch-$debianVersion.img
 dpi="/var/www/LM/DietPi"
 

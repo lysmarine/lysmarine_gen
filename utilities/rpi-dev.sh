@@ -3,7 +3,7 @@ source ../lib.sh
 
 
 thisArch=RPi-ARMv6
-debianVersion="Stretch"
+debianVersion="Buster"
 image=DietPi_$thisArch-$debianVersion.img
 dpi="/var/www/LM/DietPi"
 
@@ -108,7 +108,7 @@ cmds='/bin/bash -e ' # drop to shell prompt
         echo "";
         echo "export ARCH=$thisArch ;cd /lysmarine; ./build.sh 00 10 50 51 55 98; exit"
         echo "";
-        sudo proot -r $ROOTFS -q qemu-arm -S $ROOTFS
+        sudo proot -r $ROOTFS -q qemu-arm -S $ROOTFS ;
 
         cd $wd
         sed -i 's/^#//g' $ROOTFS/etc/ld.so.preload
