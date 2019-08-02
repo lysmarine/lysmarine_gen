@@ -2,7 +2,8 @@
 # Lysmarine script to modify the default DietPi image prior to install lysmarine on it.
 # Mainly fonfiguration and hacks to make it play nice with Lysmarine.
 
-
+#rebuild apt cache
+apt update -y
 
 # force services states.
 systemctl enable dietpi-fs_partition_resize.service

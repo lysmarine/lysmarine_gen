@@ -2,7 +2,7 @@
 echo "";
 echo "Install script for Lysmarine $ARCH :)"
 echo "";
-apt update -y
+
 
 if [ "$#" -gt "0" ]; then
 
