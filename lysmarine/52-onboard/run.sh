@@ -1,5 +1,5 @@
 #!/bin/bash -e
-apt-get install -y onboard dconf-tools dbus-x11
+apt-get install -y onboard dconf-editor dbus-x11
 
 install -d "/usr/share/onboard/"
 install -v $FILE_FOLDER/onboard.dconf "/usr/share/onboard/"
