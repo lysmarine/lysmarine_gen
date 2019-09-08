@@ -3,18 +3,17 @@ source common.sh
 
 
 
-thisArch=RPi-ARMv6
+thisArch=BIOS-x86_64
 imageSource="https://dietpi.com/downloads/images/"
-zipName="DietPi_RPi-ARMv6-Buster.7z"
-imageName="DietPi_v6.25_RPi-ARMv6-Buster.img"
+zipName="DietPi_NativePC-BIOS-x86_64-Buster.7z"
+imageName="DietPi_v6.25_NativePC-BIOS-x86_64-Buster.img"
 dietPiRepo="https://github.com/MichaIng/DietPi"
 dietPiBranch="dev"
 
-DBOOTmirror="http://archive.raspbian.org/raspbian"
+DBOOTmirror="http://ftp.debian.org/debian/"
 DBOOTinclude="net-tools,isc-dhcp-client,nano,openssh-server,rsync,wget"
-DBOOTaptsources="deb http://archive.raspbian.org/raspbian stretch main contrib non-free\ndeb-src http://archive.raspbian.org/raspbian stretch main contrib non-free"
-DBOOTarch='armhf'
-
+DBOOTaptsources="deb deb.debian.org/debian/ buster main contrib non-free \ndeb-src https://deb.debian.org/debian/ buster main contrib non-free"
+DBOOTarch='amd64'
 
 
 # Create caching folder hierarchy to work with this architecture
@@ -53,7 +52,6 @@ mountAndBind
 addScripts
 
 
-
 # chroot into the mounted image.
 log "chroot into the image"
 
@@ -70,7 +68,7 @@ echo "========================================================================="
 echo "";echo "";
 
 cmds='/bin/bash -e ' # drop to shell prompt
-sudo proot -r ./work/$thisArch/rootfs -q qemu-arm -S ./work/$thisArch/rootfs ;
+sudo proot -r ./work/$thisArch/rootfs -q qemu-aarch64 -S ./work/$thisArch/rootfs ;
 
 sed -i 's/^#//g' ./work/$thisArch/rootfs/etc/ld.so.preload
 
