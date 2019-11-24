@@ -1,4 +1,4 @@
-feh --randomize --bg-fill ~/.config/feh/* > /dev/null &
+
 nm-applet &
 onboard &
 
@@ -6,4 +6,4 @@ xset s off &
 xset -dpms &
 xset s noblank &
 
-conky &
+

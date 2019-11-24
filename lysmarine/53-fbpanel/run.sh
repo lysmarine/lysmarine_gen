@@ -12,7 +12,7 @@ install    -o 1000 -g 1000 $FILE_FOLDER/default "/home/pi/.config/fbpanel/defaul
 install -d -o 1000 -g 1000 -m 755 "/home/pi/.config/tint2/"
 install    -o 1000 -g 1000 -v $FILE_FOLDER/tint2rc "/home/pi/.config/tint2/"
 
-install -d /home/pi/.config/openbox
+install -d  -o 1000 -g 1000 /home/pi/.config/openbox
 echo 'fbpanel &' >> /home/pi/.config/openbox/autostart
 
 git clone https://github.com/FredericGuilbault/fbpanel
