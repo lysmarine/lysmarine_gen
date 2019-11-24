@@ -8,12 +8,17 @@ logErr () {
 
 # Create caching folder hierarchy to work with this architecture
 setupWorkSpace () {
+				if [ $EUID -ne 0 ]; then
+					echo "This tool must be run as root."
+					exit 1
+				fi
+
         thisArch=$1
         mkdir -p ./cache/$thisArch
         mkdir -p ./work/$thisArch
         mkdir -p ./work/$thisArch/rootfs
         mkdir -p ./work/$thisArch/bootfs
-        mkdir -p ./work/$thisArch/overlayRootfs
+        mkdir -p ./work/$thisArch/ISOmountPoint
         mkdir -p ./release/$thisArch
 
 }
@@ -31,26 +36,15 @@ function getCachedVendors {
 
         fi
 
-
-
-        # Check dietPi repo cache.
-        if [ ! -d ./cache/DietPi/.git ] ; then
-                cd ./cache
-                git clone $dietPiRepo
-                cd ../
-        fi;
-
-
-
         # Download or copy the official image from cache
         if [ ! -f ./cache/$thisArch/$imageName ]; then
-                log "Downloading official Dietpi image from internet."
-                wget -P ./cache/$thisArch/  $imageSource/$zipName
+                log "Downloading official image from internet."
+                wget -P ./cache/$thisArch/  $imageSource
                 7z e -o./cache/$thisArch/   ./cache/$thisArch/$zipName
-                rm ./cache/$thisArch/$zipName ./cache/$thisArch/hash.txt ./cache/$thisArch/README.md
+                rm ./cache/$thisArch/$zipName
 
         else
-                log "Using official Dietpi image from cache."
+                log "Using official image from cache."
 
         fi
 
@@ -59,11 +53,11 @@ function getCachedVendors {
 
 function prepareBaseOs {
         if [ ! -f ./cache/$thisArch/$imageName-rdy2build ]; then
-                log "Getting DietPi image ready to run in qemu and build. "
+                log "Getting OS image ready to run in qemu and build. "
                 cp -fv ./cache/$thisArch/$imageName ./cache/$thisArch/$imageName-rdy2build
 
                 # Mounting image disk (but not the partitions yet)
-                log "Mounting Dietpi image."
+                log "Mounting image."
                 partQty=$(fdisk -l ./cache/$thisArch/$imageName-rdy2build | grep -o "^./cache/$thisArch/$imageName-rdy2build" | wc -l)
 
                 echo $partQty partitions detected.
@@ -81,20 +75,11 @@ function prepareBaseOs {
                 log "Resize the root file system to fill the new drive size."
                 resize2fs /dev/mapper/loop${loopId}p$partQty
 
-                # Fix the no-dns problem due to the fact that services are not started.
-                mv ./work/$thisArch/rootfs/etc/resolv.conf ./work/$thisArch/rootfs/etc/resolv.conf.lysmarinebak
-                cp -vf /etc/resolv.conf ./work/$thisArch/rootfs/etc/resolv.conf
-
-                log "Debootstraping."
+								log "Unmount OS image"
+								umountImage
 
 
-                debootstrap --arch $DBOOTarch --foreign --no-check-gpg --include $DBOOTinclude buster ./work/$thisArch/rootfs/ $DBOOTmirror
-                cp -v /usr/bin/qemu-arm-static "./work/$thisArch/rootfs/usr/bin"
-                cp -v /usr/bin/qemu-aarch64-static "./work/$thisArch/rootfs/usr/bin"
-        	log "Unmount Dietpi image"
 
-                #Unmount the image to return to the previous state.
-                umountImage
         else
                 log "Using Ready to build image from cache"
 
@@ -104,7 +89,7 @@ function prepareBaseOs {
 
 
 function mountImage  {
-        log "Mounting Dietpi partitions."
+        log "Mounting OS partitions."
         # mount partition table in /dev/loop
         loopId=$(kpartx -sav ./cache/$thisArch/$imageName-rdy2build |  cut -d" " -f3 | grep -o "[^a-z]" | head -n 1)
 
@@ -136,7 +121,7 @@ function umountImage {
 
 function mountAndBind {
         # Mount the image and make the binds required to chroot.
-        log "Mounting Dietpi image."
+        log "Mounting OS image."
         IFS=$'\n' #to split lines into array
         partitions=($(kpartx -sav ./work/$thisArch/$imageName |  cut -d" " -f3))
         partQty=${#partitions[@]}
@@ -144,7 +129,7 @@ function mountAndBind {
 
 
 
-        log "Mounting Dietpi partitions."
+        log "Mounting OS partitions."
         if [ $partQty == 2 ] ; then
                 mount -v /dev/mapper/${partitions[1]} ./work/$thisArch/rootfs/
                 mount -v /dev/mapper/${partitions[0]} ./work/$thisArch/rootfs/boot/
@@ -170,22 +155,11 @@ function mountAndBind {
 
 
 function addScripts {
-        log "copying lysmarine and dietpi_configuration_script on the image"
+        log "copying lysmarine on the image"
         cp -r ../lysmarine ./work/$thisArch/rootfs/
         chmod 0775 ./work/$thisArch/rootfs/lysmarine/*.sh
         chmod 0775 ./work/$thisArch/rootfs/lysmarine/*/*.sh
-
-        cp -rvf ./cache/DietPi/rootfs/*    ./work/$thisArch/rootfs/
-        cp -rvf ./cache/DietPi/dietpi      ./work/$thisArch/rootfs/
-
-        cp -vf /etc/resolv.conf ./work/$thisArch/rootfs/etc/resolv.conf
-        mv ./work/$thisArch/rootfs/etc/resolv.conf ./work/$thisArch/rootfs/etc/resolv.conf.lysmarinebak
-
-        cp -v /usr/bin/qemu-arm-static "./work/$thisArch/rootfs/usr/bin"
-        cp -v /usr/bin/qemu-aarch64-static "./work/$thisArch/rootfs/usr/bin"
-
 }
-#deb http://deb.debian.org/debian buster main contrib non-free
 
 
 

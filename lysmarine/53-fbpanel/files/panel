@@ -16,7 +16,7 @@ Global {
   usefontsize=1
   fontsize=20
   background=1
-  backgroundfile=/home/dietpi/.icons/Flat-Remix-Dark/categories/scalable/applications-boardgames.svg
+  backgroundfile=/home/pi/.icons/Flat-Remix-Dark/categories/scalable/applications-boardgames.svg
   iconsize=38
   align=left
 }

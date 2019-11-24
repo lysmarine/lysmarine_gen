@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Openplotter
-Exec=sh -c "/usr/bin/python /opt/openplotter/startup restart && /opt/.config/openplotter/openplotter"
-Terminal=false
-Icon=$HOME/.config/openplotter/openplotter.ico
-Categories=Administration;

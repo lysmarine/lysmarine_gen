@@ -6,14 +6,14 @@ install -d "/usr/share/applications/"
 install $FILE_FOLDER/XyGrib.desktop "/usr/share/applications/"
 
 install -d "/usr/local/share/openGribs/XyGrib/data/img/"
-install -d -o 1000 -g 1000 "$FILE_FOLDER/home/dietpi/.local/share/applications/openGrib/XyGrib/data/"
+install -d -o 1000 -g 1000 "$FILE_FOLDER/home/pi/.local/share/applications/openGrib/XyGrib/data/"
 
 
 
-wget https://github.com/opengribs/XyGrib/archive/v1.2.4.tar.gz
-tar xf v1.2.4.tar.gz
-rm v1.2.4.tar.gz
-mv -f XyGrib-1.2.4 XyGrib
+wget https://github.com/opengribs/XyGrib/archive/v1.2.6.tar.gz
+tar xf v1.2.6.tar.gz
+rm v1.2.6.tar.gz
+mv -f XyGrib-1.2.6 XyGrib
 
 cd XyGrib
 mkdir -p build
@@ -30,6 +30,6 @@ rm -rf /XyGrib
 install $FILE_FOLDER/XyGrib -m755 "/usr/local/bin/"
 install $FILE_FOLDER/XyGrib.desktop "/usr/share/applications"
 #install files/logo_grib.jpg "${ROOTFS_DIR}/usr/local/share/openGribs/XyGrib/data/img/"
-#install -d -o 1000 -g 1000   "${ROOTFS_DIR}/home/dietpi/.local/share/icons/"
+#install -d -o 1000 -g 1000   "${ROOTFS_DIR}/home/pi/.local/share/icons/"
 
  install -o 1000 -g 1000 $FILE_FOLDER/logo_grib.png "/usr/share/icons/"

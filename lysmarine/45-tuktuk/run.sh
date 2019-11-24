@@ -3,15 +3,18 @@
 apt-get install -y nodejs git python-dev  libsqlite3-0 g++
 
 echo " - Install tuktuk"
-if [ ! -d /var/www ] ; then
-        mkdir /var/www
-        chown www-data:www-data /var/www
+if [ ! id -u www-data >/dev/null 2>&1 ] ; then
+	adduser --disabled-login --home /var/www www-data
 fi
 
-cd /var/www
-git clone https://gitlab.com/FredericGuilbault/tuktuk-chart-plotter
-cd tuktuk-chart-plotter
-git checkout lysmarine/master
+if [ ! -d /var/www  ] ; then
+	mkdir /var/www
+	chown www-data:www-data /var/www
+fi
+
+
+git clone  --branch lysmarine/master https://gitlab.com/FredericGuilbault/tuktuk-chart-plotter /var/www/tuktuk-chart-plotter
+pushd /var/www/tuktuk-chart-plotter
 npm cache verify
 npm install -g --unsafe-perm --loglevel error  --cache /tmp/empty-cache45;
 echo " -package Install done"
@@ -21,12 +24,11 @@ NODE_ENV=production npm run bundle:js
 NODE_ENV=production npm run bundle:css
 echo " - Bundle done"
 
-cd $FILE_FOLDER/../
+popd
 echo " Compiling Done for tuktuk"
 
-echo "CWD ===> $(pwd)"
-install $FILE_FOLDER/client-config.json "/var/www/tuktuk-chart-plotter/client-config.json"
-install -m 644 -v $FILE_FOLDER/tuktuk.service  "/etc/systemd/system/tuktuk.service"
+install ./files/client-config.json "/var/www/tuktuk-chart-plotter/client-config.json"
+install -m 644 -v ./files/tuktuk.service  "/etc/systemd/system/tuktuk.service"
 
 systemctl enable tuktuk.service
 

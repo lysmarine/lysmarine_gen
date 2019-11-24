@@ -19,8 +19,11 @@ conky-all
 apt-get install -y chromium-browser
 
 
-install -d -o dietpi -g dietpi /home/dietpi/.local
-install -d -o dietpi -g dietpi /home/dietpi/.local/share
+install -d -o pi -g pi /home/pi/.local
+install -d -o pi -g pi /home/pi/.local/share
 
-chown dietpi:dietpi /home/dietpi/.local
-chown dietpi:dietpi /home/dietpi/.local/share # luakit change it to root So we must give it back to pi.
+chown pi:pi /home/pi/.local
+chown pi:pi /home/pi/.local/share # luakit change it to root So we must give it back to pi.
+
+# Openbox 
+install -o 1000 -g 1000  -v $FILE_FOLDER/autostart     "/home/pi/.config/openbox/"
