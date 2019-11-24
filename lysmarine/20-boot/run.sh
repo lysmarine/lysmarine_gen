@@ -7,14 +7,8 @@ chmod 0775 /bin/splashScreen
 cp $FILE_FOLDER/ascii_logo.txt /etc/motd
 cp $FILE_FOLDER/splash.png /usr/share/splash.png
 
-#cp $FILE_FOLDER/splashscreen.service "/etc/systemd/system/splashscreen.service"
-#chmod 0644 "/etc/systemd/system/splashscreen.service"
+cp $FILE_FOLDER/splashscreen.service "/etc/systemd/system/splashscreen.service"
+chmod 0644 "/etc/systemd/system/splashscreen.service"
 
 apt-get install -y fbi ;
-#systemctl enable splashscreen.service
-
-if [ ! $(id -u www-data) ] ; then
-        adduser --disabled-login --home /var/www www-data
-        mkdir /var/www
-        chown www-data:www-data /var/www
-fi
+systemctl enable splashscreen.service

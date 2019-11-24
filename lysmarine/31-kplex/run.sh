@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
-cp $FILE_FOLDER/.kplex.conf "/home/dietpi/"
-chmod 0755 /home/dietpi/.kplex.conf
-chown 1000:1000 /home/dietpi/.kplex.conf
+cp $FILE_FOLDER/.kplex.conf "/home/pi/"
+chmod 0755 /home/pi/.kplex.conf
+chown 1000:1000 /home/pi/.kplex.conf
 echo $ARCH
 
 if [ "$ARCH" == "NativePC-BIOS-x86_64" ] ; then

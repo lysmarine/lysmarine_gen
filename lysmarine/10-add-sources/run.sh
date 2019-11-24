@@ -1,5 +1,5 @@
 #!/bin/bash -e
-
+apt update -yy && apt upgrade -yy
 apt-get install -y cmake build-essential curl dirmngr apt-transport-https lsb-release git
 
 # Nodejs10
@@ -13,4 +13,4 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6AF0E1940624A220
 cp $FILE_FOLDER/opencpnsource.list /etc/apt/sources.list.d/opencpnsource.list
 
 # Upadate
-apt update
+apt update  -yy

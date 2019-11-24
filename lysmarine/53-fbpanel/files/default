@@ -48,7 +48,7 @@ Plugin {
         item {
             icon = android-studio
             name = Tuktuk
-            action = chromium-browser http://localhost:4999
+            action = chromium-browser --app="http://localhost:4999"
         }
         item {
             icon = logo_grib
@@ -58,7 +58,7 @@ Plugin {
         item {
             icon = signalk
             name = Signalk
-            action = chromium-browser http://localhost:80
+            action = chromium-browser --app="http://localhost:80"
         }
         item {
             icon = utilities-system-monitor

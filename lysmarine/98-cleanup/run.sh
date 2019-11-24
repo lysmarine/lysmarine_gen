@@ -4,5 +4,5 @@ rm -f /usr/share/applications/vim.desktop
 rm -f /usr/share/applications/PyCrust.desktop
 rm -f /usr/share/applications/XRCed.desktop
 
-rm -rf /home/dietpi/Public  /home/dietpi/Templates /home/dietpi/Videos /home/dietpi/Music /home/dietpi/Pictures /home/dietpi/Documents /home/dietpi/Desktop
+rm -rf /home/pi/Public  /home/pi/Templates /home/pi/Videos /home/pi/Music /home/pi/Pictures /home/pi/Documents /home/pi/Desktop
 apt -y autoremove

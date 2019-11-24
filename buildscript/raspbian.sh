@@ -1,19 +1,11 @@
 #!/bin/bash
+{
 source common.sh
 
-
-
-thisArch=RPi-ARMv6
-imageSource="https://dietpi.com/downloads/images/"
-zipName="DietPi_RPi-ARMv6-Buster.7z"
-imageName="DietPi_v6.25_RPi-ARMv6-Buster.img"
-dietPiRepo="https://github.com/MichaIng/DietPi"
-dietPiBranch="dev"
-
-DBOOTmirror="http://archive.raspbian.org/raspbian"
-DBOOTinclude="net-tools,isc-dhcp-client,nano,openssh-server,rsync,wget"
-DBOOTaptsources="deb http://archive.raspbian.org/raspbian stretch main contrib non-free\ndeb-src http://archive.raspbian.org/raspbian stretch main contrib non-free"
-DBOOTarch='armhf'
+thisArch=rpi
+imageSource="https://downloads.raspberrypi.org/raspbian_lite_latest"
+zipName="raspbian_lite_latest"
+imageName="2019-09-26-raspbian-buster-lite.img"
 
 
 
@@ -27,16 +19,9 @@ getCachedVendors
 
 
 
-# Update and checkout the good branch of the repository
-cd ./cache/DietPi/
-git checkout $dietPiBranch
-git pull
-cd ../../
-
-
-
 # Copy image file to work folder add temporary space to it.
 prepareBaseOs
+
 
 
 # copy ready image from cache to the work dir
@@ -48,9 +33,16 @@ cp -fv ./cache/$thisArch/$imageName-rdy2build ./work/$thisArch/$imageName
 mountAndBind
 
 
-
-# Copy the lysmarine and dietpi config files in the mounted rootfs
+# Copy the lysmarine and origine OS config files in the mounted rootfs
 addScripts
+
+
+###################cp -v /usr/bin/qemu-arm-static "./work/$thisArch/rootfs/usr/bin"
+
+
+# Fix the no-dns problem due to the fact that services are not started.
+mv ./work/$thisArch/rootfs/etc/resolv.conf ./work/$thisArch/rootfs/etc/resolv.conf.lysmarinebak
+cp -vf /etc/resolv.conf ./work/$thisArch/rootfs/etc/resolv.conf
 
 
 
@@ -60,16 +52,15 @@ log "chroot into the image"
 echo "";echo "";echo "";echo "";echo "";
 echo "========================================================================="
 echo "You are now in the chroot environement.";
-echo "Start the build script with by pasting the following line in the terminal:";
+echo "Start the build script with by pasting one of the following line in the terminal:";
 echo "";
-echo "export ARCH=$thisArch ;cd /lysmarine; ./build.sh 00 10 50 51 55 98; exit"
-echo "export ARCH=RPi-ARMv6 ;cd /lysmarine; ./build.sh 00 10 20 21 22 26 27 30 31 32 50 51 52 55 98 ";
-echo "export ARCH=RPi-ARMv6 ;cd /lysmarine; ./build.sh ";
-
+echo "cd /lysmarine; ./build.sh 10 20 21 22 23 27 30 31 32 91 95 98"
+echo "cd /lysmarine; ./build.sh 50 51 52 53 55 98"
+echo "cd /lysmarine; ./build.sh 46"
+echo "cd /lysmarine; ./build.sh ";
 echo "========================================================================="
 echo "";echo "";
 
-cmds='/bin/bash -e ' # drop to shell prompt
 sudo proot -r ./work/$thisArch/rootfs -q qemu-arm -S ./work/$thisArch/rootfs ;
 
 sed -i 's/^#//g' ./work/$thisArch/rootfs/etc/ld.so.preload
@@ -78,9 +69,6 @@ sed -i 's/^#//g' ./work/$thisArch/rootfs/etc/ld.so.preload
 
 #unmount
 unmountOs
-
-
-
 # Shrink the image size.
 # ./cache/pishrink.sh ./work/$thisArch/$image
 
@@ -92,7 +80,8 @@ log "DONE."
 
 
 
-echo "Pro Tip"
-echo "cp -v ./work/$thisArch/$imageName ./cache/$thisArch/$imageName-rdy2build"
-
+echo "Pro Tips"
+echo "sudo cp -v ./work/$thisArch/$imageName ./cache/$thisArch/$imageName-rdy2build"
+echo "sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
 exit
+}
