@@ -24,4 +24,4 @@ SUBSYSTEM=="tty", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a5", SYMLINK="tt
 SUBSYSTEM=="tty", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a6", SYMLINK="ttyLYS_gps_%n", RUN+="/lib/udev/manage_gps.sh %n"
 
 
-ACTION=="remove", SUBSYSTEM=="tty", RUN+="/lib/udev/manage_gps.sh %n remove" 
+ACTION=="remove", SUBSYSTEM=="tty", RUN+="/lib/udev/manage_gps.sh %n remove"
