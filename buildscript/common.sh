@@ -111,45 +111,36 @@ function mountImage  {
 
 
 function umountImage {
-        umount ./work/$thisArch/bootfs
-        umount ./work/$thisArch/rootfs
-        kpartx -d ./cache/$thisArch/$imageName-rdy2build
+	umount ./work/$thisArch/bootfs
+	umount ./work/$thisArch/rootfs
+	kpartx -d ./cache/$thisArch/$imageName-rdy2build
 
 }
 
 
 
 function mountAndBind {
-        # Mount the image and make the binds required to chroot.
-        log "Mounting OS image."
-        IFS=$'\n' #to split lines into array
-        partitions=($(kpartx -sav ./work/$thisArch/$imageName |  cut -d" " -f3))
-        partQty=${#partitions[@]}
-        echo $partQty partitions detected.
+	# Mount the image and make the binds required to chroot.
+	log "Mounting OS image."
+	IFS=$'\n' #to split lines into array
+	partitions=($(kpartx -sav ./work/$thisArch/$imageName |  cut -d" " -f3))
+	partQty=${#partitions[@]}
+	echo $partQty partitions detected.
 
+	log "Mounting OS partitions."
+	if [ $partQty == 2 ] ; then
+		mount -v /dev/mapper/${partitions[1]} ./work/$thisArch/rootfs/
+		mount -v /dev/mapper/${partitions[0]} ./work/$thisArch/rootfs/boot/
 
+	elif [ $partQty == 1 ] ; then
+		mount -v /dev/mapper/${partitions[0]} ./work/$thisArch/rootfs/
 
-        log "Mounting OS partitions."
-        if [ $partQty == 2 ] ; then
-                mount -v /dev/mapper/${partitions[1]} ./work/$thisArch/rootfs/
-                mount -v /dev/mapper/${partitions[0]} ./work/$thisArch/rootfs/boot/
+	else
+		log "ERROR: unsuported amount of partitions."
+		exit 1
+	fi
 
-        elif [ $partQty == 1 ] ; then
-                mount -v /dev/mapper/${partitions[0]} ./work/$thisArch/rootfs/
-
-        else
-                log "ERROR: unsuported amount of partitions."
-                exit 1
-        fi
-
-        mount --bind /dev  ./work/$thisArch/rootfs/dev/
-        mount --bind /dev/pts  ./work/$thisArch/rootfs/dev/pts
-        mount --bind /sys  ./work/$thisArch/rootfs/sys/
-        mount --bind /proc ./work/$thisArch/rootfs/proc/
-
-
-        resize2fs /dev/mapper/${partitions[ $(($partQty - 1)) ]}
-
+	resize2fs /dev/mapper/${partitions[ $(($partQty - 1)) ]}
 }
 
 
@@ -163,17 +154,10 @@ function addScripts {
 
 
 
+# Unmount the image
 function unmountOs {
-        # The file transfer is done now, unmouting
-        mv ./work/$thisArch/rootfs/etc/resolv.conf.lysmarinebak ./work/$thisArch/rootfs/etc/resolv.conf
-
-        # Unmount the image
-        log "Unmounting partitions"
-        umount ./work/$thisArch/rootfs/dev/pts
-        umount ./work/$thisArch/rootfs/dev/
-        umount ./work/$thisArch/rootfs/sys/
-        umount ./work/$thisArch/rootfs/proc/
-        umount /dev/mapper/${partitions[0]}
-        umount /dev/mapper/${partitions[1]}
-        kpartx -d ./work/$thisArch/$imageName
+	log "Unmounting partitions"
+	umount /dev/mapper/${partitions[0]}
+	umount /dev/mapper/${partitions[1]}
+	kpartx -d ./work/$thisArch/$imageName
 }

@@ -1,25 +1,23 @@
 #!/bin/bash -e
-apt update -yy && apt upgrade -yy
-apt-get install -y cmake build-essential curl dirmngr apt-transport-https lsb-release git
 
-# Nodejs10
-if [ ! -f /etc/apt/sources.list.d/nodesource.list ]; then
-	wget wget -q -O- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add
-	DISTRO="$(lsb_release -s -c)"
-	echo "deb https://deb.nodesource.com/node_10.x $DISTRO main" | tee /etc/apt/sources.list.d/nodesource.list
-else
-	echo "node source already added to source list."
-fi
+apt-get update  -y -q
+apt-get install -y -q apt-transport-https lsb-release
 
+DISTRO="$(lsb_release -s -c)"
 
-# Opencpn
-if [ ! -f /etc/apt/sources.list.d/opencpnsource.list ]; then
-	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 67E4A52AC865EB40
-	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6AF0E1940624A220
-	cp $FILE_FOLDER/opencpnsource.list /etc/apt/sources.list.d/opencpnsource.list
-else
-	echo "Opencon source already added to source list"
-fi
+## Nodejs10
+wget wget -q -O- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add
+echo "deb https://deb.nodesource.com/node_10.x $DISTRO main" | tee /etc/apt/sources.list.d/nodesource.list
 
-# Upadate
-apt update  -yy
+## Opencpn
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 67E4A52AC865EB40
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6AF0E1940624A220
+echo "deb http://ppa.launchpad.net/opencpn/opencpn/ubuntu/ eoan main" > /etc/apt/sources.list.d/opencpnsource.list
+
+## XyGrib
+wget -q -O - https://www.free-x.de/debian/oss.boating.gpg.key  | apt-key add -
+echo "deb https://www.free-x.de/debian/ $DISTRO main contrib non-free" > /etc/apt/sources.list.d/oss.list
+
+## Upadate
+apt-get update  -y -q
+apt-get upgrade -y -q
