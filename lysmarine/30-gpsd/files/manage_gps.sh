@@ -1,7 +1,6 @@
 #! /bin/bash
 {
-if [ $2 == "remove" ]
-then
+if [[ $2 == "remove" ]] ; then
 	logger "The USB device $1 have been disconnected" ;
 	systemctl stop lysgpsd@$1.service ;
 

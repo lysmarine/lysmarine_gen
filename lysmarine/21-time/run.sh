@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-apt-get install -y -d chrony
+apt-get install -y -q chrony
 
 systemctl disable systemd-timesyncd
 
