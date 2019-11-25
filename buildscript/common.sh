@@ -120,6 +120,13 @@ function umountImage {
 
 
 function mountAndBind {
+
+	## Make sure it's not already mounted
+	if [ ! -z "$(ls -A ./work/$thisArch/rootfs)" ]; then
+		 logErr "./work/$thisArch/rootfs is not empty. Previous failiure to unmount ?"
+		 exit
+	fi
+
 	# Mount the image and make the binds required to chroot.
 	log "Mounting OS image."
 	IFS=$'\n' #to split lines into array

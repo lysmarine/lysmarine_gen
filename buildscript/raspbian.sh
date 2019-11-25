@@ -67,7 +67,7 @@ echo "";echo "";
  	--mount=/proc:/proc \
  	--mount=/tmp:/tmp \
  	--mount=/run/shm:/run/shm \
- 	/bin/bash -e
+ 	/bin/bash
 
 
 
