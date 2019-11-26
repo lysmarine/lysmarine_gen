@@ -1,7 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
-apt-get install -y xrdp
-cp $FILE_FOLDER/Xwrapper.config "/etc/X11/Xwrapper.config"
-
-# systemctl disable xrdp.service
-# systemctl disable xrdp-sesman.service
+apt-get install -y -q xrdp
+install -v $FILE_FOLDER/Xwrapper.config "/etc/X11/Xwrapper.config"
