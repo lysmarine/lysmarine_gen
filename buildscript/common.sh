@@ -64,7 +64,7 @@ function prepareBaseOs {
                 log "Resizing root partition."
 
                 # Add 5G to the image file
-                truncate -s "5G" ./cache/$thisArch/$imageName-rdy2build
+                truncate -s "6G" ./cache/$thisArch/$imageName-rdy2build
 
                 # Inflate last partition to maximum available space.
                 parted ./cache/$thisArch/$imageName-rdy2build --script "resizepart $partQty 100%" ;
