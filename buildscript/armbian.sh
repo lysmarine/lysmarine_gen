@@ -1,8 +1,8 @@
 #!/bin/bash
 source lib.sh
 
-dBootArch="i386"
-thisArch="debian-$dBootArch"
+dBootArch="amd64"
+thisArch="armbian-$dBootArch"
 imageName="$thisArch.img"
 
 
@@ -30,15 +30,24 @@ if [ ! -f ./cache/$thisArch/$imageName-rdy2build ] ;then
 
 	mountImageFile $thisArch ./work/$thisArch/$imageName ;
 
-	debootstrap \
+
+
+debootstrap \
 --arch=$dBootArch \
---include=aptitude,console-setup,locales,keyboard-configuration,\
-command-not-found,bash,sudo,intel-microcode,firmware-linux-free,firmware-misc-nonfree,\
-firmware-iwlwifi,cryptsetup,network-manager \
---exclude=vim \
---components=main,contrib,non-free \
 buster \
-./work/$thisArch/rootfs
+./work/$thisArch/rootfs \
+
+
+#
+# 	debootstrap \
+# --arch=$dBootArch \
+# --include=aptitude,console-setup,locales,keyboard-configuration,build-essential,libc6-dev,\
+# command-not-found,busybox,sudo,intel-microcode,firmware-linux-free,firmware-misc-nonfree,\
+# firmware-iwlwifi,cryptsetup,network-manager \
+# --exclude=vim \
+# --components=main,contrib,non-free \
+# buster \
+# ./work/$thisArch/rootfs
 
 	umountImageFile $thisArch ./work/$thisArch/$imageName
 
@@ -65,7 +74,7 @@ mkdir ./work/$thisArch/rootfs/lysmarine
 mount --bind ../lysmarine ./work/$thisArch/rootfs/lysmarine
 
 
-# Chroot into the mounted image.
+# Chroot into the mounted image./
 log "chroot into the image"
 
 echo "";echo "";echo "";echo "";echo "";
@@ -80,18 +89,19 @@ echo "export LMBUILD=$thisArch ;cd /lysmarine; ./build.sh ";
 echo "========================================================================="
 echo "";echo "";
 
+
 # chroot into the mount image point
- proot -q qemu-aarch64 \
---root-id \
---rootfs=work/${thisArch}/rootfs \
---cwd=/ \
- --mount=/etc/resolv.conf:/etc/resolv.conf \
- --mount=/dev:/dev \
- --mount=/sys:/sys \
- --mount=/proc:/proc \
- --mount=/tmp:/tmp \
- --mount=/run/shm:/run/shm \
-"bash"
+ proot -q qemu-i386 \
+ 	--root-id \
+ 	--rootfs=work/${thisArch}/rootfs \
+	--cwd=/ \
+ 	--mount=/etc/resolv.conf:/etc/resolv.conf \
+ 	--mount=/dev:/dev \
+ 	--mount=/sys:/sys \
+ 	--mount=/proc:/proc \
+ 	--mount=/tmp:/tmp \
+ 	--mount=/run/shm:/run/shm \
+ 	/bin/sh
 
 
 
@@ -100,8 +110,7 @@ sed -i 's/^#//g' ./work/$thisArch/rootfs/etc/ld.so.preload
 
 
 
-# Unmount
-umountImageFile $thisArch ./work/$thisArch/$imageName
+	umountImageFile $thisArch ./work/$thisArch/$imageName
 
 
 
