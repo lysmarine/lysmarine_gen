@@ -1,5 +1,5 @@
 include "/home/pi/.gtkrc-2.0.mine"
-gtk-theme-name="Adwaita-dark"
+gtk-theme-name="Adapta-Nokto"
 gtk-icon-theme-name="Flat-Remix-Dark"
 gtk-font-name="Sans 11"
 gtk-cursor-theme-name="PiX"
