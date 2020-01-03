@@ -1,9 +1,11 @@
 #!/bin/bash
+{
 source lib.sh
 
-dBootArch="amd64"
-thisArch="armbian-$dBootArch"
-imageName="$thisArch.img"
+thisArch="armbian-pine64"
+imageSource="https://dl.armbian.com/pine64/Buster_current"
+zipName="Buster_current"
+imageName="Armbian_19.11.3_Pine64_buster_current_5.3.9.img"
 
 
 
@@ -11,67 +13,47 @@ checkRoot ;
 
 
 
-get3rdPartyAssets ;
-
-
-
-createEmptyImageFile ;
-
-
-
+# Create caching folder hierarchy to work with this architecture.
 setupWorkSpace $thisArch ;
 
 
 
-if [ ! -f ./cache/$thisArch/$imageName-rdy2build ] ;then
-	log "No ready-to-buld image found in cache, bootstrapping"
-
-	cp -v ./cache/emptyImage.img ./work/$thisArch/$imageName
-
-	mountImageFile $thisArch ./work/$thisArch/$imageName ;
+# Check 3rd party dependency Needed to to execute various tasks.
+get3rdPartyAssets ;
 
 
 
-debootstrap \
---arch=$dBootArch \
-buster \
-./work/$thisArch/rootfs \
-
-
-#
-# 	debootstrap \
-# --arch=$dBootArch \
-# --include=aptitude,console-setup,locales,keyboard-configuration,build-essential,libc6-dev,\
-# command-not-found,busybox,sudo,intel-microcode,firmware-linux-free,firmware-misc-nonfree,\
-# firmware-iwlwifi,cryptsetup,network-manager \
-# --exclude=vim \
-# --components=main,contrib,non-free \
-# buster \
-# ./work/$thisArch/rootfs
-
-	umountImageFile $thisArch ./work/$thisArch/$imageName
-
-	mv -vf ./work/$thisArch/$imageName ./cache/$thisArch/$imageName-rdy2build
+# Download or copy the official image from cache
+if [ ! -f ./cache/$thisArch/$imageName ]; then
+	log "Downloading official image from internet."
+	wget -P ./cache/$thisArch/  $imageSource
+	7z e -o./cache/$thisArch/  ./cache/$thisArch/$zipName
+	rm ./cache/$thisArch/$zipName ./cache/$thisArch/Armbian_19.11.3_Pine64_buster_current_5.3.9.img.*
 
 else
-	log "Using ready to buld image from cache"
-fi;
+	log "Using official image from cache."
+
+fi
 
 
 
-cp -fv ./cache/$thisArch/$imageName-rdy2build ./work/$thisArch/$imageName
+# Copy image file to work folder add temporary space to it.
+inflateImage $thisArch ./cache/$thisArch/$imageName
 
 
 
-mountImageFile $thisArch ./work/$thisArch/$imageName ;
+# copy ready image from cache to the work dir
+cp -fv ./cache/$thisArch/$imageName-inflated ./work/$thisArch/$imageName
 
 
 
-#  chmod 0775 ./work/$thisArch/rootfs/lysmarine/*.sh
-#  chmod 0775 ./work/$thisArch/rootfs/lysmarine/*/*.sh
+# Mount the image and make the binds required to chroot.
+mountImageFile $thisArch ./work/$thisArch/$imageName
 
-mkdir ./work/$thisArch/rootfs/lysmarine
-mount --bind ../lysmarine ./work/$thisArch/rootfs/lysmarine
+
+
+# Copy the lysmarine and origine OS config files in the mounted rootfs
+addLysmarineScripts $thisArch
 
 
 # Chroot into the mounted image./
@@ -82,50 +64,47 @@ echo "========================================================================="
 echo "You are now in the chroot environement.";
 echo "Start the build script with by pasting the following line in the terminal:";
 echo "";
-echo "export LMBUILD=$thisArch ;cd /lysmarine; ./build.sh 00 "
+echo "export LMBUILD=$thisArch ;cd /lysmarine; ./build.sh 10 15 20 21 22 23 "
 echo "export LMBUILD=$thisArch ;cd /lysmarine; ./build.sh 00 ";
 echo "export LMBUILD=$thisArch ;cd /lysmarine; ./build.sh ";
-
 echo "========================================================================="
 echo "";echo "";
 
 
+
 # chroot into the mount image point
- proot -q qemu-i386 \
- 	--root-id \
- 	--rootfs=work/${thisArch}/rootfs \
+proot -q qemu-aarch64 \
+	--root-id \
+	--rootfs=work/${thisArch}/rootfs \
 	--cwd=/ \
- 	--mount=/etc/resolv.conf:/etc/resolv.conf \
- 	--mount=/dev:/dev \
- 	--mount=/sys:/sys \
- 	--mount=/proc:/proc \
- 	--mount=/tmp:/tmp \
- 	--mount=/run/shm:/run/shm \
- 	/bin/sh
+	--mount=/etc/resolv.conf:/etc/resolv.conf \
+	--mount=/dev:/dev \
+	--mount=/sys:/sys \
+	--mount=/proc:/proc \
+	--mount=/tmp:/tmp \
+	--mount=/run/shm:/run/shm \
+	/bin/bash
 
 
 
-
-sed -i 's/^#//g' ./work/$thisArch/rootfs/etc/ld.so.preload
-
-
-
-	umountImageFile $thisArch ./work/$thisArch/$imageName
+# Unmount
+umountImageFile $thisArch
 
 
 
 # Shrink the image size.
-./cache/pishrink.sh ./work/$thisArch/$image
+#./cache/pishrink.sh ./work/$thisArch/$image
 
 
 
 # Renaming the OS and moving it to the release folder.
-cp -v ./work/$thisArch/$imageName  ./release/$thisArch/LysMarine_$thisArch-0.9.0.img
-log "DONE."
+mv -v ./work/$thisArch/$imageName  ./release/$thisArch/LysMarine_$thisArch-0.9.0.img
 
 
 
-echo "Pro Tip"
-echo "cp -v ./work/$thisArch/$imageName ./cache/$thisArch/$imageName-rdy2build"
+echo "Pro Tip:"
+echo "cp -v ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ./cache/$thisArch/$imageName-inflated"
+echo "sudo ./cache/pishrink.sh ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ;sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
 
 exit
+}

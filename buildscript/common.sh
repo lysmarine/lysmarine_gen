@@ -1,27 +1,8 @@
-log () {
-        echo -e "\e[32m["$(date +'%T' )"]  \e[1m $1 \e[0m " #| tee -a "${LOG_FILE}"
-}
+source lib.sh
 
-logErr () {
-          echo -e "\e[91m ["$(date +'%T' )"] ---> $1 \e[0m" #| tee -a "${LOG_FILE}"
-}
 
-# Create caching folder hierarchy to work with this architecture
-setupWorkSpace () {
-				if [ $EUID -ne 0 ]; then
-					echo "This tool must be run as root."
-					exit 1
-				fi
 
-        thisArch=$1
-        mkdir -p ./cache/$thisArch
-        mkdir -p ./work/$thisArch
-        mkdir -p ./work/$thisArch/rootfs
-        mkdir -p ./work/$thisArch/bootfs
-        mkdir -p ./work/$thisArch/ISOmountPoint
-        mkdir -p ./release/$thisArch
 
-}
 
 function getCachedVendors {
         #pishrink is needed to deflate the disk size at the end
@@ -51,47 +32,98 @@ function getCachedVendors {
 }
 
 
-function prepareBaseOs {
-        if [ ! -f ./cache/$thisArch/$imageName-rdy2build ]; then
-                log "Getting OS image ready to run in qemu and build. "
-                cp -fv ./cache/$thisArch/$imageName ./cache/$thisArch/$imageName-rdy2build
+#function prepareBaseOs {
 
-                # Mounting image disk (but not the partitions yet)
-                log "Mounting image."
-                partQty=$(fdisk -l ./cache/$thisArch/$imageName-rdy2build | grep -o "^./cache/$thisArch/$imageName-rdy2build" | wc -l)
-
-                echo $partQty partitions detected.
-                log "Resizing root partition."
-
-                # Add 5G to the image file
-                truncate -s "6G" ./cache/$thisArch/$imageName-rdy2build
-
-                # Inflate last partition to maximum available space.
-                parted ./cache/$thisArch/$imageName-rdy2build --script "resizepart $partQty 100%" ;
-
-                #mount the inage drive
-                mountImage
-
-                log "Resize the root file system to fill the new drive size."
-                resize2fs /dev/mapper/loop${loopId}p$partQty
-
-								log "Unmount OS image"
-								umountImage
-
-
-
-        else
-                log "Using Ready to build image from cache"
-
-        fi
-}
+#	inflateImage $thisArch ./cache/$thisArch/$imageName
+	# if [ ! -f ./cache/$thisArch/$imageName-inflated ]; then
+	# 	log "Inflating OS image to have enough space to build lysmarine. "
+	# 	cp -fv ./cache/$thisArch/$imageName ./cache/$thisArch/$imageName-inflated
+	#
+	# 	# Mounting image disk (but not the partitions yet)
+	# 	log "Mounting image."
+	# 	partQty=$(fdisk -l ./cache/$thisArch/$imageName-inflated | grep -o "^./cache/$thisArch/$imageName-inflated" | wc -l)
+	#
+	# 	echo $partQty partitions detected.
+	# 	log "Resizing root partition."
+	#
+	# 	# Add 6G to the image file
+	# 	truncate -s "6G" ./cache/$thisArch/$imageName-inflated
+	#
+	# 	# Inflate last partition to maximum available space.
+	# 	parted ./cache/$thisArch/$imageName-inflated --script "resizepart $partQty 100%" ;
+	#
+	# 	#mount the inage drive
+	# 	mountImageFile $thisArch ./work/$thisArch/$imageName
+	#
+	# 	log "Resize the root file system to fill the new drive size."
+	# 	resize2fs /dev/mapper/loop${loopId}p$partQty
+	#
+	# 	log "Unmount OS image"
+	# 	umountImageFile $thisArch ./work/$thisArch/$imageName
+	#
+	# else
+	# 	log "Using Ready to build image from cache"
+	# fi
+#}#
 
 
 
 function mountImage  {
         log "Mounting OS partitions."
+
+				## Make sure it's not already mounted
+				if [ ! -z "$(ls -A ./work/$thisArch/rootfs)" ]; then
+					 logErr "./work/$thisArch/rootfs is not empty. Previous failiure to unmount ?"
+					 exit
+				fi
+
+				# Mount the image and make the binds required to chroot.
+				log "Mounting OS image."
+				IFS=$'\n' #to split lines into array
+				partitions=($(kpartx -sav ./work/$thisArch/$imageName |  cut -d" " -f3))
+				partQty=${#partitions[@]}
+				echo $partQty partitions detected.
+
+
+				# mount partition table in /dev/loop
+ 			 loopId=$(kpartx -sav ./work/$thisArch/$imageName |  cut -d" " -f3 | grep -o "[^a-z]" | head -n 1)
+
+        if [ $partQty == 2 ] ; then
+                mount -v /dev/mapper/loop${loopId}p2 ./work/$thisArch/rootfs/
+								if [ ! -d ./work/$thisArch/rootfs/boot ] ; then mkdir ./work/$thisArch/rootfs/boot ; fi
+	              mount -v /dev/mapper/loop${loopId}p1 ./work/$thisArch/rootfs/boot/
+
+        elif [ $partQty == 1 ] ; then
+                mount -v /dev/mapper/loop${loopId}p1 ./work/$thisArch/rootfs/
+
+        else
+                log "ERROR: unsuported amount of partitions."
+                exit 1
+        fi
+
+}
+
+
+function mountImageInWork  {
+        log "Mounting OS partitions."
+
+				## Make sure it's not already mounted
+				if [ ! -z "$(ls -A ./work/$thisArch/rootfs)" ]; then
+					 logErr "./work/$thisArch/rootfs is not empty. Previous failiure to unmount ?"
+					 exit
+				fi
+
+				# Mount the image and make the binds required to chroot.
+				log "Mounting OS image."
+				IFS=$'\n' #to split lines into array
+				partitions=($(kpartx -sav ./work/$thisArch/$imageName |  cut -d" " -f3))
+				partQty=${#partitions[@]}
+				echo $partQty partitions detected.
+
+
+
         # mount partition table in /dev/loop
-        loopId=$(kpartx -sav ./cache/$thisArch/$imageName-rdy2build |  cut -d" " -f3 | grep -o "[^a-z]" | head -n 1)
+        loopId=$(kpartx -sav ./work/$thisArch/$imageName |  cut -d" " -f3 | grep -o "[^a-z]" | head -n 1)
 
         if [ $partQty == 2 ] ; then
         #
@@ -113,7 +145,7 @@ function mountImage  {
 function umountImage {
 	umount ./work/$thisArch/bootfs
 	umount ./work/$thisArch/rootfs
-	kpartx -d ./cache/$thisArch/$imageName-rdy2build
+	kpartx -d ./cache/$thisArch/$imageName-inflated
 
 }
 
@@ -137,6 +169,7 @@ function mountAndBind {
 	log "Mounting OS partitions."
 	if [ $partQty == 2 ] ; then
 		mount -v /dev/mapper/${partitions[1]} ./work/$thisArch/rootfs/
+		mkdir ./work/$thisArch/rootfs/boot
 		mount -v /dev/mapper/${partitions[0]} ./work/$thisArch/rootfs/boot/
 
 	elif [ $partQty == 1 ] ; then
@@ -152,12 +185,7 @@ function mountAndBind {
 
 
 
-function addScripts {
-        log "copying lysmarine on the image"
-        cp -r ../lysmarine ./work/$thisArch/rootfs/
-        chmod 0775 ./work/$thisArch/rootfs/lysmarine/*.sh
-        chmod 0775 ./work/$thisArch/rootfs/lysmarine/*/*.sh
-}
+
 
 
 

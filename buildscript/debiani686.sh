@@ -1,7 +1,7 @@
 #!/bin/bash
 source lib.sh
 
-dBootArch="i386"
+dBootArch="i686"
 thisArch="debian-$dBootArch"
 imageName="$thisArch.img"
 
@@ -23,7 +23,7 @@ setupWorkSpace $thisArch ;
 
 
 
-if [ ! -f ./cache/$thisArch/$imageName-rdy2build ] ;then
+if [ ! -f ./cache/$thisArch/$imageName-inflated ] ;then
 	log "No ready-to-buld image found in cache, bootstrapping"
 
 	cp -v ./cache/emptyImage.img ./work/$thisArch/$imageName
@@ -31,7 +31,6 @@ if [ ! -f ./cache/$thisArch/$imageName-rdy2build ] ;then
 	mountImageFile $thisArch ./work/$thisArch/$imageName ;
 
 	debootstrap \
---arch=$dBootArch \
 --include=aptitude,console-setup,locales,keyboard-configuration,\
 command-not-found,bash,sudo,intel-microcode,firmware-linux-free,firmware-misc-nonfree,\
 firmware-iwlwifi,cryptsetup,network-manager \
@@ -42,7 +41,7 @@ buster \
 
 	umountImageFile $thisArch ./work/$thisArch/$imageName
 
-	mv -vf ./work/$thisArch/$imageName ./cache/$thisArch/$imageName-rdy2build
+	mv -vf ./work/$thisArch/$imageName ./cache/$thisArch/$imageName-inflated
 
 else
 	log "Using ready to buld image from cache"
@@ -50,7 +49,7 @@ fi;
 
 
 
-cp -fv ./cache/$thisArch/$imageName-rdy2build ./work/$thisArch/$imageName
+cp -fv ./cache/$thisArch/$imageName-inflated ./work/$thisArch/$imageName
 
 
 
@@ -81,7 +80,7 @@ echo "========================================================================="
 echo "";echo "";
 
 # chroot into the mount image point
- proot -q qemu-aarch64 \
+ proot \
 --root-id \
 --rootfs=work/${thisArch}/rootfs \
 --cwd=/ \
@@ -91,7 +90,7 @@ echo "";echo "";
  --mount=/proc:/proc \
  --mount=/tmp:/tmp \
  --mount=/run/shm:/run/shm \
-"bash"
+"/bin/bash"
 
 
 
@@ -117,6 +116,6 @@ log "DONE."
 
 
 echo "Pro Tip"
-echo "cp -v ./work/$thisArch/$imageName ./cache/$thisArch/$imageName-rdy2build"
+echo "cp -v ./work/$thisArch/$imageName ./cache/$thisArch/$imageName-inflated"
 
 exit
