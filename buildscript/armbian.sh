@@ -88,7 +88,7 @@ proot -q qemu-aarch64 \
 
 
 # Unmount
-umountImageFile $thisArch
+umountImageFile $thisArch ./work/$thisArch/$imageName
 
 
 
