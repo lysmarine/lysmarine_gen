@@ -34,3 +34,4 @@ install -d -v -o 1000 -g 1000 /home/pi/.pypilot
 install    -v -o 1000 -g 1000 $FILE_FOLDER/signalk.conf "/home/pi/.pypilot/"
 install    -v                 $FILE_FOLDER/pypilot.desktop "/usr/share/applications/"
 install    -v                 $FILE_FOLDER/pypilot_webapp.desktop "/usr/share/applications/"
+install    -v -o 1000 -g 1000 $FILE_FOLDER/webapp.conf "/home/pi/.pypilot/"
