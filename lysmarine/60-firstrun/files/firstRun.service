@@ -1,0 +1,8 @@
+[Service]
+ExecStart=/usr/bin/firstrun
+StandardOutput=syslog
+StandardError=syslog
+User=root
+
+[Install]
+WantedBy=graphical.target

@@ -1,0 +1,7 @@
+#!/bin/bash -e
+
+# Fix a bug documented somewhere in gentoo bug tracker
+update-mime-database /usr/share/mime
+
+touch /tmp/FIRSTRUN
+systemctl disable firstRun.service ;
