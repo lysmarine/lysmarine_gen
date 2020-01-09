@@ -1,7 +1,18 @@
 #!/bin/bash -e
+if [ $LMBUILD == raspbian ] ;then
+	apt-mark hold raspberrypi-sys-mods
+fi
+
+if [ $LMBUILD == armbian-pine64 ] ;then
+	echo 'root:raspberry' | chpasswd
+fi
+
+
 
 apt-get update  -y -q
-apt-get install -y -q apt-transport-https lsb-release
+apt-get install -y -q apt-transport-https lsb-release wget gnupg
+
+
 
 DISTRO="$(lsb_release -s -c)"
 
