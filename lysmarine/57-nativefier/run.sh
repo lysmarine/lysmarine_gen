@@ -1,10 +1,10 @@
 #!/bin/bash
 
-apt-get -y -q install nodejs
+apt-get -y -q install nodejs libnss3
 
 npm install nativefier -g --unsafe-perm
 
-install -v -o 1000 -g 1000 $FILE_FOLDER/freeboard-sk.png "/home/pi/.local/share/icons/freeboard-sk.png"
+install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/freeboard-sk.png "/home/pi/.local/share/icons/freeboard-sk.png"
 
 nativefier -a armv7l --disable-context-menu --disable-dev-tools --single-instance \
 --name "SignalK"   --icon /home/pi/.local/share/icons/signalk.png \
@@ -21,3 +21,7 @@ nativefier -a armv7l --disable-context-menu --disable-dev-tools --single-instanc
  nativefier -a armv7l --disable-context-menu --disable-dev-tools --single-instance \
   --name "Tuktuk" --icon /home/pi/.icons/Flat-Remix-Dark/apps/scalable/android-studio.svg \
   "http://localhost:4999" /opt/
+
+nativefier -a armv7l --disable-context-menu --disable-dev-tools --single-instance \
+	--name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png  \
+	"http://localhost:8080" /opt/
