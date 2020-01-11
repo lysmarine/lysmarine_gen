@@ -1,7 +1,7 @@
 [Unit]
 Description=Display a splash screen on boot
 DefaultDependencies=no
-Before=boot.mount
+After=local-fs.target
 
 [Service]
 ExecStart=/bin/sh /bin/splashScreen
