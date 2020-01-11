@@ -2,7 +2,7 @@ conky.config = {
     use_xft = true,
 
 
-    update_interval = 1.0,
+    update_interval = 99999999.0,
     total_run_times = 0,
     own_window = false,
     own_window_transparent = true,
@@ -40,6 +40,6 @@ conky.config = {
 
 conky.text = [[
  $alignr ${template0 LysMarine}
- $alignr ${template1 v0.8.2}
+ $alignr ${template1 v0.9.0}
 
 ]];
