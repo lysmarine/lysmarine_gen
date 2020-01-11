@@ -15,3 +15,4 @@ rm -rf create_ap
 
 systemctl disable dhcpcd.service
 systemctl disable wpa_supplicant.service
+systemctl disable hostapd.service
