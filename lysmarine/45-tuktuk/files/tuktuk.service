@@ -1,9 +1,0 @@
-[Service]
-ExecStart=/usr/bin/node /var/www/tuktuk-chart-plotter/index.js
-StandardOutput=syslog
-StandardError=syslog
-WorkingDirectory=/var/www/tuktuk-chart-plotter
-User=www-data
-
-[Install]
-WantedBy=graphical.target

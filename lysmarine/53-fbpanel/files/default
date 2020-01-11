@@ -47,11 +47,6 @@ Plugin {
         }
         item {
             icon = android-studio
-            name = Tuktuk
-            action = /opt/tuktuk-linux-armv7l/tuktuk
-        }
-				item {
-            icon = android-studio
             name = FreeBoard
             action = /opt/freeboard-sk-linux-armv7l/freeboard-sk
         }
