@@ -14,7 +14,7 @@ if ! grep -q charts /etc/group ; then
 fi
 
 ## Create the charts folder.
-install -v -d -m 0775 -o signalk -g signalk /srv/charts;
+install -v -d -m 0775 -o signalk -g charts /srv/charts;
 
 ## Link the chart folder to home for convenience.
 if [ ! -f /home/pi/charts ] ; then
