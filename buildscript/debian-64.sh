@@ -1,7 +1,7 @@
 #!/bin/bash
 source lib.sh
 
-dBootArch="i686"
+dBootArch="amd64"
 thisArch="debian-$dBootArch"
 imageName="$thisArch.img"
 

@@ -55,7 +55,7 @@ createEmptyImageFile () {
 		qemu-img create -f raw ./cache/emptyImage.img 6G
 		echo -e "g\nn\n\n\n+300M\nn\n\n\n\nw\n" | fdisk ./cache/emptyImage.img
 
-		loopId=$(kpartx -sav ./cache/emptyImage.img |  cut -d" " -f3 | grep -o "[^a-z]" | head -n 1)
+		loopId=$(kpartx -sav ./cache/emptyImage.img |  cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 
 		mkfs.vfat  /dev/mapper/loop${loopId}p1
 		mkfs.ext4  /dev/mapper/loop${loopId}p2
@@ -88,7 +88,7 @@ mountImageFile () {
 	echo $partQty partitions detected.
 
 	# mount partition table in /dev/loop
-	loopId=$(kpartx -sav $imageFile |  cut -d" " -f3 | grep -o "[^a-z]" | head -n 1)
+	loopId=$(kpartx -sav $imageFile |  cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 
 	if [ $partQty == 2 ] ; then
 		mount -v /dev/mapper/loop${loopId}p2 ./work/$thisArch/rootfs/
@@ -138,7 +138,7 @@ inflateImage () {
 		fdisk -l $imageLocation-inflated
 
 		log "Resize the filesystem to fit the partition."
-		loopId=$(kpartx -sav $imageLocation-inflated |  cut -d" " -f3 | grep -o "[^a-z]" | head -n 1)
+		loopId=$(kpartx -sav $imageLocation-inflated |  cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 
 		e2fsck -f /dev/mapper/loop${loopId}p$partQty
 		resize2fs /dev/mapper/loop${loopId}p$partQty
