@@ -1,32 +1,32 @@
 #!/bin/bash -e
 apt-get install -y git feh conky-all adapta-gtk-theme
 
-install  -d -o 1000 -g 1000 -m 755 -d "/home/pi/.themes"
-install  -d -o 1000 -g 1000 -m 755 -d "/home/pi/.icons"
+install  -d -o 1000 -g 1000 -m 755 -d "/home/user/.themes"
+install  -d -o 1000 -g 1000 -m 755 -d "/home/user/.icons"
 
 
 
 git clone -q --depth=1 https://github.com/daniruiz/flat-remix
-cp -rf flat-remix/Flat-Remix-Blue /home/pi/.icons/Flat-Remix-Dark
-chown -R pi:pi /home/pi/.icons/Flat-Remix-Dark
+cp -rf flat-remix/Flat-Remix-Blue /home/user/.icons/Flat-Remix-Dark
+chown -R user:user /home/user/.icons/Flat-Remix-Dark
 rm -rf flat-remix
 
 
 
-install -d -o 1000 -g 1000 -m 755 "/home/pi/.config/"
-install -d -o 1000 -g 1000 -m 755 "/home/pi/.config/feh/"
-install -d -o 1000 -g 1000 -m 755 "/home/pi/.config/gtk-3.0/"
-install -d -o 1000 -g 1000 -m 755 "/home/pi/.config/openbox/"
-install -d -o 1000 -g 1000 -m 755 "/home/pi/.config/pcmanfm/"
-install -d -o 1000 -g 1000 -m 755 "/home/pi/.config/pcmanfm/default/"
-install -d -o 1000 -g 1000 -m 755 "/home/pi/.config/libfm/"
-install -o 1000 -g 1000  -v $FILE_FOLDER/.gtkrc-2.0    "/home/pi/"
-install -o 1000 -g 1000  -v $FILE_FOLDER/water.jpg     "/home/pi/.config/feh/"
-install -o 1000 -g 1000  -v $FILE_FOLDER/settings.ini  "/home/pi/.config/gtk-3.0/"
-install -o 1000 -g 1000  -v $FILE_FOLDER/rc.xml        "/home/pi/.config/openbox/"
-install -o 1000 -g 1000  -v $FILE_FOLDER/pcmanfm.conf  "/home/pi/.config/pcmanfm/default/"
-install -o 1000 -g 1000  -v $FILE_FOLDER/libfm.conf    "/home/pi/.config/libfm/"
-install -o 1000 -g 1000  -v $FILE_FOLDER/.conkyrc      "/home/pi/.conkyrc"
+install -d -o 1000 -g 1000 -m 755 "/home/user/.config/"
+install -d -o 1000 -g 1000 -m 755 "/home/user/.config/feh/"
+install -d -o 1000 -g 1000 -m 755 "/home/user/.config/gtk-3.0/"
+install -d -o 1000 -g 1000 -m 755 "/home/user/.config/openbox/"
+install -d -o 1000 -g 1000 -m 755 "/home/user/.config/pcmanfm/"
+install -d -o 1000 -g 1000 -m 755 "/home/user/.config/pcmanfm/default/"
+install -d -o 1000 -g 1000 -m 755 "/home/user/.config/libfm/"
+install -o 1000 -g 1000  -v $FILE_FOLDER/.gtkrc-2.0    "/home/user/"
+install -o 1000 -g 1000  -v $FILE_FOLDER/water.jpg     "/home/user/.config/feh/"
+install -o 1000 -g 1000  -v $FILE_FOLDER/settings.ini  "/home/user/.config/gtk-3.0/"
+install -o 1000 -g 1000  -v $FILE_FOLDER/rc.xml        "/home/user/.config/openbox/"
+install -o 1000 -g 1000  -v $FILE_FOLDER/pcmanfm.conf  "/home/user/.config/pcmanfm/default/"
+install -o 1000 -g 1000  -v $FILE_FOLDER/libfm.conf    "/home/user/.config/libfm/"
+install -o 1000 -g 1000  -v $FILE_FOLDER/.conkyrc      "/home/user/.conkyrc"
 
-echo "feh --randomize --bg-fill ~/.config/feh/* > /dev/null &" >> /home/pi/.config/openbox/autostart
-echo "conky &" >> /home/pi/.config/openbox/autostart
+echo "feh --randomize --bg-fill ~/.config/feh/* > /dev/null &" >> /home/user/.config/openbox/autostart
+echo "conky &" >> /home/user/.config/openbox/autostart

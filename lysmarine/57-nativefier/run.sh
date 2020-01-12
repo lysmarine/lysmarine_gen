@@ -4,16 +4,16 @@ apt-get -y -q install nodejs libnss3
 
 npm install nativefier -g --unsafe-perm
 
-install -d -o 1000 -g 1000 "/home/pi/.local/share/icons"
-install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/freeboard-sk.png "/home/pi/.local/share/icons/freeboard-sk.png"
-install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/signalk.png "/home/pi/.local/share/icons/"
+install -d -o 1000 -g 1000 "/home/user/.local/share/icons"
+install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/freeboard-sk.png "/home/user/.local/share/icons/freeboard-sk.png"
+install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/signalk.png "/home/user/.local/share/icons/"
 
 nativefier -a armv7l --disable-context-menu --disable-dev-tools --single-instance \
---name "SignalK"   --icon /home/pi/.local/share/icons/signalk.png \
+--name "SignalK"   --icon /home/user/.local/share/icons/signalk.png \
 "http://localhost:80" /opt/
 
 nativefier -a armv7l --disable-context-menu --disable-dev-tools --single-instance \
- --name "Freeboard-sk" --icon /home/pi/.local/share/icons/freeboard-sk.png \
+ --name "Freeboard-sk" --icon /home/user/.local/share/icons/freeboard-sk.png \
  "http://localhost/@signalk/freeboard-sk/" /opt/
 
 nativefier -a armv7l --disable-context-menu --disable-dev-tools --single-instance \

@@ -11,8 +11,8 @@ make install
 popd
 rm -rf fbpanel
 
-install -d -o 1000 -g 1000 "/home/pi/.config/fbpanel"
-install    -o 1000 -g 1000 $FILE_FOLDER/default "/home/pi/.config/fbpanel/default"
+install -d -o 1000 -g 1000 "/home/user/.config/fbpanel"
+install    -o 1000 -g 1000 $FILE_FOLDER/default "/home/user/.config/fbpanel/default"
 
-install -d  -o 1000 -g 1000 /home/pi/.config/openbox
-echo 'fbpanel -p default &' >> /home/pi/.config/openbox/autostart
+install -d  -o 1000 -g 1000 /home/user/.config/openbox
+echo 'fbpanel -p default &' >> /home/user/.config/openbox/autostart

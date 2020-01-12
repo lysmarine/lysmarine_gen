@@ -5,8 +5,8 @@ After=graphical.target
 
 [Service]
 Type=simple
-User=pi
-ExecStart=/usr/bin/x11vnc -auth guess -xkb -forever -loop -noxdamage -rfbauth /home/pi/.vnc/passwd -rfbport 5900
+User=user
+ExecStart=/usr/bin/x11vnc -auth guess -xkb -forever -loop -noxdamage -rfbauth /home/user/.vnc/passwd -rfbport 5900
 Restart=on-failure
 RestartSec=10
 

@@ -8,6 +8,6 @@ install -m0644  -v $FILE_FOLDER/splashscreen.service "/etc/systemd/system/splash
 
 cat $FILE_FOLDER/appendToConfig.txt >> /boot/config.txt
 
-sed '$s/$/ loglevel=1 splash quiet/' /boot/cmdline.txt
+sed -i '$s/$/\ loglevel=1\ splash\ quiet/' /boot/cmdline.txt
 
 systemctl enable splashscreen.service

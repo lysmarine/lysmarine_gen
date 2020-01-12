@@ -1,8 +1,12 @@
 #!/bin/bash -e
 apt-get install -y -q python-setuptools python-gps python-serial libpython-dev \
 python-numpy python-scipy swig python-pillow python-flask python-socketio \
-python-pip python-pylirc wiringpi python-flask python-gevent-websocket \
+python-pip python-pylirc  python-flask python-gevent-websocket \
 python-wxgtk3.0 python-opengl
+
+if [ $LMBUILD == raspbian ] ;then
+	apt-get install -y -q wiringpi
+fi
 
 pip install wheel
 pip install pyglet ujson PyOpenGL PyWavefront flask_socketio
@@ -30,8 +34,8 @@ popd; popd
 rm -rf pypilot
 popd
 
-install -d -v -o 1000 -g 1000 /home/pi/.pypilot
-install    -v -o 1000 -g 1000 $FILE_FOLDER/signalk.conf "/home/pi/.pypilot/"
+install -d -v -o 1000 -g 1000 /home/user/.pypilot
+install    -v -o 1000 -g 1000 $FILE_FOLDER/signalk.conf "/home/user/.pypilot/"
 install    -v                 $FILE_FOLDER/pypilot.desktop "/usr/share/applications/"
 install    -v                 $FILE_FOLDER/pypilot_webapp.desktop "/usr/share/applications/"
-install    -v -o 1000 -g 1000 $FILE_FOLDER/webapp.conf "/home/pi/.pypilot/"
+install    -v -o 1000 -g 1000 $FILE_FOLDER/webapp.conf "/home/user/.pypilot/"

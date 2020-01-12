@@ -15,15 +15,15 @@ lxterminal network-manager-gnome
 
 
 
-install -d -o 1000 -g 1000 /home/pi/.local
-install -d -o 1000 -g 1000 /home/pi/.local/share
+install -d -o 1000 -g 1000 /home/user/.local
+install -d -o 1000 -g 1000 /home/user/.local/share
 
 
 
 # Openbox
-install -d -o 1000 -g 1000 "/home/pi/.config"
-install -d -o 1000 -g 1000 "/home/pi/.config/openbox"
-install -o 1000 -g 1000  -v $FILE_FOLDER/autostart     "/home/pi/.config/openbox/"
+install -d -o 1000 -g 1000 "/home/user/.config"
+install -d -o 1000 -g 1000 "/home/user/.config/openbox"
+install -o 1000 -g 1000  -v $FILE_FOLDER/autostart     "/home/user/.config/openbox/"
 
 # Make som room for the rest
 apt-get clean

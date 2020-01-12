@@ -9,7 +9,7 @@ fi
 if ! grep -q charts /etc/group ; then
 	groupadd charts;
 	usermod -a -G charts signalk;
-	usermod -a -G charts pi;
+	usermod -a -G charts user;
 	usermod -a -G charts root;
 fi
 
@@ -17,8 +17,8 @@ fi
 install -v -d -m 0775 -o signalk -g charts /srv/charts;
 
 ## Link the chart folder to home for convenience.
-if [ ! -f /home/pi/charts ] ; then
-	ln -s /srv/charts /home/pi/charts;
+if [ ! -f /home/user/charts ] ; then
+	ln -s /srv/charts /home/user/charts;
 fi
 
 ## Dependencys of signalk.
@@ -33,9 +33,9 @@ install    -m 644 -o signalk -g signalk $FILE_FOLDER/defaults.json  "/home/signa
 install    -m 644 -o signalk -g signalk $FILE_FOLDER/package.json   "/home/signalk/.signalk/package.json"
 install    -m 644 -o signalk -g signalk $FILE_FOLDER/settings.json  "/home/signalk/.signalk/settings.json"
 install    -m 755 -o signalk -g signalk $FILE_FOLDER/signalk-server "/home/signalk/.signalk/signalk-server"
-install -d        -o signalk -g signalk "/home/pi/.local/share/icons/"
+install -d        -o signalk -g signalk "/home/user/.local/share/icons/"
 
-install    -m 644 -o 1000    -g 1000    $FILE_FOLDER/signalk.png "/home/pi/.local/share/icons/"
+install    -m 644 -o 1000    -g 1000    $FILE_FOLDER/signalk.png "/home/user/.local/share/icons/"
 install -d                              /etc/systemd/system
 install    -m 644                       $FILE_FOLDER/signalk.service "/etc/systemd/system/signalk.service"
 install    -m 644                       $FILE_FOLDER/signalk.socket  "/etc/systemd/system/signalk.socket"
