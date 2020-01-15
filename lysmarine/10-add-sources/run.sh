@@ -24,6 +24,7 @@ echo "deb https://deb.nodesource.com/node_10.x $DISTRO main" | tee /etc/apt/sour
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 67E4A52AC865EB40
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6AF0E1940624A220
 echo "deb http://ppa.launchpad.net/opencpn/opencpn/ubuntu/ eoan main" > /etc/apt/sources.list.d/opencpnsource.list
+install -m0644 -v $FILE_FOLDER/50-lysmarine "/etc/apt/preferences.d/"
 
 ## XyGrib
 wget -q -O - https://www.free-x.de/debian/oss.boating.gpg.key  | apt-key add -
