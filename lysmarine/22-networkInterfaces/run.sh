@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 # network manager
-apt-get install -y network-manager
-apt-get install -y git util-linux procps hostapd iproute2 iw dnsmasq iptables
+apt-get install -y -q network-manager make
+apt-get install -y -q git util-linux procps hostapd iproute2 iw dnsmasq iptables
 
 #acces point
 git clone --depth=1 https://github.com/oblique/create_ap

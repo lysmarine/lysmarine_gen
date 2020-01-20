@@ -1,9 +1,10 @@
 [Unit]
-After=graphical.target
+After=startx.service
 
 [Service]
 ExecStart=/home/signalk/.signalk/signalk-server
-Restart=always
+Restart=on-failure
+RestartSec=10
 StandardOutput=syslog
 StandardError=syslog
 WorkingDirectory=/home/signalk/.signalk
