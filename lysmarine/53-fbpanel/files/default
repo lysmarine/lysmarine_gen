@@ -48,7 +48,7 @@ Plugin {
         item {
             icon = android-studio
             name = FreeBoard
-            action = /opt/freeboard-sk-linux-armv7l/freeboard-sk
+            action = /opt/freeboard-sk/freeboard-sk
         }
         item {
             icon = logo_grib
@@ -58,12 +58,12 @@ Plugin {
         item {
             icon = signalk
             name = Signalk
-            action = /opt/signal-k-linux-armv7l/signal-k
+            action = /opt/signal-k/signal-k
         }
         item {
             icon = utilities-system-monitor
             name = SpeedSample
-            action = /opt/speed-sample-linux-armv7l/speed-sample
+            action = /opt/speed-sample/speed-sample
         }
         separator {
         }
@@ -80,7 +80,7 @@ Plugin {
         item {
             icon = text-x-generic
             name = Text editor
-            action = leafpad
+            action = mousepad
         }
         item {
             icon = file-manager
