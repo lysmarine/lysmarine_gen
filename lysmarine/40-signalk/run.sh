@@ -23,6 +23,10 @@ fi
 
 ## Dependencys of signalk.
 apt-get install -y -q nodejs libavahi-compat-libdnssd-dev python-dev
+if [ $LMBUILD == debian-amd64 ] ;then
+	apt-get install -y -q npm
+fi
+
 
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk"
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk/plugin-config-data"

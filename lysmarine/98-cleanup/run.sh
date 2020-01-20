@@ -6,6 +6,10 @@ rm -fvf /usr/share/applications/XRCed.desktop
 rm -rvf /home/user/Public /home/user/Templates /home/user/Videos /home/user/Desktop
 
 apt-get clean
-apt remove -y greybird-gtk-theme murrine-themes rpd-icons
+
+if [ $LMBUILD == raspbian ] ;then
+	apt remove -y greybird-gtk-theme murrine-themes rpd-icons
+fi
+
 apt -y autoremove
 apt-get clean

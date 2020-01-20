@@ -2,16 +2,25 @@
 
 touch /etc/X11/Xwrapper.config
 
+if [ $LMBUILD == raspbian ] ;then
+	apt-get install -q -y xserver-xorg-video-fbturbo
+fi
+
+if [ $LMBUILD == armbian-pineA64 ] ;then
+	sudo apt-get -q -y install xserver-xorg-legacy
+	
+fi
+
+
 
 
 apt-get install -q -y \
-gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
-gstreamer1.0-plugins-bad gstreamer1.0-alsa gstreamer1.0-libav alsa-utils \
-libavahi-compat-libdnssd-dev git openbox xbacklight lxappearance gmrun \
-xsettingsd gnome-themes-standard xserver-xorg xinit xserver-xorg-video-fbdev \
-xserver-xorg-video-fbturbo libgtk2-perl \
-pavucontrol cpanminus perl-base dialog \
-lxterminal network-manager-gnome
+gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base \
+gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-alsa \
+gstreamer1.0-libav alsa-utils libavahi-compat-libdnssd-dev git openbox \
+xbacklight lxappearance gmrun xsettingsd gnome-themes-standard xserver-xorg \
+xinit libgtk2-perl pavucontrol cpanminus perl-base \
+dialog lxterminal network-manager-gnome
 
 
 
@@ -25,5 +34,5 @@ install -d -o 1000 -g 1000 "/home/user/.config"
 install -d -o 1000 -g 1000 "/home/user/.config/openbox"
 install -o 1000 -g 1000  -v $FILE_FOLDER/autostart     "/home/user/.config/openbox/"
 
-# Make som room for the rest
+# Make some room for the rest
 apt-get clean
