@@ -2,10 +2,10 @@
 {
 source lib.sh
 
-thisArch="armbian-pine64"
+thisArch="armbian-pineA64"
 imageSource="https://dl.armbian.com/pine64/Buster_current"
 zipName="Buster_current"
-imageName="Armbian_19.11.3_Pine64_buster_current_5.3.9.img"
+imageName="Armbian_19.11.6_Pine64so_buster_current_5.4.7.img"
 
 
 
@@ -28,7 +28,7 @@ if [ ! -f ./cache/$thisArch/$imageName ]; then
 	log "Downloading official image from internet."
 	wget -P ./cache/$thisArch/  $imageSource
 	7z e -o./cache/$thisArch/  ./cache/$thisArch/$zipName
-	rm ./cache/$thisArch/$zipName ./cache/$thisArch/Armbian_19.11.3_Pine64_buster_current_5.3.9.img.*
+	rm ./cache/$thisArch/$zipName
 
 else
 	log "Using official image from cache."
@@ -104,7 +104,7 @@ cp -v ./work/$thisArch/$imageName  ./release/$thisArch/LysMarine_$thisArch-0.9.0
 
 echo "Pro Tip:"
 echo "cp -v ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ./cache/$thisArch/$imageName-inflated"
-echo "sudo ./cache/pishrink.sh ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ;sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
+echo "sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
 
 exit
 }

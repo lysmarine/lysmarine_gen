@@ -64,7 +64,6 @@ echo "You are now in the chroot environement.";
 echo "Start the build script with by pasting one of the following line in the terminal:";
 echo "";
 echo "export LMBUILD=$thisArch ;cd /lysmarine; ./build.sh 10 15 20 21 22 23 "
-echo "export LMBUILD=$thisArch ;cd /lysmarine; ./build.sh 50 51 55 60 "
 echo "========================================================================="
 echo "";echo "";
 
@@ -85,13 +84,12 @@ proot -q qemu-arm \
 
 
 
+
+
+
+
 # Unmount
 umountImageFile $thisArch ./work/$thisArch/$imageName
-
-
-
-# Shrink the image size.
-#./cache/pishrink.sh ./work/$thisArch/$imageName
 
 
 
@@ -102,6 +100,6 @@ cp -v ./work/$thisArch/$imageName  ./release/$thisArch/LysMarine_$thisArch-0.9.0
 
 echo "Pro Tip:"
 echo "cp -v ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ./cache/$thisArch/$imageName-inflated"
-echo "sudo ./cache/pishrink.sh ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ;sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
+echo "sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
 exit
 }

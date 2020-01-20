@@ -32,18 +32,7 @@ checkRoot () {
 
 # Validate cache or download all the needed scripts from 3rd partys
 get3rdPartyAssets () {
-	#pishrink is needed to deflate the disk size at the end
-	if [ ! -f ./cache/pishrink.sh ] ; then
-		log "Downloading pishrink."
-		pushd ./cache
-		wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
-		chmod +x pishrink.sh
-		popd
-
-	else
-		log "Using pishrink from cache."
-
-	fi
+	
 
 }
 
