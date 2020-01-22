@@ -13,3 +13,7 @@ fi
 
 apt -y autoremove
 apt-get clean
+
+
+#rm -rvf /var/cache/apt/archives/*.deb
+#rm -rf /tmp/*

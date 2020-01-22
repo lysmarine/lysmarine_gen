@@ -32,3 +32,14 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
 	--name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png  \
 	"http://localhost:8080" /opt/
+
+
+cp -r /opt/freeboard-sk-linux-$arch /opt/freeboard-sk
+cp -r /opt/pypilot-webapp-linux-$arch /opt/pypilot-webapp
+cp -r /opt/signal-k-linux-$arch /opt/signal-k
+cp -r /opt/speed-sample-linux-$arch /opt/speed-sample
+
+rm -r /opt/freeboard-sk-linux-$arch
+rm -r /opt/pypilot-webapp-linux-$arch
+rm -r /opt/signal-k-linux-$arch
+rm -r /opt/speed-sample-linux-$arch
