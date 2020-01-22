@@ -32,8 +32,7 @@ checkRoot () {
 
 # Validate cache or download all the needed scripts from 3rd partys
 get3rdPartyAssets () {
-	
-
+	true
 }
 
 
@@ -42,7 +41,7 @@ createEmptyImageFile () {
 	if [ ! -f ./cache/emptyImage.img ] ;then
 		log "Create empty image file with qemu"
 		qemu-img create -f raw ./cache/emptyImage.img 6G
-		echo -e "g\nn\n\n\n+300M\nn\n\n\n\nw\n" | fdisk ./cache/emptyImage.img
+		echo -e "o\nn\np\n1\n2048\n+300M\nn\np\n2\n\n\na\n1\nw\n" | fdisk ./cache/emptyImage.img
 
 		loopId=$(kpartx -sav ./cache/emptyImage.img |  cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 
