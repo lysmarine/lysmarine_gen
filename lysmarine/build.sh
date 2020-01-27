@@ -4,6 +4,15 @@ echo "Install script for Lysmarine $ARCH :)"
 echo "";
 
 
+export LANG="en_US.UTF-8"
+export LANGUAGE=en_US:en
+export LC_NUMERIC="C"
+export LC_CTYPE="C"
+export LC_MESSAGES="C"
+export LC_ALL="C"
+
+
+
 if [ "$#" -gt "0" ]; then
 
 
