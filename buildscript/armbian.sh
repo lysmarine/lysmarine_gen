@@ -5,8 +5,7 @@ source lib.sh
 thisArch="armbian-pineA64"
 imageSource="https://dl.armbian.com/pine64/Buster_current"
 zipName="Buster_current"
-imageName="Armbian_19.11.6_Pine64so_buster_current_5.4.7.img"
-
+imageName="Armbian_20.02.0-rc0_Pine64_buster_current_5.4.12.img"
 
 
 checkRoot ;
