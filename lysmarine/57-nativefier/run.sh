@@ -34,12 +34,12 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 	"http://localhost:8080" /opt/
 
 
-cp -r /opt/freeboard-sk-linux-$arch /opt/freeboard-sk
-cp -r /opt/pypilot-webapp-linux-$arch /opt/pypilot-webapp
-cp -r /opt/signal-k-linux-$arch /opt/signal-k
-cp -r /opt/speed-sample-linux-$arch /opt/speed-sample
+cp -r /opt/Freeboard-sk-linux-$arch /opt/Freeboard-sk
+cp -r /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
+cp -r /opt/SignalK-linux-$arch /opt/SignalK
+cp -r /opt/SpeedSample-linux-$arch /opt/SpeedSample
 
-rm -r /opt/freeboard-sk-linux-$arch
-rm -r /opt/pypilot-webapp-linux-$arch
-rm -r /opt/signal-k-linux-$arch
-rm -r /opt/speed-sample-linux-$arch
+rm -r /opt/Freeboard-sk-linux-$arch
+rm -r /opt/Pypilot_webapp-linux-$arch
+rm -r /opt/SignalK-linux-$arch
+rm -r /opt/SpeedSample-linux-$arch
