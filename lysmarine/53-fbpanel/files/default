@@ -39,7 +39,7 @@ Plugin {
 Plugin {
     type = menu
     config {
-        icon = applications-boardgames
+        icon = document-properties-symbolic
         item {
             icon = opencpn
             name = Opencpn
@@ -48,7 +48,7 @@ Plugin {
         item {
             icon = android-studio
             name = FreeBoard
-            action = /opt/freeboard-sk/freeboard-sk
+            action = /opt/Freeboard-sk/Freeboard-sk
         }
         item {
             icon = logo_grib
@@ -58,12 +58,12 @@ Plugin {
         item {
             icon = signalk
             name = Signalk
-            action = /opt/signal-k/signal-k
+            action = /opt/SignalK/SignalK
         }
         item {
             icon = utilities-system-monitor
             name = SpeedSample
-            action = /opt/speed-sample/speed-sample
+            action = /opt/SpeedSample/SpeedSample
         }
         separator {
         }
