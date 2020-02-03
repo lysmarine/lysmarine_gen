@@ -34,5 +34,5 @@ install -d -o 1000 -g 1000 "/home/user/.config"
 install -d -o 1000 -g 1000 "/home/user/.config/openbox"
 install -o 1000 -g 1000  -v $FILE_FOLDER/autostart     "/home/user/.config/openbox/"
 
-# Make some room for the rest
+# Make some room for the rest of the build script
 apt-get clean

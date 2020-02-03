@@ -1,8 +1,10 @@
 [Service]
+Type=oneshot
 ExecStart=/usr/bin/firstrun
 StandardOutput=syslog
 StandardError=syslog
 User=root
+Before=graphical.target
 
 [Install]
-WantedBy=graphical.target
+WantedBy=multi-user.target
