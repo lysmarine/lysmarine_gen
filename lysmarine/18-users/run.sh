@@ -23,21 +23,5 @@ if [ $LMBUILD == armbian-pineA64 ] ;then
 	usermod -a -G tty user
 	usermod -a -G sudo user
 	echo 'PATH="/sbin:/usr/sbin:$PATH"' > /home/user/.profile
-
+	rm /root/.not_logged_in_yet
 fi
-
-# cat <<EOF > /etc/default/locale
-# LANG="en_US.UTF-8"
-# LANGUAGE=en_US:en
-# LC_NUMERIC="de_DE.UTF-8"
-# LC_TIME="de_DE.UTF-8"
-# LC_MONETARY="de_DE.UTF-8"
-# LC_PAPER="de_DE.UTF-8"
-# LC_NAME="de_DE.UTF-8"
-# LC_ADDRESS="de_DE.UTF-8"
-# LC_TELEPHONE="de_DE.UTF-8"
-# LC_MEASUREMENT="de_DE.UTF-8"
-# LC_IDENTIFICATION="de_DE.UTF-8"
-# EOF
-# locale-gen en_US.UTF-8 de_DE.UTF-8
-# dpkg-reconfigure locales
