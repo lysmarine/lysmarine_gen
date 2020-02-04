@@ -4,6 +4,19 @@ echo "Install script for Lysmarine $ARCH :)"
 echo "";
 
 
+if [[ -z $LMBUILD ]];then
+  echo ''
+  echo ''
+  echo "variable $LMBUILD is not set, choices are: "
+  echo ''
+  echo "export LMBUILD=debian-vbox"
+  echo "export LMBUILD=raspbian"
+  echo "export LMBUILD=armbian-pineA64"
+  echo "export LMBUILD=debian-64"
+  echo ''
+  exit
+fi
+
 export LANG="en_US.UTF-8"
 export LANGUAGE=en_US:en
 export LC_NUMERIC="C"
@@ -16,27 +29,24 @@ export LC_ALL="C"
 if [ "$#" -gt "0" ]; then
 
 
-for number in "$@"; do
-    for stage in ./$number*; do
-      if [ -d $stage ]; then
+  for number in "$@"; do
+      for stage in ./$number*; do
+        if [ -d $stage ]; then
             echo '';
             echo '==========================================';
-            echo "running number :$number "
+            echo "Running number :$number "
             echo "$stage/run.sh"
             echo '==========================================';
             echo '';
 
-                export FILE_FOLDER=$stage/files/
-                  if [ -f $stage/run.sh ]; then
-
-                    $stage/run.sh
-                  fi
-
-
-      fi
+            export FILE_FOLDER=$stage/files/
+            if [ -f $stage/run.sh ]; then
+              $stage/run.sh
+            fi
+        fi
+      done
     done
-  done
-else
+  else
 
 
   for stage in ./{00..99}*; do
@@ -53,8 +63,7 @@ else
         if [ -f $stage/run.sh ]; then
           $stage/run.sh
         fi
-
-  fi
+    fi
   done ;
 
 
