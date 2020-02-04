@@ -21,6 +21,8 @@ system-theme-associations={'Default': '/usr/share/onboard/themes/Droid.theme'}
 layout='/usr/share/onboard/layouts/Compact.onboard'
 schema-version='2.3'
 snippets=@as []
+show-status-icon=true
+status-icon-provider="GtkStatusIcon"
 
 [window]
 docking-enabled=true
