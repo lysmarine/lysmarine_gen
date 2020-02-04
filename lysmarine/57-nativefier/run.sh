@@ -15,23 +15,25 @@ if [ $LMBUILD == armbian-pineA64 ] ;then
 	arch=arm64
 fi
 
-
+if [ $LMBUILD == debian-vbox ] ;then
+	arch=amd64
+fi
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
 --name "SignalK"   --icon /home/user/.local/share/icons/signalk.png \
 "http://localhost:80" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
- --name "Freeboard-sk" --icon /home/user/.local/share/icons/freeboard-sk.png \
- "http://localhost/@signalk/freeboard-sk/" /opt/
+--name "Freeboard-sk" --icon /home/user/.local/share/icons/freeboard-sk.png \
+"http://localhost/@signalk/freeboard-sk/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
- --name "SpeedSample" --icon /usr/share/icons/gnome/256x256/apps/utilities-system-monitor.png \
- "http://localhost:4998" /opt/
+--name "SpeedSample" --icon /usr/share/icons/gnome/256x256/apps/utilities-system-monitor.png \
+"http://localhost:4998" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-	--name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png  \
-	"http://localhost:8080" /opt/
+--name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png  \
+"http://localhost:8080" /opt/
 
 
 cp -r /opt/Freeboard-sk-linux-$arch /opt/Freeboard-sk
@@ -43,3 +45,5 @@ rm -r /opt/Freeboard-sk-linux-$arch
 rm -r /opt/Pypilot_webapp-linux-$arch
 rm -r /opt/SignalK-linux-$arch
 rm -r /opt/SpeedSample-linux-$arch
+
+install -v $FILE_FOLDER/signalk.desktop "/usr/share/applications/"

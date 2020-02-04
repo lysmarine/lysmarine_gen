@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Signalk Marine data server
+Exec=/opt/SignalK/SignalK
+Terminal=false
+Icon=/home/user/.local/share/icons/signalk.png
+Categories=System

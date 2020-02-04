@@ -705,8 +705,11 @@
 <applications>
 
   <application type="normal">
-     <maximized>yes</maximized>
-     <decor>yes</decor>
+    <maximized>yes</maximized>
+    <decor>yes</decor>
+    <startupnotify>
+        <enabled>true</enabled>
+    </startupnotify>
   </application>
 
   <application name="chromium-browser">
@@ -721,10 +724,18 @@
      <decor>no</decor>
   </application>
 
+  <application name="pcmanfm">
+     <decor>no</decor>
+  </application>
+
   <application class="fbpanel">
     <skip_taskbar>yes</skip_taskbar>
   </application>
 
+  <application name="gsimplecal">
+    <maximized>no</maximized>
+     <decor>yes</decor>
+  </application>
 
 
 

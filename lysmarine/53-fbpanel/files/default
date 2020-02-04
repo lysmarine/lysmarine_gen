@@ -24,7 +24,7 @@ Global {
 Plugin {
     type = space
     config {
-        size = 2
+        size = 4
     }
 }
 
@@ -42,62 +42,47 @@ Plugin {
         icon = document-properties-symbolic
         item {
             icon = opencpn
-            name = Opencpn
-            action = opencpn
+            name = Charplotter (Opencpn)
+            action = /usr/bin/opencpn
         }
         item {
-            icon = android-studio
-            name = FreeBoard
+            icon = freeboard-sk
+            name = Charplotter (FreeBoard)
             action = /opt/Freeboard-sk/Freeboard-sk
         }
         item {
             icon = logo_grib
-            name = XyGrib
-            action = XyGrib
-        }
-        item {
-            icon = signalk
-            name = Signalk
-            action = /opt/SignalK/SignalK
+            name = Meteo (XyGrib)
+            action = /usr/bin/XyGrib
         }
         item {
             icon = utilities-system-monitor
-            name = SpeedSample
+            name = SpeedSample (Sample of average speed)
             action = /opt/SpeedSample/SpeedSample
         }
+        item {
+            icon = go-jump
+            name = Autopilot control (Pypilot)
+            action = /usr/local/bin/pypilot_control 8080
+        }
+
         separator {
         }
-        item {
-            icon = terminator
-            name = Terminal
-            action = lxterminal
-        }
-        item {
-            icon = web-browser
-            name = Browser
-            action = x-www-browser
-        }
-        item {
-            icon = text-x-generic
-            name = Text editor
-            action = mousepad
-        }
-        item {
-            icon = file-manager
-            name = File Manager
-            action = pcmanfm
-        }
-        item {
-            icon = pavucontrol
-            name = Volume
-            action = pavucontrol
-        }
         separator {
-        }
+                }
+        separator {
+                }
+        
         systemmenu {
         }
+        
         separator {
         }
+        separator {
+        }
+        separator {
+        }
+
         item {
             icon = reboot
             name = Reboot
@@ -124,7 +109,7 @@ Plugin {
 Plugin {
     type = space
     config {
-        size = 25
+        size = 12
     }
 }
 Plugin {
@@ -142,6 +127,12 @@ Plugin {
 }
 Plugin {
     type = tray
+}
+Plugin {
+    type = space
+    config {
+        size = 5
+    }
 }
 Plugin {
     type = dclock

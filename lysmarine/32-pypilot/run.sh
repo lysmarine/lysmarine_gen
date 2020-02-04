@@ -2,7 +2,7 @@
 apt-get install -y -q python-setuptools python-gps python-serial libpython-dev \
 python-numpy python-scipy swig python-pillow python-flask python-socketio \
 python-pip python-pylirc  python-flask python-gevent-websocket \
-python-wxgtk3.0 python-opengl
+python-wxgtk4.0 python-opengl
 
 if [ $LMBUILD == raspbian ] ;then
 	apt-get install -y -q wiringpi
@@ -36,6 +36,7 @@ popd
 
 install -d -v -o 1000 -g 1000 /home/user/.pypilot
 install    -v -o 1000 -g 1000 $FILE_FOLDER/signalk.conf "/home/user/.pypilot/"
-install    -v                 $FILE_FOLDER/pypilot.desktop "/usr/share/applications/"
+#install    -v                 $FILE_FOLDER/pypilot_control.desktop "/usr/share/applications/"
+install    -v                 $FILE_FOLDER/pypilot_calibration.desktop "/usr/share/applications/"
 install    -v                 $FILE_FOLDER/pypilot_webapp.desktop "/usr/share/applications/"
 install    -v -o 1000 -g 1000 $FILE_FOLDER/webapp.conf "/home/user/.pypilot/"
