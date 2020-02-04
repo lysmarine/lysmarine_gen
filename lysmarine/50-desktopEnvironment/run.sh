@@ -18,7 +18,7 @@ apt-get install -q -y \
 gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base \
 gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-alsa \
 gstreamer1.0-libav alsa-utils libavahi-compat-libdnssd-dev git openbox \
-xbacklight lxappearance gmrun xsettingsd gnome-themes-standard xserver-xorg \
+xbacklight lxappearance gmrun xsettingsd xserver-xorg \
 xinit libgtk2-perl pavucontrol cpanminus perl-base \
 dialog lxterminal network-manager-gnome
 
