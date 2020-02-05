@@ -1,28 +1,30 @@
 conky.config = {
+
+    background = true,
     use_xft = true,
-
-
-    update_interval = 99999999.0,
+    font = 'Ubuntu:pixelsize=14',
+    xftalpha = 0.5,
+    update_interval = 1,
     total_run_times = 0,
-    own_window = false,
+    own_window = true,
+    own_window_type = 'override',
     own_window_transparent = true,
-
-    own_window_argb_visual = flase,
-    own_window_type = override,
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
-
-
-    background = false,
     double_buffer = true,
-    imlib_cache_size = 0,
-    no_buffers = false,
-    uppercase = false,
-
-
-    -- placement
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = false,
+    default_color = 'grey',
+    default_shade_color = 'red',
+    default_outline_color = 'green',
     alignment = 'bottom_right',
     gap_x = 0,
     gap_y = 0,
+    no_buffers = true,
+    uppercase = false,
+    cpu_avg_samples = 2,
+    override_utf8_locale = false,
 
 
     -- colors
@@ -37,6 +39,9 @@ conky.config = {
     template1 = [[${font}${color1}\1]],
 
 };
+
+
+
 
 conky.text = [[
  $alignr ${template0 LysMarine}
