@@ -1,12 +1,13 @@
 
 [Unit]
 Description=VNC Server for X11
-After=startx.service
+Requires=graphical.target
+After=graphical.target
 
 [Service]
 Type=simple
 User=user
-ExecStart=/usr/bin/x11vnc -auth guess -xkb -forever -loop -noxdamage -rfbauth /home/user/.vnc/passwd -rfbport 5900
+ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -overlay_nocursor -noxdamage -rfbauth /home/user/.vnc/passwd -rfbport 5900
 Restart=on-failure
 RestartSec=10
 
