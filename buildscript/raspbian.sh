@@ -84,12 +84,6 @@ proot -q qemu-arm \
 
 
 
-
-rm -rf work/${thisArch}/rootfs/home/border
-# rm -rf work/${thisArch}/rootfs/lysmarine
-
-
-
 # Unmount
 umountImageFile $thisArch ./work/$thisArch/$imageName
 

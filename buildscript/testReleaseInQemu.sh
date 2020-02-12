@@ -1,6 +1,6 @@
 #! /bin/bash
-source common.sh
 
+source lib.sh
 
 
 if [ -z "$1"  ]; then
@@ -11,44 +11,41 @@ if [ -z "$1"  ]; then
 	exit
 fi
 
-
-
 thisArch=$1
 imageName=$( ls ./release/$thisArch/ )
 
-
-
-if [ ! -d ./cache/$thisArch/qemu-rpi-kernel-master ]; then
-	log "Download qemu-rpi-kernel"
-		wget -P ./cache/$thisArch/ https://github.com/dhruvvyas90/qemu-rpi-kernel/archive/master.zip
-		unzip ./cache/$thisArch/master.zip -d ./cache/$thisArch/
-		rm ./cache/$thisArch/master.zip
+if [ ! -f ./work/$thisArch/test.img ]; then
+	log "Build test image from cache"
+	cp -v ./release/$thisArch/$imageName ./work/$thisArch/test.img
+	truncate -s "7G" ./work/$thisArch/test.img
+	
 else
-	log "Use qemu-rpi-kernel from cache"
+	log "Use test image from cache"
 fi
 
 
 
-cp -v ./release/$thisArch/$imageName ./work/$thisArch/test.img
-partQty=$(fdisk -l ./work/$thisArch/test.img | grep -o "^./work/$thisArch/test.img" | wc -l)
-truncate -s "5G" ./work/$thisArch/test.img
-parted ./work/$thisArch/test.img --script "resizepart $partQty 100%" ;
-
 
 
 if [ "$thisArch" == "raspbian" ]; then
+	if [ ! -f ./cache/$thisArch/kernel-qemu-4.19.50-buster ]; then
+		log "Download qemu-rpi-kernel"
+			wget -P ./cache/$thisArch/ https://github.com/dhruvvyas90/qemu-rpi-kernel/raw/master/kernel-qemu-4.19.50-buster 
+	else
+		log "Use qemu-rpi-kernel from cache"
+	fi
 
 	qemu-system-arm \
-		 -kernel ./cache/$thisArch/qemu-rpi-kernel-master/kernel-qemu-4.19.50-buster \
-		 -cpu arm1176 \
-		 -m 256 \
-		 -M versatilepb \
-		 -hda ./work/$thisArch/test.img \
-		 -serial stdio \
-		 -dtb ./cache/$thisArch/qemu-rpi-kernel-master/versatile-pb.dtb \
-		 -append  "root=/dev/sda2 panic=1 rootfstype=ext4 rw" \
-		 -net user,hostfwd=tcp::${#thisArch}2-:22 \
-		 -net nic
+		-kernel ./cache/$thisArch/kernel-qemu-4.19.50-buster  \
+		-cpu  arm1176\
+		-m 256 \
+		-serial stdio \
+		-M versatilepb \
+		-hda ./work/$thisArch/test.img \
+		-dtb ./cache/$thisArch/qemu-rpi-kernel-master/versatile-pb.dtb \
+		-append  "root=/dev/sda2 panic=1" \
+		-net user,hostfwd=tcp::5022-:22,hostfwd=tcp::5080-:80,hostfwd=tcp::5090-:5900 \
+		-net nic
 
 else
 	echo "arch not supported"
