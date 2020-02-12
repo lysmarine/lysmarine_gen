@@ -14,11 +14,11 @@ if ! grep -q charts /etc/group ; then
 fi
 
 ## Create the charts folder.
-install -v -d -m 0775 -o signalk -g charts /srv/charts;
+install -v -d -m 6775 -o signalk -g charts /srv/charts;
 
 ## Link the chart folder to home for convenience.
 if [ ! -f /home/user/charts ] ; then
-	ln -s /srv/charts /home/user/charts;
+	su user -c "ln -s /srv/charts /home/user/charts;"
 fi
 
 ## Dependencys of signalk.
@@ -58,4 +58,7 @@ npm install --loglevel error -g --unsafe-perm signalk-server
 ## Install signalk plugins
 pushd /home/signalk/.signalk
 su signalk -c "npm install @signalk/charts-plugin --unsafe-perm --loglevel error"
+# su signalk -c "npm install signalk-world-coastline-map --unsafe-perm --loglevel error" # this npm package is broken
 popd
+
+rm -r /tmp/npm-*
