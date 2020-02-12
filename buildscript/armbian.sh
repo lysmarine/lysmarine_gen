@@ -3,9 +3,10 @@
 source lib.sh
 
 thisArch="armbian-pineA64"
-imageSource="https://dl.armbian.com/pine64/Buster_current"
-zipName="Buster_current"
-imageName="Armbian_20.02.0-rc0_Pine64_buster_current_5.4.12.img"
+#imageSource="https://dl.armbian.com/pine64so/Buster_current"
+imageSource="https://dl.armbian.com/pine64so/archive/Armbian_20.02.0-rc1_Pine64so_buster_current_5.4.14.7z"
+zipName="Armbian_20.02.0-rc1_Pine64so_buster_current_5.4.14.7z"
+imageName="Armbian_20.02.0-rc1_Pine64so_buster_current_5.4.14.img"
 
 
 checkRoot ;
