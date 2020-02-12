@@ -17,6 +17,8 @@ if [[ -z $LMBUILD ]];then
   exit
 fi
 
+mkdir log
+
 export LANG="en_US.UTF-8"
 export LANGUAGE=en_US:en
 export LC_NUMERIC="C"
@@ -41,7 +43,7 @@ if [ "$#" -gt "0" ]; then
 
             export FILE_FOLDER=$stage/files/
             if [ -f $stage/run.sh ]; then
-              $stage/run.sh
+              $stage/run.sh 2>&1 | tee "log/$stage.log"
             fi
         fi
       done
@@ -61,7 +63,7 @@ if [ "$#" -gt "0" ]; then
 
       export FILE_FOLDER="$(pwd)/$stage/files/"
         if [ -f $stage/run.sh ]; then
-          $stage/run.sh
+          $stage/run.sh 2>&1 | tee "log/$stage.log"
         fi
     fi
   done ;
