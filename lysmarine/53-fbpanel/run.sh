@@ -18,3 +18,7 @@ install -d -o 1000 -g 1000 /home/user/.config/openbox
 echo 'fbpanel -p default &' >> /home/user/.config/openbox/autostart
 
 install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/freeboard-sk.png "/home/user/.local/share/icons/freeboard-sk.png"
+
+if [ $LMBUILD == armbian-pineA64 ] ;then
+	sed -i 's/\/usr\/bin\/opencpn/\/usr\/local\/bin\/opencpn/' "/home/user/.config/fbpanel/default"
+fi
