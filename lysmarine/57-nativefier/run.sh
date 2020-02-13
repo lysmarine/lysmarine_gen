@@ -16,7 +16,7 @@ if [ $LMBUILD == armbian-pineA64 ] ;then
 fi
 
 if [ $LMBUILD == debian-vbox ] ;then
-	arch=amd64
+	arch=x64
 fi
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
@@ -31,7 +31,8 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 --name "SpeedSample" --icon /usr/share/icons/gnome/256x256/apps/utilities-system-monitor.png \
 "http://localhost:4998" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+echo "setTheme('dark')" > ./pypilot_darktheme.js
+nativefier -a $arch --inject ./pypilot_darktheme.js --disable-context-menu --disable-dev-tools --single-instance \
 --name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png  \
 "http://localhost:8080" /opt/
 
@@ -45,5 +46,12 @@ rm -r /opt/Freeboard-sk-linux-$arch
 rm -r /opt/Pypilot_webapp-linux-$arch
 rm -r /opt/SignalK-linux-$arch
 rm -r /opt/SpeedSample-linux-$arch
+
+if [ $LMBUILD == debian-vbox ] ;then
+	chmod 4755 /opt/Freeboard-sk/chrome-sandbox
+	chmod 4755 /opt/Pypilot_webapp/chrome-sandbox
+	chmod 4755 /opt/SignalK/chrome-sandbox
+	chmod 4755 /opt/SpeedSample/chrome-sandbox
+fi
 
 install -v $FILE_FOLDER/signalk.desktop "/usr/share/applications/"
