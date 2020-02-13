@@ -2,7 +2,7 @@
 echo "";
 echo "Install script for Lysmarine $ARCH :)"
 echo "";
-
+source ./config ;
 
 if [[ -z $LMBUILD ]];then
   echo ''
