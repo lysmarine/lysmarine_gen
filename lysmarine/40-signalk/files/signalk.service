@@ -1,0 +1,15 @@
+[Unit]
+After=multi-user.target
+
+[Service]
+ExecStart=/home/signalk/.signalk/signalk-server
+Restart=on-failure
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+WorkingDirectory=/home/signalk/.signalk
+User=signalk
+Environment=EXTERNALPORT=80
+
+[Install]
+WantedBy=graphical.target

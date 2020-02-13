@@ -1,8 +1,4 @@
-deploy/*
-work/*
-postrun.sh
-SKIP
-SKIP_IMAGES
-.pc
-*-pc
-apt-cacher-ng/
+cache
+work
+release
+dev

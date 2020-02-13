@@ -1,0 +1,10 @@
+
+###### Buld configurations ######
+
+
+## Althrou lysmarine try to not be platform dependent,  The OS/ARCH/SBC have their specificities. And some actions must be applyed accordingly.
+## Uncomment the version that fit your case  
+#export LMBUILD="armbian-pineA64"
+#export LMBUILD="debian-vbox"
+#export LMBUILD="debian-amd64"
+#export LMBUILD="raspbian"

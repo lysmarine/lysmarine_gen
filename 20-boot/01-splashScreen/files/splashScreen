@@ -1,4 +1,0 @@
-#!/bin/sh
-chvt 8
-clear
-fbi -once -timeout 30 -noverbose -nocomments -noedit /usr/share/splash.png 2> /dev/null
