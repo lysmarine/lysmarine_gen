@@ -14,7 +14,7 @@ rm -rf fbpanel
 install -d -o 1000 -g 1000 "/home/user/.config/fbpanel"
 install    -o 1000 -g 1000 $FILE_FOLDER/default "/home/user/.config/fbpanel/default"
 
-install -d  -o 1000 -g 1000 /home/user/.config/openbox
+install -d -o 1000 -g 1000 /home/user/.config/openbox
 echo 'fbpanel -p default &' >> /home/user/.config/openbox/autostart
 
 install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/freeboard-sk.png "/home/user/.local/share/icons/freeboard-sk.png"

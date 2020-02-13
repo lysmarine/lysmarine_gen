@@ -11,7 +11,7 @@ if [ $LMBUILD == raspbian ] ;then
 #   apt purge -y gnome-icon-theme hicolor-icon-theme 
 fi
 
-apt -y autoremove
+apt-get -y autoremove
 apt-get clean
 
 # Menu cleanup 

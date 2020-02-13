@@ -1,10 +1,5 @@
 #!/bin/bash
 
-## Create signalk user to run the server.
-if [ ! -d /home/signalk ] ; then
-	adduser --home /home/signalk --gecos --disabled-password --disabled-login signalk
-fi
-
 ## Create a user group that are allowed to write on the charts folder.
 if ! grep -q charts /etc/group ; then
 	groupadd charts;

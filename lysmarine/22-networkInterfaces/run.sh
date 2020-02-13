@@ -22,3 +22,7 @@ rm -rf create_ap
 systemctl disable dhcpcd.service
 systemctl disable wpa_supplicant.service
 systemctl disable hostapd.service
+
+systemctl disable NetworkManager-wait-online.service # if we do not boot remote user it's not needed
+systemctl disable ModemManager.service # for 2G/3G/4G
+systemctl disable pppd-dns.service # For dial-up Internet LOL

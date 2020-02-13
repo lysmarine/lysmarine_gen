@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-apt-get install -y -q gpsd gpsd-clients
+apt-get install -y -q gpsd #gpsd-clients
 
 ## Automaticaly start gpsd when a USB gps is detecteded.
 install -d /etc/udev/rules.d

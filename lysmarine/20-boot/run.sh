@@ -20,3 +20,5 @@ cp -r $FILE_FOLDER/dreams "/usr/share/plymouth/themes/"
 plymouth-set-default-theme dreams
 
 rm /etc/issue /etc/issue.net
+
+systemctl disable triggerhappy.services
