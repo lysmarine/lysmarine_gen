@@ -3,7 +3,7 @@ apt-get install -y -q  libc6
 
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/.kplex.conf "/home/user/.kplex.conf"
 
-if [ $LMBUILD == debian-amd64 ] ;then
+if [ $LMBUILD == debian-amd64 ] || [ $LMBUILD == debian-vbox ] ;then
 	wget http://www.stripydog.com/download/kplex_1.4-1_amd64.deb
 	dpkg -i kplex_1.4-1_amd64.deb
 	rm kplex_1.4-1_amd64.deb
