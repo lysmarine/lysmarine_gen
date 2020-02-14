@@ -5,7 +5,7 @@ source lib.sh
 thisArch="raspbian"
 imageSource="https://downloads.raspberrypi.org/raspbian_lite_latest"
 zipName="raspbian_lite_latest"
-imageName="2019-09-26-raspbian-buster-lite.img"
+imageName="2020-02-05-raspbian-buster-lite.img"
 
 
 

@@ -28,13 +28,13 @@ apt install proot qemu git
 #### Install lysmarine-gen 
 ```
 git clone https://github.com/lysmarine/lysmarine_gen.git
-cd ./lysmarine_gen/buildscript
+cd ./lysmarine_gen/cross-build
 sudo chmod -v u+w *.sh
 ```
 
 #### Setup the cross-build environement and get in it 
 ```
-cd ./lysmarine_gen/buildscript
+cd ./lysmarine_gen/cross-build
 sudo ./raspbian.sh #or the build script available you would like
 ```
 
@@ -49,7 +49,7 @@ Example, to build the minimal GUI :
 ``` 
 ./build.sh 10 15 18 20 50 55 60 98
 ```
-When the script is done, you need to `exit;` The resulting image will be located in `./lysmarine_gen/buildscript/release/`
+When the script is done, you need to `exit;` The resulting image will be located in `./lysmarine_gen/cross-build/release/`
 
 # Build directly on the single bord computer
 
