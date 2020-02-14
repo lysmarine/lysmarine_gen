@@ -77,7 +77,8 @@ qemu-nbd -d /dev/nbd1
 
 echo "";echo "";echo "";echo "";echo "";
 echo "========================================================================="
-echo "export LMBUILD=$thisArch ;cd /lysmarine; ./build.sh 00 ";
+echo "cd /lysmarine; ./build.sh 1 2 3 4 5 6 7 86 9"
+echo "cd /lysmarine; ./build.sh ";
 echo "========================================================================="
 echo "";echo "";echo "";echo "";echo "";
 
@@ -90,7 +91,8 @@ read -n 1 -r -s -p $'When done with the vurtual machine, press enter to continue
 cp -v ./work/$thisArch/$thisArch.vdi  ./release/$thisArch/LysMarine_$thisArch-0.9.0.vdi
 log "DONE."
 
-echo "Pro Tip" 
+log "Pro Tip"
+echo "" 
 echo "cp -v ./work/$thisArch/$thisArch.vdi ./cache/$thisArch/$thisArch.vdi"
-
+echo ""
 exit

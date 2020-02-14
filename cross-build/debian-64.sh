@@ -72,10 +72,8 @@ echo "========================================================================="
 echo "You are now in the chroot environement.";
 echo "Start the build script with by pasting the following line in the terminal:";
 echo "";
-echo "apt install initramfs-tools linux-image-4.19.0-6-amd64 "
-echo "export LMBUILD=$thisArch ;cd /lysmarine; ./build.sh 00 ";
-echo "export LMBUILD=$thisArch ;cd /lysmarine; ./build.sh ";
-
+echo "cd /lysmarine; ./build.sh 1 2 3 4 5 6 7 86 9"
+echo "cd /lysmarine; ./build.sh ";
 echo "========================================================================="
 echo "";echo "";
 
@@ -117,7 +115,11 @@ log "DONE."
 
 
 
-echo "Pro Tip"
-echo "cp -v ./work/$thisArch/$imageName ./cache/$thisArch/$imageName-inflated"
+log "Pro Tip:"
+echo ""
+echo "sudo cp -v ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ./cache/$thisArch/$imageName-inflated"
+echo ""
+echo "sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
+echo ""
 
 exit
