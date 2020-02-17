@@ -7,6 +7,7 @@ apt-get install -y -q network-manager make
 apt-get install -y -q avahi-daemon 
 echo -n 'lysmarine' > /etc/hostname
 echo '127.0.1.1	lysmarine' >> /etc/hosts
+echo '127.0.1.1	lysmarine.local' >> /etc/hosts
 
 # Access Point
 apt-get install -y -q git util-linux procps hostapd iproute2 iw dnsmasq iptables
