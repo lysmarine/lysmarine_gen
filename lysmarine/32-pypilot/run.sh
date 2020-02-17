@@ -1,4 +1,9 @@
 #!/bin/bash -e
+
+## this stage depend on stage 18-users for the pypilot user creation 
+## adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
+
+## Install apt depedencys
 apt-get install -y -q python-setuptools python-gps python-serial libpython-dev \
 python-numpy python-scipy swig python-pillow python-flask python-socketio \
 python-pip python-pylirc  python-flask python-gevent-websocket \
@@ -8,40 +13,52 @@ if [ $LMBUILD == raspbian ] ;then
 	apt-get install -y -q wiringpi
 fi
 
+## Install python depedencys
 pip install wheel
 pip install pyglet ujson PyOpenGL PyWavefront pyudev flask_socketio
 
-echo "Install RTIMULib2 as a (dep of Pypilot) : "
-git clone --depth=1 https://github.com/seandepagnier/RTIMULib2
-pushd RTIMULib2/Linux/python
-	python setup.py install
-popd
-rm -rf RTIMULib2
+pushd /home/pypilot
+	
+	## Install RTIMULib2 as it's a dependency of pypilot 
+	git clone --depth=1 https://github.com/seandepagnier/RTIMULib2
+	pushd ./RTIMULib2/Linux/python
+		python setup.py install
+	popd
+	rm -rf ./RTIMULib2
 
-echo "Install Pypilot : "
-pushd /
+	## Get pypilot
 	git clone https://github.com/pypilot/pypilot.git
+
 	pushd ./pypilot
-		git checkout db173ae4409aba2900dfd58c50bf8a409cd954e7 # Forced regression due to broken GTK GUI
+		git checkout db173ae4409aba2900dfd58c50bf8a409cd954e7 # Temporary regression due to broken GUI 
 	popd 
 
+	## Get pypilot_data
 	git clone --depth=1 https://github.com/pypilot/pypilot_data.git
-	cp -rv pypilot_data/* pypilot
-	rm -rf pypilot_data
+	cp -rv ./pypilot_data/* ./pypilot
+	rm -rf ./pypilot_data
 
+	## Build and install pypilot
 	pushd ./pypilot
 		python setup.py build
 		python setup.py install
-	pushd ./scripts/debian/
-	cp -r etc/systemd/system/* /etc/systemd/system/
+	popd
 
-popd; popd
-rm -rf pypilot
+	rm -rf pypilot
 popd
 
-install -d -v -o 1000 -g 1000 /home/user/.pypilot
-install    -v -o 1000 -g 1000 $FILE_FOLDER/signalk.conf "/home/user/.pypilot/"
+## Install the service files
+install -v -m 0644 $FILE_FOLDER/pypilot.service "/etc/systemd/system/"
+install -v -m 0644 $FILE_FOLDER/pypilot_web.service "/etc/systemd/system/"
+systemctl enable pypilot.service
+systemctl enable pypilot_web.service
+
+## Install the user config files
+install -d -v -o pypilot -g pypilot -m 0755 /home/pypilot/.pypilot
+install    -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/signalk.conf "/home/pypilot/.pypilot/"
+install    -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/webapp.conf  "/home/pypilot/.pypilot/"
+
+## Install The .desktop files
 #install    -v                 $FILE_FOLDER/pypilot_control.desktop "/usr/share/applications/"
-install    -v                 $FILE_FOLDER/pypilot_calibration.desktop "/usr/share/applications/"
-install    -v                 $FILE_FOLDER/pypilot_webapp.desktop "/usr/share/applications/"
-install    -v -o 1000 -g 1000 $FILE_FOLDER/webapp.conf "/home/user/.pypilot/"
+install -v $FILE_FOLDER/pypilot_calibration.desktop "/usr/share/applications/"
+install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/share/applications/" # Depend on stage 57-nativfier to build the app

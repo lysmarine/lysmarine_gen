@@ -1,0 +1,17 @@
+
+[Unit]
+Description=pypilot web
+After=pypilot.service
+BindsTo=pypilot.service
+
+[Service]
+Type=simple
+ExecStart=pypilot_web 8080
+StandardOutput=syslog
+StandardError=syslog
+User=pypilot
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

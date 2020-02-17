@@ -1,0 +1,16 @@
+
+[Unit]
+Description=pypilot
+Conflicts=pypilot_boatimu.service
+
+[Service]
+Type=simple
+ExecStart=pypilot
+StandardOutput=syslog
+StandardError=syslog
+User=pypilot
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
