@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-touch /etc/X11/Xwrapper.config
-
+echo "allowed_users=anybody" > /etc/X11/Xwrapper.config
+echo "needs_root_rights=yes" >> /etc/X11/Xwrapper.config
 if [ $LMBUILD == raspbian ] ;then
 	apt-get install -q -y xserver-xorg-video-fbturbo
 fi

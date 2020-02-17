@@ -20,7 +20,7 @@ echo "user ALL=(ALL:ALL) ALL" >> /etc/sudoers
 usermod -a -G netdev user
 usermod -a -G tty user
 usermod -a -G sudo user
-
+usermod -a -G video user
 ## Create signalk user to run the server.
 if [ ! -d /home/signalk ] ; then
 	echo "Creating signalk user"
