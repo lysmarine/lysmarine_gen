@@ -1,7 +1,7 @@
 #!/bin/bash -e
 apt-get install -y gsimplecal pavucontrol libgtk2.0-dev
 
-git clone https://github.com/FredericGuilbault/fbpanel
+git clone https://github.com/lysmarine/fbpanel
 pushd ./fbpanel
 git checkout lysmarine_flavour
 
