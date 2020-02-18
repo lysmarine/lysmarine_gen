@@ -42,10 +42,8 @@ install    -m 644                       $FILE_FOLDER/signalk.socket  "/etc/syste
 ln -sf "/etc/systemd/system/signalk.service" "/etc/systemd/system/multi-user.target.wants/signalk.service"
 ln -sf "/etc/systemd/system/signalk.socket"  "/etc/systemd/system/multi-user.target.wants/signalk.socket"
 
-## This is problematic and have been fixed: Waiting for  @signalk/set-system-time@1.3.0.... https://github.com/SignalK/set-system-time/pull/5
-# echo "signalk ALL=(ALL) NOPASSWD: /bin/date" >> /etc/sudoers
-## Meanwhile :
-echo "signalk ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+## Give set-system-time the possibility to change the date. 
+echo "signalk ALL=(ALL) NOPASSWD: /bin/date" >> /etc/sudoers
 
 ## Install signalk
 npm install --loglevel error -g --unsafe-perm signalk-server
