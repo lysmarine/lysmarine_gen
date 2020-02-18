@@ -8,7 +8,7 @@ Type=simple
 ExecStart=pypilot
 StandardOutput=syslog
 StandardError=syslog
-User=pypilot
+User=%i
 Restart=always
 RestartSec=2
 

@@ -48,9 +48,11 @@ pushd /home/pypilot
 popd
 
 ## Install the service files
-install -v -m 0644 $FILE_FOLDER/pypilot.service "/etc/systemd/system/"
+install -v -m 0644 $FILE_FOLDER/pypilot@.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.service "/etc/systemd/system/"
-systemctl enable pypilot.service
+install -v -m 0644 $FILE_FOLDER/pypilot_web.socket "/etc/systemd/system/"
+
+systemctl enable pypilot@pypilot.service
 systemctl enable pypilot_web.service
 
 ## Install the user config files
@@ -62,3 +64,7 @@ install    -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/webapp.conf  "/home/pyp
 #install    -v                 $FILE_FOLDER/pypilot_control.desktop "/usr/share/applications/"
 install -v $FILE_FOLDER/pypilot_calibration.desktop "/usr/share/applications/"
 install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/share/applications/" # Depend on stage 57-nativfier to build the app
+
+## Give permission to sudo chrt without password for the user pypilot. 
+echo "" >> /etc/sudoers
+echo 'pypilot ALL=(ALL) NOPASSWD: /usr/bin/chrt' >> /etc/sudoers
