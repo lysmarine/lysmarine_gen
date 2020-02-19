@@ -61,9 +61,10 @@ install    -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/signalk.conf "/home/pyp
 install    -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/webapp.conf  "/home/pypilot/.pypilot/"
 
 ## Install The .desktop files
-#install    -v                 $FILE_FOLDER/pypilot_control.desktop "/usr/share/applications/"
-install -v $FILE_FOLDER/pypilot_calibration.desktop "/usr/share/applications/"
-install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/share/applications/" # Depend on stage 57-nativfier to build the app
+install -d /usr/local/share/applications
+#install    -v                 $FILE_FOLDER/pypilot_control.desktop "/usr/local/share/applications/"
+install -v $FILE_FOLDER/pypilot_calibration.desktop "/usr/local/share/applications/"
+install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applications/" # Depend on stage 57-nativfier to build the app
 
 ## Give permission to sudo chrt without password for the user pypilot. 
 echo "" >> /etc/sudoers

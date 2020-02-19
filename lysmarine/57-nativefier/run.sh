@@ -53,5 +53,5 @@ if [ $LMBUILD == debian-vbox ] ;then
 	chmod 4755 /opt/SignalK/chrome-sandbox
 	chmod 4755 /opt/SpeedSample/chrome-sandbox
 fi
-
-install -v $FILE_FOLDER/signalk.desktop "/usr/share/applications/"
+install -d /usr/local/share/applications
+install -v $FILE_FOLDER/signalk.desktop "/usr/local/share/applications/"

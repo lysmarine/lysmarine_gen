@@ -12,5 +12,5 @@ echo "dconf load / < /usr/share/onboard/a11y.dconf &" >> /home/user/.config/open
 echo "sed -i 's/^dconf\ /#&/' /home/user/.config/openbox/autostart; " >> /home/user/.config/openbox/autostart
 echo "sed -i 's/^sed\ /#&/'   /home/user/.config/openbox/autostart; " >> /home/user/.config/openbox/autostart
 
-cp -v /home/user/.icons/Flat-Remix-Dark/devices/symbolic/input-keyboard-symbolic.svg /home/user/.icons/Flat-Remix-Dark/apps/scalable/onboard.svg
-cp -v /home/user/.icons/Flat-Remix-Dark/devices/symbolic/input-keyboard-symbolic.svg /home/user/.icons/Flat-Remix-Dark/panel/onboard.svg
+cp -v /usr/share/icons/Flat-Remix-Dark/devices/symbolic/input-keyboard-symbolic.svg /usr/share/icons/Flat-Remix-Dark/apps/scalable/onboard.svg
+cp -v /usr/share/icons/Flat-Remix-Dark/devices/symbolic/input-keyboard-symbolic.svg /usr/share/icons/Flat-Remix-Dark/panel/onboard.svg
