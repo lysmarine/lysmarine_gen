@@ -43,27 +43,27 @@ Plugin {
         item {
             icon = opencpn
             name = Charplotter (Opencpn)
-            action = /usr/bin/opencpn
+            action = onlyone opencpn
         }
         item {
             icon = freeboard-sk
             name = Charplotter (FreeBoard)
-            action = /opt/Freeboard-sk/Freeboard-sk
+            action = onlyone /opt/Freeboard-sk/Freeboard-sk
         }
         item {
             icon = logo_grib
             name = Meteo (XyGrib)
-            action = /usr/bin/XyGrib
+            action = onlyone XyGrib
         }
         item {
             icon = utilities-system-monitor
             name = SpeedSample (Sample of average speed)
-            action = /opt/SpeedSample/SpeedSample
+            action = onlyone /opt/SpeedSample/SpeedSample
         }
         item {
             icon = go-jump
             name = Autopilot control (Pypilot)
-            action = /usr/local/bin/pypilot_control 8080
+            action = onlyone pypilot_control 8080
         }
 
         separator {

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Pypilot Calibration
-Exec=/usr/local/bin/pypilot_calibration
+Exec=onlyone pypilot_calibration
 Terminal=false
 Icon=go-jump
 Categories=Utility

@@ -1,0 +1,8 @@
+#! /bin/bash
+application=$1
+if wmctrl -xl | grep "${application}" > /dev/null ; then
+    echo "${application} is already running"
+    wmctrl -x -R "$application"
+else
+    $@
+fi
