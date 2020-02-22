@@ -13,6 +13,8 @@ else
 	echo "No default user found !"
 fi
 
+
+
 ## Add default user
 adduser --uid 1000 --home /home/user --quiet --disabled-password -gecos "lysmarine" user
 echo 'user:changeme' | chpasswd
@@ -21,17 +23,31 @@ usermod -a -G netdev user
 usermod -a -G tty user
 usermod -a -G sudo user
 usermod -a -G video user
+
+
+
 ## Create signalk user to run the server.
 if [ ! -d /home/signalk ] ; then
 	echo "Creating signalk user"
 	adduser --home /home/signalk --gecos --system --disabled-password --disabled-login signalk
+
+	## Create the special charts folder.
+	install -v -d -m 6775 -o signalk -g charts /srv/charts;
+
+	## Link the chart folder to home for convenience.
+	if [ ! -f /home/user/charts ] ; then
+		su user -c "ln -s /srv/charts /home/user/charts;"
+	fi
 fi
+
+
 
 ## Create pypilot user to run the services.
 if [ ! -d /home/pypilot ] ; then
 	echo "Creating pypilot user"
 	adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
 fi
+
 
 
 ## Manage the permissions and privileges.
@@ -51,6 +67,8 @@ echo 'PATH="/sbin:/usr/sbin:$PATH"' >> /home/user/.profile # Give user capabilit
 if [ -f /root/.not_logged_in_yet ] ;then # Disable Armbian first login script.
 	rm /root/.not_logged_in_yet
 fi
+
+
 
 ## Prevent the creation of useless home folders on first boot.
 sed -i 's/^DESKTOP=/#&/'     /etc/xdg/user-dirs.defaults; 

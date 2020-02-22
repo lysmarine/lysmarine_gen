@@ -2,5 +2,5 @@
 
 apt-get install -y -q xygrib
 
-#install                 $FILE_FOLDER/XyGrib.desktop "/usr/local/share/applications"
+## Provide an alternative more meaningful icon for xygrib
 install -o 1000 -g 1000 $FILE_FOLDER/logo_grib.png "/usr/share/icons/"

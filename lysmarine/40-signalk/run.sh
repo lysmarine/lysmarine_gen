@@ -11,16 +11,14 @@ fi
 ## Create the charts folder.
 install -v -d -m 6775 -o signalk -g charts /srv/charts;
 
-## Link the chart folder to home for convenience.
-if [ ! -f /home/user/charts ] ; then
-	su user -c "ln -s /srv/charts /home/user/charts;"
-fi
+
 
 ## Dependencys of signalk.
 apt-get install -y -q nodejs libavahi-compat-libdnssd-dev python-dev
 if [ $LMBUILD == debian-amd64 ] ;then
 	apt-get install -y -q npm
 fi
+
 
 
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk"
@@ -42,11 +40,12 @@ install    -m 644                       $FILE_FOLDER/signalk.socket  "/etc/syste
 ln -sf "/etc/systemd/system/signalk.service" "/etc/systemd/system/multi-user.target.wants/signalk.service"
 ln -sf "/etc/systemd/system/signalk.socket"  "/etc/systemd/system/multi-user.target.wants/signalk.socket"
 
-## Give set-system-time the possibility to change the date. 
-echo "signalk ALL=(ALL) NOPASSWD: /bin/date" >> /etc/sudoers
+
 
 ## Install signalk
 npm install --loglevel error -g --unsafe-perm signalk-server
+
+
 
 ## Install signalk plugins
 pushd /home/signalk/.signalk
@@ -54,4 +53,10 @@ su signalk -c "npm install @signalk/charts-plugin --unsafe-perm --loglevel error
 # su signalk -c "npm install signalk-world-coastline-map --unsafe-perm --loglevel error" # this npm package is broken
 popd
 
+## Give set-system-time the possibility to change the date. 
+echo "signalk ALL=(ALL) NOPASSWD: /bin/date" >> /etc/sudoers
+
+
+
+## Make some space on the drive for the next stages
 rm -r /tmp/npm-*

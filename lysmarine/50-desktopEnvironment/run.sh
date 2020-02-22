@@ -1,16 +1,18 @@
 #!/bin/bash -e
 
+## Needed to allow the service file start X 
 echo "allowed_users=anybody" > /etc/X11/Xwrapper.config
 echo "needs_root_rights=yes" >> /etc/X11/Xwrapper.config
+
+
+
 if [ $LMBUILD == raspbian ] ;then
 	apt-get install -q -y xserver-xorg-video-fbturbo
 fi
 
 if [ $LMBUILD == armbian-pineA64 ] ;then
-	sudo apt-get -q -y install xserver-xorg-legacy
-	
+	sudo apt-get -q -y install xserver-xorg-legacy	
 fi
-
 
 
 
@@ -33,6 +35,8 @@ install -d -o 1000 -g 1000 /home/user/.local/share
 install -d -o 1000 -g 1000 "/home/user/.config"
 install -d -o 1000 -g 1000 "/home/user/.config/openbox"
 install -o 1000 -g 1000  -v $FILE_FOLDER/autostart     "/home/user/.config/openbox/"
+
+
 
 # Make some room for the rest of the build script
 apt-get clean

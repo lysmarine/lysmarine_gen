@@ -1,16 +1,14 @@
 #!/bin/bash -e
+
 apt-get install -y git feh conky-all adapta-gtk-theme
 
-#install  -d -o 1000 -g 1000 -m 755 -d "/home/user/.themes"
-#install  -d -o 1000 -g 1000 -m 755 -d "/home/user/.icons"
 
+## Install icon theme 
 git clone -q --depth=1 https://github.com/daniruiz/flat-remix
-#cp -rf flat-remix/Flat-Remix-Blue /home/user/.icons/Flat-Remix-Dark
 cp -rf flat-remix/Flat-Remix-Blue /usr/share/icons/Flat-Remix-Dark
-
-
-#chown -R user:user /home/user/.icons/Flat-Remix-Dark
 rm -rf flat-remix
+
+
 
 install -d -o 1000 -g 1000 -m 755 "/home/user/.config/"
 install -d -o 1000 -g 1000 -m 755 "/home/user/.config/feh/"
@@ -27,5 +25,8 @@ install -o 1000 -g 1000  -v $FILE_FOLDER/pcmanfm.conf  "/home/user/.config/pcman
 install -o 1000 -g 1000  -v $FILE_FOLDER/libfm.conf    "/home/user/.config/libfm/"
 install -o 1000 -g 1000  -v $FILE_FOLDER/.conkyrc      "/home/user/.conkyrc"
 
+
+
+## Wallpaper
 echo "feh --randomize --bg-fill ~/.config/feh/* > /dev/null &" >> /home/user/.config/openbox/autostart
 echo "conky &" >> /home/user/.config/openbox/autostart

@@ -7,14 +7,12 @@ apt-get clean
 
 if [ $LMBUILD == raspbian ] ;then
 	apt-get remove -y greybird-gtk-theme murrine-themes rpd-icons 
-#	apt purge -y gnome-accessibility-themes
-#   apt purge -y gnome-icon-theme hicolor-icon-theme 
 fi
 
 apt-get -y autoremove
 apt-get clean
 
-# Menu cleanup 
+## Menu cleanup 
 rm -fv /usr/share/applications/vim.desktop
 rm -fv /usr/share/applications/PyCrust.desktop
 rm -fv /usr/share/applications/XRCed.desktop

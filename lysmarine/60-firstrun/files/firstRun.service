@@ -1,6 +1,6 @@
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/firstrun
+ExecStart=/usr/local/sbin/firstrun
 StandardOutput=syslog
 StandardError=syslog
 User=root
