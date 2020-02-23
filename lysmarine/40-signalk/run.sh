@@ -1,16 +1,5 @@
 #!/bin/bash
 
-## Create a user group that are allowed to write on the charts folder.
-if ! grep -q charts /etc/group ; then
-	groupadd charts;
-	usermod -a -G charts signalk;
-	usermod -a -G charts user;
-	usermod -a -G charts root;
-fi
-
-## Create the charts folder.
-install -v -d -m 6775 -o signalk -g charts /srv/charts;
-
 
 
 ## Dependencys of signalk.

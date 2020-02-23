@@ -30,14 +30,6 @@ usermod -a -G video user
 if [ ! -d /home/signalk ] ; then
 	echo "Creating signalk user"
 	adduser --home /home/signalk --gecos --system --disabled-password --disabled-login signalk
-
-	## Create the special charts folder.
-	install -v -d -m 6775 -o signalk -g charts /srv/charts;
-
-	## Link the chart folder to home for convenience.
-	if [ ! -f /home/user/charts ] ; then
-		su user -c "ln -s /srv/charts /home/user/charts;"
-	fi
 fi
 
 
@@ -48,6 +40,25 @@ if [ ! -d /home/pypilot ] ; then
 	adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
 fi
 
+
+
+## Create a user group that are allowed to write on the charts folder.
+if ! grep -q charts /etc/group ; then
+	groupadd charts;
+	usermod -a -G charts signalk;
+	usermod -a -G charts user;
+	usermod -a -G charts root;
+fi
+
+
+
+## Create the special charts folder.
+install -v -d -m 6775 -o signalk -g charts /srv/charts; 
+
+## Link the chart folder to home for convenience.
+if [ ! -f /home/user/charts ] ; then
+	su user -c "ln -s /srv/charts /home/user/charts;"
+fi
 
 
 ## Manage the permissions and privileges.
