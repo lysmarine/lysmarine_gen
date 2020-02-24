@@ -1,8 +1,28 @@
-#! /bin/bash
-echo "";
-echo "Install script for Lysmarine $ARCH :)"
-echo "";
+#! /bin/bash -e
+
 source ./config ;
+
+
+
+run_stage() {
+  if [ -f $1/run.sh ]; then
+    echo '';
+    echo '==========================================';
+    echo "Running number $1 "
+    echo "$2/run.sh"
+    echo '==========================================';
+    echo '';
+
+    export FILE_FOLDER=$1/files/
+    $1/run.sh 2>&1 | tee "logs/$1.log"
+  fi
+} 
+
+
+
+echo "";
+echo "Install script for Lysmarine :)"
+echo "";
 
 if [[ -z $LMBUILD ]];then
   echo ''
@@ -17,8 +37,9 @@ if [[ -z $LMBUILD ]];then
   exit
 fi
 
-mkdir log
 
+
+## This help making less noice in cross-build environment. 
 export LANG="en_US.UTF-8"
 export LANGUAGE=en_US:en
 export LC_NUMERIC="C"
@@ -28,48 +49,25 @@ export LC_ALL="C"
 
 
 
+
 if [ "$#" -gt "0" ]; then
-
-
-  for number in "$@"; do
-      for stage in ./$number*; do
-        if [ -d $stage ]; then
-            echo '';
-            echo '==========================================';
-            echo "Running number :$number "
-            echo "$stage/run.sh"
-            echo '==========================================';
-            echo '';
-
-            export FILE_FOLDER=$stage/files/
-            if [ -f $stage/run.sh ]; then
-              $stage/run.sh 2>&1 | tee "log/$stage.log"
-            fi
-        fi
-      done
-    done
-  else
-
-
-  for stage in ./{00..99}*; do
-    if [ -d $stage ]; then
-
-      echo '';
-      echo '==========================================';
-      echo " Running $stage ..."
-      echo "$stage/run.sh "
-      echo '==========================================';
-      echo '';
-
-      export FILE_FOLDER="$(pwd)/$stage/files/"
-        if [ -f $stage/run.sh ]; then
-          $stage/run.sh 2>&1 | tee "log/$stage.log"
-        fi
-    fi
-  done ;
-
-
-  echo "";
-  echo "Done Installing script for Lysmarine $ARCH :)"
-  echo "";
+  stageList="$@"
+else
+  stageList="*" 
 fi
+
+
+
+
+for number in $stageList; do
+  for stage in ./$number*; do
+    if [ -d $stage ]; then
+      run_stage $stage
+    fi
+  done
+done
+
+
+echo "";
+echo "Done Installing script for Lysmarine $ARCH :)"
+echo "";
