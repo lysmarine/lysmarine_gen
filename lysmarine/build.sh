@@ -2,7 +2,14 @@
 
 source ./config ;
 
+if [[ -z $LMARCH ]];then
+  export LMARCH="$(dpkg --print-architecture)"
+  echo $LMARCH
+fi
 
+if [[ -z $LMOS ]];then
+  export LMOS="$(lsb_release -id -s | head -1)"
+fi
 
 run_stage() {
   if [ -f $1/run.sh ]; then

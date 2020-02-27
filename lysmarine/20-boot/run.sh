@@ -29,3 +29,11 @@ rm /etc/issue /etc/issue.net
 
 # Raspbian neable it in intercept keystroke during the boot process for ondemand cup freq management. 
 systemctl disable triggerhappy.services
+
+
+
+
+
+if [[ $LMOS == 'Raspbian' ]]; then # Rapsberrys 1,2&3 does not boot normaly due to the proprietary blob 
+	apt-get install -y -q libraspberrypi-bin raspberrypi-kernel
+	fi

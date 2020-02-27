@@ -1,8 +1,8 @@
 #!/bin/bash
 source lib.sh
 
-dBootArch="amd64"
-thisArch="debian-$dBootArch"
+dBootArch="debian"
+thisArch="raspbian-dboot"
 imageName="$thisArch.img"
 
 
@@ -30,15 +30,8 @@ if [ ! -f ./cache/$thisArch/$imageName-inflated ] ;then
 
 	mountImageFile $thisArch ./work/$thisArch/$imageName ;
 
-	debootstrap \
---include=aptitude,console-setup,locales,keyboard-configuration,\
-command-not-found,bash,sudo,intel-microcode,firmware-linux-free,firmware-misc-nonfree,\
-firmware-iwlwifi,cryptsetup,network-manager,initramfs-tools,linux-image-4.19.0-6-amd64 \
---exclude=vim \
---components=main,contrib,non-free \
---arch amd64 \
-buster \
-./work/$thisArch/rootfs
+	# TODO: BOOTSTRAP_ARGS+=(--keyring "${STAGE_DIR}/files/raspberrypi.gpg")
+	qemu-debootstrap --arch armhf --components "main,contrib,non-free" --no-check-gpg --include "net-tools,isc-dhcp-client,nano,wget,bash,ca-certificates,lsb-release" buster ./work/$thisArch/rootfs http://raspbian.raspberrypi.org/raspbian/
 
 	umountImageFile $thisArch ./work/$thisArch/$imageName
 
@@ -69,7 +62,8 @@ log "chroot into the image"
 
 echo "";echo "";echo "";echo "";echo "";
 echo "========================================================================="
-echo "You are now in the chroot environement.";
+echo "apt update; apt install libraspberrypi-bin raspberrypi-kernel raspberrypi-sys-mods"
+echo "apt install sudo bash-completion dbus firmware-brcm80211 ";
 echo "Start the build script with by pasting the following line in the terminal:";
 echo "";
 echo "cd /lysmarine; ./build.sh 1 2 3 4 5 6 7 86 9"
@@ -78,27 +72,21 @@ echo "========================================================================="
 echo "";echo "";
 
 # chroot into the mount image point
- proot \
---root-id \
---rootfs=work/${thisArch}/rootfs \
---cwd=/ \
- --mount=/etc/resolv.conf:/etc/resolv.conf \
- --mount=/dev:/dev \
- --mount=/sys:/sys \
- --mount=/proc:/proc \
- --mount=/tmp:/tmp \
- --mount=/run/shm:/run/shm \
-"/bin/bash"
+ proot -q qemu-arm \
+	--root-id \
+	--rootfs=work/${thisArch}/rootfs \
+	--cwd=/ \
+	--mount=/etc/resolv.conf:/etc/resolv.conf \
+	--mount=/dev:/dev \
+	--mount=/sys:/sys \
+	--mount=/proc:/proc \
+	--mount=/tmp:/tmp \
+	--mount=/run/shm:/run/shm \
+	"/bin/bash"
 
 
+#sed -i 's/^#//g' ./work/$thisArch/rootfs/etc/ld.so.preload
 
-
-sed -i 's/^#//g' ./work/$thisArch/rootfs/etc/ld.so.preload
-
-
-## VBOX IMAGE
-rm ./release/$thisArch/LysMarine_$thisArch-0.9.0.vdi
-VBoxManage convertfromraw --format VDI ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ./release/$thisArch/LysMarine_$thisArch-0.9.0.vdi
 
 ## ISO
 # mkisofs -o ./release/$thisArch/LysMarine_$thisArch-0.9.0.iso ./work/$thisArch/rootfs

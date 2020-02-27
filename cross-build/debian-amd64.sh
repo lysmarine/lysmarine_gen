@@ -1,11 +1,8 @@
 #!/bin/bash
-{
 source lib.sh
 
-thisArch="raspbian"
-imageSource="https://downloads.raspberrypi.org/raspbian_lite_latest"
-zipName="raspbian_lite_latest"
-imageName="2020-02-05-raspbian-buster-lite.img"
+thisArch="debian-amd64"
+imageName="$thisArch.img"
 
 
 
@@ -13,37 +10,39 @@ checkRoot ;
 
 
 
-# Create caching folder hierarchy to work with this architecture.
-setupWorkSpace $thisArch
+createEmptyImageFile ;
 
 
 
-# Download or copy the official image from cache
-if [ ! -f ./cache/$thisArch/$imageName ]; then
-	log "Downloading official image from internet."
-	wget -P ./cache/$thisArch/  $imageSource
-	7z e -o./cache/$thisArch/   ./cache/$thisArch/$zipName
-	rm ./cache/$thisArch/$zipName
+setupWorkSpace $thisArch ;
+
+
+
+if [ ! -f ./cache/$thisArch/$imageName-inflated ] ;then
+	log "No ready-to-buld image found in cache, bootstrapping"
+
+	cp -v ./cache/emptyImage.img ./work/$thisArch/$imageName
+
+	mountImageFile $thisArch ./work/$thisArch/$imageName ;
+
+	qemu-debootstrap --arch amd64 --components "main,contrib,non-free" --no-check-gpg --include "net-tools,isc-dhcp-client,nano,wget,bash,ca-certificates,lsb-release" buster ./work/$thisArch/rootfs
+
+	umountImageFile $thisArch ./work/$thisArch/$imageName
+
+	mv -vf ./work/$thisArch/$imageName ./cache/$thisArch/$imageName-inflated
 
 else
-	log "Using official image from cache."
-
-fi
-
-
-
-# Copy image file to work folder add temporary space to it.
-inflateImage $thisArch ./cache/$thisArch/$imageName ;
+	log "Using ready to buld image from cache"
+fi;
 
 
 
-# copy ready image from cache to the work dir
 cp -fv ./cache/$thisArch/$imageName-inflated ./work/$thisArch/$imageName
 
 
-
 # Mount the image and make the binds required to chroot.
-mountImageFile $thisArch ./work/$thisArch/$imageName
+mountImageFile $thisArch ./work/$thisArch/$imageName ;
+
 
 
 
@@ -52,21 +51,21 @@ addLysmarineScripts $thisArch
 
 
 
-# Display build tips
+# Chroot into the mounted image.
+log "chroot into the image"
+
 echo "";echo "";echo "";echo "";echo "";
 echo "========================================================================="
 echo "You are now in the chroot environement.";
-echo "Start the build script with by pasting one of the following line in the terminal:";
+echo "Start the build script with by pasting the following line in the terminal:";
 echo "";
 echo "cd /lysmarine; ./build.sh 1 2 3 4 5 6 7 86 9"
 echo "cd /lysmarine; ./build.sh ";
 echo "========================================================================="
 echo "";echo "";
 
-
-
-# chroot into the
-proot -q qemu-arm \
+# chroot into the mount image point
+ proot \
 	--root-id \
 	--rootfs=work/${thisArch}/rootfs \
 	--cwd=/ \
@@ -76,17 +75,26 @@ proot -q qemu-arm \
 	--mount=/proc:/proc \
 	--mount=/tmp:/tmp \
 	--mount=/run/shm:/run/shm \
-	/bin/bash
+	"/bin/bash"
 
 
 
+
+#sed -i 's/^#//g' ./work/$thisArch/rootfs/etc/ld.so.preload
+
+
+## ISO
+# mkisofs -o ./release/$thisArch/LysMarine_$thisArch-0.9.0.iso ./work/$thisArch/rootfs
 # Unmount
+
 umountImageFile $thisArch ./work/$thisArch/$imageName
+
 
 
 
 # Renaming the OS and moving it to the release folder.
 cp -v ./work/$thisArch/$imageName  ./release/$thisArch/LysMarine_$thisArch-0.9.0.img
+log "DONE."
 
 
 
@@ -96,5 +104,5 @@ echo "sudo cp -v ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ./cache/$this
 echo ""
 echo "sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
 echo ""
+
 exit
-}
