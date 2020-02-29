@@ -45,8 +45,8 @@ createEmptyImageFile () {
 
 		loopId=$(kpartx -sav ./cache/emptyImage.img |  cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 
-		mkfs.vfat  /dev/mapper/loop${loopId}p1
-		mkfs.ext4  /dev/mapper/loop${loopId}p2
+		mkfs.fat -n boot -F 32 /dev/mapper/loop${loopId}p1
+		mkfs.ext4 /dev/mapper/loop${loopId}p2
 
 		kpartx -d ./cache/emptyImage.img
 	else

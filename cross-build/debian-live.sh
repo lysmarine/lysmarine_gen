@@ -1,17 +1,12 @@
 #!/bin/bash
 source lib.sh
 
-dBootArch="debian"
-thisArch="raspbian-dboot"
+thisArch="debian-live"
 imageName="$thisArch.img"
 
 
 
 checkRoot ;
-
-
-
-get3rdPartyAssets ;
 
 
 
@@ -30,8 +25,7 @@ if [ ! -f ./cache/$thisArch/$imageName-inflated ] ;then
 
 	mountImageFile $thisArch ./work/$thisArch/$imageName ;
 
-	# TODO: BOOTSTRAP_ARGS+=(--keyring "${STAGE_DIR}/files/raspberrypi.gpg")
-	qemu-debootstrap --arch armhf --components "main,contrib,non-free" --no-check-gpg --include "net-tools,isc-dhcp-client,nano,wget,bash,ca-certificates,lsb-release" buster ./work/$thisArch/rootfs http://raspbian.raspberrypi.org/raspbian/
+	qemu-debootstrap --arch amd64 --components "main,contrib,non-free" --no-check-gpg --include "net-tools,isc-dhcp-client,nano,wget,bash,ca-certificates,lsb-release" buster ./work/$thisArch/rootfs
 
 	umountImageFile $thisArch ./work/$thisArch/$imageName
 
@@ -62,17 +56,20 @@ log "chroot into the image"
 
 echo "";echo "";echo "";echo "";echo "";
 echo "========================================================================="
-echo "apt update; apt install libraspberrypi-bin raspberrypi-kernel raspberrypi-sys-mods"
-echo "apt install sudo bash-completion dbus firmware-brcm80211 ";
+echo "You are now in the chroot environement.";
 echo "Start the build script with by pasting the following line in the terminal:";
-echo "";
+echo "apt-get update && \
+apt-get install --no-install-recommends \
+    linux-image-686 \
+    live-boot \
+    systemd-sysv";
 echo "cd /lysmarine; ./build.sh 1 2 3 4 5 6 7 86 9"
 echo "cd /lysmarine; ./build.sh ";
 echo "========================================================================="
 echo "";echo "";
 
 # chroot into the mount image point
- proot -q qemu-arm \
+ proot \
 	--root-id \
 	--rootfs=work/${thisArch}/rootfs \
 	--cwd=/ \
@@ -83,6 +80,8 @@ echo "";echo "";
 	--mount=/tmp:/tmp \
 	--mount=/run/shm:/run/shm \
 	"/bin/bash"
+
+
 
 
 #sed -i 's/^#//g' ./work/$thisArch/rootfs/etc/ld.so.preload

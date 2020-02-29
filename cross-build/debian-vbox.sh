@@ -27,7 +27,7 @@ if [ ! -f ./cache/$thisArch/$imageName-inflated ] ;then
 	mountImageFile $thisArch ./work/$thisArch/$imageName ;
 
 	qemu-debootstrap --arch amd64 --components "main,contrib,non-free" --no-check-gpg --include "net-tools,isc-dhcp-client,nano,wget,bash,ca-certificates,lsb-release" buster ./work/$thisArch/rootfs
-
+ls -lah work/${thisArch}/rootfs
 	umountImageFile $thisArch ./work/$thisArch/$imageName
 
 	mv -vf ./work/$thisArch/$imageName ./cache/$thisArch/$imageName-inflated
@@ -35,6 +35,42 @@ if [ ! -f ./cache/$thisArch/$imageName-inflated ] ;then
 else
 	log "Using ready to buld image from cache"
 fi;
+
+
+
+cp -vf ./cache/$thisArch/$imageName-inflated ./work/$thisArch/$imageName 
+
+
+
+# Mount the image and make the binds required to chroot.
+mountImageFile $thisArch ./work/$thisArch/$imageName ;
+
+
+
+# Copy the lysmarine and origine OS config files in the mounted rootfs
+addLysmarineScripts $thisArch
+
+
+
+# chroot into the mount image point
+ proot \
+	--root-id \
+	--rootfs=work/${thisArch}/rootfs \
+	--cwd=/ \
+	--mount=/etc/resolv.conf:/etc/resolv.conf \
+	--mount=/dev:/dev \
+	--mount=/sys:/sys \
+	--mount=/proc:/proc \
+	--mount=/tmp:/tmp \
+	--mount=/run/shm:/run/shm \
+	"/bin/bash"
+
+
+
+umountImageFile $thisArch ./work/$thisArch/$imageName
+
+
+
 
 
 

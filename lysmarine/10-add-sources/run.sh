@@ -7,19 +7,17 @@ if [[ $LMOS == 'Raspbian' ]]; then
 	echo "deb http://archive.raspberrypi.org/debian/ buster main" > /etc/apt/sources.list.d/raspi.list
 	echo "deb http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi" > /etc/apt/sources.list
 
-	
-
 elif [[ $LMOS == 'Debian' ]]; then 
 	echo 'Set Debian repositories';
-#	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA8E81B4331F7F50 112695A0E562B32A 82B129927FA3303E
 	echo "deb http://deb.debian.org/debian buster main contrib non-free" > /etc/apt/sources.list
 	echo "deb http://deb.debian.org/debian buster-updates main contrib non-free" >> /etc/apt/sources.list
 	echo "deb http://security.debian.org/debian-security buster/updates main contrib non-free" >> /etc/apt/sources.list
+
 fi
 
 
-apt-get update  -y -q
 
+apt-get update  -y -q
 apt-get install -y -q apt-transport-https gnupg     lsb-release wget # maybe armbian ?
 
 
