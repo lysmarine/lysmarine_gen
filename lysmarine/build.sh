@@ -1,32 +1,25 @@
 #! /bin/bash -e
-
 source ./config ;
-
-
-
-run_stage() {
-  if [ -f $1/run.sh ]; then
-    echo '';
-    echo '==========================================';
-    echo "Running number $1 "
-    echo "$2/run.sh"
-    echo '==========================================';
-    echo '';
-
-    export FILE_FOLDER=$1/files/
-    $1/run.sh 2>&1 | tee "logs/$1.log"
-  fi
-} 
-
-
 
 echo "";
 echo "Install script for Lysmarine :)"
 echo "";
 
+
+## Check variable declaration
+if [[ -z $LMARCH ]];then
+  export LMARCH="$(dpkg --print-architecture)"
+fi
+echo "Architecture : $LMARCH"
+
+if [[ -z $LMOS ]];then
+  export LMOS="$(lsb_release -id -s | head -1)"
+fi
+echo "Base OS : $LMOS"
+
 if [[ -z $LMBUILD ]];then
   echo ''
-  echo ''
+  echo '*DEPRICATED*'
   echo "variable $LMBUILD is not set, choices are: "
   echo ''
   echo "export LMBUILD=debian-vbox"
@@ -36,6 +29,7 @@ if [[ -z $LMBUILD ]];then
   echo ''
   exit
 fi
+echo "Build tag : $LMBUILD"
 
 
 
@@ -49,7 +43,7 @@ export LC_ALL="C"
 
 
 
-
+## If no build stage is provided, build all stages.
 if [ "$#" -gt "0" ]; then
   stageList="$@"
 else
@@ -57,12 +51,24 @@ else
 fi
 
 
-
-
+## Loop stages.
 for number in $stageList; do
   for stage in ./$number*; do
     if [ -d $stage ]; then
-      run_stage $stage
+      if [ -f $stage/run.sh ]; then
+        echo '';
+        echo '==========================================';
+        echo "From request $number "
+        echo "Running stage $stage/run.sh"
+        echo '==========================================';
+        echo '';
+
+        export FILE_FOLDER=$stage/files/
+       
+        $stage/run.sh 2>&1 | tee "logs/$stage.log"
+        # [[ $? -ne 0 ]] && exit # Exit if non-zero exit code
+
+      fi
     fi
   done
 done
