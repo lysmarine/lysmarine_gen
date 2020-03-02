@@ -9,7 +9,7 @@ python-numpy python-scipy swig python-pillow python-flask python-socketio \
 python-pip python-pylirc  python-flask python-gevent-websocket \
 python-wxgtk4.0 python-opengl python-wxtools
 
-if [ $LMBUILD == raspbian ] ;then
+if [ $LMOS == 'Raspbian' ] ;then
 	apt-get install -y -q wiringpi
 fi
 
@@ -17,35 +17,42 @@ fi
 pip install wheel
 pip install pyglet ujson PyOpenGL PyWavefront pyudev flask_socketio
 
-pushd /home/pypilot
-	
+
+
+pushd ./stageCache 
+
 	## Install RTIMULib2 as it's a dependency of pypilot 
-	git clone --depth=1 https://github.com/seandepagnier/RTIMULib2
+	if [[ ! -f RTIMULib2 ]]; then 
+		git clone --depth=1 https://github.com/seandepagnier/RTIMULib2
+	fi
+	## Build and install RTIMULib2
 	pushd ./RTIMULib2/Linux/python
 		python setup.py install
 	popd
-	rm -rf ./RTIMULib2
+
+
 
 	## Get pypilot
-	git clone https://github.com/pypilot/pypilot.git
-
-	pushd ./pypilot
-		git checkout db173ae4409aba2900dfd58c50bf8a409cd954e7 # Temporary regression due to broken GUI 
-	popd 
-
-	## Get pypilot_data
-	git clone --depth=1 https://github.com/pypilot/pypilot_data.git
-	cp -rv ./pypilot_data/* ./pypilot
-	rm -rf ./pypilot_data
-
+	if [[ ! -f pypilot.git ]]; then 
+		git clone https://github.com/pypilot/pypilot.git
+		pushd ./pypilot
+			git checkout db173ae4409aba2900dfd58c50bf8a409cd954e7 # Temporary regression due to broken GUI 
+		popd 
+		git clone --depth=1 https://github.com/pypilot/pypilot_data.git
+		cp -rv ./pypilot_data/* ./pypilot
+		rm -rf ./pypilot_data
+		pushd ./pypilot
+			python setup.py build
+		popd
+	fi
 	## Build and install pypilot
 	pushd ./pypilot
-		python setup.py build
 		python setup.py install
 	popd
-
-	rm -rf pypilot
+		
 popd
+
+
 
 ## Install the service files
 install -v -m 0644 $FILE_FOLDER/pypilot@.service "/etc/systemd/system/"

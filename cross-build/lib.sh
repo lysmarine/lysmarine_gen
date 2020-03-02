@@ -12,6 +12,7 @@ logErr () {
 setupWorkSpace () {
 	thisArch=$1
 	mkdir -p ./cache/$thisArch
+	mkdir -p ./cache/$thisArch/stageCache
 	mkdir -p ./work/$thisArch
 	mkdir -p ./work/$thisArch/rootfs
 	mkdir -p ./work/$thisArch/bootfs

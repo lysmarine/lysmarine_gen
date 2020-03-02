@@ -15,9 +15,13 @@ echo '127.0.1.1	lysmarine.local' >> /etc/hosts
 
 # Access Point management
 apt-get install -y -q git util-linux procps hostapd iproute2 iw dnsmasq iptables
-git clone --depth=1 https://github.com/oblique/create_ap
-pushd create_ap
-make install
+pushd ./stageCache 
+	if [[ ! -f create_ap ]]; then 
+		git clone --depth=1 https://github.com/oblique/create_ap
+	fi
+	pushd create_ap
+		make install
+	popd		
 popd
 
 cp $FILE_FOLDER/create_ap.conf /etc/

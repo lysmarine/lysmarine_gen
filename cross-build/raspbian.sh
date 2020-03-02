@@ -80,6 +80,7 @@ proot -q qemu-arm \
 	--mount=/sys:/sys \
 	--mount=/proc:/proc \
 	--mount=/tmp:/tmp \
+	--mount=./cache/$thisArch/stageCache:/lysmarine/stageCache \
 	--mount=/run/shm:/run/shm \
 	/bin/bash
 

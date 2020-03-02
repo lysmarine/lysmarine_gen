@@ -4,7 +4,7 @@
 
 ## Dependencys of signalk.
 apt-get install -y -q nodejs libavahi-compat-libdnssd-dev python-dev
-if [ $LMBUILD == debian-amd64 ] ;then
+if [[ $LMOS == "Debian" ]] ;then
 	apt-get install -y -q npm
 fi
 
