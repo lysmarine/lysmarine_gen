@@ -5,7 +5,7 @@ source lib.sh
 thisArch="raspbian"
 imageSource="https://downloads.raspberrypi.org/raspbian_lite_latest"
 zipName="raspbian_lite_latest"
-imageName="2020-02-05-raspbian-buster-lite.img"
+imageName="2020-02-13-raspbian-buster-lite.img"
 
 
 
@@ -15,11 +15,6 @@ checkRoot ;
 
 # Create caching folder hierarchy to work with this architecture.
 setupWorkSpace $thisArch
-
-
-
-# Check 3rd party dependency Needed to to execute various tasks.
-get3rdPartyAssets
 
 
 
