@@ -2,7 +2,7 @@
 
 apt-get update  -y -q
 apt-get upgrade -y -q
-apt-get install -y -q apt-transport-https lsb-release wget gnupg
+apt-get install -y -q apt-transport-https lsb-release wget gnupg dirmngr
 
 
 

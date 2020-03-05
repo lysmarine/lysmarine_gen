@@ -155,4 +155,7 @@ function addLysmarineScripts {
 	echo 'export LMBUILD='$thisArch >> ./work/$thisArch/rootfs/lysmarine/config 
   	chmod 0775 ./work/$thisArch/rootfs/lysmarine/build.sh
 	find ./ -name run.sh  -exec chmod 775 {} \;
+
+	mkdir ./work/$thisArch/rootfs/lysmarine/stageCache
+
 }
