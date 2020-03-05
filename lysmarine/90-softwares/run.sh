@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ $LMBUILD == raspbian ] ;then
+if [ $LMOS == Raspbian ] ;then
 	apt-get install -y -q chromium-browser
 else
 	apt-get install -y -q chromium

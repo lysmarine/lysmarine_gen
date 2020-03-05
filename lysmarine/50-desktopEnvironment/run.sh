@@ -6,11 +6,11 @@ echo "needs_root_rights=yes" >> /etc/X11/Xwrapper.config
 
 
 
-if [ $LMBUILD == raspbian ] ;then
+if [ $LMOS == Raspbian ] ;then
 	apt-get install -q -y xserver-xorg-video-fbturbo
 fi
 
-if [ $LMBUILD == armbian-pineA64 ] ;then
+if [ $LMOS == Armbian ] ;then
 	sudo apt-get -q -y install xserver-xorg-legacy	
 fi
 

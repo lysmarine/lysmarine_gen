@@ -13,9 +13,3 @@
 #export LMARCH="arm64"
 #export LMARCH="armhf"
 #export LMARCH="amd64"
-
-## Deprecated variable.   
-#export LMBUILD="armbian-pineA64"
-#export LMBUILD="debian-vbox"
-#export LMBUILD="debian-amd64"
-#export LMBUILD="raspbian"

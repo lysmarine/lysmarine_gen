@@ -46,8 +46,8 @@ createEmptyImageFile () {
 
 		loopId=$(kpartx -sav ./cache/emptyImage.img |  cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 
-		mkfs.vfat  /dev/mapper/loop${loopId}p1
-		mkfs.ext4  /dev/mapper/loop${loopId}p2
+		mkfs.fat -n boot -F 32 /dev/mapper/loop${loopId}p1
+		mkfs.ext4 /dev/mapper/loop${loopId}p2
 
 		kpartx -d ./cache/emptyImage.img
 	else
@@ -106,7 +106,6 @@ umountImageFile (){
 	rm -rf ./work/${thisArch}/rootfs/var/log/*
 	rm -rf ./work/${thisArch}/rootfs/tmp/*
 
-
 	umount ./work/$thisArch/rootfs/boot
 	umount ./work/$thisArch/rootfs
 
@@ -152,7 +151,6 @@ function addLysmarineScripts {
 	log "copying lysmarine on the image"
 	cp -r ../lysmarine ./work/$thisArch/rootfs/
 	echo "" >> ./work/$thisArch/rootfs/lysmarine/config
-	echo 'export LMBUILD='$thisArch >> ./work/$thisArch/rootfs/lysmarine/config 
   	chmod 0775 ./work/$thisArch/rootfs/lysmarine/build.sh
 	find ./ -name run.sh  -exec chmod 775 {} \;
 

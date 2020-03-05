@@ -17,22 +17,6 @@ if [[ -z $LMOS ]];then
 fi
 echo "Base OS : $LMOS"
 
-if [[ -z $LMBUILD ]];then
-  echo ''
-  echo '*DEPRICATED*'
-  echo "variable $LMBUILD is not set, choices are: "
-  echo ''
-  echo "export LMBUILD=debian-vbox"
-  echo "export LMBUILD=raspbian"
-  echo "export LMBUILD=armbian-pineA64"
-  echo "export LMBUILD=debian-64"
-  echo ''
-  exit
-fi
-echo "Build tag : $LMBUILD"
-
-
-
 ## This help making less noice in cross-build environment. 
 export LANG="en_US.UTF-8"
 export LANGUAGE=en_US:en
