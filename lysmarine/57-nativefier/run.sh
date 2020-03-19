@@ -42,7 +42,7 @@ if [ $LMARCH == debian-vbox ] ;then #FIXME
 fi
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
---name "webdesktop"   --icon /usr/share/icons/gnome/256x256/actions/reload.png \
+--name "wdash"   --icon /usr/share/icons/gnome/256x256/actions/reload.png \
 "http://localhost:80" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
@@ -51,7 +51,7 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
 --name "Freeboard-sk" --icon /home/user/.local/share/icons/freeboard-sk.png \
-"http://localhost/@signalk/freeboard-sk/" /opt/
+"http://localhost:81/@signalk/freeboard-sk/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
 --name "SpeedSample" --icon /usr/share/icons/gnome/256x256/apps/utilities-system-monitor.png \
@@ -69,13 +69,13 @@ cp -r /opt/Freeboard-sk-linux-$arch /opt/Freeboard-sk
 cp -r /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
 cp -r /opt/SignalK-linux-$arch /opt/SignalK
 cp -r /opt/SpeedSample-linux-$arch /opt/SpeedSample
-cp -r /opt/webdesktop-linux-$arch /opt/webdesktop
+cp -r /opt/wdash-linux-$arch /opt/webdesktop
 
 rm -r /opt/Freeboard-sk-linux-$arch
 rm -r /opt/Pypilot_webapp-linux-$arch
 rm -r /opt/SignalK-linux-$arch
 rm -r /opt/SpeedSample-linux-$arch
-rm -r /opt/webdesktop-linux-$arch
+rm -r /opt/wdash-linux-$arch
 
 
 ## On debian, the sandbox environement fail without GUID/SUID 
@@ -84,5 +84,7 @@ if [ $LMOS == Debian ] ;then
 	chmod 4755 /opt/Pypilot_webapp/chrome-sandbox
 	chmod 4755 /opt/SignalK/chrome-sandbox
 	chmod 4755 /opt/SpeedSample/chrome-sandbox
+	chmod 4755 /opt/wdash/chrome-sandbox
+
 fi
 

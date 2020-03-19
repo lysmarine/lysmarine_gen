@@ -28,5 +28,5 @@ install -o 1000 -g 1000  -v $FILE_FOLDER/.conkyrc      "/home/user/.conkyrc"
 
 
 ## Wallpaper
-echo "feh --randomize --bg-fill ~/.config/feh/* > /dev/null &" >> /home/user/.config/openbox/autostart
-echo "conky &" >> /home/user/.config/openbox/autostart
+# echo "feh --randomize --bg-fill ~/.config/feh/* > /dev/null &" >> /home/user/.config/openbox/autostart
+# echo "conky &" >> /home/user/.config/openbox/autostart

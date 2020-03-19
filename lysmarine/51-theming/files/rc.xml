@@ -736,7 +736,13 @@
     <maximized>no</maximized>
      <decor>yes</decor>
   </application>
-
+  <application name="wdash">
+    <maximized>yes</maximized>
+     <decor>no</decor>
+      <layer>below</layer>
+       <focus>no</focus>
+     <skip_taskbar>yes</skip_taskbar>
+  </application>
 
 
 </applications>
