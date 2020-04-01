@@ -6,7 +6,7 @@ apt-get install -y -q git librtlsdr-dev
 
 ## Compiling 
 pushd ./stageCache 
-	if [[ ! -f rtl-ais ]]; then 
+	if [[ ! -d rtl-ais ]]; then
 		git clone --depth 1 https://github.com/dgiardini/rtl-ais/
 		pushd ./rtl-ais
 			sed -i "s/^LDFLAGS.*librtlsdr./LDFLAGS+=-lpthread\ -lm\ -lrtlsdr\ -L\ \/usr\/lib\/arm-linux-gnueabihf\//" Makefile

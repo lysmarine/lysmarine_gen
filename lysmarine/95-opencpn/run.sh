@@ -14,7 +14,7 @@ if [[ $LMARCH == 'arm64' ]] ;then
 		dpkg -i opencpn-data_5.0.0+dfsg-1_all.deb # This ugly workaround bypass : https://github.com/OpenCPN/OpenCPN/issues/1685 and https://github.com/OpenCPN/OpenCPN/issues/1712
 	
 
-		if [[ ! -f OpenCPN ]]; then 
+		if [[ ! -d ./OpenCPN ]]; then
 			git clone --depth 1 git://github.com/OpenCPN/OpenCPN.git
 			mkdir -p ./OpenCPN/build
 

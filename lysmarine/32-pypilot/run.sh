@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-## this stage depend on stage 18-users for the pypilot user creation 
+## this stage depend on stage 18-users for the pypilot user creation
 ## adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
 
 ## Install apt depedencys
@@ -32,8 +32,7 @@ pushd ./stageCache
 
 
 
-	## Get pypilot
-	if [[ ! -f pypilot.git ]]; then 
+	if [[ ! -d ./pypilot ]]; then
 		git clone https://github.com/pypilot/pypilot.git
 		pushd ./pypilot
 			git checkout db173ae4409aba2900dfd58c50bf8a409cd954e7 # Temporary regression due to broken GUI 
@@ -73,6 +72,6 @@ install -d /usr/local/share/applications
 install -v $FILE_FOLDER/pypilot_calibration.desktop "/usr/local/share/applications/"
 install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applications/" # Depend on stage 57-nativfier to build the app
 
-## Give permission to sudo chrt without password for the user pypilot. 
+## Give permission to sudo chrt without password for the user pypilot.
 echo "" >> /etc/sudoers
 echo 'pypilot ALL=(ALL) NOPASSWD: /usr/bin/chrt' >> /etc/sudoers
