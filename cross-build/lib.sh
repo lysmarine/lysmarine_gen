@@ -41,7 +41,7 @@ get3rdPartyAssets () {
 createEmptyImageFile () {
 	if [ ! -f ./cache/emptyImage.img ] ;then
 		log "Create empty image file with qemu"
-		qemu-img create -f raw ./cache/emptyImage.img 6G
+		qemu-img create -f raw ./cache/emptyImage.img 7G
 		echo -e "o\nn\np\n1\n2048\n+300M\nn\np\n2\n\n\na\n1\nw\n" | fdisk ./cache/emptyImage.img
 
 		loopId=$(kpartx -sav ./cache/emptyImage.img |  cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
@@ -122,8 +122,8 @@ inflateImage () {
 		log "Inflating OS image to have enough space to build lysmarine. "
 		cp -fv $imageLocation $imageLocation-inflated
 
-		log "truncate image to 6G"
-		truncate -s "6G" $imageLocation-inflated
+		log "truncate image to 7G"
+		truncate -s "7G" $imageLocation-inflated
 
 		log "resize last partition to 100%"
 		partQty=$(fdisk -l $imageLocation-inflated | grep -o "^$imageLocation-inflated" | wc -l)
@@ -149,11 +149,8 @@ inflateImage () {
 function addLysmarineScripts {
 	thisArch=$1
 	log "copying lysmarine on the image"
+	mkdir -p ./work/$thisArch/rootfs/lysmarine
 	cp -r ../lysmarine ./work/$thisArch/rootfs/
-	echo "" >> ./work/$thisArch/rootfs/lysmarine/config
-  	chmod 0775 ./work/$thisArch/rootfs/lysmarine/build.sh
+	chmod 0775 ./work/$thisArch/rootfs/lysmarine/build.sh
 	find ./ -name run.sh  -exec chmod 775 {} \;
-
-	mkdir ./work/$thisArch/rootfs/lysmarine/stageCache
-
 }
