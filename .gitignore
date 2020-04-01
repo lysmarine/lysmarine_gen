@@ -4,3 +4,6 @@ release
 dev
 lysmarine/log/*
 lysmarine/stageCache/*
+
+
+.idea

@@ -54,11 +54,12 @@ if [ ! -f ./cache/$thisArch/$thisArch.vdi ]; then
 
 		#remove the CD
 		read -n 1 -r -s -p $'When done with the vurtual machine, press enter to continue...\n'
-		VBoxManage storageattach ./cache/$thisArch/$isoName --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium none
+		pwd
+		VBoxManage storageattach ../../cache/$thisArch/$isoName --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium none
 
     popd
 
-    cp -v ./work/$thisArch/$thisArch.vdi ./cache/$thisArch/$thisArch.vdi  
+    cp -v ./work/$thisArch/$thisArch.vdi ./cache/$thisArch/$thisArch.vdi
 else
 	log "Using VBox image found in cache."
 fi
@@ -76,7 +77,7 @@ sleep 1 ;
 mount /dev/nbd1p1 ./work/$thisArch/rootfs
 
 log "Copy lysmarine"
-addLysmarineScripts $thisArch		
+addLysmarineScripts $thisArch
 
 
 log "UNmount"
@@ -100,7 +101,7 @@ cp -v ./work/$thisArch/$thisArch.vdi  ./release/$thisArch/LysMarine_$thisArch-0.
 log "DONE."
 
 log "Pro Tip"
-echo "" 
+echo ""
 echo "cp -v ./work/$thisArch/$thisArch.vdi ./cache/$thisArch/$thisArch.vdi"
 echo ""
 exit
