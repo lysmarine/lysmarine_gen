@@ -2,15 +2,16 @@
 apt-get install -y -q plymouth;
 
 ## This override the default tty1 behaviour to make it more discrete during the boot process
+install -v -d "/etc/systemd/system/getty@tty1.service.d"
 install -v -m0644 $FILE_FOLDER/skip-prompt.conf "/etc/systemd/system/getty@tty1.service.d/"
 
 ## Raspbian
-if [ -f /boot/config.txt  ] ;then 
+if [ -f /boot/config.txt  ] ;then
 	cat $FILE_FOLDER/appendToConfig.txt >> /boot/config.txt
 fi
 
 ## Raspbian
-if [ -f /boot/cmdline.txt ] ; then 
+if [ -f /boot/cmdline.txt ] ; then
 	sed -i '$s/$/\ loglevel=1\ splash\ quiet\ logo.nologo\ vt.global_cursor_default=0\ plymouth.ignore-serial-consoles/' /boot/cmdline.txt
 fi
 
@@ -27,5 +28,8 @@ plymouth-set-default-theme dreams
 # Armbian
 rm /etc/issue /etc/issue.net
 
-# Raspbian neable it in intercept keystroke during the boot process for ondemand cup freq management. 
-systemctl disable triggerhappy.services
+# Raspbian neable this to intercept keystroke during the boot process, (for ondemand cup freq management.)
+
+if [[ $LMOS == 'Raspbian' ]]; then
+	systemctl disable triggerhappy.service
+fi
