@@ -17,7 +17,7 @@ if [[ -z $LMOS ]];then
 fi
 echo "Base OS : $LMOS"
 
-## This help making less noice in cross-build environment. 
+## This help making less noice in cross-build environment.
 export LANG="en_US.UTF-8"
 export LANGUAGE=en_US:en
 export LC_NUMERIC="C"
@@ -31,7 +31,7 @@ export LC_ALL="C"
 if [ "$#" -gt "0" ]; then
   stageList="$@"
 else
-  stageList="*" 
+  stageList="*"
 fi
 
 
@@ -48,9 +48,10 @@ for number in $stageList; do
         echo '';
 
         export FILE_FOLDER=$stage/files/
-       
+
         $stage/run.sh 2>&1 | tee "logs/$stage.log"
-        # [[ $? -ne 0 ]] && exit # Exit if non-zero exit code
+        [[ ${PIPESTATUS[0]} -ne 0 ]] && exit ;
+
 
       fi
     fi

@@ -26,10 +26,11 @@ cp -r $FILE_FOLDER/dreams "/usr/share/plymouth/themes/"
 plymouth-set-default-theme dreams
 
 # Armbian
-rm /etc/issue /etc/issue.net
+if [ -f /etc/issue ] ;then
+	rm /etc/issue /etc/issue.net
+fi
 
 # Raspbian neable this to intercept keystroke during the boot process, (for ondemand cup freq management.)
-
 if [[ $LMOS == 'Raspbian' ]]; then
 	systemctl disable triggerhappy.service
 fi

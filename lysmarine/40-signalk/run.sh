@@ -42,10 +42,10 @@ su signalk -c "npm install @signalk/charts-plugin --unsafe-perm --loglevel error
 # su signalk -c "npm install signalk-world-coastline-map --unsafe-perm --loglevel error" # this npm package is broken
 popd
 
-## Give set-system-time the possibility to change the date. 
+## Give set-system-time the possibility to change the date.
 echo "signalk ALL=(ALL) NOPASSWD: /bin/date" >> /etc/sudoers
 
 
 
 ## Make some space on the drive for the next stages
-rm -r /tmp/npm-*
+#rm -r /tmp/npm-*
