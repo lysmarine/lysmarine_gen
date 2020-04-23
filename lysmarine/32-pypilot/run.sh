@@ -3,52 +3,63 @@
 ## this stage depend on stage 18-users for the pypilot user creation
 ## adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
 
+# Op way
+apt-get install -y -q python3 python3-serial libpython3-dev python3-numpy python3-scipy swig python3-ujson \
+python3-pyudev python3-pil python3-flask python3-opengl python3-pip python3-dev python3-setuptools  python3-wxgtk4.0 #python3-flask-socketio
+
+pip3 install pywavefront pyglet gps gevent-websocket python-socketio
+
+
+
+
+
+#Lysmarine way
 ## Install apt depedencys
-apt-get install -y -q python-setuptools python-gps python-serial libpython-dev \
-python-numpy python-scipy swig python-pillow python-flask python-socketio \
-python-pip python-pylirc  python-flask python-gevent-websocket \
-python-wxgtk4.0 python-opengl python-wxtools
+#apt-get install -y -q python3 python3-pip libpython3-dev   #python3-dev libpython3-dev python3-dev
+#apt-get install -y -q swig #ask by the compiler
+#apt-get install -y -q libatlas-base-dev #numpy won't work wothout this
+#apt-get install -y -q freeglut3 libgl1 libglu1-mesa libgle3 #debian package says pyopengl depend on theses (pypilot_calibration need at least one of them)
+#apt-get install -y -q python-wxgtk4.0 # wxpython is the pip package. I don't have the balls for this one, too much compiling depedencys.
+
+#pip3 install numpy pillow serial gps pyudev pywavefront pyglet serial scipy \
+#			 gevent-websocket python-socketio flask flask-socketio pyopengl
 
 if [ $LMOS == 'Raspbian' ] ;then
 	apt-get install -y -q wiringpi
 fi
 
-## Install python depedencys
-pip install wheel
-pip install pyglet ujson PyOpenGL PyWavefront pyudev flask_socketio
 
 
+pushd ./stageCache
 
-pushd ./stageCache 
-
-	## Install RTIMULib2 as it's a dependency of pypilot 
-	if [[ ! -f RTIMULib2 ]]; then 
+	## Install RTIMULib2 as it's a dependency of pypilot
+	if [[ ! -d ./RTIMULib2 ]]; then
 		git clone --depth=1 https://github.com/seandepagnier/RTIMULib2
 	fi
-	## Build and install RTIMULib2
+	echo "Build and install RTIMULib2"
 	pushd ./RTIMULib2/Linux/python
-		python setup.py install
+		python3 setup.py install
 	popd
 
 
-
+	echo "Get pypilot";
 	if [[ ! -d ./pypilot ]]; then
 		git clone https://github.com/pypilot/pypilot.git
-		pushd ./pypilot
-			git checkout db173ae4409aba2900dfd58c50bf8a409cd954e7 # Temporary regression due to broken GUI 
-		popd 
+		# pushd ./pypilot
+		# 	git checkout db173ae4409aba2900dfd58c50bf8a409cd954e7 # Temporary regression due to broken GUI
+		# popd
 		git clone --depth=1 https://github.com/pypilot/pypilot_data.git
 		cp -rv ./pypilot_data/* ./pypilot
 		rm -rf ./pypilot_data
 		pushd ./pypilot
-			python setup.py build
+			python3 setup.py build
 		popd
 	fi
 	## Build and install pypilot
 	pushd ./pypilot
-		python setup.py install
+		python3 setup.py install
 	popd
-		
+
 popd
 
 
