@@ -13,6 +13,9 @@ fi
 echo "Architecture : $LMARCH"
 
 if [[ -z $LMOS ]];then
+  if [ ! -f /usr/bin/lsb_release ]; then
+      apt-get install -y -q lsb-release
+  fi
   export LMOS="$(lsb_release -id -s | head -1)"
 fi
 echo "Base OS : $LMOS"
