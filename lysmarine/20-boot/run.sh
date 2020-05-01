@@ -15,9 +15,18 @@ if [ -f /boot/cmdline.txt ] ; then
 	sed -i '$s/$/\ loglevel=1\ splash\ quiet\ logo.nologo\ vt.global_cursor_default=0\ plymouth.ignore-serial-consoles/' /boot/cmdline.txt
 fi
 
- ## Armbian
+## Armbian
 if [ -f /boot/armbianEnv.txt ] ; then
 	echo "console=serial" >> /boot/armbianEnv.txt
+fi
+
+## Debian
+if [ -f /etc/default/grub ] ; then
+  install -m0644 -v $FILE_FOLDER/grub "/etc/default/grub"
+  install -m0644 -v $FILE_FOLDER/background.png "/boot/grub/background.png"
+  echo FRAMEBUFFER=y >> /etc/initramfs-tools/conf.d/splash
+  update-initramfs -u
+  update-grub
 fi
 
 ## Theming of the boot prcess

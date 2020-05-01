@@ -44,7 +44,7 @@ if [ ! -f ./cache/$thisArch/$thisArch.vdi ]; then
 		VBoxManage storageattach $MACHINENAME --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium  ./$thisArch.vdi
 		VBoxManage storagectl $MACHINENAME --name "IDE Controller" --add ide --controller PIIX4
 		VBoxManage storageattach $MACHINENAME --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium ../.././cache/$thisArch/$isoName
-		VBoxManage modifyvm $MACHINENAME --boot1 dvd --boot2 disk --boot3 none --boot4 none
+		VBoxManage modifyvm $MACHINENAME --boot1 dvd --boot2 disk
 
 
 		#Start the VM
@@ -54,10 +54,9 @@ if [ ! -f ./cache/$thisArch/$thisArch.vdi ]; then
 
 		#remove the CD
 		read -n 1 -r -s -p $'When done with the vurtual machine, press enter to continue...\n'
-		pwd
 		VBoxManage storageattach ../../cache/$thisArch/$isoName --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium none
 
-    popd
+  popd
 
     cp -v ./work/$thisArch/$thisArch.vdi ./cache/$thisArch/$thisArch.vdi
 else
