@@ -736,11 +736,11 @@
     <maximized>no</maximized>
      <decor>yes</decor>
   </application>
-  <application name="wdash">
+  <application title="wdash">
     <maximized>yes</maximized>
      <decor>no</decor>
       <layer>below</layer>
-       <focus>no</focus>
+       <focus>yes</focus>
      <skip_taskbar>yes</skip_taskbar>
   </application>
 
