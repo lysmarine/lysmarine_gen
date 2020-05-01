@@ -1,6 +1,6 @@
 include "/home/user/.gtkrc-2.0.mine"
 gtk-theme-name="Adapta-Nokto-Eta"
-gtk-icon-theme-name="Flat-Remix-Dark"
+gtk-icon-theme-name="Abyss-DEEP-Suru-GLOW"
 gtk-font-name="Sans 11"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
