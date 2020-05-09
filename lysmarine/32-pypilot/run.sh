@@ -5,19 +5,19 @@
 
 # Op way
 apt-get install -y -q python3 python3-serial libpython3-dev python3-numpy python3-scipy swig python3-ujson \
-python3-pyudev python3-pil python3-flask python3-opengl python3-pip python3-dev python3-setuptools  python3-wxgtk4.0 #python3-flask-socketio
+python3-pyudev python3-pil python3-flask python3-opengl python3-pip python3-dev python3-setuptools  python3-wxgtk4.0
 
-pip3 install pywavefront pyglet gps gevent-websocket python-socketio
+pip3 install pywavefront pyglet gps gevent-websocket Flask-SocketIO python-socketio
 
 
 
 
 
 #Lysmarine way
-## Install apt depedencys
+## Install apt deps
 #apt-get install -y -q python3 python3-pip libpython3-dev   #python3-dev libpython3-dev python3-dev
 #apt-get install -y -q swig #ask by the compiler
-#apt-get install -y -q libatlas-base-dev #numpy won't work wothout this
+#apt-get install -y -q libatlas-base-dev #numpy won't work without this
 #apt-get install -y -q freeglut3 libgl1 libglu1-mesa libgle3 #debian package says pyopengl depend on theses (pypilot_calibration need at least one of them)
 #apt-get install -y -q python-wxgtk4.0 # wxpython is the pip package. I don't have the balls for this one, too much compiling depedencys.
 
