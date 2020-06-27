@@ -27,7 +27,7 @@ else
 fi
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
---name "wdash"   --icon /usr/share/icons/gnome/256x256/actions/reload.png \
+--name "wdash" \
 "http://localhost:80" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
