@@ -4,9 +4,6 @@
 
 ## Dependencys of signalk.
 apt-get install -y -q nodejs libavahi-compat-libdnssd-dev python-dev
-if [[ $LMOS == "Debian" ]] ;then
-	apt-get install -y -q npm
-fi
 
 
 
@@ -20,16 +17,18 @@ install    -m 644 -o signalk -g signalk $FILE_FOLDER/package.json   "/home/signa
 install    -m 644 -o signalk -g signalk $FILE_FOLDER/settings.json  "/home/signalk/.signalk/settings.json"
 install    -m 644 -o signalk -g signalk $FILE_FOLDER/security.json  "/home/signalk/.signalk/security.json"
 install    -m 755 -o signalk -g signalk $FILE_FOLDER/signalk-server "/home/signalk/.signalk/signalk-server"
-install -d        -o signalk -g signalk "/home/user/.local/share/icons/"
 
+install -d        -o signalk -g signalk "/home/user/.local/share/icons/"
 install    -m 644 -o 1000    -g 1000    $FILE_FOLDER/signalk.png "/home/user/.local/share/icons/"
+
 install -d                              /etc/systemd/system
 install    -m 644                       $FILE_FOLDER/signalk.service "/etc/systemd/system/signalk.service"
 install    -m 644                       $FILE_FOLDER/signalk.socket  "/etc/systemd/system/signalk.socket"
 
-ln -sf "/etc/systemd/system/signalk.service" "/etc/systemd/system/multi-user.target.wants/signalk.service"
-ln -sf "/etc/systemd/system/signalk.socket"  "/etc/systemd/system/multi-user.target.wants/signalk.socket"
-
+#ln -sf "/etc/systemd/system/signalk.service" "/etc/systemd/system/multi-user.target.wants/signalk.service"
+#ln -sf "/etc/systemd/system/signalk.socket"  "/etc/systemd/system/multi-user.target.wants/signalk.socket"
+systemctl enable signalk.service
+systemctl enable signalk.socket
 
 
 ## Install signalk
@@ -37,10 +36,22 @@ npm install --loglevel error -g --unsafe-perm signalk-server
 
 
 
-## Install signalk plugins
+## Install signalk published plugin
 pushd /home/signalk/.signalk
-su signalk -c "npm install @signalk/charts-plugin --unsafe-perm --loglevel error"
-# su signalk -c "npm install signalk-world-coastline-map --unsafe-perm --loglevel error" # this npm package is broken
+	su signalk -c "npm install @signalk/charts-plugin --unsafe-perm --loglevel error"
+  su signalk -c "npm install @mxtommy/kip --unsafe-perm --loglevel error"
+	# su signalk -c "npm install signalk-world-coastline-map --unsafe-perm --loglevel error" # this npm package is broken
+popd
+
+
+
+## Install signalk lysmarine-dashboard plugin
+pushd /home/signalk/.signalk/node_modules/@signalk/
+	su signalk -c "git clone https://github.com/lysmarine/lysmarine-dashboard"
+	pushd ./lysmarine-dashboard
+	  rm -r .git
+		npm install
+  popd
 popd
 
 ## Give set-system-time the possibility to change the date.

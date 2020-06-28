@@ -27,7 +27,7 @@ else
 fi
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
---name "wdash" \
+--name "wdash" --icon /home/user/.local/share/icons/signalk.png \
 "http://localhost:80" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
