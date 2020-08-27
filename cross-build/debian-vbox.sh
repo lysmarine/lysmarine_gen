@@ -2,8 +2,8 @@
 source lib.sh
 
 thisArch="debian-vbox"
-imageSource="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.3.0-amd64-netinst.iso"
-isoName="debian-10.3.0-amd64-netinst.iso"
+imageSource="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.5.0-amd64-netinst.iso"
+isoName="debian-10.5.0-amd64-netinst.iso"
 MACHINENAME=lysmarine
 # Download or copy the official image from cache
 
@@ -54,8 +54,10 @@ if [ ! -f ./cache/$thisArch/$thisArch.vdi ]; then
 
 		#remove the CD
 		read -n 1 -r -s -p $'When done with the vurtual machine, press enter to continue...\n'
-		VBoxManage storageattach ../../cache/$thisArch/$isoName --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium none
 
+		VBoxManage storageattach $MACHINENAME --storagectl "IDE Controller" --port 0 --device 0 --medium none
+    VBoxManage modifyvm $MACHINENAME --boot1 disk --boot2 none
+    VBoxManage storagectl $MACHINENAME --name "IDE Controller" --remove
   popd
 
     cp -v ./work/$thisArch/$thisArch.vdi ./cache/$thisArch/$thisArch.vdi
@@ -73,7 +75,7 @@ log "Mounting Vbox drive on host And copy lysmarine into it."
 modprobe nbd
 qemu-nbd  -v -c /dev/nbd1 ./work/$thisArch/$thisArch.vdi &
 sleep 1 ;
-mount /dev/nbd1p1 ./work/$thisArch/rootfs
+mount -v /dev/nbd1p1 ./work/$thisArch/rootfs
 
 log "Copy lysmarine"
 addLysmarineScripts $thisArch
@@ -91,7 +93,7 @@ echo "========================================================================="
 echo "";echo "";echo "";echo "";echo "";
 
 VBoxManage startvm $MACHINENAME --type=gui
-read -n 1 -r -s -p $'When done with the vurtual machine, press enter to continue...\n'
+read -n 1 -r -s -p $'When done with the virtual machine, press enter to continue...\n'
 
 ./work/$thisArch/$thisArch.vdi
 

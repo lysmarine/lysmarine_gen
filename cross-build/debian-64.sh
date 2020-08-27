@@ -30,10 +30,11 @@ if [ ! -f ./cache/$thisArch/$imageName-inflated ] ;then
 
 	mountImageFile $thisArch ./work/$thisArch/$imageName ;
 
+#linux-image-arm64 \
 	debootstrap \
 --include=aptitude,console-setup,locales,keyboard-configuration,\
 command-not-found,bash,sudo,intel-microcode,firmware-linux-free,firmware-misc-nonfree,\
-firmware-iwlwifi,cryptsetup,network-manager,initramfs-tools,linux-image-4.19.0-6-amd64 \
+firmware-iwlwifi,cryptsetup,network-manager,initramfs-tools, \
 --exclude=vim \
 --components=main,contrib,non-free \
 --arch amd64 \
