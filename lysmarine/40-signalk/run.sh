@@ -9,6 +9,8 @@ apt-get install -y -q nodejs libavahi-compat-libdnssd-dev python-dev
 
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk"
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk/plugin-config-data"
+install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk/node_modules/"
+
 install    -m 644 -o signalk -g signalk $FILE_FOLDER/set-system-time.json  "/home/signalk/.signalk/plugin-config-data/"
 install    -m 644 -o signalk -g signalk $FILE_FOLDER/charts.json  "/home/signalk/.signalk/plugin-config-data/"
 
@@ -25,8 +27,6 @@ install -d                              /etc/systemd/system
 install    -m 644                       $FILE_FOLDER/signalk.service "/etc/systemd/system/signalk.service"
 install    -m 644                       $FILE_FOLDER/signalk.socket  "/etc/systemd/system/signalk.socket"
 
-#ln -sf "/etc/systemd/system/signalk.service" "/etc/systemd/system/multi-user.target.wants/signalk.service"
-#ln -sf "/etc/systemd/system/signalk.socket"  "/etc/systemd/system/multi-user.target.wants/signalk.socket"
 systemctl enable signalk.service
 systemctl enable signalk.socket
 

@@ -29,7 +29,7 @@ if [ -f /etc/default/grub ] ; then
   update-grub
 fi
 
-## Theming of the boot prcess
+## Theming of the boot process
 install -v $FILE_FOLDER/ascii_logo.txt "/etc/motd"
 cp -r $FILE_FOLDER/dreams "/usr/share/plymouth/themes/"
 plymouth-set-default-theme dreams
@@ -39,7 +39,7 @@ if [ -f /etc/issue ] ;then
 	rm /etc/issue /etc/issue.net
 fi
 
-# Raspbian neable this to intercept keystroke during the boot process, (for ondemand cup freq management.)
+# Raspbian enable this to intercept keystroke during the boot process, (for ondemand cup freq management.) Lysmarine don't want to set it that way.
 if [[ $LMOS == 'Raspbian' ]]; then
 	systemctl disable triggerhappy.service
 fi

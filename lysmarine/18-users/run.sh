@@ -1,10 +1,14 @@
 #!/bin/bash -e
 apt-get -y -q install sudo policykit-1
 
-## Set root password
+
+
+## Set root password.
 echo 'root:changeme' | chpasswd
 
-## Roemove default uder (if any)
+
+
+## Remove default user (if any).
 oldUser=$(cat /etc/passwd | grep 1000:1000 | cut -f1 -d:) 
 if [[ ! -z $oldUser ]]; then 
 	echo "Removing user "$oldUser
@@ -15,7 +19,7 @@ fi
 
 
 
-## Add default user
+## Add default user.
 adduser --uid 1000 --home /home/user --quiet --disabled-password -gecos "lysmarine" user
 echo 'user:changeme' | chpasswd
 echo "user ALL=(ALL:ALL) ALL" >> /etc/sudoers
@@ -42,7 +46,7 @@ fi
 
 
 
-## Create a user group that are allowed to write on the charts folder.
+## Create the charts group and add users that have to write to that folder.
 if ! grep -q charts /etc/group ; then
 	groupadd charts;
 	usermod -a -G charts signalk;
@@ -55,10 +59,13 @@ fi
 ## Create the special charts folder.
 install -v -d -m 6775 -o signalk -g charts /srv/charts; 
 
+
+
 ## Link the chart folder to home for convenience.
 if [ ! -f /home/user/charts ] ; then
 	su user -c "ln -s /srv/charts /home/user/charts;"
 fi
+
 
 
 ## Manage the permissions and privileges.
@@ -69,7 +76,7 @@ if [[ -d /etc/polkit-1 ]]; then
 	install -v $FILE_FOLDER/org.freedesktop.NetworkManager.pkla  "/etc/polkit-1/localauthority/10-vendor.d/"
 fi
 
-if [[ -f /etc/sudoers.d/010_pi-nopasswd ]]; then # remove the raspbian no-pwd sudo to user pi.
+if [[ -f /etc/sudoers.d/010_pi-nopasswd ]]; then # Remove the raspbian no-pwd sudo to user pi.
 	rm /etc/sudoers.d/010_pi-nopasswd
 fi
 
@@ -82,9 +89,11 @@ fi
 
 
 ## Prevent the creation of useless home folders on first boot.
-sed -i 's/^DESKTOP=/#&/'     /etc/xdg/user-dirs.defaults; 
-sed -i 's/^TEMPLATES=/#&/'   /etc/xdg/user-dirs.defaults; 
-sed -i 's/^PUBLICSHARE=/#&/' /etc/xdg/user-dirs.defaults; 
-sed -i 's/^MUSIC=/#&/'       /etc/xdg/user-dirs.defaults; 
-sed -i 's/^PICTURES=/#&/'    /etc/xdg/user-dirs.defaults; 
-sed -i 's/^VIDEOS=/#&/'      /etc/xdg/user-dirs.defaults; 
+if [ -f /etc/xdg/user-dirs.defaults ] ;then
+  sed -i 's/^DESKTOP=/#&/'     /etc/xdg/user-dirs.defaults;
+  sed -i 's/^TEMPLATES=/#&/'   /etc/xdg/user-dirs.defaults;
+  sed -i 's/^PUBLICSHARE=/#&/' /etc/xdg/user-dirs.defaults;
+  sed -i 's/^MUSIC=/#&/'       /etc/xdg/user-dirs.defaults;
+  sed -i 's/^PICTURES=/#&/'    /etc/xdg/user-dirs.defaults;
+  sed -i 's/^VIDEOS=/#&/'      /etc/xdg/user-dirs.defaults;
+fi
