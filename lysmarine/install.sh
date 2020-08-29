@@ -1,5 +1,4 @@
 #! /bin/bash -e
-source ./config ;
 
 echo "";
 echo "Install script for Lysmarine :)"
