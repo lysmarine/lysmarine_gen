@@ -151,6 +151,6 @@ function addLysmarineScripts {
 	log "copying lysmarine on the image"
 	mkdir -p ./work/$thisArch/rootfs/lysmarine
 	cp -r ../lysmarine ./work/$thisArch/rootfs/
-	chmod 0775 ./work/$thisArch/rootfs/lysmarine/build.sh
+	chmod 0775 ./work/$thisArch/rootfs/lysmarine/install.sh
 	find ./ -name run.sh  -exec chmod 775 {} \;
 }

@@ -87,15 +87,15 @@ qemu-nbd -d /dev/nbd1
 
 echo "";echo "";echo "";echo "";echo "";
 echo "========================================================================="
-echo "cd /lysmarine; ./build.sh 1 2 3 4 5 6 7 86 9"
-echo "cd /lysmarine; ./build.sh ";
+echo "cd /lysmarine; ./install.sh 1 2 3 4 5 6 7 86 9"
+echo "cd /lysmarine; ./install.sh ";
 echo "========================================================================="
 echo "";echo "";echo "";echo "";echo "";
 
 VBoxManage startvm $MACHINENAME --type=gui
 read -n 1 -r -s -p $'When done with the virtual machine, press enter to continue...\n'
 
-./work/$thisArch/$thisArch.vdi
+#./work/$thisArch/$thisArch.vdi
 
 # Renaming the OS and moving it to the release folder.
 cp -v ./work/$thisArch/$thisArch.vdi  ./release/$thisArch/LysMarine_$thisArch-0.9.0.vdi
