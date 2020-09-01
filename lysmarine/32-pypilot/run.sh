@@ -5,12 +5,12 @@
 
 # Op way
 apt-get install -y -q python3 python3-serial libpython3-dev python3-numpy python3-scipy swig python3-ujson \
-python3-pyudev python3-pil python3-flask python3-opengl python3-pip python3-dev python3-setuptools  python3-wxgtk4.0
+python3-pyudev python3-pil python3-flask python3-opengl python3-pip python3-dev python3-setuptools  python3-wxgtk4.0 \
+libffi-dev python3-gevent
 
 pip3 install pywavefront pyglet gps gevent-websocket Flask-SocketIO python-socketio
 
-
-
+## je pense que la meilleur approche est de favoriser PIP pcq dean deploi sur tiny core et n'est pas interesser par debian. aussi pcq y'a du code pour arduino et que ca pourrais etre supporter par les dependances d'installation python
 
 
 #Lysmarine way
