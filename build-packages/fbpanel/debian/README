@@ -1,0 +1,423 @@
+	Configuring
+	===========
+
+fbpanel stores its configurations in ~/.config/fbpanel directory. 
+Every profile is represented by a single text file with a same name. 
+Name of default profile is «default». Edit relevant file and restart fbpanel. 
+
+
+You can also tell running fbpanel to reload its configuration by sending it USR1 signal.
+% vim ~/.config/fbpanel/default  
+% killall -USR1 fbpanel         # tell fbpanel to reload configuration
+
+In addition, there is configuration GUI that covers all panel's options, but not plugins yet. 
+To get it, click Ctrl-Button2 anywhere in panel or run it with -C option.
+
+
+
+
+<<<<	 Configuration file structure   >>>>
+	==============================
+
+
+Configuration file consists from one Global section, that covers panel options, and one or more Plugin sections.
+The syntax is following:
+
+    * Spaces at the begining and at the end of a line are ignored
+    * Lines strarting with '#' or blank lines are ignored. '#' in any other place is NOT treated as comment
+    * Variable's name is NOT case sensitive
+    * Variable's value IS case sensitive
+    * Variable's value is a text from first non-blank char after '=' till the last non-blank char.
+    * Section starts by its type (Global or Plugin) and "{' on a same line, then inner variables and sections, and ends with '}' on separate line.
+
+
+
+<<<<<		Global section  	>>>>>
+
+
+It describes global panel parameters like position, size and some NETWM settings.
+If variable has default value, it can be omited. The full variable list is:
+
+    * Edge - screen edge
+      Legal values are left, right, top or bottom.
+      Default is bottom.
+    * Allign - allignment of a panel
+      Legal values are left, right or center.
+      Default is center.
+    * WidthType - units of width
+      Legal values are
+          o pixel - width is number of pixels
+          o percent - width is percent of an edge
+          o request - follow widgets' size requests. can shrink or grow dynamically
+      Default is percent.
+    * Width - panel width in widthtype units
+      Legal values are numbers.
+      Default is 100.
+    * HeightType - units of height
+      Legal values are
+          o pixel - height is number of pixels
+      Default is pixel.
+    * Height - panel height in heighttype units
+      Legal values are numbers.
+      Default is 26.
+    * Margin - margin from screen edge for left or right allignment. Legal values are numbers.
+      Default is 0.
+    * SetDockType - set panel's NETWM window type to Dock Legal values are true or false.
+      Default is true.
+    * SetPartialStrut - ask NETWM compliant window manager to not cover panel by maximized windows. Legal values are true or false.
+      Default is true.
+    * Transparent - enable transparent background Legal values are true or false.
+      Default is false.
+    * TintColor - color to composite on root background Legal values are colors, eg 0xRRGGBB or red, black etc.
+      Default is white.
+    * Alpha - transparency of the tint color Legal values are numbers from 0 to 255.
+      Default is 127.
+    * Autohide - hide panel when mouse is far enough Legal values are true or false.
+      Default is false.
+    * RoundCorners - panel has rounded corners Legal values are true or false.
+      Default is true.
+    * RoundCornersRadius - radius of ronded corners. Legal values are numbers from 0 to 25.
+      Default is 7.
+    * Layer - stacking layer of a panel Legal values are above or below.
+      Default is above.
+    * SetLayer - set or not stacking layer of panel. If not, defaul WM policy is used. Legal values are true or false.
+      Default is false.
+    * MaxElemHeight - maximal height of plugins' lements, like icons, messages etc. If plugin has more space, it can place elements in multiple rows. Legal values are numbers from 10 to 200.
+      Default is 200
+
+For example:
+
+Global {
+    edge = bottom
+    allign = center
+    margin = 0
+    widthtype = percent
+    width = 92
+    height = 48
+    transparent = true
+    tintcolor = #ffffff
+    alpha = 32
+    setdocktype = true
+    setpartialstrut = true
+    autohide = false
+    heightWhenHidden = 2
+    roundcorners = false
+    roundcornersradius = 7
+    layer = above
+    setlayer = false
+    maxelemheight = 24
+}
+
+
+
+<<<<<		Plugin section  	>>>>>
+
+
+It describes which plugin to load, how to position it and has plugin specific configuration section. If variable has default value, it can be omited. The full variable list is:
+
+    * type - plugin type
+      Legal values are battery, cpu, dclock, deskno, deskno2, genmon, icons, image, launchbar, mem, menu, net, pager, separator, space, systray, taskbar, tclock, volume, wincmd
+      Mandatory.
+    * expand - expand plugin if extra space is available
+      Legal values are true or false
+      Default is false
+    * padding - padding around plugin in pixels
+      Legal values are numbers
+      Default is 0
+    * config - a section with plugin specific configuration.
+
+For example:
+
+Plugin {
+    type = space
+    expand = false
+    padding = 0
+    config {
+        size = 2
+    }
+}
+
+Plugin {
+    type = cpu
+}
+
+
+Plugins with additional configuration
+Cpu
+
+    * color - chart color
+      Legal values are colors eg 0xRRGGBB or red, black etc.
+      Default is green.
+
+For example:
+
+Plugin {
+    type = cpu
+    config {
+        Color = green
+    }
+}
+
+Net
+
+    * interface - interface to watch
+      Legal values are network interface names.
+      Default is eth0.
+    * TxColor - color of Tx traffic
+      Legal values are colors.
+      Default is violet.
+    * RxColor - color of Rx traffic
+      Legal values are colors.
+      Default is blue.
+    * TxLimit - Tx limit of the connection, in KB/s. Used to scale chart properly
+      Legal values are numbers.
+      Default is 12.
+    * RxLimit - Rx limit of the connection, in KB/s. Used to scale chart properly
+      Legal values are numbers.
+      Default is 120.
+
+For example:
+
+Plugin {
+    type = net
+    config {
+        interface = eth0
+        TxLimit = 20
+        RxLimit = 190
+        TxColor = violet
+        RxColor = blue
+    }
+}
+
+Pager
+
+    * ShowWallpaper - show desktop wallpaper in pager window or not
+      Legal values are true or false.
+      Default is true.
+
+For example:
+
+Plugin {
+    type = pager
+    config {
+        showwallpaper = true
+    }
+}
+
+Space
+
+    * size - size of space to occupy in pixels
+      Legal values are numbers.
+      Default is 1.
+
+For example:
+
+Plugin {
+    type = space
+    config {
+        size = 15
+    }
+}
+
+Mem
+
+    * ShowSwap - show swap usage or not
+      Legal values are true or false
+      Default is false.
+
+For example:
+
+Plugin {
+    type = mem
+    config {
+        ShowSwap = true
+    }
+}
+
+dclock
+
+    * ShowSeconds - show secondsor not
+      Legal values are true or false
+      Default is false.
+    * HoursView - 24h or 12h hours view
+      Legal values are 12 or 24
+      Default is 24.
+    * TooltipFmt - tooltip content
+      Legal values are strftime formats
+      Default is %A %x.
+    * Action - command to run on mouse click
+      Legal values are bash commands
+      Default is none.
+    * Color - digits color
+      Legal values are colors, eg 0xRRGGBB or red, black etc.
+      Default is blue.
+
+For example:
+
+Plugin {
+    type = dclock
+    config {
+        ShowSeconds = false
+        HoursView = 24
+        Action = xmessage Please define some command 
+    }
+}
+
+tclock
+
+    * ClockFmt - Clock format string. May contain strftime conversion specifications and Pango markup information.
+      Legal values are strings
+      Default is "%R".
+    * TooltipFmt - Tooltip format string. May contain strftime conversion specifications and Pango markup information.
+      Legal values are strings
+      Default is "%A %x".
+    * Action - command to run on mouse click
+      Legal values are bash commands
+      Default is none.
+    * ShowCalendar - Show a GTK calendar widget when the clock is clicked. Only valid if Action is unset.
+      Legal values are true or false
+      Default is true.
+    * ShowTooltip - Show tooltip for clock
+      Legal values are true or false
+      Default is true.
+
+Plugin {
+    type = tclock
+    config {
+        # 2 line view, time in bold above and date below
+        ClockFmt = %-l:%M %P&#xA;%a %B %-e
+        TooltipFmt = %A %x
+        #Action = xmessage Please define some command 
+        ShowCalendar = false
+        ShowTooltip = true
+    }
+}
+
+Taskbar
+
+    * TBD
+
+For example:
+
+plugin {
+    type = taskbar
+    expand = true
+    config {
+        ShowIconified = true
+        ShowMapped = true
+        ShowAllDesks = false
+        tooltips = true
+        IconsOnly = false
+        MaxTaskWidth = 150
+    }
+}
+
+Launchbar
+
+    * TBD
+
+For example:
+
+plugin {
+    type = launchbar
+    expand = false
+    padding = 0
+    config {
+        button {
+            icon = gnome-terminal
+            tooltip = Terminal
+            action = xterm
+        }
+        button {
+            image = /opt/google/chrome/product_logo_48.png
+            tooltip = Google Chrome
+            action = google-chrome
+        }     
+    }
+}
+
+Menu
+
+    * TBD
+
+For example:
+
+plugin {
+    type = menu
+    config {
+        icon = start-here
+        systemmenu {
+        }
+        separator {
+        }
+        menu {
+            name = Computer
+            icon = computer
+            item {
+                name = Terminal
+                icon = terminal
+                action = x-terminal
+            }
+            item {
+                name = Lock Display
+                icon = gnome-lockscreen
+                action = xtrlock2
+            }
+            separator {
+            }
+            item {
+                name = Reboot
+                icon = gnome-session-reboot
+                action = sudo reboot
+            }
+        
+        }
+    }
+}
+
+Icons
+
+    * TBD
+
+For example:
+
+plugin {
+    type = icons
+    expand = false
+    padding = 0
+    config {
+        DefaultIcon = /usr/share/fbpanel/images/default.xpm
+        application {
+            icon = gnome-terminal
+            ClassName = XTerm
+        }
+        application {
+            icon = gnome-terminal
+            ClassName = mlterm
+        }
+        application {
+            icon = gnome-terminal
+            ClassName = URxvt
+        }
+        application {
+            icon = gnome-emacs
+            ClassName = Emacs
+        }
+        application {
+            icon = mozilla-firefox
+            ClassName = Firefox-bin
+        }
+        application {
+            icon = mozilla-firefox
+            ClassName = Firefox
+        }
+        application {
+            image = /usr/share/icons/yasis/scalable/apps/gnome-ppp.svg
+            AppName = minicom
+        }
+    }
+}
+
+
+
+ -- Ulises Vitulli <dererk@debian.org>  Tue, 06 Jul 2010 02:35:37 -0300

@@ -1,0 +1,12 @@
+Source: createap
+Maintainer: oblique
+Section: misc
+Priority: optional
+Standards-Version: 0.4.6
+Build-Depends: debhelper (>=9)
+
+Package: createap
+Maintainer: Frederic Guilbault <2@0464.ca>
+Architecture: any
+Depends: procps|procps-ng,hostapd,iproute2,iw,dnsmasq,iptables,iwconfig
+Description: Create an AP (Access Point).

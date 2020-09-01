@@ -1,0 +1,11 @@
+About fbpanel source
+====================
+
+Original upstream's source includes a dynamic object copy without apparent
+sources, but they don't appear to be used at any point.
+
+The orig tarball has been downloaded from:
+https://github.com/aanatoly/fbpanel/archive/7.0.tar.gz
+
+debian/rules has a get-orig-source target which
+will fetch the tarball from the upstream page.

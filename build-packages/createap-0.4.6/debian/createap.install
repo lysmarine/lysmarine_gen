@@ -1,0 +1,5 @@
+create_ap /usr/bin/
+create_ap.conf /etc/
+create_ap.service /lib/systemd/system/
+bash_completion /usr/share/bash-completion/completions/
+README.md /usr/share/doc/create_ap/
