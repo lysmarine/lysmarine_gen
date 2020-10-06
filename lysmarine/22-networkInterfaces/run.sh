@@ -14,19 +14,7 @@ echo '127.0.1.1	lysmarine.local' >> /etc/hosts
 
 
 # Access Point management
-apt-get install -y -q git util-linux procps hostapd iproute2 iw dnsmasq iptables
-pushd ./stageCache
-	if [[ ! -d create_ap ]]; then
-		git clone --depth=1 https://github.com/oblique/create_ap
-	fi
-	pushd create_ap
-		make install
-	popd
-popd
-
-cp $FILE_FOLDER/create_ap.conf /etc/
-rm -rf create_ap
-
+apt-get install -y -q createap
 
 
 ##  NetworkManager provide it's own wpa_supplicant, stop the others to avoid conflicts.

@@ -3,7 +3,7 @@
 
 
 ## Dependencys of signalk.
-apt-get install -y -q nodejs libavahi-compat-libdnssd-dev python-dev
+apt-get install -y -q nodejs libavahi-compat-libdnssd-dev python-dev git
 
 
 

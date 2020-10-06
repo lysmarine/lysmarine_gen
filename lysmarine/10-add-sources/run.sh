@@ -19,6 +19,9 @@ install -m0644 -v $FILE_FOLDER/50-lysmarine "/etc/apt/preferences.d/" # Prefer o
 wget -q -O - https://www.free-x.de/debian/oss.boating.gpg.key  | apt-key add -
 echo "deb https://www.free-x.de/debian/ buster main contrib non-free" > /etc/apt/sources.list.d/xygrib.list
 
+## lysmarine (provide: createap, rtl-ais, fbpanel)
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 868273edce9979e7
+echo "deb http://ppa.launchpad.net/lysmarine/upstream-projects/ubuntu bionic main " > /etc/apt/sources.list.d/lysmarine.list
 
 ## Update
 apt-get update  -y -q
