@@ -2,8 +2,8 @@
 source lib.sh
 
 thisArch="debian-vbox"
-imageSource="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.5.0-amd64-netinst.iso"
-isoName="debian-10.5.0-amd64-netinst.iso"
+imageSource="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.6.0-amd64-netinst.iso"
+isoName="debian-10.6.0-amd64-netinst.iso"
 MACHINENAME=lysmarine
 # Download or copy the official image from cache
 

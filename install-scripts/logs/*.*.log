@@ -1,0 +1,10 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+policykit-1 is already the newest version (0.105-26ubuntu1).
+sudo is already the newest version (1.8.31-1ubuntu1.1).
+0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+Removing user border
+userdel: user border is currently used by process 1916
+userdel: border mail spool (/var/mail/border) not found
+userdel: error removing directory /home/border
