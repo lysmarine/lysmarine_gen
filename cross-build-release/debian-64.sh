@@ -73,8 +73,8 @@ echo "========================================================================="
 echo "You are now in the chroot environement.";
 echo "Start the build script with by pasting the following line in the terminal:";
 echo "";
-echo "cd /lysmarine; ./install.sh 1 2 3 4 5 6 7 86 9"
-echo "cd /lysmarine; ./install.sh ";
+echo "cd /install-scripts; ./install.sh 1 2 3 4 5 6 7 86 9"
+echo "cd /install-scripts; ./install.sh ";
 echo "========================================================================="
 echo "";echo "";
 

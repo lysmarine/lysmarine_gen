@@ -87,8 +87,8 @@ qemu-nbd -d /dev/nbd1
 
 echo "";echo "";echo "";echo "";echo "";
 echo "========================================================================="
-echo "cd /lysmarine; ./install.sh 1 2 3 4 5 6 7 86 9"
-echo "cd /lysmarine; ./install.sh ";
+echo "cd /install-scripts; ./install.sh 1 2 3 4 5 6 7 86 9"
+echo "cd /install-scripts; ./install.sh ";
 echo "========================================================================="
 echo "";echo "";echo "";echo "";echo "";
 
