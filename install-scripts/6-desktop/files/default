@@ -52,7 +52,7 @@ Plugin {
         }
         item {
             icon = logo_grib
-            name = Meteo (XyGrib)
+            name = Weather (XyGrib)
             action = onlyone XyGrib
         }
         item {

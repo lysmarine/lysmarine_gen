@@ -32,14 +32,15 @@ systemctl enable signalk.socket
 
 
 ## Install signalk
-npm install --loglevel error -g --unsafe-perm signalk-server
+npm install -g --unsafe-perm signalk-server
+
 
 
 
 ## Install signalk published plugin
 pushd /home/signalk/.signalk
 	su signalk -c "npm install @signalk/charts-plugin --unsafe-perm --loglevel error"
-  su signalk -c "npm install @mxtommy/kip --unsafe-perm --loglevel error"
+    su signalk -c "npm install @mxtommy/kip --unsafe-perm --loglevel error"
 	# su signalk -c "npm install signalk-world-coastline-map --unsafe-perm --loglevel error" # this npm package is broken
 popd
 
