@@ -1,8 +1,7 @@
 #!/bin/bash -e
 
-## Needed to allow the service file start X 
-echo "allowed_users=anybody" > /etc/X11/Xwrapper.config
-echo "needs_root_rights=yes" >> /etc/X11/Xwrapper.config
+## Needed to allow the service file start X
+install  -v $FILE_FOLDER/Xwrapper.config "/etc/X11/"
 
 
 
@@ -13,8 +12,6 @@ fi
 if [ $LMOS == Armbian ] ;then
 	sudo apt-get -q -y install xserver-xorg-legacy	
 fi
-
-
 
 apt-get install -q -y \
 gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base \
