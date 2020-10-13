@@ -7,10 +7,8 @@ apt-get install -y -q network-manager make
 
 # Resolve lysmarine.local
 apt-get install -y -q avahi-daemon
-echo -n 'lysmarine' > /etc/hostname
-echo '127.0.1.1	lysmarine' >> /etc/hosts
-echo '127.0.1.1	lysmarine.local' >> /etc/hosts
-
+install -v $FILE_FOLDER/hostname "/etc/"
+cat $FILE_FOLDER/hosts >> /etc/hosts
 
 
 # Access Point management
