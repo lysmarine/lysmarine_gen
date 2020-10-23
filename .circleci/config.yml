@@ -10,7 +10,7 @@ executors:
 commands:
   git-checkout:
     steps:
-      - run: checkout
+      - checkout
   build-n-publish:
     steps:
       - run: sudo apt-get -y install wget
