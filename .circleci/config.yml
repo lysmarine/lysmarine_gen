@@ -27,7 +27,7 @@ jobs:
     executor: boot-linux
     environment:
       - DOCKER_IMAGE=jongough/raspbian-buster:plugin_build_tooling_current
-      - CONTAINER_DISTRO=raspbian:buster
+      - CONTAINER_DISTRO=raspbian-buster
       - PKG_DISTRO=raspbian
       - PKG_ARCH=armhf
       - PRG_REPO=bbn-projects/bbn-repo/deb/raspbian/pool/buster
