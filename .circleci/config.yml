@@ -21,14 +21,14 @@ commands:
           no_output_timeout: 30m
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
-      - run: .circleci/publish-cloudsmith.sh deb bbn-projects/bbn-repo ${PKG_DISTRO}
+      - run: .circleci/publish-cloudsmith.sh bbn-projects/bbn-repo ${PKG_DISTRO}
 jobs:
   build-raspbian-buster-arm32:
     executor: boot-linux
     environment:
-      - DOCKER_IMAGE=arm32v7/debian:buster
-      - CONTAINER_DISTRO=debian:buster
-      - PKG_DISTRO=debian/buster
+      - DOCKER_IMAGE=jongough/raspbian-buster:plugin_build_tooling_current
+      - CONTAINER_DISTRO=raspbian:buster
+      - PKG_DISTRO=raspbian
       - PKG_ARCH=armhf
       - PRG_REPO=bbn-projects/bbn-repo/deb/raspbian/pool/buster
       - EMU=on
