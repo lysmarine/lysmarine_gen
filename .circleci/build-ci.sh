@@ -31,8 +31,11 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install \
   proot qemu qemu-user git live-build kpartx
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
-    cd ./cross-build-release; chmod -v u+w *.sh; ./raspbian.sh;  \
+    "cd ci-source/cross-build-release; chmod -v u+w *.sh; ./raspbian.sh "
+
+docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
     cd /lysmarine; export LMBUILD="raspbian"; ./build.sh
+
 
 echo "Stopping"
 docker ps -a
