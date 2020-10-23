@@ -1,0 +1,42 @@
+---
+version: 2.1
+orbs:
+  cloudsmith: cloudsmith/cloudsmith@1.0.4
+executors:
+  boot-linux:
+    machine:
+      enabled: true
+      image: ubuntu-2004:202010-01
+commands:
+  git-checkout:
+    steps:
+      - run: checkout
+  build-n-publish:
+    steps:
+      - run: sudo apt-get -y install wget
+      - run: chmod a+x .circleci/*.sh
+      - run:
+          command: |
+            .circleci/build-ci.sh
+          no_output_timeout: 30m
+      - cloudsmith/ensure-api-key
+      - cloudsmith/install-cli
+      - run: .circleci/publish-cloudsmith.sh deb bbn-projects/bbn-repo ${PKG_DISTRO}
+jobs:
+  build-raspbian-buster-arm32:
+    executor: boot-linux
+    environment:
+      - DOCKER_IMAGE=arm32v7/debian:buster
+      - CONTAINER_DISTRO=debian:buster
+      - PKG_DISTRO=debian/buster
+      - PKG_ARCH=armhf
+      - PRG_REPO=bbn-projects/bbn-repo/deb/raspbian/pool/buster
+      - EMU=on
+    steps:
+      - git-checkout
+      - build-n-publish
+workflows:
+  version: 2
+  build_all:
+    jobs:
+      - build-raspbian-buster-arm32
