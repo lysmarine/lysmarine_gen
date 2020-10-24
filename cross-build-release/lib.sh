@@ -132,6 +132,7 @@ inflateImage () {
 
 		log "Resize the filesystem to fit the partition."
 		availLoop=$(losetup -f)
+		ls -l $imageLocation-inflated
 		losetup $availLoop $imageLocation-inflated
     loopId=$(echo $availLoop | grep -oh '[0-9]*')
 		kpartx -sav $availLoop
