@@ -28,7 +28,7 @@ DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep $CONTAINER_DISTRO | awk '{print 
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install \
-  proot qemu qemu-user git live-build kpartx p7zip p7zip-full
+  proot qemu qemu-user git live-build kpartx p7zip p7zip-full parted
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
     "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./raspbian.sh "
