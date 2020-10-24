@@ -134,7 +134,7 @@ inflateImage () {
 		losetup -a
 		availLoop=$(losetup -f)
 		ls -l $imageLocation-inflated
-		modprobe loop
+
 		pwd
 		#losetup $availLoop $imageLocation-inflated
 		losetup $availLoop /ci-source/cross-build-release/cache/raspbian/2020-02-13-raspbian-buster-lite.img-inflated
