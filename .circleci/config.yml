@@ -35,8 +35,21 @@ jobs:
     steps:
       - git-checkout
       - build-n-publish
+  build-debian-buster-arm32:
+    executor: boot-linux
+    environment:
+      - DOCKER_IMAGE=arm32v7/debian:buster
+      - CONTAINER_DISTRO=debian:buster
+      - PKG_DISTRO=debian/buster
+      - PKG_ARCH=armhf
+      - PRG_REPO=bbn-projects/bbn-repo/deb/raspbian/pool/buster
+      - EMU=on
+    steps:
+      - git-checkout
+      - build-n-publish
 workflows:
   version: 2
   build_all:
     jobs:
       - build-raspbian-buster-arm32
+      - build-debian-buster-arm32
