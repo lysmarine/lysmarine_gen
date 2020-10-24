@@ -134,8 +134,7 @@ inflateImage () {
 		losetup -a
 		availLoop=$(losetup -f)
 		ls -l $imageLocation-inflated
-		#losetup $availLoop $imageLocation-inflated
-		losetup -f $imageLocation-inflated
+		losetup $availLoop $imageLocation-inflated
     loopId=$(echo $availLoop | grep -oh '[0-9]*')
 		kpartx -sav $availLoop
 		#loopId=$(kpartx -sav $imageLocation-inflated | cut -d' ' -f3 | grep -oh '[0-9]*' | head -n 1)
