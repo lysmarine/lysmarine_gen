@@ -133,10 +133,11 @@ inflateImage () {
 		log "Resize the filesystem to fit the partition."
 		availLoop=$(losetup -f)
 		losetup $availLoop $imageLocation-inflated
-		kpartx -sav $availLoop
     loopId=$(echo $availLoop | grep -oh '[0-9]*')
+		kpartx -sav $availLoop
 		#loopId=$(kpartx -sav $imageLocation-inflated | cut -d' ' -f3 | grep -oh '[0-9]*' | head -n 1)
 		losetup -a
+		sleep 5
 		ls -l /dev/mapper/
 
 		e2fsck -f /dev/mapper/loop${loopId}p$partQty
