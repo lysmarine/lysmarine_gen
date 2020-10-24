@@ -131,6 +131,7 @@ inflateImage () {
 		fdisk -l $imageLocation-inflated
 
 		log "Resize the filesystem to fit the partition."
+		losetup -a
 		availLoop=$(losetup -f)
 		ls -l $imageLocation-inflated
 		losetup $availLoop $imageLocation-inflated
