@@ -132,7 +132,7 @@ inflateImage () {
 
 		log "Resize the filesystem to fit the partition."
 		#kpartx -v -s -a -l $imageLocation-inflated
-		loopId=$(kpartx -v -s -a -l $imageLocation-inflated | cut -d' ' -f3 | grep -oh '[0-9]*' | head -n 1)
+		loopId=$(kpartx -a -s -v $imageLocation-inflated | cut -d' ' -f3 | grep -oh '[0-9]*' | head -n 1)
 
 		e2fsck -f /dev/mapper/loop${loopId}p$partQty
 		resize2fs /dev/mapper/loop${loopId}p$partQty
