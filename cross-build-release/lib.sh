@@ -136,7 +136,7 @@ inflateImage () {
 		ls -l $imageLocation-inflated
 
 		pwd
-		#losetup $availLoop $imageLocation-inflated
+		losetup $availLoop -P $imageLocation-inflated
 		#losetup $availLoop /ci-source/cross-build-release/cache/raspbian/2020-02-13-raspbian-buster-lite.img-inflated
     loopId=$(echo $availLoop | grep -oh '[0-9]*')
 		#kpartx -sav $availLoop
