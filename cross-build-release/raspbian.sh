@@ -91,17 +91,15 @@ mount -o bind /proc $MK_ROOT/proc
 mount -o bind /tmp $MK_ROOT/tmp
 mount --rbind ./cache/$thisArch/stageCache $MK_ROOT/lysmarine/stageCache
 mount --rbind /run/shm $MK_ROOT/run/shm
-chroot work/${thisArch}/rootfs /bin/bash
+chroot work/${thisArch}/rootfs /bin/bash -xe << EOF > /tmp/lysmarine-mk-image.log
+  set -x; set -e; cd /lysmarine; export LMBUILD="raspbian"; ./build.sh; exit
+EOF
 
 # Unmount
 umountImageFile $thisArch ./work/$thisArch/$imageName
 
-
-
 # Renaming the OS and moving it to the release folder.
 cp -v ./work/$thisArch/$imageName  ./release/$thisArch/LysMarine_$thisArch-0.9.0.img
-
-
 
 log "Pro Tip:"
 echo ""

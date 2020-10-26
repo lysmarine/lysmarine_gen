@@ -34,9 +34,6 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install \
 docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
     "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./raspbian.sh "
 
-docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
-    cd /lysmarine; export LMBUILD="raspbian"; ./build.sh
-
 pwd
 ls
 
