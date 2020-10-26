@@ -55,7 +55,7 @@ EOF
   umountImageFile $thisArch ./work/$thisArch/$imageName
 
   # Renaming the OS and moving it to the release folder.
-  cp -v ./work/$thisArch/$imageName  ./release/$thisArch/LysMarine_$thisArch-0.9.0.img
+  cp -v ./work/$thisArch/$imageName  ./release/$thisArch/LysMarine-${thisArch}-${cpuArch}_0.9.0.img
 
   log "Pro Tip:"
   echo ""
