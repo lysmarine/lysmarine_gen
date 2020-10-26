@@ -82,8 +82,8 @@ echo "";echo "";
 ls -l /run
 
 MK_ROOT=work/${thisArch}/rootfs
-mkdir -p ./cache/${thisArch}/stageCache
-mkdir -p /run/shm
+mkdir -p ./cache/${thisArch}/stageCache; mkdir -p $MK_ROOT/lysmarine/stageCache
+mkdir -p /run/shm; mkdir -p $MK_ROOT/run/shm
 mount -o bind /etc/resolv.conf $MK_ROOT/etc/resolv.conf
 mount -o bind /dev $MK_ROOT/dev
 mount -o bind /sys $MK_ROOT/sys
