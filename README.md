@@ -16,43 +16,6 @@ might need some tweaks to build correctly.
 __If you wish to have your favorite SBC supported and have some time to do testing ...or have a spare to giveaway. 
 Open a github issue or contact me on facebook https://fb.me.com/lysmarineOS/__
 
-# Cross-build on a host machine
-
-lysmarine-gen have been develop to build on a linux mint host and have been tested on debian.
-
-#### Install Dependencies
-``` 
-apt install proot qemu qemu-user git live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
-```
-
-#### Install lysmarine-gen 
-```
-git clone https://github.com/bareboat-necessities/lysmarine_gen.git
-cd ./lysmarine_gen/cross-build-release
-sudo chmod -v u+w *.sh
-```
-
-#### Setup the cross-build environement and get in it 
-```
-cd ./lysmarine_gen/cross-build-release
-sudo ./raspbian.sh #or the build script available you would like
-```
-
-#### Once in the chroot environement, launch lysmarine build script
-```
-cd /lysmarine; export LMBUILD="raspbian"; ./install.sh
-```
-
-When starting the build script, it's possible to build only a list of specified stages
-by providing arguments to build.sh
-  
-Example, to build the minimal GUI :
-``` 
-./install.sh 10 15 18 20 50 55 60 98
-```
-When the script is done, you need to `exit;` The resulting image will be 
-located in `./lysmarine_gen/cross-build-release/release/`
-
 # Build directly on the single board computer
 
 #### Dependencies
@@ -62,12 +25,11 @@ apt install git
 #### Launch the build script
 As root:
 ```
-git clone https://github.com/lysmarine/lysmarine_gen.git
-mv lysmarine_gen/lysmarine /lysmarine
+git clone https://github.com/bareboat-necessities/lysmarine_gen.git
+mv lysmarine_gen/install-scripts /lysmarine
 cd /lysmarine; export LMBUILD="raspbian"; ./install.sh
 ```
 When the build script is done, you need to reboot. As few things are configured on the first boot. 
-
 
 # Contributors & Testers
 
@@ -77,7 +39,6 @@ making a Pull Request.
 
 I'm friendly to first time contributors, if you are not sure what in mean to contribute to an opensource software
 or github scare you. Message me on facebook <https://fb.me.com/lysmarineOS/> (I speak English and French). 
-
 
 # License
 
