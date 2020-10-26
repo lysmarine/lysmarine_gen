@@ -66,7 +66,8 @@ echo "";echo "";
 
 
 # chroot into the
-proot -q qemu-arm \
+#proot -q qemu-arm \
+proot \
 	--root-id \
 	--rootfs=work/${thisArch}/rootfs \
 	--cwd=/ \
