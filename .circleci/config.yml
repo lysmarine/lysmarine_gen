@@ -37,19 +37,9 @@ jobs:
       - EMU=on
     steps:
       - do-all
-  build-raspbian-buster-arm32:
-    executor: boot-linux
-    environment:
-      - DOCKER_IMAGE=jongough/raspbian-buster:plugin_build_tooling_current
-      - CONTAINER_DISTRO=raspbian-buster
-      - PKG_RELEASE=buster
-      - PKG_DISTRO=raspbian
-      - EMU=on
-    steps:
-      - do-all
 workflows:
   version: 2
   build_all:
     jobs:
       - build-debian-buster-arm32
-      - build-raspbian-buster-arm32
+
