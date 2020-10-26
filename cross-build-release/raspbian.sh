@@ -67,20 +67,20 @@ echo "";echo "";
 
 # chroot into the
 #proot -q qemu-arm \
-proot \
-	--root-id \
-	--rootfs=work/${thisArch}/rootfs \
-	--cwd=/ \
-	--mount=/etc/resolv.conf:/etc/resolv.conf \
-	--mount=/dev:/dev \
-	--mount=/sys:/sys \
-	--mount=/proc:/proc \
-	--mount=/tmp:/tmp \
-	--mount=./cache/$thisArch/stageCache:/lysmarine/stageCache \
-	--mount=/run/shm:/run/shm \
-	/bin/bash
+#	--root-id \
+#	--rootfs=work/${thisArch}/rootfs \
+#	--cwd=/ \
+#	--mount=/etc/resolv.conf:/etc/resolv.conf \
+#	--mount=/dev:/dev \
+#	--mount=/sys:/sys \
+#	--mount=/proc:/proc \
+#	--mount=/tmp:/tmp \
+#	--mount=./cache/$thisArch/stageCache:/lysmarine/stageCache \
+#	--mount=/run/shm:/run/shm \
+#	/bin/bash
 
-
+mount -o bind ./cache/$thisArch/stageCache /lysmarine/stageCache
+chroot work/${thisArch}/rootfs /bin/bash
 
 # Unmount
 umountImageFile $thisArch ./work/$thisArch/$imageName
