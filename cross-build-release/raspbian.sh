@@ -36,6 +36,8 @@
   addLysmarineScripts $thisArch
 
   ls -l /run
+  ls -l lysmarine
+  ls -l $thisArch
 
   MK_ROOT=work/${thisArch}/rootfs
   mkdir -p ./cache/${thisArch}/stageCache; mkdir -p $MK_ROOT/lysmarine/stageCache
