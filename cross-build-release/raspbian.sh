@@ -2,68 +2,45 @@
 {
 source lib.sh
 
+myCpuArch=$1
 thisArch="raspbian"
-imageSource="https://downloads.raspberrypi.org/raspbian_lite_latest"
-zipName="raspbian_lite_latest"
-imageName="2020-02-13-raspbian-buster-lite.img"
+cpuArch="armhf"
+if [ "arm64" == "$myCpuArch" ]; then
+  cpuArch="arm64"
+fi
+zipName="raspios_lite_${cpuArch}_latest"
+imageSource="https://downloads.raspberrypi.org/${zipName}"
 
-
-
-checkRoot ;
-
-
+checkRoot
 
 # Create caching folder hierarchy to work with this architecture.
 setupWorkSpace $thisArch
 
-
-
-# Download or copy the official image from cache
-if [ ! -f ./cache/$thisArch/$imageName ]; then
-	log "Downloading official image from internet."
-	wget -P ./cache/$thisArch/  $imageSource
-	7z e -o./cache/$thisArch/   ./cache/$thisArch/$zipName
-	rm ./cache/$thisArch/$zipName
-
-else
-	log "Using official image from cache."
-
-fi
-
-
+# Download the official image
+log "Downloading official image from internet."
+wget -P ./cache/$thisArch/ $imageSource
+7z e -o./cache/$thisArch/ ./cache/$thisArch/$zipName
+rm ./cache/$thisArch/$zipName
 
 # Copy image file to work folder add temporary space to it.
-inflateImage $thisArch ./cache/$thisArch/$imageName ;
-
-
+imageName=$(cd ./cache/$thisArch; ls *.img; cd ../../)
+inflateImage $thisArch ./cache/$thisArch/$imageName
 
 # copy ready image from cache to the work dir
 cp -fv ./cache/$thisArch/$imageName-inflated ./work/$thisArch/$imageName
 
-
-
 # Mount the image and make the binds required to chroot.
 mountImageFile $thisArch ./work/$thisArch/$imageName
-
-
 
 # Copy the lysmarine and origine OS config files in the mounted rootfs
 addLysmarineScripts $thisArch
 
-
-
 # Display build tips
-echo "";echo "";echo "";echo "";echo "";
-echo "========================================================================="
-echo "You are now in the chroot environement.";
-echo "Start the build script with by pasting one of the following line in the terminal:";
-echo "";
+echo "You are now in the chroot environement."
+echo "Start the build script with by pasting one of the following line in the terminal:"
 echo "cd /lysmarine; ./install.sh 1 2 3 4 5 6 7 86 9"
-echo "cd /lysmarine; ./install.sh ";
-echo "========================================================================="
-echo "";echo "";
-
-
+echo "cd /lysmarine; ./install.sh "
+echo ""
 
 # chroot into the
 #proot -q qemu-arm \
