@@ -80,6 +80,7 @@ echo "";echo "";
 #	/bin/bash
 
 MK_ROOT=work/${thisArch}/rootfs
+mount -o bind /etc/resolv.conf $MK_ROOT/etc/resolv.conf
 mount -o bind /dev $MK_ROOT/dev
 mount -o bind /sys $MK_ROOT/sys
 mount -o bind /proc $MK_ROOT/proc
