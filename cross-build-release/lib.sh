@@ -97,28 +97,28 @@ umountImageFile () {
 inflateImage () {
 	thisArch=$1
 	imageLocation=$2
-	imageLocatioInflated=${imageLocation}-inflated
+	imageLocationInflated=${imageLocation}-inflated
 
-	if [ ! -f $imageLocatioInflated ]; then
+	if [ ! -f $imageLocationInflated ]; then
 		log "Inflating OS image to have enough space to build lysmarine. "
-		cp -fv ${imageLocation} $imageLocatioInflated
+		cp -fv ${imageLocation} $imageLocationInflated
 
 		log "truncate image to 7G"
-		truncate -s "7G" $imageLocatioInflated
+		truncate -s "7G" $imageLocationInflated
 
 		log "resize last partition to 100%"
-		partQty=$(fdisk -l $imageLocatioInflated | grep -o "^$imageLocatioInflated" | wc -l)
-		parted $imageLocatioInflated --script "resizepart $partQty 100%" ;
-		fdisk -l $imageLocatioInflated
+		partQty=$(fdisk -l $imageLocationInflated | grep -o "^$imageLocationInflated" | wc -l)
+		parted $imageLocationInflated --script "resizepart $partQty 100%" ;
+		fdisk -l $imageLocationInflated
 
 		log "Resize the filesystem to fit the partition."
-		loopId=$(kpartx -sav $imageLocatioInflated | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
+		loopId=$(kpartx -sav $imageLocationInflated | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 		sleep 5
 		ls -l /dev/mapper/
 
 		e2fsck -f /dev/mapper/loop${loopId}p$partQty
 		resize2fs /dev/mapper/loop${loopId}p$partQty
-		kpartx -d $imageLocatioInflated
+		kpartx -d $imageLocationInflated
 	else
 		log "Using Ready to build image from cache"
 	fi
