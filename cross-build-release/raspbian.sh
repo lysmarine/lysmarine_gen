@@ -79,7 +79,13 @@ echo "";echo "";
 #	--mount=/run/shm:/run/shm \
 #	/bin/bash
 
-mount -o bind ./cache/$thisArch/stageCache /lysmarine/stageCache
+MK_ROOT=work/${thisArch}/rootfs
+mount -o bind /dev $MK_ROOT/dev
+mount -o bind /sys $MK_ROOT/sys
+mount -o bind /proc $MK_ROOT/proc
+mount -o bind /tmp $MK_ROOT/tmp
+mount -o bind /run/shm $MK_ROOT/run/shm
+mount -o bind /lysmarine/stageCache ./cache/$thisArch/stageCache
 chroot work/${thisArch}/rootfs /bin/bash
 
 # Unmount
