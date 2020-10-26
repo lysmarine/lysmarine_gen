@@ -84,14 +84,15 @@ umountImageFile () {
 	log "un-Mounting"
 	thisArch=$1
 	imageFile=$2
+	ROOT_FS=./work/${thisArch}/rootfs
 
-	rm -rf ./work/${thisArch}/rootfs/home/border
-	rm -rf ./work/${thisArch}/rootfs/lysmarine
-	rm -rf ./work/${thisArch}/rootfs/var/log/*
-	rm -rf ./work/${thisArch}/rootfs/tmp/*
+	rm -rf $ROOT_FS/home/border
+	rm -rf $ROOT_FS/lysmarine
+	rm -rf $ROOT_FS/var/log/*
+	rm -rf $ROOT_FS/tmp/*
 
-	umount ./work/${thisArch}/rootfs/boot
-	umount ./work/${thisArch}/rootfs
+	umount $ROOT_FS/boot
+	umount $ROOT_FS
 	kpartx -d $imageFile
 }
 
