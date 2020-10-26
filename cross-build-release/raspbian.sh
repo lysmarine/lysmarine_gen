@@ -92,7 +92,7 @@ mount -o bind /tmp $MK_ROOT/tmp
 mount --rbind ./cache/$thisArch/stageCache $MK_ROOT/lysmarine/stageCache
 mount --rbind /run/shm $MK_ROOT/run/shm
 chroot work/${thisArch}/rootfs /bin/bash -xe << EOF > /tmp/lysmarine-mk-image.log
-  set -x; set -e; cd /lysmarine; export LMBUILD="raspbian"; ls; chmod +x *.sh; ./build.sh; exit
+  set -x; set -e; cd /lysmarine; export LMBUILD="raspbian"; ls; chmod +x *.sh; ./install.sh; exit
 EOF
 
 # Unmount
