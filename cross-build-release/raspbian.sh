@@ -35,13 +35,6 @@
   # Copy the lysmarine and origine OS config files in the mounted rootfs
   addLysmarineScripts $thisArch
 
-  # Display build tips
-  echo "You are now in the chroot environement."
-  echo "Start the build script with by pasting one of the following line in the terminal:"
-  echo "cd /lysmarine; ./install.sh 1 2 3 4 5 6 7 86 9"
-  echo "cd /lysmarine; ./install.sh "
-  echo ""
-
   ls -l /run
 
   MK_ROOT=work/${thisArch}/rootfs
