@@ -6,7 +6,7 @@ executors:
   boot-linux:
     machine:
       enabled: true
-      image: ubuntu-2004:202010-01
+      image: ubuntu-1604:202010-01
 commands:
   git-checkout:
     steps:
@@ -21,32 +21,32 @@ commands:
           no_output_timeout: 30m
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
-      - run: .circleci/publish-cloudsmith.sh bbn-projects/bbn-repo ${PKG_DISTRO}
+      - run: .circleci/publish-cloudsmith.sh bbn-projects/bbn-repo ${PKG_DISTRO}/${PKG_RELEASE}
+  do-all:
+    steps:
+      - git-checkout
+      - build-n-publish-debian
 jobs:
   build-raspbian-buster-arm32:
     executor: boot-linux
     environment:
       - DOCKER_IMAGE=jongough/raspbian-buster:plugin_build_tooling_current
       - CONTAINER_DISTRO=raspbian-buster
+      - PKG_RELEASE=buster
       - PKG_DISTRO=raspbian
-      - PKG_ARCH=armhf
-      - PRG_REPO=bbn-projects/bbn-repo/deb/raspbian/pool/buster
       - EMU=on
     steps:
-      - git-checkout
-      - build-n-publish
+      - do-all
   build-debian-buster-arm32:
     executor: boot-linux
     environment:
       - DOCKER_IMAGE=arm32v7/debian:buster
       - CONTAINER_DISTRO=debian:buster
-      - PKG_DISTRO=debian/buster
-      - PKG_ARCH=armhf
-      - PRG_REPO=bbn-projects/bbn-repo/deb/raspbian/pool/buster
+      - PKG_RELEASE=buster
+      - PKG_DISTRO=debian
       - EMU=on
     steps:
-      - git-checkout
-      - build-n-publish
+      - do-all
 workflows:
   version: 2
   build_all:
