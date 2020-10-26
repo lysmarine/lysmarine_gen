@@ -27,7 +27,7 @@ apt install proot qemu qemu-user git live-build kpartx p7zip p7zip-full parted e
 
 #### Install lysmarine-gen 
 ```
-git clone https://github.com/lysmarine/lysmarine_gen.git
+git clone https://github.com/bareboat-necessities/lysmarine_gen.git
 cd ./lysmarine_gen/cross-build-release
 sudo chmod -v u+w *.sh
 ```
