@@ -42,7 +42,7 @@ sudo ./raspbian.sh #or the build script available you would like
 
 #### Once in the chroot environement, launch lysmarine build script
 ```
-cd /lysmarine; export LMBUILD="raspbian"; ./build.sh
+cd /lysmarine; export LMBUILD="raspbian"; ./install.sh
 ```
 
 When starting the build script, it's possible to build only a list of specified stages
@@ -50,7 +50,7 @@ by providing arguments to build.sh
   
 Example, to build the minimal GUI :
 ``` 
-./build.sh 10 15 18 20 50 55 60 98
+./install.sh 10 15 18 20 50 55 60 98
 ```
 When the script is done, you need to `exit;` The resulting image will be 
 located in `./lysmarine_gen/cross-build-release/release/`
@@ -66,7 +66,7 @@ As root:
 ```
 git clone https://github.com/lysmarine/lysmarine_gen.git
 mv lysmarine_gen/lysmarine /lysmarine
-cd /lysmarine; export LMBUILD="raspbian"; ./build.sh
+cd /lysmarine; export LMBUILD="raspbian"; ./install.sh
 ```
 When the build script is done, you need to reboot. As few things are configured on the first boot. 
 
