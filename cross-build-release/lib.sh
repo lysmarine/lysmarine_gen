@@ -89,35 +89,36 @@ umountImageFile () {
 	rm -rf ./work/${thisArch}/rootfs/var/log/*
 	rm -rf ./work/${thisArch}/rootfs/tmp/*
 
-	umount ./work/$thisArch/rootfs/boot
-	umount ./work/$thisArch/rootfs
+	umount ./work/${thisArch}/rootfs/boot
+	umount ./work/${thisArch}/rootfs
 	kpartx -d $imageFile
 }
 
 inflateImage () {
 	thisArch=$1
 	imageLocation=$2
+	imageLocatioInflated=${imageLocation}-inflated
 
-	if [ ! -f $imageLocation-inflated ]; then
+	if [ ! -f $imageLocatioInflated ]; then
 		log "Inflating OS image to have enough space to build lysmarine. "
-		cp -fv $imageLocation $imageLocation-inflated
+		cp -fv ${imageLocation} $imageLocatioInflated
 
 		log "truncate image to 7G"
-		truncate -s "7G" $imageLocation-inflated
+		truncate -s "7G" $imageLocatioInflated
 
 		log "resize last partition to 100%"
-		partQty=$(fdisk -l $imageLocation-inflated | grep -o "^$imageLocation-inflated" | wc -l)
-		parted $imageLocation-inflated --script "resizepart $partQty 100%" ;
-		fdisk -l $imageLocation-inflated
+		partQty=$(fdisk -l $imageLocatioInflated | grep -o "^$imageLocatioInflated" | wc -l)
+		parted $imageLocatioInflated --script "resizepart $partQty 100%" ;
+		fdisk -l $imageLocatioInflated
 
 		log "Resize the filesystem to fit the partition."
-		loopId=$(kpartx -sav $imageLocation-inflated | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
+		loopId=$(kpartx -sav $imageLocatioInflated | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 		sleep 5
 		ls -l /dev/mapper/
 
 		e2fsck -f /dev/mapper/loop${loopId}p$partQty
 		resize2fs /dev/mapper/loop${loopId}p$partQty
-		kpartx -d $imageLocation-inflated
+		kpartx -d $imageLocatioInflated
 	else
 		log "Using Ready to build image from cache"
 	fi
