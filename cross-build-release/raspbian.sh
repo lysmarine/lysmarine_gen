@@ -18,16 +18,17 @@
 
   # Download the official image
   log "Downloading official image from internet."
-  wget -P ./cache/$thisArch/ $imageSource
-  7z e -o./cache/$thisArch/ ./cache/$thisArch/$zipName
-  rm ./cache/$thisArch/$zipName
+  myCache=./cache/$thisArch
+  wget -P $myCache/ $imageSource
+  7z e -o$myCache/ $myCache/$zipName
+  rm $myCache/$zipName
 
   # Copy image file to work folder add temporary space to it.
-  imageName=$(cd ./cache/$thisArch; ls *.img; cd ../../)
-  inflateImage $thisArch ./cache/$thisArch/$imageName
+  imageName=$(cd $myCache; ls *.img; cd ../../)
+  inflateImage $thisArch $myCache/$imageName
 
   # copy ready image from cache to the work dir
-  cp -fv ./cache/$thisArch/$imageName-inflated ./work/$thisArch/$imageName
+  cp -fv $myCache/$imageName-inflated ./work/$thisArch/$imageName
 
   # Mount the image and make the binds required to chroot.
   mountImageFile $thisArch ./work/$thisArch/$imageName
@@ -47,7 +48,7 @@
   mount -o bind /sys $MK_ROOT/sys
   mount -o bind /proc $MK_ROOT/proc
   mount -o bind /tmp $MK_ROOT/tmp
-  mount --rbind ./cache/$thisArch/stageCache $MK_ROOT/lysmarine/stageCache
+  mount --rbind $myCache/stageCache $MK_ROOT/lysmarine/stageCache
   mount --rbind /run/shm $MK_ROOT/run/shm
   chroot work/${thisArch}/rootfs /bin/bash -xe << EOF > /tmp/lysmarine-mk-image.log
     set -x; set -e; cd /lysmarine; export LMBUILD="raspbian"; ls; chmod +x *.sh; ./install.sh; exit
@@ -61,7 +62,7 @@ EOF
 
   log "Pro Tip:"
   echo ""
-  echo "sudo cp -v ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ./cache/$thisArch/$imageName-inflated"
+  echo "sudo cp -v ./release/$thisArch/LysMarine_$thisArch-0.9.0.img $myCache/$imageName-inflated"
   echo ""
   echo "sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
   echo ""
