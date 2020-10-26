@@ -11,6 +11,7 @@ commands:
   git-checkout:
     steps:
       - checkout
+      - run: mv install-scripts lysmarine
   build-n-publish-debian:
     steps:
       - run: sudo apt-get -y install wget
