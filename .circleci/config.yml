@@ -11,7 +11,7 @@ commands:
   git-checkout:
     steps:
       - checkout
-  build-n-publish:
+  build-n-publish-debian:
     steps:
       - run: sudo apt-get -y install wget
       - run: chmod a+x .circleci/*.sh
