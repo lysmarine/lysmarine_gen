@@ -131,18 +131,17 @@ inflateImage () {
 		fdisk -l $imageLocation-inflated
 
 		log "Resize the filesystem to fit the partition."
-		losetup -a
-		availLoop=$(losetup -f)
-		ls -l $imageLocation-inflated
-
-		pwd
-		losetup $availLoop -P $imageLocation-inflated
+		#losetup -a
+		#availLoop=$(losetup -f)
+		#ls -l $imageLocation-inflated
+		#pwd
+		#losetup $availLoop -P $imageLocation-inflated
 		#losetup $availLoop /ci-source/cross-build-release/cache/raspbian/2020-02-13-raspbian-buster-lite.img-inflated
-    loopId=$(echo $availLoop | grep -oh '[0-9]*')
+    #loopId=$(echo $availLoop | grep -oh '[0-9]*')
 		#kpartx -sav $availLoop
-		kpartx -sav /ci-source/cross-build-release/cache/raspbian/2020-02-13-raspbian-buster-lite.img-inflated
-		#loopId=$(kpartx -sav $imageLocation-inflated | cut -d' ' -f3 | grep -oh '[0-9]*' | head -n 1)
-		losetup -a
+		#kpartx -sav /ci-source/cross-build-release/cache/raspbian/2020-02-13-raspbian-buster-lite.img-inflated
+		loopId=$(kpartx -sav $imageLocation-inflated | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
+		#losetup -a
 		sleep 5
 		ls -l /dev/mapper/
 
