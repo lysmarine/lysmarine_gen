@@ -31,7 +31,7 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev de
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install \
   proot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
 
-docker exec --privileged --security-opt="seccomp=unconfined" -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
+docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
     "update-alternatives --set fakeroot /usr/bin/fakeroot-tcp; cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./raspbian.sh "
 
 docker exec --privileged --security-opt="seccomp=unconfined" -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
