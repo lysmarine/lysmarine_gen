@@ -27,11 +27,12 @@ docker run --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti
 DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep $CONTAINER_DISTRO | awk '{print $1}')
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
+docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install \
   proot qemu qemu-user git live-build kpartx p7zip p7zip-full parted
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
-    "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./raspbian.sh "
+    "update-alternatives --set fakeroot /usr/bin/fakeroot-tcp; cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./raspbian.sh "
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
     cd /lysmarine; export LMBUILD="raspbian"; ./build.sh
