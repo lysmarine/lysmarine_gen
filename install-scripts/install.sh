@@ -3,10 +3,10 @@
 echo "Install script for Lysmarine :)"
 
 ## Check variable declaration
-if [[ -z $LMARCH ]];then
+if [[ -z $LMARCH ]]; then
   export LMARCH="$(dpkg --print-architecture)"
 fi
-echo "Architecture : $LMARCH"
+echo "Architecture: $LMARCH"
 
 if [[ -z $LMOS ]]; then
   if [ ! -f /usr/bin/lsb_release ]; then
@@ -14,7 +14,7 @@ if [[ -z $LMOS ]]; then
   fi
   export LMOS="$(lsb_release -id -s | head -1)"
 fi
-echo "Base OS : $LMOS"
+echo "Base OS: $LMOS"
 
 ## This makes less noise in cross-build environment.
 export LANG="en_US.UTF-8"
@@ -43,12 +43,8 @@ for argument in $argumentList; do # access each element of array
 	set +f
 	for scriptLocation in ./$stage*/$script*.sh; do
       if [ -f $scriptLocation ]; then
-        echo ''
-        echo '=========================================='
         echo "From request $argument "
         echo "Running stage $stage -> $script ( $scriptLocation )"
-        echo '=========================================='
-        echo ''
         export FILE_FOLDER=${scriptLocation%/*}/files/
         $scriptLocation 2>&1 | tee "logs/$stage.$script.log"
         [[ ${PIPESTATUS[0]} -ne 0 ]] && exit
@@ -57,4 +53,3 @@ for argument in $argumentList; do # access each element of array
 done
 
 echo "Done Installing script for Lysmarine $ARCH :)"
-
