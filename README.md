@@ -8,9 +8,7 @@ The ready to use image can be found at <http://lysmarineos.com>
 Since version 0.9.X lysmarine now have it's custom build tool to be able to compile for multiple single boards computer.
 
 At this time, The tested SBCs are :
- - RaspberryPi 3 
- - PineA64 LTS (based on the Pine64so kernel)
- - virtualbox disk image
+ - RaspberryPi
 
 Others SBC related supported arch might work out of the box but haven't been tested, others 
 might need some tweaks to build correctly. 
@@ -24,7 +22,7 @@ lysmarine-gen have been develop to build on a linux mint host and have been test
 
 #### Install Dependencies
 ``` 
-apt install proot qemu qemu-user git live-build kpartx p7zip p7zip-full parted
+apt install proot qemu qemu-user git live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
 ```
 
 #### Install lysmarine-gen 
