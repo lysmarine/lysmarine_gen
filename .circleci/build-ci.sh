@@ -29,7 +29,7 @@ DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep $CONTAINER_DISTRO | awk '{print 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install \
-  proot git live-build kpartx p7zip p7zip-full parted
+  proot git-core live-build kpartx p7zip p7zip-full parted
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
     "update-alternatives --set fakeroot /usr/bin/fakeroot-tcp; cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./raspbian.sh "
