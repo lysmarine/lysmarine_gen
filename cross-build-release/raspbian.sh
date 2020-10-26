@@ -82,6 +82,7 @@ echo "";echo "";
 ls -l /run
 
 MK_ROOT=work/${thisArch}/rootfs
+mkdir -p ./cache/raspbian/stageCache
 mount -o bind /etc/resolv.conf $MK_ROOT/etc/resolv.conf
 mount -o bind /dev $MK_ROOT/dev
 mount -o bind /sys $MK_ROOT/sys
