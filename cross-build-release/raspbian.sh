@@ -1,6 +1,7 @@
 #!/bin/bash -xe
 {
   source lib.sh
+  LYSMARINE_VER=0.9.0.1
 
   myCpuArch=$1
   thisArch="raspbian"
@@ -58,9 +59,7 @@ EOF
   umountImageFile $thisArch ./work/$thisArch/$imageName
 
   # Renaming the OS and moving it to the release folder.
-  cp -v ./work/$thisArch/$imageName  ./release/$thisArch/LysMarine_0.9.0-${thisArch}-${cpuArch}.img
+  cp -v ./work/$thisArch/$imageName  ./release/$thisArch/LysMarine_${LYSMARINE_VER}-${thisArch}-${cpuArch}.img
 
-  echo "sudo cp -v ./release/$thisArch/LysMarine_$thisArch-0.9.0.img $myCache/$imageName-inflated"
-  echo "sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
   exit 0
 }
