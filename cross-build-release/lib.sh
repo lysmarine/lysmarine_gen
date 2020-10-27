@@ -110,6 +110,7 @@ function addLysmarineScripts {
 	log "copying lysmarine on the image"
 	pwd
 	ls
+	ls work
 	cp -r ./install-scripts ${rootfs}/
 	chmod 0775 ${rootfs}/install-scripts/install.sh
 }
