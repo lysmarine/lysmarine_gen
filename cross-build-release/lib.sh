@@ -128,8 +128,9 @@ inflateImage () {
 
 function addLysmarineScripts {
 	thisArch=$1
+	rootfs=./work/${thisArch}/rootfs
 	log "copying lysmarine on the image"
-	mkdir -p ./work/$thisArch/rootfs/install-scripts
-	cp -r ../install-scripts ./work/$thisArch/rootfs/
-	chmod 0775 ./work/$thisArch/rootfs/install-scripts/install.sh
+	mkdir -p ${rootfs}/install-scripts
+	cp -r ../install-scripts ${rootfs}/
+	chmod 0775 ${rootfs}/install-scripts/install.sh
 }
