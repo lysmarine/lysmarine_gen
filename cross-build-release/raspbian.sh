@@ -37,11 +37,10 @@
 
   # Copy the lysmarine and origine OS config files in the mounted rootfs
   addLysmarineScripts $thisArch
-
-  ls -l /run
-  ls -l install-scripts
-
+  
   MK_ROOT=work/${thisArch}/rootfs
+  ls -l $MK_ROOT
+
   mkdir -p ./cache/${thisArch}/stageCache; mkdir -p $MK_ROOT/install-scripts/stageCache
   mkdir -p /run/shm; mkdir -p $MK_ROOT/run/shm
   mount -o bind /etc/resolv.conf $MK_ROOT/etc/resolv.conf
