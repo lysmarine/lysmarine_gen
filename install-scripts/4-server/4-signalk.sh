@@ -52,4 +52,3 @@ echo "signalk ALL=(ALL) NOPASSWD: /bin/date" >> /etc/sudoers
 
 ## Make some space on the drive for the next stages
 npm clean cache --force
-rm -r /tmp/npm-*
