@@ -64,7 +64,8 @@ umountImageFile () {
 	rootfs=./work/${thisArch}/rootfs
 
 	rm -rf $rootfs/home/border
-	rm -rf $rootfs/install-scripts
+	rm -rf $rootfs/install-scripts/stageCache/*
+	rm -rf $rootfs/install-scripts/logs/*
 	rm -rf $rootfs/var/log/*
 	rm -rf $rootfs/tmp/*
 
