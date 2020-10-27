@@ -52,7 +52,7 @@
   mount --rbind $myCache/stageCache $MK_ROOT/install-scripts/stageCache
   mount --rbind /run/shm $MK_ROOT/run/shm
   chroot work/${thisArch}/rootfs /bin/bash -xe << EOF > /tmp/lysmarine-mk-image.log
-    set -x; set -e; cd /install-scripts; export LMBUILD="raspbian"; ls; chmod +x *.sh; ./install.sh; exit
+    set -x; set -e; cd /install-scripts; export LMBUILD="raspios"; ls; chmod +x *.sh; ./install.sh; exit
 EOF
 
   # Unmount
