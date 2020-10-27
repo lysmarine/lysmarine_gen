@@ -1,9 +1,10 @@
 #!/bin/bash -xe
 {
   source lib.sh
-  LYSMARINE_VER=0.9.0.1
 
   myCpuArch=$1
+  LYSMARINE_VER=$2
+
   thisArch="raspbian"
   cpuArch="armhf"
   if [ "arm64" == "$myCpuArch" ]; then

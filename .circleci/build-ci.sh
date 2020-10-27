@@ -22,6 +22,7 @@ if [ "$EMU" = "on" ]; then
 fi
 
 WORK_DIR=$(pwd):/ci-source
+LYSMARINE_VER=0.9.0.1
 
 docker run --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker"  -v $WORK_DIR:rw $DOCKER_IMAGE /bin/bash
 DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep $CONTAINER_DISTRO | awk '{print $1}')
@@ -32,7 +33,7 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install \
   proot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
-    "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./raspbian.sh $PKG_ARCH"
+    "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER"
 
 pwd
 ls
