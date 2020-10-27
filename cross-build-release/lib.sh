@@ -38,9 +38,8 @@ mountImageFile () {
 	fi
 
 	# Mount the image and make the binds required to chroot.
-	IFS=$'\n' #to split lines into array
 	partitions=$(kpartx -sav $imageFile |  cut -d' ' -f3)
-	partQty=${#partitions[@]}
+	partQty=$(wc -l $partitions)
 	echo $partQty partitions detected.
 
 	# mount partition table in /dev/loop
