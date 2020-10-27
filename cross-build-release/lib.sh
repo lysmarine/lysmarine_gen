@@ -26,12 +26,13 @@ checkRoot () {
 mountImageFile () {
 	thisArch=$1
 	imageFile=$2
-
+	rootfs=./work/${thisArch}/rootfs
+	
 	log "Mounting Image File"
 
 	## Make sure it's not already mounted
-	if [ -n "$(ls -A ./work/$thisArch/rootfs)" ]; then
-		logErr "./work/$thisArch/rootfs is not empty. Previous failure to unmount?"
+	if [ -n "$(ls -A $rootfs)" ]; then
+		logErr "$rootfs is not empty. Previous failure to unmount?"
 		umountImageFile $1 $2
 		exit
 	fi
@@ -46,11 +47,11 @@ mountImageFile () {
 	loopId=$(kpartx -sav $imageFile |  cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 
 	if [ $partQty == 2 ]; then
-		mount -v /dev/mapper/loop${loopId}p2 ./work/$thisArch/rootfs/
-		if [ ! -d ./work/$thisArch/rootfs/boot ]; then mkdir ./work/$thisArch/rootfs/boot; fi
-		mount -v /dev/mapper/loop${loopId}p1 ./work/$thisArch/rootfs/boot/
+		mount -v /dev/mapper/loop${loopId}p2 $rootfs/
+		if [ ! -d $rootfs/boot ]; then mkdir $rootfs/boot; fi
+		mount -v /dev/mapper/loop${loopId}p1 $rootfs/boot/
 	elif [ $partQty == 1 ]; then
-		mount -v /dev/mapper/loop${loopId}p1 ./work/$thisArch/rootfs/
+		mount -v /dev/mapper/loop${loopId}p1 $rootfs/
 	else
 		log "ERROR: unsuported amount of partitions."
 		exit 1
