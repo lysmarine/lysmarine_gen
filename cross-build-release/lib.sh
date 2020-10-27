@@ -108,11 +108,7 @@ function addLysmarineScripts {
 	thisArch=$1
 	rootfs=./work/${thisArch}/rootfs
 	log "copying lysmarine on the image"
-	pwd
-	ls
-	ls work
-	ls work/raspios/rootfs
-
+	ls $rootfs
 	cp -r ./install-scripts ${rootfs}/
 	chmod 0775 ${rootfs}/install-scripts/install.sh
 }
