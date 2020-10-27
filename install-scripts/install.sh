@@ -1,4 +1,4 @@
-#! /bin/bash -e
+#! /bin/bash -xe
 
 echo "Install script for Lysmarine :)"
 
@@ -42,13 +42,13 @@ for argument in $argumentList; do # access each element of array
 
 	set +f
 	for scriptLocation in ./$stage*/$script*.sh; do
-      if [ -f $scriptLocation ]; then
-        echo "From request $argument "
-        echo "Running stage $stage -> $script ( $scriptLocation )"
-        export FILE_FOLDER=${scriptLocation%/*}/files/
-        $scriptLocation 2>&1 | tee "logs/$stage.$script.log"
-        [[ ${PIPESTATUS[0]} -ne 0 ]] && exit
-      fi
+    if [ -f $scriptLocation ]; then
+      echo "From request $argument "
+      echo "Running stage $stage -> $script ( $scriptLocation )"
+      export FILE_FOLDER=${scriptLocation%/*}/files/
+      $scriptLocation 2>&1 | tee "logs/$stage.$script.log"
+      [[ ${PIPESTATUS[0]} -ne 0 ]] && exit
+    fi
   done
 done
 
