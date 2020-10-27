@@ -40,7 +40,6 @@
 
   ls -l /run
   ls -l install-scripts
-  ls -l $thisArch
 
   MK_ROOT=work/${thisArch}/rootfs
   mkdir -p ./cache/${thisArch}/stageCache; mkdir -p $MK_ROOT/install-scripts/stageCache
