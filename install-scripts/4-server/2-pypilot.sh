@@ -1,6 +1,6 @@
 #!/bin/bash -e
 apt-get install -y -q git
-## this stage depend on stage 18-users for the pypilot user creation
+## this stage depends on stage 18-users for the pypilot user creation
 ## adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
 
 # Op way
@@ -23,6 +23,7 @@ pushd ./stageCache
 	echo "Build and install RTIMULib2"
 	pushd ./RTIMULib2/Linux/python
 		python3 setup.py install
+		python3 setup.py clean --all
 	popd
 
 	echo "Get pypilot";
@@ -38,6 +39,7 @@ pushd ./stageCache
 	## Build and install pypilot
 	pushd ./pypilot
 		python3 setup.py install
+		python3 setup.py clean --all
 	popd
 popd
 
@@ -59,6 +61,6 @@ install -d /usr/local/share/applications
 install -v $FILE_FOLDER/pypilot_calibration.desktop "/usr/local/share/applications/"
 install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applications/" # Depend on stage 57-nativfier to build the app
 
-## Give permission to sudo chrt without password for the user pypilot.
+## Give permission to sudo chrt without a password for the user pypilot.
 echo "" >> /etc/sudoers
 echo 'pypilot ALL=(ALL) NOPASSWD: /usr/bin/chrt' >> /etc/sudoers
