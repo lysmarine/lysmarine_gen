@@ -69,6 +69,13 @@ umountImageFile () {
 	rm -rf $rootfs/var/log/*
 	rm -rf $rootfs/tmp/*
 
+  umount $rootfs/etc/resolv.conf
+  umount $rootfs/dev
+  umount $rootfs/sys
+  umount $rootfs/proc
+  umount $rootfs/tmp
+  umount $rootfs/install-scripts/stageCache
+  umount $rootfs/run/shm
 	umount $rootfs/boot
 	umount $rootfs
 	kpartx -d $imageFile
