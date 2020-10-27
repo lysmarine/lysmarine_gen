@@ -6,6 +6,9 @@ EXT=$1
 REPO=$2
 DISTRO=$3
 
+pwd
+ls
+
 for pkg_file in cross-build-release/release/*/*.img; do
   cloudsmith push raw $REPO/$DISTRO $pkg_file  --summary "LysMarine built by CircleCi on $(date)" --description "LysMarine BBN build"
   RESULT=$?
