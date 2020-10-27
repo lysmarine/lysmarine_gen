@@ -23,5 +23,5 @@ or github scare you. Message me on facebook <https://fb.me.com/lysmarineOS/> (I 
 
 # License
 
-Lysmarine scripts are distributed under GPLv3
+Lysmarine scripts distributed under GPLv3
 Copyright © 2020 Frederic Guilbault
