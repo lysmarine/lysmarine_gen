@@ -23,29 +23,6 @@ checkRoot () {
 	fi
 }
 
-# Validate cache or download all the needed scripts from 3rd partys
-get3rdPartyAssets () {
-	true
-}
-
-createEmptyImageFile () {
-	if [ ! -f ./cache/emptyImage.img ]; then
-		log "Create empty image file with qemu"
-		emptyImg=./cache/emptyImage.img
-		qemu-img create -f raw $emptyImg 7G
-		echo -e "o\nn\np\n1\n2048\n+300M\nn\np\n2\n\n\na\n1\nw\n" | fdisk $emptyImg
-
-		loopId=$(kpartx -sav $emptyImg |  cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
-
-		mkfs.fat -n boot -F 32 /dev/mapper/loop${loopId}p1
-		mkfs.ext4 /dev/mapper/loop${loopId}p2
-
-		kpartx -d $emptyImg
-	else
-		log "Using empty image from cache"
-	fi
-}
-
 mountImageFile () {
 	thisArch=$1
 	imageFile=$2
