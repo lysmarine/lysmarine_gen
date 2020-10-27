@@ -111,6 +111,8 @@ function addLysmarineScripts {
 	pwd
 	ls
 	ls work
+	ls work/raspios/rootfs
+
 	cp -r ./install-scripts ${rootfs}/
 	chmod 0775 ${rootfs}/install-scripts/install.sh
 }
