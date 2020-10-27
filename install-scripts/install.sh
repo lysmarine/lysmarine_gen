@@ -52,4 +52,4 @@ for argument in $argumentList; do # access each element of array
   done
 done
 
-echo "Done Installing script for Lysmarine $ARCH :)"
+echo "Done installing script for Lysmarine $ARCH :)"
