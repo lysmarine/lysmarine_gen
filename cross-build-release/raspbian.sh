@@ -50,7 +50,7 @@
   mount -o bind /tmp $mkRoot/tmp
   mount --rbind $myCache/stageCache $mkRoot/install-scripts/stageCache
   mount --rbind /run/shm $mkRoot/run/shm
-  chroot work/${thisArch}/rootfs /bin/bash -xe << EOF
+  chroot $mkRoot /bin/bash -xe << EOF
     set -x; set -e; cd /install-scripts; export LMBUILD="raspios"; ls; chmod +x *.sh; ./install.sh; exit
 EOF
 
