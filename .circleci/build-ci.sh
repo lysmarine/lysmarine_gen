@@ -37,6 +37,7 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
 
 pwd
 ls
+ls cross-build-release/release/*/*.img
 
 echo "Stopping"
 docker ps -a
