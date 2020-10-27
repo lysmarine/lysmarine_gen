@@ -43,7 +43,7 @@ mountImageFile () {
 	echo $partQty partitions detected.
 
 	# mount partition table in /dev/loop
-	loopId=$(echo $partitions | grep -oh '[0-9]*' | head -n 1)
+	loopId=$(kpartx -sav $imageFile |  cut -d' ' -f3 | grep -oh '[0-9]*' | head -n 1)
 
 	if [ $partQty == 2 ]; then
 		mount -v /dev/mapper/loop${loopId}p2 $rootfs/
