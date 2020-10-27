@@ -27,7 +27,7 @@ mountImageFile () {
 	thisArch=$1
 	imageFile=$2
 	rootfs=./work/${thisArch}/rootfs
-	
+
 	log "Mounting Image File"
 
 	## Make sure it's not already mounted
