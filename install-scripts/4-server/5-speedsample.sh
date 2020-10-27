@@ -1,6 +1,5 @@
 #!/bin/bash -e
 
-
 apt install -y nodejs libavahi-compat-libdnssd-dev python-dev libsqlite3-0 g++
 npm cache verify
 if [ ! id -u www-data >/dev/null 2>&1 ] ; then
@@ -11,7 +10,6 @@ if [ ! -d /var/www  ] ; then
 	mkdir /var/www
 	chown www-data:www-data /var/www
 fi
-
 
 pushd /var/www/
 git clone --depth=1 https://gitlab.com/FredericGuilbault/speedSample

@@ -5,12 +5,12 @@ apt-get install -y -q plymouth  plymouth-label;
 install -v -d "/etc/systemd/system/getty@tty1.service.d"
 install -v -m0644 $FILE_FOLDER/skip-prompt.conf "/etc/systemd/system/getty@tty1.service.d/"
 
-## Raspbian
+## RaspOS
 if [ -f /boot/config.txt  ] ;then
 	cat $FILE_FOLDER/appendToConfig.txt >> /boot/config.txt
 fi
 
-## Raspbian
+## RaspOS
 if [ -f /boot/cmdline.txt ] ; then
 	sed -i '$s/$/\ loglevel=1\ splash\ quiet\ logo.nologo\ vt.global_cursor_default=0\ plymouth.ignore-serial-consoles/' /boot/cmdline.txt
 fi

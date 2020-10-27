@@ -1,11 +1,7 @@
 #!/bin/bash
 
-
-
 ## Dependencys of signalk.
 apt-get install -y -q nodejs libavahi-compat-libdnssd-dev python-dev git
-
-
 
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk"
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk/plugin-config-data"
@@ -29,7 +25,6 @@ install    -m 644                       $FILE_FOLDER/signalk.socket  "/etc/syste
 
 systemctl enable signalk.service
 systemctl enable signalk.socket
-
 
 ## Install signalk
 npm install -g --unsafe-perm signalk-server

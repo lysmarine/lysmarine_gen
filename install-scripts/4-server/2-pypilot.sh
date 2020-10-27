@@ -12,7 +12,6 @@ pip3 install pywavefront pyglet gps gevent-websocket Flask-SocketIO python-socke
 
 ## je pense que la meilleur approche est de favoriser PIP pcq dean deploi sur tiny core et n'est pas interesser par debian. aussi pcq y'a du code pour arduino et que ca pourrais etre supporter par les dependances d'installation python
 
-
 #Lysmarine way
 ## Install apt deps
 #apt-get install -y -q python3 python3-pip libpython3-dev   #python3-dev libpython3-dev python3-dev
@@ -28,8 +27,6 @@ if [ $LMOS == 'Raspbian' ] ;then
 	apt-get install -y -q wiringpi
 fi
 
-
-
 pushd ./stageCache
 
 	## Install RTIMULib2 as it's a dependency of pypilot
@@ -40,7 +37,6 @@ pushd ./stageCache
 	pushd ./RTIMULib2/Linux/python
 		python3 setup.py install
 	popd
-
 
 	echo "Get pypilot";
 	if [[ ! -d ./pypilot ]]; then
@@ -59,10 +55,7 @@ pushd ./stageCache
 	pushd ./pypilot
 		python3 setup.py install
 	popd
-
 popd
-
-
 
 ## Install the service files
 install -v -m 0644 $FILE_FOLDER/pypilot@.service "/etc/systemd/system/"

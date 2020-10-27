@@ -2,9 +2,6 @@
   "interfaces": {},
   "ssl": false,
   "pipedProviders": [
-
-
-
     {
       "id": "ttyLYS_gps_0",
       "pipeElements": [
@@ -31,9 +28,6 @@
         }
       ]
     },
-
-
-
     {
       "id": "ttyLYS_gps_1",
       "pipeElements": [
@@ -60,9 +54,6 @@
         }
       ]
     },
-
-
-
     {
       "id": "ttyLYS_gps_2",
       "pipeElements": [
@@ -89,8 +80,6 @@
         }
       ]
     },
-
-
     {
       "id": "ttyLYS_gps_3",
       "pipeElements": [
@@ -117,8 +106,6 @@
         }
       ]
     },
-
-
     {
       "id": "ttyLYS_gps_4",
       "pipeElements": [
@@ -145,7 +132,6 @@
         }
       ]
     }
-
   ],
   "security": {
     "strategy": "./tokensecurity"
