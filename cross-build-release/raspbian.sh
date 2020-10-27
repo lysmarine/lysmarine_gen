@@ -5,7 +5,7 @@
   myCpuArch=$1
   LYSMARINE_VER=$2
 
-  thisArch="raspbian"
+  thisArch="raspOs"
   cpuArch="armhf"
   if [ "arm64" == "$myCpuArch" ]; then
     cpuArch="arm64"
