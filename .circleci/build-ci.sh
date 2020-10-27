@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash -xe
 
 #
 # Build for Debian in a docker container
