@@ -7,7 +7,7 @@ REPO=$2
 DISTRO=$3
 
 for pkg_file in cross-build-release/release/*/*.img; do
-  cloudsmith push raw $REPO/$DISTRO $pkg_file  --version VERSION --summary "LysMarine built by CircleCi on $(date)" --description "LysMarine BBN build"
+  cloudsmith push raw $REPO/$DISTRO $pkg_file  --summary "LysMarine built by CircleCi on $(date)" --description "LysMarine BBN build"
   RESULT=$?
   if [ $RESULT -eq 144 ]; then
      echo "skipping already deployed $pkg_file"
