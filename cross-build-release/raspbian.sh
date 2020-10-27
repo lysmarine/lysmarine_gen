@@ -2,12 +2,12 @@
 {
   source lib.sh
 
-  myCpuArch=$1
+  MY_CPU_ARCH=$1
   LYSMARINE_VER=$2
 
   thisArch="raspios"
   cpuArch="armhf"
-  if [ "arm64" == "$myCpuArch" ]; then
+  if [ "arm64" == "$MY_CPU_ARCH" ]; then
     cpuArch="arm64"
   fi
   zipName="raspios_lite_${cpuArch}_latest"
@@ -37,7 +37,7 @@
 
   # Copy the lysmarine and origine OS config files in the mounted rootfs
   addLysmarineScripts $thisArch
-  
+
   MK_ROOT=work/${thisArch}/rootfs
   ls -l $MK_ROOT
 
