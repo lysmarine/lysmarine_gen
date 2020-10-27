@@ -39,7 +39,7 @@ mountImageFile () {
 
 	# Mount the image and make the binds required to chroot.
 	partitions=$(kpartx -sav $imageFile |  cut -d' ' -f3)
-	partQty=$(echo $partitions | wc -l)
+	partQty=$(echo $partitions | wc -w)
 	echo $partQty partitions detected.
 
 	# mount partition table in /dev/loop
