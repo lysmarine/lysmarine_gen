@@ -38,18 +38,18 @@
   # Copy the lysmarine and origine OS config files in the mounted rootfs
   addLysmarineScripts $thisArch
 
-  MK_ROOT=work/${thisArch}/rootfs
-  ls -l $MK_ROOT
+  mkRoot=work/${thisArch}/rootfs
+  ls -l $mkRoot
 
-  mkdir -p ./cache/${thisArch}/stageCache; mkdir -p $MK_ROOT/install-scripts/stageCache
-  mkdir -p /run/shm; mkdir -p $MK_ROOT/run/shm
-  mount -o bind /etc/resolv.conf $MK_ROOT/etc/resolv.conf
-  mount -o bind /dev $MK_ROOT/dev
-  mount -o bind /sys $MK_ROOT/sys
-  mount -o bind /proc $MK_ROOT/proc
-  mount -o bind /tmp $MK_ROOT/tmp
-  mount --rbind $myCache/stageCache $MK_ROOT/install-scripts/stageCache
-  mount --rbind /run/shm $MK_ROOT/run/shm
+  mkdir -p ./cache/${thisArch}/stageCache; mkdir -p $mkRoot/install-scripts/stageCache
+  mkdir -p /run/shm; mkdir -p $mkRoot/run/shm
+  mount -o bind /etc/resolv.conf $mkRoot/etc/resolv.conf
+  mount -o bind /dev $mkRoot/dev
+  mount -o bind /sys $mkRoot/sys
+  mount -o bind /proc $mkRoot/proc
+  mount -o bind /tmp $mkRoot/tmp
+  mount --rbind $myCache/stageCache $mkRoot/install-scripts/stageCache
+  mount --rbind /run/shm $mkRoot/run/shm
   chroot work/${thisArch}/rootfs /bin/bash -xe << EOF > /tmp/lysmarine-mk-image.log
     set -x; set -e; cd /install-scripts; export LMBUILD="raspios"; ls; chmod +x *.sh; ./install.sh; exit
 EOF
