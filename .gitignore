@@ -2,7 +2,7 @@ cache
 work
 release
 dev
-lysmarine/log/*
-lysmarine/stageCache/*
+install-scripts/log/*
+install-scripts/stageCache/*
 .idea
 *.iml

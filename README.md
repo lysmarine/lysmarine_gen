@@ -26,8 +26,8 @@ apt install git
 As root:
 ```
 git clone https://github.com/bareboat-necessities/lysmarine_gen.git
-mv lysmarine_gen/install-scripts /lysmarine
-cd /lysmarine; export LMBUILD="raspbian"; ./install.sh
+mv lysmarine_gen/install-scripts /
+cd /install-scripts; export LMBUILD="raspbian"; ./install.sh
 ```
 When the build script is done, you need to reboot. As few things are configured on the first boot. 
 
