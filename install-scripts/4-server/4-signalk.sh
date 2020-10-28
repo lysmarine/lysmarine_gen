@@ -27,9 +27,9 @@ systemctl enable signalk.service
 systemctl enable signalk.socket
 
 ## Install signalk
-npm clean cache --force
+npm cache clean --force
 npm install -g --unsafe-perm signalk-server
-npm clean cache --force
+npm cache clean --force
 
 ## Install signalk published plugin
 pushd /home/signalk/.signalk
@@ -51,4 +51,4 @@ popd
 echo "signalk ALL=(ALL) NOPASSWD: /bin/date" >> /etc/sudoers
 
 ## Make some space on the drive for the next stages
-npm clean cache --force
+npm cache clean --force

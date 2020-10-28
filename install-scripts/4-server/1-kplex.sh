@@ -7,7 +7,7 @@ elif [[ $LMARCH == 'armhf' ]]; then
 	package='kplex_1.4-1_armhf.deb'
 elif [[ $LMARCH == 'arm64' ]]; then
 	apt-get install -y -q gcc-8-base libc6 libgcc1
-	package='kplex_1.4-1_arm64.deb'
+	package='kplex_1.4-1_armhf.deb'
 fi
 
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/.kplex.conf "/home/user/.kplex.conf"
