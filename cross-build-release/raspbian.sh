@@ -10,7 +10,8 @@
   if [ "arm64" == "$MY_CPU_ARCH" ]; then
     cpuArch="arm64"
   fi
-  zipName="raspios_lite_${cpuArch}_latest"
+#  zipName="raspios_lite_${cpuArch}_latest"
+  zipName="raspios_${cpuArch}_latest"
   imageSource="https://downloads.raspberrypi.org/${zipName}"
 
   checkRoot
