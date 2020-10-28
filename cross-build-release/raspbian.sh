@@ -51,7 +51,7 @@
   mount --rbind $myCache/stageCache $mkRoot/install-scripts/stageCache
   mount --rbind /run/shm $mkRoot/run/shm
   chroot $mkRoot /bin/bash -xe << EOF
-    set -x; set -e; cd /install-scripts; export LMBUILD="raspios"; ls; chmod +x *.sh; ./install.sh; exit
+    set -x; set -e; cd /install-scripts; export LMBUILD="raspios"; ls; chmod +x *.sh; ./install.sh 0 2 4 6 8; exit
 EOF
 
   # Unmount
