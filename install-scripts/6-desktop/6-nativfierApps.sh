@@ -11,11 +11,11 @@ install -d /usr/local/share/applications
 install -v $FILE_FOLDER/signalk.desktop "/usr/local/share/applications/"
 
 ## arch name translation
-if [ $LMARCH == 'armhf' ] ;then
+if [ $LMARCH == 'armhf' ]; then
  	arch=armv7l
-elif [ $LMARCH == 'arm64' ] ;then
+elif [ $LMARCH == 'arm64' ]; then
 	arch=arm64
-elif [ $LMARCH == 'amd64' ] ;then
+elif [ $LMARCH == 'amd64' ]; then
 	arch=x64
 else
   arch=$LMARCH
@@ -56,7 +56,7 @@ rm -r /opt/SpeedSample-linux-$arch
 rm -r /opt/wdash-linux-$arch
 
 ## On debian, the sandbox environment fail without GUID/SUID
-if [ $LMOS == Debian ] ;then
+if [ $LMOS == Debian ]; then
 	chmod 4755 /opt/Freeboard-sk/chrome-sandbox
 	chmod 4755 /opt/Pypilot_webapp/chrome-sandbox
 	chmod 4755 /opt/SignalK/chrome-sandbox

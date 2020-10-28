@@ -1,22 +1,22 @@
 #!/bin/bash -e
-apt-get install -y -q plymouth  plymouth-label;
+apt-get install -y -q plymouth  plymouth-label
 
 ## This override the default tty1 behaviour to make it more discrete during the boot process
 install -v -d "/etc/systemd/system/getty@tty1.service.d"
 install -v -m0644 $FILE_FOLDER/skip-prompt.conf "/etc/systemd/system/getty@tty1.service.d/"
 
 ## RaspOS
-if [ -f /boot/config.txt  ] ;then
+if [ -f /boot/config.txt ]; then
 	cat $FILE_FOLDER/appendToConfig.txt >> /boot/config.txt
 fi
 
 ## RaspOS
-if [ -f /boot/cmdline.txt ] ; then
+if [ -f /boot/cmdline.txt ]; then
 	sed -i '$s/$/\ loglevel=1\ splash\ quiet\ logo.nologo\ vt.global_cursor_default=0\ plymouth.ignore-serial-consoles/' /boot/cmdline.txt
 fi
 
 ## Armbian
-if [ -f /boot/armbianEnv.txt ] ; then
+if [ -f /boot/armbianEnv.txt ]; then
 	echo "console=serial" >> /boot/armbianEnv.txt
 fi
 
@@ -35,7 +35,7 @@ cp -r $FILE_FOLDER/dreams "/usr/share/plymouth/themes/"
 plymouth-set-default-theme dreams
 
 # Armbian
-if [ -f /etc/issue ] ;then
+if [ -f /etc/issue ]; then
 	rm /etc/issue /etc/issue.net
 fi
 

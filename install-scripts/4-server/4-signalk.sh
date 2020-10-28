@@ -42,7 +42,7 @@ popd
 pushd /home/signalk/.signalk/node_modules/@signalk/
 	su signalk -c "git clone https://github.com/lysmarine/lysmarine-dashboard"
 	pushd ./lysmarine-dashboard
-	  rm -r .git
+	  rm -rf .git
 		npm install
   popd
 popd

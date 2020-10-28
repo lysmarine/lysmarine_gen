@@ -26,31 +26,31 @@ usermod -a -G sudo user
 usermod -a -G video user
 
 ## Create signalk user to run the server.
-if [ ! -d /home/signalk ] ; then
+if [ ! -d /home/signalk ]; then
 	echo "Creating signalk user"
 	adduser --home /home/signalk --gecos --system --disabled-password --disabled-login signalk
 fi
 
 ## Create pypilot user to run the services.
-if [ ! -d /home/pypilot ] ; then
+if [ ! -d /home/pypilot ]; then
 	echo "Creating pypilot user"
 	adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
 fi
 
 ## Create the charts group and add users that have to write to that folder.
-if ! grep -q charts /etc/group ; then
-	groupadd charts;
-	usermod -a -G charts signalk;
-	usermod -a -G charts user;
-	usermod -a -G charts root;
+if ! grep -q charts /etc/group; then
+	groupadd charts
+	usermod -a -G charts signalk
+	usermod -a -G charts user
+	usermod -a -G charts root
 fi
 
 ## Create the special charts folder.
-install -v -d -m 6775 -o signalk -g charts /srv/charts; 
+install -v -d -m 6775 -o signalk -g charts /srv/charts
 
 ## Link the chart folder to home for convenience.
 if [ ! -f /home/user/charts ] ; then
-	su user -c "ln -s /srv/charts /home/user/charts;"
+	su user -c "ln -s /srv/charts /home/user/charts"
 fi
 
 ## Manage the permissions and privileges.
@@ -67,16 +67,16 @@ fi
 
 echo 'PATH="/sbin:/usr/sbin:$PATH"' >> /home/user/.profile # Give user capability to halt and reboot.
 
-if [ -f /root/.not_logged_in_yet ] ;then # Disable first login script.
+if [ -f /root/.not_logged_in_yet ]; then # Disable first login script.
 	rm /root/.not_logged_in_yet
 fi
 
 ## Prevent the creation of useless home folders on first boot.
-if [ -f /etc/xdg/user-dirs.defaults ] ;then
-  sed -i 's/^DESKTOP=/#&/'     /etc/xdg/user-dirs.defaults;
-  sed -i 's/^TEMPLATES=/#&/'   /etc/xdg/user-dirs.defaults;
-  sed -i 's/^PUBLICSHARE=/#&/' /etc/xdg/user-dirs.defaults;
-  sed -i 's/^MUSIC=/#&/'       /etc/xdg/user-dirs.defaults;
-  sed -i 's/^PICTURES=/#&/'    /etc/xdg/user-dirs.defaults;
-  sed -i 's/^VIDEOS=/#&/'      /etc/xdg/user-dirs.defaults;
+if [ -f /etc/xdg/user-dirs.defaults ]; then
+  sed -i 's/^DESKTOP=/#&/'     /etc/xdg/user-dirs.defaults
+  sed -i 's/^TEMPLATES=/#&/'   /etc/xdg/user-dirs.defaults
+  sed -i 's/^PUBLICSHARE=/#&/' /etc/xdg/user-dirs.defaults
+  sed -i 's/^MUSIC=/#&/'       /etc/xdg/user-dirs.defaults
+  sed -i 's/^PICTURES=/#&/'    /etc/xdg/user-dirs.defaults
+  sed -i 's/^VIDEOS=/#&/'      /etc/xdg/user-dirs.defaults
 fi

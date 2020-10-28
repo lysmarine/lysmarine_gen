@@ -15,7 +15,7 @@ pushd /var/www/
 git clone --depth=1 https://gitlab.com/FredericGuilbault/speedSample
 popd
 pushd /var/www/speedSample;
-npm install -g --unsafe-perm  --cache /tmp/empty-cache46;
+npm install -g --unsafe-perm  --cache /tmp/empty-cache46
 popd
 chown -R www-data:www-data /var/www/speedSample
 

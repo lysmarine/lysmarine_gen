@@ -10,7 +10,7 @@ libffi-dev python3-gevent
 
 pip3 install pywavefront pyglet gps gevent-websocket Flask-SocketIO python-socketio
 
-if [ $LMOS == 'Raspbian' ] ;then
+if [ $LMOS == 'Raspbian' ]; then
 	apt-get install -y -q wiringpi
 fi
 
