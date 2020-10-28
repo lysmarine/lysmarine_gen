@@ -4,4 +4,4 @@
 update-mime-database /usr/share/mime
 
 touch /tmp/FIRSTRUN
-systemctl disable firstRun.service ;
+systemctl disable firstRun.service
