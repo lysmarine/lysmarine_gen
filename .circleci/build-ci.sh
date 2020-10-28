@@ -7,6 +7,7 @@
 # bailout on errors and echo commands.
 set -xe
 
+LYSMARINE_VER=0.9.0.3
 DOCKER_SOCK="unix:///var/run/docker.sock"
 
 echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H $DOCKER_SOCK -s overlay2\"" | sudo tee /etc/default/docker > /dev/null
@@ -22,7 +23,6 @@ if [ "$EMU" = "on" ]; then
 fi
 
 WORK_DIR=$(pwd):/ci-source
-LYSMARINE_VER=0.9.0.2
 
 docker run --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker"  -v $WORK_DIR:rw $DOCKER_IMAGE /bin/bash
 DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep $CONTAINER_DISTRO | awk '{print $1}')
