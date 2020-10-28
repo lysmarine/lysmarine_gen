@@ -46,7 +46,7 @@ for argument in $argumentList; do # access each element of array
       echo "From request $argument "
       echo "Running stage $stage -> $script ( $scriptLocation )"
       export FILE_FOLDER=${scriptLocation%/*}/files/
-      $scriptLocation 2>&1 | tee "logs/$stage.$script.log"
+      $scriptLocation
       [[ ${PIPESTATUS[0]} -ne 0 ]] && exit 255
     fi
   done
