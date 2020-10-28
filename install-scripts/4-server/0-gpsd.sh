@@ -2,7 +2,7 @@
 
 apt-get install -y -q gpsd #gpsd-clients
 
-## Automaticaly start gpsd when a USB gps is detected.
+## Automaticaly start gpsd when a USB gps detected.
 install -d /etc/udev/rules.d
 install -v $FILE_FOLDER/90-lys-gps.rules "/etc/udev/rules.d/90-lys-gps.rules"
 
