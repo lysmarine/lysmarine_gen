@@ -3,10 +3,6 @@
 # Network manager
 apt-get install -y -q network-manager make
 
-# cd /etc/polkit-1/localauthority/10-vendor.d
-#Identity=unix-user:username1;unix-user:username2
-#sudo cp org.freedesktop.NetworkManager.pkla /etc/polkit-1/localauthority/50-local.d/
-# exec /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 
 # Resolve lysmarine.local
 apt-get install -y -q avahi-daemon

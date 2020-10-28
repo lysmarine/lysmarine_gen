@@ -17,16 +17,16 @@ popd
 log "Add and build lysmarine mega script."
 mkdir -p ./work/$thisArch/config/includes.chroot
 mkdir -p ./work/$thisArch/config/hooks/live
-cp -r ../lysmarine ./work/$thisArch/config/includes.chroot/lysmarine
+cp -r ../install-scripts ./work/$thisArch/config/includes.chroot/install-scripts
 
+echo debian-installer-launcher >>  ./work/$thisArch/config/package-lists/my.list.chroot
+#echo "d-i debian-installer/locale string en_US" \ >> config/includes.installer/preseed.cfg
 
 cat <<EOT > ./work/$thisArch/config/hooks/live/0060-build-lysmarine.hook.chroot
 #!/bin/bash
-    apt-get install -yq debian-installer-launcher
-    cd /lysmarine ;
+    cd /install-scripts ;
     export LMBUILD=debian-64 ;
     find ./ -name run.sh  -exec chmod 775 {} \;
-    ls -lah ./;
     chmod 0755 ./install.sh ;
     ./install.sh ;
     exit ;
@@ -36,7 +36,7 @@ EOT
 mkdir -p ./work/$thisArch/config/hooks/live
 mkdir -p ./work/$thisArch/config/bootloaders/isolinux
 cp -r /usr/share/live/build/bootloaders/isolinux/* ./work/$thisArch/config/bootloaders/isolinux
-cp -r ../lysmarine/20-boot/files/background.svg ./work/$thisArch/config/bootloaders/isolinux/splash.svg
+cp -r ../install-scripts/2-baseSystem/files/background.svg ./work/$thisArch/config/bootloaders/isolinux/splash.svg
 cat <<EOT > ./work/$thisArch/config/bootloaders/isolinux/menu.cfg
 menu hshift 0
 menu width 82
@@ -59,8 +59,8 @@ pushd ./work/$thisArch
   --archive-areas "main contrib non-free" \
   --binary-images iso-hybrid \
   --clean \
-  --debian-installer true \
   --debian-installer-gui true \
+  --linux-package "linux-image linux-headers" \
   --bootloader syslinux \
   --distribution buster \
   --firmware-binary true \
@@ -75,7 +75,10 @@ pushd ./work/$thisArch
   --updates true \
   --verbose \
   --win32-loader true  \
-
+  --debian-installer live
+ echo debian-installer-launcher >> config/package-lists/my.list.chroot
+  #debian-installer-launcher
+#https://live-team.pages.debian.net/live-manual/html/live-manual/customizing-installer.en.html
 
 # --bootappend-live "boot=live splash quiet  hostname=lysmarine username=user sudo noeject" \
 
