@@ -1,6 +1,6 @@
 # Lysmarine gen
 Tool used to create lysmarine image on CircleCI
-The ready to use image can be found at <https://cloudsmith.io/~bbn-projects/repos/bbn-repo/packages/?q=lysmarine/>
+The ready to use image can be found at <https://cloudsmith.io/~bbn-projects/repos/bbn-repo/packages/?q=lysmarine>
 
 ---
 
