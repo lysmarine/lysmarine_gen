@@ -43,17 +43,11 @@ nativefier -a $arch --inject ./pypilot_darktheme.js --disable-context-menu --dis
 "http://localhost:8080" /opt/
 
 ## Make folder name arch independent.
-cp -r /opt/Freeboard-sk-linux-$arch /opt/Freeboard-sk
-cp -r /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
-cp -r /opt/SignalK-linux-$arch /opt/SignalK
-cp -r /opt/SpeedSample-linux-$arch /opt/SpeedSample
-cp -r /opt/wdash-linux-$arch /opt/wdash
-
-rm -r /opt/Freeboard-sk-linux-$arch
-rm -r /opt/Pypilot_webapp-linux-$arch
-rm -r /opt/SignalK-linux-$arch
-rm -r /opt/SpeedSample-linux-$arch
-rm -r /opt/wdash-linux-$arch
+mv /opt/Freeboard-sk-linux-$arch /opt/Freeboard-sk
+mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
+mv /opt/SignalK-linux-$arch /opt/SignalK
+mv /opt/SpeedSample-linux-$arch /opt/SpeedSample
+mv /opt/wdash-linux-$arch /opt/wdash
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
