@@ -13,8 +13,11 @@ ls
 
 for pkg_file in cross-build-release/release/*/*.$EXT; do
   zipName=$(basename $pkg_file)
+  zipDir=$(dirname $pkg_file)
   mkdir ./tmp; chmod 755 ./tmp
-  zip ./tmp/${zipName}.zip ${pkg_file}
+  cd $zipDir || exit 255
+  zip ../../../tmp/${zipName}.zip ${zipName}
+  cd ../../..
   cloudsmith push raw $REPO ./tmp/${zipName}.zip --summary "LysMarine built by CircleCi on $(date)" --description "LysMarine BBN build"
   RESULT=$?
   if [ $RESULT -eq 144 ]; then
