@@ -57,6 +57,11 @@ EOF
   # Unmount
   umountImageFile $thisArch ./work/$thisArch/$imageName
 
+  # Shrink the image size.
+  wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh -P ./cache/$thisArch/pishrink.sh
+  chmod +x ./cache/$thisArch/pishrink.sh
+  ./cache/$thisArch/pishrink.sh ./work/$thisArch/$image
+
   # Renaming the OS and moving it to the release folder.
   cp -v ./work/$thisArch/$imageName  ./release/$thisArch/lysmarine_${LYSMARINE_VER}-${thisArch}-${cpuArch}.img
 
