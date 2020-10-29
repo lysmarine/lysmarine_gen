@@ -24,6 +24,8 @@ usermod -a -G netdev user
 usermod -a -G tty user
 usermod -a -G sudo user
 usermod -a -G video user
+usermod -a -G input user     # for evdev-rce
+usermod -a -G audio user
 
 ## Create signalk user to run the server.
 if [ ! -d /home/signalk ]; then
