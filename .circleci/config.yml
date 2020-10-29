@@ -1,7 +1,5 @@
 ---
 version: 2.1
-orbs:
-  cloudsmith: cloudsmith/cloudsmith@1.0.4
 executors:
   boot-linux:
     machine:
@@ -19,9 +17,6 @@ commands:
           command: |
             .circleci/build-ci.sh
           no_output_timeout: 30m
-      - cloudsmith/ensure-api-key
-      - cloudsmith/install-cli
-      - run: .circleci/publish-cloudsmith.sh img bbn-projects/bbn-repo ${PKG_DISTRO}/${PKG_RELEASE}
   do-all:
     steps:
       - git-checkout
