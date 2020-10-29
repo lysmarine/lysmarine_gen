@@ -1,0 +1,2 @@
+deb https://dl.cloudsmith.io/public/bbn-projects/bbn-repo/deb/debian buster main
+deb-src https://dl.cloudsmith.io/public/bbn-projects/bbn-repo/deb/debian buster main
