@@ -60,7 +60,7 @@ EOF
   # Shrink the image size.
   wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh -P ./cache/$thisArch/
   chmod +x ./cache/$thisArch/pishrink.sh
-  ./cache/$thisArch/pishrink.sh ./work/$thisArch/$image
+  ./cache/$thisArch/pishrink.sh ./work/$thisArch/$imageName
 
   # Renaming the OS and moving it to the release folder.
   cp -v ./work/$thisArch/$imageName  ./release/$thisArch/lysmarine_${LYSMARINE_VER}-${thisArch}-${cpuArch}.img
