@@ -58,7 +58,7 @@ EOF
   umountImageFile $thisArch ./work/$thisArch/$imageName
 
   # Shrink the image size.
-  wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh -P ./cache/$thisArch/pishrink.sh
+  wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh -P ./cache/$thisArch/
   chmod +x ./cache/$thisArch/pishrink.sh
   ./cache/$thisArch/pishrink.sh ./work/$thisArch/$image
 
