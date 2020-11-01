@@ -12,11 +12,8 @@ fi
 
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/.kplex.conf "/home/user/.kplex.conf"
 
-pushd ./stageCache
-	if [[ ! -f $package ]]; then
-		wget http://www.stripydog.com/download/$package
-	fi
-	dpkg -i $package
-popd
+wget http://www.stripydog.com/download/$package
+dpkg -i $package
+rm $package
 
 systemctl enable kplex
