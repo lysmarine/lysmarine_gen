@@ -3,8 +3,8 @@
 	source lib.sh
 	checkRoot
 	LYSMARINE_VER=${LYSMARINE_VER:-0.dev}
-	cpuArch="${$1:-armhf}"
-	upstreamOS="${$2:-raspios}"
+	cpuArch="${1:-armhf}"
+	upstreamOS="${2:-raspios}"
   	thisArch=upstreamOS # $thisArch is deprecated, plz use $upstreamOS
 	zipName="raspios_lite_${cpuArch}_latest"
 	imageSource="https://downloads.raspberrypi.org/${zipName}"
@@ -23,7 +23,7 @@
 	fi
 
     # Copy image file to work folder add temporary space to it.
-  	imageName=$(pushd $cacheDir; ls $cacheDir/????-??-??-${upstreamOS}-buster-${cpuArch}-lite.img; popd)
+  	imageName=$(ls $cacheDir/????-??-??-${upstreamOS}-buster-${cpuArch}-lite.img | xargs -n 1 basename;)
   	if [ ! -f $cacheDir/${imageName}-inflated ]; then
   		inflateImage $upstreamOS $cacheDir/$imageName
 	fi
