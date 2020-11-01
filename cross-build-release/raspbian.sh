@@ -2,9 +2,9 @@
 {
 	source lib.sh
 	checkRoot
-	LYSMARINE_VER=${LYSMARINE_VER:-0.dev}
+	lmVersion=${2:-0.dev}
 	cpuArch="${1:-armhf}"
-	upstreamOS="${2:-raspios}"
+	upstreamOS="raspios"
   	thisArch=upstreamOS # $thisArch is deprecated, plz use $upstreamOS
 	zipName="raspios_lite_${cpuArch}_latest"
 	imageSource="https://downloads.raspberrypi.org/${zipName}"
@@ -63,7 +63,7 @@ EOF
   $cacheDir/pishrink.sh $workDir/$imageName
 
   # Renaming the OS and moving it to the release folder.
-  cp -v $workDir/$imageName  $releaseDir/lysmarine_${LYSMARINE_VER}-${upstreamOS}-${cpuArch}.img
+  cp -v $workDir/$imageName  $releaseDir/lysmarine_${lmVersion}-${upstreamOS}-${cpuArch}.img
 
   exit 0
 }
