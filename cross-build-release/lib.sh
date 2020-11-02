@@ -74,7 +74,6 @@ umountImageFile () {
   umount $rootfs/sys
   umount $rootfs/proc
   umount $rootfs/tmp
-  umount $rootfs/install-scripts/stageCache
   umount $rootfs/run/shm
 	umount $rootfs/boot
 	umount $rootfs
