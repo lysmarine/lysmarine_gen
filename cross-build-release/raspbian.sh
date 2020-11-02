@@ -13,7 +13,7 @@
 	setupWorkSpace $upstreamOS
 	cacheDir=./cache/$upstreamOS
 	workDir=./work/$upstreamOS
-	releaseDir=./dir/$upstreamOS
+	releaseDir=./release/$upstreamOS
 
 	# Download upstream image from internet
   	if [ ! -f $cacheDir/????-??-??-${upstreamOS}-buster-${cpuArch}-lite.img ]; then
