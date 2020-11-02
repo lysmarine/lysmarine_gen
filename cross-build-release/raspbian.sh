@@ -58,7 +58,7 @@ EOF
   # Shrink the image size.
   if [ ! -f $cacheDir/pishrink.sh ]; then
 	wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh -P $cacheDir/
-	chmod +x .$cacheDir/pishrink.sh
+	chmod +x $cacheDir/pishrink.sh
   fi
   $cacheDir/pishrink.sh $workDir/$imageName
 
