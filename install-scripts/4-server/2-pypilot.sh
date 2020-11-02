@@ -30,8 +30,6 @@ fi
 
 
 
-pushd ./stageCache
-
 	## Install RTIMULib2 as it's a dependency of pypilot
 	if [[ ! -d ./RTIMULib2 ]]; then
 		git clone --depth=1 https://github.com/seandepagnier/RTIMULib2
@@ -60,7 +58,6 @@ pushd ./stageCache
 		python3 setup.py install
 	popd
 
-popd
 
 
 

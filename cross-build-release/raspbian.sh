@@ -1,101 +1,69 @@
-#!/bin/bash
+#!/bin/bash -xe
 {
-source lib.sh
+	source lib.sh
+	checkRoot
+	lmVersion=${2:-0.dev}
+	cpuArch="${1:-armhf}"
+	upstreamOS="raspios"
+  	thisArch=upstreamOS # $thisArch is deprecated, plz use $upstreamOS
+	zipName="raspios_lite_${cpuArch}_latest"
+	imageSource="https://downloads.raspberrypi.org/${zipName}"
 
-thisArch="raspbian"
-imageSource="https://downloads.raspberrypi.org/raspbian_lite_latest"
-zipName="raspbian_lite_latest"
-imageName="2020-02-13-raspbian-buster-lite.img"
+	# Create caching folder hierarchy to work with this architecture.
+	setupWorkSpace $upstreamOS
+	cacheDir=./cache/$upstreamOS
+	workDir=./work/$upstreamOS
+	releaseDir=./dir/$upstreamOS
 
+	# Download upstream image from internet
+  	if [ ! -f $cacheDir/????-??-??-${upstreamOS}-buster-${cpuArch}-lite.img ]; then
+    	wget -P $cacheDir/ $imageSource
+  		7z e -o$cacheDir/ $cacheDir/$zipName
+  		rm $cacheDir/$zipName
+	fi
 
+    # Copy image file to work folder add temporary space to it.
+  	imageName=$(ls $cacheDir/????-??-??-${upstreamOS}-buster-${cpuArch}-lite.img | xargs -n 1 basename;)
+  	if [ ! -f $cacheDir/${imageName}-inflated ]; then
+  		inflateImage $upstreamOS $cacheDir/$imageName
+	fi
 
-checkRoot ;
+	# copy ready image from cache to the work dir
+	cp -fv $cacheDir/$imageName-inflated $workDir/$imageName
 
+	# Mount the image and make the binds required to chroot.
+	mountImageFile $upstreamOS $workDir/$imageName
 
+	# Copy the lysmarine and origine OS config files in the mounted rootfs
+	addLysmarineScripts $upstreamOS
 
-# Create caching folder hierarchy to work with this architecture.
-setupWorkSpace $thisArch
+  mkRoot=$workDir/rootfs
+  ls -l $mkRoot
 
+  mkdir -p ./cache/${thisArch}/stageCache; mkdir -p $mkRoot/install-scripts/stageCache
+  mkdir -p /run/shm; mkdir -p $mkRoot/run/shm
+  mount -o bind /etc/resolv.conf $mkRoot/etc/resolv.conf
+  mount -o bind /dev $mkRoot/dev
+  mount -o bind /sys $mkRoot/sys
+  mount -o bind /proc $mkRoot/proc
+  mount -o bind /tmp $mkRoot/tmp
+  mount --rbind /run/shm $mkRoot/run/shm
+  chroot $mkRoot /bin/bash -xe << EOF
+    set -x; set -e; cd /install-scripts; export LMBUILD="raspios"; ls; chmod +x *.sh; ./install.sh 0 2 4 6 8; exit
+EOF
 
+  # Unmount
+  umountImageFile $upstreamOS $workDir/$imageName
 
-# Download or copy the official image from cache
-if [ ! -f ./cache/$thisArch/$imageName ]; then
-	log "Downloading official image from internet."
-	wget -P ./cache/$thisArch/  $imageSource
-	7z e -o./cache/$thisArch/   ./cache/$thisArch/$zipName
-	rm ./cache/$thisArch/$zipName
+  # Shrink the image size.
+  if [ ! -f $cacheDir/pishrink.sh ]; then
+	wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh -P $cacheDir/
+	chmod +x $cacheDir/pishrink.sh
+  fi
+  $cacheDir/pishrink.sh $workDir/$imageName
 
-else
-	log "Using official image from cache."
+  # Renaming the OS and moving it to the release folder.
+  cp -v $workDir/$imageName  $releaseDir/lysmarine_${lmVersion}-${upstreamOS}-${cpuArch}.img
 
-fi
-
-
-
-# Copy image file to work folder add temporary space to it.
-inflateImage $thisArch ./cache/$thisArch/$imageName ;
-
-
-
-# copy ready image from cache to the work dir
-cp -fv ./cache/$thisArch/$imageName-inflated ./work/$thisArch/$imageName
-
-
-
-# Mount the image and make the binds required to chroot.
-mountImageFile $thisArch ./work/$thisArch/$imageName
-
-
-
-# Copy the lysmarine and origine OS config files in the mounted rootfs
-addLysmarineScripts $thisArch
-
-
-
-# Display build tips
-echo "";echo "";echo "";echo "";echo "";
-echo "========================================================================="
-echo "You are now in the chroot environement.";
-echo "Start the build script with by pasting one of the following line in the terminal:";
-echo "";
-echo "cd /lysmarine; ./install.sh 1 2 3 4 5 6 7 86 9"
-echo "cd /lysmarine; ./install.sh ";
-echo "========================================================================="
-echo "";echo "";
-
-
-
-# chroot into the
-proot -q qemu-arm \
-	--root-id \
-	--rootfs=work/${thisArch}/rootfs \
-	--cwd=/ \
-	--mount=/etc/resolv.conf:/etc/resolv.conf \
-	--mount=/dev:/dev \
-	--mount=/sys:/sys \
-	--mount=/proc:/proc \
-	--mount=/tmp:/tmp \
-	--mount=./cache/$thisArch/stageCache:/lysmarine/stageCache \
-	--mount=/run/shm:/run/shm \
-	/bin/bash
-
-
-
-# Unmount
-umountImageFile $thisArch ./work/$thisArch/$imageName
-
-
-
-# Renaming the OS and moving it to the release folder.
-cp -v ./work/$thisArch/$imageName  ./release/$thisArch/LysMarine_$thisArch-0.9.0.img
-
-
-
-log "Pro Tip:"
-echo ""
-echo "sudo cp -v ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ./cache/$thisArch/$imageName-inflated"
-echo ""
-echo "sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
-echo ""
-exit
+  exit 0
 }
