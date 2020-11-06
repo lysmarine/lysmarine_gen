@@ -1,5 +1,5 @@
 [Unit]
-Description=Start Graphical interface
+Description=Start Graphical Interface
 After=graphical.target systemd-user-sessions.service
 
 [Service]

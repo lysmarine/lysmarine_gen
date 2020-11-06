@@ -39,7 +39,7 @@ ROWS="$ROWS $STATUS RDP "
 ## Dialog
 SAVE=$(zenity --list \
 	--height=400 \
-	--text="Lysmarine have multiples services available Enable and disable them based on what you need"\
+	--text="Lysmarine have multiples services available Enable and Disable them based on what you need"\
 	--column="Enable" \
 	--column="Service" \
 	--checklist \
