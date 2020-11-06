@@ -1,10 +1,16 @@
 ### lysmarine ####################################
 gpu_mem=768
-hdmi_drive=0
+#hdmi_drive=0
 disable_splash=1
 
 dtparam=i2c_arm=on
 dtparam=spi=on
+dtparam=audio=on
+
+dtoverlay=vc4-fkms-v3d
+max_framebuffers=2
+arm_64bit=1
+enable_uart=1
 dtoverlay=w1-gpio
 
 ### lysmarine - screen preset ####################
