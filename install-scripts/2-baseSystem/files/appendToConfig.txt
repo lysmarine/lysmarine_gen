@@ -1,16 +1,10 @@
 ### lysmarine ####################################
-gpu_mem=768
-#hdmi_drive=0
+gpu_mem=512
+hdmi_drive=0
 disable_splash=1
 
 dtparam=i2c_arm=on
 dtparam=spi=on
-dtparam=audio=on
-
-dtoverlay=vc4-fkms-v3d
-max_framebuffers=2
-arm_64bit=1
-enable_uart=1
 dtoverlay=w1-gpio
 
 ### lysmarine - screen preset ####################
@@ -38,8 +32,8 @@ dtoverlay=w1-gpio
 #hdmi_cvt 1024 600 60 6 0 0 0
 
 ## https://www.waveshare.com/wiki/7inch_HDMI_LCD_(C)
-#max_usb_current=1
-#hdmi_group=2
-#hdmi_mode=87
-#hdmi_cvt 1024 600 60 6 0 0 0
-#hdmi_drive=1
+max_usb_current=1
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt 1024 600 60 6 0 0 0
+hdmi_drive=1
