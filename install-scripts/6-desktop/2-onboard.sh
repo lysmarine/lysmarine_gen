@@ -13,3 +13,6 @@ echo "dconf load / < /usr/share/onboard/a11y.dconf &" >> /home/user/.config/open
 
 echo "sed -i 's/^dconf\ /#&/' /home/user/.config/openbox/autostart; " >> /home/user/.config/openbox/autostart
 echo "sed -i 's/^sed\ /#&/'   /home/user/.config/openbox/autostart; " >> /home/user/.config/openbox/autostart
+
+install -d -o 1000 -g 1000 /home/user/.local/share/onboard/themes
+cat /usr/share/onboard/themes/Droid.theme | sed -e "s#_font></#_font>Sans</#" > /home/user/.local/share/onboard/themes/Droid.theme
