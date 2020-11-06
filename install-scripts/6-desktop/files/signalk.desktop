@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Signalk Marine data server
+Name=SignalK Marine Data Server
 Exec=onlyone /opt/SignalK/SignalK
 Terminal=false
 Icon=/home/user/.local/share/icons/signalk.png

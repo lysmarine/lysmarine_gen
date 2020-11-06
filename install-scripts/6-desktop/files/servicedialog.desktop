@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Service Management.
+Name=Service Management
 Exec=onlyone servicedialog
 Terminal=false
 Icon=alacarte
