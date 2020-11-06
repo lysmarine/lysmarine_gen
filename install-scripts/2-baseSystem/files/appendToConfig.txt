@@ -1,5 +1,5 @@
 ### lysmarine ####################################
-gpu_mem=128
+gpu_mem=768
 hdmi_drive=0
 disable_splash=1
 
