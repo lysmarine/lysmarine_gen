@@ -5,7 +5,7 @@ adduser mopidy audio
 xhost +SI:localuser:mopidy
 
 # Install Mopidy and all dependencies:
-apt-get -y install mopidy mopidy-mpd mopidy-spotify mopidy-tunein
+apt-get -y install mopidy mopidy-mpd mopidy-spotify mopidy-tunein xdotool
 
 # Install some needed packages
 python3 -m pip install mem systems
