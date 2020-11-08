@@ -4,7 +4,7 @@ adduser mopidy video
 adduser mopidy audio
 
 # Install Mopidy and all dependencies:
-apt-get -y install mopidy mopidy-mpd mopidy-spotify mopidy-tunein python3-spotify xdotool
+apt-get -y install mopidy mopidy-mpd mopidy-spotify mopidy-tunein libspotify-dev xdotool
 
 # Install some needed packages
 python3 -m pip install mem systems
