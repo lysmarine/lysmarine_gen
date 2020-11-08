@@ -2,7 +2,6 @@
 
 adduser mopidy video
 adduser mopidy audio
-xhost +SI:localuser:mopidy
 
 # Install Mopidy and all dependencies:
 apt-get -y install mopidy mopidy-mpd mopidy-spotify mopidy-tunein xdotool

@@ -3,5 +3,8 @@
 # Fix a bug documented somewhere in gentoo bug tracker
 update-mime-database /usr/share/mime
 
+# Allow mopidy user to access X server
+xhost +SI:localuser:mopidy
+
 touch /tmp/FIRSTRUN
 systemctl disable firstRun.service
