@@ -15,3 +15,6 @@ python3 -m pip install Mopidy-MusicBox-Webclient
 
 # Install YouTube support
 python3 -m pip install --pre Mopidy-YouTube
+
+# Enable mopidy service
+systemctl enable mopidy
