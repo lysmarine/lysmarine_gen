@@ -82,3 +82,5 @@ if [ -f /etc/xdg/user-dirs.defaults ]; then
   sed -i 's/^PICTURES=/#&/'    /etc/xdg/user-dirs.defaults
   sed -i 's/^VIDEOS=/#&/'      /etc/xdg/user-dirs.defaults
 fi
+
+adduser --home /home/mopidy --gecos --system --disabled-password --disabled-login mopidy
