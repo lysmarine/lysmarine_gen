@@ -10,7 +10,7 @@ adduser mopidy video
 adduser mopidy audio
 
 # Install some needed packages
-python3 -m pip install mem systems
+python3 -m pip install systems
 
 # Install Mopidy MusicBox Web Client:
 python3 -m pip install Mopidy-MusicBox-Webclient
