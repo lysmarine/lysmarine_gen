@@ -135,15 +135,6 @@ Plugin {
     }
 }
 Plugin {
-    type = volume
-}
-Plugin {
-    type = space
-    config {
-        size = 5
-    }
-}
-Plugin {
     type = dclock
     config {
         TooltipFmt = %A %x
