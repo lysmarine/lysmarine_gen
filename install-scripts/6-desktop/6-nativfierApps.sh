@@ -43,7 +43,7 @@ nativefier -a $arch --inject ./pypilot_darktheme.js --disable-context-menu --dis
 "http://localhost:8080" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
---name "MusicBox" --icon /usr/share/icons/gnome/256x256/apps/multimedia.png \
+--name "MusicBox" --icon /usr/share/icons/gnome/256x256/apps/multimedia-volume-control.png \
 "http://localhost:6680/musicbox_webclient" /opt/
 
 ## Make folder name arch independent.
