@@ -3,8 +3,8 @@
 # Install Mopidy and all dependencies:
 #apt-get -y install mopidy mopidy-mpd mopidy-spotify mopidy-tunein libspotify-dev xdotool
 
-apt-get -y install mopidy
-apt-get -y install mopidy-mpd mopidy-tunein xdotool
+apt-get -y --no-install-recommends install mopidy
+apt-get -y --no-install-recommends install mopidy-mpd mopidy-tunein xdotool
 
 adduser mopidy video
 adduser mopidy audio
