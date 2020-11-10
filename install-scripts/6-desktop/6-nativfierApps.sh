@@ -42,12 +42,17 @@ nativefier -a $arch --inject ./pypilot_darktheme.js --disable-context-menu --dis
 --name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png  \
 "http://localhost:8080" /opt/
 
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+--name "MusicBox" --icon /usr/share/icons/gnome/256x256/apps/multimedia.png \
+"http://localhost:6680/musicbox_webclient" /opt/
+
 ## Make folder name arch independent.
 mv /opt/Freeboard-sk-linux-$arch /opt/Freeboard-sk
 mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
 mv /opt/SignalK-linux-$arch /opt/SignalK
 mv /opt/SpeedSample-linux-$arch /opt/SpeedSample
 mv /opt/wdash-linux-$arch /opt/wdash
+mv /opt/MusicBox-linux-$arch /opt/MusicBox
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
