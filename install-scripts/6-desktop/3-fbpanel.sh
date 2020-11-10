@@ -1,5 +1,5 @@
 #!/bin/bash -e
-apt-get install -y gsimplecal pavucontrol libgtk2.0-dev fbpanel
+apt-get install -y gsimplecal pavucontrol libgtk2.0-dev fbpanel libatk-adaptor
 
 ## Install configuration files.
 install -d -o 1000 -g 1000 "/home/user/.config/fbpanel"
