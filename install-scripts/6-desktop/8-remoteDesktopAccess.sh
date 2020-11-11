@@ -11,7 +11,7 @@ systemctl enable vnc
 ## NOTE: The password file have been generated with the command
 ## x11vnc -storepasswd SECRETPASSWORD /home/user/.vnc/passwd
 
-install -d /etc/systemd/system/xrdp.d
-
-apt-get install -y -q --no-install-recommends xrdp
-install -v $FILE_FOLDER/Xwrapper.config "/etc/X11/Xwrapper.config"
+#install -d /etc/systemd/system/xrdp.d
+#
+#apt-get install -y -q --no-install-recommends xrdp
+#install -v $FILE_FOLDER/Xwrapper.config "/etc/X11/Xwrapper.config"
