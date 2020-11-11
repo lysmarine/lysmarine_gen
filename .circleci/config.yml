@@ -10,12 +10,6 @@ executors:
       image: ubuntu-1604:202010-01
 
 commands:
-  publish:
-    steps:
-      - cloudsmith/ensure-api-key
-      - cloudsmith/install-cli
-      - run: .circleci/publish-cloudsmith.sh img lysmarineos/images ${PKG_DISTRO}/${PKG_RELEASE}
-
   build-lysmarine:
     steps:
       - run: sudo apt-get -y install wget
@@ -51,6 +45,12 @@ jobs:
     steps:
       - checkout
       - build-lysmarine
+
+  publish:
+    steps:
+      - cloudsmith/ensure-api-key
+      - cloudsmith/install-cli
+      - run: .circleci/publish-cloudsmith.sh img lysmarineos/images ${PKG_DISTRO}/${PKG_RELEASE}
 
 workflows:
   version: 2
