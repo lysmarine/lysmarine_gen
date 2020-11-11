@@ -18,7 +18,7 @@ log "Add and build lysmarine mega script."
 mkdir -p ./work/$thisArch/config/includes.chroot
 mkdir -p ./work/$thisArch/config/hooks/live
 cp -r ../install-scripts ./work/$thisArch/config/includes.chroot/install-scripts
-
+install -d ./work/$thisArch/config/package-lists/
 echo debian-installer-launcher >>  ./work/$thisArch/config/package-lists/my.list.chroot
 #echo "d-i debian-installer/locale string en_US" \ >> config/includes.installer/preseed.cfg
 

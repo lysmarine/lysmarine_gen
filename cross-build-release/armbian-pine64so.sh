@@ -18,11 +18,6 @@ setupWorkSpace $thisArch ;
 
 
 
-# Check 3rd party dependency Needed to to execute various tasks.
-get3rdPartyAssets ;
-
-
-
 # Download or copy the official image from cache
 if [ ! -f ./cache/$thisArch/$imageName ]; then
 	log "Downloading official image from internet."

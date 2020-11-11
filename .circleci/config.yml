@@ -16,7 +16,7 @@ commands:
     steps:
       - checkout
       - run: sudo apt-get -q update
-      - run: sudo apt-get -y -q install proot qemu qemu-user git live-build
+      - run: sudo apt-get -y -q install proot qemu qemu-user git live-build p7zip-full
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
 jobs:
