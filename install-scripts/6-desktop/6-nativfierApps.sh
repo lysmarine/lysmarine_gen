@@ -63,3 +63,6 @@ if [ $LMOS == Debian ]; then
 	chmod 4755 /opt/wdash/chrome-sandbox
 	chmod 4755 /opt/MusicBox/chrome-sandbox
 fi
+
+# Minimize space by linking identical files
+hardlink -v -f -t /opt/*
