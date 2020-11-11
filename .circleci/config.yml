@@ -16,36 +16,63 @@ commands:
       - checkout
       - run: sudo apt-get -q update
       - run: sudo apt-get -y -q install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
-      - run: touch persistance.txt
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
 jobs:
   build-raspios-arm32:
     executor: linux
     environment:
-      - PKG_RELEASE=raspios
       - PKG_DISTRO=buster
-      - PKG_ARCH=armhf
       - LYSMARINE_VER=0.9.0.10
+      - PKG_RELEASE=raspios
+      - PKG_ARCH=armhf
     steps:
       - prepare-linux-machine
-      - run: sudo ls -lah
-      - run: sudo pwd
-      - run: sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+      - run: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
       - store_artifacts:
-          path: ./release/$PKG_ARCH/*
-          destination: test/$PKG_ARCH/
+          path: ./cross-build-release/release/$PKG_ARCH/*
+          destination: release/$PKG_ARCH/
 
   build-raspios-arm64:
     executor: linux
     environment:
-      - PKG_RELEASE=raspios
       - PKG_DISTRO=buster
-      - PKG_ARCH=arm64
       - LYSMARINE_VER=0.9.0.10
+      - PKG_RELEASE=raspios
+      - PKG_ARCH=arm64
     steps:
       - prepare-linux-machine
-      - run: sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+      - run: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+      - store_artifacts:
+          path: ./cross-build-release/release/$PKG_ARCH/*
+          destination: release/$PKG_ARCH/
+
+  build-armbian-pine64so:
+    executor: linux
+    environment:
+      - PKG_DISTRO=buster
+      - LYSMARINE_VER=0.9.0.10
+      - PKG_RELEASE=armbian-pineA64
+      - PKG_ARCH=armbian-pineA64
+    steps:
+      - prepare-linux-machine
+      - run: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh $PKG_ARCH $LYSMARINE_VER
+      - store_artifacts:
+          path: ./cross-build-release/release/$PKG_ARCH/*
+          destination: release/$PKG_ARCH/
+
+  build-debian-live:
+    executor: linux
+    environment:
+      - PKG_DISTRO=buster
+      - LYSMARINE_VER=0.9.0.10
+      - PKG_ARCH=amd64
+    steps:
+      - prepare-linux-machine
+      - run: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
+      - store_artifacts:
+          path: ./cross-build-release/release/$PKG_ARCH/*
+          destination: release/$PKG_ARCH/
 
   publish:
     executor: cloudsmith/default
