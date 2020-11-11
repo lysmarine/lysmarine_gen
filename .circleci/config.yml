@@ -29,7 +29,9 @@ jobs:
       - PKG_ARCH=armhf
     steps:
       - prepare-linux-machine
-      - run: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+      - run:
+          command: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+          no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/$PKG_ARCH/*
           destination: release/$PKG_ARCH/
@@ -43,7 +45,9 @@ jobs:
       - PKG_ARCH=arm64
     steps:
       - prepare-linux-machine
-      - run: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+      - run:
+          command: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+          no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/$PKG_ARCH/*
           destination: release/$PKG_ARCH/
@@ -57,7 +61,9 @@ jobs:
       - PKG_ARCH=armbian-pineA64
     steps:
       - prepare-linux-machine
-      - run: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh $PKG_ARCH $LYSMARINE_VER
+      - run:
+          command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh $PKG_ARCH $LYSMARINE_VER
+          no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/$PKG_ARCH/*
           destination: release/$PKG_ARCH/
