@@ -24,3 +24,5 @@ python3 -m pip install https://github.com/natumbri/mopidy-youtube/archive/develo
 systemctl enable mopidy
 
 install -m 644 $FILE_FOLDER/musicbox.desktop "/usr/local/share/applications/"
+
+python3 setup.py clean --all
