@@ -1,5 +1,6 @@
 ---
 version: 2.1
+
 orbs:
   cloudsmith: cloudsmith/cloudsmith@1.0.4
 
@@ -15,7 +16,7 @@ commands:
     steps:
       - checkout
       - run: sudo apt-get -q update
-      - run: sudo apt-get -y -q install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
+      - run: sudo apt-get -y -q install proot qemu qemu-user git live-build
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
 jobs:
@@ -88,7 +89,11 @@ workflows:
     jobs:
       - build-raspios-arm32
       - build-raspios-arm64
+      - build-armbian-pine64so
+      - build-debian-live
       - publish:
           requires:
             - build-raspios-arm32
             - build-raspios-arm64
+            - build-armbian-pine64so
+            - build-debian-live
