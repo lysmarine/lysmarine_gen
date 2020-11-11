@@ -9,8 +9,21 @@ executors:
       image: ubuntu-2004:202010-01
     resource_class: medium
 
-
 jobs:
+  prepare-machine:
+    executor: linux
+    steps:
+      - checkout
+      - run: sudo apt-get -q update
+      - run: sudo apt-get -y -q install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
+      - run: pwd
+      - run: ls -lah
+      - run: ls -lah /
+      - run: sudo find / -name ci-source
+      - run: cd ci-source/cross-build-release; sudo chmod -v u+w *.sh;
+
+
+
   raspios-arm32:
     executor: linux
     environment:
@@ -19,10 +32,7 @@ jobs:
       - PKG_ARCH=armhf
       - LYSMARINE_VER=0.9.0.10
     steps:
-      - checkout
-      - run: sudo apt-get -q update
-      - run: sudo apt-get -y -q install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
-      - run: cd ci-source/cross-build-release; sudo chmod -v u+w *.sh;
+      - run: git -h
       - run: sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
 
   publish:
@@ -37,6 +47,7 @@ workflows:
   version: 2
   build_all:
     jobs:
+      - prepare-machine
       - raspios-arm32
       - publish:
           requires:
