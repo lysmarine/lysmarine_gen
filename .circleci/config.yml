@@ -16,9 +16,10 @@ jobs:
       - checkout
       - run: sudo apt-get -q update
       - run: sudo apt-get -y -q install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
+      - run: touch persistance.txt
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
-  raspios-arm32:
+  build-raspios-arm32:
     executor: linux
     environment:
       - PKG_RELEASE=raspios
@@ -26,6 +27,20 @@ jobs:
       - PKG_ARCH=armhf
       - LYSMARINE_VER=0.9.0.10
     steps:
+      - run: sudo ls -lah
+      - run: sudo pwd
+      - run: sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+
+  build-raspios-arm64:
+    executor: linux
+    environment:
+      - PKG_RELEASE=raspios
+      - PKG_DISTRO=buster
+      - PKG_ARCH=arm64
+      - LYSMARINE_VER=0.9.0.10
+    steps:
+      - run: sudo ls -lah
+      - run: sudo pwd
       - run: sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
 
   publish:
@@ -41,9 +56,13 @@ workflows:
   build_all:
     jobs:
       - prepare-machine
-      - raspios-arm32:
+      - build-raspios-arm32:
+          requires:
+            - prepare-machine
+      - build-raspios-arm64:
           requires:
             - prepare-machine
       - publish:
           requires:
-            - raspios-arm32
+            - build-raspios-arm32
+            - build-raspios-arm64
