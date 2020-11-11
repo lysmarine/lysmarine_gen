@@ -9,9 +9,9 @@ executors:
       image: ubuntu-2004:202010-01
     resource_class: medium
 
-jobs:
-  prepare-machine:
-    executor: linux
+commands:
+  prepare-linux-machine:
+    description: "Install the requirements to run lysmarine build script"
     steps:
       - checkout
       - run: sudo apt-get -q update
@@ -19,6 +19,7 @@ jobs:
       - run: touch persistance.txt
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
+jobs:
   build-raspios-arm32:
     executor: linux
     environment:
@@ -27,9 +28,13 @@ jobs:
       - PKG_ARCH=armhf
       - LYSMARINE_VER=0.9.0.10
     steps:
+      - prepare-linux-machine
       - run: sudo ls -lah
       - run: sudo pwd
       - run: sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+      - store_artifacts:
+          path: ./release/$PKG_ARCH/*
+          destination: test/$PKG_ARCH/
 
   build-raspios-arm64:
     executor: linux
@@ -39,8 +44,7 @@ jobs:
       - PKG_ARCH=arm64
       - LYSMARINE_VER=0.9.0.10
     steps:
-      - run: sudo ls -lah
-      - run: sudo pwd
+      - prepare-linux-machine
       - run: sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
 
   publish:
@@ -55,13 +59,8 @@ workflows:
   version: 2
   build_all:
     jobs:
-      - prepare-machine
       - build-raspios-arm32:
-          requires:
-            - prepare-machine
       - build-raspios-arm64:
-          requires:
-            - prepare-machine
       - publish:
           requires:
             - build-raspios-arm32
