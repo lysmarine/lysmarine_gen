@@ -20,9 +20,9 @@ jobs:
       - LYSMARINE_VER=0.9.0.10
     steps:
       - checkout
-      - run: apt-get -y -q update
-      - run: apt-get -y -q install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
-      - run: cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER"
+      - run: sudo apt-get -q update
+      - run: sudo apt-get -y -q install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
+      - run: cd ci-source/cross-build-release; sudo chmod -v u+w *.sh; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER"
 
   publish:
     executor: cloudsmith/default
