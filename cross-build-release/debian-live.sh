@@ -72,7 +72,6 @@ pushd ./work/$thisArch
   --mode debian \
   --security false \
   --system "live" \
-  --updates true \
   --verbose \
   --win32-loader true  \
   --debian-installer live

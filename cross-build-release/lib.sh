@@ -69,14 +69,8 @@ umountImageFile () {
 	rm -rf $rootfs/var/log/*
 	rm -rf $rootfs/tmp/*
 
-  umount $rootfs/etc/resolv.conf
-  umount $rootfs/dev
-  umount $rootfs/sys
-  umount $rootfs/proc
-  umount $rootfs/tmp
-  umount $rootfs/run/shm
-	umount $rootfs/boot
-	umount $rootfs
+	umount ./work/$thisArch/rootfs/boot
+	umount ./work/$thisArch/rootfs
 	kpartx -d $imageFile
 }
 
@@ -112,9 +106,9 @@ inflateImage () {
 
 function addLysmarineScripts {
 	thisArch=$1
-	rootfs=./work/${thisArch}/rootfs
+	rootfs="./work/${thisArch}/rootfs"
 	log "copying lysmarine on the image"
 	ls $rootfs
-	cp -r ../install-scripts ${rootfs}/
-	chmod 0775 ${rootfs}/install-scripts/install.sh
+	cp -r ../install-scripts "${rootfs}/"
+	chmod 0775 "${rootfs}/install-scripts/install.sh"
 }

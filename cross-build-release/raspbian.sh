@@ -37,20 +37,21 @@
 	# Copy the lysmarine and origine OS config files in the mounted rootfs
 	addLysmarineScripts $upstreamOS
 
-  mkRoot=$workDir/rootfs
-  ls -l $mkRoot
+# chroot into the
+proot -q qemu-arm \
+	--root-id \
+	--rootfs=$workDir/rootfs \
+	--cwd=/install-scripts \
+	--mount=/etc/resolv.conf:/etc/resolv.conf \
+	--mount=/dev:/dev \
+	--mount=/sys:/sys \
+	--mount=/proc:/proc \
+	--mount=/tmp:/tmp \
+	--mount=./cache/$thisArch/stageCache:/lysmarine/stageCache \
+	--mount=/run/shm:/run/shm \
+	./install.sh 0 2 4 6 8
 
-  mkdir -p ./cache/${thisArch}/stageCache; mkdir -p $mkRoot/install-scripts/stageCache
-  mkdir -p /run/shm; mkdir -p $mkRoot/run/shm
-  mount -o bind /etc/resolv.conf $mkRoot/etc/resolv.conf
-  mount -o bind /dev $mkRoot/dev
-  mount -o bind /sys $mkRoot/sys
-  mount -o bind /proc $mkRoot/proc
-  mount -o bind /tmp $mkRoot/tmp
-  mount --rbind /run/shm $mkRoot/run/shm
-  chroot $mkRoot /bin/bash -xe << EOF
-    set -x; set -e; cd /install-scripts; export LMBUILD="raspios"; ls; chmod +x *.sh; ./install.sh 0 2 4 6 8; exit
-EOF
+
 
   # Unmount
   umountImageFile $upstreamOS $workDir/$imageName

@@ -51,33 +51,18 @@ mountImageFile $thisArch ./work/$thisArch/$imageName
 addLysmarineScripts $thisArch
 
 
-# Chroot into the mounted image./
-log "chroot into the image"
-
-echo "";echo "";echo "";echo "";echo "";
-echo "========================================================================="
-echo "You are now in the chroot environement.";
-echo "Start the build script with by pasting the following line in the terminal:";
-echo "";
-echo "cd /install-scripts; ./install.sh 1 2 3 4 5 6 7 86 9"
-echo "cd /install-scripts; ./install.sh ";
-echo "========================================================================="
-echo "";echo "";
-
-
-
 # chroot into the mount image point
 proot -q qemu-aarch64 \
 	--root-id \
 	--rootfs=work/${thisArch}/rootfs \
-	--cwd=/ \
+	--cwd=/install-scripts \
 	--mount=/etc/resolv.conf:/etc/resolv.conf \
 	--mount=/dev:/dev \
 	--mount=/sys:/sys \
 	--mount=/proc:/proc \
 	--mount=/tmp:/tmp \
 	--mount=/run/shm:/run/shm \
-	/bin/bash
+	./install.sh 0 2 4 6 8
 
 
 
