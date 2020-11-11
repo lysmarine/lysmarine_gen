@@ -38,6 +38,7 @@ jobs:
     steps:
       - checkout
       - build-lysmarine
+
   build-on-buster-arm64:
     executor: boot-linux
     environment:
@@ -57,5 +58,4 @@ workflows:
     jobs:
       - build-on-buster-arm32
       - build-on-buster-arm64
-      - hold
       - publish
