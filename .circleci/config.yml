@@ -1,14 +1,20 @@
 ---
 version: 2.1
 
+
+
 orbs:
   cloudsmith: cloudsmith/cloudsmith@1.0.4
+
+
 
 executors:
   linux:
     machine:
       image: ubuntu-2004:202010-01
     resource_class: medium
+
+
 
 commands:
   prepare-linux-machine:
@@ -18,6 +24,8 @@ commands:
       - run: sudo apt-get -q update
       - run: sudo apt-get -y -q install proot qemu qemu-user git live-build p7zip-full
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
+
+
 
 jobs:
   build-raspios-arm32:
@@ -33,7 +41,7 @@ jobs:
           command: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
           no_output_timeout: 30m
       - store_artifacts:
-          path: ./cross-build-release/release/armhf/
+          path: ./cross-build-release/release/raspios/
           destination: release/
 
   build-raspios-arm64:
@@ -49,7 +57,7 @@ jobs:
           command: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
           no_output_timeout: 30m
       - store_artifacts:
-          path: ./cross-build-release/release/arm64/
+          path: ./cross-build-release/release/raspios/
           destination: release/
 
   build-armbian-pine64so:
@@ -87,7 +95,12 @@ jobs:
       - checkout
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
-      - run: .circleci/publish-cloudsmith.sh img lysmarineos/images ${PKG_DISTRO}/${PKG_RELEASE}
+      - cloudsmith/publish:
+          cloudsmith-repository: lysmarineos/images
+          package-format: img
+          package-path: ./cross-build-release/release/*/*.*
+
+
 
 workflows:
   version: 2
