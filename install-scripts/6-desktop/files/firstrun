@@ -6,5 +6,11 @@ update-mime-database /usr/share/mime
 # Allow mopidy user to access X server
 xhost +SI:localuser:mopidy
 
+# Setting sound
+amixer cset numid=3 1
+amixer set Master 90%
+amixer -D pulse set Master 90%
+
+
 touch /tmp/FIRSTRUN
 systemctl disable firstRun.service
