@@ -94,8 +94,3 @@ workflows:
   build_all:
     jobs:
       - build-raspios-arm32
-
-      - publish:
-          requires:
-            - build-raspios-arm32
-
