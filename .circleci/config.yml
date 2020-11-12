@@ -30,10 +30,10 @@ jobs:
     steps:
       - prepare-linux-machine
       - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+          command: cd cross-build-release;mkdir -p release/armhf ; touch release/armhf/foo.txt
           no_output_timeout: 30m
       - store_artifacts:
-          path: ./cross-build-release/release/$PKG_ARCH/*
+          path: ./cross-build-release/release/
           destination: release/$PKG_ARCH/
 
   build-raspios-arm64:
@@ -94,12 +94,8 @@ workflows:
   build_all:
     jobs:
       - build-raspios-arm32
-      - build-raspios-arm64
-      - build-armbian-pine64so
-      - build-debian-live
+
       - publish:
           requires:
             - build-raspios-arm32
-            - build-raspios-arm64
-            - build-armbian-pine64so
-            - build-debian-live
+
