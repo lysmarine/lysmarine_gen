@@ -33,18 +33,18 @@ npm cache clean --force
 
 ## Install signalk published plugin
 pushd /home/signalk/.signalk
-su signalk -c "npm install @signalk/charts-plugin --unsafe-perm --loglevel error"
-su signalk -c "npm install @mxtommy/kip --unsafe-perm --loglevel error"
-#su signalk -c "npm install signalk-world-coastline-map --unsafe-perm --loglevel error"
+  su signalk -c "npm install @signalk/charts-plugin --unsafe-perm --loglevel error"
+  su signalk -c "npm install @mxtommy/kip --unsafe-perm --loglevel error"
+  #su signalk -c "npm install signalk-world-coastline-map --unsafe-perm --loglevel error"
 popd
 
 ## Install signalk lysmarine-dashboard plugin
 pushd /home/signalk/.signalk/node_modules/@signalk/
-su signalk -c "git clone https://github.com/lysmarine/lysmarine-dashboard"
-pushd ./lysmarine-dashboard
-rm -rf .git
-npm install
-popd
+  su signalk -c "git clone https://github.com/lysmarine/lysmarine-dashboard"
+  pushd ./lysmarine-dashboard
+    rm -rf .git
+    npm install
+  popd
 popd
 
 ## Give set-system-time the possibility to change the date.
