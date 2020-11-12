@@ -30,11 +30,11 @@ jobs:
     steps:
       - prepare-linux-machine
       - run:
-          command: cd cross-build-release;mkdir -p release/armhf ; touch release/armhf/foo.txt
+          command: cd cross-build-release;mkdir -p release/armhf ; touch release/armhf/foo.txt ; echo boo >> release/armhf/foo.txt
           no_output_timeout: 30m
       - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/$PKG_ARCH/
+          path: ./cross-build-release/release/${PKG_ARCH}/
+          destination: release/${PKG_ARCH}/
 
   build-raspios-arm64:
     executor: linux
@@ -94,3 +94,8 @@ workflows:
   build_all:
     jobs:
       - build-raspios-arm32
+
+      - publish:
+          requires:
+            - build-raspios-arm32
+
