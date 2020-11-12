@@ -1,52 +1,105 @@
 ---
 version: 2.1
+
+orbs:
+  cloudsmith: cloudsmith/cloudsmith@1.0.4
+
 executors:
-  boot-linux:
+  linux:
     machine:
-      enabled: true
-      image: ubuntu-1604:202010-01
+      image: ubuntu-2004:202010-01
+    resource_class: medium
+
 commands:
-  git-checkout:
+  prepare-linux-machine:
+    description: "Install the requirements to run lysmarine build script"
     steps:
       - checkout
-  build-n-publish-debian:
-    steps:
-      - run: sudo apt-get -y install wget
-      - run: chmod a+x .circleci/*.sh
-      - run:
-          command: |
-            .circleci/build-ci.sh
-          no_output_timeout: 30m
-  do-all:
-    steps:
-      - git-checkout
-      - build-n-publish-debian
+      - run: sudo apt-get -q update
+      - run: sudo apt-get -y -q install proot qemu qemu-user git live-build p7zip-full
+      - run: cd cross-build-release; sudo chmod -v u+w *.sh;
+
 jobs:
-  build-raspbian-buster-arm32:
-    executor: boot-linux
+  build-raspios-arm32:
+    executor: linux
     environment:
-      - DOCKER_IMAGE=arm32v7/debian:buster
-      - CONTAINER_DISTRO=debian:buster
-      - PKG_RELEASE=raspbian
       - PKG_DISTRO=buster
+      - LYSMARINE_VER=0.9.0.10
+      - PKG_RELEASE=raspios
       - PKG_ARCH=armhf
-      - EMU=on
     steps:
-      - do-all
-  build-raspbian-buster-arm64:
-    executor: boot-linux
+      - prepare-linux-machine
+      - run:
+          command: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+          no_output_timeout: 30m
+      - store_artifacts:
+          path: ./cross-build-release/release/$PKG_ARCH/*
+          destination: release/$PKG_ARCH/
+
+  build-raspios-arm64:
+    executor: linux
     environment:
-      - DOCKER_IMAGE=arm64v8/debian:buster
-      - CONTAINER_DISTRO=debian:buster
-      - PKG_RELEASE=raspbian
       - PKG_DISTRO=buster
+      - LYSMARINE_VER=0.9.0.10
+      - PKG_RELEASE=raspios
       - PKG_ARCH=arm64
-      - EMU=on
     steps:
-      - do-all
+      - prepare-linux-machine
+      - run:
+          command: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+          no_output_timeout: 30m
+      - store_artifacts:
+          path: ./cross-build-release/release/$PKG_ARCH/*
+          destination: release/$PKG_ARCH/
+
+  build-armbian-pine64so:
+    executor: linux
+    environment:
+      - PKG_DISTRO=buster
+      - LYSMARINE_VER=0.9.0.10
+      - PKG_RELEASE=armbian-pineA64
+      - PKG_ARCH=armbian-pineA64
+    steps:
+      - prepare-linux-machine
+      - run:
+          command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh $PKG_ARCH $LYSMARINE_VER
+          no_output_timeout: 30m
+      - store_artifacts:
+          path: ./cross-build-release/release/$PKG_ARCH/*
+          destination: release/$PKG_ARCH/
+
+  build-debian-live:
+    executor: linux
+    environment:
+      - PKG_DISTRO=buster
+      - LYSMARINE_VER=0.9.0.10
+      - PKG_ARCH=amd64
+    steps:
+      - prepare-linux-machine
+      - run: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
+      - store_artifacts:
+          path: ./cross-build-release/release/$PKG_ARCH/*
+          destination: release/$PKG_ARCH/
+
+  publish:
+    executor: cloudsmith/default
+    steps:
+      - checkout
+      - cloudsmith/ensure-api-key
+      - cloudsmith/install-cli
+      - run: .circleci/publish-cloudsmith.sh img lysmarineos/images ${PKG_DISTRO}/${PKG_RELEASE}
+
 workflows:
   version: 2
   build_all:
     jobs:
-      - build-raspbian-buster-arm32
-      - build-raspbian-buster-arm64
+      - build-raspios-arm32
+      - build-raspios-arm64
+      - build-armbian-pine64so
+      - build-debian-live
+      - publish:
+          requires:
+            - build-raspios-arm32
+            - build-raspios-arm64
+            - build-armbian-pine64so
+            - build-debian-live
