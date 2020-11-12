@@ -33,8 +33,8 @@ jobs:
           command: cd cross-build-release;mkdir -p release/armhf ; touch release/armhf/foo.txt ; echo boo >> release/armhf/foo.txt
           no_output_timeout: 30m
       - store_artifacts:
-          path: ./cross-build-release/release/${PKG_ARCH}/
-          destination: release/${PKG_ARCH}/
+          path: ./cross-build-release/release/armhf/*.txt
+          destination: release/raspios-armhf/
 
   build-raspios-arm64:
     executor: linux
