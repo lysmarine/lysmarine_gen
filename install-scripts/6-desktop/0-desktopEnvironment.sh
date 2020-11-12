@@ -19,13 +19,13 @@ xbacklight lxappearance gmrun xsettingsd xserver-xorg \
 xinit libgtk2-perl pavucontrol cpanminus perl-base \
 dialog lxterminal network-manager-gnome
 
-install -d -o 1000 -g 1000 /home/user/.local
-install -d -o 1000 -g 1000 /home/user/.local/share
+install -o 1000 -g 1000 -d /home/user/.local
+install -o 1000 -g 1000 -d /home/user/.local/share
 
 # Openbox
-install -d -o 1000 -g 1000 "/home/user/.config"
-install -d -o 1000 -g 1000 "/home/user/.config/openbox"
-install -o 1000 -g 1000  -v $FILE_FOLDER/autostart  "/home/user/.config/openbox/"
+install -o 1000 -g 1000 -d "/home/user/.config"
+install -o 1000 -g 1000 -d "/home/user/.config/openbox"
+install -o 1000 -g 1000 -v $FILE_FOLDER/autostart  "/home/user/.config/openbox/"
 
 # Make some room for the rest of the build script
 apt-get clean

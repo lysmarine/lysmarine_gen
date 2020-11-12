@@ -26,22 +26,22 @@ export LC_ALL="C"
 
 ## If no build stage provided, build all stages.
 if [ "$#" -gt "0" ]; then
-	argumentList="$@"
+  argumentList="$@"
 else
-	argumentList="*.*"
+  argumentList="*.*"
 fi
 
 set -f
 for argument in $argumentList; do # access each element of array
-	stage=$(echo $argument | cut -d '.' -f 1)
-	script=$(echo $argument | cut -s -d '.' -f 2)
+  stage=$(echo $argument | cut -d '.' -f 1)
+  script=$(echo $argument | cut -s -d '.' -f 2)
 
-	if [ ! $script ]; then
-		script="*"
-	fi
+  if [ ! $script ]; then
+    script="*"
+  fi
 
-	set +f
-	for scriptLocation in ./$stage*/$script*.sh; do
+  set +f
+  for scriptLocation in ./$stage*/$script*.sh; do
     if [ -f $scriptLocation ]; then
       echo "From request $argument "
       echo "Running stage $stage -> $script ( $scriptLocation )"

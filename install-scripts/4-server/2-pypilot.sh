@@ -48,8 +48,8 @@ install -v -m 0644 $FILE_FOLDER/pypilot@.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.socket "/etc/systemd/system/"
 
-#systemctl enable pypilot@pypilot.service
-#systemctl enable pypilot_web.service
+systemctl enable pypilot@pypilot.service
+systemctl enable pypilot_web.service
 
 ## Install the user config files
 install -d -v -o pypilot -g pypilot -m 0755 /home/pypilot/.pypilot

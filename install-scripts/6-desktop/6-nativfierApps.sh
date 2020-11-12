@@ -12,39 +12,39 @@ install -v $FILE_FOLDER/signalk.desktop "/usr/local/share/applications/"
 
 ## arch name translation
 if [ $LMARCH == 'armhf' ]; then
- 	arch=armv7l
+  arch=armv7l
 elif [ $LMARCH == 'arm64' ]; then
-	arch=arm64
+  arch=arm64
 elif [ $LMARCH == 'amd64' ]; then
-	arch=x64
+  arch=x64
 else
   arch=$LMARCH
 fi
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
---name "wdash" --icon /home/user/.local/share/icons/signalk.png \
-"http://localhost:80" /opt/
+  --name "wdash" --icon /home/user/.local/share/icons/signalk.png \
+  "http://localhost:80" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
---name "SignalK"   --icon /home/user/.local/share/icons/signalk.png \
-"http://localhost:80/admin/" /opt/
+  --name "SignalK" --icon /home/user/.local/share/icons/signalk.png \
+  "http://localhost:80/admin/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
---name "Freeboard-sk" --icon /home/user/.local/share/icons/freeboard-sk.png \
-"http://localhost:81/@signalk/freeboard-sk/" /opt/
+  --name "Freeboard-sk" --icon /home/user/.local/share/icons/freeboard-sk.png \
+  "http://localhost:81/@signalk/freeboard-sk/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
---name "SpeedSample" --icon /usr/share/icons/gnome/256x256/apps/utilities-system-monitor.png \
-"http://localhost:4998" /opt/
+  --name "SpeedSample" --icon /usr/share/icons/gnome/256x256/apps/utilities-system-monitor.png \
+  "http://localhost:4998" /opt/
 
-echo "setTheme('dark')" > ./pypilot_darktheme.js
+echo "setTheme('dark')" >./pypilot_darktheme.js
 nativefier -a $arch --inject ./pypilot_darktheme.js --disable-context-menu --disable-dev-tools --single-instance \
---name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png  \
-"http://localhost:8080" /opt/
+  --name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
+  "http://localhost:8080" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
---name "MusicBox" --icon /usr/share/icons/gnome/256x256/apps/multimedia-volume-control.png \
-"http://localhost:6680/musicbox_webclient" /opt/
+  --name "MusicBox" --icon /usr/share/icons/gnome/256x256/apps/multimedia-volume-control.png \
+  "http://localhost:6680/musicbox_webclient" /opt/
 
 ## Make folder name arch independent.
 mv /opt/Freeboard-sk-linux-$arch /opt/Freeboard-sk
@@ -56,12 +56,12 @@ mv /opt/MusicBox-linux-$arch /opt/MusicBox
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
-	chmod 4755 /opt/Freeboard-sk/chrome-sandbox
-	chmod 4755 /opt/Pypilot_webapp/chrome-sandbox
-	chmod 4755 /opt/SignalK/chrome-sandbox
-	chmod 4755 /opt/SpeedSample/chrome-sandbox
-	chmod 4755 /opt/wdash/chrome-sandbox
-	chmod 4755 /opt/MusicBox/chrome-sandbox
+  chmod 4755 /opt/Freeboard-sk/chrome-sandbox
+  chmod 4755 /opt/Pypilot_webapp/chrome-sandbox
+  chmod 4755 /opt/SignalK/chrome-sandbox
+  chmod 4755 /opt/SpeedSample/chrome-sandbox
+  chmod 4755 /opt/wdash/chrome-sandbox
+  chmod 4755 /opt/MusicBox/chrome-sandbox
 fi
 
 # Minimize space by linking identical files

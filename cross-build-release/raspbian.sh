@@ -26,7 +26,11 @@
   rm $myCache/$zipName
 
   # Copy image file to work folder add temporary space to it.
-  imageName=$(cd $myCache; ls *.img; cd ../../)
+  imageName=$(
+    cd $myCache
+    ls *.img
+    cd ../../
+  )
   inflateImage $thisArch $myCache/$imageName
 
   # copy ready image from cache to the work dir
@@ -41,8 +45,10 @@
   mkRoot=work/${thisArch}/rootfs
   ls -l $mkRoot
 
-  mkdir -p ./cache/${thisArch}/stageCache; mkdir -p $mkRoot/install-scripts/stageCache
-  mkdir -p /run/shm; mkdir -p $mkRoot/run/shm
+  mkdir -p ./cache/${thisArch}/stageCache
+  mkdir -p $mkRoot/install-scripts/stageCache
+  mkdir -p /run/shm
+  mkdir -p $mkRoot/run/shm
   mount -o bind /etc/resolv.conf $mkRoot/etc/resolv.conf
   mount -o bind /dev $mkRoot/dev
   mount -o bind /sys $mkRoot/sys
@@ -50,7 +56,7 @@
   mount -o bind /tmp $mkRoot/tmp
   mount --rbind $myCache/stageCache $mkRoot/install-scripts/stageCache
   mount --rbind /run/shm $mkRoot/run/shm
-  chroot $mkRoot /bin/bash -xe << EOF
+  chroot $mkRoot /bin/bash -xe <<EOF
     set -x; set -e; cd /install-scripts; export LMBUILD="raspios"; ls; chmod +x *.sh; ./install.sh 0 2 4 6 8; exit
 EOF
 
@@ -58,7 +64,7 @@ EOF
   umountImageFile $thisArch ./work/$thisArch/$imageName
 
   # Renaming the OS and moving it to the release folder.
-  cp -v ./work/$thisArch/$imageName  ./release/$thisArch/lysmarine_${LYSMARINE_VER}-${thisArch}-${cpuArch}.img
+  cp -v ./work/$thisArch/$imageName ./release/$thisArch/lysmarine_${LYSMARINE_VER}-${thisArch}-${cpuArch}.img
 
   exit 0
 }
