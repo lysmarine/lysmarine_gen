@@ -20,7 +20,7 @@ commands:
     steps:
       - checkout
       - run: sudo apt-get -q update
-      - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full
+      - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted
       - run: wget http://http.us.debian.org/debian/pool/main/l/live-build/live-build_20190311_all.deb
       - run: sudo apt install ./live-build_20190311_all.deb
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
@@ -50,8 +50,7 @@ jobs:
       - attach_workspace:
           at: /home/circleci
       - run:
-          #command: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
-          command: mkdir -p ./cross-build-release/release/raspios/ ;cd ./cross-build-release/release/raspios/;echo test > raspios-arm32-dummy.img
+          command: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
           no_output_timeout: 30m
       - persist_to_workspace:
           root: .
@@ -73,8 +72,7 @@ jobs:
       - attach_workspace:
           at: /home/circleci
       - run:
-          #command: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
-          command: mkdir -p ./cross-build-release/release/raspios/ ;cd ./cross-build-release/release/raspios/;echo test > raspios-arm64-dummy.img
+          command: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
           no_output_timeout: 30m
       - persist_to_workspace:
            root: .
@@ -95,7 +93,6 @@ jobs:
       - prepare-linux-machine
       - run:
           command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh
-        #  command: mkdir -p ./cross-build-release/release/raspios/ ; cd ./cross-build-release/release/raspios/;echo test > raspios-pine64-dummy.img
           no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/armbian-pineA64/*
@@ -139,8 +136,8 @@ workflows:
   version: 2
   build_all:
     jobs:
-      - build-raspios-arm32
-      - build-raspios-arm64
+     # - build-raspios-arm32
+     # - build-raspios-arm64
       #- build-debian-vbox
       - build-armbian-pine64so
       # - build-debian-live
