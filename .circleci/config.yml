@@ -16,25 +16,14 @@ commands:
     steps:
       - checkout
       - run: sudo apt-get -q update
-      - run: sudo apt-get -y -q install proot qemu qemu-user git live-build p7zip-full
+      - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full
+      - run: wget http://http.us.debian.org/debian/pool/main/l/live-build/live-build_20190311_all.deb
+      - run: dpkg -i live-build_20190311_all.deb
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
 
 
 jobs:
-
-  prepare-host:
-    executor: linux
-    environment:
-      - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.10
-      - PKG_RELEASE=raspios
-      - PKG_ARCH=armhf
-    steps:
-      - attach_workspace:
-          at: /
-      - prepare-linux-machine
-
   build-raspios-arm32:
     executor: linux
     environment:
@@ -48,7 +37,7 @@ jobs:
           at: /home/circleci
       - run:
           #command: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
-          command: cd ./cross-build-release/release/raspios/;echo test > raspios-arm32-dummy.img
+          command: mkdir -p ./cross-build-release/release/raspios/ ;cd ./cross-build-release/release/raspios/;echo test > raspios-arm32-dummy.img
           no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/raspios/
@@ -65,10 +54,9 @@ jobs:
       - prepare-linux-machine
       - attach_workspace:
           at: /home/circleci
-      - run: 7z -h
       - run:
           #command: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
-          command: cd ./cross-build-release/release/raspios/;echo test > raspios-arm64-dummy.img
+          command: mkdir -p ./cross-build-release/release/raspios/ ;cd ./cross-build-release/release/raspios/;echo test > raspios-arm64-dummy.img
           no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/raspios/
@@ -83,12 +71,10 @@ jobs:
       - PKG_ARCH=armbian-pineA64
     steps:
       - attach_workspace:
-          at: /
-      - attach_workspace:
           at: /home/circleci
       - run:
           #command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh $PKG_ARCH $LYSMARINE_VER
-          command: 7z -h ; cd ./cross-build-release/release/raspios/;echo test > raspios-pine64-dummy.img
+          command: mkdir -p ./cross-build-release/release/raspios/ ; cd ./cross-build-release/release/raspios/;echo test > raspios-pine64-dummy.img
           no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/pineA64/*
@@ -103,7 +89,21 @@ jobs:
     steps:
       - prepare-linux-machine
       - run: lb -v
-      #- run: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
+      - run: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
+      - store_artifacts:
+          path: ./cross-build-release/release/amd64/*
+          destination: release/$PKG_ARCH/
+
+  build-debian-vbox:
+    executor: linux
+    environment:
+      - PKG_DISTRO=buster
+      - LYSMARINE_VER=0.9.0.10
+      - PKG_ARCH=amd64
+    steps:
+      - prepare-linux-machine
+      - run: sudo apt-get virtualbox
+      #- run: cd cross-build-release; sudo /bin/bash -xe ./debian-vbox.sh
       - store_artifacts:
           path: ./cross-build-release/release/amd64/*
           destination: release/$PKG_ARCH/
@@ -126,22 +126,13 @@ workflows:
   version: 2
   build_all:
     jobs:
-      - prepare-host
-      - build-raspios-arm32:
-          requires:
-            - prepare-host
-      - build-raspios-arm64:
-          requires:
-              - prepare-host
-      - build-armbian-pine64so:
-          requires:
-            - prepare-host
-      - build-debian-live:
-          requires:
-            - prepare-host
+      - build-raspios-arm32
+      - build-raspios-arm64
+      - build-debian-vbox
+      # - build-armbian-pine64so
+      - build-debian-live
       - publish:
           requires:
-            - prepare-host
             - build-raspios-arm32
             - build-raspios-arm64
       # filters:
