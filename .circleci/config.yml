@@ -1,20 +1,14 @@
 ---
 version: 2.1
 
-
-
 orbs:
   cloudsmith: cloudsmith/cloudsmith@1.0.4
-
-
 
 executors:
   linux:
     machine:
       image: ubuntu-2004:202010-01
     resource_class: medium
-
-
 
 commands:
   prepare-linux-machine:
@@ -28,6 +22,7 @@ commands:
 
 
 jobs:
+
   prepare-host:
     executor: linux
     environment:
@@ -52,7 +47,8 @@ jobs:
       - attach_workspace:
           at: /home/circleci
       - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+          #command: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+          command: cd ./cross-build-release/release/raspios/;echo test > raspios-arm32-dummy.img
           no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/raspios/
@@ -71,7 +67,8 @@ jobs:
           at: /home/circleci
       - run: 7z -h
       - run:
-          command: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+          #command: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
+          command: cd ./cross-build-release/release/raspios/;echo test > raspios-arm64-dummy.img
           no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/raspios/
@@ -87,8 +84,11 @@ jobs:
     steps:
       - attach_workspace:
           at: /
+      - attach_workspace:
+          at: /home/circleci
       - run:
-          command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh $PKG_ARCH $LYSMARINE_VER
+          #command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh $PKG_ARCH $LYSMARINE_VER
+          command: 7z -h ; cd ./cross-build-release/release/raspios/;echo test > raspios-pine64-dummy.img
           no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/pineA64/*
@@ -102,7 +102,8 @@ jobs:
       - PKG_ARCH=amd64
     steps:
       - prepare-linux-machine
-      - run: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
+      - run: lb -v
+      #- run: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
       - store_artifacts:
           path: ./cross-build-release/release/amd64/*
           destination: release/$PKG_ARCH/
@@ -126,12 +127,21 @@ workflows:
   build_all:
     jobs:
       - prepare-host
-      - build-raspios-arm32
-      - build-raspios-arm64
-      - build-armbian-pine64so
-      - build-debian-live
+      - build-raspios-arm32:
+          requires:
+            - prepare-host
+      - build-raspios-arm64:
+          requires:
+              - prepare-host
+      - build-armbian-pine64so:
+          requires:
+            - prepare-host
+      - build-debian-live:
+          requires:
+            - prepare-host
       - publish:
           requires:
+            - prepare-host
             - build-raspios-arm32
             - build-raspios-arm64
       # filters:
