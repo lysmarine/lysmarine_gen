@@ -120,7 +120,7 @@ jobs:
     executor: cloudsmith/default
     steps:
       - attach_workspace:
-          at: ./cross-build-release/release/raspios/
+          at: ./
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
       - run: ls -lah ./cross-build-release/release/raspios/
