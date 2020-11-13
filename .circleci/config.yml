@@ -123,11 +123,10 @@ jobs:
           at: ./cross-build-release/release/raspios/
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
-      - run: pwd; ls -lah
-      - run: ls -lah ./cross-build-release/release/
+      - run: ls -lah ./cross-build-release/release/raspios/
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/images
-          package-format: img
+          package-format: raw
           package-path: ./cross-build-release/release/*
 
 
