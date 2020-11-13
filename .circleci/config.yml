@@ -132,8 +132,8 @@ workflows:
     jobs:
       - build-raspios-arm32
       - build-raspios-arm64
-      - build-debian-vbox
       - build-armbian-pine64so
+      - build-debian-vbox
       - build-debian-live
       # filters:
        # branches:

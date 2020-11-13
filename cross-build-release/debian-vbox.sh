@@ -21,7 +21,10 @@ fi
 if [ ! -f ./cache/$thisArch/$thisArch.vdi ]; then
 	log "Creating a new VBox image"
 	rm -r ./work/$thisArch/*
-	rm /root/.config/VirtualBox/lysmarine/lysmarine.vbox
+
+	if [  -f /root/.config/VirtualBox/lysmarine/lysmarine.vbox ]; then
+		rm /root/.config/VirtualBox/lysmarine/lysmarine.vbox
+	fi
 
 	#Create VM
 
