@@ -18,7 +18,7 @@ commands:
       - run: sudo apt-get -q update
       - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full
       - run: wget http://http.us.debian.org/debian/pool/main/l/live-build/live-build_20190311_all.deb
-      - run: dpkg -i live-build_20190311_all.deb
+      - run: sudo dpkg -i live-build_20190311_all.deb
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
 
