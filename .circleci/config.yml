@@ -25,7 +25,17 @@ commands:
       - run: sudo apt install ./live-build_20190311_all.deb
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
-
+  publish:
+    steps:
+      - cloudsmith/ensure-api-key
+      - cloudsmith/install-cli
+      - run: ls -lah ./cross-build-release/release/raspios/
+      - run: cp -v ./cross-build-release/release/raspios/* ./
+      - run: ls -lah
+      - cloudsmith/publish:
+          cloudsmith-repository: lysmarineos/images
+          package-format: raw
+          package-path: ./*.img
 
 jobs:
   build-raspios-arm32:
@@ -49,6 +59,7 @@ jobs:
       - store_artifacts:
           path: ./cross-build-release/release/raspios/
           destination: release/
+      - publish
 
   build-raspios-arm64:
     executor: linux
@@ -71,6 +82,7 @@ jobs:
       - store_artifacts:
           path: ./cross-build-release/release/raspios/
           destination: release/
+      - publish
 
   build-armbian-pine64so:
     executor: docker-container
@@ -80,13 +92,11 @@ jobs:
       - PKG_RELEASE=armbian-pineA64
       - PKG_ARCH=armbian-pineA64
     steps:
+      - prepare-linux-machine
       - run:
           command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh
         #  command: mkdir -p ./cross-build-release/release/raspios/ ; cd ./cross-build-release/release/raspios/;echo test > raspios-pine64-dummy.img
           no_output_timeout: 30m
-      #- persist_to_workspace:
-      #   root: .
-      #   paths: ./cross-build-release/release/armbian-pineA64/
       - store_artifacts:
           path: ./cross-build-release/release/armbian-pineA64/*
           destination: release/$PKG_ARCH/
@@ -121,21 +131,7 @@ jobs:
           path: ./cross-build-release/release/amd64/*
           destination: release/$PKG_ARCH/
 
-  publish:
-    executor: cloudsmith/default
-    steps:
-      - attach_workspace:
-          at: ./
-      - cloudsmith/ensure-api-key
-      - cloudsmith/install-cli
-      - run: ls -lah ./cross-build-release/release/raspios/
-      - run: cp -v ./cross-build-release/release/raspios/* ./
-     # - run: cp -v ./cross-build-release/release/armbian-pineA64/* ./
-      - run: ls -lah
-      - cloudsmith/publish:
-          cloudsmith-repository: lysmarineos/images
-          package-format: raw
-          package-path: ./*.img
+
 
 
 
@@ -148,10 +144,6 @@ workflows:
       #- build-debian-vbox
       - build-armbian-pine64so
       # - build-debian-live
-      - publish:
-          requires:
-            - build-raspios-arm32
-            - build-raspios-arm64
       # filters:
        # branches:
         #  only: master
