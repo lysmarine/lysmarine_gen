@@ -8,36 +8,32 @@ executors:
   linux:
     machine:
       image: ubuntu-2004:202010-01
-    resource_class: medium
-
-  docker-container:
-    docker:
-      - image: circleci/buildpack-deps:buster
 
 commands:
+
   prepare-linux-machine:
     description: "Install the requirements to run lysmarine build script"
     steps:
       - checkout
       - run: sudo apt-get -q update
       - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx
-      - run: wget http://http.us.debian.org/debian/pool/main/l/live-build/live-build_20190311_all.deb
-      - run: sudo apt install ./live-build_20190311_all.deb
+      - run: wget http://http.us.debian.org/debian/pool/main/l/live-build/live-build_20190311_all.deb && sudo apt install ./live-build_20190311_all.deb
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
   publish:
     steps:
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
-      - run: ls -lah ./cross-build-release/release/raspios/
-      - run: cp -v ./cross-build-release/release/raspios/* ./
+      - run: cp -v ./cross-build-release/release/*/* ./
       - run: ls -lah
+      - run: zip $(ls ./*.img).zip $(ls ./*.img)
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/images
           package-format: raw
-          package-path: ./*.img
+          package-path: ./*.img.zip
 
 jobs:
+
   build-raspios-arm32:
     executor: linux
     environment:
@@ -83,7 +79,7 @@ jobs:
       - publish
 
   build-armbian-pine64so:
-    executor: docker-container
+    executor: linux
     environment:
       - PKG_DISTRO=buster
       - LYSMARINE_VER=0.9.0.10
@@ -97,6 +93,7 @@ jobs:
       - store_artifacts:
           path: ./cross-build-release/release/armbian-pineA64/*
           destination: release/$PKG_ARCH/
+      - publish
 
   build-debian-live:
     executor: linux
@@ -106,13 +103,13 @@ jobs:
       - PKG_ARCH=amd64
     steps:
       - prepare-linux-machine
-      - run: lb -v
       - run:
           command: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
           no_output_timeout: 30m
       - store_artifacts:
-          path: ./cross-build-release/release/amd64/*
+          path: ./cross-build-release/release/debian-amd64/*
           destination: release/$PKG_ARCH/
+      - publish
 
   build-debian-vbox:
     executor: linux
@@ -125,22 +122,19 @@ jobs:
       - run: sudo apt-get install virtualbox
       #- run: cd cross-build-release; sudo /bin/bash -xe ./debian-vbox.sh
       - store_artifacts:
-          path: ./cross-build-release/release/amd64/*
+          path: ./cross-build-release/release/debian-vbox/*
           destination: release/$PKG_ARCH/
-
-
-
-
+      - publish
 
 workflows:
   version: 2
   build_all:
     jobs:
-     # - build-raspios-arm32
-     # - build-raspios-arm64
-      #- build-debian-vbox
+      - build-raspios-arm32
+      - build-raspios-arm64
+      - build-debian-vbox
       - build-armbian-pine64so
-      # - build-debian-live
+      - build-debian-live
       # filters:
        # branches:
         #  only: master
