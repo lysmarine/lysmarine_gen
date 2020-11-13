@@ -80,14 +80,15 @@ jobs:
       - PKG_RELEASE=armbian-pineA64
       - PKG_ARCH=armbian-pineA64
     steps:
-      - attach_workspace:
-          at: /home/circleci
       - run:
-          #command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh $PKG_ARCH $LYSMARINE_VER
-          command: mkdir -p ./cross-build-release/release/raspios/ ; cd ./cross-build-release/release/raspios/;echo test > raspios-pine64-dummy.img
+          command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh
+        #  command: mkdir -p ./cross-build-release/release/raspios/ ; cd ./cross-build-release/release/raspios/;echo test > raspios-pine64-dummy.img
           no_output_timeout: 30m
+      #- persist_to_workspace:
+      #   root: .
+      #   paths: ./cross-build-release/release/armbian-pineA64/
       - store_artifacts:
-          path: ./cross-build-release/release/pineA64/*
+          path: ./cross-build-release/release/armbian-pineA64/*
           destination: release/$PKG_ARCH/
 
   build-debian-live:
@@ -128,12 +129,13 @@ jobs:
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
       - run: ls -lah ./cross-build-release/release/raspios/
-      - run: cp ./cross-build-release/release/raspios/* ./
-      - run: ls -lah ./cross-build-release/release/raspios/
+      - run: cp -v ./cross-build-release/release/raspios/* ./
+     # - run: cp -v ./cross-build-release/release/armbian-pineA64/* ./
+      - run: ls -lah
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/images
           package-format: raw
-          package-path: .
+          package-path: ./*.img
 
 
 
