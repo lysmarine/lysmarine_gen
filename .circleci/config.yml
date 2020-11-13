@@ -89,7 +89,9 @@ jobs:
     steps:
       - prepare-linux-machine
       - run: lb -v
-      - run: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
+      - run:
+          command: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
+          no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/amd64/*
           destination: release/$PKG_ARCH/
@@ -102,7 +104,7 @@ jobs:
       - PKG_ARCH=amd64
     steps:
       - prepare-linux-machine
-      - run: sudo apt-get virtualbox
+      - run: sudo apt-get install virtualbox
       #- run: cd cross-build-release; sudo /bin/bash -xe ./debian-vbox.sh
       - store_artifacts:
           path: ./cross-build-release/release/amd64/*
@@ -115,6 +117,8 @@ jobs:
           at: /home/circleci
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
+      - run: pwd; ls -lah
+      - run: ls -lah ./cross-build-release/release/
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/images
           package-format: img
@@ -130,7 +134,7 @@ workflows:
       - build-raspios-arm64
       - build-debian-vbox
       # - build-armbian-pine64so
-      - build-debian-live
+      # - build-debian-live
       - publish:
           requires:
             - build-raspios-arm32
