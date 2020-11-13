@@ -10,6 +10,10 @@ executors:
       image: ubuntu-2004:202010-01
     resource_class: medium
 
+  docker-container:
+    docker:
+      - image: circleci/buildpack-deps:buster
+
 commands:
   prepare-linux-machine:
     description: "Install the requirements to run lysmarine build script"
@@ -69,7 +73,7 @@ jobs:
           destination: release/
 
   build-armbian-pine64so:
-    executor: linux
+    executor: docker-container
     environment:
       - PKG_DISTRO=buster
       - LYSMARINE_VER=0.9.0.10
@@ -124,10 +128,12 @@ jobs:
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
       - run: ls -lah ./cross-build-release/release/raspios/
+      - run: cp ./cross-build-release/release/raspios/* ./
+      - run: ls -lah ./cross-build-release/release/raspios/
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/images
           package-format: raw
-          package-path: ./cross-build-release/release/*
+          package-path: .
 
 
 
@@ -138,7 +144,7 @@ workflows:
       - build-raspios-arm32
       - build-raspios-arm64
       #- build-debian-vbox
-      # - build-armbian-pine64so
+      - build-armbian-pine64so
       # - build-debian-live
       - publish:
           requires:
