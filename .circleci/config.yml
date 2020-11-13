@@ -39,6 +39,9 @@ jobs:
           #command: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
           command: mkdir -p ./cross-build-release/release/raspios/ ;cd ./cross-build-release/release/raspios/;echo test > raspios-arm32-dummy.img
           no_output_timeout: 30m
+      - persist_to_workspace:
+          root: .
+          paths: ./cross-build-release/release/raspios/
       - store_artifacts:
           path: ./cross-build-release/release/raspios/
           destination: release/
@@ -58,6 +61,9 @@ jobs:
           #command: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
           command: mkdir -p ./cross-build-release/release/raspios/ ;cd ./cross-build-release/release/raspios/;echo test > raspios-arm64-dummy.img
           no_output_timeout: 30m
+      - persist_to_workspace:
+           root: .
+           paths: ./cross-build-release/release/raspios/
       - store_artifacts:
           path: ./cross-build-release/release/raspios/
           destination: release/
@@ -114,7 +120,7 @@ jobs:
     executor: cloudsmith/default
     steps:
       - attach_workspace:
-          at: /home/circleci
+          at: ./cross-build-release/release/raspios/
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
       - run: pwd; ls -lah
@@ -132,7 +138,7 @@ workflows:
     jobs:
       - build-raspios-arm32
       - build-raspios-arm64
-      - build-debian-vbox
+      #- build-debian-vbox
       # - build-armbian-pine64so
       # - build-debian-live
       - publish:
