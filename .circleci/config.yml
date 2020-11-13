@@ -17,7 +17,7 @@ commands:
       - checkout
       - run: sudo apt-get -q update
       - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx
-      - run: wget http://http.us.debian.org/debian/pool/main/l/live-build/live-build_20190311_all.deb && sudo apt install ./live-build_20190311_all.deb
+      - run: wget http://http.us.debian.org/debian/pool/main/l/live-build/live-build_20190311_all.deb && sudo apt install ./live-build_20190311_all.deb ; rm ./live-build_20190311_all.deb
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
   publish:
@@ -26,7 +26,7 @@ commands:
       - cloudsmith/install-cli
       - run: cp -v ./cross-build-release/release/*/* ./
       - run: ls -lah
-      - run: zip $(ls ./*.img).zip $(ls ./*.img)
+      - run: zip $(ls ./LysMarine*.i*).zip $(ls ./LysMarine*.i*)
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/images
           package-format: raw
@@ -38,7 +38,7 @@ jobs:
     executor: linux
     environment:
       - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.10
+      - LYSMARINE_VER=0.9.0.11
       - PKG_RELEASE=raspios
       - PKG_ARCH=armhf
     steps:
@@ -60,7 +60,7 @@ jobs:
     executor: linux
     environment:
       - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.10
+      - LYSMARINE_VER=0.9.0.11
       - PKG_RELEASE=raspios
       - PKG_ARCH=arm64
     steps:
@@ -82,7 +82,7 @@ jobs:
     executor: linux
     environment:
       - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.10
+      - LYSMARINE_VER=0.9.0.11
       - PKG_RELEASE=armbian-pineA64
       - PKG_ARCH=armbian-pineA64
     steps:
@@ -99,7 +99,7 @@ jobs:
     executor: linux
     environment:
       - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.10
+      - LYSMARINE_VER=0.9.0.11
       - PKG_ARCH=amd64
     steps:
       - prepare-linux-machine
@@ -115,12 +115,12 @@ jobs:
     executor: linux
     environment:
       - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.10
+      - LYSMARINE_VER=0.9.0.11
       - PKG_ARCH=amd64
     steps:
       - prepare-linux-machine
       - run: sudo apt-get install virtualbox
-      #- run: cd cross-build-release; sudo /bin/bash -xe ./debian-vbox.sh
+      - run: cd cross-build-release; sudo /bin/bash -xe ./debian-vbox.sh
       - store_artifacts:
           path: ./cross-build-release/release/debian-vbox/*
           destination: release/$PKG_ARCH/
