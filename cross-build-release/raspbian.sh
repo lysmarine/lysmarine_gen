@@ -19,7 +19,7 @@
 	setupWorkSpace $upstreamOS
 	cacheDir=./cache/$upstreamOS
 	workDir=./work/$upstreamOS
-	releaseDir=./release/$upstreamOS
+	releaseDir=./release/
 
 	# Download upstream image from internet
 	if [ ! -f $cacheDir/????-??-??-${upstreamOS}-buster-${cpuArch}-lite.img ]; then
@@ -55,7 +55,7 @@
 		--mount=/tmp:/tmp \
 		--mount=./cache/$thisArch/stageCache:/lysmarine/stageCache \
 		--mount=/run/shm:/run/shm \
-		./install.sh 0 2 4 6 8
+		echo boo
 
 	# Unmount
 	umountImageFile $upstreamOS $workDir/$imageName
