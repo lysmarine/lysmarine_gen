@@ -96,7 +96,7 @@ log "Pro Tip:"
 echo ""
 echo "sudo cp -v ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ./cache/$thisArch/$imageName-inflated"
 echo ""
-echo "sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
+echo "sudo dd of=/dev/mmcblk0 if=./release/LysMarine_$thisArch-0.9.0.img status=progress"
 echo ""
 
 exit

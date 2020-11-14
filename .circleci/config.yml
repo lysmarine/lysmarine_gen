@@ -24,13 +24,12 @@ commands:
     steps:
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
-      - run: cp -v ./cross-build-release/release/*/* ./
-      - run: ls -lah
-      - run: zip $(ls ./LysMarine*.i*).zip $(ls ./LysMarine*.i*)
+      - run: ls -lah ./cross-build-release/release/
+      - run: zip $(ls ./cross-build-release/release/).zip $(ls ./cross-build-release/release/)
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/images
           package-format: raw
-          package-path: ./*.img.zip
+          package-path: ./*.zip
 
 jobs:
 

@@ -22,7 +22,7 @@ lysmarine-gen have been develop to build on a linux mint host and have been test
 
 #### Install Dependencies
 ``` 
-apt install proot qemu qemu-user git live-build
+apt install proot qemu qemu-user git live-build (v1:20190311)
 ```
 
 #### Install lysmarine-gen 

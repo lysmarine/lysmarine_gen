@@ -13,7 +13,7 @@ setupWorkSpace() {
 	mkdir -p ./cache/${thisArch}/stageCache
 	mkdir -p ./work/${thisArch}/rootfs
 	mkdir -p ./work/${thisArch}/bootfs
-	mkdir -p ./release/${thisArch}
+	mkdir -p ./release/
 }
 
 # Check if the user run with root privileges
