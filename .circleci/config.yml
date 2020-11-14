@@ -49,9 +49,9 @@ jobs:
           no_output_timeout: 30m
       - persist_to_workspace:
           root: .
-          paths: ./cross-build-release/release/raspios/
+          paths: ./cross-build-release/release/
       - store_artifacts:
-          path: ./cross-build-release/release/raspios/
+          path: ./cross-build-release/release/
           destination: release/
       - publish
 
@@ -71,9 +71,9 @@ jobs:
           no_output_timeout: 30m
       - persist_to_workspace:
            root: .
-           paths: ./cross-build-release/release/raspios/
+           paths: ./cross-build-release//release
       - store_artifacts:
-          path: ./cross-build-release/release/raspios/
+          path: ./cross-build-release/release/
           destination: release/
       - publish
 
@@ -90,8 +90,8 @@ jobs:
           command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh
           no_output_timeout: 30m
       - store_artifacts:
-          path: ./cross-build-release/release/armbian-pineA64/*
-          destination: release/$PKG_ARCH/
+          path: ./cross-build-release/release/
+          destination: release/
       - publish
 
   build-debian-live:
@@ -106,8 +106,8 @@ jobs:
           command: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
           no_output_timeout: 30m
       - store_artifacts:
-          path: ./cross-build-release/release/debian-amd64/*
-          destination: release/$PKG_ARCH/
+          path: ./cross-build-release/release/
+          destination: release/
       - publish
 
   build-debian-vbox:
@@ -121,8 +121,8 @@ jobs:
       - run: sudo apt-get install virtualbox
       - run: cd cross-build-release; sudo /bin/bash -xe ./debian-vbox.sh
       - store_artifacts:
-          path: ./cross-build-release/release/debian-vbox/*
-          destination: release/$PKG_ARCH/
+          path: ./cross-build-release/release/
+          destination: release/
       - publish
 
 workflows:
