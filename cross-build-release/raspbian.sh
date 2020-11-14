@@ -55,7 +55,7 @@
 		--mount=/tmp:/tmp \
 		--mount=./cache/$thisArch/stageCache:/lysmarine/stageCache \
 		--mount=/run/shm:/run/shm \
-		echo boo
+		./install.sh 0 2 4 6 8
 
 	# Unmount
 	umountImageFile $upstreamOS $workDir/$imageName

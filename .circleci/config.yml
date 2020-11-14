@@ -25,7 +25,7 @@ commands:
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
       - run: ls -lah ./cross-build-release/release/
-      - run: zip $(ls ./cross-build-release/release/).zip $(ls ./cross-build-release/release/)
+      - run: zip $(ls ./cross-build-release/release/).zip ./cross-build-release/release/$(ls ./cross-build-release/release/)
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/images
           package-format: raw
