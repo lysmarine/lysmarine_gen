@@ -90,6 +90,7 @@ umountImageFile $thisArch ./work/$thisArch/$imageName
 
 # Renaming the OS and moving it to the release folder.
 cp -v ./work/$thisArch/$imageName ./release/LysMarine_$thisArch-0.9.0.img
+
 log "DONE."
 
 log "Pro Tip:"

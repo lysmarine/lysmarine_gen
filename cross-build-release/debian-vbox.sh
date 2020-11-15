@@ -102,6 +102,7 @@ read -n 1 -r -s -p $'When done with the virtual machine, press enter to continue
 
 # Renaming the OS and moving it to the release folder.
 cp -v ./work/$thisArch/$thisArch.vdi ./release/LysMarine_$thisArch-0.9.0.vdi
+
 log "DONE."
 
 log "Pro Tip"
