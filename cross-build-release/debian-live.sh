@@ -80,12 +80,13 @@ lb build
 
 popd
 
-mv ./work/$thisArch/live-image-amd64.hybrid.iso ./release/$thisArch/LysMarine_$thisArch-0.9.0.iso
+mv ./work/$thisArch/live-image-amd64.hybrid.iso ./release/LysMarine_$thisArch-0.9.0.iso
+
 log "DONE."
 
 log "Pro Tip:"
 echo ""
-echo "iso file is located at ./release/$thisArch/LysMarine_$thisArch-0.9.0.iso "
+echo "iso file is located at ./release/LysMarine_$thisArch-0.9.0.iso "
 echo ""
 
 exit

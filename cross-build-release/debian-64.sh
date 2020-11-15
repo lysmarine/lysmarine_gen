@@ -89,14 +89,15 @@ VBoxManage convertfromraw --format VDI ./release/$thisArch/LysMarine_$thisArch-0
 umountImageFile $thisArch ./work/$thisArch/$imageName
 
 # Renaming the OS and moving it to the release folder.
-cp -v ./work/$thisArch/$imageName ./release/$thisArch/LysMarine_$thisArch-0.9.0.img
+cp -v ./work/$thisArch/$imageName ./release/LysMarine_$thisArch-0.9.0.img
+
 log "DONE."
 
 log "Pro Tip:"
 echo ""
 echo "sudo cp -v ./release/$thisArch/LysMarine_$thisArch-0.9.0.img ./cache/$thisArch/$imageName-inflated"
 echo ""
-echo "sudo dd of=/dev/mmcblk0 if=./release/$thisArch/LysMarine_$thisArch-0.9.0.img status=progress"
+echo "sudo dd of=/dev/mmcblk0 if=./release/LysMarine_$thisArch-0.9.0.img status=progress"
 echo ""
 
 exit

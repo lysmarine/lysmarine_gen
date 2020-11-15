@@ -54,10 +54,12 @@
 	umountImageFile $thisArch ./work/$thisArch/$imageName
 
 	# Shrink the image size.
-	#./cache/pishrink.sh ./work/$thisArch/$image
+
+	./cache/pishrink.sh ./work/$thisArch/$image
 
 	# Renaming the OS and moving it to the release folder.
-	cp -v ./work/$thisArch/$imageName ./release/$thisArch/LysMarine_$thisArch-0.9.0.img
+	cp -v ./work/$thisArch/$imageName ./release/LysMarine_$thisArch-0.9.0.img
+
 
 	log "Pro Tip:"
 	echo ""

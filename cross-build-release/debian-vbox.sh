@@ -21,7 +21,10 @@ fi
 if [ ! -f ./cache/$thisArch/$thisArch.vdi ]; then
 	log "Creating a new VBox image"
 	rm -r ./work/$thisArch/*
-	rm /root/.config/VirtualBox/lysmarine/lysmarine.vbox
+
+	if [  -f /root/.config/VirtualBox/lysmarine/lysmarine.vbox ]; then
+		rm /root/.config/VirtualBox/lysmarine/lysmarine.vbox
+	fi
 
 	#Create VM
 
@@ -98,7 +101,8 @@ read -n 1 -r -s -p $'When done with the virtual machine, press enter to continue
 #./work/$thisArch/$thisArch.vdi
 
 # Renaming the OS and moving it to the release folder.
-cp -v ./work/$thisArch/$thisArch.vdi ./release/$thisArch/LysMarine_$thisArch-0.9.0.vdi
+cp -v ./work/$thisArch/$thisArch.vdi ./release/LysMarine_$thisArch-0.9.0.vdi
+
 log "DONE."
 
 log "Pro Tip"

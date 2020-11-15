@@ -8,86 +8,122 @@ executors:
   linux:
     machine:
       image: ubuntu-2004:202010-01
-    resource_class: medium
-
+      
 commands:
   prepare-linux-machine:
     description: "Install the requirements to run lysmarine build script"
     steps:
       - checkout
       - run: sudo apt-get -q update
-      - run: sudo apt-get -y -q install proot qemu qemu-user git live-build p7zip-full
+      - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx
+      - run: wget http://http.us.debian.org/debian/pool/main/l/live-build/live-build_20190311_all.deb && sudo apt install ./live-build_20190311_all.deb ; rm ./live-build_20190311_all.deb
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
+  publish:
+    steps:
+      - cloudsmith/ensure-api-key
+      - cloudsmith/install-cli
+      - run: ls -lah ./cross-build-release/release/
+      - run: zip $(ls ./cross-build-release/release/).zip ./cross-build-release/release/$(ls ./cross-build-release/release/)
+      - cloudsmith/publish:
+          cloudsmith-repository: lysmarineos/images
+          package-format: raw
+          package-path: ./*.zip
+
 jobs:
+
   build-raspios-arm32:
     executor: linux
     environment:
       - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.10
+      - LYSMARINE_VER=0.9.0.11
       - PKG_RELEASE=raspios
       - PKG_ARCH=armhf
     steps:
       - prepare-linux-machine
+      - attach_workspace:
+          at: /home/circleci
       - run:
           command: cd cross-build-release;sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
           no_output_timeout: 30m
+      - persist_to_workspace:
+          root: .
+          paths: ./cross-build-release/release/
       - store_artifacts:
-          path: ./cross-build-release/release/$PKG_ARCH/*
-          destination: release/$PKG_ARCH/
+          path: ./cross-build-release/release/
+          destination: release/
+      - publish
 
   build-raspios-arm64:
     executor: linux
     environment:
       - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.10
+      - LYSMARINE_VER=0.9.0.11
       - PKG_RELEASE=raspios
       - PKG_ARCH=arm64
     steps:
       - prepare-linux-machine
+      - attach_workspace:
+          at: /home/circleci
       - run:
           command: cd cross-build-release; sudo /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER
           no_output_timeout: 30m
+      - persist_to_workspace:
+           root: .
+           paths: ./cross-build-release//release
       - store_artifacts:
-          path: ./cross-build-release/release/$PKG_ARCH/*
-          destination: release/$PKG_ARCH/
+          path: ./cross-build-release/release/
+          destination: release/
+      - publish
 
   build-armbian-pine64so:
     executor: linux
     environment:
       - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.10
+      - LYSMARINE_VER=0.9.0.11
       - PKG_RELEASE=armbian-pineA64
       - PKG_ARCH=armbian-pineA64
     steps:
       - prepare-linux-machine
       - run:
-          command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh $PKG_ARCH $LYSMARINE_VER
+          command: cd cross-build-release; sudo /bin/bash -xe ./armbian-pine64so.sh
           no_output_timeout: 30m
       - store_artifacts:
-          path: ./cross-build-release/release/$PKG_ARCH/*
-          destination: release/$PKG_ARCH/
+          path: ./cross-build-release/release/
+          destination: release/
+      - publish
 
   build-debian-live:
     executor: linux
     environment:
       - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.10
+      - LYSMARINE_VER=0.9.0.11
       - PKG_ARCH=amd64
     steps:
       - prepare-linux-machine
-      - run: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
+      - run:
+          command: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
+          no_output_timeout: 30m
       - store_artifacts:
-          path: ./cross-build-release/release/$PKG_ARCH/*
-          destination: release/$PKG_ARCH/
+          path: ./cross-build-release/release/
+          destination: release/
+      - publish
 
-  publish:
-    executor: cloudsmith/default
+  build-debian-vbox:
+    executor: linux
+    environment:
+      - PKG_DISTRO=buster
+      - LYSMARINE_VER=0.9.0.11
+      - PKG_ARCH=amd64
     steps:
-      - checkout
-      - cloudsmith/ensure-api-key
-      - cloudsmith/install-cli
-      - run: .circleci/publish-cloudsmith.sh img lysmarineos/images ${PKG_DISTRO}/${PKG_RELEASE}
+      - prepare-linux-machine
+      - run: sudo apt-get install virtualbox
+      - run: cd cross-build-release; sudo /bin/bash -xe ./debian-vbox.sh
+      - store_artifacts:
+          path: ./cross-build-release/release/
+          destination: release/
+      - publish
+
 
 workflows:
   version: 2
@@ -95,11 +131,6 @@ workflows:
     jobs:
       - build-raspios-arm32
       - build-raspios-arm64
-      - build-armbian-pine64so
+      #- build-armbian-pine64so
+      #- build-debian-vbox
       - build-debian-live
-      - publish:
-          requires:
-            - build-raspios-arm32
-            - build-raspios-arm64
-            - build-armbian-pine64so
-            - build-debian-live
