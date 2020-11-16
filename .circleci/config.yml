@@ -12,8 +12,6 @@ executors:
 commands:
   prepare-linux-machine:
     description: "Install the requirements to run lysmarine build script"
-    environment:
-      - LYSMARINE_VER=0.9.0.11
     steps:
       - checkout
       - run: sudo apt-get -q update
@@ -41,7 +39,7 @@ jobs:
       - attach_workspace:
           at: /home/circleci
       - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios arm32 $LYSMARINE_VER
+          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios arm32 0.9.12
           no_output_timeout: 30m
       - persist_to_workspace:
           root: .
@@ -58,7 +56,7 @@ jobs:
       - attach_workspace:
           at: /home/circleci
       - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios arm64 $LYSMARINE_VER
+          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios arm64 0.9.12
           no_output_timeout: 30m
       - persist_to_workspace:
            root: .
@@ -73,7 +71,7 @@ jobs:
     steps:
       - prepare-linux-machine
       - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh armbian-pineA64 arm64 $LYSMARINE_VER
+          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh armbian-pineA64 arm64 0.9.12
           no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/
