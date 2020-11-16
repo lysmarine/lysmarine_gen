@@ -39,7 +39,7 @@ jobs:
       - attach_workspace:
           at: /home/circleci
       - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios arm32 0.9.12
+          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios armhf 0.9.12
           no_output_timeout: 30m
       - persist_to_workspace:
           root: .
@@ -71,7 +71,7 @@ jobs:
     steps:
       - prepare-linux-machine
       - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh armbian-pineA64 arm64 0.9.12
+          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh armbian-pineA64so arm64 0.9.12
           no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/
