@@ -48,7 +48,7 @@
 		--mount=/proc:/proc \
 		--mount=/tmp:/tmp \
 		--mount=/run/shm:/run/shm \
-		./install.sh 0 2 4 6 8
+		/bin/bash
 
 	# Unmount
 	umountImageFile $thisArch ./work/$thisArch/$imageName
