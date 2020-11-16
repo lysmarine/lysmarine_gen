@@ -721,7 +721,7 @@
   </application>
 
   <application name="opencpn">
-     <decor>no</decor>
+     <decor>yes</decor>
   </application>
 
   <application name="pcmanfm">
