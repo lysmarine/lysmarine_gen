@@ -16,3 +16,4 @@ echo "sed -i 's/^sed\ /#&/'   /home/user/.config/openbox/autostart; " >> /home/u
 
 install -d -o 1000 -g 1000 /home/user/.local/share/onboard/themes
 cat /usr/share/onboard/themes/Droid.theme | sed -e "s#_font></#_font>Sans</#" > /home/user/.local/share/onboard/themes/Droid.theme
+install -v /home/user/.local/share/onboard/themes/Droid.theme "/usr/share/onboard/themes"
