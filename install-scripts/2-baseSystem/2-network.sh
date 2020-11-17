@@ -16,7 +16,7 @@ apt-get install -y -q createap
 
 
 ##  NetworkManager provide it's own wpa_supplicant, stop the others to avoid conflicts.
-if [[ $LMOS == 'Raspbian' ]]; then
+if service --status-all | grep -Fq 'dhcpcd'; then
 	systemctl disable dhcpcd.service
 fi
 systemctl disable wpa_supplicant.service
