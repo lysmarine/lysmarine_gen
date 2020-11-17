@@ -13,7 +13,7 @@ setupWorkSpace() {
 	mkdir -p ./cache/${thisArch}/stageCache
 	mkdir -p ./work/${thisArch}/rootfs
 	mkdir -p ./work/${thisArch}/bootfs
-
+	mkdir -p ./work/${thisArch}/isomount
 	mkdir -p ./release/
 
 }
@@ -74,7 +74,7 @@ umountImageFile() {
 
 	umount $workDir/rootfs/boot || /bin/true
 	umount $workDir/rootfs || /bin/true
-	kpartx -d $imageFile
+	kpartx -d $imageFile || /bin/true
 }
 
 inflateImage() {
@@ -107,10 +107,8 @@ inflateImage() {
 }
 
 function addLysmarineScripts {
-	workDir=$1
-	rootfs="$workDir/rootfs"
+	rootfs=$1
 	log "copying lysmarine on the image"
-	ls $rootfs
 	cp -r ../install-scripts "${rootfs}/"
 	chmod 0775 "${rootfs}/install-scripts/install.sh"
 }

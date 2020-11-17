@@ -21,6 +21,7 @@
 
 	# if needed, download the base OS
 
+	# if no source Os is found in cache, download it.
 	if ! ls ${cacheDir}/${baseOS}-${cpuArch}.base.??? > /dev/null 2>&1; then
 
 	   if [[ "${baseOS}" == "raspios" ]]; then
@@ -38,35 +39,67 @@
 			 rm "${cacheDir}/${zipName}"
 
 	   elif [[ "$baseOS" =~ debian-* ]]; then
-		   wget -P "${cacheDir}/" "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.6.0-${cpuArch}-netinst.iso"
-		   mv "debian-10.6.0-${cpuArch}-netinst.iso" "$cacheDir/${baseOS}-${cpuArch}.base.iso"
+		   wget -P "${cacheDir}/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/${cpuArch}/iso-hybrid/debian-live-10.6.0-${cpuArch}-standard+nonfree.iso"
+		   mv "${cacheDir}/debian-live-10.6.0-${cpuArch}-standard+nonfree.iso" "$cacheDir/${baseOS}-${cpuArch}.base.iso"
 
 	   else
 	    echo "Unknown baseOS" ; exit 1 ;
 	   fi
    fi
 
+   # if it's an image, we assume that it will to be inflated
    if [[ ! -f "$cacheDir/${baseOS}-${cpuArch}.base.img-inflated" && -f "$cacheDir/${baseOS}-${cpuArch}.base.img" ]]; then
 	   inflateImage $baseOS "$cacheDir/${baseOS}-${cpuArch}.base.img"
    fi
 
+	# if it's an image, we assume that it will need chroot to build
    if [ -f "$cacheDir/${baseOS}-${cpuArch}.base.img-inflated" ]; then
-	  rsync --info=progress2 -auz "$cacheDir/${baseOS}-${cpuArch}.base.img-inflated" "$workDir/${baseOS}-${cpuArch}.base.img-inflated"
+	  rsync -P -auz "$cacheDir/${baseOS}-${cpuArch}.base.img-inflated" "$workDir/${baseOS}-${cpuArch}.base.img-inflated"
 	  mountImageFile $workDir "$workDir/${baseOS}-${cpuArch}.base.img-inflated"
-	  addLysmarineScripts $workDir
+	  addLysmarineScripts $workDir/rootfs
 	  chrootWithProot $workDir $cpuArch $stagesToBuild
 	  umountImageFile $workDir $workDir/${baseOS}-${cpuArch}.base.img-inflated
 	  shrinkWithPishrink cacheDir "$workDir/${baseOS}-${cpuArch}.base.img-inflated"
-	  rsync --info=progress2 -auz $workDir/${baseOS}-${cpuArch}.base.img-inflated $releaseDir/lysmarine-${lmVersion}-${baseOS}-${cpuArch}.img
+	  rsync -P -auz $workDir/${baseOS}-${cpuArch}.base.img-inflated $releaseDir/lysmarine-${lmVersion}-${baseOS}-${cpuArch}.img
 
-   fi
+   elif [[ $baseOS == 'debian-vbox' ]];then
+ #     rsync -P -auz "$cacheDir/${baseOS}-${cpuArch}.base.iso" "$workDir/${baseOS}-${cpuArch}.base.iso"
+#	  MACHINENAME=lysmarine
 
+   elif [[ $baseOS == 'debian-live' ]];then
+	   mount -o loop "$cacheDir/${baseOS}-${cpuArch}.base.iso" $workDir/isomount
+		   cp -a $workDir/isomount/live/filesystem.squashfs $workDir/
+		   cp -a $workDir/isomount/* $workDir/rootfs
+		   cp -a $workDir/isomount/.disk $workDir/rootfs
+	   umount $workDir/isomount
 
+	   pushd $workDir/
+		   unsquashfs ./filesystem.squashfs
+	   popd
 
-	# Renaming the OS and moving it to the release folder.
+	   mount --bind /dev $workDir/squashfs-root/dev
+	   mount --bind /sys $workDir/squashfs-root/sys
+	   mount --bind /proc $workDir/squashfs-root/proc
+		   addLysmarineScripts $workDir/squashfs-root
+		   chroot $workDir/squashfs-root
+	   umount $workDir/squashfs-root/dev
+	   umount $workDir/squashfs-root/sys
+	   umount $workDir/squashfs-root/proc
 
-	exit 0
+	   pushd $workDir/
+		   mksquashfs squashfs-root/ ./filesystem.squashfs -comp xz -noappend
+	   popd
+		rm -r $workDir/squashfs-root
 
+	   cp $workDir/filesystem.squashfs $workDir/rootfs/live/filesystem.squashfs
+
+	   pushd $workDir/rootfs
+		 xorriso -as mkisofs -V 'Debian 10.1 amd64 custom nonfree' -o $releaseDir/lysmarine-${lmVersion}-${baseOS}-${cpuArch}.iso -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus ./
+	   popd
+
+	elif [[ $baseOS == 'debian-image' ]];then
+	   echo "not yet"
+	fi
 
 exit 0 ;
 }
