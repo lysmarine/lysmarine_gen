@@ -23,5 +23,6 @@ python3 -m pip install https://github.com/natumbri/mopidy-youtube/archive/develo
 # Enable mopidy service
 systemctl enable mopidy
 
+install -m 644 $FILE_FOLDER/.asoundrc "/home/user/"
 install -m 644 $FILE_FOLDER/mopidy.conf "/etc/mopidy/"
 install -m 644 $FILE_FOLDER/musicbox.desktop "/usr/local/share/applications/"
