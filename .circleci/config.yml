@@ -87,27 +87,14 @@ jobs:
     steps:
       - prepare-linux-machine
       - run:
-          command: cd cross-build-release; sudo /bin/bash -xe ./debian-live.sh
+          command: cd cross-build-release; sudo /bin/bash -xe ./build.sh debian-live amd64 0.9.12
           no_output_timeout: 30m
       - store_artifacts:
           path: ./cross-build-release/release/
           destination: release/
       - publish
 
-  build-debian-vbox:
-    executor: linux
-    environment:
-      - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.11
-      - PKG_ARCH=amd64
-    steps:
-      - prepare-linux-machine
-      - run: sudo apt-get install virtualbox
-      - run: cd cross-build-release; sudo /bin/bash -xe ./debian-vbox.sh
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
-      - publish
+
 
 workflows:
   version: 2
