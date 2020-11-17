@@ -72,7 +72,7 @@ border_color_pressed = #000000 100
 
 #-------------------------------------
 # Panel
-panel_items = L:TSC
+panel_items = PL:TSC
 panel_size = 100% 48
 panel_margin = 0 0
 panel_padding = 2 0 2
