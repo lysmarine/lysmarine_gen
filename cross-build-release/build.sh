@@ -65,7 +65,7 @@
    elif [[ $baseOS == 'debian-vbox' ]];then
  #     rsync -P -auz "$cacheDir/${baseOS}-${cpuArch}.base.iso" "$workDir/${baseOS}-${cpuArch}.base.iso"
 #	  MACHINENAME=lysmarine
-
+echo "not yet"
    elif [[ $baseOS == 'debian-live' ]];then
 	   mount -o loop "$cacheDir/${baseOS}-${cpuArch}.base.iso" $workDir/isomount
 		   cp -a $workDir/isomount/live/filesystem.squashfs $workDir/
@@ -81,7 +81,19 @@
 	   mount --bind /sys $workDir/squashfs-root/sys
 	   mount --bind /proc $workDir/squashfs-root/proc
 		   addLysmarineScripts $workDir/squashfs-root
-		   chroot $workDir/squashfs-root
+buildCmd="./install.sh ${stagesToBuild}"
+		   proot  \
+	  --root-id \
+	  --rootfs=$workDir/squashfs-root \
+	  --cwd=/install-scripts \
+	  --mount=/etc/resolv.conf:/etc/resolv.conf \
+	  --mount=/dev:/dev \
+	  --mount=/sys:/sys \
+	  --mount=/proc:/proc \
+	  --mount=/tmp:/tmp \
+	  --mount=/run/shm:/run/shm \
+	  $buildCmd
+
 	   umount $workDir/squashfs-root/dev
 	   umount $workDir/squashfs-root/sys
 	   umount $workDir/squashfs-root/proc
