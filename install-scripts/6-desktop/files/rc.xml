@@ -732,6 +732,10 @@
     <skip_taskbar>yes</skip_taskbar>
   </application>
 
+  <application class="tint2">
+    <skip_taskbar>yes</skip_taskbar>
+  </application>
+
   <application name="gsimplecal">
     <maximized>no</maximized>
      <decor>yes</decor>
