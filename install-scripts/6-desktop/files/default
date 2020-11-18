@@ -5,7 +5,7 @@ Global {
     widthtype = percent
     width = 100
     heighttype = pixel
-    height = 35
+    height = 40
     roundcorners = false
     transparent = false
     tintcolor = #474747
@@ -27,15 +27,6 @@ Plugin {
         size = 4
     }
 }
-
-
-
-
-
-
-
-
-
 Plugin {
     type = menu
     config {
@@ -65,24 +56,20 @@ Plugin {
             name = Autopilot control (Pypilot)
             action = onlyone pypilot_control 8080
         }
-
         separator {
         }
         separator {
-                }
+        }
         separator {
-                }
-        
+        }
         systemmenu {
         }
-        
         separator {
         }
         separator {
         }
         separator {
         }
-
         item {
             icon = reboot
             name = Reboot
@@ -95,17 +82,6 @@ Plugin {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 Plugin {
     type = space
     config {
