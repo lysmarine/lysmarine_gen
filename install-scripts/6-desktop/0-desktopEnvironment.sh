@@ -20,7 +20,7 @@ xinit libgtk2-perl pavucontrol cpanminus perl-base \
 dialog lxterminal network-manager-gnome
 
 # Install touchscreen drivers
-apt-get -q -y install xserver-xorg-input-libinput xserver-xorg-input-evdev
+apt-get -q -y install xserver-xorg-input-libinput
 apt-get -q -y install xinput-calibrator libinput-tools
 
 install -o 1000 -g 1000 -d /home/user/.local
