@@ -11,10 +11,6 @@ if [ $LMOS == Armbian ]; then
 	apt-get -q -y install xserver-xorg-legacy
 fi
 
-# Install touchscreen drivers
-apt-get -q -y install xserver-xorg-input-libinput xserver-xorg-input-evdev
-apt-get -q -y install xinput-calibrator libinput-tools
-
 apt-get install -q -y \
 gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base \
 gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-alsa \
@@ -22,6 +18,10 @@ gstreamer1.0-libav alsa-utils libavahi-compat-libdnssd-dev git openbox \
 xbacklight lxappearance gmrun xsettingsd xserver-xorg \
 xinit libgtk2-perl pavucontrol cpanminus perl-base \
 dialog lxterminal network-manager-gnome
+
+# Install touchscreen drivers
+apt-get -q -y install xserver-xorg-input-libinput xserver-xorg-input-evdev
+apt-get -q -y install xinput-calibrator libinput-tools
 
 install -o 1000 -g 1000 -d /home/user/.local
 install -o 1000 -g 1000 -d /home/user/.local/share
