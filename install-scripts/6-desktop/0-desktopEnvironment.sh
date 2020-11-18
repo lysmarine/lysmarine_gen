@@ -12,7 +12,7 @@ if [ $LMOS == Armbian ]; then
 fi
 
 # Install touchscreen drivers
-apt-get -q -y install xserver-xorg-input-libinput xserver-xorg-input-evdev xserver-xorg-input-multitouch
+apt-get -q -y install xserver-xorg-input-libinput xserver-xorg-input-evdev
 apt-get -q -y install xinput-calibrator libinput-tools
 
 apt-get install -q -y \
