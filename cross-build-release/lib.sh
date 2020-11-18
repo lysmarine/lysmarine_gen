@@ -154,3 +154,63 @@ function shrinkWithPishrink {
 	$cacheDir/pishrink.sh $imgLocation
 
 }
+
+
+mountIsoFile() {
+	workDir=$1
+	isoFile=$2
+	rootfs=$workDir/rootfs
+
+	log "Mounting Iso File"
+
+	## Make sure it's not already mounted
+	if [ -n "$(ls -A $rootfs)" ]; then
+		logErr "$rootfs is not empty. Previous failure to unmount?"
+		rm -r $workDir/rootfs/* || /bin/true
+		rm -r $workDir/rootfs/.disk || /bin/true
+		exit
+	fi
+
+	if [ -n "$(ls -A $workDir/squashfs-root)" ]; then
+		logErr "$rootfs/squashfs-root is not empty. Previous failure to unmount?"
+		umountIsoFile $1 $2
+		rm -r $workDir/squashfs-root
+		exit
+	fi
+
+	# Copy file out of the iso image
+   	mount -o loop $isoFile $workDir/isomount
+	  cp -a $workDir/isomount/* $workDir/rootfs
+	  cp -a $workDir/isomount/.disk $workDir/rootfs
+	  cp  $workDir/isomount/live/filesystem.squashfs $workDir/
+	umount $workDir/isomount
+
+	# unsquash the file system
+	pushd $workDir/
+		unsquashfs ./filesystem.squashfs
+	popd
+
+}
+
+umountIsoFile() {
+	log "un-Mounting"
+	workDir=$1
+	umount $workDir/squashfs-root/dev || /bin/true
+	umount $workDir/squashfs-root/proc || /bin/true
+	umount $workDir/squashfs-root/sys || /bin/true
+	umount $workDir/squashfs-root/tmp || /bin/true
+	umount $workDir/squashfs-root/etc/resolv.conf || /bin/true
+	umount $workDir/isomount || /bin/true
+
+
+#	rm -rf $rootfs/home/border
+#	rm -rf $rootfs/install-scripts/stageCache/*
+#	rm -rf $rootfs/install-scripts/logs/*
+#	rm -rf $rootfs/var/log/*
+#	rm -rf $rootfs/tmp/*
+#
+#	umount $workDir/rootfs/boot || /bin/true
+#	umount $workDir/rootfs || /bin/true
+	# umount $workDir/squashfs-root || /bin/true
+#	kpartx -d $imageFile || /bin/true
+}

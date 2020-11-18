@@ -62,55 +62,40 @@
 	  shrinkWithPishrink cacheDir "$workDir/${baseOS}-${cpuArch}.base.img-inflated"
 	  rsync -P -auz $workDir/${baseOS}-${cpuArch}.base.img-inflated $releaseDir/lysmarine-${lmVersion}-${baseOS}-${cpuArch}.img
 
-   elif [[ $baseOS == 'debian-vbox' ]];then
- #     rsync -P -auz "$cacheDir/${baseOS}-${cpuArch}.base.iso" "$workDir/${baseOS}-${cpuArch}.base.iso"
-#	  MACHINENAME=lysmarine
-echo "not yet"
+
    elif [[ $baseOS == 'debian-live' ]];then
-	   mount -o loop "$cacheDir/${baseOS}-${cpuArch}.base.iso" $workDir/isomount
-		   cp -a $workDir/isomount/live/filesystem.squashfs $workDir/
-		   cp -a $workDir/isomount/* $workDir/rootfs
-		   cp -a $workDir/isomount/.disk $workDir/rootfs
-	   umount $workDir/isomount
+    	mountIsoFile $workDir "$cacheDir/${baseOS}-${cpuArch}.base.iso"
+		addLysmarineScripts $workDir/squashfs-root
+		buildCmd="./install.sh ${stagesToBuild}"
+		proot  \
+		   --root-id \
+		   --rootfs=$workDir/squashfs-root \
+		   --cwd=/install-scripts \
+		   --mount=/etc/resolv.conf:/etc/resolv.conf \
+		   --mount=/dev:/dev \
+		   --mount=/sys:/sys \
+		   --mount=/proc:/proc \
+		   --mount=/tmp:/tmp \
+		   /bin/bash
 
+	   umountIsoFile  $workDir
+
+	   # Re-squash the file system.
 	   pushd $workDir/
-		   unsquashfs ./filesystem.squashfs
+		   mksquashfs squashfs-root/ ./filesystem.squashfs -comp xz -noappend -processors 8
+		   rm -r ./squashfs-root
 	   popd
 
-	   mount --bind /dev $workDir/squashfs-root/dev
-	   mount --bind /sys $workDir/squashfs-root/sys
-	   mount --bind /proc $workDir/squashfs-root/proc
-		   addLysmarineScripts $workDir/squashfs-root
-buildCmd="./install.sh ${stagesToBuild}"
-		   proot  \
-	  --root-id \
-	  --rootfs=$workDir/squashfs-root \
-	  --cwd=/install-scripts \
-	  --mount=/etc/resolv.conf:/etc/resolv.conf \
-	  --mount=/dev:/dev \
-	  --mount=/sys:/sys \
-	  --mount=/proc:/proc \
-	  --mount=/tmp:/tmp \
-	  --mount=/run/shm:/run/shm \
-	  $buildCmd
-
-	   umount $workDir/squashfs-root/dev
-	   umount $workDir/squashfs-root/sys
-	   umount $workDir/squashfs-root/proc
-
-	   pushd $workDir/
-		   mksquashfs squashfs-root/ ./filesystem.squashfs -comp xz -noappend
-	   popd
-		rm -r $workDir/squashfs-root
-
+	   # Move the file system inside the new iso source location
 	   cp $workDir/filesystem.squashfs $workDir/rootfs/live/filesystem.squashfs
 
-	   pushd $workDir/rootfs
-		 xorriso -as mkisofs -V 'Debian 10.1 amd64 custom nonfree' -o $releaseDir/lysmarine-${lmVersion}-${baseOS}-${cpuArch}.iso -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus ./
-	   popd
+	   # Create the iso
+	   xorriso -as mkisofs -V 'Debian 10.1 amd64 custom nonfree' -o $releaseDir/lysmarine-${lmVersion}-${baseOS}-${cpuArch}.iso -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus $workDir/rootfs
 
-	elif [[ $baseOS == 'debian-image' ]];then
-	   echo "not yet"
+	   elif [[ $baseOS == 'debian-vbox' ]];then
+ 			#     rsync -P -auz "$cacheDir/${baseOS}-${cpuArch}.base.iso" "$workDir/${baseOS}-${cpuArch}.base.iso"
+			#	  MACHINENAME=lysmarine
+			echo 	"not yet"
 	fi
 
 exit 0 ;
