@@ -66,8 +66,14 @@
    elif [[ $baseOS == 'debian-live' ]];then
     	mountIsoFile $workDir "$cacheDir/${baseOS}-${cpuArch}.base.iso"
 		addLysmarineScripts $workDir/squashfs-root
-		buildCmd="./install.sh ${stagesToBuild}"
-		proot  \
+
+		if [[ $stagesToBuild == 'bash' ]]; then
+			buildCmd='/bin/bash'
+		else
+			buildCmd="./install.sh ${stagesToBuild}"
+		fi
+
+		proot \
 		   --root-id \
 		   --rootfs=$workDir/squashfs-root \
 		   --cwd=/install-scripts \
@@ -76,7 +82,7 @@
 		   --mount=/sys:/sys \
 		   --mount=/proc:/proc \
 		   --mount=/tmp:/tmp \
-		   /bin/bash
+		   $buildCmd
 
 	   umountIsoFile  $workDir
 
