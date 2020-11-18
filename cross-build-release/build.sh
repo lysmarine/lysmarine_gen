@@ -92,7 +92,7 @@ buildCmd="./install.sh ${stagesToBuild}"
 	  --mount=/proc:/proc \
 	  --mount=/tmp:/tmp \
 	  --mount=/run/shm:/run/shm \
-	  $buildCmd
+	  /bin/bash
 
 	   umount $workDir/squashfs-root/dev
 	   umount $workDir/squashfs-root/sys
