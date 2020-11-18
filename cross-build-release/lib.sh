@@ -13,7 +13,7 @@ setupWorkSpace() {
 	mkdir -p ./cache/${thisArch}/stageCache
 	mkdir -p ./work/${thisArch}/rootfs
 	mkdir -p ./work/${thisArch}/bootfs
-
+	mkdir -p ./work/${thisArch}/isomount
 	mkdir -p ./release/
 
 }
@@ -27,9 +27,9 @@ checkRoot() {
 }
 
 mountImageFile() {
-	thisArch=$1
+	workDir=$1
 	imageFile=$2
-	rootfs=./work/${thisArch}/rootfs
+	rootfs=$workDir/rootfs
 
 	log "Mounting Image File"
 
@@ -62,9 +62,9 @@ mountImageFile() {
 
 umountImageFile() {
 	log "un-Mounting"
-	thisArch=$1
+	workDir=$1
 	imageFile=$2
-	rootfs=./work/${thisArch}/rootfs
+	rootfs=$workDir/rootfs
 
 	rm -rf $rootfs/home/border
 	rm -rf $rootfs/install-scripts/stageCache/*
@@ -72,9 +72,9 @@ umountImageFile() {
 	rm -rf $rootfs/var/log/*
 	rm -rf $rootfs/tmp/*
 
-	umount ./work/$thisArch/rootfs/boot
-	umount ./work/$thisArch/rootfs
-	kpartx -d $imageFile
+	umount $workDir/rootfs/boot || /bin/true
+	umount $workDir/rootfs || /bin/true
+	kpartx -d $imageFile || /bin/true
 }
 
 inflateImage() {
@@ -96,8 +96,7 @@ inflateImage() {
 
 		log "Resize the filesystem to fit the partition."
 		loopId=$(kpartx -sav "$imageLocationInflated" | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
-		sleep 5
-		ls -l /dev/mapper/
+		sleep 3
 
 		e2fsck -f "/dev/mapper/loop${loopId}p${partQty}"
 		resize2fs "/dev/mapper/loop${loopId}p${partQty}"
@@ -108,10 +107,50 @@ inflateImage() {
 }
 
 function addLysmarineScripts {
-	thisArch=$1
-	rootfs="./work/${thisArch}/rootfs"
+	rootfs=$1
 	log "copying lysmarine on the image"
-	ls $rootfs
 	cp -r ../install-scripts "${rootfs}/"
 	chmod 0775 "${rootfs}/install-scripts/install.sh"
+}
+
+function chrootWithProot {
+ 	workDir=$1
+	cpuArch=$2
+	stagesToBuild=$3
+	if [[ $stagesToBuild == 'bash' ]]; then
+	  buildCmd='/bin/bash'
+	else
+	 buildCmd="./install.sh ${stagesToBuild}"
+	fi
+
+	if [[ $cpuArch == arm64 ]]; then
+		qemuArch="qemu-aarch64"
+	elif [[ $cpuArch == armhf ]]; then
+		qemuArch="qemu-arm"
+    fi
+
+	proot -q "$qemuArch" \
+	  --root-id \
+	  --rootfs=$workDir/rootfs \
+	  --cwd=/install-scripts \
+	  --mount=/etc/resolv.conf:/etc/resolv.conf \
+	  --mount=/dev:/dev \
+	  --mount=/sys:/sys \
+	  --mount=/proc:/proc \
+	  --mount=/tmp:/tmp \
+	  --mount=/run/shm:/run/shm \
+	  $buildCmd
+}
+
+function shrinkWithPishrink {
+ 	cacheDir=$1
+ 	imgLocation=$2
+
+	if [ ! -f $cacheDir/pishrink.sh ]; then
+		wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh -P $cacheDir/
+		chmod +x $cacheDir/pishrink.sh
+	fi
+
+	$cacheDir/pishrink.sh $imgLocation
+
 }
