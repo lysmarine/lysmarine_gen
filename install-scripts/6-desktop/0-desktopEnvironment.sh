@@ -8,8 +8,12 @@ if [ $LMOS == Raspbian ]; then
 fi
 
 if [ $LMOS == Armbian ]; then
-	sudo apt-get -q -y install xserver-xorg-legacy	
+	apt-get -q -y install xserver-xorg-legacy
 fi
+
+# Install touchscreen drivers
+apt-get -q -y install xserver-xorg-input-libinput xserver-xorg-input-evdev xserver-xorg-input-multitouch
+apt-get -q -y install xinput-calibrator
 
 apt-get install -q -y \
 gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base \
