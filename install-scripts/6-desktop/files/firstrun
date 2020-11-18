@@ -12,7 +12,7 @@ amixer sset -D pulse Master 90% unmute
 amixer sset Master 90% unmute
 
 # Keeping it enabled breaks wifi in nm-applet
-systemctl disable dhcpd.service
+systemctl disable dhcpcd.service
 
 touch /tmp/FIRSTRUN
 systemctl disable firstRun.service
