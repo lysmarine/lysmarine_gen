@@ -26,6 +26,7 @@ status-icon-provider="GtkStatusIcon"
 
 [window]
 docking-enabled=true
+docking-shrink-workarea=false
 
 [window/landscape]
 width=764
