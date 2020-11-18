@@ -4,7 +4,5 @@ sleep 1 && onboard &
 sleep 5 && xset s off &
 sleep 5 && xset -dpms &
 sleep 5 && xset s noblank &
-sleep 2 && /usr/lib64/polkit-gnome-authentication-agent-1 &
-
 /opt/wdash/wdash &
-#Or should I always manually add the lines to the autostart /etc/xdg/openbox/autostart file
+
