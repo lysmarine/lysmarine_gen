@@ -12,7 +12,6 @@ cat $FILE_FOLDER/hosts >> /etc/hosts
 
 # Access Point management
 install -m0644 -v $FILE_FOLDER/lysmarine-hotspot.nmconnection "/etc/NetworkManager/system-connections/"
-sed -i '/^OnlyShowIn=*/d' /etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop
 systemctl disable dnsmasq
 
 
