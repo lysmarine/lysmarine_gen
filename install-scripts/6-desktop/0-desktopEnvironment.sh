@@ -4,7 +4,7 @@
 install  -v $FILE_FOLDER/Xwrapper.config "/etc/X11/"
 
 if [ $LMOS == Raspbian ]; then
-	apt-get install -q -y xserver-xorg-video-fbturbo
+	apt-get -q -y install xserver-xorg-video-fbturbo
 fi
 
 if [ $LMOS == Armbian ]; then
