@@ -32,21 +32,29 @@ commands:
 jobs:
 
   build-raspios-arm32:
+    parameters:
+      saywhat:
+        description: "To whom shall we say hello?"
+        default: "World"
+        type: string
+
     executor: linux
     steps:
       - prepare-linux-machine
-      - attach_workspace:
-          at: /home/circleci
+#      - attach_workspace:
+#          at: /home/circleci
       - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios armhf 0.9.12
+#          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios armhf 0.9.12
+
+          command: echo << parameters.saywhat >>
           no_output_timeout: 30m
-      - persist_to_workspace:
-          root: .
-          paths: ./cross-build-release/release/
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
-      - publish
+#      - persist_to_workspace:
+#          root: .
+#          paths: ./cross-build-release/release/
+#      - store_artifacts:
+#          path: ./cross-build-release/release/
+#          destination: release/
+#      - publish
 
   build-raspios-arm64:
     executor: linux
@@ -99,8 +107,10 @@ workflows:
   version: 2
   build_all:
     jobs:
-      - build-raspios-arm32
-      - build-raspios-arm64
-      - build-armbian-pine64so
-      #- build-debian-vbox
-      - build-debian-live
+
+      - build-raspios-arm32:
+          saywhat: Everyone
+#      - build-raspios-arm64
+#      - build-armbian-pine64so
+#      #- build-debian-vbox
+#      - build-debian-live
