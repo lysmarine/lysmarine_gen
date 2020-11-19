@@ -103,7 +103,7 @@ Plugin {
     }
 }
 Plugin {
-    type = dclock
+    type = tclock
     config {
         ClockFmt = %a %b %d %H:%M
         TooltipFmt = %A %x
