@@ -12,6 +12,17 @@ At this time targeted SBCs are :
 __If you wish to have your favorite SBC supported and if you have some time for testing ...or have a spare to giveaway. 
 Open a github issue or contact me on facebook https://fb.me.com/lysmarineOS/__
 
+# Steps to create your own LysMarine image
+
+* Create GitHub account
+* Fork this project on GitHub
+* Create CircleCi account (Use logging in with GitHub)
+* Register .circleci/config.yml in CircleCi
+* Create CloudSmith account (Use logging in with GitHub)
+* Import CloudSmith key into circleci project settings (via env variable)
+* After circleci build completes it will create and upload image to cloudsmith
+* You can burn this image using RaspberryPi imager to SD card and use that SD card to boot your raspberry Pi
+
 # Contributors & Testers
 
 If you don't know where to start, fixing a typo can be enough. There are also some issues in the bug tracker marked as
