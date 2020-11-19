@@ -20,6 +20,8 @@ Open a github issue or contact me on facebook https://fb.me.com/lysmarineOS/__
 * Register .circleci/config.yml in CircleCi
 * Create CloudSmith account (Use logging in with GitHub)
 * Import CloudSmith key into circleci project settings (via env variable)
+* Edit publish-cloudsmith.sh options in .circleci/config.yml to put location of your cloudsmith repository and push
+  the changes into github
 * After circleci build completes it will create and upload image to cloudsmith
 * You can burn this image using RaspberryPi imager to SD card and use that SD card to boot your raspberry Pi
 * You can edit files inside install-scripts directory push them into github and customize your image.
