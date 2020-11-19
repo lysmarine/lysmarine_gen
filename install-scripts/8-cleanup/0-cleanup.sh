@@ -4,9 +4,7 @@ rm -rvf /home/user/Public /home/user/Templates /home/user/Videos /home/user/Desk
 
 apt-get clean
 
-if [ $LMOS == Raspbian ]; then
-	apt-get remove -y greybird-gtk-theme murrine-themes rpd-icons 
-fi
+apt-get remove -y greybird-gtk-theme murrine-themes rpd-icons
 
 apt-get -y autoremove
 apt-get clean
