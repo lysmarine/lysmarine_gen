@@ -12,9 +12,7 @@ cat $FILE_FOLDER/hosts >> /etc/hosts
 apt-get install -y -q createap
 
 ##  NetworkManager provide its own wpa_supplicant, stop the others to avoid conflicts.
-if [[ $LMOS == 'Raspbian' ]]; then
-	systemctl disable dhcpcd.service
-fi
+systemctl disable dhcpcd.service
 systemctl disable wpa_supplicant.service
 systemctl disable hostapd.service
 
