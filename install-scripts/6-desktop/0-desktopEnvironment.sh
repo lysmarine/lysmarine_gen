@@ -36,9 +36,9 @@ apt-get clean
 
 ## Install base desktop apps.
 if [ $LMOS == Raspbian ]; then
-	apt-get install -y -q chromium-browser
+	apt-get install -y -q chromium-browser rpi-chromium-mods
 else
-	apt-get install -y -q chromium
+	apt-get install -y -q chromium rpi-chromium-mods
 fi
 
 apt-get install -y -q pcmanfm lxterminal mousepad gpsbabel file-roller
