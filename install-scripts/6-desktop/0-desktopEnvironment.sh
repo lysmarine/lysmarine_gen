@@ -3,7 +3,13 @@
 ## Needed to allow the service file start X
 install  -v $FILE_FOLDER/Xwrapper.config "/etc/X11/"
 
-apt-get -q -y install xserver-xorg-video-fbturbo
+if [ $LMOS == Raspbian ]; then
+	apt-get -q -y install xserver-xorg-video-fbturbo
+fi
+
+if [ $LMOS == Armbian ]; then
+	apt-get -q -y install xserver-xorg-legacy
+fi
 
 apt-get install -q -y \
 gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base \
@@ -29,6 +35,10 @@ install -o 1000 -g 1000 -v $FILE_FOLDER/autostart  "/home/user/.config/openbox/"
 apt-get clean
 
 ## Install base desktop apps.
-apt-get install -y -q chromium
+if [ $LMOS == Raspbian ]; then
+	apt-get install -y -q chromium-browser
+else
+	apt-get install -y -q chromium
+fi
 
 apt-get install -y -q pcmanfm lxterminal mousepad gpsbabel file-roller

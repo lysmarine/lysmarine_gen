@@ -40,4 +40,6 @@ if [ -f /etc/issue ]; then
 fi
 
 # Raspbian enable this to intercept keystroke during the boot process, (for ondemand cup freq management.) Lysmarine don't want to set it that way.
-systemctl disable triggerhappy.service
+if [[ $LMOS == 'Raspbian' ]]; then
+	systemctl disable triggerhappy.service
+fi
