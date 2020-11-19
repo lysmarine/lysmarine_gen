@@ -32,12 +32,6 @@ commands:
 jobs:
 
   build-raspios-arm32:
-    parameters:
-      saywhat:
-        description: "To whom shall we say hello?"
-        default: "World"
-        type: string
-
     executor: linux
     steps:
       - prepare-linux-machine
@@ -101,16 +95,64 @@ jobs:
           destination: release/
       - publish
 
+  build-on-linux:
+    executor: linux
+    parameters:
+      baseOs:
+        type: string
+      cpuArch:
+        type: string
+      version:
+        type: string
+      stage:
+        type: string
+
+    steps:
+    #  - prepare-linux-machine
+      - run:
+          command: echo <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> <<parameters.stage>>
+          no_output_timeout: 30m
+#      - persist_to_workspace:
+#          root: .
+#          paths: ./cross-build-release//release
+#      - store_artifacts:
+#          path: ./cross-build-release/release/
+#          destination: release/
+#      - publish
+
+
 
 
 workflows:
   version: 2
   build_all:
     jobs:
+      - build-on-linux:
+          baseOs: 'raspios'
+          cpuArch: 'armhf'
+          version: 'dev'
+          stage: '0 2 4 6 8 '
 
-      - build-raspios-arm32:
-          saywhat: Everyone
-#      - build-raspios-arm64
-#      - build-armbian-pine64so
-#      #- build-debian-vbox
-#      - build-debian-live
+      - build-on-linux:
+          baseOs: 'raspios'
+          cpuArch: 'arm64'
+          version: 'dev'
+          stage: '0 2 4'
+
+      - build-on-linux:
+          baseOs: 'debian-live'
+          cpuArch: 'amd64'
+          version: 'dev'
+          stage: '0 2 4'
+
+      - build-on-linux:
+          baseOs: 'raspbian'
+          cpuArch: 'pine64so'
+          version: 'dev'
+          stage: '0 2 4'
+
+      - build-on-linux:
+          baseOs: 'debian-vbox'
+          cpuArch: 'amd64'
+          version: 'dev'
+          stage: '0 2 4'
