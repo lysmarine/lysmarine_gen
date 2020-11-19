@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-apt-get install -y git breeze-gtk-theme gtk3-engines-breeze
+apt-get install -y git adapta-gtk-theme
 
 git clone -q --depth=1 --single-branch --branch Abyss-Desktop-Theme-Icons-and-Folders https://github.com/rtlewis88/rtl88-Themes.git
 cp -rf rtl88-Themes/Abyss-DEEP-Suru-GLOW /usr/share/icons/Abyss-DEEP-Suru-GLOW
