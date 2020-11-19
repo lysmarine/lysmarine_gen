@@ -105,6 +105,7 @@ Plugin {
 Plugin {
     type = dclock
     config {
+        ClockFmt = %a %b %d %H:%M
         TooltipFmt = %A %x
         Action = gsimplecal
         Color = #ffffff
