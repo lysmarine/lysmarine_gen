@@ -10,7 +10,9 @@ apt-get install -y -q --no-install-recommends python3 python3-serial libpython3-
 
 pip3 install pywavefront pyglet gps gevent-websocket Flask-SocketIO python-socketio
 
-apt-get install -y -q wiringpi
+if [ $LMOS == 'Raspbian' ]; then
+  apt-get install -y -q wiringpi
+fi
 
 pushd ./stageCache
   ## Install RTIMULib2 as it's a dependency of pypilot
