@@ -36,21 +36,21 @@ Plugin {
             name = Charplotter (Opencpn)
             action = onlyone opencpn
         }
-        item {
-            icon = freeboard-sk
-            name = Charplotter (FreeBoard)
-            action = onlyone /opt/Freeboard-sk/Freeboard-sk
-        }
+#        item {
+#            icon = freeboard-sk
+#            name = Charplotter (FreeBoard)
+#            action = onlyone /opt/Freeboard-sk/Freeboard-sk
+#        }
         item {
             icon = logo_grib
             name = Weather (XyGrib)
             action = onlyone XyGrib
         }
-        item {
-            icon = utilities-system-monitor
-            name = SpeedSample (Sample of average speed)
-            action = onlyone /opt/SpeedSample/SpeedSample
-        }
+#        item {
+#            icon = utilities-system-monitor
+#            name = SpeedSample (Sample of average speed)
+#            action = onlyone /opt/SpeedSample/SpeedSample
+#        }
         item {
             icon = go-jump
             name = Autopilot control (Pypilot)
@@ -58,15 +58,7 @@ Plugin {
         }
         separator {
         }
-        separator {
-        }
-        separator {
-        }
         systemmenu {
-        }
-        separator {
-        }
-        separator {
         }
         separator {
         }
