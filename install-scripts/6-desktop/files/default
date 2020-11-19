@@ -1,5 +1,5 @@
 Global {
-    edge = left
+    edge = top
     allign = center
     margin = 0
     widthtype = percent
