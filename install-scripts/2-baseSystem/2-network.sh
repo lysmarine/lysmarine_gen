@@ -11,7 +11,8 @@ cat $FILE_FOLDER/hosts >> /etc/hosts
 
 
 # Access Point management
-install -m0644 -v $FILE_FOLDER/lysmarine-hotspot.nmconnection "/etc/NetworkManager/system-connections/"
+apt-get install -y -q createap #FIXME be careful before deleting createap, NetworkManager depend on some of its depedancies.
+install -m0600 -v $FILE_FOLDER/lysmarine-hotspot.nmconnection "/etc/NetworkManager/system-connections/"
 systemctl disable dnsmasq
 
 

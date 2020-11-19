@@ -3,15 +3,12 @@ id=lysmarine-hotspot
 uuid=cabf5cf8-e457-4480-bfdb-17e8e2c8a327
 type=wifi
 interface-name=wlan0
-permissions=
-timestamp=0
+permissions=user:user:;
 
 [wifi]
-
 mac-address-blacklist=
 mode=ap
-seen-bssids=
-ssid=machinename_nomap
+ssid=lysmarine-hotspot
 
 [wifi-security]
 key-mgmt=wpa-psk

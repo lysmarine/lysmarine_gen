@@ -1,8 +1,7 @@
-nm-applet &
 sleep 1 && onboard &
 
-sleep 5 && xset s off &
-sleep 5 && xset -dpms &
-sleep 5 && xset s noblank &
+sleep 42 && xset s off &
+sleep 42 && xset -dpms &
+sleep 42 && xset s noblank &
 /opt/wdash/wdash &
 
