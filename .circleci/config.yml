@@ -30,71 +30,6 @@ commands:
           package-path: ./*.zip
 
 jobs:
-
-  build-raspios-arm32:
-    executor: linux
-    steps:
-      - prepare-linux-machine
-#      - attach_workspace:
-#          at: /home/circleci
-      - run:
-#          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios armhf 0.9.12
-
-          command: echo << parameters.saywhat >>
-          no_output_timeout: 30m
-#      - persist_to_workspace:
-#          root: .
-#          paths: ./cross-build-release/release/
-#      - store_artifacts:
-#          path: ./cross-build-release/release/
-#          destination: release/
-#      - publish
-
-  build-raspios-arm64:
-    executor: linux
-    steps:
-      - prepare-linux-machine
-      - attach_workspace:
-          at: /home/circleci
-      - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios arm64 0.9.12
-          no_output_timeout: 30m
-      - persist_to_workspace:
-           root: .
-           paths: ./cross-build-release//release
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
-      - publish
-
-  build-armbian-pine64so:
-    executor: linux
-    steps:
-      - prepare-linux-machine
-      - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh armbian-pineA64so arm64 0.9.12
-          no_output_timeout: 30m
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
-      - publish
-
-  build-debian-live:
-    executor: linux
-    environment:
-      - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.11
-      - PKG_ARCH=amd64
-    steps:
-      - prepare-linux-machine
-      - run:
-          command: cd cross-build-release; sudo /bin/bash -xe ./build.sh debian-live amd64 0.9.12
-          no_output_timeout: 30m
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
-      - publish
-
   build-on-linux:
     executor: linux
     parameters:
@@ -106,20 +41,12 @@ jobs:
         type: string
       stage:
         type: string
-
     steps:
-    #  - prepare-linux-machine
+      - prepare-linux-machine
       - run:
-          command: echo <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> <<parameters.stage>>
+          command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
           no_output_timeout: 30m
-#      - persist_to_workspace:
-#          root: .
-#          paths: ./cross-build-release//release
-#      - store_artifacts:
-#          path: ./cross-build-release/release/
-#          destination: release/
-#      - publish
-
+      - publish
 
 
 
