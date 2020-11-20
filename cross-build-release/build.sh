@@ -73,17 +73,16 @@
 		else
 			buildCmd="./install.sh $stagesToBuild"
 		fi
-
-		proot \
-			--root-id \
-			--rootfs=$workDir/squashfs-root \
-			--cwd=/install-scripts \
-			--mount=/etc/resolv.conf:/etc/resolv.conf \
-			--mount=/dev:/dev \
-			--mount=/sys:/sys \
-			--mount=/proc:/proc \
-			--mount=/tmp:/tmp \
-			$buildCmd
+		
+		mount --rbind /dev $workDir/squashfs-root/dev/
+		mount  -t proc /proc $workDir/squashfs-root/proc/
+		mount --rbind /sys $workDir/squashfs-root/sys/
+		cp /etc/resolv.conf  $workDir/squashfs-root/etc/
+		chroot $workDir/squashfs-root
+		rm $workDir/squashfs-root/etc/resolv.conf
+		umount  $workDir/squashfs-root/dev
+		umount  $workDir/squashfs-root/proc
+		umount  $workDir/squashfs-root/sys
 
 		umountIsoFile "$workDir"
 
