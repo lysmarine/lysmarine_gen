@@ -139,7 +139,7 @@ function chrootWithProot {
 		--mount=/proc:/proc \
 		--mount=/tmp:/tmp \
 		--mount=/run/shm:/run/shm \
-		"$buildCmd"
+		$buildCmd
 }
 
 function shrinkWithPishrink {

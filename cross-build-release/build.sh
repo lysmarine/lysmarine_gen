@@ -8,10 +8,10 @@
 	# Usage: sudo ./build.sh baseOS processorArchitecture lmVersion stagesToBuild
 	# Note : baseOs options are raspios|armbian-pine64so|debian-live|debian-vbox|debian.
 	# Note : processorArchitecture armhf|arm64|amd64
-	baseOS="${1:raspios}"
-	cpuArch="${2:armhf}"
-	lmVersion="${3:dev}"
-	stagesToBuild="${4}"
+	baseOS="${1:-raspios}"
+	cpuArch="${2:-armhf}"
+	lmVersion="${3:-nightBuild_$EPOCHSECONDS}"
+	stagesToBuild="$4"
 
 	setupWorkSpace "$baseOS-$cpuArch"
 	cacheDir="./cache/$baseOS-$cpuArch"

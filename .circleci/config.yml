@@ -57,29 +57,29 @@ workflows:
       - build-on-linux:
           baseOs: 'raspios'
           cpuArch: 'armhf'
-          version: 'dev'
-          stage: '0 2 4 6 8 '
+          version: ''
+          stage: ''
 
       - build-on-linux:
           baseOs: 'raspios'
           cpuArch: 'arm64'
-          version: 'dev'
-          stage: '0 2 4'
+          version: ''
+          stage: ''
 
       - build-on-linux:
           baseOs: 'debian-live'
           cpuArch: 'amd64'
-          version: 'dev'
-          stage: '0 2 4'
+          version: ''
+          stage: ''
 
       - build-on-linux:
           baseOs: 'raspbian'
           cpuArch: 'pine64so'
-          version: 'dev'
-          stage: '0 2 4'
+          version: ''
+          stage: ''
 
       - build-on-linux:
           baseOs: 'debian-vbox'
           cpuArch: 'amd64'
-          version: 'dev'
-          stage: '0 2 4'
+          version: ''
+          stage: ''
