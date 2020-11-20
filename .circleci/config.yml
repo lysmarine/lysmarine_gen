@@ -73,8 +73,8 @@ workflows:
           stage: ''
 
       - build-on-linux:
-          baseOs: 'raspbian'
-          cpuArch: 'pine64so'
+          baseOs: 'armbian-pine64so'
+          cpuArch: 'arm64'
           version: ''
           stage: ''
 
