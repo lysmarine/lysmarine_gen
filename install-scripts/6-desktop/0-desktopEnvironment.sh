@@ -3,13 +3,7 @@
 ## Needed to allow the service file start X
 install  -v $FILE_FOLDER/Xwrapper.config "/etc/X11/"
 
-if [ $LMOS == Raspbian ]; then
-	apt-get -q -y install xserver-xorg-video-fbturbo
-fi
-
-if [ $LMOS == Armbian ]; then
-	apt-get -q -y install xserver-xorg-legacy
-fi
+apt-get -q -y install xserver-xorg-video-fbturbo
 
 apt-get install -q -y \
 gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base \
@@ -21,7 +15,7 @@ dialog lxterminal network-manager-gnome
 
 # Install touchscreen drivers
 apt-get -q -y install xserver-xorg-input-libinput
-apt-get -q -y install xinput-calibrator libinput-tools
+apt-get -q -y install xinput xinput-calibrator libinput-tools
 
 install -o 1000 -g 1000 -d /home/user/.local
 install -o 1000 -g 1000 -d /home/user/.local/share
