@@ -14,7 +14,7 @@ install -m0644 -v $FILE_FOLDER/mopidy.list "/etc/apt/sources.list.d/"
 #install -m0644 -v $FILE_FOLDER/50-lysmarine.pref "/etc/apt/preferences.d/"
 
 ## Get the signature keys
-apt-get install -y -q  wget gnupg
+apt-get install -y -q  wget gnupg ca-certificates
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 67E4A52AC865EB40          # Opencpn
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6AF0E1940624A220          # Opencpn
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 868273EDCE9979E7          # lysmarine (provide: createap, rtl-ais, fbpanel)
