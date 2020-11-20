@@ -17,7 +17,7 @@ install -m0644 -v $FILE_FOLDER/mopidy.list "/etc/apt/sources.list.d/"
 apt-get install -y -q  wget gnupg
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 67E4A52AC865EB40          # Opencpn
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6AF0E1940624A220          # Opencpn
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 868273edce9979e7          # lysmarine (provide: createap, rtl-ais, fbpanel)
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 868273EDCE9979E7          # lysmarine (provide: createap, rtl-ais, fbpanel)
 
 wget -q -O- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -   # NodeJs
 wget -q -O- https://www.free-x.de/debian/oss.boating.gpg.key     | apt-key add -   # XyGrib
