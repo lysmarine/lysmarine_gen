@@ -8,10 +8,10 @@
 	# Usage: sudo ./build.sh baseOS processorArchitecture lmVersion stagesToBuild
 	# Note : baseOs options are raspios|armbian-pine64so|debian-live|debian-vbox|debian.
 	# Note : processorArchitecture armhf|arm64|amd64
-	baseOS="${1:raspios}"
-	cpuArch="${2:armhf}"
-	lmVersion="${3:dev}"
-	stagesToBuild="${4}"
+	baseOS="${1:-raspios}"
+	cpuArch="${2:-armhf}"
+	lmVersion="${3:-nightBuild_$EPOCHSECONDS}"
+	stagesToBuild="$4"
 
 	setupWorkSpace "$baseOS-$cpuArch"
 	cacheDir="./cache/$baseOS-$cpuArch"
@@ -100,7 +100,8 @@
 		xorriso -as mkisofs -V 'Debian 10.1 amd64 custom nonfree' -o "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.iso" -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus "$workDir/rootfs"
 
 	elif [[ $baseOS == 'debian-vbox' ]]; then
-		echo "not yet"
+		echo "not implemented yet"
+		exit 1
 	fi
 
 	exit 0

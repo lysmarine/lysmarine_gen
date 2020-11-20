@@ -30,67 +30,22 @@ commands:
           package-path: ./*.zip
 
 jobs:
-
-  build-raspios-arm32:
+  build-on-linux:
     executor: linux
-    steps:
-      - prepare-linux-machine
-      - attach_workspace:
-          at: /home/circleci
-      - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios armhf 0.9.12
-          no_output_timeout: 30m
-      - persist_to_workspace:
-          root: .
-          paths: ./cross-build-release/release/
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
-      - publish
-
-  build-raspios-arm64:
-    executor: linux
-    steps:
-      - prepare-linux-machine
-      - attach_workspace:
-          at: /home/circleci
-      - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios arm64 0.9.12
-          no_output_timeout: 30m
-      - persist_to_workspace:
-           root: .
-           paths: ./cross-build-release//release
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
-      - publish
-
-  build-armbian-pine64so:
-    executor: linux
+    parameters:
+      baseOs:
+        type: string
+      cpuArch:
+        type: string
+      version:
+        type: string
+      stage:
+        type: string
     steps:
       - prepare-linux-machine
       - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh armbian-pineA64so arm64 0.9.12
+          command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
           no_output_timeout: 30m
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
-      - publish
-
-  build-debian-live:
-    executor: linux
-    environment:
-      - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.11
-      - PKG_ARCH=amd64
-    steps:
-      - prepare-linux-machine
-      - run:
-          command: cd cross-build-release; sudo /bin/bash -xe ./build.sh debian-live amd64 0.9.12
-          no_output_timeout: 30m
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
       - publish
 
 
@@ -99,8 +54,32 @@ workflows:
   version: 2
   build_all:
     jobs:
-      - build-raspios-arm32
-      - build-raspios-arm64
-      - build-armbian-pine64so
-      #- build-debian-vbox
-      - build-debian-live
+      - build-on-linux:
+          baseOs: 'raspios'
+          cpuArch: 'armhf'
+          version: ''
+          stage: ''
+
+      - build-on-linux:
+          baseOs: 'raspios'
+          cpuArch: 'arm64'
+          version: ''
+          stage: ''
+
+      - build-on-linux:
+          baseOs: 'debian-live'
+          cpuArch: 'amd64'
+          version: ''
+          stage: ''
+
+      - build-on-linux:
+          baseOs: 'armbian-pine64so'
+          cpuArch: 'arm64'
+          version: ''
+          stage: ''
+
+      - build-on-linux:
+          baseOs: 'debian-vbox'
+          cpuArch: 'amd64'
+          version: ''
+          stage: ''
