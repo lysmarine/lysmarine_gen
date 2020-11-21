@@ -83,9 +83,9 @@ cd /install-scripts ;
 $buildCmd
 EOT
 		rm $workDir/squashfs-root/etc/resolv.conf
-		umount  $workDir/squashfs-root/dev
-		umount  $workDir/squashfs-root/proc
-		umount  $workDir/squashfs-root/sys
+		umount $workDir/squashfs-root/dev  || umount -l $workDir/squashfs-root/dev
+		umount $workDir/squashfs-root/proc || umount -l $workDir/squashfs-root/proc
+		umount $workDir/squashfs-root/sys  || umount -l $workDir/squashfs-root/sys
 
 		umountIsoFile "$workDir"
 
