@@ -11,6 +11,7 @@ apt-get clean
 
 ## Menu cleanup 
 rm -fv /usr/share/applications/vim.desktop
+rm -fv /usr/share/applications/htop.desktop
 rm -fv /usr/share/applications/PyCrust.desktop
 rm -fv /usr/share/applications/XRCed.desktop
 rm -fv /usr/share/applications/x11vnc.desktop
