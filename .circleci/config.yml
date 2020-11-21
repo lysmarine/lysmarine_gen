@@ -19,7 +19,7 @@ commands:
       - run:
           command: |
             .circleci/build-ci.sh
-          no_output_timeout: 30m
+          no_output_timeout: 60m
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
       - run: .circleci/publish-cloudsmith.sh img bbn-projects/bbn-repo ${PKG_DISTRO}/${PKG_RELEASE}

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Chart Plotter (OpenCPN)
+Comment=Open source chart plotter / navigator
+Exec=onlyone /usr/bin/opencpn
+Icon=opencpn
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Geography;System;
+Keywords=GPS;Navigation;Chart;

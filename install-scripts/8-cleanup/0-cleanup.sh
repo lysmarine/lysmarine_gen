@@ -13,7 +13,6 @@ apt-get clean
 rm -fv /usr/share/applications/vim.desktop
 rm -fv /usr/share/applications/PyCrust.desktop
 rm -fv /usr/share/applications/XRCed.desktop
-rm -fv /usr/share/applications/opencpn.desktop
 rm -fv /usr/share/applications/x11vnc.desktop
 rm -fv /usr/share/applications/org.gnome.FileRoller.desktop
-rm -fv /usr/local/share/applications/opencpn.desktop # for amd64 that need a manual builds
+
