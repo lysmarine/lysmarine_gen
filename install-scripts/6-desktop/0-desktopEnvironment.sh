@@ -15,7 +15,8 @@ dialog lxterminal network-manager-gnome
 
 # Install touchscreen drivers
 apt-get -q -y install xserver-xorg-input-libinput
-apt-get -q -y install xinput xinput-calibrator libinput-tools
+apt-get -q -y install xinput libinput-tools
+apt-get -q -y install xinput-calibrator
 
 install -o 1000 -g 1000 -d /home/user/.local
 install -o 1000 -g 1000 -d /home/user/.local/share
