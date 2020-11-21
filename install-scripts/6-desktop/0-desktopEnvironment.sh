@@ -36,6 +36,7 @@ else
 	apt-get install -y -q chromium
 fi
 
+# Adobe Flash Player. Copyright 1996-2015. Adobe Systems Incorporated. All Rights Reserved.
 DEBIAN_FRONTEND=noniterractive apt-get -o Dpkg::Options:=="--force-confnew" -q -y install rpi-chromium-mods
 
 apt-get install -y -q pcmanfm lxterminal mousepad gpsbabel file-roller
