@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-apt-get install -y libatk-adaptor
+apt-get install -y libatk-adaptor libgtk2.0-dev
 apt-get install -y budgie-desktop
 
 ## Start budgie-desktop on openbox boot.
