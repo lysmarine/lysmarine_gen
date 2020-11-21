@@ -8,7 +8,8 @@ apt-get install -y -q libatk1.0-0 libcairo2 libfontconfig1 libfreetype6 libgdk-p
 apt-get install -y -q fbpanel
 
 ## Start budgie-desktop on openbox boot.
+install -m 755 $FILE_FOLDER/.xinitrc "/home/user/"
+
 install -o 1000 -g 1000 -d /home/user/.config/openbox
-#echo 'export XDG_CURRENT_DESKTOP=Budgie:GNOME; budgie-desktop &' >>/home/user/.config/openbox/autostart
-echo 'budgie-panel &' >>/home/user/.config/openbox/autostart
 echo 'chromium --headless &' >>/home/user/.config/openbox/autostart
+
