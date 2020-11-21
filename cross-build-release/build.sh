@@ -78,7 +78,10 @@
 		mount  -t proc /proc $workDir/squashfs-root/proc/
 		mount --rbind /sys $workDir/squashfs-root/sys/
 		cp /etc/resolv.conf  $workDir/squashfs-root/etc/
-		chroot $workDir/squashfs-root
+		chroot $workDir/squashfs-root /bin/bash <<EOT
+cd /install-scripts ;
+$buildCmd
+EOT
 		rm $workDir/squashfs-root/etc/resolv.conf
 		umount  $workDir/squashfs-root/dev
 		umount  $workDir/squashfs-root/proc

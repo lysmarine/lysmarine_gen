@@ -194,10 +194,11 @@ mountIsoFile() {
 umountIsoFile() {
 	log "un-Mounting"
 	workDir=$1
-	umount "$workDir/squashfs-root/dev" || /bin/true
+	umount -l "$workDir/squashfs-root/dev" || /bin/true
 	umount "$workDir/squashfs-root/proc" || /bin/true
-	umount "$workDir/squashfs-root/sys" || /bin/true
+	umount -l "$workDir/squashfs-root/sys" || /bin/true
 	umount "$workDir/squashfs-root/tmp" || /bin/true
 	umount "$workDir/squashfs-root/etc/resolv.conf" || /bin/true
 	umount "$workDir/isomount" || /bin/true
+
 }
