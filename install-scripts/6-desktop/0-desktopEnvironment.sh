@@ -3,7 +3,13 @@
 ## Needed to allow the service file start X
 install  -v $FILE_FOLDER/Xwrapper.config "/etc/X11/"
 
-apt-get -q -y install xserver-xorg-video-fbturbo
+if [ $LMOS == Raspbian ]; then
+  apt-get -q -y install xserver-xorg-video-fbturbo
+fi
+
+if [ $LMOS == Armbian ]; then
+	apt-get -q -y install xserver-xorg-legacy
+fi
 
 # Install touchscreen drivers
 apt-get -q -y install xserver-xorg-input-libinput
