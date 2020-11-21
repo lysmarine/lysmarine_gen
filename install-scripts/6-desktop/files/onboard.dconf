@@ -27,8 +27,8 @@ status-icon-provider="GtkStatusIcon"
 [window]
 docking-enabled=true
 docking-shrink-workarea=false
-window-state-sticky=True
-force-to-top=True
+#window-state-sticky=True
+#force-to-top=True
 
 [window/landscape]
 width=764
@@ -37,6 +37,6 @@ x=36
 y=0
 
 [keyboard]
-input-event-source=XInput
+#input-event-source=XInput
 #input-event-source=GTK
 
