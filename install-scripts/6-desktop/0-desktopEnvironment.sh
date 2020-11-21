@@ -36,5 +36,6 @@ else
 	apt-get install -y -q chromium
 fi
 
-#apt-get install -y -q rpi-chromium-mods
+DEBIAN_FRONTEND=noniterractive apt-get -o Dpkg::Options:=="--force-confnew" -q -y install rpi-chromium-mods
+
 apt-get install -y -q pcmanfm lxterminal mousepad gpsbabel file-roller
