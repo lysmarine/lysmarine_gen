@@ -10,5 +10,5 @@ apt-get install -y -q fbpanel
 ## Start budgie-desktop on openbox boot.
 install -o 1000 -g 1000 -d /home/user/.config/openbox
 #echo 'export XDG_CURRENT_DESKTOP=Budgie:GNOME; budgie-desktop &' >>/home/user/.config/openbox/autostart
-echo 'fbpanel &' >>/home/user/.config/openbox/autostart
+echo 'budgie-panel &' >>/home/user/.config/openbox/autostart
 echo 'chromium --headless &' >>/home/user/.config/openbox/autostart
