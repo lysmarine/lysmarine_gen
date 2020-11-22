@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+apt-get clean
+
 apt-get -y -q install rtl-sdr rtl-ais
 apt-get -y -q install gqrx-sdr
 apt-get -y -q install cubicsdr
