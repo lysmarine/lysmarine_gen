@@ -1,3 +1,3 @@
 #!/bin/bash -e
 
-#apt-get -y -q install stellarium
+apt-get -y -q install stellarium
