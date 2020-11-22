@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=AvNav
+GenericName=AvNav
+Comment=AvNav ChartPlotter
+Exec=sh -c "chromium-browser -new-window http://localhost:8099; sleep 6; xdotool key F11"
+Terminal=false
+Icon=globe
+Categories=System;GPS;Geography;Navigation;Chart;
+Keywords=GPS;Navigation;Chart;

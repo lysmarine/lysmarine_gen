@@ -7,5 +7,5 @@ Icon=opencpn
 StartupNotify=true
 Terminal=false
 Type=Application
-Categories=Geography;System;
+Categories=System;GPS;Geography;Navigation;Chart;
 Keywords=GPS;Navigation;Chart;
