@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Marina Booking (Dockwa)
+GenericName=Marina Booking (Dockwa)
+Comment=Marina Booking (Dockwa)
+Exec=sh -c "/opt/Dockwa/Dockwa"
+Terminal=false
+Categories=Network;Internet;Travel
+Keywords=Network;Internet;Travel

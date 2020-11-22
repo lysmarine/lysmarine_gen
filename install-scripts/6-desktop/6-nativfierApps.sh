@@ -46,6 +46,12 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   --name "MusicBox" --icon /usr/share/icons/gnome/256x256/apps/multimedia-volume-control.png \
   "http://localhost:6680/musicbox_webclient" /opt/
 
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+  --name "Dockwa"  \
+  "https://dockwa.com/"\
+   -u "Mozilla/5.0 (Linux; <Android Version>; <Build Tag etc.>) AppleWebKit/<WebKit Rev> (KHTML, like Gecko) Chrome/<Chrome Rev> Mobile Safari/<WebKit Rev>" \
+  /opt/
+
 ## Make folder name arch independent.
 mv /opt/Freeboard-sk-linux-$arch /opt/Freeboard-sk
 mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
@@ -53,6 +59,7 @@ mv /opt/SignalK-linux-$arch /opt/SignalK
 mv /opt/SpeedSample-linux-$arch /opt/SpeedSample
 mv /opt/wdash-linux-$arch /opt/wdash
 mv /opt/MusicBox-linux-$arch /opt/MusicBox
+mv /opt/Dockwa-linux-$arch /opt/Dockwa
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
@@ -62,7 +69,10 @@ if [ $LMOS == Debian ]; then
   chmod 4755 /opt/SpeedSample/chrome-sandbox
   chmod 4755 /opt/wdash/chrome-sandbox
   chmod 4755 /opt/MusicBox/chrome-sandbox
+  chmod 4755 /opt/Dockwa/chrome-sandbox
 fi
+
+install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
 
 # Minimize space by linking identical files
 hardlink -v -f -t /opt/*
