@@ -8,6 +8,10 @@ apt-get remove -y greybird-gtk-theme murrine-themes rpd-icons
 
 apt-get -y autoremove
 apt-get clean
+npm cache clean --force
+
+# remove python pip cache
+rm -rf ~/.cache/pip
 
 ## Menu cleanup 
 rm -fv /usr/share/applications/vim.desktop
@@ -20,6 +24,5 @@ rm -fv /usr/share/applications/gmrun.desktop
 rm -fv /usr/share/applications/mopidy.desktop
 rm -fv /usr/share/applications/xinput_calibrator.desktop
 
-# remove python pip cache
-rm -rf ~/.cache/pip
+
 
