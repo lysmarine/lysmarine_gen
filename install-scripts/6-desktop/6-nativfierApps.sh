@@ -24,10 +24,6 @@ else
 fi
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "wdash" --icon /home/user/.local/share/icons/signalk.png \
-  "http://localhost:80" /opt/
-
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "SignalK" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:80/admin/" /opt/
 
@@ -35,33 +31,47 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   --name "Freeboard-sk" --icon /home/user/.local/share/icons/freeboard-sk.png \
   "http://localhost:81/@signalk/freeboard-sk/" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "SpeedSample" --icon /usr/share/icons/gnome/256x256/apps/utilities-system-monitor.png \
-  "http://localhost:4998" /opt/
-
 echo "setTheme('dark')" >./pypilot_darktheme.js
 nativefier -a $arch --inject ./pypilot_darktheme.js --disable-context-menu --disable-dev-tools --single-instance \
   --name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
   "http://localhost:8080" /opt/
 
 ## Make folder name arch independent.
+mv /opt/SignalK-linux-$arch /opt/SignalK
 mv /opt/Freeboard-sk-linux-$arch /opt/Freeboard-sk
 mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
-mv /opt/SignalK-linux-$arch /opt/SignalK
-mv /opt/SpeedSample-linux-$arch /opt/SpeedSample
-mv /opt/wdash-linux-$arch /opt/wdash
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
+  chmod 4755 /opt/SignalK/chrome-sandbox
   chmod 4755 /opt/Freeboard-sk/chrome-sandbox
   chmod 4755 /opt/Pypilot_webapp/chrome-sandbox
-  chmod 4755 /opt/SignalK/chrome-sandbox
-  chmod 4755 /opt/SpeedSample/chrome-sandbox
-  chmod 4755 /opt/wdash/chrome-sandbox
 fi
 
 # Minimize space by linking identical files
 hardlink -v -f -t /opt/*
+
+
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+  --name "wdash" --icon /home/user/.local/share/icons/signalk.png \
+  "http://localhost:80" /opt/
+
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+  --name "SpeedSample" --icon /usr/share/icons/gnome/256x256/apps/utilities-system-monitor.png \
+  "http://localhost:4998" /opt/
+
+mv /opt/wdash-linux-$arch /opt/wdash
+mv /opt/SpeedSample-linux-$arch /opt/SpeedSample
+
+## On debian, the sandbox environment fail without GUID/SUID
+if [ $LMOS == Debian ]; then
+  chmod 4755 /opt/wdash/chrome-sandbox
+  chmod 4755 /opt/SpeedSample/chrome-sandbox
+fi
+
+# Minimize space by linking identical files
+hardlink -v -f -t /opt/*
+
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "MusicBox" --icon /usr/share/icons/gnome/256x256/apps/multimedia-volume-control.png \
