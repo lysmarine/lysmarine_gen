@@ -10,3 +10,4 @@ apt-get -y -q install fldigi
 apt-get -y -q install predict gpredict
 apt-get -y -q install gnuais gnuaisgui
 
+apt-get clean
