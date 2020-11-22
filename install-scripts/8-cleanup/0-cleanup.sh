@@ -16,4 +16,8 @@ rm -fv /usr/share/applications/PyCrust.desktop
 rm -fv /usr/share/applications/XRCed.desktop
 rm -fv /usr/share/applications/x11vnc.desktop
 rm -fv /usr/share/applications/org.gnome.FileRoller.desktop
+rm -fv /usr/share/applications/gmrun.desktop
+rm -fv /usr/share/applications/mopidy.desktop
+rm -fv /usr/share/applications/xinput_calibrator.desktop
+
 
