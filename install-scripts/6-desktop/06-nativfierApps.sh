@@ -50,7 +50,7 @@ fi
 
 # Minimize space by linking identical files
 hardlink -v -f -t /opt/*
-
+npm cache clean --force
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "wdash" --icon /home/user/.local/share/icons/signalk.png \
@@ -71,7 +71,7 @@ fi
 
 # Minimize space by linking identical files
 hardlink -v -f -t /opt/*
-
+npm cache clean --force
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "MusicBox" --icon /usr/share/icons/gnome/256x256/apps/multimedia-volume-control.png \
@@ -94,8 +94,8 @@ fi
 
 # Minimize space by linking identical files
 hardlink -v -f -t /opt/*
+npm cache clean --force
 
 install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
 
-npm cache clean --force
 apt-get clean
