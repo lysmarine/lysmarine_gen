@@ -7,3 +7,5 @@ xset s noblank &
 
 /opt/wdash/wdash &
 
+# Allow mopidy user to access X server
+xhost +SI:localuser:mopidy
