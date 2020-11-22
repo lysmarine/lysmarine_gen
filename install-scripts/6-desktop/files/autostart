@@ -9,3 +9,8 @@ xset s noblank &
 
 # Allow mopidy user to access X server
 xhost +SI:localuser:mopidy
+
+# Setting sound
+amixer cset numid=3 1
+amixer sset -D pulse Master 90% unmute
+amixer sset Master 90% unmute
