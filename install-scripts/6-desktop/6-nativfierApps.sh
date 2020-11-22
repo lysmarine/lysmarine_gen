@@ -44,6 +44,25 @@ nativefier -a $arch --inject ./pypilot_darktheme.js --disable-context-menu --dis
   --name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
   "http://localhost:8080" /opt/
 
+## Make folder name arch independent.
+mv /opt/Freeboard-sk-linux-$arch /opt/Freeboard-sk
+mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
+mv /opt/SignalK-linux-$arch /opt/SignalK
+mv /opt/SpeedSample-linux-$arch /opt/SpeedSample
+mv /opt/wdash-linux-$arch /opt/wdash
+
+## On debian, the sandbox environment fail without GUID/SUID
+if [ $LMOS == Debian ]; then
+  chmod 4755 /opt/Freeboard-sk/chrome-sandbox
+  chmod 4755 /opt/Pypilot_webapp/chrome-sandbox
+  chmod 4755 /opt/SignalK/chrome-sandbox
+  chmod 4755 /opt/SpeedSample/chrome-sandbox
+  chmod 4755 /opt/wdash/chrome-sandbox
+fi
+
+# Minimize space by linking identical files
+hardlink -v -f -t /opt/*
+
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "MusicBox" --icon /usr/share/icons/gnome/256x256/apps/multimedia-volume-control.png \
   "http://localhost:6680/musicbox_webclient" /opt/
@@ -54,30 +73,19 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
    -u "Mozilla/5.0 (Linux; <Android Version>; <Build Tag etc.>) AppleWebKit/<WebKit Rev> (KHTML, like Gecko) Chrome/<Chrome Rev> Mobile Safari/<WebKit Rev>" \
   /opt/
 
-## Make folder name arch independent.
-mv /opt/Freeboard-sk-linux-$arch /opt/Freeboard-sk
-mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
-mv /opt/SignalK-linux-$arch /opt/SignalK
-mv /opt/SpeedSample-linux-$arch /opt/SpeedSample
-mv /opt/wdash-linux-$arch /opt/wdash
 mv /opt/MusicBox-linux-$arch /opt/MusicBox
 mv /opt/Dockwa-linux-$arch /opt/Dockwa
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
-  chmod 4755 /opt/Freeboard-sk/chrome-sandbox
-  chmod 4755 /opt/Pypilot_webapp/chrome-sandbox
-  chmod 4755 /opt/SignalK/chrome-sandbox
-  chmod 4755 /opt/SpeedSample/chrome-sandbox
-  chmod 4755 /opt/wdash/chrome-sandbox
   chmod 4755 /opt/MusicBox/chrome-sandbox
   chmod 4755 /opt/Dockwa/chrome-sandbox
 fi
 
-install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
-
 # Minimize space by linking identical files
 hardlink -v -f -t /opt/*
+
+install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
 
 npm cache clean --force
 apt-get clean
