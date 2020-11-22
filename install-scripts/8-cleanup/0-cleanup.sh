@@ -20,4 +20,6 @@ rm -fv /usr/share/applications/gmrun.desktop
 rm -fv /usr/share/applications/mopidy.desktop
 rm -fv /usr/share/applications/xinput_calibrator.desktop
 
+# remove python pip cache
+rm -rf ~/.cache/pip
 
