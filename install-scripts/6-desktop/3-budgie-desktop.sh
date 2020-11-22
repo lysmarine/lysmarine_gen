@@ -12,3 +12,5 @@ echo 'chromium --headless &' >>/home/user/.config/openbox/autostart
 
 ## Start budgie-desktop on openbox boot.
 echo 'export XDG_CURRENT_DESKTOP=Budgie:GNOME; budgie-desktop &' >>/home/user/.config/openbox/autostart
+
+apt-get clean

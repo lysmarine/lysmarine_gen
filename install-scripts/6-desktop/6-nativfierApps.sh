@@ -1,5 +1,7 @@
 #!/bin/bash
 
+apt-get clean
+
 apt-get -y -q install nodejs libnss3 gnome-icon-theme unzip
 npm install nativefier -g --unsafe-perm
 
@@ -78,3 +80,4 @@ install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
 hardlink -v -f -t /opt/*
 
 npm cache clean --force
+apt-get clean
