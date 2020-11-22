@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+apt-get clean
+
 apt-get install -y -q x11vnc
 
 install -v -m 644 $FILE_FOLDER/vnc.service "/etc/systemd/system/vnc.service"
