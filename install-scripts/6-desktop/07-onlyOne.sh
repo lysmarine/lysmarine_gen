@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 apt-get install -y -q wmctrl
 
