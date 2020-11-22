@@ -7,7 +7,7 @@ User=user
 WorkingDirectory=/home/user
 PAMName=login
 Type=simple
-ExecStart=/bin/bash -l -c startx
+ExecStart=/bin/bash -l -c "startx; xhost +SI:localuser:mopidy"
 
 [Install]
 WantedBy=graphical.target
