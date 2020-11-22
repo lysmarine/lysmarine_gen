@@ -14,3 +14,4 @@ systemctl enable avnav
 install -m 644 $FILE_FOLDER/avnav.desktop "/usr/local/share/applications/"
 
 apt-get clean
+npm cache clean --force
