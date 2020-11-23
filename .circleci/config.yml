@@ -18,6 +18,35 @@ commands:
       - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
+  prepare-arm-docker:
+    description: "Do the necessary hacks needed to have a docker container that run a ARM arch from a amd64 host machine"
+    steps:
+      - checkout
+      - run: sudo apt-get -y install wget
+      - run:
+          command: |
+            echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker
+            sudo service docker restart && echo Dockerd is ready
+            docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static:register --reset --credential yes --persistent yes
+            docker ps -a
+            DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep debian:buster | awk '{print $1}')
+            docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
+            docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot
+            docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install proot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
+            docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
+            "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER"
+            echo "Stopping"
+            docker stop $DOCKER_CONTAINER_ID
+            docker rm -v $DOCKER_CONTAINER_ID
+
+#    environment:
+#      - DOCKER_IMAGE=arm64v8/debian:buster
+#      - CONTAINER_DISTRO=debian:buster
+#      - PKG_RELEASE=raspbian
+#      - PKG_DISTRO=buster
+#      - PKG_ARCH=arm64
+#      - EMU=on
+
   publish:
     steps:
       - cloudsmith/ensure-api-key
@@ -39,8 +68,10 @@ jobs:
         type: string
       version:
         type: string
+        default: ''
       stage:
         type: string
+        default: ''
     steps:
       - prepare-linux-machine
       - run:
@@ -48,38 +79,44 @@ jobs:
           no_output_timeout: 30m
       - publish
 
-
+  build-in-arm-docker:
+    executor: linux
+    parameters:
+      baseOs:
+        type: string
+      cpuArch:
+        type: string
+      version:
+        type: string
+        default: ''
+      stage:
+        type: string
+        default: ''
+    steps:
+      - prepare-linux-machine
+      - run:
+          command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
+          no_output_timeout: 30m
+      - publish
 
 workflows:
   version: 2
   build_all:
     jobs:
-      - build-on-linux:
+      - build-in-arm-docker:
           baseOs: 'raspios'
           cpuArch: 'armhf'
-          version: ''
-          stage: ''
-
-      - build-on-linux:
+      - build-in-arm-docker:
           baseOs: 'raspios'
           cpuArch: 'arm64'
-          version: ''
-          stage: ''
-
       - build-on-linux:
           baseOs: 'debian-live'
           cpuArch: 'amd64'
-          version: ''
-          stage: ''
-
-      - build-on-linux:
+      - build-in-arm-docker:
           baseOs: 'armbian-pine64so'
           cpuArch: 'arm64'
-          version: ''
-          stage: ''
-
-      - build-on-linux:
-          baseOs: 'debian-vbox'
-          cpuArch: 'amd64'
-          version: ''
-          stage: ''
+#      - build-on-linux:
+#          baseOs: 'debian-vbox'
+#          cpuArch: 'amd64'
+#          version: ''
+#          stage: ''

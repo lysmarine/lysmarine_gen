@@ -91,7 +91,7 @@ EOT
 
 		# Re-squash the file system.
 		pushd "$workDir/"
-		mksquashfs squashfs-root/ ./filesystem.squashfs -comp xz -noappend -processors 8
+		mksquashfs squashfs-root/ ./filesystem.squashfs -comp xz -noappend -processors 2
 		rm -r ./squashfs-root
 		popd
 
