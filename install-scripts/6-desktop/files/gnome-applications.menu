@@ -2,10 +2,6 @@
 <!DOCTYPE Menu
         PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
         'http://standards.freedesktop.org/menu-spec/menu-1.0.dtd'>
-<!--
-<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
-        "https://specifications.freedesktop.org/menu-spec/menu-latest.dtd">
--->
 <Menu>
     <Name>Applications</Name>
     <DefaultAppDirs/>
@@ -19,21 +15,9 @@
         <Layout>
             <Merge type="menus"/>
             <Filename>yelp.desktop</Filename>
-            <Filename>eog.desktop</Filename>
             <Filename>menulibre.desktop</Filename>
             <Filename>mousepad.desktop</Filename>
             <Filename>globaltime.desktop</Filename>
-            <Filename>pypilot_calibration.desktop</Filename>
-            <Filename>pypilot_webapp.desktop</Filename>
-            <Merge type="files"/>
-        </Layout>
-    </Menu>
-    <Menu>
-        <Name>menulibre-navigation</Name>
-        <Directory>menulibre-navigation.directory</Directory>
-        <DirectoryDir>/home/user/.local/share/desktop-directories</DirectoryDir>
-        <Layout>
-            <Merge type="menus"/>
             <Merge type="files"/>
         </Layout>
     </Menu>
@@ -189,6 +173,9 @@
         <DirectoryDir>/home/user/.local/share/desktop-directories</DirectoryDir>
         <Layout>
             <Merge type="menus"/>
+            <Filename>flarq.desktop</Filename>
+            <Filename>fldigi.desktop</Filename>
+            <Filename>gpredict.desktop</Filename>
             <Merge type="files"/>
         </Layout>
     </Menu>
@@ -198,12 +185,9 @@
         <Layout>
             <Merge type="menus"/>
             <Filename>chromium.desktop</Filename>
-            <Filename>flarq.desktop</Filename>
-            <Filename>fldigi.desktop</Filename>
+            <Filename>dockwa.desktop</Filename>
             <Filename>org.gnome.Geary.desktop</Filename>
             <Filename>geary-autostart.desktop</Filename>
-            <Filename>gpredict.desktop</Filename>
-            <Filename>dockwa.desktop</Filename>
             <Merge type="files"/>
         </Layout>
     </Menu>
@@ -224,8 +208,6 @@
         <DirectoryDir>/home/user/.local/share/desktop-directories</DirectoryDir>
         <Layout>
             <Merge type="menus"/>
-            <Filename>python2.7.desktop</Filename>
-            <Filename>python3.7.desktop</Filename>
             <Merge type="files"/>
         </Layout>
     </Menu>
@@ -235,9 +217,6 @@
         <DirectoryDir>/home/user/.local/share/desktop-directories</DirectoryDir>
         <Layout>
             <Merge type="menus"/>
-            <Filename>gpredict.desktop</Filename>
-            <Filename>opencpn.desktop</Filename>
-            <Filename>stellarium.desktop</Filename>
             <Merge type="files"/>
         </Layout>
     </Menu>
@@ -302,7 +281,6 @@
             <Directory>Settings.directory</Directory>
             <Layout>
                 <Merge type="menus"/>
-                <Filename>alacarte.desktop</Filename>
                 <Filename>menulibre.desktop</Filename>
                 <Filename>onboard-settings.desktop</Filename>
                 <Filename>obconf.desktop</Filename>
@@ -314,7 +292,6 @@
             <Merge type="menus"/>
             <Menuname>Administration</Menuname>
             <Menuname>Preferences</Menuname>
-            <Filename>avnav.desktop</Filename>
             <Filename>budgie-daemon.desktop</Filename>
             <Filename>budgie-desktop-settings.desktop</Filename>
             <Filename>budgie-panel.desktop</Filename>
@@ -324,9 +301,6 @@
             <Filename>lxterminal.desktop</Filename>
             <Filename>org.gnome.PowerStats.desktop</Filename>
             <Filename>servicedialog.desktop</Filename>
-            <Filename>signalk.desktop</Filename>
-            <Filename>debian-uxterm.desktop</Filename>
-            <Filename>debian-xterm.desktop</Filename>
             <Merge type="files"/>
         </Layout>
     </Menu>
@@ -346,7 +320,6 @@
         <DirectoryDir>/home/user/.local/share/desktop-directories</DirectoryDir>
         <Layout>
             <Merge type="menus"/>
-            <Filename>yelp.desktop</Filename>
             <Filename>eog.desktop</Filename>
             <Merge type="files"/>
         </Layout>
@@ -399,7 +372,6 @@
             <Filename>xdg-desktop-portal-gtk.desktop</Filename>
             <Filename>rygel.desktop</Filename>
             <Filename>gcr-viewer.desktop</Filename>
-            <Filename>xygrib.desktop</Filename>
             <Merge type="files"/>
         </Layout>
     </Menu>
@@ -409,6 +381,13 @@
         <DirectoryDir>/home/user/.local/share/desktop-directories</DirectoryDir>
         <Layout>
             <Merge type="menus"/>
+            <Filename>pypilot_calibration.desktop</Filename>
+            <Filename>pypilot_webapp.desktop</Filename>
+            <Filename>xygrib.desktop</Filename>
+            <Filename>signalk.desktop</Filename>
+            <Filename>opencpn.desktop</Filename>
+            <Filename>stellarium.desktop</Filename>
+            <Filename>avnav.desktop</Filename>
             <Merge type="files"/>
         </Layout>
     </Menu>

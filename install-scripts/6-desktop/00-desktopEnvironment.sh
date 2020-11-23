@@ -30,11 +30,18 @@ install -o 1000 -g 1000 -d /home/user/.local
 install -o 1000 -g 1000 -d /home/user/.local/share
 install -o 1000 -g 1000 -d /home/user/.local/share/desktop-directories
 install -o 1000 -g 1000 -d /home/user/.local/share/applications
+install -o 1000 -g 1000 -d /home/user/.local/share/icons
+install -o 1000 -g 1000 -d /home/user/.local/share/sounds
 
 # Openbox
-install -o 1000 -g 1000 -d "/home/user/.config"
-install -o 1000 -g 1000 -d "/home/user/.config/openbox"
-install -o 1000 -g 1000 -v $FILE_FOLDER/autostart  "/home/user/.config/openbox/"
+install -o 1000 -g 1000 -d /home/user/.config
+install -o 1000 -g 1000 -d /home/user/.config/openbox
+install -o 1000 -g 1000 -v $FILE_FOLDER/autostart /home/user/.config/openbox/
+
+# Menus
+install -o 1000 -g 1000 -d /home/user/.config/menus
+install -o 1000 -g 1000 -v $FILE_FOLDER/navigation.directory /home/user/.config/desktop-directories/
+install -o 1000 -g 1000 -v $FILE_FOLDER/gnome-applications.menu /home/user/.config/menus/
 
 # Make some room for the rest of the build script
 apt-get clean
@@ -51,5 +58,3 @@ DEBIAN_FRONTEND=noniterractive apt-get -o Dpkg::Options:=="--force-confnew" -q -
 
 apt-get install -y -q pcmanfm lxterminal mousepad gpsbabel file-roller
 
-install -o 1000 -g 1000 -d "/home/user/.config/menus"
-install -o 1000 -g 1000 -v $FILE_FOLDER/gnome-applications.menu  "/home/user/.config/menus/"
