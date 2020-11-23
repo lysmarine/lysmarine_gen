@@ -3,7 +3,7 @@
 apt-get clean
 
 apt-get -y -q install rtl-sdr rtl-ais
-apt-get -y -q install gqrx-sdr
+#apt-get -y -q install gqrx-sdr
 apt-get -y -q install cubicsdr
 apt-get -y -q install multimon-ng netcat
 apt-get -y -q install fldigi
