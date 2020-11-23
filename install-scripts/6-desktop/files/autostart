@@ -6,6 +6,7 @@ xset -dpms &
 xset s noblank &
 
 /opt/wdash/wdash &
+evdev-rce &
 
 # Allow mopidy user to access X server
 xhost +SI:localuser:mopidy
