@@ -28,6 +28,8 @@ dialog lxterminal network-manager-gnome
 
 install -o 1000 -g 1000 -d /home/user/.local
 install -o 1000 -g 1000 -d /home/user/.local/share
+install -o 1000 -g 1000 -d /home/user/.local/share/desktop-directories
+install -o 1000 -g 1000 -d /home/user/.local/share/applications
 
 # Openbox
 install -o 1000 -g 1000 -d "/home/user/.config"
@@ -48,3 +50,6 @@ fi
 DEBIAN_FRONTEND=noniterractive apt-get -o Dpkg::Options:=="--force-confnew" -q -y install rpi-chromium-mods
 
 apt-get install -y -q pcmanfm lxterminal mousepad gpsbabel file-roller
+
+install -o 1000 -g 1000 -d "/home/user/.config/menus"
+install -o 1000 -g 1000 -v $FILE_FOLDER/gnome-applications.menu  "/home/user/.config/menus/"
