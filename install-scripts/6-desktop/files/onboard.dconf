@@ -36,3 +36,5 @@ height=480
 x=36
 y=0
 
+[icon-palette]
+in-use=true
