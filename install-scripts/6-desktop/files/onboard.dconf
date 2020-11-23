@@ -36,7 +36,3 @@ height=480
 x=36
 y=0
 
-#[keyboard]
-#input-event-source=XInput
-#input-event-source=GTK
-
