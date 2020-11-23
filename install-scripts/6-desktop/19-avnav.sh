@@ -2,7 +2,7 @@
 
 apt-get clean
 
-sudo apt-get -q -y install avnav xterm mpg123
+sudo apt-get -q -y --no-install-recommends install avnav xterm mpg123
 
 install -o 1000 -g 1000 -d /home/user/AvNavCharts
 install -o 1000 -g 1000 -d /home/user/AvNavCharts/out
