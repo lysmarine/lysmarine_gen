@@ -17,7 +17,7 @@ for pkg_file in cross-build-release/release/*/*.$EXT; do
   mkdir ./tmp
   chmod 755 ./tmp
   cd $zipDir || exit 255
-  xz -z -c -7 --threads=4 ${zipName} > ../../../tmp/${zipName}.xz
+  xz -z -c -8 --threads=2 ${zipName} > ../../../tmp/${zipName}.xz
   cd ../../..
   cloudsmith push raw $REPO ./tmp/${zipName}.xz --summary "LysMarine built by CircleCi on $(date)" --description "LysMarine BBN build"
   RESULT=$?
