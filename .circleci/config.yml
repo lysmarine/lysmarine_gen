@@ -84,9 +84,8 @@ jobs:
           no_output_timeout: 30m
       - publish
   build-on-docker:
-    build:
-      docker:
-        - image: buildpack-deps:buster
+    docker:
+      - image: buildpack-deps:buster
     parameters:
       baseOs:
         type: string
@@ -122,6 +121,6 @@ workflows:
 #          cpuArch: 'amd64'
 #          version: ''
 #          stage: ''
-      - build-on-docker
+      - build-on-docker:
           baseOs: 'debian-live'
           cpuArch: 'amd64'
