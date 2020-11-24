@@ -36,8 +36,8 @@ We would think our distribution can serve as a basis for others interested to bu
 
 The code of building is distribution is easily customizable following instructions below.
 You do not have to build it on your own ARM hardware. The process described below explains how you
-can make it to build it directly from your source code on GitHib via CircleCi and distribute it on Cloudmith
-or other place. It doesn't take that much effort or coding, some dedication is needed though.
+can make it to build it directly from your source code on GitHib via CircleCi and distribute it on CloudSmith
+or other place. It doesn't take that much effort or coding, some dedication required (surely).
 
 ## Supported Boards 
 
