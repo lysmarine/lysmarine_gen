@@ -28,7 +28,7 @@ commands:
             sudo service docker restart && sleep 5
       - run: |
             docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static --reset --credential yes --persistent yes
-            docker run --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):rw arm64v8/debian:buster /bin/bash
+            docker run --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source:rw arm64v8/debian:buster /bin/bash
       - run: docker ps -a
       - run: docker ps --last 4 | grep debian:buster | awk '{print $1}'
       - run: DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep debian:buster | awk '{print $1}')
