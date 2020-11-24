@@ -8,7 +8,7 @@ executors:
   linux:
     machine:
       image: ubuntu-2004:202010-01
-      
+
 commands:
   prepare-linux-machine:
     description: "Install the requirements to run lysmarine build script"
@@ -80,10 +80,27 @@ jobs:
     steps:
       - prepare-arm-based-container
       - run:
-          command: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
+          command: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; modprobe loop;chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
           no_output_timeout: 30m
       - publish
-
+  build-on-docker:
+    build:
+      docker:
+        - image: buildpack-deps:buster
+    parameters:
+      baseOs:
+        type: string
+      cpuArch:
+        type: string
+      version:
+        type: string
+        default: ''
+      stage:
+        type: string
+        default: ''
+    steps:
+      - run: echo 'hello world'
+      - run:  <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
 workflows:
   version: 2
   build_all:
@@ -105,3 +122,6 @@ workflows:
 #          cpuArch: 'amd64'
 #          version: ''
 #          stage: ''
+      - build-on-docker
+          baseOs: 'debian-live'
+          cpuArch: 'amd64'
