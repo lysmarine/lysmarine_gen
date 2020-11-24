@@ -22,7 +22,7 @@ commands:
       - checkout
       - run: apt-get -q update
       - run: apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx kmod
-      - run: cd cross-build-release; sudo chmod -v u+w *.sh;
+      - run: cd cross-build-release; chmod -v u+w *.sh;
 
   prepare-arm-based-container:
     description: "Do the necessary hacks needed to have a docker container that run a ARM arch from a amd64 host machine"
@@ -32,7 +32,7 @@ commands:
             sudo su -c 'echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker'
             sudo service docker restart
       - run: |
-            docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static:register --reset --credential yes --persistent yes
+            docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static --reset --credential yes --persistent yes
             docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source arm64v8/debian:buster /bin/bash
       - run: |
             docker exec --privileged -ti CIarmBuilder apt-get update
