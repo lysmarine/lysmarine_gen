@@ -4,6 +4,40 @@ The ready to use image can be found at: <https://cloudsmith.io/~bbn-projects/rep
 
 ---
 
+## What is LysMarine
+
+What started as an effort to build a marine linux OS turned out into much more interesting.
+Our focus was to build a marine computer OS to be used on boats for the navigation and on touch screens in a cockpit of a boat.
+By nature marine navigation is very demanding. Much more demanding than a car computer. There was a need for: 
+
+* good touch screen support (even with small screens) (GTK3, budgie)
+* ability to easily connect to a variety of sensors GPS, IMU, environment (temp, pressure, humidity, wind), autopilot, bilge water level, and much more (SignalK/Kplex NMEA are built-in)
+* ability to control other hardware (started with controlling steering of the boat and autopilot). We have pyPilot built-in.
+* weather information retrieving, processing, mapping and visualizing (it's often a matter of survival for a boat)
+* weather routing and climatology
+* a media player (who doesn't want to play some music being on a boat, so here we go with MPD player, Mopidy and more)
+* internet connectivity, VPN, cellular 4G/LTE, satellite, Wi-Fi
+* celestial navigation (brought us astronomy software, so we package Stellarium and more)
+* cartography and navigation (We have OpenCPN, FreeBoard-SK, AvNav chart plotters). While our focus was marine charts, our distribution can be easily adapted for a car navigation system.
+* software defined radio SDR (HAM radio community might take some interest), AIS, weather (NOAA, weather fax, NavText), Inmarsat Fleet
+* satellite internet via Iridium
+* low power consumption (so we built it for the ARM based processors)
+
+We would think our distribution can serve as a basis for others interested to build either:
+
+* Car specialized linux distribution
+* Linux weather linux station
+* Home automation linux distribution
+* Astronomy related linux distribution
+* Music/Media player linux distribution
+* HAM radio SDR linux distribution
+* Generic Linux touch tablet on ARM raspberry OS
+
+The code of building is distribution is easily customizable following instructions below.
+You do not have to build it on your own ARM hardware. The process described below explains how you
+can make it to build it directly from your source code on GitHib via CircleCi and distribute it on Cloudmith
+or other place. It doesn't take that much effort or coding, some dedication is needed though.
+
 ## Supported Boards 
 
 At this time targeted SBCs are :
