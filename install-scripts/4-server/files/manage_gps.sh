@@ -2,7 +2,7 @@
 {
   chmod a+r /dev/ttyLYS_gps_"$1"
   if [[ $2 == "remove" ]] ; then
-    logger "The USB device $1 have been disconnected"
+    logger "The USB device /dev/ttyLYS_gps_$1 have been disconnected"
     systemctl stop lysgpsd@"$1".service
   else
     logger "This USB device is known as a GPS and will be connected to gpsd on port 2947 /dev/ttyLYS_gps_$1"
