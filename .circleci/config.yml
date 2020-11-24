@@ -17,6 +17,12 @@ commands:
       - run: sudo apt-get -q update
       - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
+  prepare-docker-machine:
+    steps:
+      - checkout
+      - run: apt-get -q update
+      - run: apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx kmod
+      - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
   prepare-arm-based-container:
     description: "Do the necessary hacks needed to have a docker container that run a ARM arch from a amd64 host machine"
@@ -30,7 +36,7 @@ commands:
             docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source arm64v8/debian:buster /bin/bash
       - run: |
             docker exec --privileged -ti CIarmBuilder apt-get update
-            docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git-core  kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod
+            docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git-core kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod
 
   publish:
     steps:
@@ -80,7 +86,7 @@ jobs:
     steps:
       - prepare-arm-based-container
       - run:
-          command: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; modprobe loop;chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
+          command: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
           no_output_timeout: 30m
       - publish
   build-on-docker:
@@ -98,7 +104,7 @@ jobs:
         type: string
         default: ''
     steps:
-      - prepare-linux-machine
+      - prepare-docker-machine
       - run:
           command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
           no_output_timeout: 30m
