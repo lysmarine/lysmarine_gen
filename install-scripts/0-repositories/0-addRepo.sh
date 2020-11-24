@@ -29,7 +29,7 @@ wget -q -O- https://dl.cloudsmith.io/public/bbn-projects/bbn-rce/cfg/gpg/gpg.540
 wget -q -O- https://dl.cloudsmith.io/public/bbn-projects/bbn-kplex/cfg/gpg/gpg.B487196268D0D9B6.key | apt-key add -
 wget -q -O- https://dl.cloudsmith.io/public/bbn-projects/bbn-fbpanel/cfg/gpg/gpg.89DE2CF06C6908DA.key | apt-key add -
 wget -q -O- https://apt.mopidy.com/mopidy.gpg | apt-key add -
-wget -q -O- https://open-mind.space/repo/open-mind.space.gpg.key |  sudo apt-key add -
+wget -q -O- https://open-mind.space/repo/open-mind.space.gpg.key |  sudo apt-key add -     # AvNav
 
 ## Update && Upgrade
 apt-get update  -y -q
