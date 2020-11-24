@@ -13,24 +13,23 @@ By nature marine navigation is very demanding. Much more demanding than a car co
 * good touch screen support (even with small screens) (GTK3, budgie)
 * ability to easily connect to a variety of sensors GPS, IMU, environment (temp, pressure, humidity, wind), autopilot, bilge water level, and much more (SignalK/Kplex NMEA are built-in)
 * ability to control other hardware (started with controlling steering of the boat and autopilot). We have pyPilot built-in.
-* weather information retrieving, processing, mapping and visualizing (it's often a matter of survival for a boat)
+* weather information retrieving, processing, mapping and visualizing (it's often a matter of survival on a boat)
 * weather routing and climatology
 * a media player (who doesn't want to play some music being on a boat, so here we go with MPD player, Mopidy and more)
 * internet connectivity, VPN, cellular 4G/LTE, satellite, Wi-Fi
 * celestial navigation (brought us astronomy software, so we package Stellarium and more)
 * cartography and navigation (We have OpenCPN, FreeBoard-SK, AvNav chart plotters). While our focus was marine charts, our distribution can be easily adapted for a car navigation system.
-* software defined radio SDR (HAM radio community might take some interest), AIS, weather (NOAA, weather fax, NavText), Inmarsat Fleet
+* software defined radio SDR (HAM radio community might take some interest), AIS, weather (NOAA, weather fax, NavTex), Inmarsat Fleet
 * satellite internet via Iridium
 * low power consumption (so we built it for the ARM based processors)
 
 We would think our distribution can serve as a basis for others interested to build either:
 
 * Car specialized Linux distribution
-* Linux weather Linux station
+* Weather station under Linux
 * Home automation Linux distribution
 * Astronomy related Linux distribution
 * Music/Media player Linux distribution
-* HAM radio SDR Linux distribution
 * HAM radio SDR Linux distribution
 * Generic Linux touch tablet on ARM raspberry OS
 
