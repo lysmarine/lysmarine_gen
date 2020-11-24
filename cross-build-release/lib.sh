@@ -95,8 +95,10 @@ inflateImage() {
 		fdisk -l $imageLocationInflated
 
 		log "Resize the filesystem to fit the partition."
+		echo "$imageLocationInflated"
+		fdisk -l $imageLocationInflated
 		kpartx -l "$imageLocationInflated"
-		kpartx -sav "$imageLocationInflated"
+		#kpartx -sav "$imageLocationInflated"
 		loopId=$(kpartx -sav "$imageLocationInflated" | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 		echo loopId
 		sleep 3
