@@ -25,6 +25,7 @@ commands:
       - run: |
             sudo su -c 'echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker'
             sudo service docker restart
+            sleep 5
       - run: |
             docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static --reset --credential yes --persistent yes
             docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source arm64v8/debian:buster /bin/bash
@@ -79,6 +80,7 @@ jobs:
         default: ''
     steps:
       - prepare-arm-based-container
+      - run: cat /etc/default/docker
       - run:
           command: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
           no_output_timeout: 30m
