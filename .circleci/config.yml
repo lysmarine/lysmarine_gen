@@ -25,7 +25,7 @@ commands:
       - run: sudo apt-get -y install wget
       - run:
           command: |
-            echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker
+            sudo echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker
             sudo service docker restart && echo Dockerd is ready
             docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static:register --reset --credential yes --persistent yes
             docker ps -a
