@@ -22,7 +22,6 @@ commands:
     description: "Do the necessary hacks needed to have a docker container that run a ARM arch from a amd64 host machine"
     steps:
       - checkout
-#      - run: sudo apt-get -y install wget
       - run: |
             sudo su -c 'echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker'
             sudo service docker restart
@@ -31,18 +30,7 @@ commands:
             docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source arm64v8/debian:buster /bin/bash
       - run: |
             docker exec --privileged -ti CIarmBuilder apt-get update
-            #docker exec --privileged -ti CIarmBuilder apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot
-            docker exec --privileged -ti CIarmBuilder apt-get -y install proot git-core  kpartx p7zip p7zip-full parted e2fsprogs qemu-user #live-build
-#            docker stop $DOCKER_CONTAINER_ID
-#            docker rm -v $DOCKER_CONTAINER_ID
-
-#    environment:
-#      - DOCKER_IMAGE=arm64v8/debian:buster
-#      - CONTAINER_DISTRO=debian:buster
-#      - PKG_RELEASE=raspbian
-#      - PKG_DISTRO=buster
-#      - PKG_ARCH=arm64
-#      - EMU=on
+            docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git-core  kpartx p7zip p7zip-full parted e2fsprogs qemu-user
 
   publish:
     steps:
