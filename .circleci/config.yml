@@ -27,10 +27,11 @@ commands:
           command: |
             sudo su -c 'echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker'
             sudo service docker restart
-
-      - run: docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static:register --reset --credential yes --persistent yes
-      - run: docker ps -a
+            sleep 5
+      # - run: docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static:register --reset --credential yes --persistent yes
+      - run:  docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static --reset --credential yes --persistent yes
       - run: |
+            docker ps -a
             DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep debian:buster | awk '{print $1}')
             docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
             docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot
