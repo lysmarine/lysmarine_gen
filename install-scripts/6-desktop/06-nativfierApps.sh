@@ -7,9 +7,9 @@ npm install nativefier -g --unsafe-perm
 
 ## Install icons and .desktop files
 install -d -o 1000 -g 1000 /home/user/.local/share/icons
-install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/freeboard-sk.png /home/user/.local/share/icons/
-install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/signalk.png /home/user/.local/share/icons/
-install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/dockwa.png /home/user/.local/share/icons/
+install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/icons/freeboard-sk.png /home/user/.local/share/icons/
+install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/icons/signalk.png /home/user/.local/share/icons/
+install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/icons/dockwa.png /home/user/.local/share/icons/
 install -d /usr/local/share/applications
 install -v $FILE_FOLDER/signalk.desktop /usr/local/share/applications/
 
