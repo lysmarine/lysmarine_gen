@@ -17,12 +17,6 @@ commands:
       - run: sudo apt-get -q update
       - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
-  prepare-docker-machine:
-    steps:
-      - checkout
-      - run: apt-get -q update
-      - run: apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx kmod
-      - run: cd cross-build-release; chmod -v u+w *.sh;
 
   prepare-arm-based-container:
     description: "Do the necessary hacks needed to have a docker container that run a ARM arch from a amd64 host machine"
@@ -89,26 +83,7 @@ jobs:
           command: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
           no_output_timeout: 30m
       - publish
-  build-on-docker:
-    docker:
-      - image: buildpack-deps:buster
-    parameters:
-      baseOs:
-        type: string
-      cpuArch:
-        type: string
-      version:
-        type: string
-        default: ''
-      stage:
-        type: string
-        default: ''
-    steps:
-      - prepare-docker-machine
-      - run:
-          command: cd cross-build-release; ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
-          no_output_timeout: 30m
-      - publish
+
 
 workflows:
   version: 2
@@ -120,9 +95,10 @@ workflows:
       - build-in-arm-docker:
           baseOs: 'raspios'
           cpuArch: 'arm64'
-#      - build-on-linux:
-#          baseOs: 'debian-live'
-#          cpuArch: 'amd64'
+      - build-on-linux:
+          baseOs: 'debian-live'
+          cpuArch: 'amd64'
+          stage: '0 2'
 #      - build-in-arm-docker:
 #          baseOs: 'armbian-pine64so'
 #          cpuArch: 'arm64'
@@ -131,6 +107,3 @@ workflows:
 #          cpuArch: 'amd64'
 #          version: ''
 #          stage: ''
-      - build-on-docker:
-          baseOs: 'debian-live'
-          cpuArch: 'amd64'
