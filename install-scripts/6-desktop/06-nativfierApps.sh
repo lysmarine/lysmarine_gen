@@ -6,11 +6,12 @@ apt-get -y -q install nodejs libnss3 gnome-icon-theme unzip
 npm install nativefier -g --unsafe-perm
 
 ## Install icons and .desktop files
-install -d -o 1000 -g 1000 "/home/user/.local/share/icons"
-install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/freeboard-sk.png "/home/user/.local/share/icons/freeboard-sk.png"
-install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/signalk.png "/home/user/.local/share/icons/"
+install -d -o 1000 -g 1000 /home/user/.local/share/icons
+install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/freeboard-sk.png /home/user/.local/share/icons/
+install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/signalk.png /home/user/.local/share/icons/
+install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/dockwa.png /home/user/.local/share/icons/
 install -d /usr/local/share/applications
-install -v $FILE_FOLDER/signalk.desktop "/usr/local/share/applications/"
+install -v $FILE_FOLDER/signalk.desktop /usr/local/share/applications/
 
 ## arch name translation
 if [ $LMARCH == 'armhf' ]; then
@@ -78,8 +79,8 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   "http://localhost:6680/musicbox_webclient" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "Dockwa"  \
-  "https://dockwa.com/"\
+  --name "Dockwa" --icon /home/user/.local/share/icons/dockwa.png \
+  "https://dockwa.com/" \
    -u "Mozilla/5.0 (Linux; <Android Version>; <Build Tag etc.>) AppleWebKit/<WebKit Rev> (KHTML, like Gecko) Chrome/<Chrome Rev> Mobile Safari/<WebKit Rev>" \
   /opt/
 
