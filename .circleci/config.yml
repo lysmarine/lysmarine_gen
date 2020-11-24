@@ -103,7 +103,7 @@ jobs:
           command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
           no_output_timeout: 30m
       - publish
-      -
+
 workflows:
   version: 2
   build_all:
