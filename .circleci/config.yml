@@ -29,13 +29,12 @@ commands:
       - run: ls -lah
       - run: |
             docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static --reset --credential yes --persistent yes
-            docker run --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source arm64v8/debian:buster /bin/bash
+            DOCKER_CONTAINER_ID=$(docker run --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source arm64v8/debian:buster /bin/bash)
       - run: docker ps -a
-      - run: docker ps --last 4 | grep debian:buster | awk '{print $1}'
-      - run: DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep debian:buster | awk '{print $1}')
-      - run: echo $DOCKER_CONTAINER_ID \
-            docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update && \
-            docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot && \
+      - run: echo $DOCKER_CONTAINER_ID
+      - run: |
+            docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
+            docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot
             docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install proot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
 #            docker stop $DOCKER_CONTAINER_ID
 #            docker rm -v $DOCKER_CONTAINER_ID
