@@ -29,9 +29,7 @@ commands:
             sudo su -c 'echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker'
             sudo service docker restart
             sleep 5
-      - run:
-          description: Prepare container
-          command : |
+
             docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static --reset --credential yes --persistent yes
             DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep debian:buster | awk '{print $1}')
             echo $DOCKER_CONTAINER_ID
