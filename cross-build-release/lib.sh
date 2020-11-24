@@ -95,7 +95,9 @@ inflateImage() {
 		fdisk -l $imageLocationInflated
 
 		log "Resize the filesystem to fit the partition."
+		kpartx -sav "$imageLocationInflated"
 		loopId=$(kpartx -sav "$imageLocationInflated" | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
+		echo loopId
 		sleep 3
 
 		e2fsck -f "/dev/mapper/loop${loopId}p${partQty}"
