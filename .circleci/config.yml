@@ -30,7 +30,7 @@ commands:
             docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source arm64v8/debian:buster /bin/bash
       - run: |
             docker exec --privileged -ti CIarmBuilder apt-get update
-            docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git-core  kpartx p7zip p7zip-full parted e2fsprogs qemu-user
+            docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git-core  kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod
 
   publish:
     steps:
@@ -98,8 +98,12 @@ jobs:
         type: string
         default: ''
     steps:
-      - run: echo 'hello world'
-      - run:  <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
+      - prepare-linux-machine
+      - run:
+          command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
+          no_output_timeout: 30m
+      - publish
+      -
 workflows:
   version: 2
   build_all:
