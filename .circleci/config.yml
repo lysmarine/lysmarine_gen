@@ -18,7 +18,7 @@ commands:
       - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx
       - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
-  prepare-arm-docker:
+  prepare-arm-based-container:
     description: "Do the necessary hacks needed to have a docker container that run a ARM arch from a amd64 host machine"
     steps:
       - checkout
@@ -33,11 +33,9 @@ commands:
             docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
             docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot
             docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install proot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user
-            docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
-            "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./raspbian.sh $PKG_ARCH $LYSMARINE_VER"
-            echo "Stopping"
-            docker stop $DOCKER_CONTAINER_ID
-            docker rm -v $DOCKER_CONTAINER_ID
+
+#            docker stop $DOCKER_CONTAINER_ID
+#            docker rm -v $DOCKER_CONTAINER_ID
 
 #    environment:
 #      - DOCKER_IMAGE=arm64v8/debian:buster
@@ -93,9 +91,9 @@ jobs:
         type: string
         default: ''
     steps:
-      - prepare-linux-machine
+      - prepare-arm-based-container
       - run:
-          command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
+          command: docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
           no_output_timeout: 30m
       - publish
 
@@ -103,18 +101,18 @@ workflows:
   version: 2
   build_all:
     jobs:
-      - build-in-arm-docker:
-          baseOs: 'raspios'
-          cpuArch: 'armhf'
+#      - build-in-arm-docker:
+#          baseOs: 'raspios'
+#          cpuArch: 'armhf'
       - build-in-arm-docker:
           baseOs: 'raspios'
           cpuArch: 'arm64'
       - build-on-linux:
           baseOs: 'debian-live'
           cpuArch: 'amd64'
-      - build-in-arm-docker:
-          baseOs: 'armbian-pine64so'
-          cpuArch: 'arm64'
+#      - build-in-arm-docker:
+#          baseOs: 'armbian-pine64so'
+#          cpuArch: 'arm64'
 #      - build-on-linux:
 #          baseOs: 'debian-vbox'
 #          cpuArch: 'amd64'
