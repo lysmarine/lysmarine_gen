@@ -31,7 +31,7 @@ commands:
             docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source -v /dev:/dev arm64v8/debian:buster /bin/bash
       - run: |
             docker exec --privileged -ti CIarmBuilder apt-get update
-            docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git-core kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod rsync
+            docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod rsync xorriso
 
   publish:
     steps:

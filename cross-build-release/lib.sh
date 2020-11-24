@@ -143,7 +143,6 @@ function chrootWithProot {
 		--mount=/sys:/sys \
 		--mount=/proc:/proc \
 		--mount=/tmp:/tmp \
-		--mount=/run/shm:/run/shm \
 		$buildCmd
 }
 
