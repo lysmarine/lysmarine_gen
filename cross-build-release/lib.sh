@@ -149,10 +149,10 @@ function chrootWithProot {
 cd /install-scripts ;
 $buildCmd
 EOT
-		rm $workDir/rootfs/etc/resolv.conf
-		umount $workDir/rootfs/dev  || umount -l $workDir/rootfs/dev
-		umount $workDir/rootfs/proc || umount -l $workDir/rootfs/proc
-		umount $workDir/rootfs/sys  || umount -l $$workDir/rootfs/sys
+		rm $workDir/rootfs/etc/resolv.conf || /bin/true
+		umount $workDir/rootfs/dev  || umount -l $workDir/rootfs/dev || /bin/true
+		umount $workDir/rootfs/proc || umount -l $workDir/rootfs/proc || /bin/true
+		umount $workDir/rootfs/sys  || umount -l $$workDir/rootfs/sys || /bin/true
 
 	fi
 
