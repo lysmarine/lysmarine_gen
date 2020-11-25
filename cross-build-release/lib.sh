@@ -132,7 +132,7 @@ function chrootWithProot {
 	  fi
 	fi
 
-	proot  "$qemuArch" \
+	proot  $qemuArch \
 		--root-id \
 		--rootfs=$workDir/rootfs \
 		--cwd=/install-scripts \
