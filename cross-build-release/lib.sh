@@ -141,18 +141,18 @@ function chrootWithProot {
 		--mount=/tmp:/tmp \
 		$buildCmd
 	else # just chroot
-		mount --rbind /dev $workDir/squashfs-root/dev/
-		mount  -t proc /proc $workDir/squashfs-root/proc/
-		mount --rbind /sys $workDir/squashfs-root/sys/
-		cp /etc/resolv.conf  $workDir/squashfs-root/etc/
-		chroot $workDir/squashfs-root /bin/bash <<EOT
+		mount --rbind /dev $workDir/rootfs/dev/
+		mount  -t proc /proc $workDir/rootfs/proc/
+		mount --rbind /sys $workDir/rootfs/sys/
+		cp /etc/resolv.conf  $workDir/rootfs/etc/
+		chroot $workDir/rootfs /bin/bash <<EOT
 cd /install-scripts ;
 $buildCmd
 EOT
-		rm $workDir/squashfs-root/etc/resolv.conf
-		umount $workDir/squashfs-root/dev  || umount -l $workDir/squashfs-root/dev
-		umount $workDir/squashfs-root/proc || umount -l $workDir/squashfs-root/proc
-		umount $workDir/squashfs-root/sys  || umount -l $workDir/squashfs-root/sys
+		rm $workDir/rootfs/etc/resolv.conf
+		umount $workDir/rootfs/dev  || umount -l $workDir/rootfs/dev
+		umount $workDir/rootfs/proc || umount -l $workDir/rootfs/proc
+		umount $workDir/rootfs/sys  || umount -l $$workDir/rootfs/sys
 
 	fi
 
