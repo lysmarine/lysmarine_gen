@@ -78,9 +78,9 @@ workflows:
   version: 2
   build_all:
     jobs:
-#      - build-in-arm-docker:
-#          baseOs: 'raspios'
-#          cpuArch: 'armhf'
+      - build-in-arm-docker:
+          baseOs: 'raspios'
+          cpuArch: 'armhf'
       - build-in-arm-docker:
           baseOs: 'raspios'
           cpuArch: 'arm64'
@@ -88,9 +88,9 @@ workflows:
           baseOs: 'debian-live'
           cpuArch: 'amd64'
           stage: '0 2'
-#      - build-in-arm-docker:
-#          baseOs: 'armbian-pine64so'
-#          cpuArch: 'arm64'
+      - build-in-arm-docker:
+          baseOs: 'armbian-pine64so'
+          cpuArch: 'arm64'
 #      - build-on-linux:
 #          baseOs: 'debian-vbox'
 #          cpuArch: 'amd64'
