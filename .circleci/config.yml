@@ -57,7 +57,6 @@ jobs:
         type: string
         default: ''
     steps:
-      - run: containerArch=arm64v8 ; if [[ '<<parameters.cpuArch>>' == 'armhf' ]] then; containerArch=ARMv7  ;fi  export CONTAINERARCH=$containerArch ;
       - prepare-linux-machine
       - run:
           command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
@@ -78,6 +77,7 @@ jobs:
         type: string
         default: ''
     steps:
+      - run: containerArch=arm64v8 ; if [[ '<<parameters.cpuArch>>' == 'armhf' ]]; then containerArch=ARMv7  ;fi;  export CONTAINERARCH=$containerArch ;
       - prepare-arm-based-container
       - run: cat /etc/default/docker
       - run:
