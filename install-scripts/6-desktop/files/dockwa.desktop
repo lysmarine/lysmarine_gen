@@ -7,3 +7,4 @@ Exec=sh -c "/opt/Dockwa/Dockwa"
 Terminal=false
 Categories=Network;Internet;Travel
 Keywords=Network;Internet;Travel
+Icon=hotel
