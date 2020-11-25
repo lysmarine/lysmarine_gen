@@ -95,6 +95,7 @@ inflateImage() {
 		fdisk -l $imageLocationInflated
 
 		log "Resize the filesystem to fit the partition."
+		echo "$imageLocationInflated"
 		loopId=$(kpartx -sav "$imageLocationInflated" | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 		sleep 3
 
@@ -123,13 +124,13 @@ function chrootWithProot {
 		buildCmd="./install.sh $stagesToBuild"
 	fi
 
-	if [[ $cpuArch == arm64 ]]; then
-		qemuArch="qemu-aarch64"
-	elif [[ $cpuArch == armhf ]]; then
-		qemuArch="qemu-arm"
-	fi
-
-	proot -q "$qemuArch" \
+	if [[ ! $(dpkg --print-architecture) == $cpuArch ]]; then # if the target arch is not the same as the host arch use proot.
+	  if [[ $cpuArch == arm64 ]]; then
+		  qemuArch=" -q qemu-aarch64"
+	  elif [[ $cpuArch == armhf ]]; then
+		  qemuArch=" -q qemu-arm"
+	  fi
+	  proot $qemuArch \
 		--root-id \
 		--rootfs=$workDir/rootfs \
 		--cwd=/install-scripts \
@@ -138,8 +139,24 @@ function chrootWithProot {
 		--mount=/sys:/sys \
 		--mount=/proc:/proc \
 		--mount=/tmp:/tmp \
-		--mount=/run/shm:/run/shm \
 		$buildCmd
+	else # just chroot
+		mount --rbind /dev $workDir/rootfs/dev/
+		mount  -t proc /proc $workDir/rootfs/proc/
+		mount --rbind /sys $workDir/rootfs/sys/
+		cp /etc/resolv.conf  $workDir/rootfs/etc/
+		chroot $workDir/rootfs /bin/bash <<EOT
+cd /install-scripts ;
+$buildCmd
+EOT
+		rm $workDir/rootfs/etc/resolv.conf || /bin/true
+		umount $workDir/rootfs/dev  || umount -l $workDir/rootfs/dev || /bin/true
+		umount $workDir/rootfs/proc || umount -l $workDir/rootfs/proc || /bin/true
+		umount $workDir/rootfs/sys  || umount -l $$workDir/rootfs/sys || /bin/true
+
+	fi
+
+
 }
 
 function shrinkWithPishrink {
