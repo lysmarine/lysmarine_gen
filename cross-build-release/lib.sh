@@ -96,11 +96,7 @@ inflateImage() {
 
 		log "Resize the filesystem to fit the partition."
 		echo "$imageLocationInflated"
-		fdisk -l $imageLocationInflated
-		kpartx -l "$imageLocationInflated"
-		#kpartx -sav "$imageLocationInflated"
 		loopId=$(kpartx -sav "$imageLocationInflated" | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
-		echo loopId
 		sleep 3
 
 		e2fsck -f "/dev/mapper/loop${loopId}p${partQty}"
@@ -128,13 +124,15 @@ function chrootWithProot {
 		buildCmd="./install.sh $stagesToBuild"
 	fi
 
-	if [[ $cpuArch == arm64 ]]; then
-		qemuArch="qemu-aarch64"
-	elif [[ $cpuArch == armhf ]]; then
-		qemuArch="qemu-arm"
+	if [[ ! $(dpkg --print-architecture) == $cpuArch ]]; then # if the target arch is not the same as the host arch.
+	  if [[ $cpuArch == arm64 ]]; then
+		  qemuArch=" -q qemu-aarch64"
+	  elif [[ $cpuArch == armhf ]]; then
+		  qemuArch=" -q qemu-arm"
+	  fi
 	fi
 
-	proot -q "$qemuArch" \
+	proot  "$qemuArch" \
 		--root-id \
 		--rootfs=$workDir/rootfs \
 		--cwd=/install-scripts \
