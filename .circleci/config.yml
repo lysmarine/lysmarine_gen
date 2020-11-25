@@ -26,6 +26,7 @@ commands:
             sudo su -c 'echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker'
             sudo service docker restart && sleep 3
       - run: |
+            echo $CONTAINERARCH
             docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static --reset --credential yes --persistent yes -v /dev:/dev
             docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source -v /dev:/dev $CONTAINERARCH/debian:buster /bin/bash
       - run: |
@@ -77,7 +78,8 @@ jobs:
         type: string
         default: ''
     steps:
-      - run: containerArch=arm64v8 ; if [[ '<<parameters.cpuArch>>' == 'armhf' ]]; then containerArch=ARMv7  ;fi;  export CONTAINERARCH=$containerArch ;
+      - run: containerArch=arm64v8 ; if [[ '<<parameters.cpuArch>>' == 'armhf' ]]; then containerArch=ARMv7  ;fi;  export CONTAINERARCH=$containerArch ; echo $CONTAINERARCH
+      - run: echo $CONTAINERARCH
       - prepare-arm-based-container
       - run: cat /etc/default/docker
       - run:
