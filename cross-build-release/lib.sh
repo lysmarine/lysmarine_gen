@@ -124,15 +124,13 @@ function chrootWithProot {
 		buildCmd="./install.sh $stagesToBuild"
 	fi
 
-	if [[ ! $(dpkg --print-architecture) == $cpuArch ]]; then # if the target arch is not the same as the host arch.
+	if [[ ! $(dpkg --print-architecture) == $cpuArch ]]; then # if the target arch is not the same as the host arch use proot.
 	  if [[ $cpuArch == arm64 ]]; then
 		  qemuArch=" -q qemu-aarch64"
 	  elif [[ $cpuArch == armhf ]]; then
 		  qemuArch=" -q qemu-arm"
 	  fi
-	fi
-
-	proot  $qemuArch \
+	  proot $qemuArch \
 		--root-id \
 		--rootfs=$workDir/rootfs \
 		--cwd=/install-scripts \
@@ -142,6 +140,23 @@ function chrootWithProot {
 		--mount=/proc:/proc \
 		--mount=/tmp:/tmp \
 		$buildCmd
+	else # just chroot
+		mount --rbind /dev $workDir/squashfs-root/dev/
+		mount  -t proc /proc $workDir/squashfs-root/proc/
+		mount --rbind /sys $workDir/squashfs-root/sys/
+		cp /etc/resolv.conf  $workDir/squashfs-root/etc/
+		chroot $workDir/squashfs-root /bin/bash <<EOT
+cd /install-scripts ;
+$buildCmd
+EOT
+		rm $workDir/squashfs-root/etc/resolv.conf
+		umount $workDir/squashfs-root/dev  || umount -l $workDir/squashfs-root/dev
+		umount $workDir/squashfs-root/proc || umount -l $workDir/squashfs-root/proc
+		umount $workDir/squashfs-root/sys  || umount -l $workDir/squashfs-root/sys
+
+	fi
+
+
 }
 
 function shrinkWithPishrink {
