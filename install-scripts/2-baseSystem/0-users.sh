@@ -29,6 +29,7 @@ usermod -a -G netdev user
 usermod -a -G tty user
 usermod -a -G sudo user
 usermod -a -G video user
+install -m 644 $FILE_FOLDER/asoundrc "/home/user/.asoundrc"
 
 
 
