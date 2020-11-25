@@ -117,12 +117,7 @@ function addLysmarineScripts {
 function chrootWithProot {
 	workDir=$1
 	cpuArch=$2
-	stagesToBuild=$3
-	if [[ $stagesToBuild == 'bash' ]]; then
-		buildCmd='/bin/bash'
-	else
-		buildCmd="./install.sh $stagesToBuild"
-	fi
+	buildCmd=$3
 
 	if [[ ! $(dpkg --print-architecture) == $cpuArch ]]; then # if the target arch is not the same as the host arch use proot.
 	  if [[ $cpuArch == arm64 ]]; then

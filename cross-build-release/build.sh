@@ -2,25 +2,34 @@
 {
 	source lib.sh
 	checkRoot
+	#################################################################################
+	##
+	##  Usage: build.sh baseOS processorArchitecture lmVersion stagesToBuild
+    ##
+	##  Note : baseOs options are raspios|armbian-pine64so|debian-live|debian-vbox
+	##  Note : processorArchitecture are armhf|arm64|amd64
+    ##
+	##  Example: sudo ./build.sh raspios arm64 0.9.0 "0 2 4 6 8"
+	##  To mount mount the image/iso and have a prompt inside the chroot: sudo ./build.sh raspios arm64 0.9.0 bash
+	#################################################################################
 
-	#sudo ./build.sh raspios arm64
-
-	# Usage: sudo ./build.sh baseOS processorArchitecture lmVersion stagesToBuild
-	# Note : baseOs options are raspios|armbian-pine64so|debian-live|debian-vbox|debian.
-	# Note : processorArchitecture armhf|arm64|amd64
 	baseOS="${1:-raspios}"
 	cpuArch="${2:-armhf}"
 	lmVersion="${3:-nightBuild_$EPOCHSECONDS}"
 	stagesToBuild="$4"
+	buildCmd="./install.sh $stagesToBuild"
+	if [[ $stagesToBuild == 'bash' ]]; then
+		buildCmd='/bin/bash'
+	fi
 
+	# Setup the workspace
 	setupWorkSpace "$baseOS-$cpuArch"
 	cacheDir="./cache/$baseOS-$cpuArch"
 	workDir="./work/$baseOS-$cpuArch"
 	releaseDir="./release/"
 
-	# if needed, download the base OS
 
-	# if no source Os is found in cache, download it.
+	# if the source OS is not found in cache, download it.
 	if ! ls "$cacheDir/$baseOS-$cpuArch".base.??? >/dev/null 2>&1; then
 
 		if [[ "$baseOS" == "raspios" ]]; then
@@ -42,37 +51,28 @@
 			mv "$cacheDir/debian-live-10.6.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
 
 		else
-			echo "Unknown baseOS"
-			exit 1
+			echo "Unknown baseOS"; exit 1
 		fi
 	fi
 
-	# if it's an image, we assume that it will to be inflated
+	# if it's an image file, we assume that it will need to be inflated.
 	if [[ ! -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" && -f "$cacheDir/$baseOS-$cpuArch.base.img" ]]; then
 		inflateImage "$baseOS" "$cacheDir/$baseOS-$cpuArch.base.img"
 	fi
 
-	# if it's an image, we assume that it will need chroot to build
+	# if it's an image file copy and mount it
 	if [ -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" ]; then
 		rsync -P -auz "$cacheDir/$baseOS-$cpuArch.base.img-inflated" "$workDir/$baseOS-$cpuArch.base.img-inflated"
 		mountImageFile "$workDir" "$workDir/$baseOS-$cpuArch.base.img-inflated"
 		addLysmarineScripts "$workDir/rootfs"
-		chrootWithProot "$workDir" "$cpuArch" "$stagesToBuild"
+		chrootWithProot "$workDir" "$cpuArch" "$buildCmd"
 		umountImageFile "$workDir" "$workDir/$baseOS-$cpuArch.base.img-inflated"
 		shrinkWithPishrink "$cacheDir" "$workDir/$baseOS-$cpuArch.base.img-inflated"
 		rsync -P -auz "$workDir/$baseOS-$cpuArch.base.img-inflated" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
 
-	elif
-		[[ "$baseOS" == 'debian-live' ]]
-	then
+	elif [[ "$baseOS" == 'debian-live' ]]; then # if it's an ISO file extract it and mount it
 		mountIsoFile "$workDir" "$cacheDir/${baseOS}-${cpuArch}.base.iso"
 		addLysmarineScripts "$workDir/squashfs-root"
-
-		if [[ $stagesToBuild == 'bash' ]]; then
-			buildCmd='/bin/bash'
-		else
-			buildCmd="./install.sh $stagesToBuild"
-		fi
 		
 		mount --rbind /dev $workDir/squashfs-root/dev/
 		mount  -t proc /proc $workDir/squashfs-root/proc/
