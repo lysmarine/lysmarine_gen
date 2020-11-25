@@ -10,29 +10,6 @@ executors:
       image: ubuntu-2004:202010-01
 
 commands:
-  prepare-linux-machine:
-    description: "Install the requirements to run lysmarine build script"
-    steps:
-      - checkout
-      - run: sudo apt-get -q update
-      - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx xorriso
-      - run: cd cross-build-release; sudo chmod -v u+w *.sh;
-
-  prepare-arm-based-container:
-    description: "Do the necessary hacks needed to have a docker container that run a ARM arch from a amd64 host machine"
-    steps:
-      - checkout
-      - run: |
-            sudo su -c 'echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker'
-            sudo service docker restart && sleep 3
-      - run: |
-            echo $CONTAINERARCH
-            docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static --reset --credential yes --persistent yes -v /dev:/dev
-            docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source -v /dev:/dev $CONTAINERARCH/debian:buster /bin/bash
-      - run: |
-            docker exec --privileged -ti CIarmBuilder apt-get update
-            docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod rsync
-
   publish:
     steps:
       - cloudsmith/ensure-api-key
@@ -58,7 +35,11 @@ jobs:
         type: string
         default: ''
     steps:
-      - prepare-linux-machine
+      - checkout
+      - run: |
+          sudo apt-get -q update
+          sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx xorriso
+          cd cross-build-release; sudo chmod -v u+w *.sh;
       - run:
           command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
           no_output_timeout: 30m
@@ -78,13 +59,18 @@ jobs:
         type: string
         default: ''
     steps:
-      - run: containerArch=arm64v8 ; if [[ '<<parameters.cpuArch>>' == 'armhf' ]]; then containerArch=ARMv7  ;fi;  export CONTAINERARCH=$containerArch ; echo $CONTAINERARCH
-      - run: echo $CONTAINERARCH
-      - prepare-arm-based-container
-      - run: cat /etc/default/docker
-      - run:
-          command: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
-          no_output_timeout: 30m
+      - checkout
+      - run: |
+          sudo su -c 'echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker'
+          sudo service docker restart && sleep 3
+      - run: |
+          containerArch=arm64v8 ; if [[ '<<parameters.cpuArch>>' == 'armhf' ]]; then containerArch=ARMv7  ; fi;
+          docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static --reset --credential yes --persistent yes -v /dev:/dev
+          docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source -v /dev:/dev $containerArch/debian:buster /bin/bash
+      - run: |
+          docker exec --privileged -ti CIarmBuilder apt-get update
+          docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod rsync
+      - run: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
       - publish
 
 
