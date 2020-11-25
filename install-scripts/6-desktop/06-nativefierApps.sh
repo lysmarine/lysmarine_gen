@@ -75,8 +75,12 @@ hardlink -v -f -t /opt/*
 npm cache clean --force
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "MusicBox" --icon /usr/share/icons/gnome/256x256/apps/multimedia-volume-control.png \
+  --name "MusicBox" --icon /usr/share/icons/gnome/48x48/apps/multimedia-volume-control.png \
   "http://localhost:6680/musicbox_webclient" /opt/
+
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+  --name "AvNav" --icon /usr/share/icons/gnome/48x48/categories/gnome-globe.png \
+  "http://localhost:8080/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "Dockwa" --icon /home/user/.local/share/icons/dockwa.png \
@@ -85,6 +89,7 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   /opt/
 
 mv /opt/MusicBox-linux-$arch /opt/MusicBox
+mv /opt/AvNav-linux-$arch /opt/AvNav
 mv /opt/Dockwa-linux-$arch /opt/Dockwa
 
 ## On debian, the sandbox environment fail without GUID/SUID
