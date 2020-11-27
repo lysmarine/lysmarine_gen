@@ -119,42 +119,42 @@ function chrootWithProot {
 	cpuArch=$2
 	buildCmd=$3
 
-	if [[ ! $(dpkg --print-architecture) == $cpuArch ]]; then # if the target arch is not the same as the host arch use qemu.
+	if [[ ! $(dpkg --print-architecture) == $cpuArch ]] || [[ $cpuArch == 'debian-live' ]]; then # if the target arch is not the same as the host arch use qemu.
 
 	  if [[ $cpuArch == arm64 ]]; then
 		  qemuArch=" -q qemu-aarch64"
 	  elif [[ $cpuArch == armhf ]]; then
 		  qemuArch=" -q qemu-arm"
 	  fi
-	fi
+	  proot $qemuArch \
+		--root-id \
+		--rootfs=$workDir/rootfs \
+		--cwd=/install-scripts \
+		--mount=/etc/resolv.conf:/etc/resolv.conf \
+		--mount=/dev:/dev \
+		--mount=/sys:/sys \
+		--mount=/proc:/proc \
+		$buildCmd
 
-	proot $qemuArch \
-	  --root-id \
-	  --rootfs=$workDir/rootfs \
-	  --cwd=/install-scripts \
-	  --mount=/etc/resolv.conf:/etc/resolv.conf \
-	  --mount=/dev:/dev \
-	  --mount=/sys:/sys \
-	  --mount=/proc:/proc \
-	  $buildCmd
-	#else # just chroot
-#		mount --bind /dev $workDir/rootfs/dev/
-#		mount -t proc /proc $workDir/rootfs/proc/
-#		mount --bind /sys $workDir/rootfs/sys/
-#		mount --bind /tmp $workDir/rootfs/tmp/
+
+	else # just chroot
+		mount --bind /dev $workDir/rootfs/dev
+		mount -t proc /proc $workDir/rootfs/proc
+		mount --bind /sys $workDir/rootfs/sys
+		mount --bind /tmp $workDir/rootfs/tmp
 #
-#		cp /etc/resolv.conf  $workDir/rootfs/etc/
-#		chroot $workDir/rootfs /bin/bash <<EOT
-#cd /install-scripts ;
-#$buildCmd
-#EOT
-#		rm $workDir/rootfs/etc/resolv.conf
-#		umount $workDir/rootfs/dev
-#		umount $workDir/rootfs/proc
-#		umount $workDir/rootfs/sys
-#		umount $workDir/rootfs/tmp
+		cp /etc/resolv.conf  $workDir/rootfs/etc/
+		chroot $workDir/rootfs /bin/bash <<EOT
+cd /install-scripts ;
+$buildCmd
+EOT
+		rm $workDir/rootfs/etc/resolv.conf
+		umount $workDir/rootfs/dev
+		umount $workDir/rootfs/proc
+		umount $workDir/rootfs/sys
+		umount $workDir/rootfs/tmp
 
-	#fi
+	fi
 
 }
 
@@ -170,90 +170,3 @@ function shrinkWithPishrink {
 	"$cacheDir"/pishrink.sh "$imgLocation"
 
 }
-
-#mountIsoFile() {
-#	workDir=$1
-#	isoFile=$2
-#	rootfs="$workDir/rootfs"
-#
-#	log "Mounting Iso File"
-#
-#	## Make sure it's not already mounted
-#	if [ -n "$(ls -A $rootfs)" ]; then
-#		logErr "$rootfs is not empty. Previous failure to unmount?"
-#		rm -r "$workDir"/rootfs/* || /bin/true
-#		rm -r "$workDir/rootfs/.disk" || /bin/true
-#		exit
-#	fi
-#
-#	if [ -n "$(ls -A $workDir/squashfs-root)" ]; then
-#		logErr "$rootfs/squashfs-root is not empty. Previous failure to unmount?"
-#		umountIsoFile "$1" "$2"
-#		rm -r "$workDir/squashfs-root"
-#		exit
-#	fi
-#
-#	# Copy file out of the iso image
-#	mount -o loop "$isoFile" "$workDir/isomount"
-#	cp -a "$workDir"/isomount/* "$workDir/rootfs"
-#	cp -a "$workDir/isomount/.disk" "$workDir/rootfs"
-#	cp "$workDir/isomount/live/filesystem.squashfs" "$workDir/"
-#	umount "$workDir/isomount"
-#
-#	# unsquash the file system
-#	pushd "$workDir/" || exit
-#	unsquashfs "./filesystem.squashfs"
-#	popd || exit
-#
-#}
-#
-#extractIso() {
-#	workDir=$1
-#	isoFile=$2
-#	rootfs="$workDir/rootfs"
-#
-#	log "Mounting Iso File"
-#
-#	## Make sure it's not already mounted
-#	if [ -n "$(ls -A $rootfs)" ]; then
-#		logErr "$rootfs is not empty. Previous failure to unmount?"
-#		rm -r "$workDir"/rootfs/* || /bin/true
-#		rm -r "$workDir/rootfs/.disk" || /bin/true
-#		exit
-#	fi
-#
-#	if [ -n "$(ls -A $workDir/squashfs-root)" ]; then
-#		logErr "$rootfs/squashfs-root is not empty. Previous failure to unmount?"
-#		umountIsoFile "$1" "$2"
-#		rm -r "$workDir/squashfs-root"
-#		exit
-#	fi
-#
-#	# Copy file out of the iso image
-#	7z x "$isoFile" -o$workDir/isomount
-#
-##	mount -o loop "$isoFile" "$workDir/isomount"
-##	cp -a "$workDir"/isomount/* "$workDir/rootfs"
-##	cp -a "$workDir/isomount/.disk" "$workDir/rootfs"
-##	cp "$workDir/isomount/live/filesystem.squashfs" "$workDir/"
-##	umount "$workDir/isomount" || umount -l "$workDir/isomount"
-#
-#	# unsquash the file system
-#	pushd "$workDir/" || exit
-#	unsquashfs "./filesystem.squashfs"
-#	popd || exit
-#
-#}
-#
-#
-#umountIsoFile() {
-#	log "un-Mounting"
-#	workDir=$1
-#	umount -l "$workDir/squashfs-root/dev" || /bin/true
-#	umount "$workDir/squashfs-root/proc" || /bin/true
-#	umount -l "$workDir/squashfs-root/sys" || /bin/true
-#	umount "$workDir/squashfs-root/tmp" || /bin/true
-#	umount "$workDir/squashfs-root/etc/resolv.conf" || /bin/true
-#	umount "$workDir/isomount" || /bin/true
-#
-#}
