@@ -12,11 +12,14 @@ executors:
 commands:
   publish:
     steps:
+      - store_artifacts:
+          path: ./cross-build-release/release/
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
       - run: zip $(ls ./cross-build-release/release/).zip ./cross-build-release/release/$(ls ./cross-build-release/release/)
       - cloudsmith/publish:
-          cloudsmith-repository: lysmarineos/images
+          cloudsmith-repository: lysmarineos/dev
+          allow-republish: true
           package-format: raw
           package-path: ./*.zip
 
@@ -30,7 +33,7 @@ jobs:
         type: string
       version:
         type: string
-        default: ''
+        default: 'dev'
       stage:
         type: string
         default: ''
@@ -54,7 +57,7 @@ jobs:
         type: string
       version:
         type: string
-        default: ''
+        default: 'dev'
       stage:
         type: string
         default: ''
@@ -69,7 +72,7 @@ jobs:
           docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source -v /dev:/dev $containerArch/debian:buster /bin/bash
       - run: |
           docker exec --privileged -ti CIarmBuilder apt-get update
-          docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod rsync
+          docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod rsync xz-utils
       - run: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
       - publish
 
@@ -78,21 +81,19 @@ workflows:
   version: 2
   build_all:
     jobs:
+      - build-on-linux:
+          name: debian-live
+          baseOs: 'debian-live'
+          cpuArch: 'amd64'
       - build-in-arm-docker:
+          name: raspios-armhf
           baseOs: 'raspios'
           cpuArch: 'armhf'
       - build-in-arm-docker:
+          name: raspios-arm64
           baseOs: 'raspios'
           cpuArch: 'arm64'
-      - build-on-linux:
-          baseOs: 'debian-live'
-          cpuArch: 'amd64'
-          stage: '0 2'
       - build-in-arm-docker:
+          name: armbian-pine64so
           baseOs: 'armbian-pine64so'
           cpuArch: 'arm64'
-#      - build-on-linux:
-#          baseOs: 'debian-vbox'
-#          cpuArch: 'amd64'
-#          version: ''
-#          stage: ''
