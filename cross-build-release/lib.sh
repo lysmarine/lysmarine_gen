@@ -119,21 +119,24 @@ function chrootWithProot {
 	cpuArch=$2
 	buildCmd=$3
 
-	#if [[ ! $(dpkg --print-architecture) == $cpuArch ]]; then # if the target arch is not the same as the host arch use proot.
+	if [[ ! $(dpkg --print-architecture) == $cpuArch ]]; then # if the target arch is not the same as the host arch use qemu.
+
 	  if [[ $cpuArch == arm64 ]]; then
 		  qemuArch=" -q qemu-aarch64"
 	  elif [[ $cpuArch == armhf ]]; then
 		  qemuArch=" -q qemu-arm"
 	  fi
-	  proot $qemuArch \
-		--root-id \
-		--rootfs=$workDir/rootfs \
-		--cwd=/install-scripts \
-		--mount=/etc/resolv.conf:/etc/resolv.conf \
-		--mount=/dev:/dev \
-		--mount=/sys:/sys \
-		--mount=/proc:/proc \
-		$buildCmd
+	fi
+
+	proot $qemuArch \
+	  --root-id \
+	  --rootfs=$workDir/rootfs \
+	  --cwd=/install-scripts \
+	  --mount=/etc/resolv.conf:/etc/resolv.conf \
+	  --mount=/dev:/dev \
+	  --mount=/sys:/sys \
+	  --mount=/proc:/proc \
+	  $buildCmd
 	#else # just chroot
 #		mount --bind /dev $workDir/rootfs/dev/
 #		mount -t proc /proc $workDir/rootfs/proc/
