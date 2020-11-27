@@ -19,6 +19,7 @@ commands:
       - run: zip $(ls ./cross-build-release/release/).zip ./cross-build-release/release/$(ls ./cross-build-release/release/)
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/dev
+          allow-republish: true
           package-format: raw
           package-path: ./*.zip
 
@@ -32,7 +33,7 @@ jobs:
         type: string
       version:
         type: string
-        default: ''
+        default: 'dev'
       stage:
         type: string
         default: ''
@@ -56,7 +57,7 @@ jobs:
         type: string
       version:
         type: string
-        default: ''
+        default: 'dev'
       stage:
         type: string
         default: ''
@@ -71,7 +72,7 @@ jobs:
           docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source -v /dev:/dev $containerArch/debian:buster /bin/bash
       - run: |
           docker exec --privileged -ti CIarmBuilder apt-get update
-          docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod rsync
+          docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod rsync xz-utils
       - run: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
       - publish
 
