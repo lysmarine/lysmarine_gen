@@ -18,7 +18,7 @@ commands:
       - cloudsmith/install-cli
       - run: zip $(ls ./cross-build-release/release/).zip ./cross-build-release/release/$(ls ./cross-build-release/release/)
       - cloudsmith/publish:
-          cloudsmith-repository: lysmarineos/dev
+          cloudsmith-repository: lysmarineos/release
           allow-republish: true
           package-format: raw
           package-path: ./*.zip
@@ -85,15 +85,19 @@ workflows:
           name: debian-live
           baseOs: 'debian-live'
           cpuArch: 'amd64'
+          version: '0.9.1'
       - build-in-arm-docker:
           name: raspios-armhf
           baseOs: 'raspios'
           cpuArch: 'armhf'
+          version: '0.9.1'
       - build-in-arm-docker:
           name: raspios-arm64
           baseOs: 'raspios'
           cpuArch: 'arm64'
-      - build-in-arm-docker:
-          name: armbian-pine64so
-          baseOs: 'armbian-pine64so'
-          cpuArch: 'arm64'
+          version: '0.9.1'
+#      - build-in-arm-docker:
+#          name: armbian-pine64so
+#          baseOs: 'armbian-pine64so'
+#          cpuArch: 'arm64'
+#          version: '0.9.1'
