@@ -68,13 +68,13 @@
 
 	# if it's an image file copy and mount it
 	if [ -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" ]; then
-		rsync -P -auz "$cacheDir/$baseOS-$cpuArch.base.img-inflated" "$workDir/$baseOS-$cpuArch.base.img-inflated"
+		rsync -hP "$cacheDir/$baseOS-$cpuArch.base.img-inflated" "$workDir/$baseOS-$cpuArch.base.img-inflated"
 		mountImageFile "$workDir" "$workDir/$baseOS-$cpuArch.base.img-inflated"
 		addLysmarineScripts "$workDir/rootfs"
 		chrootWithProot "$workDir" "$cpuArch" "$buildCmd"
 		umountImageFile "$workDir" "$workDir/$baseOS-$cpuArch.base.img-inflated"
 		shrinkWithPishrink "$cacheDir" "$workDir/$baseOS-$cpuArch.base.img-inflated"
-		rsync -P -auz "$workDir/$baseOS-$cpuArch.base.img-inflated" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
+		rsync -hP "$workDir/$baseOS-$cpuArch.base.img-inflated" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
 
 	elif [[ "$baseOS" == 'debian-live' ]]; then # if it's an ISO file extract it and mount it
 		if [[ ! -d $cacheDir/isoContent || ! -d $cacheDir/squashfs-root ]]; then
@@ -108,8 +108,8 @@
 		mkdir -p "$workDir/isoContent/live/"
 		mksquashfs "$workDir/rootfs" "$workDir/isoContent/live/filesystem.squashfs" -comp xz -noappend -no-progress -info
 		rm -r "$workDir"/rootfs/*
-		rsync  -auz  "$cacheDir"/isoContent/* "$workDir/isoContent"
-		rsync  -auz  "$cacheDir/isoContent/.disk" "$workDir/isoContent"
+		rsync  -hP  "$cacheDir"/isoContent/* "$workDir/isoContent"
+		rsync  -ahP  "$cacheDir/isoContent/.disk" "$workDir/isoContent"
 
 		# Create the iso
 		xorriso -as mkisofs -V 'lysmarineOSlive-amd64' -o "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.iso" -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus "$workDir/isoContent"
