@@ -17,16 +17,16 @@ commands:
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
       - run: |
-            cd ./cross-build-release/release/;
-            ls -lah
-            file=$(ls ./)
-            echo $file
-            sudo xz -z -c -v --threads=2 $file > $file.xz
-            ls -lah
-            sudo rm $file
-            ls -lah
+          cd ./cross-build-release/release/;
+          ls -lah
+          file=$(ls ./)
+          echo $file
+          sudo xz -z -c -v --threads=2 $file > $file.xz
+          ls -lah
+          sudo rm $file
+          ls -lah
 
-- cloudsmith/publish:
+      - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/dev
           allow-republish: true
           package-format: raw
