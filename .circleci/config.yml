@@ -16,7 +16,7 @@ commands:
           path: ./cross-build-release/release/
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
-      - run: cd ./cross-build-release/release/; file=$(ls ./) ; xz -z -c -v --threads=2 $file > $file.xz ; rm $file
+      - run: cd ./cross-build-release/release/; file=$(ls ./) ;sudo xz -z -c -v --threads=2 $file > $file.xz ; sudo rm $file
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/dev
           allow-republish: true
