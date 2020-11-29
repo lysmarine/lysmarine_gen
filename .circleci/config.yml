@@ -19,9 +19,10 @@ commands:
       - run: |
           cd ./cross-build-release/release/;
           ls -lah
-          file=$(ls ./)
+          export file=$(ls ./)
           echo $file
-          sudo xz -z -c -v --threads=2 $file > $file.xz
+          sudo sh -c 'echo $file'
+          sudo sh -c 'xz -z -c -v --threads=2 $file > $file.xz'
           ls -lah
           sudo rm $file
           ls -lah
@@ -102,6 +103,7 @@ workflows:
           name: raspios-arm64
           baseOs: 'raspios'
           cpuArch: 'arm64'
+          stage : '0'
 #      - build-in-arm-docker:
 #          name: armbian-pine64so
 #          baseOs: 'armbian-pine64so'
