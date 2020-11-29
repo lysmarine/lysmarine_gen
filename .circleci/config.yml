@@ -22,9 +22,7 @@ commands:
           export file=$(ls ./)
           echo $file
           sudo sh -c 'echo $file'
-          sudo sh -c 'xz -z -c -v --threads=2 $file > $file.xz'
-          ls -lah
-          sudo rm $file
+          sudo xz -z -v --memlimit=1500MiB --threads=2 $file
           ls -lah
 
       - cloudsmith/publish:
