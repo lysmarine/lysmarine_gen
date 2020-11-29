@@ -16,8 +16,17 @@ commands:
           path: ./cross-build-release/release/
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
-      - run: cd ./cross-build-release/release/; file=$(ls ./) ;sudo xz -z -c -v --threads=2 $file > $file.xz ; sudo rm $file
-      - cloudsmith/publish:
+      - run: |
+            cd ./cross-build-release/release/;
+            ls -lah
+            file=$(ls ./)
+            echo $file
+            sudo xz -z -c -v --threads=2 $file > $file.xz
+            ls -lah
+            sudo rm $file
+            ls -lah
+
+- cloudsmith/publish:
           cloudsmith-repository: lysmarineos/dev
           allow-republish: true
           package-format: raw
@@ -81,19 +90,19 @@ workflows:
   version: 2
   build_all:
     jobs:
-      - build-on-linux:
-          name: debian-live
-          baseOs: 'debian-live'
-          cpuArch: 'amd64'
-      - build-in-arm-docker:
-          name: raspios-armhf
-          baseOs: 'raspios'
-          cpuArch: 'armhf'
+#      - build-on-linux:
+#          name: debian-live
+#          baseOs: 'debian-live'
+#          cpuArch: 'amd64'
+#      - build-in-arm-docker:
+#          name: raspios-armhf
+#          baseOs: 'raspios'
+#          cpuArch: 'armhf'
       - build-in-arm-docker:
           name: raspios-arm64
           baseOs: 'raspios'
           cpuArch: 'arm64'
-      - build-in-arm-docker:
-          name: armbian-pine64so
-          baseOs: 'armbian-pine64so'
-          cpuArch: 'arm64'
+#      - build-in-arm-docker:
+#          name: armbian-pine64so
+#          baseOs: 'armbian-pine64so'
+#          cpuArch: 'arm64'
