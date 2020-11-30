@@ -20,7 +20,6 @@ commands:
           cd ./cross-build-release/release/;
           export file=$(ls ./)
           sudo xz -z -v --memlimit=1500MiB --threads=2 $file
-
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/dev
           allow-republish: true
@@ -85,20 +84,19 @@ workflows:
   version: 2
   build_all:
     jobs:
-#      - build-on-linux:
-#          name: debian-live
-#          baseOs: 'debian-live'
-#          cpuArch: 'amd64'
-#      - build-in-arm-docker:
-#          name: raspios-armhf
-#          baseOs: 'raspios'
-#          cpuArch: 'armhf'
+      - build-on-linux:
+          name: debian-live
+          baseOs: 'debian-live'
+          cpuArch: 'amd64'
+      - build-in-arm-docker:
+          name: raspios-armhf
+          baseOs: 'raspios'
+          cpuArch: 'armhf'
       - build-in-arm-docker:
           name: raspios-arm64
           baseOs: 'raspios'
           cpuArch: 'arm64'
-          stage : '0'
-#      - build-in-arm-docker:
-#          name: armbian-pine64so
-#          baseOs: 'armbian-pine64so'
-#          cpuArch: 'arm64'
+      - build-in-arm-docker:
+          name: armbian-pine64so
+          baseOs: 'armbian-pine64so'
+          cpuArch: 'arm64'
