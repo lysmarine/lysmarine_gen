@@ -18,18 +18,14 @@ commands:
       - cloudsmith/install-cli
       - run: |
           cd ./cross-build-release/release/;
-          ls -lah
           export file=$(ls ./)
-          echo $file
-          sudo sh -c 'echo $file'
           sudo xz -z -v --memlimit=1500MiB --threads=2 $file
-          ls -lah
 
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/dev
           allow-republish: true
           package-format: raw
-          package-path: ./*.xz
+          package-path: ./cross-build-release/release/*.xz
 
 jobs:
   build-on-linux:
