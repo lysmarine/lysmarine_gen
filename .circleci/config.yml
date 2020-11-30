@@ -16,12 +16,15 @@ commands:
           path: ./cross-build-release/release/
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
-      - run: zip $(ls ./cross-build-release/release/).zip ./cross-build-release/release/$(ls ./cross-build-release/release/)
+      - run: |
+          cd ./cross-build-release/release/;
+          export file=$(ls ./)
+          sudo xz -z -v --memlimit=1500MiB --threads=2 $file
       - cloudsmith/publish:
           cloudsmith-repository: lysmarineos/dev
           allow-republish: true
           package-format: raw
-          package-path: ./*.zip
+          package-path: ./cross-build-release/release/*.xz
 
 jobs:
   build-on-linux:
