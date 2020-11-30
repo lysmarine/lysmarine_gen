@@ -8,99 +8,95 @@ executors:
   linux:
     machine:
       image: ubuntu-2004:202010-01
-      
-commands:
-  prepare-linux-machine:
-    description: "Install the requirements to run lysmarine build script"
-    steps:
-      - checkout
-      - run: sudo apt-get -q update
-      - run: sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx
-      - run: cd cross-build-release; sudo chmod -v u+w *.sh;
 
+commands:
   publish:
     steps:
+      - store_artifacts:
+          path: ./cross-build-release/release/
       - cloudsmith/ensure-api-key
       - cloudsmith/install-cli
-      - run: ls -lah ./cross-build-release/release/
-      - run: zip $(ls ./cross-build-release/release/).zip ./cross-build-release/release/$(ls ./cross-build-release/release/)
+      - run: |
+          cd ./cross-build-release/release/;
+          export file=$(ls ./)
+          sudo xz -z -v --memlimit=1500MiB --threads=2 $file
       - cloudsmith/publish:
-          cloudsmith-repository: lysmarineos/images
+          cloudsmith-repository: lysmarineos/dev
+          allow-republish: true
           package-format: raw
-          package-path: ./*.zip
+          package-path: ./cross-build-release/release/*.xz
 
 jobs:
-
-  build-raspios-arm32:
+  build-on-linux:
     executor: linux
+    parameters:
+      baseOs:
+        type: string
+      cpuArch:
+        type: string
+      version:
+        type: string
+        default: 'dev'
+      stage:
+        type: string
+        default: ''
     steps:
-      - prepare-linux-machine
-      - attach_workspace:
-          at: /home/circleci
+      - checkout
+      - run: |
+          sudo apt-get -q update
+          sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx xorriso
+          cd cross-build-release; sudo chmod -v u+w *.sh;
       - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios armhf 0.9.12
+          command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
           no_output_timeout: 30m
-      - persist_to_workspace:
-          root: .
-          paths: ./cross-build-release/release/
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
       - publish
 
-  build-raspios-arm64:
+  build-in-arm-docker:
     executor: linux
+    parameters:
+      baseOs:
+        type: string
+      cpuArch:
+        type: string
+      version:
+        type: string
+        default: 'dev'
+      stage:
+        type: string
+        default: ''
     steps:
-      - prepare-linux-machine
-      - attach_workspace:
-          at: /home/circleci
-      - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh raspios arm64 0.9.12
-          no_output_timeout: 30m
-      - persist_to_workspace:
-           root: .
-           paths: ./cross-build-release//release
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
+      - checkout
+      - run: |
+          sudo su -c 'echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock -s overlay2\"" > /etc/default/docker'
+          sudo service docker restart && sleep 3
+      - run: |
+          containerArch=arm64v8 ; if [[ '<<parameters.cpuArch>>' == 'armhf' ]]; then containerArch=arm32v7  ; fi;
+          docker run --rm --privileged --cap-add=ALL --security-opt="seccomp=unconfined" multiarch/qemu-user-static --reset --credential yes --persistent yes -v /dev:/dev
+          docker run --name CIarmBuilder --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti -e "container=docker" -v $(pwd):/ci-source -v /dev:/dev $containerArch/debian:buster /bin/bash
+      - run: |
+          docker exec --privileged -ti CIarmBuilder apt-get update
+          docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod rsync xz-utils
+      - run: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
       - publish
-
-  build-armbian-pine64so:
-    executor: linux
-    steps:
-      - prepare-linux-machine
-      - run:
-          command: cd cross-build-release;sudo /bin/bash -xe ./build.sh armbian-pineA64so arm64 0.9.12
-          no_output_timeout: 30m
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
-      - publish
-
-  build-debian-live:
-    executor: linux
-    environment:
-      - PKG_DISTRO=buster
-      - LYSMARINE_VER=0.9.0.11
-      - PKG_ARCH=amd64
-    steps:
-      - prepare-linux-machine
-      - run:
-          command: cd cross-build-release; sudo /bin/bash -xe ./build.sh debian-live amd64 0.9.12
-          no_output_timeout: 30m
-      - store_artifacts:
-          path: ./cross-build-release/release/
-          destination: release/
-      - publish
-
 
 
 workflows:
   version: 2
   build_all:
     jobs:
-      - build-raspios-arm32
-      - build-raspios-arm64
-      - build-armbian-pine64so
-      #- build-debian-vbox
-      - build-debian-live
+      - build-on-linux:
+          name: debian-live
+          baseOs: 'debian-live'
+          cpuArch: 'amd64'
+      - build-in-arm-docker:
+          name: raspios-armhf
+          baseOs: 'raspios'
+          cpuArch: 'armhf'
+      - build-in-arm-docker:
+          name: raspios-arm64
+          baseOs: 'raspios'
+          cpuArch: 'arm64'
+      - build-in-arm-docker:
+          name: armbian-pine64so
+          baseOs: 'armbian-pine64so'
+          cpuArch: 'arm64'

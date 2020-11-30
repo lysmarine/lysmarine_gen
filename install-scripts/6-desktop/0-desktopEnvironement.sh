@@ -46,3 +46,6 @@ else
 fi
 
 apt-get install -y -q pcmanfm lxterminal mousepad gpsbabel file-roller
+
+# force polkit agent to start with openbox (this is needed for nm-applet hotspot)
+sed -i '/^OnlyShowIn=/ s/$/GNOME;/' /etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop
