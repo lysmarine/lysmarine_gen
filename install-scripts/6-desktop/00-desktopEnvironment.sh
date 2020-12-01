@@ -41,6 +41,7 @@ install -o 1000 -g 1000 -v $FILE_FOLDER/autostart /home/user/.config/openbox/
 # Menus
 install -o 1000 -g 1000 -d /home/user/.config/menus
 install -o 1000 -g 1000 -v $FILE_FOLDER/gnome-applications.menu /home/user/.config/menus/gnome-applications.menu-orig
+install -o 1000 -g 1000 -v $FILE_FOLDER/lysmarine-applications.menu /home/user/.config/menus/lysmarine-applications.menu-orig
 install -o 1000 -g 1000 -v $FILE_FOLDER/lysmarine-applications.menu /home/user/.config/menus/gnome-applications.menu
 install -o 1000 -g 1000 -v $FILE_FOLDER/navigation.directory /home/user/.local/share/desktop-directories/
 
