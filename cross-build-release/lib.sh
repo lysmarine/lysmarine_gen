@@ -10,10 +10,9 @@ logErr() {
 # Create caching folder hierarchy to work with this architecture
 setupWorkSpace() {
 	thisArch=$1
-	mkdir -p ./cache/${thisArch}/stageCache
+	mkdir -p ./cache/${thisArch}/isoContent
 	mkdir -p ./work/${thisArch}/rootfs
 	mkdir -p ./work/${thisArch}/bootfs
-	mkdir -p ./work/${thisArch}/isomount
 	mkdir -p ./release/
 
 }
