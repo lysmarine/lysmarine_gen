@@ -82,6 +82,7 @@
 		fi
 		if [[ ! -d "$cacheDir/squashfs-root" ]]; then
 			unsquashfs -d $cacheDir/squashfs-root "$cacheDir/isoContent/live/filesystem.squashfs"
+			rm "$cacheDir/isoContent/live/filesystem.squashfs"
 		fi
 
 		# Safety check,
@@ -109,14 +110,9 @@
 		# Adapt the iso
 		rsync -hPr  "$cacheDir"/isoContent/* "$workDir/isoContent"
 		rsync -hPr  "$cacheDir/isoContent/.disk" "$workDir/isoContent"
-   	    mkdir $workDir/isoContent/d-i/buster
-   	    cp files/preseed.cfg "$workDir/isoContent/d-i/buster"
-   	    cp files/preseed.cfg "$workDir/isoContent/d-i/gtk/"
-   	    cp files/preseed.cfg "$workDir/isoContent/d-i/"
-   	    cp files/preseed.cfg "$workDir/isoContent"
-
-   	    cp files/splash.png "$workDir/isoContent/isolinux/"
-   	    cp files/menu.cfg "$workDir/isoContent/isolinux/"
+    cp files/preseed.cfg "$workDir/isoContent"
+    cp files/splash.png "$workDir/isoContent/isolinux/"
+    cp files/menu.cfg "$workDir/isoContent/isolinux/"
 		cp files/stdmenu.cfg "$workDir/isoContent/isolinux/"
 
 		# Create the iso
