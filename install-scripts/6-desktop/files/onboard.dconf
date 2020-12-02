@@ -23,6 +23,8 @@ schema-version='2.3'
 snippets=@as []
 show-status-icon=true
 status-icon-provider="GtkStatusIcon"
+xembed-onboard=true
+xembed-aspect-change-range=[0, 3]
 
 [window]
 docking-enabled=true
