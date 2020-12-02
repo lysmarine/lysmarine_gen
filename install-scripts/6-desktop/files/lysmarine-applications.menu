@@ -141,6 +141,9 @@
         <Include>
             <Filename>gnome-control-center.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>ca.desrt.dconf-editor.desktop</Filename>
+        </Include>
     </Menu>
     <Layout>
         <Menuname>Navigation</Menuname>
