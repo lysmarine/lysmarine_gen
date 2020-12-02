@@ -3,7 +3,7 @@ Description=RTL-SDR decoder for AIS signals
 After=multi-user.target syslog.target
 
 [Service]
-ExecStart=/usr/local/bin/rtl_ais -R on -P 10112
+ExecStart=/usr/bin/rtl_ais -R on -P 10112
 Restart=always
 RestartSec=10
 KillMode=process
