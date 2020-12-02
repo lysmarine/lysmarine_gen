@@ -1,5 +1,5 @@
 #!/bin/bash -e
 
-sudo apt-get -q -y install gnome-chess traceroute
+sudo apt-get -q -y install dconf-editor traceroute gnome-chess
 
 
