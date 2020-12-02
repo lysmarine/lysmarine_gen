@@ -12,9 +12,6 @@
         <Directory>navigation.directory</Directory>
         <DirectoryDir>/home/user/.local/share/desktop-directories</DirectoryDir>
         <Include>
-            <Filename>pypilot_calibration.desktop</Filename>
-        </Include>
-        <Include>
             <Filename>pypilot_webapp.desktop</Filename>
         </Include>
         <Include>
@@ -87,6 +84,9 @@
         <Include>
             <Filename>pcmanfm.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>onboard.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Settings</Name>
@@ -94,11 +94,24 @@
         <Include>
             <Filename>pcmanfm-desktop-pref.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>onboard-settings.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>budgie-desktop-settings.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>menulibre.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>pypilot_calibration.desktop</Filename>
+        </Include>
     </Menu>
     <Layout>
         <Menuname>Navigation</Menuname>
         <Menuname>Multimedia</Menuname>
         <Menuname>Internet</Menuname>
+        <Menuname>Radio</Menuname>
         <Menuname>System Tools</Menuname>
         <Menuname>Settings</Menuname>
     </Layout>
