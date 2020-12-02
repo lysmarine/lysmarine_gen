@@ -32,7 +32,6 @@ usermod -a -G input user     # for evdev-rce
 usermod -a -G audio user
 usermod -a -G dialout user
 usermod -a -G lp user
-usermod -a -G lpadmin user
 usermod -a -G scanner user
 usermod -a -G cdrom user
 usermod -a -G plugdev user
