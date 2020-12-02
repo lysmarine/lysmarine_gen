@@ -144,12 +144,11 @@
     </Menu>
     <Layout>
         <Menuname>Navigation</Menuname>
-        <Menuname>Multimedia</Menuname>
         <Menuname>Internet</Menuname>
         <Menuname>Radio</Menuname>
+        <Menuname>Multimedia</Menuname>
         <Menuname>Games</Menuname>
         <Menuname>Utilities</Menuname>
-        <Separator/>
         <Menuname>System Tools</Menuname>
         <Menuname>Settings</Menuname>
     </Layout>
