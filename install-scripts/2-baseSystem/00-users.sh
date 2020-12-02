@@ -70,7 +70,6 @@ if ! grep -q charts /etc/group; then
 	groupadd charts
 	usermod -a -G charts signalk
 	usermod -a -G charts user
-	usermod -a -G charts avnav
 	usermod -a -G charts root
 fi
 
