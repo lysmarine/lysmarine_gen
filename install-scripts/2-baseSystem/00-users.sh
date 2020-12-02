@@ -26,6 +26,15 @@ usermod -a -G sudo user
 usermod -a -G video user
 usermod -a -G input user     # for evdev-rce
 usermod -a -G audio user
+usermod -a -G dialout user
+usermod -a -G lp user
+usermod -a -G lpadmin user
+usermod -a -G scanner user
+usermod -a -G cdrom user
+usermod -a -G plugdev user
+usermod -a -G fax user
+usermod -a -G voice user
+usermod -a -G bluetooth user
 
 ## Create signalk user to run the server.
 if [ ! -d /home/signalk ]; then
@@ -33,17 +42,30 @@ if [ ! -d /home/signalk ]; then
 	adduser --home /home/signalk --gecos --system --disabled-password --disabled-login signalk
 fi
 
+usermod -a -G tty signalk
+usermod -a -G i2c signalk
+usermod -a -G spi signalk
+usermod -a -G gpio signalk
+usermod -a -G dialout signalk
+
 ## Create pypilot user to run the services.
 if [ ! -d /home/pypilot ]; then
 	echo "Creating pypilot user"
 	adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
 fi
 
+usermod -a -G tty pypilot
+usermod -a -G i2c pypilot
+usermod -a -G spi pypilot
+usermod -a -G gpio pypilot
+usermod -a -G dialout pypilot
+
 ## Create the charts group and add users that have to write to that folder.
 if ! grep -q charts /etc/group; then
 	groupadd charts
 	usermod -a -G charts signalk
 	usermod -a -G charts user
+	usermod -a -G charts avnav
 	usermod -a -G charts root
 fi
 
