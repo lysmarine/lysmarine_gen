@@ -35,6 +35,8 @@ usermod -a -G plugdev user
 usermod -a -G fax user
 usermod -a -G voice user
 usermod -a -G bluetooth user
+usermod -a -G games user
+usermod -a -G users user
 
 ## Create signalk user to run the server.
 if [ ! -d /home/signalk ]; then
