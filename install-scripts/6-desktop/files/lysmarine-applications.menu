@@ -89,6 +89,29 @@
         </Include>
     </Menu>
     <Menu>
+        <Name>Games</Name>
+        <Directory>Games.directory</Directory>
+        <Include>
+            <Filename>gnome-chess.desktop</Filename>
+        </Include>
+    </Menu>
+    <Menu>
+        <Name>Utilities</Name>
+        <Directory>X-GNOME-Utilities.directory</Directory>
+        <Include>
+            <Filename>eog.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>orage.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>sailcut.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>boats.desktop</Filename>
+        </Include>
+    </Menu>
+    <Menu>
         <Name>Settings</Name>
         <Directory>X-GNOME-SystemSettings.directory</Directory>
         <Include>
@@ -124,6 +147,9 @@
         <Menuname>Multimedia</Menuname>
         <Menuname>Internet</Menuname>
         <Menuname>Radio</Menuname>
+        <Menuname>Games</Menuname>
+        <Menuname>Utilities</Menuname>
+        <Separator/>
         <Menuname>System Tools</Menuname>
         <Menuname>Settings</Menuname>
     </Layout>
