@@ -39,8 +39,7 @@
 			rm "$cacheDir/$zipName"
 
 		elif [[ "$baseOS" == "armbian-pine64so" ]]; then
-
-			zipName="Armbian_20.11_Pine64_buster_current_5.8.16.img.xz"
+			zipName="Armbian_20.11_Pine64so_buster_current_5.8.16.img.xz"
 			wget -P "${cacheDir}/" "https://dl.armbian.com/pine64so/archive/$zipName"
 			7z e -o"${cacheDir}/" "${cacheDir}/${zipName}"
 			mv "$cacheDir"/Armbian_??.??_Pine64so_buster_current_?.?.??.img "$cacheDir/$baseOS-$cpuArch.base.img"
