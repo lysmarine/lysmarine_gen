@@ -60,7 +60,7 @@
         </Include>
     </Menu>
     <Menu>
-        <Name>Radio</Name>
+        <Name>Hamradio</Name>
         <Directory>HamRadio.directory</Directory>
         <Include>
             <Filename>flarq.desktop</Filename>
@@ -113,7 +113,7 @@
     </Menu>
     <Menu>
         <Name>Settings</Name>
-        <Directory>X-GNOME-SystemSettings.directory</Directory>
+        <Directory>Settings-System.directory</Directory>
         <Include>
             <Filename>pcmanfm-desktop-pref.desktop</Filename>
         </Include>
@@ -148,7 +148,7 @@
     <Layout>
         <Menuname>Navigation</Menuname>
         <Menuname>Internet</Menuname>
-        <Menuname>Radio</Menuname>
+        <Menuname>Hamradio</Menuname>
         <Menuname>Multimedia</Menuname>
         <Menuname>Games</Menuname>
         <Menuname>Utilities</Menuname>
