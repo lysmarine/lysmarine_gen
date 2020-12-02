@@ -79,7 +79,7 @@
         </Include>
     </Menu>
     <Menu>
-        <Name>System</Name>
+        <Name>System Tools</Name>
         <Directory>System-Tools.directory</Directory>
         <Include>
             <Filename>lxterminal.desktop</Filename>
@@ -89,7 +89,7 @@
         </Include>
     </Menu>
     <Menu>
-        <Name>System Settings</Name>
+        <Name>Settings</Name>
         <Directory>X-GNOME-SystemSettings.directory</Directory>
         <Include>
             <Filename>pcmanfm-desktop-pref.desktop</Filename>
@@ -99,7 +99,7 @@
         <Menuname>Navigation</Menuname>
         <Menuname>Multimedia</Menuname>
         <Menuname>Internet</Menuname>
-        <Menuname>System</Menuname>
+        <Menuname>System Tools</Menuname>
         <Menuname>Settings</Menuname>
     </Layout>
 </Menu>
