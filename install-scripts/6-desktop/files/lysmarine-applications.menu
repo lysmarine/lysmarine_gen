@@ -106,6 +106,12 @@
         <Include>
             <Filename>pypilot_calibration.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>servicedialog.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>nm-connection-editor.desktop</Filename>
+        </Include>
     </Menu>
     <Layout>
         <Menuname>Navigation</Menuname>
