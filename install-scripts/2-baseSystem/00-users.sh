@@ -22,6 +22,9 @@ echo 'user:changeme' | chpasswd
 echo "user ALL=(ALL:ALL) ALL" >> /etc/sudoers
 usermod -a -G netdev user
 usermod -a -G tty user
+usermod -a -G i2c user
+usermod -a -G spi user
+usermod -a -G gpio user
 usermod -a -G sudo user
 usermod -a -G video user
 usermod -a -G input user     # for evdev-rce
