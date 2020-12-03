@@ -99,8 +99,8 @@ workflows:
           baseOs: 'raspios'
           cpuArch: 'arm64'
           version: '0.9.1'
-#      - build-in-arm-docker:
-#          name: armbian-pine64so
-#          baseOs: 'armbian-pine64so'
-#          cpuArch: 'arm64'
-#          version: '0.9.1'
+      - build-in-arm-docker:
+          name: armbian-pine64so
+          baseOs: 'armbian-pine64so'
+          cpuArch: 'arm64'
+          version: '0.9.1'
