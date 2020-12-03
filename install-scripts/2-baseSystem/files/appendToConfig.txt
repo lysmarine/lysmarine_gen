@@ -3,11 +3,11 @@
 
 ### lysmarine ####################################
 gpu_mem=128
-hdmi_drive=0
 disable_splash=1
 
 dtparam=i2c_arm=on
 dtparam=spi=on
+dtparam=audio=on
 dtoverlay=w1-gpio
 
 ### lysmarine - screen preset ####################
