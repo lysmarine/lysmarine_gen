@@ -80,7 +80,7 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "AvNav" --icon /usr/share/icons/gnome/48x48/categories/gnome-globe.png \
-  "http://localhost:8080/" /opt/
+  "http://localhost:8099/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "Dockwa" --icon /home/user/.local/share/icons/dockwa.png \
