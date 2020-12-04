@@ -60,6 +60,7 @@
     <!-- provide your data at this port for e.g. OpenCPN -->
     <AVNSocketWriter port="34567" maxDevices="5" filter="" read="true" minTime="100"/>
     <AVNTrackWriter interval="10" distance="100" trackdir="/var/lib/avnav/tracks"/>
+    <AVNSocketReader host="localhost" port="10110"/>
     <AVNHttpServer navurl="/viewer/avnav_navi.php" httpPort="8099" upzoom="0"
                    chartbase="maps" empty="nonexistent">
         <!-- chartbaseurl="http://$host/Karten/anav"> -->
