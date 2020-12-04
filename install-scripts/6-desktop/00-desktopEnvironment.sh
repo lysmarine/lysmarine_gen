@@ -36,7 +36,12 @@ install -o 1000 -g 1000 -d /home/user/.local/share/sounds
 # Openbox
 install -o 1000 -g 1000 -d /home/user/.config
 install -o 1000 -g 1000 -d /home/user/.config/openbox
-install -o 1000 -g 1000 -v $FILE_FOLDER/autostart /home/user/.config/openbox/
+
+# Thunar file manager
+install -o 1000 -g 1000 -d /home/user/.config/xfce4
+install -o 1000 -g 1000 -d /home/user/.config/xfce4/xfconf
+install -o 1000 -g 1000 -d /home/user/.config/xfce4/xfconf/xfce-perchannel-xml
+install -o 1000 -g 1000 -v $FILE_FOLDER/thunar.xml /home/user/.config/xfce4/xfconf/xfce-perchannel-xml/
 
 # Menus
 install -o 1000 -g 1000 -d /home/user/.config/menus
