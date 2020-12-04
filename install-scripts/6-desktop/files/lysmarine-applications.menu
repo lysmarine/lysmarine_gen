@@ -53,6 +53,9 @@
             <Filename>dockwa.desktop</Filename>
         </Include>
         <Include>
+            <Filename>org.gnome.Weather.Application.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>org.gnome.Geary.desktop</Filename>
         </Include>
         <Include>
@@ -92,6 +95,9 @@
         </Include>
         <Include>
             <Filename>lxtask.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>pypilot_calibration.desktop</Filename>
         </Include>
     </Menu>
     <Menu>
@@ -134,9 +140,6 @@
         </Include>
         <Include>
             <Filename>menulibre.desktop</Filename>
-        </Include>
-        <Include>
-            <Filename>pypilot_calibration.desktop</Filename>
         </Include>
         <Include>
             <Filename>servicedialog.desktop</Filename>

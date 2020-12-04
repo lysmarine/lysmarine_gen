@@ -1,6 +1,6 @@
 #!/bin/bash -e
 rm -rf  /tmp/empty-cache46
-rm -rvf /home/user/Public /home/user/Templates /home/user/Videos /home/user/Desktop
+rm -rvf /home/user/Public /home/user/Templates 
 
 apt-get clean
 

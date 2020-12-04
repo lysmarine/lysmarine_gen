@@ -1,0 +1,4 @@
+# dAISy AIS receiver
+SUBSYSTEM=="usb", ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="0b03", SYMLINK+="ttyLYS_ais%n", RUN+="/lib/udev/manage_ais.sh %n"
+
+ACTION=="remove", SUBSYSTEM=="tty", RUN+="/lib/udev/manage_ais.sh %n remove"
