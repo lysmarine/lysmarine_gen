@@ -36,6 +36,7 @@ install -o 1000 -g 1000 -d /home/user/.local/share/sounds
 # Openbox
 install -o 1000 -g 1000 -d /home/user/.config
 install -o 1000 -g 1000 -d /home/user/.config/openbox
+install -o 1000 -g 1000 -v $FILE_FOLDER/autostart /home/user/.config/openbox/
 
 # Thunar file manager
 install -o 1000 -g 1000 -d /home/user/.config/xfce4
