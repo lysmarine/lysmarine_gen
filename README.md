@@ -32,6 +32,7 @@ We would think our distribution can serve as a basis for others interested to bu
 * Music/Media player Linux distribution
 * HAM radio SDR Linux distribution
 * Generic Linux touch tablet on ARM raspberry OS
+* WiFi router
 
 The code of building is distribution is easily customizable following instructions below.
 You do not have to build it on your own ARM hardware. The process described below explains how you
