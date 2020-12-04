@@ -87,6 +87,12 @@
         <Include>
             <Filename>onboard.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>Thunar.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>lxtask.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Games</Name>
@@ -143,6 +149,9 @@
         </Include>
         <Include>
             <Filename>ca.desrt.dconf-editor.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>thunar-settings.desktop</Filename>
         </Include>
     </Menu>
     <Layout>

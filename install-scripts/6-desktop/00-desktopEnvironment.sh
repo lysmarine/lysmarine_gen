@@ -63,4 +63,3 @@ apt-get install -y -q lxterminal gpsbabel file-roller
 #apt-get install -y -q pcmanfm mousepad
 
 apt-get install -y -q lxtask thunar
-
