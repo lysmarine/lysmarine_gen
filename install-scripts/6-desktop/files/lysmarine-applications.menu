@@ -100,6 +100,9 @@
         <Include>
             <Filename>gnome-chess.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>openpref.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Utilities</Name>
