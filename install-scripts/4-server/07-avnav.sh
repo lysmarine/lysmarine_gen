@@ -13,7 +13,7 @@ adduser avnav audio
 usermod -a -G charts avnav
 
 install -m 0644 $FILE_FOLDER/avnav.desktop "/usr/local/share/applications/"
-install -m 0644 /var/lib/avnav/avnav_server.xml "/var/lib/avnav/avnav_server.xml-orig"
+
 install -m 0644 $FILE_FOLDER/avnav_server_lysmarine.xml "/var/lib/avnav/avnav_server_lysmarine.xml"
 install -m 0644 $FILE_FOLDER/avnav_server_lysmarine.xml "/var/lib/avnav/avnav_server.xml"
 
