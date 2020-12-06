@@ -85,7 +85,7 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "Dockwa" --icon /home/user/.local/share/icons/dockwa.png \
   "https://dockwa.com/" \
-   -u "Mozilla/5.0 (Linux; <Android Version>; <Build Tag etc.>) AppleWebKit/<WebKit Rev> (KHTML, like Gecko) Chrome/<Chrome Rev> Mobile Safari/<WebKit Rev>" \
+   -u "Mozilla/5.0 (Linux; Android 10; SM-G960U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.86 Mobile Safari/537.36" \
   /opt/
 
 mv /opt/MusicBox-linux-$arch /opt/MusicBox
