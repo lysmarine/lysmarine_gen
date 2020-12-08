@@ -17,7 +17,7 @@ const commands = [
     {name: 'weather', title: 'Weather', img: 'weather', bg: 'RoyalBlue', cmd: 'onlyone', args: ['XyGrib']},
     {name: 'cam', title: 'Camera', img: 'camera', bg: 'SeaGreen', cmd: 'onlyone', args: ['vlc']},
     {name: 'music', title: 'Music', img: 'multimedia', bg: 'IndianRed', cmd: '/opt/MusicBox/MusicBox', args: []},
-    {name: 'www', title: 'WWW', img: 'internet', bg: 'SteelBlue', cmd: 'onlyone', args: ['chromium']},
+    {name: 'www', title: 'WWW', img: 'internet', bg: 'SteelBlue', cmd: 'onlyone', args: ['chromium', 'https://google.com']},
     {name: 'marinas', title: 'Marinas', img: 'travel', bg: 'SaddleBrown', cmd: '/opt/Dockwa/Dockwa', args: []},
     {name: 'files', title: 'Files', img: 'travel', bg: 'Peru', cmd: 'onlyone', args: ['thunar']},
     {name: 'tasks', title: 'Tasks', img: 'travel', bg: 'ForestGreen',  cmd: 'onlyone', args: ['lxtask']},
