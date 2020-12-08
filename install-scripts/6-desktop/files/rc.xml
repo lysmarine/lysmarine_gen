@@ -756,14 +756,6 @@
             <decor>yes</decor>
         </application>
 
-        <application title="wdash">
-            <maximized>yes</maximized>
-            <decor>no</decor>
-            <layer>below</layer>
-            <focus>yes</focus>
-            <skip_taskbar>yes</skip_taskbar>
-        </application>
-
         <application title="bbn-launcher">
             <maximized>yes</maximized>
             <decor>no</decor>
