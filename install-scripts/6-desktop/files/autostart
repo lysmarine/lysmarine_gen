@@ -13,7 +13,9 @@ xset s noblank &
 evdev-rce &
 
 #/opt/wdash/wdash &
-/opt/bbn-launcher/bbn-launcher &
+
+bbn-launcherd &
+(sleep 4 && /opt/bbn-launcher/bbn-launcher) &
 
 (sleep 8 && nm-applet) &
 (sleep 8 && onboard) &
