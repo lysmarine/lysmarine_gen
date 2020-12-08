@@ -15,4 +15,9 @@ rm -rf ~/.cache/pip
 
 # remove all cache
 rm -rf ~/.cache
+rm -rf ~/.config
+rm -rf ~/.npm
+rm -rf ~/.wget*
+
+
 
