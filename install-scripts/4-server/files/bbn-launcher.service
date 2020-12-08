@@ -4,10 +4,10 @@ After=graphical.target
 [Service]
 Type=simple
 User=www-data
-ExecStart=/usr/bin/node /var/www/speedSample/app.js -P 80 -w 4998
+ExecStart=/usr/bin/node /var/www/bbn-launcher/bbn-launcher.js
 Restart=on-failure
 RestartSec=10
-WorkingDirectory=/var/www/speedSample
+WorkingDirectory=/var/www/bbn-launcher
 
 [Install]
 WantedBy=graphical.target
