@@ -61,6 +61,11 @@ Open a github issue or contact me on facebook https://fb.me.com/lysmarineOS/__
 * You can burn this image using RaspberryPi imager to SD card and use that SD card to boot your raspberry Pi
 * You can edit files inside install-scripts directory push them into github and customize your image.
 
+# Passwords
+
+Default passwords are set to 'changeme', which you are supposed to change.
+Default user name in login screens is basically 'user'.
+
 # Contributors & Testers
 
 If you don't know where to start, fixing a typo can be enough. There are also some issues in the bug tracker marked as
