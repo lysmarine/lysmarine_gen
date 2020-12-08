@@ -60,7 +60,7 @@ if [ $LMOS == Debian ]; then
 fi
 
 # Minimize space by linking identical files
-hardlink -v -f -t /opt/*
+hardlink -v -t /opt/*
 npm cache clean --force
 
 ########################################################################################################################
@@ -103,7 +103,7 @@ if [ $LMOS == Debian ]; then
 fi
 
 # Minimize space by linking identical files
-hardlink -v -f -t /opt/*
+hardlink -v -t /opt/*
 npm cache clean --force
 
 ########################################################################################################################
@@ -126,7 +126,7 @@ if [ $LMOS == Debian ]; then
 fi
 
 # Minimize space by linking identical files
-hardlink -v -f -t /opt/*
+hardlink -v -t /opt/*
 npm cache clean --force
 
 install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
@@ -157,7 +157,7 @@ if [ $LMOS == Debian ]; then
 fi
 
 # Minimize space by linking identical files
-hardlink -v -f -t /opt/*
+hardlink -v -t /opt/*
 npm cache clean --force
 
 ########################################################################################################################
