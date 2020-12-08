@@ -10,10 +10,10 @@ xset s off &
 xset -dpms &
 xset s noblank &
 
-nm-applet &
-
 evdev-rce &
 
-/opt/wdash/wdash &
+#/opt/wdash/wdash &
+/opt/bbn-launcher/bbn-launcher &
 
+(sleep 8 && nm-applet) &
 (sleep 8 && onboard) &
