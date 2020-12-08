@@ -13,3 +13,6 @@ npm cache clean --force
 # remove python pip cache
 rm -rf ~/.cache/pip
 
+# remove all cache
+rm -rf ~/.cache
+
