@@ -1,2 +1,3 @@
 #!/bin/sh
+cd /var/www/bbn-launcher/
 node bbn-launcher.js
