@@ -61,7 +61,6 @@ fi
 
 # Minimize space by linking identical files
 hardlink -v -f -t /opt/*
-npm cache clean --force
 
 ########################################################################################################################
 
@@ -104,7 +103,6 @@ fi
 
 # Minimize space by linking identical files
 hardlink -v -f -t /opt/*
-npm cache clean --force
 
 ########################################################################################################################
 
@@ -127,7 +125,6 @@ fi
 
 # Minimize space by linking identical files
 hardlink -v -f -t /opt/*
-npm cache clean --force
 
 install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
 
@@ -158,8 +155,8 @@ fi
 
 # Minimize space by linking identical files
 hardlink -v -f -t /opt/*
-npm cache clean --force
 
 ########################################################################################################################
 
+npm cache clean --force
 apt-get clean
