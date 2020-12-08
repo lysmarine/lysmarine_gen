@@ -27,9 +27,6 @@ ROWS="$ROWS $STATUS rtl-ais "
 $(systemctl -q is-enabled signalk) && STATUS=TRUE || STATUS=FALSE ;
 ROWS="$ROWS $STATUS signal-K "
 
-$(systemctl -q is-enabled bbn-launcher) && STATUS=TRUE || STATUS=FALSE ;
-ROWS="$ROWS $STATUS bbn-launcher "
-
 $(systemctl -q is-enabled vnc) && STATUS=TRUE || STATUS=FALSE ;
 ROWS="$ROWS $STATUS VNC "
 
@@ -130,16 +127,6 @@ else
 		 echo "=== disable signalk ==="
 	  sudo -A systemctl disable signalk
 	  sudo -A systemctl stop signalk
-	fi
-
-	if echo "$SAVE" | grep -q "bbn-launcher"; then
-		 echo "=== enable bbn-launcher ==="
-	  sudo -A systemctl enable bbn-launcher
-	  sudo -A systemctl start bbn-launcher
-	else
-		 echo "=== disable bbn-launcher ==="
-	  sudo -A systemctl disable bbn-launcher
-	  sudo -A systemctl stop bbn-launcher
 	fi
 
 	if echo "$SAVE" | grep -q "VNC"; then
