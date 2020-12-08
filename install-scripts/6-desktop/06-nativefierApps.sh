@@ -130,31 +130,31 @@ install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
 
 ########################################################################################################################
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "youtube" --icon /usr/share/icons/gnome/48x48/categories/gnome-globe.png \
-  "https://youtube.com/" -u "$USER_AGENT" /opt/
-
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "facebook" --icon /usr/share/icons/gnome/48x48/categories/gnome-globe.png \
-  "https://facebook.com/" -u "$USER_AGENT" /opt/
-
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "spotify" --icon /usr/share/icons/gnome/48x48/categories/gnome-globe.png \
-  "https://open.spotify.com/" -u "$USER_AGENT" /opt/
-
-mv /opt/youtube-linux-$arch /opt/youtube
-mv /opt/facebook-linux-$arch /opt/facebook
-mv /opt/spotify-linux-$arch /opt/spotify
-
-## On debian, the sandbox environment fail without GUID/SUID
-if [ $LMOS == Debian ]; then
-  chmod 4755 /opt/youtube/chrome-sandbox
-  chmod 4755 /opt/facebook/chrome-sandbox
-  chmod 4755 /opt/spotify/chrome-sandbox
-fi
-
-# Minimize space by linking identical files
-hardlink -v -f -t /opt/*
+#nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+#  --name "youtube" --icon /usr/share/icons/gnome/48x48/categories/gnome-globe.png \
+#  "https://youtube.com/" -u "$USER_AGENT" /opt/
+#
+#nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+#  --name "facebook" --icon /usr/share/icons/gnome/48x48/categories/gnome-globe.png \
+#  "https://facebook.com/" -u "$USER_AGENT" /opt/
+#
+#nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+#  --name "spotify" --icon /usr/share/icons/gnome/48x48/categories/gnome-globe.png \
+#  "https://open.spotify.com/" -u "$USER_AGENT" /opt/
+#
+#mv /opt/youtube-linux-$arch /opt/youtube
+#mv /opt/facebook-linux-$arch /opt/facebook
+#mv /opt/spotify-linux-$arch /opt/spotify
+#
+### On debian, the sandbox environment fail without GUID/SUID
+#if [ $LMOS == Debian ]; then
+#  chmod 4755 /opt/youtube/chrome-sandbox
+#  chmod 4755 /opt/facebook/chrome-sandbox
+#  chmod 4755 /opt/spotify/chrome-sandbox
+#fi
+#
+## Minimize space by linking identical files
+#hardlink -v -f -t /opt/*
 
 ########################################################################################################################
 
