@@ -14,7 +14,7 @@ evdev-rce &
 
 #/opt/wdash/wdash &
 
-bbn-launcherd &
+/usr/local/bin/bbn-launcherd &
 (sleep 4 && /opt/bbn-launcher/bbn-launcher) &
 
 (sleep 8 && nm-applet) &
