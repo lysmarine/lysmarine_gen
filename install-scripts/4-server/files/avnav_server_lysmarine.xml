@@ -64,7 +64,7 @@
     <AVNHttpServer navurl="/viewer/avnav_navi.php" httpPort="8099" upzoom="0"
                    chartbase="maps" empty="nonexistent">
         <!-- chartbaseurl="http://$host/Karten/anav"> -->
-        <Directory urlpath="maps" path="~/AvNavCharts/out"/>
+        <Directory urlpath="maps" path="/home/user/AvNavCharts/out"/>
         <MimeType extension=".avt" type="text/plain"/>
         <MimeType extension=".log" type="text/plain"/>
     </AVNHttpServer>
