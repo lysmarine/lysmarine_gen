@@ -10,10 +10,10 @@ const {spawn} = require('child_process');
 const hostname = '127.0.0.1';
 const port = 4997;
 
-const commands = [
+const commands1 = [
     {name: 'chart', title: 'Chart', img: 'chart', bg: 'Peru', cmd: 'onlyone', args: ['opencpn']},
     {name: 'pilot', title: 'AutoPilot', img: 'radar', bg: 'ForestGreen', cmd: '/opt/Pypilot_webapp/Pypilot_webapp', args: []},
-    {name: 'dash', title: 'Dashboard', img: 'dashboard', bg: 'Olive', cmd: '/opt/kip-dash/kip-dash', args: []},
+    {name: 'dash', title: 'Dashboard', img: 'dashboard', bg: 'Olive', cmd: '/opt/MusicBox/MusicBox', args: []},
     {name: 'weather', title: 'Weather', img: 'weather', bg: 'RoyalBlue', cmd: 'onlyone', args: ['XyGrib']},
     {name: 'cam', title: 'Camera', img: 'camera', bg: 'SeaGreen', cmd: 'onlyone', args: ['vlc']},
     {name: 'music', title: 'Music', img: 'multimedia', bg: 'IndianRed', cmd: '/opt/MusicBox/MusicBox', args: []},
@@ -26,6 +26,18 @@ const commands = [
     {name: 'cards', title: 'Cards', img: 'travel', bg: 'SeaGreen', cmd: 'onlyone', args: ['openpref']},
     {name: 'radio', title: 'Radio', img: 'travel', bg: 'IndianRed', cmd: 'onlyone', args: ['fldigi']},
     {name: 'email', title: 'Email', img: 'travel', bg: 'SteelBlue', cmd: 'onlyone', args: ['geary']},
+]
+
+const commands2 = [
+    {name: 'avnav', title: 'AvNav', img: 'chart', bg: 'Peru', cmd: '/opt/AvNav/AvNav', args: []},
+    {name: 'files', title: 'Files', img: 'travel', bg: 'ForestGreen', cmd: 'onlyone', args: ['thunar']},
+    {name: 'tasks', title: 'Tasks', img: 'travel', bg: 'Olive',  cmd: 'onlyone', args: ['lxtask']},
+    {name: 'terminal', title: 'Terminal', img: 'travel', bg: 'RoyalBlue',  cmd: 'onlyone', args: ['lxterminal']},
+    {name: 'web-weather', title: 'Forecast', img: 'weather', bg: 'SeaGreen',  cmd: 'onlyone', args: ['gnome-weather']},
+    {name: 'sail', title: 'Sails', img: 'travel', bg: 'IndianRed',  cmd: 'onlyone', args: ['sailcut']},
+    {name: 'race', title: 'Race', img: 'travel', bg: 'SteelBlue',  cmd: 'onlyone', args: ['boats']},
+    {name: 'instruments', title: 'Instruments', img: 'dashboard', bg: 'SaddleBrown', cmd: '/opt/instrumentpanel/instrumentpanel', args: []},
+    {name: 'provisioning', title: 'Provisioning', img: 'provisioning', bg: 'Peru',  cmd: '', args: ['']},
 ]
 
 function writeSvgResponse(res, status, contentType, parsed) {
@@ -70,9 +82,14 @@ function writeResponse(res, status, contentType, content) {
 function processReq(parsed) {
     const progName = parsed.query['name'];
     if (progName) {
-        const commandObj = commands.find(value => {
+        let commandObj = commands1.find(value => {
             if (value.name === progName) return value
         });
+        if (!commandObj) {
+            commandObj = commands2.find(value => {
+                if (value.name === progName) return value
+            });
+        }
         if (commandObj) {
             const cmd = spawn(commandObj.cmd, commandObj.args);
             cmd.stdout.on('data', data => console.log(`stdout: ${data}`));
@@ -129,7 +146,7 @@ const style = '    <style>\n' +
     '}\n' +
     '\n' +
     '.tile-img {\n' +
-    '    border-radius: 10px;\n' +
+    '    border-radius: 14px;\n' +
     '    width: 60px;\n' +
     '    height: 60px;\n' +
     '    margin: 0 auto;\n' +
@@ -189,21 +206,69 @@ const script = '\n' +
     '        console.debug(http.responseText);\n' +
     '    }\n' +
     '}\n' +
+    'function showPanel(prefix, id) {\n' +
+    '    const x = document.getElementById(prefix + id);\n' +
+    '    if (x.style.display === "none") {\n' +
+    '        x.style.display = "block";\n' +
+    '    } else {\n' +
+    '        x.style.display = "none";\n' +
+    '    }\n' +
+    '}\n' +
+    'function show(id) {\n' +
+    '    showPanel(\'panel\', id);\n' +
+    '    showPanel(\'next-btn\', id);\n' +
+    '}\n' +
     '    </script>\n';
 
-function processMain() {
-    const header = '<head>\n<meta charset="UTF-8">\n' + style + script +
-        '\n    <title>bbn-launcher</title>\n' + '\n</head>\n';
+const credits =
+    '    <div class="credits">\n' +
+    '        <div style="color: white;">Icons made by ' +
+    '<span style="color:orange;">Freepik</span> from <span style="color:orange;">www.flaticon.com</span></div>\n' +
+    '    </div>';
+
+const nextButton1 =
+    '        <div id="next-btn1" style="color: white; padding: 180px 0; float: right;">\n' +
+    '            <div style="font-family: Sans, Arial, Helvetica, sans-serif; font-size: 24pt;"\n' +
+    '                 onclick="show(1); show(2);">&nbsp;&gt;&nbsp;</div>\n' +
+    '        </div>\n';
+
+const nextButton2 =
+    '        <div id="next-btn2" style="color: white; padding: 180px 0; display: none; float: left;"\n' +
+    '             onclick="show(2); show(1);">\n' +
+    '            <div style="font-family: Sans, Arial, Helvetica, sans-serif; font-size: 24pt;">&nbsp;&lt;&nbsp;</div>\n' +
+    '        </div>\n';
+
+function buildTiles(commands) {
     let items = '';
     commands.forEach(value => {
-        items = items +
+        items = items + '\n' +
             '            <div class="tile" onclick="run(\'' + value.name + '\');">\n' +
             '                <div class="tile-img" style="background: ' + value.bg + ';"><img src="img?name=' + value.img + '" alt="' + value.title + '" class="main-icon"/></div>\n' +
             '                <div class="tile-label" >' + value.title + '</div>\n' +
             '            </div>'
     });
+    return items;
+}
+
+function processMain() {
+    const header = '<head>\n<meta charset="UTF-8">\n' + style + script +
+        '\n    <title>bbn-launcher</title>\n' + '\n</head>\n';
+    const items1 = buildTiles(commands1);
+    const panel1 =
+        '        <div id="panel1" class="main-panel" style="float: left;">' + items1 +
+        '        </div>\n';
+
+    const items2 = buildTiles(commands2);
+    const panel2 =
+        '        <div id="panel2" class="main-panel" style="display: none; float: left;">' + items2 +
+        '        </div>\n';
+
+    const panel =
+        '    <div>\n' +
+        nextButton2 + panel1 + panel2 + nextButton1 +
+        '    </div>\n' + credits;
     const body = '<body style="background: black;">\n' +
-        '<div style="width: 800px; height: 480px;" class="desktop">' + items + '</div>\n</body>';
-    return '<!DOCTYPE html>'
-        + '<html lang="en">' + header + body + '</html>';
+        '<div style="width: 796px; height: 420px;" class="desktop">\n' + panel + '\n</div>\n</body>';
+    return '<!DOCTYPE html>\n'
+        + '<html lang="en">\n' + header + body + '\n</html>';
 }
