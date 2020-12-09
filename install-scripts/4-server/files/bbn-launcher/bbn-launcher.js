@@ -92,12 +92,14 @@ function processReq(parsed) {
             });
         }
         if (commandObj) {
-            const cmd = spawn(commandObj.cmd, commandObj.args);
-            cmd.stdout.on('data', data => console.log(`stdout: ${data}`));
-            cmd.stderr.on('data', data => console.log(`stderr: ${data}`));
-            cmd.on('error', (error) => console.log(`error: ${error.message}`));
-            cmd.on('close', code => console.log(`child process exited with code ${code}`));
-            return '{"return" : "ok"}';
+            if (commandObj.cmd != null && commandObj.cmd.length > 0) {
+                const cmd = spawn(commandObj.cmd, commandObj.args);
+                cmd.stdout.on('data', data => console.log(`stdout: ${data}`));
+                cmd.stderr.on('data', data => console.log(`stderr: ${data}`));
+                cmd.on('error', (error) => console.log(`error: ${error.message}`));
+                cmd.on('close', code => console.log(`child process exited with code ${code}`));
+                return '{"return" : "ok"}';
+            }
         } else {
             console.log(`not found: ${progName}`)
         }
