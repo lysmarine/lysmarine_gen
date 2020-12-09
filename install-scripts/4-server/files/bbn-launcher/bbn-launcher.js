@@ -30,6 +30,7 @@ const commands1 = [
 
 const commands2 = [
     {name: 'avnav', title: 'AvNav', img: 'chart', bg: 'Peru', cmd: '/opt/AvNav/AvNav', args: []},
+    {name: 'freeboard', title: 'Freeboard', img: 'chart', bg: 'SteelBlue', cmd: '/opt/Freeboard-sk/Freeboard-sk', args: []},
     {name: 'files', title: 'Files', img: 'travel', bg: 'ForestGreen', cmd: 'onlyone', args: ['thunar']},
     {name: 'tasks', title: 'Tasks', img: 'travel', bg: 'Olive',  cmd: 'onlyone', args: ['lxtask']},
     {name: 'terminal', title: 'Terminal', img: 'travel', bg: 'RoyalBlue',  cmd: 'onlyone', args: ['lxterminal']},
