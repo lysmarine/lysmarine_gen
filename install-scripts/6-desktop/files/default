@@ -39,18 +39,13 @@ Plugin {
 #        item {
 #            icon = freeboard-sk
 #            name = Charplotter (FreeBoard)
-#            action = onlyone /opt/Freeboard-sk/Freeboard-sk
+#            action = /opt/Freeboard-sk/Freeboard-sk
 #        }
         item {
             icon = logo_grib
             name = Weather (XyGrib)
             action = onlyone XyGrib
         }
-#        item {
-#            icon = utilities-system-monitor
-#            name = SpeedSample (Sample of average speed)
-#            action = onlyone /opt/SpeedSample/SpeedSample
-#        }
         item {
             icon = go-jump
             name = Autopilot control (Pypilot)
