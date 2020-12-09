@@ -141,19 +141,13 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   --name "facebook" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
   "https://facebook.com/" -u "$USER_AGENT" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "spotify" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
-  "https://open.spotify.com/" -u "$USER_AGENT" /opt/
-
 mv /opt/youtube-linux-$arch /opt/youtube
 mv /opt/facebook-linux-$arch /opt/facebook
-mv /opt/spotify-linux-$arch /opt/spotify
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
   chmod 4755 /opt/youtube/chrome-sandbox
   chmod 4755 /opt/facebook/chrome-sandbox
-  chmod 4755 /opt/spotify/chrome-sandbox
 fi
 
 # Minimize space by linking identical files
