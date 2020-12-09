@@ -21,6 +21,9 @@
             <Filename>signalk.desktop</Filename>
         </Include>
         <Include>
+            <Filename>Freeboard-sk.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>opencpn.desktop</Filename>
         </Include>
         <Include>
