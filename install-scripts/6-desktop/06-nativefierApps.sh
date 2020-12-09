@@ -45,6 +45,7 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   "http://localhost:4997" /opt/
 
 install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applications/"
+install -m 0644 $FILE_FOLDER/avnav.desktop "/usr/local/share/applications/"
 
 ## Make folder name arch independent.
 mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
@@ -125,6 +126,9 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 mv /opt/MusicBox-linux-$arch /opt/MusicBox
 mv /opt/Dockwa-linux-$arch /opt/Dockwa
 
+install -m 644 $FILE_FOLDER/musicbox.desktop "/usr/local/share/applications/"
+install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
+
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
   chmod 4755 /opt/MusicBox/chrome-sandbox
@@ -134,8 +138,6 @@ fi
 # Minimize space by linking identical files
 hardlink -v -t /opt/*
 npm cache clean --force
-
-install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
 
 ########################################################################################################################
 
