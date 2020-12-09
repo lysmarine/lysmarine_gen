@@ -17,10 +17,10 @@ const commands = [
     {name: 'weather', title: 'Weather', img: 'weather', bg: 'RoyalBlue', cmd: 'onlyone', args: ['XyGrib']},
     {name: 'cam', title: 'Camera', img: 'camera', bg: 'SeaGreen', cmd: 'onlyone', args: ['vlc']},
     {name: 'music', title: 'Music', img: 'multimedia', bg: 'IndianRed', cmd: '/opt/MusicBox/MusicBox', args: []},
-    {name: 'www', title: 'WWW', img: 'internet', bg: 'SteelBlue', cmd: 'onlyone', args: ['chromium', 'https://google.com']},
+    {name: 'www', title: 'WWW', img: 'internet', bg: 'SteelBlue', cmd: 'onlyone', args: ['chromium']},
     {name: 'marinas', title: 'Marinas', img: 'travel', bg: 'SaddleBrown', cmd: '/opt/Dockwa/Dockwa', args: []},
-    {name: 'files', title: 'Files', img: 'travel', bg: 'Peru', cmd: 'onlyone', args: ['thunar']},
-    {name: 'tasks', title: 'Tasks', img: 'travel', bg: 'ForestGreen',  cmd: 'onlyone', args: ['lxtask']},
+    {name: 'video', title: 'Video', img: 'travel', bg: 'Peru', cmd: '/opt/youtube/youtube', args: []},
+    {name: 'social', title: 'Social', img: 'travel', bg: 'ForestGreen', cmd: '/opt/facebook/facebook', args: []},
     {name: 'sky', title: 'Sky', img: 'travel', bg: 'Olive', cmd: 'onlyone', args: ['stellarium']},
     {name: 'chess', title: 'Chess', img: 'travel', bg: 'RoyalBlue', cmd: 'onlyone', args: ['gnome-chess']},
     {name: 'cards', title: 'Cards', img: 'travel', bg: 'SeaGreen', cmd: 'onlyone', args: ['openpref']},
@@ -118,28 +118,46 @@ const style = '    <style>\n' +
     '}\n' +
     '\n' +
     '.tile {\n' +
-    '    border-radius: 10px;\n' +
     '    width: 120px;\n' +
-    '    height: 100px;\n' +
-    '    margin: 0 10px 10px 0;\n' +
+    '    margin: 5px;\n' +
     '    padding: 8px;\n' +
     '    color: White;\n' +
     '    display: inline-block;\n' +
     '    text-align: center;\n' +
     '    font-family: Sans, Arial, Helvetica, sans-serif;\n' +
-    '    font-size: 16pt;\n' +
+    '    font-size: 15pt;\n' +
+    '}\n' +
+    '\n' +
+    '.tile-img {\n' +
+    '    border-radius: 10px;\n' +
+    '    width: 60px;\n' +
+    '    height: 60px;\n' +
+    '    margin: 0 auto;\n' +
+    '    padding: 8px;\n' +
+    '    text-align: center;\n' +
+    '    font-family: Sans, Arial, Helvetica, sans-serif;\n' +
+    '}\n' +
+    '\n' +
+    '.tile-label {\n' +
+    '    padding: 4px;\n' +
+    '    text-align: center;\n' +
+    '}\n' +
+    '\n' +
+    '.main-icon {\n' +
+    '    max-width: 100%;\n' +
+    '    max-height: 100%;\n' +
     '}\n' +
     '\n' +
     '.toolbar {\n' +
     '    margin: 0 6px 2px 0;\n' +
-    '    color: white;\n' +
+    '    color: White;\n' +
     '    height: 32px;\n' +
     '    font-family: Sans, Arial, Helvetica, sans-serif;\n' +
     '}\n' +
     '\n' +
     '.button-bar {\n' +
     '    margin: 0 10px 10px 0;\n' +
-    '    color: white;\n' +
+    '    color: White;\n' +
     '    height: 32px;\n' +
     '    font-family: Sans, Arial, Helvetica, sans-serif;\n' +
     '}\n' +
@@ -147,11 +165,6 @@ const style = '    <style>\n' +
     '.main-panel {\n' +
     '    margin: auto;\n' +
     '    width: 758px;\n' +
-    '}\n' +
-    '\n' +
-    '.main-icon {\n' +
-    '    width: 70px;\n' +
-    '    height: 70px;\n' +
     '}\n' +
     '\n' +
     '.credits {\n' +
@@ -184,9 +197,9 @@ function processMain() {
     let items = '';
     commands.forEach(value => {
         items = items +
-            '            <div class="tile" style="background: ' + value.bg + ';" onclick="run(\'' + value.name + '\');">\n' +
-            '                <div>' + value.title + '</div>\n' +
-            '                <div><img src="img?name=' + value.img + '" alt="' + value.title + '" class="main-icon"/></div>\n' +
+            '            <div class="tile" onclick="run(\'' + value.name + '\');">\n' +
+            '                <div class="tile-img" style="background: ' + value.bg + ';"><img src="img?name=' + value.img + '" alt="' + value.title + '" class="main-icon"/></div>\n' +
+            '                <div class="tile-label" >' + value.title + '</div>\n' +
             '            </div>'
     });
     const body = '<body style="background: black;">\n' +
