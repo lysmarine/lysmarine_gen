@@ -4,4 +4,4 @@ Name=YouTube
 Exec=/opt/youtube/youtube
 Terminal=false
 Icon=video
-Categories=System
+Categories=WWW;Internet

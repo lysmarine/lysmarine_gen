@@ -4,4 +4,4 @@ Name=Facebook
 Exec=/opt/facebook/facebook
 Terminal=false
 Icon=handshake
-Categories=System
+Categories=WWW;Internet
