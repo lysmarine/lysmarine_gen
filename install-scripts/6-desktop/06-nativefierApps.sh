@@ -12,6 +12,7 @@ install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/icons/signalk.png /home/user/.loc
 install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/icons/dockwa.png /home/user/.local/share/icons/
 install -d /usr/local/share/applications
 install -v $FILE_FOLDER/signalk.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/Freeboard-sk.desktop /usr/local/share/applications/
 
 ## arch name translation
 if [ $LMARCH == 'armhf' ]; then
