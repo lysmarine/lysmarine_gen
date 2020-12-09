@@ -99,6 +99,9 @@
         <Include>
             <Filename>pypilot_calibration.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>pypilot_control.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Games</Name>
