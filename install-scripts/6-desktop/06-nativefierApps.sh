@@ -13,6 +13,9 @@ install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/icons/dockwa.png /home/user/.loca
 install -d /usr/local/share/applications
 install -v $FILE_FOLDER/signalk.desktop /usr/local/share/applications/
 install -v $FILE_FOLDER/Freeboard-sk.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/kip-dash.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/instrumentpanel.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/sailgauge.desktop /usr/local/share/applications/
 
 ## arch name translation
 if [ $LMARCH == 'armhf' ]; then

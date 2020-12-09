@@ -24,6 +24,15 @@
             <Filename>Freeboard-sk.desktop</Filename>
         </Include>
         <Include>
+            <Filename>kip-dash.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>instrumentpanel.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>sailgauge.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>opencpn.desktop</Filename>
         </Include>
         <Include>
