@@ -127,8 +127,6 @@ const style = '    <style>\n' +
     '}\n' +
     '\n' +
     '.desktop {\n' +
-    '    width: 960px;\n' +
-    '    height: 340px;\n' +
     '    background: #101010;\n' +
     '    margin: 0 auto;\n' +
     '    padding: 10px;\n' +
@@ -228,16 +226,12 @@ const credits =
     '    </div>';
 
 const nextButton1 =
-    '        <div id="next-btn1" style="color: white; padding: 180px 0; float: right;">\n' +
-    '            <div style="font-family: Sans, Arial, Helvetica, sans-serif; font-size: 24pt;"\n' +
-    '                 onclick="show(1); show(2);">&nbsp;&gt;&nbsp;</div>\n' +
-    '        </div>\n';
+    '        <div id="next-btn1" style="width: 28px; color: white; padding: 180px 0; float: right;"\n' +
+    '            onclick="show(1); show(2);">&nbsp;&gt;&nbsp;</div>\n';
 
 const nextButton2 =
-    '        <div id="next-btn2" style="color: white; padding: 180px 0; display: none; float: left;"\n' +
-    '             onclick="show(2); show(1);">\n' +
-    '            <div style="font-family: Sans, Arial, Helvetica, sans-serif; font-size: 24pt;">&nbsp;&lt;&nbsp;</div>\n' +
-    '        </div>\n';
+    '        <div id="next-btn2" style="width: 28px; color: white; padding: 180px 0; display: none; float: left;"\n' +
+    '            onclick="show(2); show(1);">&nbsp;&lt;&nbsp;</div>\n';
 
 function buildTiles(commands) {
     let items = '';
