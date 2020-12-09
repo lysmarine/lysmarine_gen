@@ -65,6 +65,12 @@
             <Filename>dockwa.desktop</Filename>
         </Include>
         <Include>
+            <Filename>youtube.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>facebook.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>org.gnome.Weather.Application.desktop</Filename>
         </Include>
         <Include>
