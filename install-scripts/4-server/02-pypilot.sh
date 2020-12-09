@@ -59,7 +59,7 @@ install -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/webapp.conf "/home/pypilot
 ## Install The .desktop files
 install -d /usr/local/share/applications
 install -v $FILE_FOLDER/pypilot_calibration.desktop "/usr/local/share/applications/"
-install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applications/" # Depends on nativefier stage to build the app
+install -v $FILE_FOLDER/pypilot_control.desktop "/usr/local/share/applications/"
 
 ## Give permission to sudo chrt without a password for the user pypilot.
 echo "" >>/etc/sudoers

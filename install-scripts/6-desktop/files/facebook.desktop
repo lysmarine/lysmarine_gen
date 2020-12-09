@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Facebook
+Exec=/opt/facebook/facebook
+Terminal=false
+Icon=video
+Categories=System

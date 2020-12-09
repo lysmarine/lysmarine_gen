@@ -11,11 +11,6 @@ install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/icons/freeboard-sk.png /home/user
 install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/icons/signalk.png /home/user/.local/share/icons/
 install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/icons/dockwa.png /home/user/.local/share/icons/
 install -d /usr/local/share/applications
-install -v $FILE_FOLDER/signalk.desktop /usr/local/share/applications/
-install -v $FILE_FOLDER/Freeboard-sk.desktop /usr/local/share/applications/
-install -v $FILE_FOLDER/kip-dash.desktop /usr/local/share/applications/
-install -v $FILE_FOLDER/instrumentpanel.desktop /usr/local/share/applications/
-install -v $FILE_FOLDER/sailgauge.desktop /usr/local/share/applications/
 
 ## arch name translation
 if [ $LMARCH == 'armhf' ]; then
@@ -49,6 +44,8 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   --name "bbn-launcher" --icon /usr/share/icons/gnome/256x256/apps/utilities-system-monitor.png \
   "http://localhost:4997" /opt/
 
+install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applications/"
+
 ## Make folder name arch independent.
 mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
 mv /opt/AvNav-linux-$arch /opt/AvNav
@@ -69,7 +66,6 @@ npm cache clean --force
 
 ########################################################################################################################
 
-
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "SignalK" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:80/admin/" /opt/
@@ -89,6 +85,12 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "sailgauge" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:80/@signalk/sailgauge/" /opt/
+
+install -v $FILE_FOLDER/signalk.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/Freeboard-sk.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/kip-dash.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/instrumentpanel.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/sailgauge.desktop /usr/local/share/applications/
 
 ## Make folder name arch independent.
 mv /opt/SignalK-linux-$arch /opt/SignalK
@@ -147,6 +149,9 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 
 mv /opt/youtube-linux-$arch /opt/youtube
 mv /opt/facebook-linux-$arch /opt/facebook
+
+install -v $FILE_FOLDER/youtube.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/facebook.desktop /usr/local/share/applications/
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
