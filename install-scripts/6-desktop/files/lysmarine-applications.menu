@@ -18,9 +18,6 @@
             <Filename>xygrib.desktop</Filename>
         </Include>
         <Include>
-            <Filename>signalk.desktop</Filename>
-        </Include>
-        <Include>
             <Filename>Freeboard-sk.desktop</Filename>
         </Include>
         <Include>
@@ -119,6 +116,9 @@
         </Include>
         <Include>
             <Filename>pypilot_control.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>signalk.desktop</Filename>
         </Include>
     </Menu>
     <Menu>
