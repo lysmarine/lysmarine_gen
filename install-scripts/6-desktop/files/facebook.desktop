@@ -3,5 +3,5 @@ Type=Application
 Name=Facebook
 Exec=/opt/facebook/facebook
 Terminal=false
-Icon=handshake
+Icon=face-cool
 Categories=WWW;Internet

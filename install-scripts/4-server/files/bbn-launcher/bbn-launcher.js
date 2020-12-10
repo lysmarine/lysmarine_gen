@@ -228,11 +228,11 @@ const credits =
     '    </div>';
 
 const nextButton1 =
-    '        <div id="next-btn1" style="width: 28px; color: white; padding: 180px 0; float: right;"\n' +
+    '        <div id="next-btn1" style="width: 30px; font-size: 18pt; color: white; padding: 180px 0; float: right;"\n' +
     '            onclick="show(1); show(2);">&nbsp;&gt;&nbsp;</div>\n';
 
 const nextButton2 =
-    '        <div id="next-btn2" style="width: 28px; color: white; padding: 180px 0; display: none; float: left;"\n' +
+    '        <div id="next-btn2" style="width: 30px; font-size: 18pt; color: white; padding: 180px 0; display: none; float: left;"\n' +
     '            onclick="show(2); show(1);">&nbsp;&lt;&nbsp;</div>\n';
 
 function buildTiles(commands) {
@@ -265,7 +265,7 @@ function processMain() {
         nextButton2 + panel1 + panel2 + nextButton1 +
         '    </div>\n' + credits;
     const body = '<body style="background: black;">\n' +
-        '<div style="width: 796px; height: 420px;" class="desktop">\n' + panel + '\n</div>\n</body>';
+        '<div style="width: 800px; height: 420px;" class="desktop">\n' + panel + '\n</div>\n</body>';
     return '<!DOCTYPE html>\n'
         + '<html lang="en">\n' + header + body + '\n</html>';
 }

@@ -3,5 +3,5 @@ Type=Application
 Name=Service Management
 Exec=onlyone servicedialog
 Terminal=false
-Icon=alacarte
+Icon=system-run
 Categories=System
