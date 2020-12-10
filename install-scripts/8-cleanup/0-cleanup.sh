@@ -2,12 +2,7 @@
 rm -rf  /tmp/empty-cache46
 rm -rvf /home/user/Public /home/user/Templates /home/user/Videos /home/user/Desktop
 
-
-apt-get clean
-
-if [ $LMOS == Raspbian ] ;then
-	apt-get remove -y greybird-gtk-theme murrine-themes rpd-icons 
-fi
+dpkg --remove khmerconverter mlterm debian-reference-common greybird-gtk-theme murrine-themes rpd-icons || true
 
 apt-get -y autoremove
 apt-get clean

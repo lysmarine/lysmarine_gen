@@ -80,8 +80,11 @@
 		 	7z x "$cacheDir/${baseOS}-${cpuArch}.base.iso" -o$cacheDir/isoContent
 		fi
 		if [[ ! -d "$cacheDir/squashfs-root" ]]; then
-			unsquashfs -d $cacheDir/squashfs-root "$cacheDir/isoContent/live/filesystem.squashfs"
-			rm "$cacheDir/isoContent/live/filesystem.squashfs"
+		    mount -t squashfs -o loop "$cacheDir/isoContent/live/filesystem.squashfs" $workDir/rootfs
+			cp -a $workDir/rootfs "$cacheDir/squashfs-root"
+			umount $workDir/rootfs
+			rm -rf $cacheDir/isoContent/live/filesystem.squashfs
+
 		fi
 
 		# Safety check,
@@ -97,21 +100,26 @@
 		fi
 
 		# Build lysmarine
-		cp -r "$cacheDir/squashfs-root/"* "$workDir/rootfs"
+		cp -rp "$cacheDir/squashfs-root/"* "$workDir/rootfs"
 		addLysmarineScripts "$workDir/rootfs"
 		chrootWithProot "$workDir" "$cpuArch" "$buildCmd"
 
 		# Re-squash the file system.
 		mkdir -p "$workDir/isoContent/live/"
-		mksquashfs "$workDir/rootfs" "$workDir/isoContent/live/filesystem.squashfs" -comp xz -noappend -no-progress -info
+		mksquashfs "$workDir/rootfs" "$workDir/isoContent/live/filesystem.squashfs" -comp xz -noappend
 		rm -r "$workDir"/rootfs/*
 
 		# Adapt the iso
-		rsync -hPr  "$cacheDir"/isoContent/* "$workDir/isoContent"
+		ls -lah "$workDir/isoContent/live/filesystem.squashfs"
+		md5sum "$workDir/isoContent/live/filesystem.squashfs"
+		rsync -Prq --exclude=*"/filesystem.squashfs" "$cacheDir"/isoContent/ "$workDir/isoContent"
+		ls -lah "$workDir/isoContent/live/filesystem.squashfs"
+		md5sum "$workDir/isoContent/live/filesystem.squashfs"
+
 		rsync -hPr  "$cacheDir/isoContent/.disk" "$workDir/isoContent"
-    cp files/preseed.cfg "$workDir/isoContent"
-    cp files/splash.png "$workDir/isoContent/isolinux/"
-    cp files/menu.cfg "$workDir/isoContent/isolinux/"
+		cp files/preseed.cfg "$workDir/isoContent"
+		cp files/splash.png "$workDir/isoContent/isolinux/"
+		cp files/menu.cfg "$workDir/isoContent/isolinux/"
 		cp files/stdmenu.cfg "$workDir/isoContent/isolinux/"
 
 		# Create the iso
