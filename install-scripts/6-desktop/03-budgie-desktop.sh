@@ -9,6 +9,8 @@ apt-get install -y -q menulibre
 
 #apt-get install -y -q fbpanel
 
+apt-get install -y -q gvfs-fuse gvfs-backends
+
 install -o 1000 -g 1000 -d /home/user/.config/openbox
 echo 'chromium --headless &' >>/home/user/.config/openbox/autostart
 
