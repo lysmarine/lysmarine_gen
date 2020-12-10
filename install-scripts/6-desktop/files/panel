@@ -117,7 +117,7 @@ Plugin {
     Config {
         ClockFmt=%H%n%M
         TooltipFmt=%A %x
-        Action = orage
+        Action=gsimplecal
         BoldFont=0
     }
 }
