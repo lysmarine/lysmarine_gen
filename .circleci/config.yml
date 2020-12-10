@@ -48,7 +48,7 @@ jobs:
           cd cross-build-release; sudo chmod -v u+w *.sh;
       - run:
           command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
-          no_output_timeout: 30m
+          no_output_timeout: 60m
       - publish
 
   build-in-arm-docker:
