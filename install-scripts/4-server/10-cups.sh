@@ -2,5 +2,5 @@
 
 apt-get -y -q install cups
 
-usermod -a -G lp user
+usermod -a -G lpadmin user
 
