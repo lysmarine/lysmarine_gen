@@ -1,0 +1,130 @@
+Global {
+    edge=left
+    align=center
+    margin=0
+    widthtype=percent
+    width=100
+    transparent=0
+    tintcolor=#474747
+    alpha=255
+    setdocktype=1
+    setpartialstrut=1
+    usefontcolor=1
+    fontcolor=#ffffff
+    background=0
+}
+
+Plugin {
+    type = space
+    Config {
+        Size=4
+    }
+}
+
+Plugin {
+    type = menu
+    Config {
+        image=document-properties-symbolic
+         item {
+			image = opencpn
+			name = Charplotter (Opencpn)
+			action = onlyone opencpn
+		}
+		item {
+			image = freeboard-sk
+			name = Charplotter (FreeBoard)
+			action = onlyone /opt/Freeboard-sk/Freeboard-sk
+		}
+		item {
+			image = logo_grib
+			name = Weather (XyGrib)
+			action = onlyone XyGrib
+		}
+		item {
+			image = utilities-system-monitor
+			name = SpeedSample (Sample of average speed)
+			action = onlyone /opt/SpeedSample/SpeedSample
+		}
+		item {
+			image = go-jump
+			name = Autopilot control (Pypilot)
+			action = onlyone pypilot_control 8080
+		}
+		separator {
+		}
+		separator {
+		}
+		separator {
+		}
+	    system {
+	    }
+		separator {
+		}
+		separator {
+		}
+		separator {
+		}
+		item {
+			name = Reboot
+			action = reboot
+		}
+		item {
+			name = Shutdown
+			action = shutdown now
+		}
+    }
+}
+
+Plugin {
+    type = space
+    Config {
+        Size=12
+    }
+}
+
+Plugin {
+    type = taskbar
+    expand=1
+    Config {
+        tooltips=1
+        IconsOnly=1
+        AcceptSkipPager=1
+        ShowIconified=1
+        ShowMapped=1
+        ShowAllDesks=0
+        UseMouseWheel=1
+        UseUrgencyHint=1
+        FlatButton=0
+        MaxTaskWidth=9000
+        spacing=1
+		Color = #ffffff
+    }
+}
+
+Plugin {
+    type = tray
+}
+
+Plugin {
+    type = space
+    config {
+        size = 5
+    }
+}
+
+Plugin {
+    type = dclock
+    Config {
+        ClockFmt=%H%n%M
+        TooltipFmt=%A %x
+        Action=gsimplecal
+        BoldFont=0
+    }
+}
+
+Plugin {
+    type = space
+    config {
+        size = 5
+    }
+}
