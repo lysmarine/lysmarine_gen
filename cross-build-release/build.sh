@@ -46,8 +46,8 @@
 			rm "$cacheDir/$zipName"
 
 		elif [[ "$baseOS" =~ debian-* ]]; then
-			wget -P "$cacheDir/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/$cpuArch/iso-hybrid/debian-live-10.6.0-$cpuArch-standard+nonfree.iso"
-			mv "$cacheDir/debian-live-10.6.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
+			wget -P "$cacheDir/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/$cpuArch/iso-hybrid/debian-live-10.7.0-$cpuArch-standard+nonfree.iso"
+			mv "$cacheDir/debian-live-10.7.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
 
 		else
 			echo "Unknown baseOS"; exit 1
