@@ -38,6 +38,9 @@
         <Include>
             <Filename>avnav.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>qtvlm.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Multimedia</Name>
