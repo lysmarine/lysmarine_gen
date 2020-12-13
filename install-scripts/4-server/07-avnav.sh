@@ -17,7 +17,7 @@ install -m 0644 $FILE_FOLDER/avnav_server_lysmarine.xml "/var/lib/avnav/avnav_se
 
 systemctl enable avnav
 
-install -d -o avnav -g avnav -m 755 /home/avnav
+install -d -o avnav -g avnav /home/avnav
 
 apt-get clean
 npm cache clean --force
