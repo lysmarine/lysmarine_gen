@@ -18,7 +18,7 @@ const commands1 = [
     {name: 'cam', title: 'Camera', img: 'camera', bg: 'SeaGreen', cmd: 'onlyone', args: ['vlc']},
     {name: 'music', title: 'Music', img: 'multimedia', bg: 'IndianRed', cmd: '/opt/MusicBox/MusicBox', args: []},
     {name: 'www', title: 'WWW', img: 'internet', bg: 'SteelBlue', cmd: 'onlyone', args: ['chromium']},
-    {name: 'marinas', title: 'Marinas', img: 'buoy', bg: 'SaddleBrown', cmd: '/opt/Dockwa/Dockwa', args: []},
+    {name: 'marinas', title: 'Moorings', img: 'buoy', bg: 'SaddleBrown', cmd: '/opt/Dockwa/Dockwa', args: []},
     {name: 'video', title: 'Video', img: 'youtube', bg: 'Peru', cmd: '/opt/youtube/youtube', args: []},
     {name: 'social', title: 'Social', img: 'facebook', bg: 'ForestGreen', cmd: '/opt/facebook/facebook', args: []},
     {name: 'sky', title: 'Sky', img: 'sky', bg: 'Olive', cmd: 'onlyone', args: ['stellarium']},
@@ -49,7 +49,7 @@ const commands2 = [
 function writeSvgResponse(res, status, contentType, parsed) {
     const imgName = parsed.query['name'];
     if (imgName && imgName.match(/^[0-9a-zA-Z_\-]+$/)) {
-        const filePath = path.join(__dirname, 'img/' + imgName + '2.svg');
+        const filePath = path.join(__dirname, 'img/' + imgName + '.svg');
         const stat = fileSystem.statSync(filePath);
         res.writeHead(status, {
             'Content-Type': contentType,
@@ -65,11 +65,11 @@ const server = http.createServer((req, res) => {
     const parsed = url.parse(req.url, true);
     console.log(`path: ${parsed.pathname}`)
     if (parsed.pathname === '/run') {
-        writeResponse(res, 200, 'application/json', processReq(parsed));
+        writeResponse(res, 200, 'application/json', processReq(parsed), "");
     } else if (parsed.pathname === '/img') {
-        writeSvgResponse(res, 200, 'image/svg+xml', parsed);
+        writeSvgResponse(res, 200, 'image/svg+xml', parsed, processMain(parsed.query['m']));
     } else {
-        writeResponse(res,200, 'text/html', processMain());
+        writeResponse(res,200, 'text/html', processMain(parsed.query['m']));
     }
 });
 
@@ -112,7 +112,7 @@ function processReq(parsed) {
     return '{"return" : "err"}';
 }
 
-const style = '    <style>\n' +
+const style =
     '\n' +
     'html {\n' +
     '    font-family: Sans, Arial, Helvetica, sans-serif;\n' +
@@ -151,8 +151,17 @@ const style = '    <style>\n' +
     '    font-size: 15pt;\n' +
     '}\n' +
     '\n' +
-    '.tile-img {\n' +
+    '.tile-img2 {\n' +
     '    border-radius: 14px;\n' +
+    '    width: 60px;\n' +
+    '    height: 60px;\n' +
+    '    margin: 0 auto;\n' +
+    '    padding: 8px;\n' +
+    '    text-align: center;\n' +
+    '    font-family: Sans, Arial, Helvetica, sans-serif;\n' +
+    '}\n' +
+    '\n' +
+    '.tile-img {\n' +
     '    width: 60px;\n' +
     '    height: 60px;\n' +
     '    margin: 0 auto;\n' +
@@ -198,8 +207,7 @@ const style = '    <style>\n' +
     '.button-bar span {\n' +
     '    border-radius: 4px;\n' +
     '}\n' +
-    '\n' +
-    '    </style>';
+    '\n';
 
 const script = '\n' +
     '    <script>\n' +
@@ -208,7 +216,7 @@ const script = '\n' +
     '    const url=\'/run?name=\' + progId;\n' +
     '    http.open("GET", url);\n' +
     '    http.send();\n' +
-    '    http.onreadystatechange = (e) => {\n' +
+    '    http.onreadystatechange = () => {\n' +
     '        console.debug(http.responseText);\n' +
     '    }\n' +
     '}\n' +
@@ -226,11 +234,20 @@ const script = '\n' +
     '}\n' +
     '    </script>\n';
 
-const credits =
-    '    <div class="credits">\n' +
-    '        <div style="color: white;">Icons made by ' +
-    '<span style="color:orange;">Freepik</span> from <span style="color:orange;">www.flaticon.com</span></div>\n' +
-    '    </div>';
+function getCredits(mode) {
+    let nextMode = "BW";
+    if ("BW" === mode) {
+        nextMode = "Dark";
+    } else if ("Dark" === mode) {
+        nextMode = "";
+    }
+    return '    <div class="credits" style="width: 800px;">\n' +
+        '        <div style="float: left; color: white;"><a style="text-decoration: none;" href="?m=' + nextMode + '">&#9728; &#9788; &#9789;</a></div>\n' +
+        '        <div style="float: right; color: white;">Icons by ' +
+        '<span style="color:orange;">Freepik</span> from <span style="color:orange;">www.flaticon.com</span></div>\n' +
+        '        <div style="clear:both;"></div>\n' +
+        '    </div>';
+}
 
 const nextButton1 =
     '        <div id="next-btn1" style="width: 30px; font-size: 18pt; color: white; padding: 180px 0; float: right;"\n' +
@@ -240,27 +257,45 @@ const nextButton2 =
     '        <div id="next-btn2" style="width: 30px; font-size: 18pt; color: white; padding: 180px 0; display: none; float: left;"\n' +
     '            onclick="show(2); show(1);">&nbsp;&lt;&nbsp;</div>\n';
 
-function buildTiles(commands) {
+function buildTiles(commands, mode) {
     let items = '';
+    let suffix = ("Dark" === mode) ? '' : '2';
     commands.forEach(value => {
+        let bg = ("Dark" === mode) ? '' : ' style="background: ' + value.bg + ';"';
+        let color = ("Dark" === mode) ? ' style="color: #e00d0d;"' : '';
         items = items + '\n' +
             '            <div class="tile" onclick="run(\'' + value.name + '\');">\n' +
-            '                <div class="tile-img" style="background: ' + value.bg + ';"><img src="img?name=' + value.img + '" alt="' + value.title + '" class="main-icon"/></div>\n' +
-            '                <div class="tile-label" >' + value.title + '</div>\n' +
+            '                <div class="tile-img'+ suffix + '"' + bg + '><img src="img?name=' + value.img + suffix + '" alt="' + value.title + '" class="main-icon"/></div>\n' +
+            '                <div class="tile-label" ' + color + '>' + value.title + '</div>\n' +
             '            </div>'
     });
     return items;
 }
 
-function processMain() {
-    const header = '<head>\n<meta charset="UTF-8">\n' + style + script +
+function getStyle(mode) {
+    let css;
+    if ("BW" === mode) {
+        css = 'html {\n' +
+            '    -moz-filter: grayscale(100%);\n' +
+            '    -webkit-filter: grayscale(100%);\n' +
+            '    filter: gray; /* IE6-9 */\n' +
+            '    filter: grayscale(100%);\n' +
+            '}\n' + style;
+    } else {
+        css = style;
+    }
+    return '    <style>\n' + css +  '    </style>';
+}
+
+function processMain(mode) {
+    const header = '<head>\n<meta charset="UTF-8">\n' + getStyle(mode) + script +
         '\n    <title>bbn-launcher</title>\n' + '\n</head>\n';
-    const items1 = buildTiles(commands1);
+    const items1 = buildTiles(commands1, mode);
     const panel1 =
         '        <div id="panel1" class="main-panel" style="float: left;">' + items1 +
         '        </div>\n';
 
-    const items2 = buildTiles(commands2);
+    const items2 = buildTiles(commands2, mode);
     const panel2 =
         '        <div id="panel2" class="main-panel" style="display: none; float: left;">' + items2 +
         '        </div>\n';
@@ -268,7 +303,7 @@ function processMain() {
     const panel =
         '    <div>\n' +
         nextButton2 + panel1 + panel2 + nextButton1 +
-        '    </div>\n' + credits;
+        '    </div>\n' + getCredits(mode);
     const body = '<body style="background: black;">\n' +
         '<div style="width: 800px; height: 420px;" class="desktop">\n' + panel + '\n</div>\n</body>';
     return '<!DOCTYPE html>\n'
