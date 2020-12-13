@@ -1,0 +1,1 @@
+Scripts to install additional software which couldn't be included in to the distribution image.
