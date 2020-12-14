@@ -4,6 +4,8 @@ Global {
     margin=0
     widthtype=percent
     width=100
+    height=30
+    iconsize=30
     transparent=0
     tintcolor=#474747
     alpha=255
@@ -12,6 +14,7 @@ Global {
     usefontcolor=1
     fontcolor=#ffffff
     background=0
+    fontsize=16
 }
 
 Plugin {
@@ -95,9 +98,11 @@ Plugin {
         UseMouseWheel=1
         UseUrgencyHint=1
         FlatButton=0
-        MaxTaskWidth=9000
+        MaxTaskWidth=30
         spacing=1
 		Color = #ffffff
+		DisableUpscale=0
+		UseSmallerIcons=1
     }
 }
 
