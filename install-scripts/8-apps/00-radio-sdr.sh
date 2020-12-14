@@ -11,6 +11,8 @@ apt-get -y -q install gqrx-sdr
 apt-get -y -q install rtl-sdr rtl-ais
 apt-get -y -q install gnss-sdr
 apt-get -y -q install gnuradio
+apt-get -y -q install gnuais
+apt-get -y -q install gnuaisgui
 
 apt-get -y -q install python3-wxgtk4.0 \
     libfftw3-dev                       \
