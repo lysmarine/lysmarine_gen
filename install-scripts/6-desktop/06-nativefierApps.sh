@@ -44,8 +44,8 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   --name "bbn-launcher" --icon /usr/share/icons/gnome/256x256/apps/utilities-system-monitor.png \
   "http://localhost:4997" /opt/
 
-install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applications/"
-install -m 0644 $FILE_FOLDER/avnav.desktop "/usr/local/share/applications/"
+install -v -m 0644 $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applications/"
+install -v -m 0644 $FILE_FOLDER/avnav.desktop "/usr/local/share/applications/"
 
 ## Make folder name arch independent.
 mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp

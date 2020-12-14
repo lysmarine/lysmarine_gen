@@ -14,6 +14,8 @@ apt-get -y -q install gnuradio
 apt-get -y -q install gnuais
 apt-get -y -q install gnuaisgui
 
+install -v $FILE_FOLDER/gnuaisgui.desktop /usr/local/share/applications/
+
 apt-get -y -q install python3-wxgtk4.0 \
     libfftw3-dev                       \
     libasound2-dev                     \

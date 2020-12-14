@@ -79,6 +79,9 @@
         <Include>
             <Filename>geary-autostart.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>gnuaisgui.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Hamradio</Name>
@@ -94,6 +97,9 @@
         </Include>
         <Include>
             <Filename>CubicSDR.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>xwxtoimg.desktop</Filename>
         </Include>
     </Menu>
     <Menu>
