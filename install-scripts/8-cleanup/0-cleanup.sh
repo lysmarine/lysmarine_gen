@@ -2,7 +2,13 @@
 rm -rf  /tmp/empty-cache46
 rm -rvf /home/user/Public /home/user/Templates /home/user/Videos /home/user/Desktop
 
-dpkg --remove khmerconverter mlterm debian-reference-common greybird-gtk-theme murrine-themes rpd-icons || true
+apt-get -yq remove --auto-remove khmerconverter  || true
+apt-get -yq remove --auto-remove mlterm || true
+apt-get -yq remove --auto-remove debian-reference-common || true
+apt-get -yq remove --auto-remove greybird-gtk-theme  || true
+apt-get -yq remove --auto-remove murrine-themes || true
+apt-get -yq remove --auto-remove rpd-icons || true
+
 
 apt-get -y autoremove
 apt-get clean
