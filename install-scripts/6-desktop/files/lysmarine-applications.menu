@@ -41,6 +41,9 @@
         <Include>
             <Filename>qtvlm.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>gnuaisgui.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Multimedia</Name>
@@ -79,9 +82,6 @@
         <Include>
             <Filename>geary-autostart.desktop</Filename>
         </Include>
-        <Include>
-            <Filename>gnuaisgui.desktop</Filename>
-        </Include>
     </Menu>
     <Menu>
         <Name>Hamradio</Name>
@@ -94,6 +94,9 @@
         </Include>
         <Include>
             <Filename>gpredict.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>previsat.desktop</Filename>
         </Include>
         <Include>
             <Filename>CubicSDR.desktop</Filename>
