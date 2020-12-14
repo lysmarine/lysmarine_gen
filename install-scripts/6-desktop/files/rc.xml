@@ -58,7 +58,7 @@
         <keepBorder>yes</keepBorder>
         <roundCorners>yes</roundCorners>
         <invisibleHandles>yes</invisibleHandles>
-        <animateIconify>no</animateIconify>
+        <animateIconify>yes</animateIconify>
         <font place="ActiveWindow">
             <name>sans</name>
             <size>16</size>
