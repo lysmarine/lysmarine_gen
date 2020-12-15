@@ -25,3 +25,4 @@ apt-get -q -y install anbox
 
 #apt-get -q -y install raspberrypi-kernel-headers anbox-modules-dkms
 
+install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/anbox-android-img-install.sh "/home/user/add-ons/"
