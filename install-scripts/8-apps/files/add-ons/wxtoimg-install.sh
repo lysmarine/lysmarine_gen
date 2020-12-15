@@ -8,3 +8,17 @@ curl https://wxtoimgrestored.xyz/beta/wxtoimg-armhf-2.11.2-beta.deb > wxtoimg-ar
 sudo apt-get install -y libxft2:armhf libasound2:armhf
 
 sudo dpkg -i wxtoimg-armhf-2.11.2-beta.deb
+
+sudo bash -c 'cat << EOF > /usr/local/share/applications/wxtoimg.desktop
+[Desktop Entry]
+Type=Application
+Name=WxToImg
+GenericName=WxToImg
+Comment=Weather Fax Image Processor
+Exec=xwxtoimg
+Terminal=false
+Icon=gnome-globe
+Categories=HamRadio;Weather
+Keywords=HamRadio;Weather
+EOF'
+
