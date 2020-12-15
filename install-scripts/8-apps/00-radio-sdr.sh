@@ -16,6 +16,7 @@ apt-get -y -q install gnuaisgui
 apt-get -y -q install noaa-apt
 
 install -v $FILE_FOLDER/gnuaisgui.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/previsat.desktop /usr/local/share/applications/
 
 # quisk
 apt-get -y -q install python3-wxgtk4.0 \

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Previsat
+GenericName=Previsat
+Comment=Previsat Satellite Tracker
+Exec=previsat
+Icon=gnome-globe
+Terminal=false
+Categories=Astronomy;HamRadio
+Keywords=Astronomy;HamRadio
