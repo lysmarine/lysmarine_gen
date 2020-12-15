@@ -36,14 +36,7 @@ install -o 1000 -g 1000  -v $FILE_FOLDER/autostart     "/home/user/.config/openb
 # Make some room for the rest of the build script
 apt-get clean
 
-## Install base desktop apps.
-if [ $LMOS == Raspbian ] ;then
-	apt-get install -y -q chromium-browser
-else
-	apt-get install -y -q chromium
-fi
-
-apt-get install -y -q pcmanfm lxterminal mousepad gpsbabel file-roller
+apt-get install -y -q chromium pcmanfm lxterminal mousepad gpsbabel file-roller
 
 # force polkit agent to start with openbox (this is needed for nm-applet hotspot)
 sed -i '/^OnlyShowIn=/ s/$/GNOME;/' /etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop
