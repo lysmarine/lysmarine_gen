@@ -63,6 +63,10 @@ EOF
   # Unmount
   umountImageFile $thisArch ./work/$thisArch/$imageName
 
+  mountImageFile $thisArch ./work/$thisArch/$imageName "-r"
+  zerofree work/${thisArch}/rootfs
+  umountImageFile $thisArch ./work/$thisArch/$imageName
+
   # Renaming the OS and moving it to the release folder.
   cp -v ./work/$thisArch/$imageName ./release/$thisArch/lysmarine_${LYSMARINE_VER}-${thisArch}-${cpuArch}.img
 

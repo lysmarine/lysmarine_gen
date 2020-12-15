@@ -26,6 +26,7 @@ checkRoot() {
 mountImageFile() {
   thisArch=$1
   imageFile=$2
+  mountOpt=$3
   rootfs=./work/${thisArch}/rootfs
 
   log "Mounting Image File"
@@ -46,11 +47,11 @@ mountImageFile() {
   loopId=$(kpartx -sav $imageFile | cut -d' ' -f3 | grep -oh '[0-9]*' | head -n 1)
 
   if [ $partQty == 2 ]; then
-    mount -v /dev/mapper/loop${loopId}p2 $rootfs/
+    mount "$mountOpt" -v /dev/mapper/loop${loopId}p2 $rootfs/
     if [ ! -d $rootfs/boot ]; then mkdir $rootfs/boot; fi
-    mount -v /dev/mapper/loop${loopId}p1 $rootfs/boot/
+    mount "$mountOpt" -v /dev/mapper/loop${loopId}p1 $rootfs/boot/
   elif [ $partQty == 1 ]; then
-    mount -v /dev/mapper/loop${loopId}p1 $rootfs/
+    mount "$mountOpt" -v /dev/mapper/loop${loopId}p1 $rootfs/
   else
     log "ERROR: unsuported amount of partitions."
     exit 1
@@ -78,8 +79,6 @@ umountImageFile() {
   umount $rootfs/run/shm
   umount $rootfs/boot
   umount $rootfs
-
-  zerofree $rootfs
 
   kpartx -d $imageFile
 }
