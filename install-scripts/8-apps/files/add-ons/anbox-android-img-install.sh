@@ -6,5 +6,5 @@ sudo systemctl enable anbox-container-manager.service
 sudo systemctl start anbox-container-manager.service
 
 # Running:
-# anbox session-manager &
+# anbox session-manager --gles-driver=translator &
 # anbox launch --package=org.anbox.appmgr --component=org.anbox.appmgr.AppViewActivity
