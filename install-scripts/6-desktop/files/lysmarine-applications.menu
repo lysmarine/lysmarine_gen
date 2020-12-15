@@ -104,6 +104,12 @@
         <Include>
             <Filename>xwxtoimg.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>jnx.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>jwx.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>System Tools</Name>
