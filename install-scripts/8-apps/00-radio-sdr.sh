@@ -13,6 +13,7 @@ apt-get -y -q install gnss-sdr
 apt-get -y -q install gnuradio
 apt-get -y -q install gnuais
 apt-get -y -q install gnuaisgui
+apt-get -y -q install noaa-apt
 
 install -v $FILE_FOLDER/gnuaisgui.desktop /usr/local/share/applications/
 
