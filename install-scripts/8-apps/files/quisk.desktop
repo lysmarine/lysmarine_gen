@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Quisk SDR
+GenericName=Quisk
+Comment=Quisk SDR
+Exec=sh -c "python3 -m quisk"
+Terminal=false
+Icon=radio
+Categories=HamRadio;Radio
+Keywords=HamRadio;Radio
