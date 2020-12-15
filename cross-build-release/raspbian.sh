@@ -64,7 +64,7 @@ EOF
   umountImageFile $thisArch ./work/$thisArch/$imageName
 
   mountImageFile $thisArch ./work/$thisArch/$imageName "-r"
-  zerofree work/${thisArch}/rootfs
+  zerofree /ci-source/cross-build-release/work/$thisArch/rootfs
   umountImageFile $thisArch ./work/$thisArch/$imageName
 
   # Renaming the OS and moving it to the release folder.
