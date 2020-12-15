@@ -1,9 +1,8 @@
 #!/bin/bash -e
 
-apt-get -q -y install anbox
 apt-get -q -y install android-tools-adb git curl unzip
 apt-get -q -y install dkms
-apt-get -q -y install linux-headers-generic
+apt-get -q -y install raspberrypi-kernel-headers
 
 cd ~
 git clone https://github.com/anbox/anbox-modules.git
@@ -17,8 +16,9 @@ pushd anbox-modules
   dkms install anbox-binder/1
 popd
 
-apt-get -q -y install software-properties-common
-add-apt-repository ppa:morphis/anbox-support
-apt update
-apt-get -q -y install linux-headers-generic anbox-modules-dkms
+apt-get -q -y install anbox
+
+#apt-get -q -y install software-properties-common
+#install -m0644 -v $FILE_FOLDER/anbox.list "/etc/apt/sources.list.d/"
+#apt-get -q -y install raspberrypi-kernel-headers anbox-modules-dkms
 
