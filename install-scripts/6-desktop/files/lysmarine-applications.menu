@@ -167,6 +167,9 @@
         <Include>
             <Filename>boats.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>anbox.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Settings</Name>
