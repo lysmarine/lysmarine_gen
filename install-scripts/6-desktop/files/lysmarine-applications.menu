@@ -110,6 +110,9 @@
         <Include>
             <Filename>jwx.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>quisk.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>System Tools</Name>
