@@ -20,5 +20,6 @@ apt-get -q -y install anbox
 
 #apt-get -q -y install software-properties-common
 #install -m0644 -v $FILE_FOLDER/anbox.list "/etc/apt/sources.list.d/"
+#apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 21C6044A875B67B7 # anbox
 #apt-get -q -y install raspberrypi-kernel-headers anbox-modules-dkms
 
