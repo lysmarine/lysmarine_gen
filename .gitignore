@@ -6,3 +6,4 @@ install-scripts/log/*
 install-scripts/stageCache/*
 .idea
 *.iml
+TMP/
