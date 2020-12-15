@@ -4,6 +4,7 @@ Name=GNU AIS
 GenericName=GNU AIS
 Comment=GNU AIS
 Exec=gnuaisgui
+Icon=up
 Terminal=false
 Categories=Navigation;ChartPlotter
 Keywords=Navigation;ChartPlotter
