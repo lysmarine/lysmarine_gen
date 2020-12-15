@@ -78,6 +78,9 @@ umountImageFile() {
   umount $rootfs/run/shm
   umount $rootfs/boot
   umount $rootfs
+
+  zerofree $rootfs
+
   kpartx -d $imageFile
 }
 
