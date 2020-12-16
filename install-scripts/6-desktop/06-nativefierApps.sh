@@ -5,6 +5,11 @@ apt-get clean
 apt-get -y -q install nodejs libnss3 gnome-icon-theme unzip
 npm install nativefier -g --unsafe-perm
 
+install -d '/usr/local/share/bbn-checklist'
+install -v -m 0644 $FILE_FOLDER/bbn-checklist/asciidoctor.css "/usr/local/share/bbn-checklist/"
+install -v -m 0644 $FILE_FOLDER/bbn-checklist/bbn-checklist.html "/usr/local/share/bbn-checklist/"
+install -v -m 0644 $FILE_FOLDER/bbn-checklist/bareboat-necessities-logo.svg "/usr/local/share/bbn-checklist/"
+
 ## Install icons and .desktop files
 install -d -o 1000 -g 1000 /home/user/.local/share/icons
 install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/icons/freeboard-sk.png /home/user/.local/share/icons/
