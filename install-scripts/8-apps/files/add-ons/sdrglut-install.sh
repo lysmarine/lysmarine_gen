@@ -9,3 +9,6 @@ cd /home/user
 git clone https://github.com/bareboat-necessities/SdrGlut
 cd SdrGlut
 make -f makefileRaspbian
+
+# to run
+# ./sdrglut.x
