@@ -5,7 +5,7 @@ apt-get install -y lxpanel gsimplecal menu
 install -d -o 1000 -g 1000 "/home/user/.config/lxpanel/lysmarine"
 install -d -o 1000 -g 1000 "/home/user/.config/lxpanel/lysmarine/panels/"
 install    -o 1000 -g 1000 -m 0644 $FILE_FOLDER/panel "/home/user/.config/lxpanel/lysmarine/panels/"
-install    -o 1000 -g 1000 -m 0644 $FILE_FOLDER/gtkrc "/home/user/.config/lxpanel/"
-## Start fbpanel on openbox boot.
+
+## Start lxpanel-gtk3 on openbox start.
 install -d -o 1000 -g 1000 /home/user/.config/openbox
 echo 'lxpanel -p lysmarine &' >> /home/user/.config/openbox/autostart
