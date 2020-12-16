@@ -20,7 +20,3 @@ pushd /var/www/speedSample;
 npm install -g --unsafe-perm  --cache /tmp/empty-cache46;
 popd
 chown -R www-data:www-data /var/www/speedSample
-
-install -m 644 -v $FILE_FOLDER/speedsample.service  "/etc/systemd/system/speedsample.service"
-
-systemctl enable speedsample.service

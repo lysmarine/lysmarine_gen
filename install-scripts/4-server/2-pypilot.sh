@@ -1,5 +1,5 @@
 #!/bin/bash -e
-apt-get install -y -q git
+apt-get install -y -q git servicemanager
 ## this stage depend on stage 18-users for the pypilot user creation
 ## adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
 
@@ -10,23 +10,7 @@ libffi-dev python3-gevent
 
 pip3 install pywavefront pyglet gps gevent-websocket Flask-SocketIO python-socketio
 
-## je pense que la meilleur approche est de favoriser PIP pcq dean deploi sur tiny core et n'est pas interesser par debian. aussi pcq y'a du code pour arduino et que ca pourrais etre supporter par les dependances d'installation python
-
-
-#Lysmarine way
-## Install apt deps
-#apt-get install -y -q python3 python3-pip libpython3-dev   #python3-dev libpython3-dev python3-dev
-#apt-get install -y -q swig #ask by the compiler
-#apt-get install -y -q libatlas-base-dev #numpy won't work without this
-#apt-get install -y -q freeglut3 libgl1 libglu1-mesa libgle3 #debian package says pyopengl depend on theses (pypilot_calibration need at least one of them)
-#apt-get install -y -q python-wxgtk4.0 # wxpython is the pip package. I don't have the balls for this one, too much compiling depedencys.
-
-#pip3 install numpy pillow serial gps pyudev pywavefront pyglet serial scipy \
-#			 gevent-websocket python-socketio flask flask-socketio pyopengl
-
-if [ $LMOS == 'Raspbian' ] ;then
-	apt-get install -y -q wiringpi
-fi
+apt-get install -y -q wiringpi || /bin/true
 
 
 
@@ -59,16 +43,6 @@ fi
 	popd
 
 
-
-
-## Install the service files
-install -v -m 0644 $FILE_FOLDER/pypilot@.service "/etc/systemd/system/"
-install -v -m 0644 $FILE_FOLDER/pypilot_web.service "/etc/systemd/system/"
-install -v -m 0644 $FILE_FOLDER/pypilot_web.socket "/etc/systemd/system/"
-
-systemctl enable pypilot@pypilot.service
-systemctl enable pypilot_web.service
-
 ## Install the user config files
 install -d -v -o pypilot -g pypilot -m 0755 /home/pypilot/.pypilot
 install    -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/signalk.conf "/home/pypilot/.pypilot/"
@@ -76,7 +50,7 @@ install    -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/webapp.conf  "/home/pyp
 
 ## Install The .desktop files
 install -d /usr/local/share/applications
-#install    -v                 $FILE_FOLDER/pypilot_control.desktop "/usr/local/share/applications/"
+
 install -v $FILE_FOLDER/pypilot_calibration.desktop "/usr/local/share/applications/"
 install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applications/" # Depend on stage 57-nativfier to build the app
 
