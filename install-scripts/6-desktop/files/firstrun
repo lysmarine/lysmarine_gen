@@ -1,12 +1,11 @@
 #!/bin/bash -e
 
 # Fix a bug documented somewhere in gentoo bug tracker
-update-mime-database /usr/share/mime
+update-mime-database /usr/share/mime &
 
 # Setting sound
-amixer cset numid=3 1
-amixer -D pulse set Master 90% unmute
-amixer set Master 90% unmute
+amixer cset numid=3 1 &
+amixer -D pulse set Master 90% unmute &
+amixer set Master 90% unmute &
 
-touch /tmp/FIRSTRUN
 systemctl disable firstRun.service ;
