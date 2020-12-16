@@ -4,16 +4,16 @@ apt-get update  -y -q
 apt-get install -y -q  wget gnupg ca-certificates
 
 ## Add repository sources
-install -m0644 -v $FILE_FOLDER/nodesource.list "/etc/apt/sources.list.d/"
-install -m0644 -v $FILE_FOLDER/opencpn.list "/etc/apt/sources.list.d/"
-install -m0644 -v $FILE_FOLDER/xygrib.list "/etc/apt/sources.list.d/"
-install -m0644 -v $FILE_FOLDER/lysmarine.list "/etc/apt/sources.list.d/"
-install -m0644 -v $FILE_FOLDER/bbn-rce.list "/etc/apt/sources.list.d/"
-install -m0644 -v $FILE_FOLDER/bbn-kplex.list "/etc/apt/sources.list.d/"
-install -m0644 -v $FILE_FOLDER/bbn-noaa-apt.list "/etc/apt/sources.list.d/"
-#install -m0644 -v $FILE_FOLDER/bbn-fbpanel.list "/etc/apt/sources.list.d/"
-install -m0644 -v $FILE_FOLDER/mopidy.list "/etc/apt/sources.list.d/"
-install -m0644 -v $FILE_FOLDER/avnav.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/nodesource.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/opencpn.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/xygrib.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/lysmarine.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/bbn-rce.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/bbn-kplex.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/bbn-noaa-apt.list "/etc/apt/sources.list.d/"
+#install -m 0644 -v $FILE_FOLDER/bbn-fbpanel.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/mopidy.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/avnav.list "/etc/apt/sources.list.d/"
 
 ## Prefer opencpn PPA to free-x (for mainly for the opencpn package)
 install -m0644 -v $FILE_FOLDER/50-lysmarine.pref "/etc/apt/preferences.d/"
