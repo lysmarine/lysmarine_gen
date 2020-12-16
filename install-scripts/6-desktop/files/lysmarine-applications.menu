@@ -68,6 +68,9 @@
             <Filename>dockwa.desktop</Filename>
         </Include>
         <Include>
+            <Filename>nauticed.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>youtube.desktop</Filename>
         </Include>
         <Include>

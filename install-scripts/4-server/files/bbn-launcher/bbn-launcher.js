@@ -43,7 +43,7 @@ const commands2 = [
     {name: 'colreg', title: 'ColReg', img: 'colreg', bg: 'Olive',  cmd: '', args: ['']},
     {name: 'floatplan', title: 'Float Plan', img: 'travel', bg: 'IndianRed',  cmd: '', args: ['']},
     {name: 'vessel', title: 'Vessel', img: 'ship', bg: 'RoyalBlue',  cmd: '', args: ['']},
-    {name: 'edu', title: 'Education', img: 'school', bg: 'SeaGreen',  cmd: '', args: ['']},
+    {name: 'edu', title: 'Education', img: 'school', bg: 'SeaGreen',  cmd: '/opt/Nauticed/Nauticed', args: []},
 ]
 
 function writeSvgResponse(res, status, contentType, parsed) {

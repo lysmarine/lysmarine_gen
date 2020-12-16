@@ -123,16 +123,23 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   --name "Dockwa" --icon /home/user/.local/share/icons/dockwa.png \
   "https://dockwa.com/" -u "$USER_AGENT" /opt/
 
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+  --name "Nauticed" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
+  "https://nauticed.org/" -u "$USER_AGENT" /opt/
+
 mv /opt/MusicBox-linux-$arch /opt/MusicBox
 mv /opt/Dockwa-linux-$arch /opt/Dockwa
+mv /opt/Nauticed-linux-$arch /opt/Nauticed
 
 install -m 644 $FILE_FOLDER/musicbox.desktop "/usr/local/share/applications/"
 install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
+install -m 644 $FILE_FOLDER/nauticed.desktop "/usr/local/share/applications/"
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
   chmod 4755 /opt/MusicBox/chrome-sandbox
   chmod 4755 /opt/Dockwa/chrome-sandbox
+  chmod 4755 /opt/Nauticed/chrome-sandbox
 fi
 
 # Minimize space by linking identical files
