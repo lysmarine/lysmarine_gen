@@ -756,6 +756,11 @@
             <decor>yes</decor>
         </application>
 
+        <application name="sdrglut.x">
+            <maximized>no</maximized>
+            <decor>yes</decor>
+        </application>
+
         <application title="bbn-launcher">
             <maximized>yes</maximized>
             <decor>no</decor>
