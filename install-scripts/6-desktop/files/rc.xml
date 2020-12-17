@@ -756,7 +756,7 @@
             <decor>yes</decor>
         </application>
 
-        <application name="sdrglut.x">
+        <application title="SdrGlut-763">
             <maximized>no</maximized>
             <decor>yes</decor>
         </application>
