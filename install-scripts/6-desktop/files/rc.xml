@@ -760,6 +760,14 @@
             <maximized>no</maximized>
             <decor>yes</decor>
         </application>
+        <application title="Open File">
+            <maximized>no</maximized>
+            <decor>yes</decor>
+        </application>
+        <application title="Select Device">
+            <maximized>no</maximized>
+            <decor>yes</decor>
+        </application>
 
         <application title="bbn-launcher">
             <maximized>yes</maximized>
