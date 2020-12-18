@@ -26,6 +26,7 @@ apt-get -y -q install noaa-apt
 
 install -v $FILE_FOLDER/gnuaisgui.desktop /usr/local/share/applications/
 install -v $FILE_FOLDER/previsat.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/hamfax.desktop -o 1000 -g 1000 "/home/user/.local/share/applications/hamfax.desktop"
 
 # quisk
 apt-get -y -q install python3-wxgtk4.0 \

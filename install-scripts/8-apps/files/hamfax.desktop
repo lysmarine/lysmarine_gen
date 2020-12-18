@@ -1,0 +1,11 @@
+user@lysmarine:~ $ cat  ~/.local/share/applications/hamfax.desktop
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=hamfax
+Icon=phone
+Comment=Send and receive radio facsimiles
+Comment[de]=Senden und Empfangen von Radio-Faksimile-Sendungen
+Exec=hamfax
+Categories=AudioVideo;Audio;HamRadio;Qt
