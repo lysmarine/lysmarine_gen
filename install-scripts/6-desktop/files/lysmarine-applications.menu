@@ -176,6 +176,9 @@
         <Include>
             <Filename>bbn-checklist.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>colreg.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Settings</Name>

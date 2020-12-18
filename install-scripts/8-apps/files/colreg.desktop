@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=ColReg
+GenericName=ColReg
+Comment=Collision Regulations
+Exec=chromium /usr/local/share/colreg/colreg.pdf
+Terminal=false
+Icon=document
+Categories=Utilities
+Keywords=Utilities

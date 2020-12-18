@@ -40,7 +40,7 @@ const commands2 = [
     {name: 'instruments', title: 'Instruments', img: 'dashboard', bg: 'SaddleBrown', cmd: '/opt/instrumentpanel/instrumentpanel', args: []},
     {name: 'provisioning', title: 'Provisioning', img: 'provisioning', bg: 'Peru',  cmd: 'onlyone', args: ['chromium', '/usr/local/share/bbn-checklist/bbn-checklist.html']},
     {name: 'knots', title: 'Knots', img: 'knot', bg: 'ForestGreen',  cmd: '', args: ['']},
-    {name: 'colreg', title: 'ColReg', img: 'colreg', bg: 'Olive',  cmd: '', args: ['']},
+    {name: 'colreg', title: 'ColReg', img: 'colreg', bg: 'Olive',  cmd: 'onlyone', args: ['chromium', '/usr/local/share/colreg/colreg.pdf']},
     {name: 'floatplan', title: 'Float Plan', img: 'travel', bg: 'IndianRed',  cmd: '', args: ['']},
     {name: 'vessel', title: 'Vessel', img: 'ship', bg: 'RoyalBlue',  cmd: '', args: ['']},
     {name: 'edu', title: 'Education', img: 'school', bg: 'SeaGreen',  cmd: '/opt/Nauticed/Nauticed', args: []},

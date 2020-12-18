@@ -33,6 +33,4 @@ curl 'https://en.wikisource.org/api/rest_v1/page/pdf/International_Regulations_f
  -H 'Upgrade-Insecure-Requests: 1' -H 'TE: Trailers' \
  --output "/usr/local/share/colreg/colreg.pdf"
 
-
-
-
+install -v $FILE_FOLDER/colreg.desktop "/usr/local/share/applications/"
