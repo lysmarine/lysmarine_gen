@@ -3,7 +3,7 @@
 # See: https://wxtoimgrestored.xyz
 
 cd ~
-curl https://wxtoimgrestored.xyz/beta/wxtoimg-armhf-2.11.2-beta.deb > wxtoimg-armhf-2.11.2-beta.deb
+wget -q -O- https://wxtoimgrestored.xyz/beta/wxtoimg-armhf-2.11.2-beta.deb > wxtoimg-armhf-2.11.2-beta.deb
 
 sudo apt-get install -y libxft2:armhf libasound2:armhf
 
