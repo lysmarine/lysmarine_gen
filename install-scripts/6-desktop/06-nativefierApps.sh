@@ -154,7 +154,7 @@ npm cache clean --force
 ########################################################################################################################
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "youtube" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
+  --name "youtube" --icon /usr/share/icons/gnome/48x48/apps/multimedia-volume-control.png \
   "https://youtube.com/" -u "$USER_AGENT" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
