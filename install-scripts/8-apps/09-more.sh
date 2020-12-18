@@ -24,3 +24,15 @@ if [ "$LMARCH" == 'armhf' ]; then
 fi
 
 install -v $FILE_FOLDER/bbn-checklist.desktop "/usr/local/share/applications/"
+
+install -d -o 1000 -g 1000 -m 0755 "/usr/local/share/colreg"
+curl 'https://en.wikisource.org/api/rest_v1/page/pdf/International_Regulations_for_Preventing_Collisions_at_Sea' \
+ -H 'Accept: */*;q=0.8' \
+ -H 'Accept-Language: en-US,en;q=0.5' --compressed \
+ -H 'DNT: 1' -H 'Connection: keep-alive' \
+ -H 'Upgrade-Insecure-Requests: 1' -H 'TE: Trailers' \
+ --output "/usr/local/share/colreg/colreg.pdf"
+
+
+
+
