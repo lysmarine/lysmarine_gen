@@ -39,3 +39,6 @@ wget -q -O- https://apt.mopidy.com/mopidy.gpg | apt-key add -
 wget -q -O- https://open-mind.space/repo/open-mind.space.gpg.key | apt-key add -     # AvNav
 wget -q -O- https://repo.mosquitto.org/debian/mosquitto-repo.gpg.key | apt-key add - # Mosquitto
 
+## Update && Upgrade
+apt-get update  -y -q
+apt-get upgrade -y -q
