@@ -173,6 +173,9 @@
         <Include>
             <Filename>anbox.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>bbn-checklist.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Settings</Name>

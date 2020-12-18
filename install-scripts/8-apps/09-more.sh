@@ -22,3 +22,5 @@ install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/tuktuk-install.sh "/home
 if [ "$LMARCH" == 'armhf' ]; then
   install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/qtvlm-install.sh "/home/user/add-ons/"
 fi
+
+install -v $FILE_FOLDER/bbn-checklist.desktop "/usr/local/share/applications/"
