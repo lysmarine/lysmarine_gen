@@ -13,6 +13,14 @@ apt-get -y -q install gnss-sdr
 apt-get -y -q install gnuradio
 apt-get -y -q install gnuais
 apt-get -y -q install gnuaisgui
+
+install -d -m 755 "/usr/local/share/noaa-apt"
+install -d -m 755 "/usr/local/share/noaa-apt/res"
+install -d -m 755 "/usr/local/share/noaa-apt/res/shapefiles"
+curl https://github.com/martinber/noaa-apt/raw/master/res/icon.png > "/usr/local/share/noaa-apt/res/icon.png"
+curl https://github.com/martinber/noaa-apt/raw/master/res/shapefiles/countries.shp > "/usr/local/share/noaa-apt/res/shapefiles/countries.shp"
+curl https://github.com/martinber/noaa-apt/raw/master/res/shapefiles/lakes.shp > "/usr/local/share/noaa-apt/res/shapefiles/lakes.shp"
+curl https://github.com/martinber/noaa-apt/raw/master/res/shapefiles/states.shp > "/usr/local/share/noaa-apt/res/shapefiles/states.shp"
 apt-get -y -q install noaa-apt
 
 install -v $FILE_FOLDER/gnuaisgui.desktop /usr/local/share/applications/
