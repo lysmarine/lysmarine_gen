@@ -158,7 +158,7 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   "https://youtube.com/" -u "$USER_AGENT" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "facebook" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
+  --name "facebook" --icon /usr/share/icons/Adwaita/256x256/emotes/face-cool.png \
   "https://facebook.com/" -u "$USER_AGENT" /opt/
 
 mv /opt/youtube-linux-$arch /opt/youtube
