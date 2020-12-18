@@ -38,7 +38,7 @@ const commands2 = [
     {name: 'sail', title: 'Sails', img: 'vessel', bg: 'IndianRed',  cmd: 'onlyone', args: ['sailcut']},
     {name: 'web-weather', title: 'Forecast', img: 'weather', bg: 'SeaGreen',  cmd: 'onlyone', args: ['gnome-weather']},
     {name: 'instruments', title: 'Instruments', img: 'dashboard', bg: 'SaddleBrown', cmd: '/opt/instrumentpanel/instrumentpanel', args: []},
-    {name: 'provisioning', title: 'Provisioning', img: 'provisioning', bg: 'Peru',  cmd: '', args: ['']},
+    {name: 'provisioning', title: 'Provisioning', img: 'provisioning', bg: 'Peru',  cmd: 'onlyone', args: ['chromium', '/usr/local/share/bbn-checklist/bbn-checklist.html']},
     {name: 'knots', title: 'Knots', img: 'knot', bg: 'ForestGreen',  cmd: '', args: ['']},
     {name: 'colreg', title: 'ColReg', img: 'colreg', bg: 'Olive',  cmd: '', args: ['']},
     {name: 'floatplan', title: 'Float Plan', img: 'travel', bg: 'IndianRed',  cmd: '', args: ['']},
