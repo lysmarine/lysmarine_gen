@@ -23,7 +23,7 @@ sudo apt-get -q -y install anbox
 #sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 21C6044A875B67B7 # anbox
 #sudo apt-get -q -y install raspberrypi-kernel-headers anbox-modules-dkms
 
-sudo bash -c 'wget -q -O- https://iot.bzh/download/public/2020/CESDemo/Anbox/Android_images/android_arm64.img > /var/lib/anbox/android.img'
+sudo bash -c 'wget -q -O - https://iot.bzh/download/public/2020/CESDemo/Anbox/Android_images/android_arm64.img > /var/lib/anbox/android.img'
 
 sudo systemctl enable anbox-container-manager.service
 sudo systemctl start anbox-container-manager.service

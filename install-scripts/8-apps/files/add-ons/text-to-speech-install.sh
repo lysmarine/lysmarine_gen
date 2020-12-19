@@ -2,7 +2,7 @@
 
 # See https://pypi.org/project/ttspico/
 
-wget -q -O- https://ftp-master.debian.org/keys/release-10.asc | sudo apt-key add -
+wget -q -O - https://ftp-master.debian.org/keys/release-10.asc | sudo apt-key add -
 
 echo "deb http://deb.debian.org/debian buster non-free" | sudo tee -a "/etc/apt/sources.list.d/non-free.list"
 
