@@ -6,7 +6,10 @@ sudo apt-get -q -y install dconf-editor gedit gnome-weather gnome-chess openpref
 
 sudo apt-get -q -y install rsync timeshift snapd
 
-#sudo apt-get -q -y install arduino
+apt-get clean
+npm cache clean --force
+
+sudo apt-get -q -y install arduino
 
 install -d -o 1000 -g 1000 -m 0755 "/home/user/add-ons"
 install -v -o 1000 -g 1000 -m 0644 $FILE_FOLDER/add-ons/readme.txt "/home/user/add-ons/"
