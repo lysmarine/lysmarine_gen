@@ -40,7 +40,7 @@ $(systemctl -q is-enabled mopidy) && STATUS=TRUE || STATUS=FALSE
 ROWS="$ROWS $STATUS mopidy"
 
 ## Dialog
-SAVE=$(zenity --list \
+SAVE=$(yad --list \
   --height=400 \
   --text="Lysmarine has multiple services available. Enable and disable them based on what you need." \
   --column="Enable" \
