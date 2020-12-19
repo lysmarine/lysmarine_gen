@@ -32,7 +32,7 @@ wget -q -O- https://dl.cloudsmith.io/public/bbn-projects/bbn-kplex/cfg/gpg/gpg.B
 wget -q -O- https://dl.cloudsmith.io/public/bbn-projects/bbn-noaa-apt/cfg/gpg/gpg.DB5121F72251E833.key | apt-key add -
 #wget -q -O- https://dl.cloudsmith.io/public/bbn-projects/bbn-fbpanel/cfg/gpg/gpg.89DE2CF06C6908DA.key | apt-key add -
 wget -q -O- https://apt.mopidy.com/mopidy.gpg | apt-key add -
-wget -q -O- https://open-mind.space/repo/open-mind.space.gpg.key | apt-key add -     # AvNav
+curl https://open-mind.space/repo/open-mind.space.gpg.key | apt-key add -     # AvNav
 wget -q -O- https://repo.mosquitto.org/debian/mosquitto-repo.gpg.key | apt-key add - # Mosquitto
 
 ## Update && Upgrade
