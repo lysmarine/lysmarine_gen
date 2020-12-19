@@ -17,7 +17,7 @@ install -m 0644 -v $FILE_FOLDER/avnav.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/mosquitto.list "/etc/apt/sources.list.d/"
 
 ## Prefer opencpn PPA to free-x (for mainly for the opencpn package)
-install -m0644 -v $FILE_FOLDER/50-lysmarine.pref "/etc/apt/preferences.d/"
+install -m 0644 -v $FILE_FOLDER/50-lysmarine.pref "/etc/apt/preferences.d/"
 
 ## Get the signature keys
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 67E4A52AC865EB40           # Opencpn
