@@ -39,7 +39,7 @@ nativefier -a $arch --inject ./pypilot_darktheme.js --disable-context-menu --dis
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "AvNav" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
-  "http://localhost:8099/" /opt/
+  "http://localhost:8099/?noCloseDialog=true" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "wdash" --icon /home/user/.local/share/icons/signalk.png \
