@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=JNX
-GenericName=JNX
+Name=JNX NavTex
+GenericName=JNX NavTex
 Comment=JNX NavTex Decoder
 Exec=sh -c "cd /usr/local/share/jnx; java -jar JNX.jar"
 Terminal=false

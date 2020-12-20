@@ -1,6 +1,7 @@
 [Desktop Entry]
-Name=noaa-apt
+Name=noaa-apt Satellite Weather
 GenericName=Image decoder for APT signals from NOAA satellites
+Comment=NOAA-APT Satellite Weather
 Exec=bash -c "cd /usr/local/share/noaa-apt; noaa-apt"
 Icon=noaa-apt
 Terminal=false
