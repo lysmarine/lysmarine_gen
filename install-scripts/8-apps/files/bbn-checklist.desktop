@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=BBN-Checklist
-GenericName=BBN-Checklist
+Name=BBN Cruise Checklist
+GenericName=BBN Cruise Checklist
 Comment=Cruise Checklist
 Exec=chromium /usr/local/share/bbn-checklist/bbn-checklist.html
 Terminal=false
