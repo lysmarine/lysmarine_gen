@@ -2,7 +2,8 @@
 Type=Application
 Version=1.0
 Encoding=UTF-8
-Name=hamfax
+Name=hamfax RadioFax
+GenericName=hamfax RadioFax
 Icon=phone
 Comment=Send and receive radio facsimiles
 Comment[de]=Senden und Empfangen von Radio-Faksimile-Sendungen

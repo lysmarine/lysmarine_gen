@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Quisk SDR
-GenericName=Quisk
+GenericName=Quisk SDR
 Comment=Quisk SDR
 Exec=sh -c "python3 -m quisk"
 Terminal=false

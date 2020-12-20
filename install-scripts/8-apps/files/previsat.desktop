@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=Previsat
-GenericName=Previsat
+Name=Previsat Satellite Tracker
+GenericName=Previsat Satellite Tracker
 Comment=Previsat Satellite Tracker
 Exec=previsat
 Icon=gnome-globe
