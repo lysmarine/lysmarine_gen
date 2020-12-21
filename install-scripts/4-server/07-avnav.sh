@@ -6,7 +6,7 @@ install -o 1000 -g 1000 -d /home/user/AvNavCharts
 install -o 1000 -g 1000 -d /home/user/AvNavCharts/out
 install -o 1000 -g 1000 -d /var/lib/avnav
 
-sudo apt-get -q -y --no-install-recommends install avnav xterm mpg123
+apt-get -q -y --no-install-recommends install avnav xterm mpg123
 
 adduser avnav audio
 
