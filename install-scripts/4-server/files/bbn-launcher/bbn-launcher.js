@@ -39,7 +39,7 @@ const commands2 = [
     {name: 'web-weather', title: 'Forecast', img: 'weather', bg: 'SeaGreen',  cmd: 'onlyone', args: ['gnome-weather']},
     {name: 'instruments', title: 'Instruments', img: 'dashboard', bg: 'SaddleBrown', cmd: '/opt/instrumentpanel/instrumentpanel', args: []},
     {name: 'provisioning', title: 'Provisioning', img: 'provisioning', bg: 'Peru',  cmd: 'onlyone', args: ['chromium', '/usr/local/share/bbn-checklist/bbn-checklist.html']},
-    {name: 'knots', title: 'Knots', img: 'knot', bg: 'ForestGreen',  cmd: '', args: ['chromium', '/usr/local/share/knots/knots.html']},
+    {name: 'knots', title: 'Knots', img: 'knot', bg: 'ForestGreen',  cmd: 'onlyone', args: ['chromium', '/usr/local/share/knots/knots.html']},
     {name: 'colreg', title: 'ColReg', img: 'colreg', bg: 'Olive',  cmd: 'onlyone', args: ['chromium', '/usr/local/share/colreg/colreg.pdf']},
     {name: 'floatplan', title: 'Float Plan', img: 'travel', bg: 'IndianRed',  cmd: '', args: ['']},
     {name: 'vessel', title: 'Vessel', img: 'ship', bg: 'RoyalBlue',  cmd: '', args: ['']},
