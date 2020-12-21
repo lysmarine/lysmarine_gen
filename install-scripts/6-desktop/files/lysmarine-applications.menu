@@ -179,6 +179,9 @@
         <Include>
             <Filename>colreg.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>knots.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Settings</Name>
