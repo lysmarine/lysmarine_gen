@@ -67,7 +67,7 @@ umountImageFile() {
   rm -rf $rootfs/home/border
   rm -rf $rootfs/install-scripts/stageCache/*
   rm -rf $rootfs/install-scripts/logs/*
-  rm -rf $rootfs/var/log/*
+  find $rootfs/var/log/ -type f -exec rm -rf {} \;
   rm -rf $rootfs/tmp/*
 
   umount $rootfs/etc/resolv.conf
