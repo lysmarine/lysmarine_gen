@@ -126,11 +126,13 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "Dockwa" --icon /home/user/.local/share/icons/dockwa.png \
-  "https://dockwa.com/" -u "$USER_AGENT" /opt/
+  --internal-urls "(.*?)(dockwa\.com)(.*?)" \
+  "http://localhost:4997/www?name=dockwa" -u "$USER_AGENT" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "Nauticed" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
-  "https://nauticed.org/" -u "$USER_AGENT" /opt/
+  --internal-urls "(.*?)(nauticed\.com|nauticed\.org)(.*?)" \
+  "http://localhost:4997/www?name=nauticed" -u "$USER_AGENT" /opt/
 
 mv /opt/MusicBox-linux-$arch /opt/MusicBox
 mv /opt/Dockwa-linux-$arch /opt/Dockwa
@@ -155,11 +157,13 @@ npm cache clean --force
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "youtube" --icon /usr/share/icons/gnome/48x48/apps/multimedia-volume-control.png \
-  "https://youtube.com/" -u "$USER_AGENT" /opt/
+  --internal-urls "(.*?)(accounts\.google\.com/ServiceLogin|youtube\.com)(.*?)" \
+  "http://localhost:4997/www?name=youtube" -u "$USER_AGENT" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "facebook" --icon /usr/share/icons/Adwaita/256x256/emotes/face-cool.png \
-  "https://facebook.com/" -u "$USER_AGENT" /opt/
+  --internal-urls "(.*?)(fb\.com|facebook\.com)(.*?)" \
+  "http://localhost:4997/www?name=facebook" -u "$USER_AGENT" /opt/
 
 mv /opt/youtube-linux-$arch /opt/youtube
 mv /opt/facebook-linux-$arch /opt/facebook

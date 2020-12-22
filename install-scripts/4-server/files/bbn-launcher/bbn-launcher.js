@@ -51,7 +51,7 @@ const sites = [
     {name: 'youtube', url: 'https://youtube.com/'},
     {name: 'facebook', url: 'https://facebook.com/'},
     {name: 'dockwa', url: 'https://dockwa.com/'},
-    {name: 'nauticed', url: 'https://nauticed.com/'},
+    {name: 'nauticed', url: 'https://nauticed.org/'},
 ]
 
 function writeSvgResponse(res, status, contentType, parsed) {
