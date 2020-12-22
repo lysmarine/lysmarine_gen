@@ -2,4 +2,4 @@
 
 apt-get -y -q install mosquitto mosquitto-clients
 
-install -o mosquitto -g mosquitto -d /var/log/mosquitto
+install -d -o mosquitto -g mosquitto "/var/log/mosquitto/"
