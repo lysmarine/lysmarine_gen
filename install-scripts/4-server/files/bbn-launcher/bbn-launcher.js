@@ -46,6 +46,14 @@ const commands2 = [
     {name: 'edu', title: 'Education', img: 'school', bg: 'SeaGreen',  cmd: '/opt/Nauticed/Nauticed', args: []},
 ]
 
+const sites = [
+    {name: 'google', url: 'https://google.com/'},
+    {name: 'youtube', url: 'https://youtube.com/'},
+    {name: 'facebook', url: 'https://facebook.com/'},
+    {name: 'dockwa', url: 'https://dockwa.com/'},
+    {name: 'nauticed', url: 'https://nauticed.com/'},
+]
+
 function writeSvgResponse(res, status, contentType, parsed) {
     const imgName = parsed.query['name'];
     if (imgName && imgName.match(/^[0-9a-zA-Z_\-]+$/)) {
@@ -64,7 +72,9 @@ const server = http.createServer((req, res) => {
     console.log(`req: ${req.url}`);
     const parsed = url.parse(req.url, true);
     console.log(`path: ${parsed.pathname}`)
-    if (parsed.pathname === '/run') {
+    if (parsed.pathname === '/www') {
+        writeResponse(res, 200, 'text/html', processSiteReq(parsed.query['name']));
+    } else if (parsed.pathname === '/run') {
         writeResponse(res, 200, 'application/json', processReq(parsed), "");
     } else if (parsed.pathname === '/img') {
         writeSvgResponse(res, 200, 'image/svg+xml', parsed, processMain(parsed.query['m']));
@@ -308,4 +318,39 @@ function processMain(mode) {
         '<div style="width: 800px; height: 420px;" class="desktop">\n' + panel + '\n</div>\n</body>';
     return '<!DOCTYPE html>\n'
         + '<html lang="en">\n' + header + body + '\n</html>';
+}
+
+function processSiteReq(name) {
+    let site = sites.find(value => {
+        if (value.name === name) return value;
+    });
+    if (!site) {
+        site = sites[0];
+    }
+    const siteHtml = '<!DOCTYPE html>\n' +
+        '<html lang="en">\n' +
+        '<head>\n' +
+        '    <meta charset="UTF-8">\n' +
+        '    <style>\n' +
+        'body {\n' +
+        '    color: white;\n' +
+        '    font-family: Sans, Arial, Helvetica, sans-serif;\n' +
+        '    font-size: 24pt;\n' +
+        '}\n' +
+        'a {\n' +
+        '    color:orange;\n' +
+        '    text-decoration:none;\n' +
+        '}\n' +
+        'a:hover, a:focus {\n' +
+        '    text-decoration:underline;\n' +
+        '}\n' +
+        '    </style>\n' +
+        '</head>\n' +
+        '<body style="background: black;">\n' +
+        '<div style="text-align: center; margin-top: 120px; ">\n' +
+        '    <div style="color: white;"><a href="' + site.url + '">Press for:&nbsp; "' + site.url + '"</a></div>\n' +
+        '</div>\n' +
+        '</body>\n' +
+        '</html>\n';
+    return siteHtml;
 }
