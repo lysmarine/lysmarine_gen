@@ -350,7 +350,7 @@ function processSiteReq(name) {
         '</head>\n' +
         '<body style="background: black;">\n' +
         '<div style="text-align: center; margin-top: 120px; ">\n' +
-        '    <div style="color: white;"><a href="' + site.url + '">Press for:&nbsp; "' + site.url + '"</a></div>\n' +
+        '    <div style="color: white;"><a href="' + site.url + '">Press for:&nbsp;' + site.url + '</a></div>\n' +
         '</div>\n' +
         '</body>\n' +
         '</html>\n';
