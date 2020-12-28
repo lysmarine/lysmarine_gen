@@ -304,12 +304,12 @@ function processMain(mode) {
         '\n    <title>bbn-launcher</title>\n' + '\n</head>\n';
     const items1 = buildTiles(commands1, mode);
     const panel1 =
-        '        <div id="panel1" class="main-panel" style="float: left;">' + items1 +
+        '        <div id="panel1" class="main-panel" style="float: left;">' + items1 + '\n' +
         '        </div>\n';
 
     const items2 = buildTiles(commands2, mode);
     const panel2 =
-        '        <div id="panel2" class="main-panel" style="display: none; float: left;">' + items2 +
+        '        <div id="panel2" class="main-panel" style="display: none; float: left;">' + items2  + '\n' +
         '        </div>\n';
 
     const panel =
@@ -329,7 +329,7 @@ function processSiteReq(name) {
     if (!site) {
         site = sites[0];
     }
-    const siteHtml = '<!DOCTYPE html>\n' +
+    return '<!DOCTYPE html>\n' +
         '<html lang="en">\n' +
         '<head>\n' +
         '    <meta charset="UTF-8">\n' +
@@ -350,9 +350,8 @@ function processSiteReq(name) {
         '</head>\n' +
         '<body style="background: black;">\n' +
         '<div style="text-align: center; margin-top: 120px; ">\n' +
-        '    <div style="color: white;"><a href="' + site.url + '">Press for:&nbsp;' + site.url + '</a></div>\n' +
+        '    <div style="color: white;"><a href="' + site.url + '">Press for:&nbsp; ' + site.url + '</a></div>\n' +
         '</div>\n' +
         '</body>\n' +
         '</html>\n';
-    return siteHtml;
 }
