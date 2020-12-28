@@ -130,6 +130,8 @@ const style =
     '\n' +
     'body {\n' +
     '    margin-top: 50px;\n' +
+    '    margin-left: 0;\n' +
+    '    margin-right: 0;\n' +
     '    font-family: Sans, Arial, Helvetica, sans-serif;\n' +
     '}\n' +
     '\n' +
@@ -146,14 +148,14 @@ const style =
     '.desktop {\n' +
     '    background: #101010;\n' +
     '    margin: 0 auto;\n' +
-    '    padding: 10px;\n' +
+    '    padding: 6px;\n' +
     '    position: relative;\n' +
     '}\n' +
     '\n' +
     '.tile {\n' +
-    '    width: 120px;\n' +
-    '    margin: 5px;\n' +
-    '    padding: 8px;\n' +
+    '    width: 122px;\n' +
+    '    margin: 3px;\n' +
+    '    padding: 3px;\n' +
     '    color: White;\n' +
     '    display: inline-block;\n' +
     '    text-align: center;\n' +
@@ -163,8 +165,8 @@ const style =
     '\n' +
     '.tile-img2 {\n' +
     '    border-radius: 14px;\n' +
-    '    width: 60px;\n' +
-    '    height: 60px;\n' +
+    '    width: 55px;\n' +
+    '    height: 55px;\n' +
     '    margin: 0 auto;\n' +
     '    padding: 8px;\n' +
     '    text-align: center;\n' +
@@ -172,8 +174,8 @@ const style =
     '}\n' +
     '\n' +
     '.tile-img {\n' +
-    '    width: 60px;\n' +
-    '    height: 60px;\n' +
+    '    width: 55px;\n' +
+    '    height: 55px;\n' +
     '    margin: 0 auto;\n' +
     '    padding: 8px;\n' +
     '    text-align: center;\n' +
@@ -206,7 +208,7 @@ const style =
     '\n' +
     '.main-panel {\n' +
     '    margin: auto;\n' +
-    '    width: 758px;\n' +
+    '    width: 720px;\n' +
     '}\n' +
     '\n' +
     '.credits {\n' +
@@ -251,7 +253,7 @@ function getCredits(mode) {
     } else if ("Dark" === mode) {
         nextMode = "";
     }
-    return '    <div class="credits" style="width: 800px;">\n' +
+    return '    <div class="credits" style="width: 780px;">\n' +
         '        <div style="float: left; color: white;"><a style="text-decoration: none;" href="?m=' + nextMode + '">&#9728; &#9788; &#9789;</a></div>\n' +
         '        <div style="float: right; color: white;">Icons by ' +
         '<span style="color:orange;">Freepik</span> from <span style="color:orange;">www.flaticon.com</span></div>\n' +
@@ -315,7 +317,7 @@ function processMain(mode) {
         nextButton2 + panel1 + panel2 + nextButton1 +
         '    </div>\n' + getCredits(mode);
     const body = '<body style="background: black;">\n' +
-        '<div style="width: 800px; height: 420px;" class="desktop">\n' + panel + '\n</div>\n</body>';
+        '<div style="width: 780px; height: 360px;" class="desktop">\n' + panel + '\n</div>\n</body>';
     return '<!DOCTYPE html>\n'
         + '<html lang="en">\n' + header + body + '\n</html>';
 }
