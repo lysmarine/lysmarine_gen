@@ -262,11 +262,11 @@ function getCredits(mode) {
 }
 
 const nextButton1 =
-    '        <div id="next-btn1" style="width: 30px; font-size: 18pt; color: white; padding: 180px 0; float: right;"\n' +
+    '        <div id="next-btn1" style="width: 30px; font-size: 18pt; color: white; padding: 145px 0; float: right;"\n' +
     '            onclick="show(1); show(2);">&nbsp;&gt;&nbsp;</div>\n';
 
 const nextButton2 =
-    '        <div id="next-btn2" style="width: 30px; font-size: 18pt; color: white; padding: 180px 0; display: none; float: left;"\n' +
+    '        <div id="next-btn2" style="width: 30px; font-size: 18pt; color: white; padding: 145px 0; display: none; float: left;"\n' +
     '            onclick="show(2); show(1);">&nbsp;&lt;&nbsp;</div>\n';
 
 function buildTiles(commands, mode) {
@@ -333,6 +333,7 @@ function processSiteReq(name) {
         '<html lang="en">\n' +
         '<head>\n' +
         '    <meta charset="UTF-8">\n' +
+        '    <title>' + site.name + '</title>\n' +
         '    <style>\n' +
         'body {\n' +
         '    color: white;\n' +
