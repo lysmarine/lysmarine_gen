@@ -66,6 +66,12 @@ Open a github issue or contact me on facebook https://fb.me.com/lysmarineOS/__
 Default passwords are set to 'changeme', which you are supposed to change.
 Default user name in login screens is basically 'user'.
 
+# System Requirements
+
+* Raspberry Pi 4 or higher 
+* 4 GB memory or higher (2 GB works too but for not many concurrent programs)
+* Touchscreen with resolution 1024x600 or higher (800x480 works too but few of the programs will open too big dialog boxes)
+
 # Contributors & Testers
 
 If you don't know where to start, fixing a typo can be enough. There are also some issues in the bug tracker marked as
