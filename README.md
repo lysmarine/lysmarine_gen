@@ -69,7 +69,7 @@ Default user name in login screens is basically 'user'.
 # System Requirements
 
 * Raspberry Pi 4 or higher 
-* 4 GB memory or higher (2 GB works too but for not many concurrent programs)
+* 4 GB memory or higher (2 GB works too but not for many concurrent programs)
 * Touchscreen with resolution 1024x600 or higher (800x480 works too but few of the programs will open too big dialog boxes)
 
 # Contributors & Testers
