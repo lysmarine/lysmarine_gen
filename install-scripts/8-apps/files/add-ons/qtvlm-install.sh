@@ -1,5 +1,12 @@
 #!/bin/bash -e
 
+myArch=$(dpkg --print-architecture)
+
+if [ "armhf" != "$myArch" ] ; then
+    echo "armhf version of the distribution is required"
+    exit 1
+fi
+
 # See: https://www.meltemus.com
 
 sudo apt-get -y install libsystemd0:armhf
