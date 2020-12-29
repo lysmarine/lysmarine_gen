@@ -61,6 +61,8 @@ Default user name in login screens is basically 'user'.
 * Raspberry Pi 4 or higher 
 * 4 GB memory or higher (2 GB works too but not for many concurrent programs)
 * Touchscreen with resolution 1024x600 or higher (800x480 works too but few of the programs will open too big dialog boxes)
+* Suitable waterproof touchscreen display for your cockpit https://www.sihovision.com/industrial-touch-monitor/7-inch-industrial-wide-temperaturer-lcd-monitor-with-remote-control-1.html
+Model: SL07W, Brand Sihovision, Capacitive Touch Screen 7 inch, (1000 nits), IP65, 1024x600, Cost under $300
 
 # Binaries
 
