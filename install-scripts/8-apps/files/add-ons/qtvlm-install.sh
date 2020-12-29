@@ -3,7 +3,7 @@
 myArch=$(dpkg --print-architecture)
 
 if [ "armhf" != "$myArch" ] ; then
-    echo "armhf version of the distribution is required"
+    echo "armhf version of the distribution is required. Exiting..."
     exit 1
 fi
 

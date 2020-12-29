@@ -1,5 +1,8 @@
 #!/bin/bash -e
 
+echo "Not supported and highly experimental feature. Exiting..."
+exit 1
+
 sudo apt-get -q -y install android-tools-adb git curl unzip
 sudo apt-get -q -y install dkms
 sudo apt-get -q -y install raspberrypi-kernel-headers
