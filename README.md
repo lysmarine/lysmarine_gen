@@ -64,7 +64,9 @@ Default user name in login screens is basically 'user'.
 * Suitable (unless you find something better) waterproof touchscreen display for your cockpit (Model: SL07W, 
 Brand Sihovision, Capacitive Touch Screen 7 inch, (1000 nits), IP65, 1024x600, Cost under $300): https://www.sihovision.com/industrial-touch-monitor/7-inch-industrial-wide-temperaturer-lcd-monitor-with-remote-control-1.html
 * WiFi and LTE/4G router (not a requirement, gl-x750 Spitz OpenWrt router): https://www.gl-inet.com/products/gl-x750/
-
+* Quark-elec Marine multiplexers seems has a good product line (or you can just use this LysMarine OS image but
+considering all waterproof connectors and hardware customization these commercial multiplexers be nicer choice):
+https://www.quark-elec.com/product-category/marine/multiplexers/
 
 # Binaries
 
