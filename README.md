@@ -81,6 +81,18 @@ making a Pull Request.
 I'm friendly to first time contributors. If you are not sure what it means to contribute to the open source software
 or GitHub scares you, message me on facebook <https://fb.me.com/lysmarineOS/> (I speak English and French). 
 
+# Binaries
+
+Binaries are downloadable from: 
+ <https://cloudsmith.io/~bbn-projects/repos/bbn-repo/packages/?q=lysmarine>
+
+[![Hosted By: Cloudsmith](https://img.shields.io/badge/OSS%20hosting%20by-cloudsmith-blue?logo=cloudsmith&style=for-the-badge)](https://cloudsmith.com)
+
+Package repository hosting is graciously provided by  [Cloudsmith](https://cloudsmith.com).
+Cloudsmith is the only fully hosted, cloud-native, universal package management solution, that
+enables your organization to create, store and share packages in any format, to any place, with total
+confidence.
+
 # License
 
 Lysmarine scripts distributed under GPLv3
