@@ -1,10 +1,9 @@
-# LysMarine gen
-Tool used to create LysMarine image on CircleCI.
-The ready to use image can be found at: <https://cloudsmith.io/~bbn-projects/repos/bbn-repo/packages/?q=lysmarine>
 
----
+## What is LysMarine BBN Edition
 
-## What is LysMarine
+This is the fork of the original LysMarine https://github.com/lysmarine/lysmarine_gen by Frederic Guilbault.
+It is based on the LysMarine OS, but differs from it in a number of included applications, and the UI features.
+Hopefully both forks will be merged eventually into one, but for now it is a distinct OS image.
 
 What started as an effort to build a marine linux OS turned out into much more interesting.
 Our focus was to build a marine computer OS to be used on boats for the navigation and on touch screens in a cockpit of a boat.
@@ -44,10 +43,7 @@ or other place. It doesn't take that much effort or coding, some dedication requ
 At this time targeted SBCs are :
  - RaspberryPi
 
-__If you wish to have your favorite SBC supported and if you have some time for testing ...or have a spare to giveaway. 
-Open a github issue or contact me on facebook https://fb.me.com/lysmarineOS/__
-
-# Steps to create your own LysMarine image
+# Steps to create your own LysMarine BBN Edition image
 
 * Create GitHub account
 * Fork this project on GitHub
@@ -55,8 +51,7 @@ Open a github issue or contact me on facebook https://fb.me.com/lysmarineOS/__
 * Register .circleci/config.yml in CircleCi
 * Create CloudSmith account (Use logging in with GitHub)
 * Import CloudSmith key into circleci project settings (via env variable)
-* Edit publish-cloudsmith.sh options in .circleci/config.yml to put location of your cloudsmith repository and push
-  the changes into github
+* Edit publish-cloudsmith.sh options in .circleci/config.yml to put location of your cloudsmith repository and push the changes into github
 * After circleci build completes it will create and upload image to cloudsmith
 * You can burn this image using RaspberryPi imager to SD card and use that SD card to boot your raspberry Pi
 * You can edit files inside install-scripts directory push them into github and customize your image.
@@ -72,23 +67,15 @@ Default user name in login screens is basically 'user'.
 * 4 GB memory or higher (2 GB works too but not for many concurrent programs)
 * Touchscreen with resolution 1024x600 or higher (800x480 works too but few of the programs will open too big dialog boxes)
 
-# Contributors & Testers
-
-If you don't know where to start, fixing a typo can be enough. There are also some issues in the bug tracker marked as
-'good first issue'. If something bothers you or you would like to add a feature, plz, open an issue before
-making a Pull Request.
-
-I'm friendly to first time contributors. If you are not sure what it means to contribute to the open source software
-or GitHub scares you, message me on facebook <https://fb.me.com/lysmarineOS/> (I speak English and French). 
-
 # Binaries
 
+CircleCI is the tool which is used to create the OS image.
 Binaries are downloadable from: 
  <https://cloudsmith.io/~bbn-projects/repos/bbn-repo/packages/?q=lysmarine>
 
 [![Hosted By: Cloudsmith](https://img.shields.io/badge/OSS%20hosting%20by-cloudsmith-blue?logo=cloudsmith&style=for-the-badge)](https://cloudsmith.com)
 
-Package repository hosting is graciously provided by  [Cloudsmith](https://cloudsmith.com).
+Package repository hosting is graciously provided by [Cloudsmith](https://cloudsmith.com).
 Cloudsmith is the only fully hosted, cloud-native, universal package management solution, that
 enables your organization to create, store and share packages in any format, to any place, with total
 confidence.
