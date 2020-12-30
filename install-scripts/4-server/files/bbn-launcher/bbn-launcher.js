@@ -42,7 +42,7 @@ const commands2 = [
     {name: 'knots', title: 'Knots', img: 'knot', bg: 'ForestGreen',  cmd: 'onlyone', args: ['chromium', '/usr/local/share/knots/knots.html']},
     {name: 'colreg', title: 'ColReg', img: 'colreg', bg: 'Olive',  cmd: 'onlyone', args: ['chromium', '/usr/local/share/colreg/colreg.pdf']},
     {name: 'floatplan', title: 'Float Plan', img: 'travel', bg: 'IndianRed',  cmd: 'onlyone', args: ['thunar', '/home/user/FloatPlans']},
-    {name: 'vessel', title: 'Vessel', img: 'ship', bg: 'RoyalBlue',  cmd: '', args: ['']},
+    {name: 'vessel', title: 'Vessel', img: 'ship', bg: 'RoyalBlue',  cmd: 'vessel-data', args: ['']},
     {name: 'edu', title: 'Education', img: 'school', bg: 'SeaGreen',  cmd: '/opt/Nauticed/Nauticed', args: []},
 ]
 
