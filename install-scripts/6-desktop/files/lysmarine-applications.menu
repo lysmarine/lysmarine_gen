@@ -182,6 +182,9 @@
         <Include>
             <Filename>knots.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>vessel-data.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Settings</Name>
