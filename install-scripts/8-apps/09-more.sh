@@ -53,3 +53,6 @@ install -v -m 0644 $FILE_FOLDER/knots/License_free.txt "/usr/local/share/knots/"
 install -v $FILE_FOLDER/knots.desktop "/usr/local/share/applications/"
 
 install -d -o 1000 -g 1000 -m 0755 "/home/user/FloatPlans"
+
+install -d -o 1000 -g 1000 -m 0755 "/home/user/.vessel"
+install -v -o 1000 -g 1000 -m 0644 $FILE_FOLDER/vessel.data "/home/user/.vessel/"
