@@ -25,11 +25,7 @@ fi
 adduser --uid 1000 --home /home/user --quiet --disabled-password -gecos "lysmarine" user
 echo 'user:changeme' | chpasswd
 echo "user ALL=(ALL:ALL) ALL" >> /etc/sudoers
-usermod -a -G netdev user
-usermod -a -G tty user
-usermod -a -G sudo user
-usermod -a -G video user
-
+usermod -a -G netdev,tty,sudo,video,input user
 
 
 ## Create signalk user to run the server.
