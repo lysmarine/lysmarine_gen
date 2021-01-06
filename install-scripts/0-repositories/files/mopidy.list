@@ -1,0 +1,2 @@
+deb https://apt.mopidy.com/ buster main contrib non-free
+#deb-src https://apt.mopidy.com/ buster main contrib non-free
