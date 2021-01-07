@@ -43,7 +43,7 @@ if [ ! -d /home/pypilot ] ; then
 fi
 
 ## Create Mopidy user.
-adduser --gecos --system --no-create-home --disabled-password mopidy video audio
+adduser --gecos --system --no-create-home --disabled-password mopidy
 usermod -a -G video,audio mopidy
 
 ## Create the charts group and add users that have to write to that folder.
