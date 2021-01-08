@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-echo "deb http://deb.debian.org/debian/ buster main contrib non-free" >  /etc/apt/sources.list
+#echo "deb http://deb.debian.org/debian/ buster main contrib non-free" >  /etc/apt/sources.list
 
 ## Add repository sources
 install -m0644 -v $FILE_FOLDER/nodesource.list "/etc/apt/sources.list.d/"
