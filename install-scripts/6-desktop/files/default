@@ -36,11 +36,6 @@ Plugin {
             name = Charplotter (Opencpn)
             action = onlyone opencpn
         }
-#        item {
-#            icon = freeboard-sk
-#            name = Charplotter (FreeBoard)
-#            action = /opt/Freeboard-sk/Freeboard-sk
-#        }
         item {
             icon = logo_grib
             name = Weather (XyGrib)
