@@ -4,4 +4,4 @@ apt-get install -y -q rtl-ais
 
 ## Adding service file
 install -v -m 0644 $FILE_FOLDER/rtl-ais.service "/etc/systemd/system/"
-systemctl enable rtl-ais.service
+systemctl disable rtl-ais.service
