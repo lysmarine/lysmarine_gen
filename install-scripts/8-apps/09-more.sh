@@ -10,6 +10,7 @@ apt-get -q -y install dconf-editor gedit gnome-weather gnome-chess openpref
 apt-get clean
 
 apt-get -q -y install rsync timeshift snapd
+systemctl disable snapd
 
 #apt-get install software-properties-common
 
