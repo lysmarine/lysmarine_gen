@@ -17,4 +17,7 @@ echo 'chromium --headless &' >>/home/user/.config/openbox/autostart
 ## Start budgie-desktop on openbox boot.
 echo 'export XDG_CURRENT_DESKTOP=Budgie:GNOME; budgie-desktop &' >>/home/user/.config/openbox/autostart
 
+# Budgie settings
+gsettings set com.solus-project.budgie-wm focus-mode true
+
 apt-get clean
