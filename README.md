@@ -38,6 +38,19 @@ You do not have to build it on your own ARM hardware. The process described belo
 can make it to build it directly from your source code on GitHib via CircleCi and distribute it on CloudSmith
 or other place. It doesn't take that much effort or coding, some dedication required (surely).
 
+# Download
+
+CircleCI is the tool which is used to create the OS image.
+Binaries are downloadable from: 
+ <https://cloudsmith.io/~bbn-projects/repos/bbn-repo/packages/?q=lysmarine>
+
+[![Hosted By: Cloudsmith](https://img.shields.io/badge/OSS%20hosting%20by-cloudsmith-blue?logo=cloudsmith&style=for-the-badge)](https://cloudsmith.com)
+
+Package repository hosting is graciously provided by [Cloudsmith](https://cloudsmith.com).
+Cloudsmith is the only fully hosted, cloud-native, universal package management solution, that
+enables your organization to create, store and share packages in any format, to any place, with total
+confidence.
+
 # Steps to create your own LysMarine BBN Edition image
 
 * Create GitHub account
@@ -68,19 +81,6 @@ Brand Sihovision, Capacitive Touch Screen 7 inch, (1000 nits), IP65, 1024x600, C
 considering all waterproof connectors and hardware customization these commercial multiplexers be nicer choice):
 https://www.quark-elec.com/product-category/marine/multiplexers/
 * More about hardware: https://bareboat-necessities.github.io/my-bareboat/
-
-# Binaries
-
-CircleCI is the tool which is used to create the OS image.
-Binaries are downloadable from: 
- <https://cloudsmith.io/~bbn-projects/repos/bbn-repo/packages/?q=lysmarine>
-
-[![Hosted By: Cloudsmith](https://img.shields.io/badge/OSS%20hosting%20by-cloudsmith-blue?logo=cloudsmith&style=for-the-badge)](https://cloudsmith.com)
-
-Package repository hosting is graciously provided by [Cloudsmith](https://cloudsmith.com).
-Cloudsmith is the only fully hosted, cloud-native, universal package management solution, that
-enables your organization to create, store and share packages in any format, to any place, with total
-confidence.
 
 # Screenshots
 
