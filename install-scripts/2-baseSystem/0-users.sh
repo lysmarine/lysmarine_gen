@@ -25,11 +25,7 @@ fi
 adduser --uid 1000 --home /home/user --quiet --disabled-password -gecos "lysmarine" user
 echo 'user:changeme' | chpasswd
 echo "user ALL=(ALL:ALL) ALL" >> /etc/sudoers
-usermod -a -G netdev user
-usermod -a -G tty user
-usermod -a -G sudo user
-usermod -a -G video user
-
+usermod -a -G netdev,tty,sudo,video,input user
 
 
 ## Create signalk user to run the server.
@@ -45,8 +41,6 @@ if [ ! -d /home/pypilot ] ; then
 	echo "Creating pypilot user"
 	adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
 fi
-
-
 
 ## Create the charts group and add users that have to write to that folder.
 if ! grep -q charts /etc/group ; then
