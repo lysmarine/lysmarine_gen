@@ -3,8 +3,8 @@ xhost +SI:localuser:mopidy
 
 # Setting sound
 amixer cset numid=3 1
-amixer sset -D pulse Master 90% unmute
-amixer sset Master 90% unmute
+amixer sset -D pulse Master 100% unmute
+amixer sset Master 100% unmute
 
 xset s off &
 xset -dpms &
