@@ -11,32 +11,23 @@ if [ $LMOS == Armbian ] ;then
 	sudo apt-get -q -y install xserver-xorg-legacy	
 fi
 
-apt-get install -q -y \
+apt-get install -yq \
 gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base \
 gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-alsa \
 gstreamer1.0-libav alsa-utils libavahi-compat-libdnssd-dev git openbox \
 xbacklight lxappearance xsettingsd xserver-xorg \
 xinit libgtk2-perl pavucontrol cpanminus perl-base \
-dialog lxterminal network-manager-gnome evdev-rce servicemanager
+dialog lxterminal network-manager-gnome evdev-rce servicemanager \
+chromium pcmanfm lxterminal mousepad gpsbabel file-roller
 
-
-
-install -d -o 1000 -g 1000 /home/user/.local
-install -d -o 1000 -g 1000 /home/user/.local/share
-
-
-
-# Openbox
-install -d -o 1000 -g 1000 "/home/user/.config"
+## Openbox
+install -d -o 1000 -g 1000 /home/user/.local/share/
 install -d -o 1000 -g 1000 "/home/user/.config/openbox"
 install -o 1000 -g 1000  -v $FILE_FOLDER/autostart     "/home/user/.config/openbox/"
 
 
-
-# Make some room for the rest of the build script
+## Make some room for the rest of the build script
 apt-get clean
 
-apt-get install -y -q chromium pcmanfm lxterminal mousepad gpsbabel file-roller
-
-# force polkit agent to start with openbox (this is needed for nm-applet hotspot)
+## Force polkit agent to start with openbox (this is needed for nm-applet hotspot)
 sed -i '/^OnlyShowIn=/ s/$/GNOME;/' /etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop
