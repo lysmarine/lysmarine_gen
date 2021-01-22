@@ -1,6 +1,8 @@
 #!/bin/bash -e
 
-#echo "deb http://deb.debian.org/debian/ buster main contrib non-free" >  /etc/apt/sources.list
+## Add the extended sources software source for Debian
+sed -i "s/deb\.debian\.org\/debian\/\ buster\ main/deb\.debian\.org\/debian\/\ buster\ main\ contrib\ non-free/g" /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian/ buster-backports main" >> /etc/apt/sources.list
 
 ## Add repository sources
 install -m0644 -v $FILE_FOLDER/nodesource.list "/etc/apt/sources.list.d/"
@@ -20,9 +22,9 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6AF0E1940624A220       
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 868273edce9979e7          # lysmarine (provide: rtl-ais, lysmarine )
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 24A4598E769C8C51          # BBN (evdev-rce)
 wget -q -O - https://apt.mopidy.com/mopidy.gpg                   | apt-key add -   # Mopidy
-wget -q -O- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add     #NodeJs
+wget -q -O- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add     # NodeJs
 wget -q -O- https://www.free-x.de/debian/oss.boating.gpg.key     | apt-key add -   # XyGrib
 
 ## Update && Upgrade
-apt-get update  -y -q
-apt-get upgrade -y -q
+apt-get update  -yq
+apt-get upgrade -yq
