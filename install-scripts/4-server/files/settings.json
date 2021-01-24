@@ -107,7 +107,7 @@
       ]
     },
     {
-      "id": "ttyLYS_gps_4",
+      "id": "ttyLYS_ais_0",
       "pipeElements": [
         {
           "type": "providers/gpsd",
