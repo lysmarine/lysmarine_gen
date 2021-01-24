@@ -8,6 +8,7 @@ WorkingDirectory=/home/user
 PAMName=login
 Type=simple
 ExecStart=/bin/bash -l -c startx
+Restart=on-abort
 
 [Install]
 WantedBy=graphical.target
