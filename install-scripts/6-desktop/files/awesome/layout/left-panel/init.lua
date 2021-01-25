@@ -4,14 +4,14 @@ local wibox = require('wibox')
 local apps = require('configuration.apps')
 local dpi = require('beautiful').xresources.apply_dpi
 
-local left_panel = function(screen)
-  local action_bar_width = dpi(48)
+local left_panels = function(screen)
+  local static_bar_width = dpi(48)
   local panel_content_width = dpi(400)
 
   local panel =
     wibox {
     screen = screen,
-    width = action_bar_width,
+    width = static_bar_width,
     height = screen.geometry.height,
     x = screen.geometry.x,
     y = screen.geometry.y,
@@ -22,14 +22,11 @@ local left_panel = function(screen)
 
   panel.opened = false
 
-  panel:struts(
-    {
-      left = action_bar_width
-    }
-  )
+  panel:struts({
+    left = static_bar_width
+  })
 
-  local backdrop =
-    wibox {
+  local backdrop = wibox {
     ontop = true,
     screen = screen,
     bg = '#00000000',
@@ -54,7 +51,7 @@ local left_panel = function(screen)
   end
 
   local openPanel = function(should_run_rofi)
-    panel.width = action_bar_width + panel_content_width
+    panel.width = static_bar_width + panel_content_width
     backdrop.visible = true
     panel.visible = false
     panel.visible = true
@@ -66,11 +63,24 @@ local left_panel = function(screen)
   end
 
   local closePanel = function()
-    panel.width = action_bar_width
+    panel.width = static_bar_width
     panel:get_children_by_id('panel_content')[1].visible = false
     backdrop.visible = false
+    static_bar.forced_width = dpi(48)
+    static_bar.width = dpi(48)
     panel:emit_signal('closed')
   end
+
+  function panel:close()
+
+    panel.opened = false
+    closePanel()
+  end
+  function panel:open()
+    panel.opened = true
+    openPanel()
+  end
+
 
   function panel:toggle(should_run_rofi)
     self.opened = not self.opened
@@ -107,9 +117,10 @@ local left_panel = function(screen)
         layout = wibox.layout.stack
       }
     },
-    require('layout.left-panel.action-bar')(screen, panel, action_bar_width)
+    require('layout.left-panel.static-bar')(screen, panel, static_bar_width)
   }
+
   return panel
 end
 
-return left_panel
+return left_panels

@@ -116,14 +116,14 @@ local globalKeys =
     end,
     {description = 'open a text/code editor', group = 'launcher'}
   ),
-  awful.key(
-    {modkey},
-    'b',
-    function()
-      awful.util.spawn(apps.default.browser)
-    end,
-    {description = 'open a browser', group = 'launcher'}
-  ),
+--  awful.key(
+--    {modkey},
+--    'b',
+--    function()
+--      awful.util.spawn(apps.default.browser)
+--    end,
+--    {description = 'open a browser', group = 'launcher'}
+--  ),
   -- Open private browser/brave
   awful.key(
     {modkey},

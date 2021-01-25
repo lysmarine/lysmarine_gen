@@ -43,7 +43,7 @@ function suspend_command()
   awful.spawn.with_shell(apps.default.lock .. ' & systemctl suspend')
 end
 function exit_command()
-  _G.awesome.quit()
+  awful.spawn.with_shell("echo 'awesome.restart()' | awesome-client")
 end
 function lock_command()
   exit_screen_hide()
@@ -184,9 +184,9 @@ exit_screen:setup {
       -- {
       poweroff,
       reboot,
-      suspend,
+     -- suspend,
       exit,
-      lock,
+
       layout = wibox.layout.fixed.horizontal
       -- },
       -- widget = exit_screen_box

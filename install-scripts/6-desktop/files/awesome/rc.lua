@@ -1,22 +1,20 @@
 local gears = require('gears')
 local awful = require('awful')
-require('awful.autofocus')
 local beautiful = require('beautiful')
+-- require('awful.autofocus')
 
 -- Theme
 beautiful.init(require('theme'))
 
--- Layout
+-- Panels and bars
 require('layout')
 
 -- Init all modules
 require('module.notifications')
 require('module.auto-start')
 require('module.decorate-client')
--- Backdrop causes bugs on some gtk3 applications
---require('module.backdrop')
+
 require('module.exit-screen')
-require('module.quake-terminal')
 
 -- Setup all configurations
 require('configuration.client')
@@ -57,16 +55,6 @@ _G.client.connect_signal(
     end
   end
 )
-
--- Enable sloppy focus, so that focus follows mouse.
---[[
-_G.client.connect_signal(
-  'mouse::enter',
-  function(c)
-    c:emit_signal('request::activate', 'mouse_enter', {raise = true})
-  end
-)
---]]
 
 -- Make the focused window have a glowing border
 _G.client.connect_signal(

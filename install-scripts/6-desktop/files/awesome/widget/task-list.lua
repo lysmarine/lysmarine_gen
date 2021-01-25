@@ -8,6 +8,7 @@ local clickable_container = require('widget.material.clickable-container')
 -- @tab buttons
 -- @param object
 -- @treturn table
+
 local function create_buttons(buttons, object)
   if buttons then
     local btns = {}
@@ -153,6 +154,7 @@ local function list_update(w, buttons, label, data, objects)
     w:add(bgb)
   end
 end
+
 local tasklist_buttons =
   awful.util.table.join(
   awful.button(
@@ -205,7 +207,7 @@ local TaskList = function(s)
     tasklist_buttons,
     {},
     list_update,
-    wibox.layout.fixed.horizontal()
+    wibox.layout.flex.vertical()
   )
 end
 

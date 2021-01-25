@@ -1,10 +1,16 @@
 local wibox = require('wibox')
+local dpi = require('beautiful').xresources.apply_dpi
 
 function build(widget)
+  local the_bg = wibox.container.background
+
   local container =
     wibox.widget {
     widget,
-    widget = wibox.container.background
+    widget = the_bg,
+    forced_height = dpi(48),
+      forced_width = dpi(48),
+      width = dpi(48),
   }
   local old_cursor, old_wibox
 

@@ -4,10 +4,9 @@
  */
 
 configuration {
-	display-drun:    "Activate";
-	display-run:     "Execute";
+	display-drun:    "Open";
 	show-icons:      true;	
-	sidebar-mode:    true;
+	sidebar-mode:    false;
 }
 
 * {
