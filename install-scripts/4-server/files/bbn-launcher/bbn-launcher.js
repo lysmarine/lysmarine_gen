@@ -316,7 +316,7 @@ function processMain(mode) {
         '    <div>\n' +
         nextButton2 + panel1 + panel2 + nextButton1 +
         '    </div>\n' + getCredits(mode);
-    const body = '<body style="background: #101010;">\n' +
+    const body = '<body style="background: #0C0C0C;">\n' +
         '<div style="width: 780px; height: 360px;" class="desktop">\n' + panel + '\n</div>\n</body>';
     return '<!DOCTYPE html>\n'
         + '<html lang="en">\n' + header + body + '\n</html>';
