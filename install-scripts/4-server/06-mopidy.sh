@@ -20,6 +20,8 @@ apt-get -y install gstreamer1.0-plugins-bad
 #python3 -m pip install --pre Mopidy-YouTube
 python3 -m pip install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
 
+pip3 install --upgrade requests
+
 # Enable mopidy service
 systemctl enable mopidy
 
