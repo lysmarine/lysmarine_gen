@@ -38,6 +38,10 @@ You do not have to build it on your own ARM hardware. The process described belo
 can make it to build it directly from your source code on GitHib via CircleCi and distribute it on CloudSmith
 or other place. It doesn't take that much effort or coding, some dedication required (surely).
 
+Another useful resource is our previous project (see: https://bareboat-necessities.github.io/my-bareboat/).
+Although it is based on OpenPlotter it still is useful to understand hardware and software set up of your marine
+raspberry pi.
+
 # Download
 
 CircleCI is the tool which is used to create the OS image.
