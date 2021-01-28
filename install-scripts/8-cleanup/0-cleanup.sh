@@ -8,7 +8,7 @@ apt-get -yq remove --auto-remove debian-reference-common || true
 apt-get -yq remove --auto-remove greybird-gtk-theme  || true
 apt-get -yq remove --auto-remove murrine-themes || true
 apt-get -yq remove --auto-remove rpd-icons || true
-
+apt-get -yq remove --auto-remove yelp || true
 
 apt-get -y autoremove
 apt-get clean
@@ -17,7 +17,10 @@ apt-get clean
 rm -fv /usr/share/applications/vim.desktop
 rm -fv /usr/share/applications/PyCrust.desktop
 rm -fv /usr/share/applications/XRCed.desktop
-rm -fv /usr/share/applications/opencpn.desktop
+rm -fv /usr/share/applications/yad-icon-browser.desktop
 rm -fv /usr/share/applications/x11vnc.desktop
 rm -fv /usr/share/applications/org.gnome.FileRoller.desktop
-rm -fv /usr/local/share/applications/opencpn.desktop #for amd64 that need a manual builds
+rm -fv /usr/share/applications/mopidy.desktop
+rm -fv /usr/share/applications/mlterm.desktop
+
+#rm -fv /usr/local/share/applications/opencpn.desktop #for amd64 that need a manual builds

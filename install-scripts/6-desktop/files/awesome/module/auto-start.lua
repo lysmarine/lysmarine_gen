@@ -1,8 +1,32 @@
 -- MODULE AUTO-START
--- Run all the apps listed in configuration/apps.lua as run_on_start_up only once when awesome start
 
+
+-- Thanks to jo148 on github for making rofi dpi aware!
+local filesystem = require('gears.filesystem')
+local with_dpi = require('beautiful').xresources.apply_dpi
+local get_dpi = require('beautiful').xresources.get_dpi
 local awful = require('awful')
-local apps = require('configuration.apps')
+local rofi_command = 'env /usr/bin/rofi -dpi ' .. get_dpi() .. ' -width ' .. with_dpi(400) .. ' -show drun -theme ' .. filesystem.get_configuration_dir() .. '/configuration/rofi.rasi -run-command "/bin/bash -c -i \'shopt -s expand_aliases; {cmd}\'"'
+
+local apps = {
+  -- List of apps to start by default on some actions
+  default = {
+    terminal = 'env sakura',
+    rofi = rofi_command,
+    browser = 'env chromium',
+    editor = 'mousepad', -- gui text editor
+    files = 'pcmanfm',
+  },
+  -- List of apps to start once on start-up
+  run_on_start_up = {
+    'xset s noblank;xset -dpms;xset s off',
+    'nm-applet --indicator', -- wifi
+    'ibus-daemon --xim --daemonize', -- Ibus daemon for keyboard
+    '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)', -- credential manager
+    '~/.config/autostart'
+  }
+}
+
 
 local function run_once(cmd)
   local findme = cmd
@@ -16,3 +40,5 @@ end
 for _, app in ipairs(apps.run_on_start_up) do
   run_once(app)
 end
+
+

@@ -1,3 +1,4 @@
+#! /bin/bash
 /opt/wdash/wdash &
 evdev-rce &
 
@@ -5,5 +6,6 @@ sleep 1 && onboard &
 sleep 42 && xset s off &
 sleep 42 && xset -dpms &
 sleep 42 && xset s noblank &
+
 
 

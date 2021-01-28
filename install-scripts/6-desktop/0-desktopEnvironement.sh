@@ -21,17 +21,15 @@ fi
 #chromium pcmanfm lxterminal mousepad gpsbabel
 
 apt-get install -yq \
-	xserver-xorg evdev-rce awesome \
+	xserver-xorg xinit evdev-rce awesome \
  	servicemanager pavucontrol network-manager-gnome\
 	chromium sakura mousepad file-roller pcmanfm \
 
-## DE config files
 install -d -o 1000 -g 1000 /home/user/.local/share/
-
 install -d -o 1000 -g 1000 "/home/user/.config/"
 
-cp -r $FILE_FOLDER/awesome "/home/user/.config/"
-chown -R 1000:1000 "/home/user/.config/"
+## Autostart script
+install -m0744 -o 1000 -g 1000 $FILE_FOLDER/autostart "/home/user/.config/"
 
 ## Make some room for the rest of the build script
 apt-get clean
@@ -39,5 +37,6 @@ apt-get clean
 ## Force polkit agent to start with openbox (this is needed for nm-applet hotspot configuration)
 sed -i '/^OnlyShowIn=/ s/$/GNOME;/' /etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop
 
+## To use the same theme for Qt/KDE applications and GTK applications, and fix missing indicators
 echo XDG_CURRENT_DESKTOP=Unity >> /etc/environment
 echo QT_QPA_PLATFORMTHEME=gtk2 >> /etc/environment
