@@ -165,6 +165,9 @@
             <Filename>orage.desktop</Filename>
         </Include>
         <Include>
+            <Filename>org.gnome.gedit.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>sailcut.desktop</Filename>
         </Include>
         <Include>
