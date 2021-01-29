@@ -4,13 +4,14 @@ apt-get clean
 npm cache clean --force
 
 apt-get -q -y install i2c-tools traceroute telnet socat gdal-bin openvpn
+systemctl disable openvpn
 
 apt-get -q -y install dconf-editor gedit gnome-calculator gnome-weather gnome-chess openpref
 
 apt-get clean
 
 apt-get -q -y install iotop rsync timeshift snapd
-systemctl disable snapd
+systemctl disable snapd snapd.socket
 
 #apt-get install software-properties-common
 
