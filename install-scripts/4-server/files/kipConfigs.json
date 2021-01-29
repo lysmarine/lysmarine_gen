@@ -1,6 +1,6 @@
 {
   "configVersion": 3,
-  "signalKUrl": "http://lysmarine.local",
+  "signalKUrl": "http://localhost",
   "signalKToken": null,
   "themeName": "modern-dark",
   "widgets": [
