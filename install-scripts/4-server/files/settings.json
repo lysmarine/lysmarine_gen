@@ -39,7 +39,7 @@
         }
       ],
       "id": "kplexd_tcp",
-      "enabled": true
+      "enabled": false
     },
     {
       "pipeElements": [
@@ -58,7 +58,7 @@
         }
       ],
       "id": "ais0",
-      "enabled": true
+      "enabled": false
     },
     {
       "pipeElements": [
@@ -77,7 +77,7 @@
         }
       ],
       "id": "gps1",
-      "enabled": true
+      "enabled": false
     }
   ],
   "security": {
