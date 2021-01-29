@@ -2,7 +2,6 @@
 
 ## Add the extended sources software source for Debian
 sed -i "s/deb\.debian\.org\/debian\/\ buster\ main/deb\.debian\.org\/debian\/\ buster\ main\ contrib\ non-free/g" /etc/apt/sources.list
-echo "deb http://deb.debian.org/debian/ buster-backports main" >> /etc/apt/sources.list
 
 ## Add repository sources
 install -m0644 -v $FILE_FOLDER/nodesource.list "/etc/apt/sources.list.d/"
