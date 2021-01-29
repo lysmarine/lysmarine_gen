@@ -51,7 +51,7 @@
             "subOptions": {
               "type": "serial",
               "validateChecksum": false,
-              "device": "/dev/ttyLYS_ais0",
+              "device": "/dev/ttyLYS_ais_0",
               "baudrate": 38400
             }
           }
@@ -70,7 +70,7 @@
             "subOptions": {
               "validateChecksum": false,
               "type": "serial",
-              "device": "/dev/ttyLYS_gps1",
+              "device": "/dev/ttyLYS_gps_1",
               "baudrate": 4800
             }
           }
