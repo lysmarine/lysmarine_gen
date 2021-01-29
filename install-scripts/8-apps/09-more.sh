@@ -9,7 +9,7 @@ apt-get -q -y install dconf-editor gedit gnome-calculator gnome-weather gnome-ch
 
 apt-get clean
 
-apt-get -q -y install rsync timeshift snapd
+apt-get -q -y install iotop rsync timeshift snapd
 systemctl disable snapd
 
 #apt-get install software-properties-common
