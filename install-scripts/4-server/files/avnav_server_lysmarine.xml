@@ -208,8 +208,8 @@
         -->
 
         <AVNPluginHandler>
-            <!--<builtin-signalk enabled="true" port="80" />-->
-            <!--<builtin-canboat enabled="true" allowKeyOverwrite="true" autoSendRMC="30" sourceName="canboatgen"/>-->
+            <builtin-signalk enabled="false" port="80" />
+            <builtin-canboat enabled="false" port="6000" host="localhost" allowKeyOverwrite="true" autoSendRMC="30" sourceName="canboatgen"/>
         </AVNPluginHandler>
 
         <!-- create chart overview files -->
