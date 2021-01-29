@@ -5,7 +5,7 @@ npm cache clean --force
 
 apt-get -q -y install i2c-tools traceroute telnet socat gdal-bin openvpn
 
-apt-get -q -y install dconf-editor gedit gnome-weather gnome-chess openpref
+apt-get -q -y install dconf-editor gedit gnome-calculator gnome-weather gnome-chess openpref
 
 apt-get clean
 
