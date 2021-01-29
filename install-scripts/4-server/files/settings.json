@@ -1,5 +1,17 @@
 {
-  "interfaces": {},
+  "interfaces": {
+    "applicationData": true,
+    "appstore": true,
+    "logfiles": true,
+    "nmea-tcp": true,
+    "playground": true,
+    "plugins": true,
+    "providers": true,
+    "rest": true,
+    "tcp": true,
+    "webapps": true,
+    "ws": true
+  },
   "ssl": false,
   "pipedProviders": [
     {
@@ -13,8 +25,10 @@
               "validateChecksum": false,
               "type": "gpsd",
               "host": "localhost",
-              "port": "2947"
-            }
+              "port": "2947",
+              "providerId": "gpsd"
+            },
+            "providerId": "gpsd"
           }
         }
       ],
@@ -87,5 +101,7 @@
   "mdns": true,
   "wsCompression": false,
   "enablePluginLogging": false,
-  "pruneContextsMinutes": 60
+  "pruneContextsMinutes": 60,
+  "port": 80,
+  "sslport": 3443
 }
