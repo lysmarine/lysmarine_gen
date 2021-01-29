@@ -5,5 +5,9 @@
   "repository": {
     "@signalk/charts-plugin": "^2.2.0"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@mxtommy/kip": "^1.1.2",
+    "@signalk/charts-plugin": "^2.2.0"
+  }
 }
