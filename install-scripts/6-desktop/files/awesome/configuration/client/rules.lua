@@ -1,6 +1,6 @@
 local awful = require('awful')
 local gears = require('gears')
-local client_keys = require('configuration.client.keys')
+
 local client_buttons = require('configuration.client.buttons')
 
 -- Rules
@@ -11,7 +11,6 @@ awful.rules.rules = {
     properties = {
       focus = awful.client.focus.filter,
       raise = true,
-      keys = client_keys,
       buttons = client_buttons,
       screen = awful.screen.preferred,
       placement = awful.placement.no_offscreen,
@@ -34,8 +33,8 @@ awful.rules.rules = {
     properties = { floating = true}
   },
   {
-    rule_any = {name = {'onboard'}},
-    properties = {skip_decoration = true,floating = true}
+    rule_any = {name = {'Onboard'}},
+    properties = {skip_decoration = true,floating = true,placement = awful.placement.bottom, focusable = false}
   },
   -- Titlebars
   {
