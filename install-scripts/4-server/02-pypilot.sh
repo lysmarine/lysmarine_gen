@@ -50,7 +50,7 @@ install -v -m 0644 $FILE_FOLDER/pypilot@.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.socket "/etc/systemd/system/"
 
-systemctl enable pypilot@pypilot.service
+systemctl disable pypilot@pypilot.service
 systemctl enable pypilot_web.service
 
 ## Install the user config files
@@ -69,3 +69,4 @@ echo 'pypilot ALL=(ALL) NOPASSWD: /usr/bin/chrt' >>/etc/sudoers
 
 ## Reduce excessive logging
 sed '1 i :msg, contains, "autopilot failed to read imu at time" ~' -i /etc/rsyslog.conf
+
