@@ -1,9 +1,9 @@
 {
-  "enabled":true,
-  "enabledLogging":false,
   "configuration": {
     "chartPaths": [
       "/srv/charts"
     ]
-  }
+  },
+  "enabled": true,
+  "enabledLogging": false
 }
