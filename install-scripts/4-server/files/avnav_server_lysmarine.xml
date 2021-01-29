@@ -31,7 +31,7 @@
              as gpsd lacks some decoders we need
              so leave this entry untouched
              -->
-        <AVNGpsdFeeder useGpsd="false" listenerPort="4020" port="2948" gpsdcommand="/usr/sbin/gpsd -b -n -N -G"/>
+        <AVNGpsdFeeder useGpsd="false"/>
 
 
         <!-- bluetooth support
@@ -150,7 +150,7 @@
              this of course must fit to the java script part...
         -->
         <AVNHttpServer navurl="/viewer/avnav_navi.php" index="/viewer/avnav_viewer.html" httpPort="8099"
-                       chartbase="maps" empty="nonexistent" upzoom="0">
+                       chartbase="maps" empty="nonexistent" upzoom="0" numThreads="5">
             <!-- chartbaseurl="http://$host/Karten/anav"> -->
             <Directory urlpath="maps" path="/srv/charts"/>
             <Directory urlpath="log" path="/var/lib/avnav/log"/>
@@ -208,7 +208,7 @@
         -->
 
         <AVNPluginHandler>
-            <!--<builtin-signalk enabled="true"/>-->
+            <!--<builtin-signalk enabled="true" port="80" />-->
             <!--<builtin-canboat enabled="true" allowKeyOverwrite="true" autoSendRMC="30" sourceName="canboatgen"/>-->
         </AVNPluginHandler>
 
@@ -220,7 +220,7 @@
               interval: interval in seconds for computing RMB data (default: 5)
               computeRMB: default True, set to false if you do not want RMB computation
         -->
-        <AVNRouter routesdir="/var/lib/avnav/routes"/>
+        <AVNRouter routesdir="/var/lib/avnav/routes" interval="15"/>
 
         <!-- log nmea data
              will create .nmea(.gz) files in the tracks directory
@@ -232,7 +232,7 @@
         <!--<AVNNmeaLogger filter="$" interval="0"/>-->
         <AVNNmeaLogger/>
 
-        <AVNImporter importDir="/var/lib/avnav/import"/>
+        <AVNImporter importDir="/var/lib/avnav/import" workDir="/var/lib/avnav/work" />
 
         <!-- add the following property to AVNWpaHandler to be able to allow external access for wlan client
              firewallCommand="sudo -n $BASEDIR/../raspberry/iptables-ext.sh wlan-av1"
