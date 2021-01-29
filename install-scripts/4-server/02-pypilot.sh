@@ -15,18 +15,18 @@ pip3 install pywavefront pyglet gps gevent-websocket Flask-SocketIO python-socke
 #fi
 
 pushd ./stageCache
-  # Install RTIMULib2 as it's a dependency of pypilot
-  if [[ ! -d ./RTIMULib2 ]]; then
-    git clone --depth=1 https://github.com/seandepagnier/RTIMULib2
-  fi
-  echo "Build and install RTIMULib2"
+#  # Install RTIMULib2 as it's a dependency of pypilot
+#  if [[ ! -d ./RTIMULib2 ]]; then
+#    git clone --depth=1 https://github.com/seandepagnier/RTIMULib2
+#  fi
+#  echo "Build and install RTIMULib2"
+#
+#  pushd ./RTIMULib2/Linux/python
+#    python3 setup.py install
+#    python3 setup.py clean --all
+#  popd
 
-  pushd ./RTIMULib2/Linux/python
-    python3 setup.py install
-    python3 setup.py clean --all
-  popd
-
-  #apt-get install -yq python3-rtimulib2-pypilot
+  apt-get install -yq python3-rtimulib2-pypilot
 
   echo "Get pypilot"
   if [[ ! -d ./pypilot ]]; then
