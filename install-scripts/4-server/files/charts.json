@@ -1,7 +1,7 @@
 {
   "configuration": {
     "chartPaths": [
-      "/srv/charts"
+      "../../../srv/charts"
     ]
   },
   "enabled": true,
