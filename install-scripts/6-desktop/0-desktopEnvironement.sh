@@ -17,12 +17,12 @@ fi
 #gstreamer1.0-libav alsa-utils libavahi-compat-libdnssd-dev git openbox \
 #xbacklight lxappearance xsettingsd xserver-xorg \
 #xinit libgtk2-perl pavucontrol cpanminus perl-base \
-#dialog lxterminal network-manager-gnome  servicemanager \
+#dialog lxterminal network-manager-gnome servicemanager \
 #chromium pcmanfm lxterminal mousepad gpsbabel
 
 apt-get install -yq \
-	xserver-xorg xinit evdev-rce awesome \
- 	servicemanager pavucontrol network-manager-gnome\
+	xserver-xorg xinit evdev-rce awesome alsa-utils \
+ 	servicemanager pavucontrol network-manager-gnome \
 	chromium sakura mousepad file-roller pcmanfm \
 
 install -d -o 1000 -g 1000 /home/user/.local/share/

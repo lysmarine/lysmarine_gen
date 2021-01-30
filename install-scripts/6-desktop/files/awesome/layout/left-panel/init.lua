@@ -4,11 +4,11 @@ local wibox = require('wibox')
 local apps = require('configuration.apps')
 local dpi = require('beautiful').xresources.apply_dpi
 
-local left_panels = function(screen)
+left_panels = function(screen)
   local static_bar_width = dpi(48)
   local panel_content_width = dpi(400)
 
-  local panel =
+  panel =
     wibox {
     screen = screen,
     width = static_bar_width,
@@ -62,7 +62,7 @@ local left_panels = function(screen)
     panel:emit_signal('opened')
   end
 
-  local closePanel = function()
+  closePanel = function()
     panel.width = static_bar_width
     panel:get_children_by_id('panel_content')[1].visible = false
     backdrop.visible = false
