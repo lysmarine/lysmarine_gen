@@ -12,6 +12,90 @@ local filesystem = require('gears.filesystem')
 
 return function(screen, panel, static_bar_width)
 
+  local menu_icon = wibox.widget {
+    icon = icons.menu,
+    size = dpi(24),
+    widget = mat_icon,
+    forced_width = dpi(48)
+  }
+
+  local taskbar_icon = wibox.widget {
+    icon = icons.code,
+    size = dpi(24),
+    widget = mat_icon,
+    forced_width = dpi(48)
+  }
+
+
+
+-- Create the home button to toggle the left collapsible part
+  local home_button = wibox.widget {
+    wibox.widget {
+      menu_icon,
+      widget = clickable_container,
+      forced_height = dpi(48),
+      forced_width = dpi(48)
+    },
+    bg = beautiful.primary.hue_500,
+    widget = wibox.container.background,
+    forced_width = dpi(48)
+  }
+
+-- Connect action to the button
+  home_button:buttons(
+      awful.button(
+        {},
+        1,
+        nil,
+        function()
+          panel:toggle()
+        end
+      )
+  )
+
+
+
+  -- Create the task button to toggle the right collapsible part
+  local expand_task_list_btn =
+  wibox.widget {
+    wibox.widget {
+      taskbar_icon,
+      widget = clickable_container,
+      forced_height = dpi(48),
+      forced_width = dpi(48),
+
+    },
+    widget = wibox.container.background,
+    forced_width = dpi(48)
+  }
+
+  -- Connect action to the button
+  expand_task_list_btn:buttons(  -- The table of buttons that should bind to the widget.
+      awful.button( -- awful.button:new (mod, _button, press, release)
+        {height = dpi(24), expanded = false},
+        1,
+        nil,
+        function()
+          expand_task_list_btn.expanded = not expand_task_list_btn.expanded
+          if expand_task_list_btn.expanded then
+            taskbar_icon.icon = icons.errorrrr
+            static_bar.forced_width = dpi(496)
+            static_bar.width = dpi(496)
+            panel:open()
+
+          else
+            taskbar_icon.icon = icons.code
+            static_bar.forced_width = dpi(48)
+            static_bar.width = dpi(48)
+            panel:close()
+
+          end
+        end
+      )
+  )
+
+
+
   -- Clock / Calendar 24h format
   local textclock = wibox.widget.textclock('<span font="Roboto Mono bold 11">%H\n%M</span>')
   textclock.forced_height = 46
@@ -30,65 +114,6 @@ return function(screen, panel, static_bar_width)
   systray:set_horizontal(false)
   systray:set_base_size(24)
 
-  local menu_icon =
-    wibox.widget {
-    icon = icons.menu,
-    size = dpi(24),
-    widget = mat_icon,
-    forced_width = dpi(48)
-  }
-
-  local home_button =
-    wibox.widget {
-    wibox.widget {
-      menu_icon,
-      widget = clickable_container,
-      forced_height = dpi(48),
-      forced_width = dpi(48)
-    },
-    bg = beautiful.primary.hue_500,
-    widget = wibox.container.background,
-    forced_width = dpi(48)
-  }
-
-  home_button:buttons(
-      awful.button(
-        {},
-        1,
-        nil,
-        function()
-          panel:toggle()
-        end
-      )
-  )
-
-  local expand_task_list_btn = mat_icon_button(mat_icon(icons.plus, dpi(24)))
-  expand_task_list_btn.expanded = false
-
-  expand_task_list_btn:buttons(
-      awful.button(
-        {},
-        1,
-        nil,
-
-        function()
-          expand_task_list_btn.expanded = not expand_task_list_btn.expanded
-          if expand_task_list_btn.expanded then
-            static_bar.forced_width = dpi(496)
-            static_bar.width = dpi(496)
-
-            panel:open()
-
-          else
-            static_bar.forced_width = dpi(48)
-            static_bar.width = dpi(48)
-            panel.close()
-          end
-
-        end
-      )
-  )
-  expand_task_list_btn.height = dpi(24)
   -- Create an imagebox widget which will contains an icon indicating which layout we're using.
   -- We need one layoutbox per screen.
   local LayoutBox = function(s)
@@ -114,7 +139,6 @@ return function(screen, panel, static_bar_width)
     return layoutBox
   end
 
-
   panel:connect_signal(
     'opened',
     function()
@@ -126,6 +150,8 @@ return function(screen, panel, static_bar_width)
     'closed',
     function()
       menu_icon.icon = icons.menu
+      taskbar_icon.icon = icons.code
+      expand_task_list_btn.expanded = false
     end
   )
 
@@ -135,7 +161,6 @@ return function(screen, panel, static_bar_width)
 
     forced_width = static_bar_width,
     {
-      -- Left widgets
       layout = wibox.layout.fixed.vertical,
       home_button,
       expand_task_list_btn,

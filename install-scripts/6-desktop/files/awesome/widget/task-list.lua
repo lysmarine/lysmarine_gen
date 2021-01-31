@@ -73,7 +73,7 @@ local function list_update(w, buttons, label, data, objects)
             nil,
             function()
               o.kill(o)
-              closePanel()
+              panel:close()
             end
           )
         )
