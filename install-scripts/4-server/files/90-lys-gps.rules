@@ -17,12 +17,6 @@ SUBSYSTEM=="tty", ATTRS{idVendor}=="1163", ATTRS{idProduct}=="0200", SYMLINK+="t
 # Garmin International GPSmap, various models (tested with Garmin GPS 18 USB)  [linux module: garmin_gps]
 SUBSYSTEM=="tty", ATTRS{idVendor}=="091e", ATTRS{idProduct}=="0003", SYMLINK+="ttyLYS_gps_%n", RUN+="/lib/udev/manage_gps.sh %n"
 
-# Cygnal Integrated Products, Inc. CP210x Composite Device (Used by Holux m241 and Wintec grays2 wbt-201) [linux module: cp210x]
-SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", SYMLINK+="ttyLYS_gps_%n", RUN+="/lib/udev/manage_gps.sh %n"
-
-# Cygnal Integrated Products, Inc. [linux module: cp210x]
-SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea71", SYMLINK="ttyLYS_gps_%n", RUN+="/lib/udev/manage_gps.sh %n"
-
 # u-blox AG, u-blox 5 (tested with Navilock NL-402U) [linux module: cdc_acm]
 SUBSYSTEM=="tty", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a5", SYMLINK="ttyLYS_gps_%n", RUN+="/lib/udev/manage_gps.sh %n"
 

@@ -5,12 +5,14 @@ apt-get install -y -q gpsd gpsd-clients
 ## Automaticaly start gpsd when a USB gps detected, handle AIS
 install -d /etc/udev/rules.d
 install -v -m 0644 $FILE_FOLDER/90-lys-ais.rules "/etc/udev/rules.d/90-lys-ais.rules"
+install -v -m 0644 $FILE_FOLDER/90-lys-ftdi.rules "/etc/udev/rules.d/90-lys-cp210x.rules"
 install -v -m 0644 $FILE_FOLDER/90-lys-ftdi.rules "/etc/udev/rules.d/90-lys-ftdi.rules"
 install -v -m 0644 $FILE_FOLDER/90-lys-gps.rules "/etc/udev/rules.d/90-lys-gps.rules"
 install -v -m 0644 $FILE_FOLDER/90-lys-gps.rules "/etc/udev/rules.d/90-lys-prolific.rules"
 
 install -d /usr/local/bin
 install -v -m 0755 $FILE_FOLDER/manage_ais.sh "/lib/udev/manage_ais.sh"
+install -v -m 0755 $FILE_FOLDER/manage_ftdi.sh "/lib/udev/manage_cp210x.sh"
 install -v -m 0755 $FILE_FOLDER/manage_ftdi.sh "/lib/udev/manage_ftdi.sh"
 install -v -m 0755 $FILE_FOLDER/manage_gps.sh "/lib/udev/manage_gps.sh"
 install -v -m 0755 $FILE_FOLDER/manage_gps.sh "/lib/udev/manage_prolific.sh"
