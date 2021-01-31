@@ -2,9 +2,6 @@
 # https://github.com/ntpsec/gpsd
 # https://github.com/ntpsec/gpsd/blob/master/gpsd.rules.in
 
-# Prolific Technology, Inc. PL2303 Serial Port [linux module: pl2303]
-SUBSYSTEM=="tty", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", SYMLINK+="ttyLYS_gps_%n", RUN+="/lib/udev/manage_gps.sh %n"
-
 # ATEN International Co., Ltd UC-232A Serial Port [linux module: pl2303]
 SUBSYSTEM=="tty", ATTRS{idVendor}=="0557", ATTRS{idProduct}=="2008", SYMLINK+="ttyLYS_gps_%n", RUN+="/lib/udev/manage_gps.sh %n"
 
