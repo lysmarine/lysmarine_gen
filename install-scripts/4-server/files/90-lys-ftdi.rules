@@ -1,0 +1,4 @@
+# FTDI 8U232AM / FT232 [linux module: ftdi_sio]
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", SYMLINK+="ttyLYS_ftdi_%s{serial}", RUN+="/lib/udev/manage_ftdi.sh %s{serial}"
+
+ACTION=="remove", SUBSYSTEM=="tty", RUN+="/lib/udev/manage_ftdi.sh %s{serial} remove"
