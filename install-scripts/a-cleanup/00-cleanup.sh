@@ -19,5 +19,4 @@ rm -rf ~/.config
 rm -rf ~/.npm
 rm -rf ~/.wget*
 
-
-
+fake-hwclock save
