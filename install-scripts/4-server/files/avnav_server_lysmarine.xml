@@ -31,7 +31,7 @@
              as gpsd lacks some decoders we need
              so leave this entry untouched
              -->
-        <AVNGpsdFeeder useGpsd="false"/>
+        <AVNGpsdFeeder useGpsd="false" listenerPort="4020" port="2948" gpsdcommand="/usr/sbin/gpsd -b -n -N -G"/>
 
 
         <!-- bluetooth support
