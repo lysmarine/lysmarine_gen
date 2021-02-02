@@ -30,8 +30,8 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 24A4598E769C8C51       
 
 wget -q -O - https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -    # NodeJs
 wget -q -O - https://www.free-x.de/debian/oss.boating.gpg.key     | apt-key add -    # XyGrib, AvNav
-#wget -q -O - https://dl.cloudsmith.io/public/bbn-projects/bbn-rce/cfg/gpg/gpg.540A03461CECBA19.key | apt-key add -
-#wget -q -O - https://dl.cloudsmith.io/public/bbn-projects/bbn-kplex/cfg/gpg/gpg.B487196268D0D9B6.key | apt-key add -
+#curl -1sLf https://dl.cloudsmith.io/public/bbn-projects/bbn-rce/gpg.540A03461CECBA19.key | apt-key add -
+#curl -1sLf https://dl.cloudsmith.io/public/bbn-projects/bbn-kplex/gpg.B487196268D0D9B6.key | apt-key add -
 curl -1sLf https://dl.cloudsmith.io/public/bbn-projects/bbn-noaa-apt/gpg.DB5121F72251E833.key | apt-key add -
 wget -q -O - https://apt.mopidy.com/mopidy.gpg | apt-key add -
 curl https://open-mind.space/repo/open-mind.space.gpg.key | apt-key add -     # AvNav
