@@ -37,6 +37,7 @@ pushd /home/signalk/.signalk
   su signalk -c "npm install @mxtommy/kip --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-raspberry-pi-bme280 --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-raspberry-pi-1wire --unsafe-perm --loglevel error"
+  su signalk -c "npm install sk-resources-fs --unsafe-perm --loglevel error"
   #su signalk -c "npm install signalk-world-coastline-map --unsafe-perm --loglevel error"
 popd
 
