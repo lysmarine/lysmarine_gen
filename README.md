@@ -96,6 +96,131 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 
 ![Lysmarine BBN Screen4](img/lysmarine-bbn-screen4.png?raw=true "Lysmarine BBN Screen4")
 
+# Brief list of applications included:
+
+## Navigation, Instruments
+
+- OpenCPN and plugins
+- AvNav
+- GPSD
+- KPlex
+- SignalK and plugins
+- Freeboard-SK
+- PyPilot
+- BBN Launcher
+- GNU AIS
+- KIP Dashboard
+- SK Instrument Panel 
+- SK Sail Gauge
+- XyGrib Weather GRIB Viewer App
+- Stellarium
+- CanBoat
+- Sail CAD
+- Race Instructions / Planning App
+- Vessel Specs App
+- ColReg 
+- Sailing Trip and Provisioning Checklist
+- Knots
+
+
+## Internet
+
+- Chromium Web Browser
+- Email Client
+- Youtube App
+- Facebook App
+- Dockwa (Mooring and Marina Booking App)
+- NauticEd (Sailing Education)
+
+
+## Multimedia
+
+- Mopidy Media Player with Web UI (Youtube, Local List, Internet Radio, MPD support)
+- MusicBox
+- VLC (with IP camera support)
+- Audacious
+
+
+## Radio
+
+- RTL AIS, RTL SDR, GNSS SDR
+- Cubic SDR
+- Flarq
+- Fldigi
+- GNU Radio Companion
+- GPredict
+- Gqrx
+- Hamfax RadioFax
+- JNX NavText
+- JWX WeatherFax
+- noaa-apt satellite weather
+- PreviSat Satellite Tracker
+- Quisk SDR
+- multimon-ng, netcat
+
+
+## Networking
+
+- Samba (Windows Networking)
+- CUPS (printing)
+- VNC (remote desktop)
+- SSH (remote shell)
+- NMEA 0183
+- SocketCAN, NMEA 2000, can-utils
+- OpenVPN (Virtual Private Networking)
+- MQTT (Mosquitto) for IoT
+- WiFi (Access Point and Client)
+- SignalK
+- Timeshift (backups), rsync
+- PPP, wvdial, picocom for satellite modem support
+- I2C tools
+
+
+## Tools
+
+- Text Editor
+- File Manager
+- Task Manager
+- Terminal Application
+- Image Viewer
+- Calculator
+- Calendar
+- Weather App
+- Chess
+- Card Game (Preferans)
+- OnBoard touch screen keyboard
+- Right click support on touchscreens
+- Arduino IDE
+- Java (OpenJDK)
+- Python
+- NodeJS
+- C/C++ Compiler and Toolset
+- Debian, NPM, PIP, Snap package managers
+
+
+## Data
+
+- InfluxDB
+- Grafana
+
+## Add-ons via install scripts
+
+- QtVlm
+- TukTuk chartplotter
+- DeskPi Pro support
+- Text-To-Speech App
+- AnBox (experimantal Android app support)
+- Touchscreen calibration
+- NMEA Sleuth Chromium Plugin
+- NodeRed
+- PACTOR
+- SdrGlut
+- WxToImg
+- OS Settings
+- Timezone Setup
+- Predict (Satellite Tracker for scripting)
+
+
 # License
 
 Lysmarine scripts distributed under GPLv3
