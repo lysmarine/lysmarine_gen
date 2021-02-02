@@ -10,7 +10,7 @@ apt-get -q -y install dconf-editor gedit gnome-calculator gnome-weather gnome-ch
 
 apt-get clean
 
-apt-get -q -y install sysstat jq xmlstarlet uhubctl iotop rsync timeshift snapd
+apt-get -q -y install sysstat jq xmlstarlet uhubctl iotop rsync timeshift unrar snapd
 systemctl disable snapd snapd.socket
 
 #apt-get install software-properties-common
