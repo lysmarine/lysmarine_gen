@@ -2,6 +2,7 @@
 
 apt-get update  -y -q
 apt-get install -y -q  wget gnupg ca-certificates
+apt-get upgrade -y -q
 
 ## Add repository sources
 install -m 0644 -v $FILE_FOLDER/nodesource.list "/etc/apt/sources.list.d/"
