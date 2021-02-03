@@ -61,8 +61,8 @@ else
     sudo -A systemctl start NetworkManager
   else
     echo "=== disable NetworkManager ==="
-    sudo -A systemctl disable NetworkManager
     sudo -A systemctl stop NetworkManager
+    sudo -A systemctl disable NetworkManager
   fi
 
   if echo "$SAVE" | grep -q "create_ap"; then
@@ -71,8 +71,8 @@ else
     sudo -A systemctl start create_ap
   else
     echo "=== disable create_ap ==="
-    sudo -A systemctl disable create_ap
     sudo -A systemctl stop create_ap
+    sudo -A systemctl disable create_ap
   fi
 
   if echo "$SAVE" | grep -q "SSH"; then
@@ -81,8 +81,8 @@ else
     sudo -A systemctl start ssh
   else
     echo "=== disable SSH ==="
-    sudo -A systemctl disable ssh
     sudo -A systemctl stop ssh
+    sudo -A systemctl disable ssh
   fi
 
   if echo "$SAVE" | grep -q "kplex"; then
@@ -101,8 +101,8 @@ else
     sudo -A systemctl start pypilot@pypilot.service
   else
     echo "=== disable PyPilot ==="
-    sudo -A systemctl disable pypilot@pypilot.service
     sudo -A systemctl stop pypilot@pypilot.service
+    sudo -A systemctl disable pypilot@pypilot.service
   fi
 
   if echo "$SAVE" | grep -q "PyPilot_web"; then
@@ -111,8 +111,8 @@ else
     sudo -A systemctl start pypilot_web
   else
     echo "=== disable PyPilot_web ==="
-    sudo -A systemctl disable pypilot_web
     sudo -A systemctl stop pypilot_web
+    sudo -A systemctl disable pypilot_web
   fi
 
   if echo "$SAVE" | grep -q "rtl-ais"; then
@@ -121,8 +121,8 @@ else
     sudo -A systemctl start rtl-ais
   else
     echo "=== disable rtl-ais ==="
-    sudo -A systemctl disable rtl-ais
     sudo -A systemctl stop rtl-ais
+    sudo -A systemctl disable rtl-ais
   fi
 
   if echo "$SAVE" | grep -q "signal-K"; then
@@ -131,8 +131,8 @@ else
     sudo -A systemctl start signalk
   else
     echo "=== disable signalk ==="
-    sudo -A systemctl disable signalk
     sudo -A systemctl stop signalk
+    sudo -A systemctl disable signalk
   fi
 
   if echo "$SAVE" | grep -q "VNC"; then
@@ -141,8 +141,8 @@ else
     sudo -A systemctl start vnc
   else
     echo "=== disable vnc ==="
-    sudo -A systemctl disable vnc
     sudo -A systemctl stop vnc
+    sudo -A systemctl disable vnc
   fi
 
   if echo "$SAVE" | grep -q "RDP"; then
@@ -151,8 +151,8 @@ else
     sudo -A systemctl start xrdp
   else
     echo "=== disable xrdp ==="
-    sudo -A systemctl disable xrdp
     sudo -A systemctl stop xrdp
+    sudo -A systemctl disable xrdp
   fi
 
   if echo "$SAVE" | grep -q "avnav"; then
@@ -171,7 +171,7 @@ else
     sudo -A systemctl start mopidy
   else
     echo "=== disable mopidy ==="
-    sudo -A systemctl disable mopidy
     sudo -A systemctl stop mopidy
+    sudo -A systemctl disable mopidy
   fi
 fi
