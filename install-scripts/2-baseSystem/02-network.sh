@@ -8,7 +8,7 @@ apt-get install -y -q network-manager make
 apt-get install -y -q avahi-daemon
 install -v $FILE_FOLDER/hostname "/etc/"
 cat $FILE_FOLDER/hosts >> /etc/hosts
-
+sed -i '/raspberrypi/d' /etc/hosts
 
 # Access Point management
 apt-get install -y -q createap
