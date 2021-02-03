@@ -88,11 +88,11 @@ else
   if echo "$SAVE" | grep -q "kplex"; then
     echo "=== enable kplex ==="
     sudo -A systemctl enable kplex
-    sudo -A systemctl start kplex
+    sudo -A systemctl daemon-reexec
   else
     echo "=== disable kplex ==="
     sudo -A systemctl disable kplex
-    sudo -A systemctl stop kplex
+    sudo -A systemctl daemon-reexec
   fi
 
   if echo "$SAVE" | grep -q "PyPilot"; then
