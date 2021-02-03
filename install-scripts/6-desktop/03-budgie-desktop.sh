@@ -23,4 +23,4 @@ gsettings set com.solus-project.budgie-wm focus-mode true
 apt-get clean
 
 chmod 4775 /usr/bin/nm-connection-editor
-chmod 4775 /usr/bin/gnome-control-center
+#chmod 4775 /usr/bin/gnome-control-center
