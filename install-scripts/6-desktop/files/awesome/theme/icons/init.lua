@@ -12,6 +12,7 @@ return {
   vm = dir .. '/ship-wheel.svg',
   --others
   menu = dir .. '/menu.svg',
+  play = dir .. '/play.svg',
   close = dir .. '/close.svg',
   logout = dir .. '/logout.svg',
   sleep = dir .. '/power-sleep.svg',

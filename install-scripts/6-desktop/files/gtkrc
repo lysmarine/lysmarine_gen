@@ -1,6 +1,6 @@
 include "/home/user/.gtkrc-2.0.mine"
 gtk-theme-name="Materia-dark"
-gtk-icon-theme-name="Abyss-DEEP-Suru-GLOW"
+gtk-icon-theme-name="Griffin-Icons-Griffin-Ghost"
 gtk-font-name="Sans 11"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0

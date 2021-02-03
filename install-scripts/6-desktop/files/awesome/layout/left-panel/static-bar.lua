@@ -20,7 +20,7 @@ return function(screen, panel, static_bar_width)
   }
 
   local taskbar_icon = wibox.widget {
-    icon = icons.code,
+    icon = icons.play,
     size = dpi(24),
     widget = mat_icon,
     forced_width = dpi(48)
@@ -84,7 +84,7 @@ return function(screen, panel, static_bar_width)
             panel:open()
 
           else
-            taskbar_icon.icon = icons.code
+            taskbar_icon.icon = icons.play
             static_bar.forced_width = dpi(48)
             static_bar.width = dpi(48)
             panel:close()
@@ -108,7 +108,7 @@ return function(screen, panel, static_bar_width)
   })
   month_calendar:attach(textclock,'bl')
 
-  local clock_widget = wibox.container.margin(textclock, dpi(13), dpi(13), dpi(0), dpi(8))
+  local clock_widget = wibox.container.margin(textclock, dpi(13), dpi(13), dpi(13), dpi(13))
 
   local systray = wibox.widget.systray()
   systray:set_horizontal(false)
@@ -150,7 +150,7 @@ return function(screen, panel, static_bar_width)
     'closed',
     function()
       menu_icon.icon = icons.menu
-      taskbar_icon.icon = icons.code
+      taskbar_icon.icon = icons.play
       expand_task_list_btn.expanded = false
     end
   )
@@ -169,7 +169,7 @@ return function(screen, panel, static_bar_width)
      nil,
     {
       layout = wibox.layout.fixed.vertical,
-      wibox.container.margin(systray, dpi(10), dpi(10)),
+      wibox.container.margin(systray, dpi(13), dpi(13), dpi(13), dpi(13)),
       LayoutBox(screen),
       clock_widget
     }

@@ -83,7 +83,7 @@ local awesome_overrides =
 
   -- Tasklist
 
-  theme.tasklist_font = 'Roboto medium 11'
+  theme.tasklist_font = 'Roboto medium 13'
   theme.tasklist_bg_normal = theme.background.hue_800
   theme.tasklist_bg_focus =
     'linear:0,0:0,' ..
@@ -96,7 +96,7 @@ local awesome_overrides =
   theme.tasklist_fg_urgent = theme.fg_normal
   theme.tasklist_fg_normal = '#AAAAAA'
 
-  theme.icon_theme = 'Papirus-Dark'
+  theme.icon_theme = 'Griffin-Ghost'
 
   --Client
   theme.border_width = dpi(2)
