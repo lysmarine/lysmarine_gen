@@ -171,6 +171,8 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - MQTT (Mosquitto) for IoT
 - WiFi (Access Point and Client)
 - SignalK
+- Seatalk
+- ModBus
 - Timeshift (backups), rsync
 - PPP, wvdial, picocom for satellite modem support
 - I2C tools

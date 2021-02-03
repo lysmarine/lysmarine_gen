@@ -10,6 +10,13 @@ apt-get install -y -q --no-install-recommends python3 python3-serial libpython3-
 
 pip3 install pywavefront pyglet gps gevent-websocket Flask-SocketIO python-socketio
 
+# For Seatalk
+apt-get install -y -q pigpio python-pigpio python3-pigpio
+systemctl enable pigpiod
+
+# For Seatalk
+wget -q -O - https://raw.githubusercontent.com/MatsA/seatalk1-to-NMEA0183/master/STALK_read.py > /usr/local/sbin/STALK_read.py
+
 #if [ $LMOS == 'Raspbian' ]; then
 #  apt-get install -y -q wiringpi
 #fi
