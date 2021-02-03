@@ -158,11 +158,11 @@ else
   if echo "$SAVE" | grep -q "avnav"; then
     echo "=== enable avnav ==="
     sudo -A systemctl enable avnav
-    sudo -A systemctl start avnav
+    sudo -A systemctl daemon-reexec
   else
     echo "=== disable avnav ==="
     sudo -A systemctl disable avnav
-    sudo -A systemctl stop avnav
+    sudo -A systemctl daemon-reexec
   fi
 
   if echo "$SAVE" | grep -q "mopidy"; then
