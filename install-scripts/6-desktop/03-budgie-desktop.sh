@@ -21,3 +21,5 @@ echo 'export XDG_CURRENT_DESKTOP=Budgie:GNOME; budgie-desktop &' >>/home/user/.c
 gsettings set com.solus-project.budgie-wm focus-mode true
 
 apt-get clean
+
+chmod 4775 /usr/bin/nm-connection-editor
