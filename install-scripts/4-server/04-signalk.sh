@@ -42,6 +42,7 @@ pushd /home/signalk/.signalk
   su signalk -c "npm install @codekilo/signalk-modbus-client --unsafe-perm --loglevel error"
   su signalk -c "npm install sk-resources-fs --unsafe-perm --loglevel error"
   su signalk -c "npm install freeboard-sk-helper --unsafe-perm --loglevel error"
+  su signalk -c "npm install signalk-derived-data --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-anchoralarm-plugin --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-simple-notifications --unsafe-perm --loglevel error"
   #su signalk -c "npm install signalk-world-coastline-map --unsafe-perm --loglevel error"
