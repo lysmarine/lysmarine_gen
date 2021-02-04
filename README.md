@@ -179,7 +179,7 @@ Windlass, Bow Thruster, Lights)
 - PPP, wvdial, picocom for satellite modem support
 - I2C tools
 - 1-Wire (sensors i.e. for temperature, humidity, pressure, tank levels)
-
+- LoRaWan
 
 ## Tools
 
