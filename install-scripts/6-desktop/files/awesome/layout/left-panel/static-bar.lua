@@ -78,17 +78,18 @@ return function(screen, panel, static_bar_width)
         function()
           expand_task_list_btn.expanded = not expand_task_list_btn.expanded
           if expand_task_list_btn.expanded then
-            taskbar_icon.icon = icons.errorrrr
+            taskbar_icon.visible = false
             static_bar.forced_width = dpi(496)
             static_bar.width = dpi(496)
+           -- expand_task_list_btn.bg = beautiful.primary.hue_500,
             panel:open()
 
           else
-            taskbar_icon.icon = icons.play
+            taskbar_icon.visible = true
             static_bar.forced_width = dpi(48)
             static_bar.width = dpi(48)
+            expand_task_list_btn.bg = nil,
             panel:close()
-
           end
         end
       )
@@ -108,7 +109,7 @@ return function(screen, panel, static_bar_width)
   })
   month_calendar:attach(textclock,'bl')
 
-  local clock_widget = wibox.container.margin(textclock, dpi(13), dpi(13), dpi(13), dpi(13))
+  local clock_widget = wibox.container.margin(textclock, dpi(13), dpi(13), dpi(0), dpi(13))
 
   local systray = wibox.widget.systray()
   systray:set_horizontal(false)
@@ -150,7 +151,8 @@ return function(screen, panel, static_bar_width)
     'closed',
     function()
       menu_icon.icon = icons.menu
-      taskbar_icon.icon = icons.play
+      taskbar_icon.visible = true
+      expand_task_list_btn.bg = nil
       expand_task_list_btn.expanded = false
     end
   )
@@ -169,7 +171,7 @@ return function(screen, panel, static_bar_width)
      nil,
     {
       layout = wibox.layout.fixed.vertical,
-      wibox.container.margin(systray, dpi(13), dpi(13), dpi(13), dpi(13)),
+      wibox.container.margin(systray, dpi(13), dpi(13), dpi(13), dpi(0)),
       LayoutBox(screen),
       clock_widget
     }
