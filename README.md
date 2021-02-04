@@ -157,6 +157,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - PreviSat Satellite Tracker
 - Quisk SDR
 - multimon-ng, netcat
+- Chirp
 
 
 ## Protocols
