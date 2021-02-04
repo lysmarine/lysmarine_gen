@@ -168,14 +168,16 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - NMEA 0183
 - SocketCAN, NMEA 2000, can-utils
 - OpenVPN (Virtual Private Networking)
-- MQTT (Mosquitto) for IoT
+- MQTT (Mosquitto) for IoT (to talk to Sonoff smart switches to switch on several devices like Radar,
+Windlass, Bow Thruster, Lights)
 - WiFi (Access Point and Client)
 - SignalK
-- Seatalk
-- ModBus
+- Seatalk 1, GPIO
+- ModBus (to talk to Victron Venus OS, etc)
 - Timeshift (backups), rsync
 - PPP, wvdial, picocom for satellite modem support
 - I2C tools
+- 1-Wire (sensors i.e. for temperature, humidity, pressure, tank levels)
 
 
 ## Tools
