@@ -104,8 +104,7 @@ if [ -f /etc/xdg/user-dirs.defaults ]; then
   sed -i 's/^DESKTOP=/#&/'     /etc/xdg/user-dirs.defaults
   sed -i 's/^TEMPLATES=/#&/'   /etc/xdg/user-dirs.defaults
   sed -i 's/^PUBLICSHARE=/#&/' /etc/xdg/user-dirs.defaults
-  sed -i 's/^MUSIC=/#&/'       /etc/xdg/user-dirs.defaults
-  sed -i 's/^PICTURES=/#&/'    /etc/xdg/user-dirs.defaults
-  sed -i 's/^VIDEOS=/#&/'      /etc/xdg/user-dirs.defaults
+#  sed -i 's/^MUSIC=/#&/'       /etc/xdg/user-dirs.defaults
+#  sed -i 's/^PICTURES=/#&/'    /etc/xdg/user-dirs.defaults
+#  sed -i 's/^VIDEOS=/#&/'      /etc/xdg/user-dirs.defaults
 fi
-
