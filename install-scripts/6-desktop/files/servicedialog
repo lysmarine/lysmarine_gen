@@ -34,7 +34,7 @@ $(systemctl -q is-enabled xrdp) && STATUS=TRUE || STATUS=FALSE
 ROWS="$ROWS $STATUS RDP"
 
 $(systemctl -q is-enabled avnav) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS avnav"
+ROWS="$ROWS $STATUS AvNav"
 
 $(systemctl -q is-enabled mopidy) && STATUS=TRUE || STATUS=FALSE
 ROWS="$ROWS $STATUS mopidy"
@@ -158,12 +158,12 @@ else
     sudo -A systemctl stop xrdp
   fi
 
-  if echo "$SAVE" | grep -q "avnav"; then
-    echo "=== enable avnav ==="
+  if echo "$SAVE" | grep -q "AvNav"; then
+    echo "=== enable AvNav ==="
     sudo -A systemctl enable avnav
     sudo -A systemctl daemon-reexec
   else
-    echo "=== disable avnav ==="
+    echo "=== disable AvNav ==="
     sudo -A systemctl disable avnav
     sudo -A systemctl daemon-reexec
   fi
