@@ -63,4 +63,6 @@ apt-get -y -q install hamfax
 
 apt-get -y -q install chirp-daily
 
+apt-get -y -q install wmctrl rtl-sdr dl-fldigi ssdv
+
 apt-get clean
