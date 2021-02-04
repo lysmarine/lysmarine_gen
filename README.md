@@ -180,6 +180,11 @@ Windlass, Bow Thruster, Lights)
 - I2C tools
 - 1-Wire (sensors i.e. for temperature, humidity, pressure, tank levels)
 - LoRaWan
+- WeatherFax
+- NOAA Weather
+- NavTex
+- Inmarsat Fleet
+
 
 ## Tools
 
