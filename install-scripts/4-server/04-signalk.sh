@@ -60,5 +60,12 @@ popd
 ## Give set-system-time the possibility to change the date.
 echo "signalk ALL=(ALL) NOPASSWD: /bin/date" >>/etc/sudoers
 
+# For Seatalk
+apt-get install -y -q pigpio python-pigpio python3-pigpio
+systemctl disable pigpiod
+
+# For Seatalk
+wget -q -O - https://raw.githubusercontent.com/MatsA/seatalk1-to-NMEA0183/master/STALK_read.py > /usr/local/sbin/STALK_read.py
+
 ## Make some space on the drive for the next stages
 npm cache clean --force
