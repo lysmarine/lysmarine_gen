@@ -39,6 +39,9 @@ ROWS="$ROWS $STATUS avnav"
 $(systemctl -q is-enabled mopidy) && STATUS=TRUE || STATUS=FALSE
 ROWS="$ROWS $STATUS mopidy"
 
+$(systemctl -q is-enabled pigpiod) && STATUS=TRUE || STATUS=FALSE
+ROWS="$ROWS $STATUS PiGPIOd"
+
 ## Dialog
 SAVE=$(yad --list \
   --height=400 \
@@ -173,5 +176,15 @@ else
     echo "=== disable mopidy ==="
     sudo -A systemctl disable mopidy
     sudo -A systemctl stop mopidy
+  fi
+
+  if echo "$SAVE" | grep -q "PiGPIOd"; then
+    echo "=== enable PiGPIOd ==="
+    sudo -A systemctl enable pigpiod
+    sudo -A systemctl start pigpiod
+  else
+    echo "=== disable PiGPIOd ==="
+    sudo -A systemctl disable pigpiod
+    sudo -A systemctl stop pigpiod
   fi
 fi
