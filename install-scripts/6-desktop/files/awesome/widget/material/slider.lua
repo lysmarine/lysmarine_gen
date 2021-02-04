@@ -11,7 +11,7 @@ local beautiful = require('beautiful')
 local mat_colors = require('theme.mat-colors')
 -- Local declarations
 
-local mat_slider = {mt = {}}
+local mat_slider = { mt = {} }
 
 local properties = {
   read_only = false
@@ -23,7 +23,7 @@ function mat_slider:set_value(value)
     self._private.progress_bar:set_value(self._private.value)
     self._private.slider:set_value(self._private.value)
     self:emit_signal('property::value')
-  --self:emit_signal('widget::layout_changed')
+    --self:emit_signal('widget::layout_changed')
   end
 end
 
@@ -64,20 +64,18 @@ end
 
 local function new(args)
   local ret =
-    base.make_widget(
-    nil,
+  base.make_widget(nil,
     nil,
     {
       enable_properties = true
-    }
-  )
+    })
 
   gtable.crush(ret._private, args or {})
 
   gtable.crush(ret, mat_slider, true)
 
   ret._private.progress_bar =
-    wibox.widget {
+  wibox.widget {
     max_value = 100,
     value = 25,
     forced_height = dpi(6),
@@ -89,7 +87,7 @@ local function new(args)
   }
 
   ret._private.slider =
-    wibox.widget {
+  wibox.widget {
     forced_height = dpi(8),
     bar_shape = gears.shape.rounded_rect,
     bar_height = 0,
@@ -102,12 +100,10 @@ local function new(args)
     widget = wibox.widget.slider
   }
 
-  ret._private.slider:connect_signal(
-    'property::value',
+  ret._private.slider:connect_signal('property::value',
     function()
       ret:set_value(ret._private.slider.value)
-    end
-  )
+    end)
 
   ret._private.read_only = false
 

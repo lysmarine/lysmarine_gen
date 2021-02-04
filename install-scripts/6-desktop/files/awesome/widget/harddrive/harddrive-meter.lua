@@ -7,23 +7,21 @@ local watch = require('awful.widget.watch')
 local dpi = require('beautiful').xresources.apply_dpi
 
 local slider =
-  wibox.widget {
+wibox.widget {
   read_only = true,
   widget = mat_slider
 }
 
-watch(
-  [[bash -c "df -h /home|grep '^/' | awk '{print $5}'"]],
+watch([[bash -c "df -h /home|grep '^/' | awk '{print $5}'"]],
   10,
   function(_, stdout)
     local space_consumed = stdout:match('(%d+)')
     slider:set_value(tonumber(space_consumed))
     collectgarbage('collect')
-  end
-)
+  end)
 
 local harddrive_meter =
-  wibox.widget {
+wibox.widget {
   wibox.widget {
     icon = icons.harddisk,
     size = dpi(24),

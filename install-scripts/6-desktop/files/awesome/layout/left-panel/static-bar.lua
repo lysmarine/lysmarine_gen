@@ -28,7 +28,7 @@ return function(screen, panel, static_bar_width)
 
 
 
--- Create the home button to toggle the left collapsible part
+  -- Create the home button to toggle the left collapsible part
   local home_button = wibox.widget {
     wibox.widget {
       menu_icon,
@@ -41,17 +41,13 @@ return function(screen, panel, static_bar_width)
     forced_width = dpi(48)
   }
 
--- Connect action to the button
-  home_button:buttons(
-      awful.button(
-        {},
-        1,
-        nil,
-        function()
-          panel:toggle()
-        end
-      )
-  )
+  -- Connect action to the button
+  home_button:buttons(awful.button({},
+    1,
+    nil,
+    function()
+      panel:toggle()
+    end))
 
 
 
@@ -63,37 +59,34 @@ return function(screen, panel, static_bar_width)
       widget = clickable_container,
       forced_height = dpi(48),
       forced_width = dpi(48),
-
     },
     widget = wibox.container.background,
     forced_width = dpi(48)
   }
 
   -- Connect action to the button
-  expand_task_list_btn:buttons(  -- The table of buttons that should bind to the widget.
-      awful.button( -- awful.button:new (mod, _button, press, release)
-        {height = dpi(24), expanded = false},
-        1,
-        nil,
-        function()
-          expand_task_list_btn.expanded = not expand_task_list_btn.expanded
-          if expand_task_list_btn.expanded then
-            taskbar_icon.visible = false
-            static_bar.forced_width = dpi(496)
-            static_bar.width = dpi(496)
-           -- expand_task_list_btn.bg = beautiful.primary.hue_500,
-            panel:open()
+  expand_task_list_btn:buttons(-- The table of buttons that should bind to the widget.
+    awful.button(-- awful.button:new (mod, _button, press, release)
+      { height = dpi(24), expanded = false },
+      1,
+      nil,
+      function()
+        expand_task_list_btn.expanded = not expand_task_list_btn.expanded
+        if expand_task_list_btn.expanded then
+          taskbar_icon.visible = false
+          static_bar.forced_width = dpi(496)
+          static_bar.width = dpi(496)
+          -- expand_task_list_btn.bg = beautiful.primary.hue_500,
+          panel:open()
 
-          else
-            taskbar_icon.visible = true
-            static_bar.forced_width = dpi(48)
-            static_bar.width = dpi(48)
-            expand_task_list_btn.bg = nil,
-            panel:close()
-          end
+        else
+          taskbar_icon.visible = true
+          static_bar.forced_width = dpi(48)
+          static_bar.width = dpi(48)
+          expand_task_list_btn.bg = nil,
+          panel:close()
         end
-      )
-  )
+      end))
 
 
 
@@ -107,7 +100,7 @@ return function(screen, panel, static_bar_width)
     start_sunday = false,
     week_numbers = true
   })
-  month_calendar:attach(textclock,'bl')
+  month_calendar:attach(textclock, 'bl')
 
   local clock_widget = wibox.container.margin(textclock, dpi(13), dpi(13), dpi(0), dpi(13))
 
@@ -119,48 +112,35 @@ return function(screen, panel, static_bar_width)
   -- We need one layoutbox per screen.
   local LayoutBox = function(s)
     local layoutBox = clickable_container(awful.widget.layoutbox(s))
-    layoutBox:buttons(
-      awful.util.table.join(
-        awful.button(
-          {},
-          1,
-          function()
-            awful.layout.inc(1)
-          end
-        ),
-        awful.button(
-          {},
-          2,
-          function()
-            awful.layout.inc(0)
-          end
-        )
-      )
-    )
+    layoutBox:buttons(awful.util.table.join(awful.button({},
+      1,
+      function()
+        awful.layout.inc(1)
+      end),
+      awful.button({},
+        2,
+        function()
+          awful.layout.inc(0)
+        end)))
     return layoutBox
   end
 
-  panel:connect_signal(
-    'opened',
+  panel:connect_signal('opened',
     function()
       menu_icon.icon = icons.close
-    end
-  )
+    end)
 
-  panel:connect_signal(
-    'closed',
+  panel:connect_signal('closed',
     function()
       menu_icon.icon = icons.menu
       taskbar_icon.visible = true
       expand_task_list_btn.bg = nil
       expand_task_list_btn.expanded = false
-    end
-  )
+    end)
 
-  static_bar =  wibox.widget {
+  static_bar = wibox.widget {
     id = 'static_bar',
     layout = wibox.layout.align.vertical,
-
     forced_width = static_bar_width,
     {
       layout = wibox.layout.fixed.vertical,
@@ -168,7 +148,7 @@ return function(screen, panel, static_bar_width)
       expand_task_list_btn,
       TaskList(screen)
     },
-     nil,
+    nil,
     {
       layout = wibox.layout.fixed.vertical,
       wibox.container.margin(systray, dpi(13), dpi(13), dpi(13), dpi(0)),
@@ -177,5 +157,4 @@ return function(screen, panel, static_bar_width)
     }
   }
   return static_bar
-
 end

@@ -5,17 +5,16 @@ function build(widget)
   local the_bg = wibox.container.background
 
   local container =
-    wibox.widget {
+  wibox.widget {
     widget,
     widget = the_bg,
     forced_height = dpi(48),
-      forced_width = dpi(48),
-      width = dpi(48),
+    forced_width = dpi(48),
+    width = dpi(48),
   }
   local old_cursor, old_wibox
 
-  container:connect_signal(
-    'mouse::enter',
+  container:connect_signal('mouse::enter',
     function()
       container.bg = '#ffffff11'
       -- Hm, no idea how to get the wibox from this signal's arguments...
@@ -24,33 +23,26 @@ function build(widget)
         old_cursor, old_wibox = w.cursor, w
         w.cursor = 'arrow'
       end
-    end
-  )
+    end)
 
-  container:connect_signal(
-    'mouse::leave',
+  container:connect_signal('mouse::leave',
     function()
       container.bg = '#ffffff00'
       if old_wibox then
         old_wibox.cursor = old_cursor
         old_wibox = nil
       end
-    end
-  )
+    end)
 
-  container:connect_signal(
-    'button::press',
+  container:connect_signal('button::press',
     function()
       container.bg = '#ffffff22'
-    end
-  )
+    end)
 
-  container:connect_signal(
-    'button::release',
+  container:connect_signal('button::release',
     function()
       container.bg = '#ffffff11'
-    end
-  )
+    end)
 
   return container
 end

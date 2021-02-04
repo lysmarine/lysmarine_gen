@@ -9,7 +9,7 @@ left_panels = function(screen)
   local panel_content_width = dpi(400)
 
   panel =
-    wibox {
+  wibox {
     screen = screen,
     width = static_bar_width,
     height = screen.geometry.height,
@@ -38,16 +38,14 @@ left_panels = function(screen)
   }
 
   function panel:run_rofi()
-    _G.awesome.spawn(
-      apps.default.rofi,
+    _G.awesome.spawn(apps.default.rofi,
       false,
       false,
       false,
       false,
       function()
         panel:toggle()
-      end
-    )
+      end)
   end
 
   local openPanel = function(should_run_rofi)
@@ -76,6 +74,7 @@ left_panels = function(screen)
     panel.opened = false
     closePanel()
   end
+
   function panel:open()
     panel.opened = true
     openPanel()
@@ -91,17 +90,11 @@ left_panels = function(screen)
     end
   end
 
-  backdrop:buttons(
-    awful.util.table.join(
-      awful.button(
-        {},
-        1,
-        function()
-          panel:toggle()
-        end
-      )
-    )
-  )
+  backdrop:buttons(awful.util.table.join(awful.button({},
+    1,
+    function()
+      panel:toggle()
+    end)))
 
   panel:setup {
     layout = wibox.layout.align.horizontal,

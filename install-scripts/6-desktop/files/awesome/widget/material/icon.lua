@@ -8,23 +8,19 @@ local wibox = require('wibox')
 
 -- Local declarations
 
-local mat_list_item = {mt = {}}
+local mat_list_item = { mt = {} }
 
 function mat_list_item:layout(_, width, height)
   local layout = {}
 
   -- Add divider if present
   if self._private.icon then
-    table.insert(
-      layout,
-      base.place_widget_at(
-        self._private.imagebox,
+    table.insert(layout,
+      base.place_widget_at(self._private.imagebox,
         width / 2 - self._private.size / 2,
         height / 2 - self._private.size / 2,
         self._private.size,
-        self._private.size
-      )
-    )
+        self._private.size))
   end
   return layout
 end
@@ -54,13 +50,11 @@ end
 
 local function new(icon, size)
   local ret =
-    base.make_widget(
-    nil,
+  base.make_widget(nil,
     nil,
     {
       enable_properties = true
-    }
-  )
+    })
 
   gtable.crush(ret, mat_list_item, true)
   ret._private.icon = icon

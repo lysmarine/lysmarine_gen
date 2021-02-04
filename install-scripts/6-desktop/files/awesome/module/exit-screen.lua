@@ -12,7 +12,7 @@ local icon_size = beautiful.exit_screen_icon_size or dpi(140)
 
 local buildButton = function(icon)
   local abutton =
-    wibox.widget {
+  wibox.widget {
     wibox.widget {
       wibox.widget {
         wibox.widget {
@@ -42,78 +42,70 @@ function suspend_command()
   exit_screen_hide()
   awful.spawn.with_shell(apps.default.lock .. ' & systemctl suspend')
 end
+
 function exit_command()
   awful.spawn.with_shell("echo 'awesome.restart()' | awesome-client")
 end
+
 function lock_command()
   exit_screen_hide()
   awful.spawn.with_shell('sleep 1 && ' .. apps.default.lock)
 end
+
 function poweroff_command()
   awful.spawn.with_shell('poweroff')
   awful.keygrabber.stop(_G.exit_screen_grabber)
 end
+
 function reboot_command()
   awful.spawn.with_shell('reboot')
   awful.keygrabber.stop(_G.exit_screen_grabber)
 end
 
 local poweroff = buildButton(icons.power, 'Shutdown')
-poweroff:connect_signal(
-  'button::release',
+poweroff:connect_signal('button::release',
   function()
     poweroff_command()
-  end
-)
+  end)
 
 local reboot = buildButton(icons.restart, 'Restart')
-reboot:connect_signal(
-  'button::release',
+reboot:connect_signal('button::release',
   function()
     reboot_command()
-  end
-)
+  end)
 
 local suspend = buildButton(icons.sleep, 'Sleep')
-suspend:connect_signal(
-  'button::release',
+suspend:connect_signal('button::release',
   function()
     suspend_command()
-  end
-)
+  end)
 
 local exit = buildButton(icons.logout, 'Logout')
-exit:connect_signal(
-  'button::release',
+exit:connect_signal('button::release',
   function()
     exit_command()
-  end
-)
+  end)
 
 local lock = buildButton(icons.lock, 'Lock')
-lock:connect_signal(
-  'button::release',
+lock:connect_signal('button::release',
   function()
     lock_command()
-  end
-)
+  end)
 
 -- Get screen geometry
 local screen_geometry = awful.screen.focused().geometry
 
 -- Create the widget
 exit_screen =
-  wibox(
-  {
-    x = screen_geometry.x,
-    y = screen_geometry.y,
-    visible = false,
-    ontop = true,
-    type = 'splash',
-    height = screen_geometry.height,
-    width = screen_geometry.width
-  }
-)
+wibox({
+  x = screen_geometry.x,
+  y = screen_geometry.y,
+  visible = false,
+  ontop = true,
+  type = 'splash',
+  height = screen_geometry.height,
+  width = screen_geometry.width
+})
 
 exit_screen.bg = beautiful.background.hue_800 .. 'dd'
 exit_screen.fg = beautiful.exit_screen_fg or beautiful.wibar_fg or '#FEFEFE'
@@ -128,52 +120,42 @@ end
 function exit_screen_show()
   -- naughty.notify({text = "starting the keygrabber"})
   exit_screen_grabber =
-    awful.keygrabber.run(
-    function(_, key, event)
-      if event == 'release' then
-        return
-      end
-
-      if key == 's' then
-        suspend_command()
-      elseif key == 'e' then
-        exit_command()
-      elseif key == 'l' then
-        lock_command()
-      elseif key == 'p' then
-        poweroff_command()
-      elseif key == 'r' then
-        reboot_command()
-      elseif key == 'Escape' or key == 'q' or key == 'x' then
-        -- naughty.notify({text = "Cancel"})
-        exit_screen_hide()
-      -- else awful.keygrabber.stop(exit_screen_grabber)
-      end
+  awful.keygrabber.run(function(_, key, event)
+    if event == 'release' then
+      return
     end
-  )
+
+    if key == 's' then
+      suspend_command()
+    elseif key == 'e' then
+      exit_command()
+    elseif key == 'l' then
+      lock_command()
+    elseif key == 'p' then
+      poweroff_command()
+    elseif key == 'r' then
+      reboot_command()
+    elseif key == 'Escape' or key == 'q' or key == 'x' then
+      -- naughty.notify({text = "Cancel"})
+      exit_screen_hide()
+      -- else awful.keygrabber.stop(exit_screen_grabber)
+    end
+  end)
   exit_screen.visible = true
 end
 
-exit_screen:buttons(
-  gears.table.join(
-    -- Middle click - Hide exit_screen
-    awful.button(
-      {},
-      2,
-      function()
-        exit_screen_hide()
-      end
-    ),
-    -- Right click - Hide exit_screen
-    awful.button(
-      {},
-      3,
-      function()
-        exit_screen_hide()
-      end
-    )
-  )
-)
+exit_screen:buttons(gears.table.join(-- Middle click - Hide exit_screen
+  awful.button({},
+    2,
+    function()
+      exit_screen_hide()
+    end),
+  -- Right click - Hide exit_screen
+  awful.button({},
+    3,
+    function()
+      exit_screen_hide()
+    end)))
 
 -- Item placement
 exit_screen:setup {
@@ -184,9 +166,8 @@ exit_screen:setup {
       -- {
       poweroff,
       reboot,
-     -- suspend,
+      -- suspend,
       exit,
-
       layout = wibox.layout.fixed.horizontal
       -- },
       -- widget = exit_screen_box

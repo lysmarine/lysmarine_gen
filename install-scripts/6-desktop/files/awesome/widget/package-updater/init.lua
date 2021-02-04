@@ -26,7 +26,7 @@ local updateAvailable = false
 local numOfUpdatesAvailable
 
 local widget =
-  wibox.widget {
+wibox.widget {
   {
     id = 'icon',
     widget = wibox.widget.imagebox,
@@ -36,38 +36,30 @@ local widget =
 }
 
 local widget_button = clickable_container(wibox.container.margin(widget, dpi(14), dpi(14), dpi(4), dpi(4)))
-widget_button:buttons(
-  gears.table.join(
-    awful.button(
-      {},
-      1,
-      nil,
-      function()
-        if updateAvailable then
-          awful.spawn('pamac-manager --updates')
-        else
-          awful.spawn('pamac-manager')
-        end
-      end
-    )
-  )
-)
+widget_button:buttons(gears.table.join(awful.button({},
+  1,
+  nil,
+  function()
+    if updateAvailable then
+      awful.spawn('pamac-manager --updates')
+    else
+      awful.spawn('pamac-manager')
+    end
+  end)))
 -- Alternative to naughty.notify - tooltip. You can compare both and choose the preferred one
-awful.tooltip(
-  {
-    objects = {widget_button},
-    mode = 'outside',
-    align = 'right',
-    timer_function = function()
-      if updateAvailable then
-        return numOfUpdatesAvailable .. ' updates are available'
-      else
-        return 'We are up-to-date!'
-      end
-    end,
-    preferred_positions = {'right', 'left', 'top', 'bottom'}
-  }
-)
+awful.tooltip({
+  objects = { widget_button },
+  mode = 'outside',
+  align = 'right',
+  timer_function = function()
+    if updateAvailable then
+      return numOfUpdatesAvailable .. ' updates are available'
+    else
+      return 'We are up-to-date!'
+    end
+  end,
+  preferred_positions = { 'right', 'left', 'top', 'bottom' }
+})
 
 -- To use colors from beautiful theme put
 -- following lines in rc.lua before require("battery"):
@@ -90,8 +82,7 @@ local function show_battery_warning()
 end
 
 local last_battery_check = os.time()
-watch(
-  'pamac checkupdates',
+watch('pamac checkupdates',
   60,
   function(_, stdout)
     numOfUpdatesAvailable = tonumber(stdout:match('.-\n'):match('%d*'))
@@ -106,7 +97,6 @@ watch(
     widget.icon:set_image(PATH_TO_ICONS .. widgetIconName .. '.svg')
     collectgarbage('collect')
   end,
-  widget
-)
+  widget)
 
 return widget_button

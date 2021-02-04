@@ -36,48 +36,35 @@ local function backdrop(c)
   local function update()
     update_backdrop(c.backdrop, c)
   end
+
   if not c.backdrop then
-    c.backdrop = wibox {ontop = true, bg = '#00000054', type = 'splash'}
-    c.backdrop:buttons(
-      awful.util.table.join(
-        awful.button(
-          {},
-          1,
-          function()
-            c:kill()
-          end
-        )
-      )
-    )
+    c.backdrop = wibox { ontop = true, bg = '#00000054', type = 'splash' }
+    c.backdrop:buttons(awful.util.table.join(awful.button({},
+      1,
+      function()
+        c:kill()
+      end)))
     c:connect_signal('property::geometry', update)
-    c:connect_signal(
-      'property::shape_client_bounding',
+    c:connect_signal('property::shape_client_bounding',
       function()
         gears.timer.delayed_call(update)
-      end
-    )
-    c:connect_signal(
-      'unmanage',
+      end)
+    c:connect_signal('unmanage',
       function()
         c.backdrop.visible = false
-      end
-    )
-    c:connect_signal(
-      'property::shape_bounding',
+      end)
+    c:connect_signal('property::shape_bounding',
       function()
         gears.timer.delayed_call(update)
-      end
-    )
+      end)
   end
   update()
   c.backdrop.visible = true
 end
 
-_G.client.connect_signal(
-  'manage',
+_G.client.connect_signal('manage',
   function(c)
     if c.drawBackdrop == true then
       backdrop(c)
     end
-  end
-)
+  end)

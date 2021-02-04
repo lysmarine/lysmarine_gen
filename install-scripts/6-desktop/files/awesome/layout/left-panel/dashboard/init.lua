@@ -8,7 +8,7 @@ local icons = require('theme.icons')
 
 return function(_, panel)
   local search_button =
-    wibox.widget {
+  wibox.widget {
     wibox.widget {
       icon = icons.search,
       size = dpi(24),
@@ -23,20 +23,14 @@ return function(_, panel)
     widget = mat_list_item
   }
 
-  search_button:buttons(
-    awful.util.table.join(
-      awful.button(
-        {},
-        1,
-        function()
-          panel:run_rofi()
-        end
-      )
-    )
-  )
+  search_button:buttons(awful.util.table.join(awful.button({},
+    1,
+    function()
+      panel:run_rofi()
+    end)))
 
   local exit_button =
-    wibox.widget {
+  wibox.widget {
     wibox.widget {
       icon = icons.logout,
       size = dpi(24),
@@ -52,18 +46,12 @@ return function(_, panel)
     widget = mat_list_item
   }
 
-  exit_button:buttons(
-    awful.util.table.join(
-      awful.button(
-        {},
-        1,
-        function()
-          panel:toggle()
-          _G.exit_screen_show()
-        end
-      )
-    )
-  )
+  exit_button:buttons(awful.util.table.join(awful.button({},
+    1,
+    function()
+      panel:toggle()
+      _G.exit_screen_show()
+    end)))
 
   return wibox.widget {
     layout = wibox.layout.align.vertical,

@@ -25,20 +25,20 @@ awful.rules.rules = {
     }
   },
   {
-    rule_any = {name = {'QuakeTerminal'}},
-    properties = {skip_decoration = true}
+    rule_any = { name = { 'QuakeTerminal' } },
+    properties = { skip_decoration = true }
   },
   {
-    rule_any = {name = {'OpenCPN'}},
-    properties = { floating = true}
+    rule_any = { name = { 'OpenCPN' } },
+    properties = { floating = true }
   },
   {
-    rule_any = {name = {'Onboard'}},
-    properties = {skip_decoration = true,floating = true,placement = awful.placement.bottom, focusable = false}
+    rule_any = { name = { 'Onboard' } },
+    properties = { skip_decoration = true, floating = true, placement = awful.placement.bottom, focusable = false }
   },
   -- Titlebars
   {
-    rule_any = {type = {'dialog'}, class = {'Wicd-client.py', 'calendar.google.com'}},
+    rule_any = { type = { 'dialog' }, class = { 'Wicd-client.py', 'calendar.google.com' } },
     properties = {
       placement = awful.placement.centered,
       ontop = true,

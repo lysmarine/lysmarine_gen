@@ -9,11 +9,11 @@ local wibox = require('wibox')
 local clickable_container = require('widget.material.clickable-container')
 -- Local declarations
 
-local mat_list_item = {mt = {}}
+local mat_list_item = { mt = {} }
 
 function mat_list_item:build_separator()
   self._private.separator =
-    wibox.widget {
+  wibox.widget {
     orientation = 'horizontal',
     forced_height = 1,
     opacity = 0.08,
@@ -24,7 +24,7 @@ end
 
 function mat_list_item:build_clickable_container()
   self._private.clickable_container =
-    wibox.widget {
+  wibox.widget {
     wibox.widget {
       widget = wibox.widget.textbox
     },
@@ -66,7 +66,7 @@ function mat_list_item:fit(_, width)
   return width, dpi(48)
 end
 
----- Properties ----
+--- - Properties ----
 
 -- Property clickable
 function mat_list_item:set_clickable(value)
@@ -130,7 +130,6 @@ end
 --- The widget who will be the content.
 -- @property content
 -- @tparam widget widget The widget
-
 function mat_list_item:set_content(widget)
   if widget then
     base.check_widget(widget)
@@ -146,7 +145,7 @@ end
 -- Get the number of children element
 -- @treturn table The children
 function mat_list_item:get_children()
-  return {self._private.widget}
+  return { self._private.widget }
 end
 
 -- Replace the layout children
@@ -166,13 +165,11 @@ end
 
 local function new(widget)
   local ret =
-    base.make_widget(
-    nil,
+  base.make_widget(nil,
     nil,
     {
       enable_properties = true
-    }
-  )
+    })
 
   gtable.crush(ret, mat_list_item, true)
 

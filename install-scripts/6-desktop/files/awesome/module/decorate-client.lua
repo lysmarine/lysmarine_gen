@@ -59,11 +59,9 @@ function clientCallback(client)
     if not client.skip_decoration and client.screen then
       changesOnScreenCalled = true
       local screen = client.screen
-      gears.timer.delayed_call(
-        function()
-          changesOnScreen(screen)
-        end
-      )
+      gears.timer.delayed_call(function()
+        changesOnScreen(screen)
+      end)
     end
   end
 end
@@ -73,11 +71,9 @@ function tagCallback(tag)
     if tag.screen then
       changesOnScreenCalled = true
       local screen = tag.screen
-      gears.timer.delayed_call(
-        function()
-          changesOnScreen(screen)
-        end
-      )
+      gears.timer.delayed_call(function()
+        changesOnScreen(screen)
+      end)
     end
   end
 end
@@ -90,16 +86,14 @@ _G.client.connect_signal('property::hidden', clientCallback)
 
 _G.client.connect_signal('property::minimized', clientCallback)
 
-_G.client.connect_signal(
-  'property::fullscreen',
+_G.client.connect_signal('property::fullscreen',
   function(c)
     if c.fullscreen then
       renderClient(c, 'maximized')
     else
       clientCallback(c)
     end
-  end
-)
+  end)
 
 _G.tag.connect_signal('property::selected', tagCallback)
 

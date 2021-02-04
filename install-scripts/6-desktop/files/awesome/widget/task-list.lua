@@ -1,14 +1,13 @@
 local awful = require('awful')
 local wibox = require('wibox')
 local dpi = require('beautiful').xresources.apply_dpi
-local capi = {button = _G.button}
+local capi = { button = _G.button }
 local gears = require('gears')
 local clickable_container = require('widget.material.clickable-container')
 --- Common method to create buttons.
 -- @tab buttons
 -- @param object
 -- @treturn table
-
 local function create_buttons(buttons, object)
   if buttons then
     local btns = {}
@@ -17,19 +16,15 @@ local function create_buttons(buttons, object)
       -- press and release events, and will propagate them to the
       -- button object the user provided, but with the object as
       -- argument.
-      local btn = capi.button {modifiers = b.modifiers, button = b.button}
-      btn:connect_signal(
-        'press',
+      local btn = capi.button { modifiers = b.modifiers, button = b.button }
+      btn:connect_signal('press',
         function()
           b:emit_signal('press', object)
-        end
-      )
-      btn:connect_signal(
-        'release',
+        end)
+      btn:connect_signal('release',
         function()
           b:emit_signal('release', object)
-        end
-      )
+        end)
       btns[#btns + 1] = btn
     end
 
@@ -49,35 +44,25 @@ local function list_update(w, buttons, label, data, objects)
       bgb = cache.bgb
       tbm = cache.tbm
       ibm = cache.ibm
-      tt  = cache.tt
+      tt = cache.tt
     else
       ib = wibox.widget.imagebox()
       tb = wibox.widget.textbox()
       cb =
-        clickable_container(
-        wibox.container.margin(
-          wibox.widget.imagebox(os.getenv('HOME') .. '/.config/awesome/theme/icons/tag-list/tag/close.png'),
-          16,
-          4,
-          4,
-          4
-        )
-      )
+      clickable_container(wibox.container.margin(wibox.widget.imagebox(os.getenv('HOME') .. '/.config/awesome/theme/icons/tag-list/tag/close.png'),
+        16,
+        4,
+        4,
+        4))
       cb.shape = gears.shape.circle
       cbm = wibox.container.margin(cb, dpi(12), dpi(12), dpi(12), dpi(12))
-      cbm:buttons(
-        gears.table.join(
-          awful.button(
-            {},
-            1,
-            nil,
-            function()
-              o.kill(o)
-              panel:close()
-            end
-          )
-        )
-      )
+      cbm:buttons(gears.table.join(awful.button({},
+        1,
+        nil,
+        function()
+          o.kill(o)
+          panel:close()
+        end)))
       bg_clickable = clickable_container()
       bgb = wibox.container.background()
       tbm = wibox.container.margin(tb, dpi(4), dpi(4))
@@ -100,7 +85,7 @@ local function list_update(w, buttons, label, data, objects)
 
       -- Tooltip to display whole title, if it was truncated
       tt = awful.tooltip({
-        objects = {tb},
+        objects = { tb },
         mode = 'outside',
         align = 'bottom',
         delay_show = 1,
@@ -112,7 +97,7 @@ local function list_update(w, buttons, label, data, objects)
         bgb = bgb,
         tbm = tbm,
         ibm = ibm,
-        tt  = tt
+        tt = tt
       }
     end
 
@@ -157,59 +142,47 @@ local function list_update(w, buttons, label, data, objects)
 end
 
 local tasklist_buttons =
-  awful.util.table.join(
-  awful.button(
-    {},
-    1,
-    function(c)
-      if c == _G.client.focus then
-        c.minimized = true
-      else
-        -- Without this, the following
-        -- :isvisible() makes no sense
-        c.minimized = false
-        if not c:isvisible() and c.first_tag then
-          c.first_tag:view_only()
-        end
-        -- This will also un-minimize
-        -- the client, if needed
-        _G.client.focus = c
-        c:raise()
+awful.util.table.join(awful.button({},
+  1,
+  function(c)
+    if c == _G.client.focus then
+      c.minimized = true
+    else
+      -- Without this, the following
+      -- :isvisible() makes no sense
+      c.minimized = false
+      if not c:isvisible() and c.first_tag then
+        c.first_tag:view_only()
       end
+      -- This will also un-minimize
+      -- the client, if needed
+      _G.client.focus = c
+      c:raise()
     end
-  ),
-  awful.button(
-    {},
+  end),
+  awful.button({},
     2,
     function(c)
       c.kill(c)
-    end
-  ),
-  awful.button(
-    {},
+    end),
+  awful.button({},
     4,
     function()
       awful.client.focus.byidx(1)
-    end
-  ),
-  awful.button(
-    {},
+    end),
+  awful.button({},
     5,
     function()
       awful.client.focus.byidx(-1)
-    end
-  )
-)
+    end))
 
 local TaskList = function(s)
-  return awful.widget.tasklist(
-    s,
+  return awful.widget.tasklist(s,
     awful.widget.tasklist.filter.currenttags,
     tasklist_buttons,
     {},
     list_update,
-    wibox.layout.flex.vertical()
-  )
+    wibox.layout.flex.vertical())
 end
 
 return TaskList

@@ -19,7 +19,7 @@ theme.accent = mat_colors.pink
 theme.background = mat_colors.grey
 
 local awesome_overrides =
-  function(theme)
+function(theme)
   theme.dir = os.getenv('HOME') .. '/.config/awesome/theme'
 
   theme.icons = theme.dir .. '/icons/'
@@ -69,16 +69,16 @@ local awesome_overrides =
   theme.taglist_bg_empty = theme.background.hue_800
   theme.taglist_bg_occupied = theme.background.hue_800
   theme.taglist_bg_urgent =
-    'linear:0,0:' ..
-    dpi(48) ..
-      ',0:0,' ..
-        theme.accent.hue_500 ..
+  'linear:0,0:' ..
+          dpi(48) ..
+          ',0:0,' ..
+          theme.accent.hue_500 ..
           ':0.08,' .. theme.accent.hue_500 .. ':0.08,' .. theme.background.hue_800 .. ':1,' .. theme.background.hue_800
   theme.taglist_bg_focus =
-    'linear:0,0:' ..
-    dpi(48) ..
-      ',0:0,' ..
-        theme.primary.hue_500 ..
+  'linear:0,0:' ..
+          dpi(48) ..
+          ',0:0,' ..
+          theme.primary.hue_500 ..
           ':0.08,' .. theme.primary.hue_500 .. ':0.08,' .. theme.background.hue_800 .. ':1,' .. theme.background.hue_800
 
   -- Tasklist
@@ -86,10 +86,10 @@ local awesome_overrides =
   theme.tasklist_font = 'Roboto medium 13'
   theme.tasklist_bg_normal = theme.background.hue_800
   theme.tasklist_bg_focus =
-    'linear:0,0:0,' ..
-    dpi(48) ..
-      ':0,' ..
-        theme.background.hue_800 ..
+  'linear:0,0:0,' ..
+          dpi(48) ..
+          ':0,' ..
+          theme.background.hue_800 ..
           ':0.95,' .. theme.background.hue_800 .. ':0.95,' .. theme.fg_normal .. ':1,' .. theme.fg_normal
   theme.tasklist_bg_urgent = theme.primary.hue_800
   theme.tasklist_fg_focus = '#DDDDDD'

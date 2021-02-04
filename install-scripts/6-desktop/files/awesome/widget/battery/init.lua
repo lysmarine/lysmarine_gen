@@ -24,7 +24,7 @@ local HOME = os.getenv('HOME')
 local PATH_TO_ICONS = HOME .. '/.config/awesome/widget/battery/icons/'
 
 local widget =
-  wibox.widget {
+wibox.widget {
   {
     id = 'icon',
     widget = wibox.widget.imagebox,
@@ -34,28 +34,20 @@ local widget =
 }
 
 local widget_button = clickable_container(wibox.container.margin(widget, dpi(14), dpi(14), 4, 4))
-widget_button:buttons(
-  gears.table.join(
-    awful.button(
-      {},
-      1,
-      nil,
-      function()
-        awful.spawn('xfce4-power-manager-settings')
-      end
-    )
-  )
-)
+widget_button:buttons(gears.table.join(awful.button({},
+  1,
+  nil,
+  function()
+    awful.spawn('xfce4-power-manager-settings')
+  end)))
 -- Alternative to naughty.notify - tooltip. You can compare both and choose the preferred one
 local battery_popup =
-  awful.tooltip(
-  {
-    objects = {widget_button},
-    mode = 'outside',
-    align = 'left',
-    preferred_positions = {'right', 'left', 'top', 'bottom'}
-  }
-)
+awful.tooltip({
+  objects = { widget_button },
+  mode = 'outside',
+  align = 'left',
+  preferred_positions = { 'right', 'left', 'top', 'bottom' }
+})
 
 -- To use colors from beautiful theme put
 -- following lines in rc.lua before require("battery"):
@@ -79,8 +71,7 @@ end
 
 local last_battery_check = os.time()
 
-watch(
-  'acpi -i',
+watch('acpi -i',
   1,
   function(_, stdout)
     local batteryIconName = 'battery'
@@ -90,7 +81,7 @@ watch(
     for s in stdout:gmatch('[^\r\n]+') do
       local status, charge_str, time = string.match(s, '.+: (%a+), (%d?%d?%d)%%,?.*')
       if status ~= nil then
-        table.insert(battery_info, {status = status, charge = tonumber(charge_str)})
+        table.insert(battery_info, { status = status, charge = tonumber(charge_str) })
       else
         local cap_str = string.match(s, '.+:.+last full capacity (%d+)')
         table.insert(capacities, tonumber(cap_str))
@@ -107,7 +98,7 @@ watch(
     for i, batt in ipairs(battery_info) do
       if batt.charge >= charge then
         status = batt.status -- use most charged battery status
-      -- this is arbitrary, and maybe another metric should be used
+        -- this is arbitrary, and maybe another metric should be used
       end
 
       charge = charge + batt.charge * capacities[i]
@@ -139,7 +130,6 @@ watch(
     battery_popup.text = string.gsub(stdout, '\n$', '')
     collectgarbage('collect')
   end,
-  widget
-)
+  widget)
 
 return widget_button

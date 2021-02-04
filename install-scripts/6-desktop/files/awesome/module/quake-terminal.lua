@@ -6,12 +6,10 @@ local quake_client
 local opened = false
 function create_shell()
   quake_id =
-    spawn(
-    app,
+  spawn(app,
     {
       skip_decoration = true
-    }
-  )
+    })
 end
 
 function open_quake()
@@ -35,8 +33,7 @@ toggle_quake = function()
   end
 end
 
-_G.client.connect_signal(
-  'manage',
+_G.client.connect_signal('manage',
   function(c)
     if (c.pid == quake_id) then
       quake_client = c
@@ -49,17 +46,14 @@ _G.client.connect_signal(
       c.hidden = not opened
       c.maximized_horizontal = true
     end
-  end
-)
+  end)
 
-_G.client.connect_signal(
-  'unmanage',
+_G.client.connect_signal('unmanage',
   function(c)
     if (c.pid == quake_id) then
       opened = false
       quake_client = nil
     end
-  end
-)
+  end)
 
 -- create_shell()
