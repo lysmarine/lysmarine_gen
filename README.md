@@ -159,7 +159,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - multimon-ng, netcat
 
 
-## Networking
+## Protocols
 
 - Samba (Windows Networking)
 - CUPS (printing)
