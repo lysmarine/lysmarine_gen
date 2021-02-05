@@ -39,7 +39,7 @@ pushd /home/signalk/.signalk
   su signalk -c "npm install signalk-raspberry-pi-1wire --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-venus-plugin --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-mqtt-gw --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-mqtt-home-assistant --unsafe-perm --loglevel error"
+  su signalk -c "npm install signalk-mqtt-home-asisstant --unsafe-perm --loglevel error"
   su signalk -c "npm install @codekilo/signalk-modbus-client --unsafe-perm --loglevel error"
   su signalk -c "npm install sk-resources-fs --unsafe-perm --loglevel error"
   su signalk -c "npm install freeboard-sk-helper --unsafe-perm --loglevel error"
