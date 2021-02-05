@@ -46,7 +46,7 @@ pushd /home/signalk/.signalk
   su signalk -c "npm install signalk-derived-data --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-anchoralarm-plugin --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-simple-notifications --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-wilhelm-plugin --unsafe-perm --loglevel error"
+  su signalk -c "npm install signalk-wilhelmsk-plugin --unsafe-perm --loglevel error"
   #su signalk -c "npm install signalk-world-coastline-map --unsafe-perm --loglevel error"
 popd
 
