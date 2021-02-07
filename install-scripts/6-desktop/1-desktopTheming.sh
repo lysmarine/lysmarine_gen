@@ -8,11 +8,6 @@ wget https://github.com/LordShenron/Griffin-Icons/archive/Griffin-Ghost.zip -O /
 unzip /tmp/Griffin-Ghost.zip -d /usr/local/share/icons/
 rm /tmp/Griffin-Ghost.zip
 
-
-# sudo cp -r ~/Downloads/Flat-Remix-GTK_2.8 /usr/share/themes/
-# https://github.com/bilelmoussaoui/Hardcode-Trayhttps://github.com/bilelmoussaoui/Hardcode-Tray
-# Awesome theming
-
 cp -r $FILE_FOLDER/awesome /home/user/.config/awesome
 chown -R 1000:1000 /home/user/.config/awesome
 
