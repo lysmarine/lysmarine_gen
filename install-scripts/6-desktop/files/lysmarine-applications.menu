@@ -217,6 +217,9 @@
             <Filename>obconf.desktop</Filename>
         </Include>
         <Include>
+            <Filename>seahorse.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>gnome-control-center.desktop</Filename>
         </Include>
         <Include>

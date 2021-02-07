@@ -3,7 +3,7 @@
 apt-get clean
 npm cache clean --force
 
-apt-get -q -y install i2c-tools python3-smbus traceroute telnet socat gdal-bin openvpn
+apt-get -q -y install i2c-tools python3-smbus traceroute telnet socat gdal-bin openvpn seahorse
 systemctl disable openvpn
 
 apt-get -q -y install dconf-editor gedit gnome-calculator gnome-weather gnome-chess openpref
