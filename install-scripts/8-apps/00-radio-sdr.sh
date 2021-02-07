@@ -122,8 +122,8 @@ cd "$MY_DIR_OLD"
 bash -c 'cat << EOF > /usr/local/share/applications/scytaleC-decoder.desktop
 [Desktop Entry]
 Type=Application
-Name=Scytale-C Decoder
-GenericName=Scytale-C Decoder
+Name=Scytale-C Inmarsat Decoder
+GenericName=Scytale-C Inmarsat Decoder
 Comment=Scytale-C Inmarsat Decoder
 Exec=/home/user/scytalec-inmarsat-bin/ScytaleC-dec-UI/ScytaleC.Decoder.UI.exe
 Terminal=false
@@ -135,8 +135,8 @@ EOF'
 bash -c 'cat << EOF > /usr/local/share/applications/scytaleC.desktop
 [Desktop Entry]
 Type=Application
-Name=Scytale-C
-GenericName=Scytale-C
+Name=Scytale-C Inmarsat
+GenericName=Scytale-C Inmarsat
 Comment=Scytale-C Inmarsat UI
 Exec=/home/user/scytalec-inmarsat-bin/ScytaleC/ScytaleC.exe
 Terminal=false
