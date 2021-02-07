@@ -15,6 +15,12 @@ systemctl disable snapd snapd.socket
 
 #apt-get install software-properties-common
 
+# rpi-clone
+git clone https://github.com/billw2/rpi-clone.git
+cd rpi-clone
+cp rpi-clone rpi-clone-setup /usr/local/sbin
+rm -rf rpi-clone
+
 apt-get clean
 npm cache clean --force
 
