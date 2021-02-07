@@ -184,6 +184,7 @@ Windlass, Bow Thruster, Lights)
 - NOAA Weather
 - NavTex
 - Inmarsat Fleet
+- SailMail
 
 
 ## Tools
@@ -207,6 +208,7 @@ Windlass, Bow Thruster, Lights)
 - C/C++ Compiler and Toolset
 - Debian, NPM, PIP, Snap package managers
 - rpi-clone
+- seahorse
 
 
 ## Data
@@ -230,6 +232,8 @@ Windlass, Bow Thruster, Lights)
 - OS Settings
 - Timezone Setup
 - Predict (Satellite Tracker for scripting)
+- Scytale-C Inmarsat Decoders
+- Pat SailMail
 
 
 # License
