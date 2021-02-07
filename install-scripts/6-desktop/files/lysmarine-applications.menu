@@ -116,6 +116,12 @@
         <Include>
             <Filename>quisk.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>scytaleC.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>scytaleC-decoder.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>System Tools</Name>
