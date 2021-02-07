@@ -19,6 +19,7 @@ systemctl disable snapd snapd.socket
 git clone https://github.com/billw2/rpi-clone.git
 cd rpi-clone
 cp rpi-clone rpi-clone-setup /usr/local/sbin
+cd ..
 rm -rf rpi-clone
 
 apt-get clean

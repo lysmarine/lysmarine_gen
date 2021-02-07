@@ -206,6 +206,7 @@ Windlass, Bow Thruster, Lights)
 - NodeJS
 - C/C++ Compiler and Toolset
 - Debian, NPM, PIP, Snap package managers
+- rpi-clone
 
 
 ## Data
