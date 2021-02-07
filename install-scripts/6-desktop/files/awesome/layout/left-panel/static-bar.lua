@@ -20,7 +20,7 @@ return function(screen, panel, static_bar_width)
   }
 
   local taskbar_icon = wibox.widget {
-    icon = icons.play,
+    icon = icons.winclose,
     size = dpi(24),
     widget = mat_icon,
     forced_width = dpi(48)

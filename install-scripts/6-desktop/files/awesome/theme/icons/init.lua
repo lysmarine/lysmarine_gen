@@ -13,6 +13,7 @@ return {
   --others
   menu = dir .. '/menu.svg',
   play = dir .. '/play.svg',
+  winclose = dir .. '/window-close.svg',
   close = dir .. '/close.svg',
   logout = dir .. '/logout.svg',
   sleep = dir .. '/power-sleep.svg',
