@@ -66,3 +66,83 @@ apt-get -y -q install chirp-daily
 apt-get -y -q install wmctrl rtl-sdr dl-fldigi ssdv
 
 apt-get clean
+
+#####################################################################################################
+# Inmarsat
+# See: https://bitbucket.org/scytalec/scytalec/src/develop/
+
+apt-get -y install dos2unix
+#apt-get -y install mono-complete
+
+MY_DIR_OLD=$(pwd)
+cd /home/user
+
+mkdir scytalec-inmarsat-bin && cd scytalec-inmarsat-bin
+
+echo -n "Install MONO like this:" > readme-first.txt
+echo -n "sudo apt-get -y install mono-complete dos2unix" >> readme-first.txt
+
+wget https://bitbucket.org/scytalec/scytalec/downloads/VERY-IMPORTANT-read-me.txt
+wget https://bitbucket.org/scytalec/scytalec/downloads/x64-ScytaleC.QuickUI-17010.zip
+wget https://bitbucket.org/scytalec/scytalec/downloads/x64-FramePlayer-1002Beta.zip
+wget https://bitbucket.org/scytalec/scytalec/downloads/x64-SDRSharp.ScytaleC-10213.zip
+wget https://bitbucket.org/scytalec/scytalec/downloads/x64-ScytaleC-1403.zip
+wget https://bitbucket.org/scytalec/scytalec/downloads/x64-DebugHelpers.zip
+wget https://bitbucket.org/scytalec/scytalec.decoder/downloads/x64_Scytalec.Decoder.UI_1.0.0.1.zip
+wget https://bitbucket.org/scytalec/scytalec.decoder/downloads/x64_Scytalec.Decoder.Cmd_1.0.zip
+
+dos2unix VERY-IMPORTANT-read-me.txt
+
+mkdir ScytaleC
+cd ScytaleC/
+unzip ../x64-ScytaleC-1403.zip
+chmod +x ./*.exe
+cd ..
+
+mkdir ScytaleC-UI
+cd ScytaleC-UI
+unzip ../x64-ScytaleC.QuickUI-17010.zip
+chmod +x ./*.exe
+cd ..
+
+mkdir ScytaleC-dec
+cd ScytaleC-dec
+unzip ../x64_Scytalec.Decoder.Cmd_1.0.zip
+chmod +x ./*.exe
+cd ..
+
+mkdir ScytaleC-dec-UI
+cd ScytaleC-dec-UI
+unzip ../x64_Scytalec.Decoder.UI_1.0.0.1.zip
+chmod +x ./*.exe
+cd ..
+
+cd "$MY_DIR_OLD"
+
+bash -c 'cat << EOF > /usr/local/share/applications/scytaleC-decoder.desktop
+[Desktop Entry]
+Type=Application
+Name=Scytale-C Decoder
+GenericName=Scytale-C Decoder
+Comment=Scytale-C Inmarsat Decoder
+Exec=/home/user/scytalec-inmarsat-bin/ScytaleC-dec-UI/ScytaleC.Decoder.UI.exe
+Terminal=false
+Icon=ModemManager
+Categories=Hamradio
+Keywords=Hamradio
+EOF'
+
+bash -c 'cat << EOF > /usr/local/share/applications/scytaleC.desktop
+[Desktop Entry]
+Type=Application
+Name=Scytale-C
+GenericName=Scytale-C
+Comment=Scytale-C Inmarsat UI
+Exec=/home/user/scytalec-inmarsat-bin/ScytaleC/ScytaleC.exe
+Terminal=false
+Icon=ModemManager
+Categories=Hamradio
+Keywords=Hamradio
+EOF'
+
+
