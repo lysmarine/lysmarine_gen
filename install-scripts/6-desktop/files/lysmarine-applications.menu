@@ -195,6 +195,9 @@
             <Filename>knots.desktop</Filename>
         </Include>
         <Include>
+            <Filename>marine-life.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>vessel-data.desktop</Filename>
         </Include>
     </Menu>

@@ -65,6 +65,11 @@ install -v $FILE_FOLDER/knots.desktop "/usr/local/share/applications/"
 
 install -d -o 1000 -g 1000 -m 0755 "/home/user/FloatPlans"
 
+
+install -d '/usr/local/share/marine-life'
+install -v -m 0644 $FILE_FOLDER/marine-life-id.html "/usr/local/share/marine-life/"
+install -v $FILE_FOLDER/marine-life.desktop "/usr/local/share/applications/"
+
 install -d -o 1000 -g 1000 -m 0755 "/home/user/.vessel"
 install -v -o 1000 -g 1000 -m 0644 $FILE_FOLDER/vessel.data "/home/user/.vessel/"
 install -v -m 0755 $FILE_FOLDER/vessel-data.sh "/usr/local/bin/vessel-data"

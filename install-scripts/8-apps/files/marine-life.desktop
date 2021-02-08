@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Marine Life
+GenericName=Marine Life
+Comment=Marine Life
+Exec=chromium /usr/local/share/marine-life/marine-life-id.html
+Terminal=false
+Icon=document
+Categories=Utilities
+Keywords=Utilities
