@@ -5,7 +5,7 @@ enabled=true
 current-settings-page=7
 use-system-defaults=false
 theme='/usr/share/onboard/themes/Lysmarine.theme'
-system-theme-associations={'Default': '/usr/share/onboard/themes/Lysmarine.theme','Adapta-Nokto': '/usr/share/onboard/themes/Lysmarine.theme'}
+system-theme-associations={'Default': '/usr/share/onboard/themes/Lysmarine.theme','materia-gtk-theme': '/usr/share/onboard/themes/Lysmarine.theme'}
 layout='/usr/share/onboard/layouts/Compact.onboard'
 schema-version='2.3'
 snippets=@as []
@@ -14,9 +14,10 @@ status-icon-provider="GtkStatusIcon"
 
 [window]
 docking-enabled=true
+force-to-top=true
 
 [window/landscape]
 width=764
 height=480
-x=36
-y=0
+x=48
+y=48

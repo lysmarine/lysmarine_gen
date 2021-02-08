@@ -3,9 +3,8 @@
 ## Needed to allow the service file start X
 install  -v $FILE_FOLDER/Xwrapper.config "/etc/X11/"
 
-if [ $LMOS == Raspbian ] ;then
-	apt-get install -q -y xserver-xorg-video-fbturbo
-fi
+## Rpi
+apt-get install -q -y xserver-xorg-video-fbturbo || true
 
 if [ $LMOS == Armbian ] ;then
 	sudo apt-get -q -y install xserver-xorg-legacy	

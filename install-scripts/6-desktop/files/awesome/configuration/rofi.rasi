@@ -35,7 +35,7 @@ configuration {
 	line-margin:                 2;
 	line-padding:                2;
 	separator-style:             "none";
-	hide-scrollbar:              "true";
+	hide-scrollbar:              "false";
 	margin:                      0px;
 	padding:                     0px;
 	font:            "Roboto medium 10";
@@ -142,4 +142,16 @@ element alternate.urgent {
 element alternate.active {
 	background-color: @active-background;
 	text-color:       @active-foreground;
+}
+
+#scrollbar {
+    width:        0px ;
+    border:       0;
+    handle-color: @normal-foreground;
+    handle-width: 18px ;
+    padding:      0;
+}
+
+listview {
+	scrollbar: true;
 }

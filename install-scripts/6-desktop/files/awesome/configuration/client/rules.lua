@@ -34,7 +34,7 @@ awful.rules.rules = {
   },
   {
     rule_any = { name = { 'Onboard' } },
-    properties = { skip_decoration = true, floating = true, placement = awful.placement.bottom, focusable = false }
+    properties = { skip_decoration = true, floating = true, placement = awful.placement.bottom, focusable = false, honor_workarea = true }
   },
   -- Titlebars
   {
