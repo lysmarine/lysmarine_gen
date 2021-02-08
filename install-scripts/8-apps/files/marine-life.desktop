@@ -5,6 +5,6 @@ GenericName=Marine Life
 Comment=Marine Life
 Exec=chromium /usr/local/share/marine-life/marine-life-id.html
 Terminal=false
-Icon=document
+Icon=accessories-dictionary
 Categories=Utilities
 Keywords=Utilities
