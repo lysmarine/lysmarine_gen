@@ -4,6 +4,7 @@ apt-get clean
 
 apt-get -y -q install multimon-ng netcat
 apt-get -y -q install cubicsdr
+apt-get -y -q install cutesdr
 apt-get -y -q install fldigi
 apt-get -y -q install gpredict
 apt-get -y -q install previsat
@@ -13,6 +14,8 @@ apt-get -y -q install gnss-sdr
 apt-get -y -q install gnuradio
 apt-get -y -q install gnuais
 apt-get -y -q install gnuaisgui
+
+apt-get -y -q install soundmodem
 
 install -d -m 755 "/usr/local/share/noaa-apt"
 install -d -m 755 "/usr/local/share/noaa-apt/res"
@@ -60,8 +63,6 @@ wget -q -O - https://arachnoid.com/JWX/resources/JWX_source.tar.bz2 > /usr/local
 
 apt-get -y -q install default-jdk
 apt-get -y -q install hamfax
-
-apt-get -y -q install cutesdr
 
 apt-get -y -q install chirp-daily
 

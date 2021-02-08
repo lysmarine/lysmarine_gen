@@ -148,6 +148,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - Flarq
 - Fldigi
 - GNU Radio Companion
+- CuteSdr
 - GPredict
 - Gqrx
 - Hamfax RadioFax
