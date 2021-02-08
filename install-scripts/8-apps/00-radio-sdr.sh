@@ -61,6 +61,8 @@ wget -q -O - https://arachnoid.com/JWX/resources/JWX_source.tar.bz2 > /usr/local
 apt-get -y -q install default-jdk
 apt-get -y -q install hamfax
 
+apt-get -y -q install cutesdr
+
 apt-get -y -q install chirp-daily
 
 apt-get -y -q install wmctrl rtl-sdr dl-fldigi ssdv

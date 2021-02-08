@@ -117,6 +117,9 @@
             <Filename>quisk.desktop</Filename>
         </Include>
         <Include>
+            <Filename>cutesdr.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>scytaleC.desktop</Filename>
         </Include>
         <Include>
