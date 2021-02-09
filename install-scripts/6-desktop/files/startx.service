@@ -8,8 +8,8 @@ WorkingDirectory=/home/user
 PAMName=login
 Type=simple
 ExecStart=/bin/bash -l -c startx
-RestartSec=3
-Restart=on-failure
+RestartSec=500ms
+Restart=always
 
 [Install]
 WantedBy=graphical.target
