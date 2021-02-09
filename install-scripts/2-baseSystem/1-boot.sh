@@ -5,6 +5,9 @@ apt-get install -y -q plymouth plymouth-label;
 install -v -d "/etc/systemd/system/getty@tty1.service.d"
 install -v -m0644 $FILE_FOLDER/skip-prompt.conf "/etc/systemd/system/getty@tty1.service.d/"
 
+echo "setterm -cursor on" >> /etc/issue
+
+
 ## Raspbian
 if [ -f /boot/config.txt  ] ;then
 	cat $FILE_FOLDER/appendToConfig.txt >> /boot/config.txt
@@ -13,7 +16,6 @@ fi
 ## Raspbian
 if [ -f /boot/cmdline.txt ] ; then
 	sed -i '$s/$/\ loglevel=1\ splash\ quiet\ logo.nologo\ vt.global_cursor_default=0\ plymouth.ignore-serial-consoles\ console=tty3\ rd.systemd.show_status=false/' /boot/cmdline.txt
-	setterm -cursor on >> /etc/issue
 fi
 
 ## Armbian
@@ -41,6 +43,4 @@ if [ -f /etc/issue ] ;then
 fi
 
 # Raspbian enable this to intercept keystroke during the boot process, (for ondemand cup freq management.) Lysmarine don't want to set it that way.
-if [[ $LMOS == 'Raspbian' ]]; then
-	systemctl disable triggerhappy.service
-fi
+systemctl disable triggerhappy.service || /bin/true
