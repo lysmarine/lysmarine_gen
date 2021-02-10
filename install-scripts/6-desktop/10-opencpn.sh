@@ -2,7 +2,8 @@
 
 apt-get install -y -q opencpn
 
-apt-get install -y -q opencpn-plugin-celestial opencpn-plugin-launcher 
+apt-get install -y -q opencpn-plugin-celestial opencpn-plugin-launcher opencpn-plugin-radar \
+   opencpn-plugin-pypilot opencpn-plugin-objsearch opencpn-plugin-iacfleet imgkap
 
 #apt-get install -y -q opencpn-gshhs-full opencpn-gshhs-high opencpn-gshhs-intermediate opencpn-gshhs-low opencpn-gshhs-crude
 #apt-get install -y -q opencpn-tcdata
