@@ -91,7 +91,26 @@
         }
       ],
       "id": "gps1",
-      "enabled": false
+      "enabled": true
+    },
+    {
+      "pipeElements": [
+        {
+          "type": "providers/simple",
+          "options": {
+            "logging": false,
+            "type": "NMEA0183",
+            "subOptions": {
+              "validateChecksum": false,
+              "type": "serial",
+              "device": "/dev/ttyLYS_gps_2",
+              "baudrate": 4800
+            }
+          }
+        }
+      ],
+      "id": "gps2",
+      "enabled": true
     }
   ],
   "security": {
