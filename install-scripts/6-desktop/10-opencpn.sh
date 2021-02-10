@@ -36,3 +36,13 @@ cd s63_pi-1.17.1-0_ubuntu-arm64-18.04
 cp -r usr/ /
 cd ../../
 rm -rf s63-tmp
+
+mkdir o-tmp
+cd o-tmp
+wget https://dl.cloudsmith.io/public/david-register/ocpn-plugins-unstable/raw/names/o-ubuntu-arm64-18.04-tarball/versions/4.2.18.2.0.ab86266/o-charts_pi-4.2.18.2-0_ubuntu-arm64-18.04.tar.gz
+gzip -cd o-charts_pi-4.2.18.2-0_ubuntu-arm64-18.04.tar.gz | tar xvf -
+cd o-charts_pi-4.2.18.2-0_ubuntu-arm64-18.04
+cp -r usr/ /
+cp -r etc/ /
+cd ../../
+rm -rf o-tmp
