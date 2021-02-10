@@ -4,6 +4,9 @@ apt-get install -y -q opencpn
 
 apt-get install -y -q opencpn-plugin-celestial opencpn-plugin-launcher 
 
+#apt-get install -y -q opencpn-gshhs-full opencpn-gshhs-high opencpn-gshhs-intermediate opencpn-gshhs-low opencpn-gshhs-crude
+#apt-get install -y -q opencpn-tcdata
+
 install -o 1000 -g 1000 -d "/home/user/.opencpn"
 install -o 1000 -g 1000 -v $FILE_FOLDER/opencpn.conf "/home/user/.opencpn/"
 
