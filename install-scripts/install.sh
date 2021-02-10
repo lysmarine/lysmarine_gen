@@ -4,7 +4,8 @@ echo "Install script for Lysmarine :)"
 
 ## Check variable declaration
 if [[ -z $LMARCH ]]; then
-  export LMARCH="$(dpkg --print-architecture)"
+  LMARCH="$(dpkg --print-architecture)"
+  export LMARCH
 fi
 echo "Architecture: $LMARCH"
 
@@ -12,7 +13,8 @@ if [[ -z $LMOS ]]; then
   if [ ! -f /usr/bin/lsb_release ]; then
     apt-get install -y -q lsb-release
   fi
-  export LMOS="$(lsb_release -id -s | head -1)"
+  LMOS="$(lsb_release -id -s | head -1)"
+  export LMOS
 fi
 echo "Base OS: $LMOS"
 
