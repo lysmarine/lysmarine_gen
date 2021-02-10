@@ -8,6 +8,8 @@ install -o 1000 -g 1000 -d /var/lib/avnav
 
 apt-get -q -y --no-install-recommends install avnav xterm mpg123
 
+apt-get -q -y install avnav-history-plugin avnav-ocharts-plugin avnav-oesenc avnav-update-plugin avnav-raspi
+
 adduser avnav audio
 
 usermod -a -G charts avnav
