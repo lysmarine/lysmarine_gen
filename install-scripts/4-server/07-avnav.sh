@@ -12,7 +12,7 @@ apt-get -q -y install avnav-history-plugin avnav-ocharts-plugin # avnav-raspi
 
 apt-get -q -y install avnav-update-plugin || true
 
-apt-get -q -y -o Dpkg::Options::="--force-overwrite" install avnav-oesenc
+apt-get -q -y -o Dpkg::Options::="--force-overwrite" install avnav-oesenc || true
 
 adduser avnav audio
 
