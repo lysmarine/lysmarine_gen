@@ -14,20 +14,29 @@
 	##
 	#################################################################################
 
+	# Set variables.
 	baseOS="${1:-raspios}"
 	cpuArch="${2:-armhf}"
-	lmVersion="${3:-nightBuild_$EPOCHSECONDS}"
+	lmVersion="${3:-$EPOCHSECONDS}"
 	stagesToBuild="$4"
 	buildCmd="./install.sh $4"
 	[[ $4 == 'bash' ]] && buildCmd='/bin/bash' ;
+
+	# Validate arguments.
+	supportedOS=(raspios debian-live pine64so)
+	if ! (printf '%s\n' "${supportedOS[@]}" | grep -xq $baseOS); then
+		echo "Unsupported os." ; exit 1
+	fi
+	supportedArch=(armhf arm64 amd64)
+	if ! (printf '%s\n' "${supportedArch[@]}" | grep -xq $cpuArch); then
+		echo "Unsupported cpu arch." ; exit 1
+	fi
 
 	# Setup the workspace
 	setupWorkSpace "$baseOS-$cpuArch"
 	cacheDir="./cache/$baseOS-$cpuArch"
 	workDir="./work/$baseOS-$cpuArch"
 	releaseDir="./release/"
-
-
 
 	# if the source OS is not found in cache, download it.
 	if ! ls "$cacheDir/$baseOS-$cpuArch".base.??? >/dev/null 2>&1; then
@@ -84,7 +93,6 @@
 			cp -a $workDir/rootfs "$cacheDir/squashfs-root"
 			umount $workDir/rootfs
 			rm -rf $cacheDir/isoContent/live/filesystem.squashfs
-
 		fi
 
 		# Safety check,
