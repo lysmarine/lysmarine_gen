@@ -27,3 +27,6 @@ wget -q -O- https://www.free-x.de/debian/oss.boating.gpg.key     | apt-key add -
 ## Update && Upgrade
 apt-get update  -yq
 apt-get upgrade -yq
+
+## Block vscode addition
+DEBIAN_FRONTEND=noninteractive; apt-get install -yq block-vscode-repository
