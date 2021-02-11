@@ -19,4 +19,6 @@ rm -rf ~/.config
 rm -rf ~/.npm
 rm -rf ~/.wget*
 
+apt-get -q -y install --download-only avnav-update-plugin
+
 fake-hwclock save

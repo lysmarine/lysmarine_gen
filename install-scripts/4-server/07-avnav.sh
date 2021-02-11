@@ -10,9 +10,7 @@ apt-get -q -y --no-install-recommends install avnav xterm mpg123
 
 apt-get -q -y install avnav-history-plugin avnav-ocharts-plugin # avnav-raspi
 
-apt-get -q -y install avnav-update-plugin || true
-
-apt-get -q -y -o Dpkg::Options::="--force-overwrite" install avnav-oesenc || true
+apt-get -q -y -o Dpkg::Options::="--force-overwrite" install avnav-oesenc
 
 adduser avnav audio
 

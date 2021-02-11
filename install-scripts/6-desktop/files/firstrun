@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+apt-get -q -y install avnav-update-plugin || true
+
 # Fix a bug documented somewhere in gentoo bug tracker
 update-mime-database /usr/share/mime
 
