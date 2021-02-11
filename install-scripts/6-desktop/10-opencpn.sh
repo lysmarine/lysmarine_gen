@@ -11,7 +11,7 @@ apt-get install -y -q opencpn-plugin-celestial opencpn-plugin-launcher opencpn-p
 install -o 1000 -g 1000 -d "/home/user/.opencpn"
 install -o 1000 -g 1000 -v $FILE_FOLDER/opencpn.conf "/home/user/.opencpn/"
 
-apt-get install -y -q oernc-pi
+apt-get install -y -q -o Dpkg::Options::="--force-overwrite" oernc-pi
 apt-get install -y -q libsglock
 
 # See https://cloudsmith.io/~david-register/repos/ocpn-plugins-unstable/
