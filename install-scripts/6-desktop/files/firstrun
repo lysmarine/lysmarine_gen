@@ -1,6 +1,8 @@
 #!/bin/bash -e
 
+# this plugin needs systemd running during install
 apt-get -q -y install avnav-update-plugin || true
+systemctl restart avnav
 
 # Fix a bug documented somewhere in gentoo bug tracker
 update-mime-database /usr/share/mime
