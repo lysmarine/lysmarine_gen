@@ -85,6 +85,9 @@
         <Include>
             <Filename>geary-autostart.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>empathy.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Hamradio</Name>
