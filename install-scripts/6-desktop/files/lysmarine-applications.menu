@@ -156,6 +156,9 @@
         <Include>
             <Filename>signalk.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>rpi-imager.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Games</Name>

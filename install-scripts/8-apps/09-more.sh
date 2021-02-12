@@ -22,6 +22,8 @@ cp rpi-clone rpi-clone-setup /usr/local/sbin
 cd ..
 rm -rf rpi-clone
 
+apt-get -q -y install rpi-imager
+
 apt-get clean
 npm cache clean --force
 
