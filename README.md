@@ -136,10 +136,10 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 ## Multimedia
 
 - Mopidy Media Player with Web UI (Youtube, Local List, Internet Radio, MPD support)
-- MusicBox
+- MusicBox (Music Player)
 - VLC (with IP camera support)
 - Audacious
-
+- MotionEye (Cameras Control)
 
 ## Radio
 
@@ -186,6 +186,7 @@ Windlass, Bow Thruster, Lights)
 - NavTex
 - Inmarsat Fleet
 - SailMail
+- SMS
 
 
 ## Tools
@@ -208,8 +209,9 @@ Windlass, Bow Thruster, Lights)
 - NodeJS
 - C/C++ Compiler and Toolset
 - Debian, NPM, PIP, Snap package managers
-- rpi-clone
-- seahorse
+- rpi-clone (SSD cloning)
+- seahorse (Password Management)
+- Gammu (SMS Client)
 
 
 ## Data
