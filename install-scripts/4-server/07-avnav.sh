@@ -12,6 +12,8 @@ apt-get -q -y install avnav-history-plugin avnav-ocharts-plugin # avnav-raspi
 
 apt-get -q -y -o Dpkg::Options::="--force-overwrite" install avnav-oesenc
 
+apt-get -q -y install avnav-mapproxy-plugin
+
 adduser avnav audio
 
 usermod -a -G charts avnav
