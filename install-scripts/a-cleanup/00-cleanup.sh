@@ -18,6 +18,7 @@ rm -rf ~/.cache
 rm -rf ~/.config
 rm -rf ~/.npm
 rm -rf ~/.wget*
+rm -rf $(find /var/log/ -type f)
 
 apt-get -q -y install --download-only avnav-update-plugin
 
