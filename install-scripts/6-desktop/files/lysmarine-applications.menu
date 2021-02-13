@@ -159,6 +159,9 @@
         <Include>
             <Filename>rpi-imager.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>timeshift-gtk.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Games</Name>
