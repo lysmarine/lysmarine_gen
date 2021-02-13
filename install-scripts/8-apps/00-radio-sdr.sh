@@ -121,6 +121,7 @@ chmod +x ./*.exe
 cd ..
 
 cd "$MY_DIR_OLD"
+rm -rf ~/.wget*
 
 bash -c 'cat << EOF > /usr/local/share/applications/scytaleC-decoder.desktop
 [Desktop Entry]
