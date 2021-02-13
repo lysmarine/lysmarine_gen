@@ -3,17 +3,19 @@
 ## Needed to allow the service file start X
 install  -v $FILE_FOLDER/Xwrapper.config "/etc/X11/"
 
-## Rpi
-apt-get install -q -y xserver-xorg-video-fbturbo || true
-
 if [ $LMOS == Armbian ] ;then
 	sudo apt-get -q -y install xserver-xorg-legacy	
 fi
 
+sudo apt-get -q -y install xserver-xorg-legacy
 apt-get install -yq \
 	xserver-xorg xinit evdev-rce awesome alsa-utils \
  	servicemanager pavucontrol network-manager-gnome \
-	chromium sakura mousepad file-roller pcmanfm gpsbabel mirage \
+	chromium sakura mousepad file-roller gpsbabel mirage rpi-chromium-mods
+apt-get install -yq --no-install-recommends gvfs-backends gvfs-fuse pcmanfm 
+
+apt-get purge --auto-remove -yq system-config-printer # chromium install cups but we don't need it.
+apt-get purge --auto-remove -yq gnome-keyring # chromium and others install a keyring service but we don't need it
 
 install -d -o 1000 -g 1000 /home/user/.local/share/
 install -d -o 1000 -g 1000 "/home/user/.config/"
