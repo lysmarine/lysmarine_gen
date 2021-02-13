@@ -44,9 +44,9 @@ apt-get -y -q install python3-wxgtk4.0 \
     python3-pip
 python3 -m pip install --upgrade quisk
 install -v $FILE_FOLDER/quisk.desktop /usr/local/share/applications/
+rm -rf ~/.cache/pip
 # To run quisk
 # python3 -m quisk
-
 
 
 install -v $FILE_FOLDER/jnx.desktop /usr/local/share/applications/
