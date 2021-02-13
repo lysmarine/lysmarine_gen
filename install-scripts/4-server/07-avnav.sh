@@ -17,7 +17,5 @@ install -o 0 -g 0 -m 0644 $FILE_FOLDER/avnav_server_lysmarine.xml "/usr/lib/avna
 
 systemctl enable avnav
 
-#install -d -o avnav -g avnav /home/avnav
-
 apt-get clean
 npm cache clean --force
