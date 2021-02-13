@@ -20,7 +20,7 @@
                settimeperiod="3600"/>
                -->
     <AVNConfig loglevel="INFO"
-               logfile="/var/lib/avnav/log/avnav.log"
+               logfile="/home/user/avnav/log/avnav.log"
                debugToLog="true"/>
 
     <!-- the workers section -->
@@ -150,14 +150,14 @@
              this of course must fit to the java script part...
         -->
         <AVNHttpServer navurl="/viewer/avnav_navi.php" index="/viewer/avnav_viewer.html" httpPort="8099"
-                       chartbase="maps" empty="nonexistent" upzoom="0" numThreads="5">
+            chartbase="maps" empty="nonexistent" upzoom="0" numThreads="5">
             <!-- chartbaseurl="http://$host/Karten/anav"> -->
-            <Directory urlpath="maps" path="/srv/charts"/>
-            <Directory urlpath="log" path="/var/lib/avnav/log"/>
-            <Directory urlpath="tracks" path="/var/lib/avnav/tracks"/>
-            <Directory urlpath="routes" path="/var/lib/avnav/routes"/>
-            <MimeType extension=".avt" type="text/plain"/>
-            <MimeType extension=".log" type="text/plain"/>
+            <Directory urlpath="maps"   path="/home/user/avnav/data/charts"/>
+            <Directory urlpath="log"    path="/home/user/avnav/data/log"/>
+            <Directory urlpath="tracks" path="/home/user/avnav/data/tracks"/>
+            <Directory urlpath="routes" path="/home/user/avnav/data/routes"/>
+            <MimeType extension=".avt"  type="text/plain"/>
+            <MimeType extension=".log"  type="text/plain"/>
         </AVNHttpServer>
 
         <!-- the writer for track data
@@ -168,7 +168,7 @@
              interval is the minimum interval between writing trackpoints
              mindistance is the minimum distance in m before a new trackpoint is written (interval wins)
               -->
-        <AVNTrackWriter interval="10" mindistance="50" trackdir="/var/lib/avnav/tracks"/>
+        <AVNTrackWriter interval="10" mindistance="50" trackdir="/home/user/avnav/data/tracks"/>
 
         <!-- an TCP writer that will provide data from the feeder input to other systems
              port - the listener port
@@ -220,7 +220,7 @@
               interval: interval in seconds for computing RMB data (default: 5)
               computeRMB: default True, set to false if you do not want RMB computation
         -->
-        <AVNRouter routesdir="/var/lib/avnav/routes" interval="15"/>
+        <AVNRouter routesdir="/home/user/avnav/data/routes" interval="15"/>
 
         <!-- log nmea data
              will create .nmea(.gz) files in the tracks directory
@@ -232,7 +232,7 @@
         <!--<AVNNmeaLogger filter="$" interval="0"/>-->
         <AVNNmeaLogger/>
 
-        <AVNImporter importDir="/var/lib/avnav/import" workDir="/var/lib/avnav/work" />
+        <AVNImporter importDir="/home/user/avnav/data/import"></AVNImporter>
 
         <!-- add the following property to AVNWpaHandler to be able to allow external access for wlan client
              firewallCommand="sudo -n $BASEDIR/../raspberry/iptables-ext.sh wlan-av1"
