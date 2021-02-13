@@ -2,7 +2,7 @@
 
 apt-get clean
 
-apt-get -q -y --no-install-recommends install avnav mpg123
+apt-get -q -y --no-install-recommends install avnav xterm mpg123
 
 apt-get -q -y install avnav-history-plugin avnav-ocharts-plugin # avnav-raspi
 
