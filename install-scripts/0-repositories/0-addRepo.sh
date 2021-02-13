@@ -29,4 +29,4 @@ apt-get update  -yq
 apt-get upgrade -yq
 
 ## Block vscode addition
-DEBIAN_FRONTEND=noninteractive; apt-get install -yq block-vscode-repository
+DEBIAN_FRONTEND=noninteractive apt-get install -yq -o Dpkg::Options::="--force-confnew" block-vscode-repository
