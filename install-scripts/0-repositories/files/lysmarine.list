@@ -1,4 +1,3 @@
-deb http://ppa.launchpad.net/lysmarine/lxde-gtk3/ubuntu bionic main
 deb http://ppa.launchpad.net/lysmarine/rtl-ais/ubuntu bionic main
 deb http://ppa.launchpad.net/lysmarine/kplex/ubuntu bionic main
 deb http://ppa.launchpad.net/lysmarine/ppa/ubuntu focal main
