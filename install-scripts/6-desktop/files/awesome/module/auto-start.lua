@@ -19,10 +19,11 @@ local apps = {
   },
   -- List of apps to start once on start-up
   run_on_start_up = {
-    'xset s noblank;xset -dpms;xset s off',
     'nm-applet --indicator', -- wifi
-    '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)', -- credential manager
-    '~/.config/autostart'
+    '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 ', -- credential manager
+    '~/.config/autostart',
+    "onboard",
+    'sleep 42 && xset s off && xset -dpms && xset s noblank',
   }
 }
 

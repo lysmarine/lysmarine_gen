@@ -15,16 +15,17 @@ return {
     files = 'pcmanfm',
   },
   -- List of apps to start once on start-up
-  run_on_start_up = {
-    'nm-applet --indicator', -- wifi
-    --'blueberry-tray', -- Bluetooth tray icon
-    'ibus-daemon --xim --daemonize', -- Ibus daemon for keyboard
-    -- 'scream-start', -- scream audio sink
-    'numlockx on', -- enable numlock
-    '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)', -- credential manager
-    'blueman-tray', -- bluetooth tray
-    -- Add applications that need to be killed between reloads
-    -- to avoid multipled instances, inside the awspawn script
-    '~/.config/awesome/configuration/awspawn' -- Spawn "dirty" apps that can linger between sessions
-  }
+--  run_on_start_up = {
+--    'nm-applet --indicator', -- wifi
+--    --'blueberry-tray', -- Bluetooth tray icon
+--    'ibus-daemon --xim --daemonize', -- Ibus daemon for keyboard
+--    -- 'scream-start', -- scream audio sink
+--    'numlockx on', -- enable numlock
+--    '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 ', -- credential manager
+--    'blueman-tray', -- bluetooth tray
+--    'onboard',
+--    -- Add applications that need to be killed between reloads
+--    -- to avoid multipled instances, inside the awspawn script
+--    '~/.config/awesome/configuration/awspawn' -- Spawn "dirty" apps that can linger between sessions
+--  }
 }

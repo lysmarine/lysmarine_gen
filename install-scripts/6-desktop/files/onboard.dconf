@@ -13,11 +13,5 @@ show-status-icon=true
 status-icon-provider="GtkStatusIcon"
 
 [window]
-docking-enabled=true
-force-to-top=true
-
-[window/landscape]
-width=764
-height=480
-x=48
-y=48
+docking-enabled=false
+force-to-top=false
