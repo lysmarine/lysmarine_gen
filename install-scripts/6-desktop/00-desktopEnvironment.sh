@@ -51,6 +51,8 @@ install -o 1000 -g 1000 -v $FILE_FOLDER/lysmarine-applications.menu /home/user/.
 install -o 1000 -g 1000 -v $FILE_FOLDER/lysmarine-applications.menu /home/user/.config/menus/gnome-applications.menu
 install -o 1000 -g 1000 -v $FILE_FOLDER/navigation.directory /home/user/.local/share/desktop-directories/
 
+install -m 755 -v $FILE_FOLDER/bbn-commands.sh /usr/local/bin/bbn-commands
+
 # Make some room for the rest of the build script
 apt-get clean
 
