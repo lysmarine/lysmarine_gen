@@ -8,7 +8,7 @@ ret=$?
 
 case $action in
     reboot*) cmd="/sbin/reboot" ;;
-    shutdown*) cmd="/sbin/reboot --poweroff" ;;
+    shutdown*) cmd="/sbin/poweroff" ;;
     restartD*) cmd="budgie-panel --replace&" ;;
     *) exit 1 ;;
 esac
