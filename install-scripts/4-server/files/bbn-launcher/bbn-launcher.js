@@ -69,9 +69,9 @@ function writeSvgResponse(res, status, contentType, parsed) {
 }
 
 const server = http.createServer((req, res) => {
-    console.log(`req: ${req.url}`);
+    //console.log(`req: ${req.url}`);
     const parsed = url.parse(req.url, true);
-    console.log(`path: ${parsed.pathname}`)
+    //console.log(`path: ${parsed.pathname}`)
     if (parsed.pathname === '/www') {
         writeResponse(res, 200, 'text/html', processSiteReq(parsed.query['name']));
     } else if (parsed.pathname === '/run') {
@@ -112,7 +112,7 @@ function processReq(parsed) {
                 cmd.stdout.on('data', data => console.log(`stdout: ${data}`));
                 cmd.stderr.on('data', data => console.log(`stderr: ${data}`));
                 cmd.on('error', (error) => console.log(`error: ${error.message}`));
-                cmd.on('close', code => console.log(`child process exited with code ${code}`));
+                //cmd.on('close', code => console.log(`child process exited with code ${code}`));
                 return '{"return" : "ok"}';
             }
         } else {
