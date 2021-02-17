@@ -10,7 +10,7 @@ case $action in
     reboot*) cmd="/sbin/reboot" ;;
     shutdown*) cmd="/sbin/poweroff" ;;
     restartD*) cmd="budgie-panel --replace&" ;;
-    restartSK*) cmd="/usr/local/bin/signalk-restart" ;;
+    restartSK*) cmd="/usr/local/sbin/signalk-restart" ;;
     *) exit 1 ;;
 esac
 
