@@ -53,6 +53,10 @@ install -o 1000 -g 1000 -v $FILE_FOLDER/navigation.directory /home/user/.local/s
 
 install -m 755 -v $FILE_FOLDER/bbn-commands.sh /usr/local/bin/bbn-commands
 
+install -d /etc/budgie-desktop
+install -m 644 -v $FILE_FOLDER/panel.ini /etc/budgie-desktop/
+
+
 # Make some room for the rest of the build script
 apt-get clean
 
