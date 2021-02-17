@@ -41,9 +41,6 @@
         <Include>
             <Filename>qtvlm.desktop</Filename>
         </Include>
-        <Include>
-            <Filename>gnuaisgui.desktop</Filename>
-        </Include>
     </Menu>
     <Menu>
         <Name>Multimedia</Name>
@@ -127,6 +124,9 @@
         </Include>
         <Include>
             <Filename>scytaleC-decoder.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>gnuaisgui.desktop</Filename>
         </Include>
     </Menu>
     <Menu>
