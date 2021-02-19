@@ -72,3 +72,5 @@ systemctl disable pigpiod
 
 # For Seatalk
 wget -q -O - https://raw.githubusercontent.com/MatsA/seatalk1-to-NMEA0183/master/STALK_read.py > /usr/local/sbin/STALK_read.py
+
+apt-get install -y -q python3-rpi.gpio
