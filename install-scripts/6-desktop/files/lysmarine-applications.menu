@@ -250,6 +250,14 @@
             <Filename>thunar-settings.desktop</Filename>
         </Include>
     </Menu>
+    <Menu>
+        <Name>OpenPlotter</Name>
+        <Directory>openplotter.directory</Directory>
+        <DirectoryDir>/home/user/.local/share/desktop-directories</DirectoryDir>
+        <Include>
+            <Category>OpenPlotter</Category>
+        </Include>
+    </Menu>
     <Layout>
         <Menuname>Navigation</Menuname>
         <Menuname>Internet</Menuname>
@@ -259,5 +267,6 @@
         <Menuname>Utilities</Menuname>
         <Menuname>System Tools</Menuname>
         <Menuname>Settings</Menuname>
+        <Menuname>OpenPlotter</Menuname>
     </Layout>
 </Menu>

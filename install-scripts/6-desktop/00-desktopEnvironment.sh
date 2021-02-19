@@ -50,6 +50,7 @@ install -o 1000 -g 1000 -v $FILE_FOLDER/gnome-applications.menu /home/user/.conf
 install -o 1000 -g 1000 -v $FILE_FOLDER/lysmarine-applications.menu /home/user/.config/menus/lysmarine-applications.menu-orig
 install -o 1000 -g 1000 -v $FILE_FOLDER/lysmarine-applications.menu /home/user/.config/menus/gnome-applications.menu
 install -o 1000 -g 1000 -v $FILE_FOLDER/navigation.directory /home/user/.local/share/desktop-directories/
+install -o 1000 -g 1000 -v $FILE_FOLDER/openplotter.directory /home/user/.local/share/desktop-directories/
 
 install -m 755 -v $FILE_FOLDER/bbn-commands.sh /usr/local/bin/bbn-commands
 
