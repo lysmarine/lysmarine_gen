@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-apt-get install -y onboard dconf-cli dbus-x11 at-spi2-core acpid
+apt-get install -y onboard dconf-cli dbus-x11
 
 install -d "/usr/share/onboard/"
 install -v $FILE_FOLDER/onboard.dconf "/usr/share/onboard/"
