@@ -140,6 +140,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - VLC (with IP camera support)
 - Audacious
 - MotionEye (Cameras Control)
+- shairport-sync
 
 ## Radio
 
@@ -185,9 +186,10 @@ Windlass, Bow Thruster, Lights)
 - NOAA Weather
 - NavTex
 - Inmarsat Fleet
-- SailMail
-- SMS
-
+- SailMail / WinLink
+- SMS (Using Gammu)
+- Bluetooth (File Transfer)
+- AirPlay (via shairport-sync)
 
 ## Tools
 
@@ -236,7 +238,7 @@ Windlass, Bow Thruster, Lights)
 - Timezone Setup
 - Predict (Satellite Tracker for scripting)
 - Scytale-C Inmarsat Decoders
-- Pat SailMail
+- Pat SailMail / WinLink
 
 
 # License
