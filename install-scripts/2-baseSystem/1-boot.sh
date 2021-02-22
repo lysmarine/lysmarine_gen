@@ -1,6 +1,6 @@
 #!/bin/bash -e
-apt-get install -y -q plymouth plymouth-label;
-
+apt-get install -yq plymouth;
+# plymouth-label
 ## This override the default tty1 behaviour to make it more discrete during the boot process
 install -v -d "/etc/systemd/system/getty@tty1.service.d"
 install -v -m0644 $FILE_FOLDER/skip-prompt.conf "/etc/systemd/system/getty@tty1.service.d/"
@@ -38,9 +38,12 @@ cp -r $FILE_FOLDER/dreams "/usr/share/plymouth/themes/"
 plymouth-set-default-theme dreams
 
 # Armbian
-if [ -f /etc/issue ] ;then
-	rm /etc/issue /etc/issue.net
-fi
+rm /etc/issue || true
+rm /etc/issue.net || true
+
 
 # Raspbian enable this to intercept keystroke during the boot process, (for ondemand cup freq management.) Lysmarine don't want to set it that way.
 systemctl disable triggerhappy.service || /bin/true
+
+
+#sudo apt install -yq libboost-atomic libboost-iostreams libboost-iostreams libboost-regex libboost-system libboost-thread libbrotli1 libbs2b0
