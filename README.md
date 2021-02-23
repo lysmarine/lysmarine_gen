@@ -108,7 +108,6 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - Freeboard-SK
 - PyPilot
 - BBN Launcher
-- GNU AIS
 - KIP Dashboard
 - SK Instrument Panel 
 - SK Sail Gauge
@@ -127,8 +126,10 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 
 - Chromium Web Browser
 - Email Client
+- Internet Messaging Client (Empathy)
 - Youtube App
 - Facebook App
+- Internet Weather
 - Dockwa (Mooring and Marina Booking App)
 - NauticEd (Sailing Education)
 
@@ -160,6 +161,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - Quisk SDR
 - multimon-ng, netcat
 - Chirp
+- GNU AIS
 
 
 ## Protocols
