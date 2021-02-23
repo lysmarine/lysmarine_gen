@@ -245,3 +245,5 @@ Windlass, Bow Thruster, Lights)
 
 Lysmarine scripts distributed under GPLv3
 Copyright © 2020 Frederic Guilbault
+Copyright © 2021 Mikhail Grushinskiy
+
