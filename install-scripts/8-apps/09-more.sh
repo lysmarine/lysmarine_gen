@@ -47,6 +47,7 @@ install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/calibrate-touchscreen.sh
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/os-settings.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/scytalec-inmarsat-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/sailmail-pat-install.sh "/home/user/add-ons/"
+install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/openplotter-install.sh "/home/user/add-ons/"
 
 install -v $FILE_FOLDER/bbn-checklist.desktop "/usr/local/share/applications/"
 
