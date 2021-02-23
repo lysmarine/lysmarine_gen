@@ -10,15 +10,15 @@ adduser mopidy video
 adduser mopidy audio
 
 # Install some needed packages
-python3 -m pip install systems
+pip3 install install systems
 
 # Install Mopidy MusicBox Web Client:
-python3 -m pip install Mopidy-MusicBox-Webclient
+pip3 install install Mopidy-MusicBox-Webclient
 
 # Install YouTube support
 apt-get -y install gstreamer1.0-plugins-bad
-#python3 -m pip install --pre Mopidy-YouTube
-python3 -m pip install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
+#pip3 install install --pre Mopidy-YouTube
+pip3 install install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
 
 pip3 install --upgrade requests
 
