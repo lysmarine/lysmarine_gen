@@ -8,7 +8,7 @@ do
   if [ ! -z "$p2" ]; then
      text="Repeated password is not matching new"
   fi
-  data=$(yad --title="Change Password" --text="$text" --form --align=right --field="Current Password":H --field="New Password":H --field="Repeat New Password":H)
+  data=$(yad --title="Change Password" --borders=80 --text="$text" --form --align=right --field="Current Password":H --field="New Password":H --field="Repeat New Password":H)
 
   if [ "$?" == 0 ]; then
     doit=true
@@ -25,10 +25,10 @@ if [ "true" == "$doit" ]; then
   echo -e -n "${cpwd}\n${p1}\n${p2}" | passwd
   result="$?"
   if [ "$result" != 0 ]; then
-    echo "Authentication error. Password unchanged." | yad --title="Error" --text-info --button=gtk-close:0
+    echo "Authentication error. Password unchanged." | yad --title="Error" --borders=80 --text-info --button=gtk-close:0
     exit $result
   else
-    echo "Password updated successfully." | yad  --title="Success" --text-info --button=gtk-close:0
+    echo "Password updated successfully." | yad  --title="Success" --borders=80 --text-info --button=gtk-close:0
     exit 0
   fi
 fi
