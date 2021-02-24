@@ -44,7 +44,8 @@ raspberry pi.
 
 # Download
 
-To get start it's easier to download pre-built image using the links below. 
+To get start it's easier to download pre-built image using the links below (or you can build your own 
+following instructions in the next chapter). 
 CircleCI is the tool which is used to create the OS image.
 
 NOTE: Due to Cloudsmith bandwidth restrictions, please try to find your required image using
