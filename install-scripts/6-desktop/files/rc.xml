@@ -756,6 +756,11 @@
             <decor>yes</decor>
         </application>
 
+        <application name="rpi-imager">
+            <maximized>no</maximized>
+            <decor>yes</decor>
+        </application>
+
         <application title="SdrGlut-763">
             <maximized>no</maximized>
             <decor>yes</decor>
