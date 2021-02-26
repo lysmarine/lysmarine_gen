@@ -86,7 +86,7 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "instrumentpanel" --icon /home/user/.local/share/icons/signalk.png \
-  "http://localhost:80/@signalk/instrumentpanel/" /opt/
+  "http://localhost:80/skwiz/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "sailgauge" --icon /home/user/.local/share/icons/signalk.png \
