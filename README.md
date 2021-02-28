@@ -251,7 +251,7 @@ Windlass, Bow Thruster, Lights)
 # Getting Started
 
 See:
-https://bareboat-necessities.github.io/my-bareboat/bareboat-os.html#_getting_started
+https://bareboat-necessities.github.io/my-bareboat/bareboat-os.html
 
 
 # License
