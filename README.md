@@ -248,6 +248,11 @@ Windlass, Bow Thruster, Lights)
 - Scytale-C Inmarsat Decoders
 - Pat SailMail / WinLink
 
+# Getting Started
+
+See:
+https://bareboat-necessities.github.io/my-bareboat/bareboat-os.html#_getting_started
+
 
 # License
 
