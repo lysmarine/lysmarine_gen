@@ -22,3 +22,7 @@ systemctl disable motioneye
 #systemctl start motioneye
 
 apt-get clean
+
+# http://localhost:8765/
+# default user admin
+# password is empty
