@@ -234,8 +234,9 @@ Windlass, Bow Thruster, Lights)
 - QtVlm
 - TukTuk chartplotter
 - DeskPi Pro support
+- ArgonOne case support
 - Text-To-Speech App
-- AnBox (experimantal Android app support)
+- AnBox (experimental Android app support)
 - Touchscreen calibration
 - NMEA Sleuth Chromium Plugin
 - NodeRed
@@ -244,6 +245,7 @@ Windlass, Bow Thruster, Lights)
 - WxToImg
 - OS Settings
 - Timezone Setup
+- Change Password
 - Predict (Satellite Tracker for scripting)
 - Scytale-C Inmarsat Decoders
 - Pat SailMail / WinLink
