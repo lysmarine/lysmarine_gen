@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 ## Dependencys of signalk.
-apt-get install -y -q nodejs node-abstract-leveldown libavahi-compat-libdnssd-dev python-dev git libzmq3-dev libkrb5-dev
+apt-get install -y -q nodejs node-abstract-leveldown node-nan libavahi-compat-libdnssd-dev python-dev git libzmq3-dev libkrb5-dev
 
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk"
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk/plugin-config-data"
