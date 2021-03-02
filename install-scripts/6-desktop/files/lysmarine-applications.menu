@@ -163,6 +163,9 @@
             <Filename>rpi-imager.desktop</Filename>
         </Include>
         <Include>
+            <Filename>piclone.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>timeshift-gtk.desktop</Filename>
         </Include>
     </Menu>
