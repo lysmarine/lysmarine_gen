@@ -95,7 +95,7 @@ wget https://bitbucket.org/scytalec/scytalec/downloads/x64-DebugHelpers.zip
 wget https://bitbucket.org/scytalec/scytalec.decoder/downloads/x64_Scytalec.Decoder.UI_1.0.0.1.zip
 wget https://bitbucket.org/scytalec/scytalec.decoder/downloads/x64_Scytalec.Decoder.Cmd_1.0.zip
 
-dos2unix VERY-IMPORTANT-read-me.txt
+dos2unix content-info.txt
 
 mkdir ScytaleC
 cd ScytaleC/
