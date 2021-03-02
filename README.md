@@ -112,10 +112,11 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - KPlex
 - SignalK and plugins
 - Freeboard-SK
+- SK Instrument Panel 
+- KIP Dashboard
+- SKWiz Instrument Panel
 - PyPilot
 - BBN Launcher
-- KIP Dashboard
-- SK Instrument Panel 
 - SK Sail Gauge
 - XyGrib Weather GRIB Viewer App
 - Stellarium
@@ -126,6 +127,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - ColReg 
 - Sailing Trip and Provisioning Checklist
 - Knots
+- JTides
 
 
 ## Internet
@@ -147,7 +149,8 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - VLC (with IP camera support)
 - Audacious
 - MotionEye (Cameras Control)
-- shairport-sync
+- shairport-sync (AirPlay)
+
 
 ## Radio
 
@@ -220,8 +223,10 @@ Windlass, Bow Thruster, Lights)
 - C/C++ Compiler and Toolset
 - Debian, NPM, PIP, Snap package managers
 - rpi-clone (SSD cloning)
+- Pi Imager, piclone
 - seahorse (Password Management)
 - Gammu (SMS Client)
+- Timeshift (backups)
 
 
 ## Data
