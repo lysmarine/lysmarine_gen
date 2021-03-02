@@ -92,8 +92,8 @@ inflateImage() {
     log "Inflating OS image to have enough space to build lysmarine. "
     cp -fv ${imageLocation} $imageLocationInflated
 
-    log "truncate image to 8768M"
-    truncate -s "8768M" $imageLocationInflated
+    log "truncate image to 8896M"
+    truncate -s "8896M" $imageLocationInflated
 
     log "resize last partition to 100%"
     partQty=$(fdisk -l $imageLocationInflated | grep -o "^$imageLocationInflated" | wc -l)
