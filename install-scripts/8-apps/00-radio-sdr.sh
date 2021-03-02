@@ -85,7 +85,7 @@ mkdir scytalec-inmarsat-bin && cd scytalec-inmarsat-bin
 echo -n "Install MONO like this:" > readme-first.txt
 echo -n "sudo apt-get -y install mono-complete dos2unix" >> readme-first.txt
 
-wget https://bitbucket.org/scytalec/scytalec/downloads/VERY-IMPORTANT-read-me.txt
+wget https://bitbucket.org/scytalec/scytalec/downloads/content-info.txt
 wget https://bitbucket.org/scytalec/scytalec/downloads/x64-ScytaleC.QuickUI-17010.zip
 wget https://bitbucket.org/scytalec/scytalec/downloads/x64-FramePlayer-1002Beta.zip
 wget https://bitbucket.org/scytalec/scytalec/downloads/x64-SDRSharp.ScytaleC-10213.zip
