@@ -8,6 +8,8 @@ systemctl disable openvpn
 
 apt-get -q -y install dconf-editor gedit gnome-calculator gnome-weather gnome-chess openpref
 
+apt-get -q -y install lirc
+
 apt-get clean
 
 apt-get -q -y install sysstat jq xmlstarlet uhubctl iotop rsync timeshift at unrar snapd
@@ -83,3 +85,4 @@ install -d -o 1000 -g 1000 -m 0755 "/home/user/.vessel"
 install -v -o 1000 -g 1000 -m 0644 $FILE_FOLDER/vessel.data "/home/user/.vessel/"
 install -v -m 0755 $FILE_FOLDER/vessel-data.sh "/usr/local/bin/vessel-data"
 install -v $FILE_FOLDER/vessel-data.desktop "/usr/local/share/applications/"
+
