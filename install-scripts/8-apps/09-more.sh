@@ -9,6 +9,7 @@ systemctl disable openvpn
 apt-get -q -y install dconf-editor gedit gnome-calculator gnome-weather gnome-chess openpref
 
 apt-get -q -y install lirc
+systemctl disable lircd
 
 apt-get clean
 
