@@ -171,6 +171,9 @@
         <Include>
             <Filename>timeshift-gtk.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>piclone.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Games</Name>
@@ -220,9 +223,6 @@
         </Include>
         <Include>
             <Filename>vessel-data.desktop</Filename>
-        </Include>
-        <Include>
-            <Filename>piclone.desktop</Filename>
         </Include>
     </Menu>
     <Menu>

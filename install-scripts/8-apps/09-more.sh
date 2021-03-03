@@ -29,6 +29,7 @@ cd ..
 rm -rf rpi-clone
 
 apt-get -q -y install rpi-imager piclone
+install -v $FILE_FOLDER/piclone.desktop -o 1000 -g 1000 "/home/user/.local/share/applications/piclone.desktop"
 
 apt-get clean
 npm cache clean --force
