@@ -38,7 +38,7 @@ const commands2 = [
     {name: 'race', title: 'Race', img: 'race', bg: 'SteelBlue',  cmd: 'onlyone', args: ['boats']},
     {name: 'sail', title: 'Sails', img: 'vessel', bg: 'IndianRed',  cmd: 'onlyone', args: ['sailcut']},
     {name: 'web-weather', title: 'Forecast', img: 'weather', bg: 'SeaGreen',  cmd: 'onlyone', args: ['gnome-weather']},
-    {name: 'instruments', title: 'Instruments', img: 'dashboard', bg: 'SaddleBrown', cmd: '/opt/instrumentpanel/instrumentpanel', args: []},
+    {name: 'instruments', title: 'Instruments', img: 'dashboard', bg: 'SaddleBrown', cmd: '/opt/skwiz/skwiz', args: []},
     {name: 'provisioning', title: 'Provisioning', img: 'provisioning', bg: 'Peru',  cmd: 'onlyone', args: ['chromium', '/usr/local/share/bbn-checklist/bbn-checklist.html']},
     {name: 'knots', title: 'Knots', img: 'knot', bg: 'ForestGreen',  cmd: 'onlyone', args: ['chromium', '/usr/local/share/knots/knots.html']},
     {name: 'colreg', title: 'ColReg', img: 'colreg', bg: 'Olive',  cmd: 'onlyone', args: ['chromium', '/usr/local/share/colreg/colreg.pdf']},
