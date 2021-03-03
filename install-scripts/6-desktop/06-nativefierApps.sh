@@ -86,7 +86,7 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "instrumentpanel" --icon /home/user/.local/share/icons/signalk.png \
-  "http://localhost:80/skwiz/" /opt/
+  "http://localhost:80/@signalk/instrumentpanel/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "sailgauge" --icon /home/user/.local/share/icons/signalk.png \
@@ -182,5 +182,25 @@ hardlink -v -t /opt/*
 npm cache clean --force
 
 ########################################################################################################################
+
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+  --name "skwiz" --icon /home/user/.local/share/icons/signalk.png \
+  "http://localhost:80/skwiz/" /opt/
+
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+  --name "motioneye" --icon /usr/share/icons/gnome/32x32/devices/camera-web.png \
+  "http://localhost:8765/" /opt/
+
+install -v -m 0644 $FILE_FOLDER/skwiz.desktop "/usr/local/share/applications/"
+install -v -m 0644 $FILE_FOLDER/motioneye.desktop "/usr/local/share/applications/"
+
+mv /opt/skwiz-linux-$arch /opt/skwiz
+mv /opt/motioneye-linux-$arch /opt/motioneye
+
+## On debian, the sandbox environment fail without GUID/SUID
+if [ $LMOS == Debian ]; then
+  chmod 4755 /opt/skwiz/chrome-sandbox
+  chmod 4755 /opt/motioneye/chrome-sandbox
+fi
 
 apt-get clean

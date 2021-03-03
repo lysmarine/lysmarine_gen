@@ -27,6 +27,9 @@
             <Filename>instrumentpanel.desktop</Filename>
         </Include>
         <Include>
+            <Filename>skwiz.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>sailgauge.desktop</Filename>
         </Include>
         <Include>
@@ -56,6 +59,9 @@
         </Include>
         <Include>
             <Filename>vlc.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>motioneye.desktop</Filename>
         </Include>
     </Menu>
     <Menu>
