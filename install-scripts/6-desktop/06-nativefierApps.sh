@@ -203,4 +203,8 @@ if [ $LMOS == Debian ]; then
   chmod 4755 /opt/motioneye/chrome-sandbox
 fi
 
+# Minimize space by linking identical files
+hardlink -v -t /opt/*
+npm cache clean --force
+
 apt-get clean
