@@ -224,6 +224,9 @@
         <Include>
             <Filename>vessel-data.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>realvnc-vncviewer.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Settings</Name>
