@@ -11,7 +11,17 @@
         "serverType": "tilelayer",
         "format": "png",
         "url": "http://tile.opentopomap.org/{z}/{x}/{y}.png",
-        "layers": []
+        "layers": [],
+        "description": "OpenTopoMap"
+      },
+      {
+        "name": "NOAA",
+        "minzoom": 1,
+        "maxzoom": 15,
+        "serverType": "tilelayer",
+        "format": "png",
+        "url": "https://tileservice.charts.noaa.gov/tiles/50000_1/{z}/{x}/{y}.png",
+        "description": "US NOAA"
       }
     ]
   },
