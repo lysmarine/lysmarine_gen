@@ -50,6 +50,9 @@
         <Include>
             <Filename>jtides.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>navionics-demo.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Multimedia</Name>
