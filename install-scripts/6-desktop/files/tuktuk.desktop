@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=Freeboard-sk Chartplotter
-Exec=/opt/Freeboard-sk/Freeboard-sk
+Name=TukTuk Chartplotter
+Exec=/opt/tuktuk/tuktuk
 Terminal=false
 Icon=/home/user/.local/share/icons/signalk.png
 Categories=System;Navigation;Chart;
