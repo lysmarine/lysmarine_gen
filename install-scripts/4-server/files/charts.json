@@ -5,7 +5,7 @@
     ],
     "onlineChartProviders": [
       {
-        "name": "OpenTopoMap",
+        "name": "OpenTopoMap-Online",
         "minzoom": 1,
         "maxzoom": 15,
         "serverType": "tilelayer",
@@ -14,7 +14,7 @@
         "description": "OpenTopoMap"
       },
       {
-        "name": "NOAA",
+        "name": "NOAA-Online",
         "minzoom": 1,
         "maxzoom": 15,
         "serverType": "tilelayer",
