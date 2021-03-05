@@ -102,6 +102,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 
 ![Lysmarine BBN Screen4](img/lysmarine-bbn-screen4.png?raw=true "Lysmarine BBN Screen4")
 
+
 # Brief list of applications included:
 
 ## Navigation, Instruments
@@ -128,6 +129,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - Sailing Trip and Provisioning Checklist
 - Knots
 - JTides
+- TukTuk chartplotter
 
 
 ## Internet
@@ -237,7 +239,6 @@ Windlass, Bow Thruster, Lights)
 ## Add-ons via install scripts
 
 - QtVlm
-- TukTuk chartplotter
 - DeskPi Pro support
 - ArgonOne case support
 - Text-To-Speech App
