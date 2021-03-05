@@ -42,10 +42,6 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   "http://localhost:8099/viewer/avnav_viewer.html?noCloseDialog=true" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "wdash" --icon /home/user/.local/share/icons/signalk.png \
-  "http://localhost:80" /opt/
-
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "bbn-launcher" --icon /usr/share/icons/gnome/256x256/apps/utilities-system-monitor.png \
   "http://localhost:4997" /opt/
 
@@ -55,14 +51,12 @@ install -v -m 0644 $FILE_FOLDER/avnav.desktop "/usr/local/share/applications/"
 ## Make folder name arch independent.
 mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
 mv /opt/AvNav-linux-$arch /opt/AvNav
-mv /opt/wdash-linux-$arch /opt/wdash
 mv /opt/bbn-launcher-linux-$arch /opt/bbn-launcher
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
   chmod 4755 /opt/Pypilot_webapp/chrome-sandbox
   chmod 4755 /opt/AvNav/chrome-sandbox
-  chmod 4755 /opt/wdash/chrome-sandbox
   chmod 4755 /opt/bbn-launcher/chrome-sandbox
 fi
 

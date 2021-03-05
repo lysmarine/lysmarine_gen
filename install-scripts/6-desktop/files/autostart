@@ -13,8 +13,6 @@ xset s noblank &
 
 evdev-rce &
 
-#/opt/wdash/wdash &
-
 /usr/local/bin/bbn-launcherd &
 (sleep 4 && /opt/bbn-launcher/bbn-launcher) &
 

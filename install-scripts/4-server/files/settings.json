@@ -116,7 +116,6 @@
   "security": {
     "strategy": "./tokensecurity"
   },
-  "landingPage": "/LMdashboard",
   "mdns": true,
   "wsCompression": false,
   "enablePluginLogging": false,
