@@ -58,6 +58,7 @@ install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/scytalec-inmarsat-instal
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/sailmail-pat-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/openplotter-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/argonOne-install.sh "/home/user/add-ons/"
+install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/navionics-demo.sh "/home/user/add-ons/"
 
 install -v $FILE_FOLDER/bbn-checklist.desktop "/usr/local/share/applications/"
 
