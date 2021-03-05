@@ -196,7 +196,7 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 install -v -m 0644 $FILE_FOLDER/skwiz.desktop "/usr/local/share/applications/"
 install -v -m 0644 $FILE_FOLDER/motioneye.desktop "/usr/local/share/applications/"
 install -v -m 0644 $FILE_FOLDER/tuktuk.desktop "/usr/local/share/applications/"
-install -v -m 0644 $FILE_FOLDER/signalk-autopilot.desktop "/usr/local/share/applications/"
+install -v -m 0644 $FILE_FOLDER/sk-autopilot.desktop "/usr/local/share/applications/"
 
 mv /opt/skwiz-linux-$arch /opt/skwiz
 mv /opt/motioneye-linux-$arch /opt/motioneye
