@@ -51,6 +51,9 @@
             <Filename>jtides.desktop</Filename>
         </Include>
         <Include>
+            <Filename>sk-autopilot.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>navionics-demo.desktop</Filename>
         </Include>
     </Menu>

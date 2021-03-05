@@ -189,19 +189,26 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   --name "tuktuk" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:80/tuktuk-chart-plotter/" /opt/
 
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+  --name "sk-autopilot" --icon /home/user/.local/share/icons/signalk.png \
+  "http://localhost:80/@signalk/signalk-autopilot/" /opt/
+
 install -v -m 0644 $FILE_FOLDER/skwiz.desktop "/usr/local/share/applications/"
 install -v -m 0644 $FILE_FOLDER/motioneye.desktop "/usr/local/share/applications/"
 install -v -m 0644 $FILE_FOLDER/tuktuk.desktop "/usr/local/share/applications/"
+install -v -m 0644 $FILE_FOLDER/signalk-autopilot.desktop "/usr/local/share/applications/"
 
 mv /opt/skwiz-linux-$arch /opt/skwiz
 mv /opt/motioneye-linux-$arch /opt/motioneye
 mv /opt/tuktuk-linux-$arch /opt/tuktuk
+mv /opt/sk-autopilot-linux-$arch /opt/sk-autopilot
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
   chmod 4755 /opt/skwiz/chrome-sandbox
   chmod 4755 /opt/motioneye/chrome-sandbox
   chmod 4755 /opt/tuktuk/chrome-sandbox
+  chmod 4755 /opt/sk-autopilot/chrome-sandbox
 fi
 
 # Minimize space by linking identical files
