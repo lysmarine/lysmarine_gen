@@ -42,6 +42,9 @@
             <Filename>avnav.desktop</Filename>
         </Include>
         <Include>
+            <Filename>tuktuk.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>qtvlm.desktop</Filename>
         </Include>
         <Include>
