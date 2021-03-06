@@ -49,14 +49,14 @@ install -v -m 0644 $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applica
 install -v -m 0644 $FILE_FOLDER/avnav.desktop "/usr/local/share/applications/"
 
 ## Make folder name arch independent.
-mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
 mv /opt/AvNav-linux-$arch /opt/AvNav
+mv /opt/Pypilot_webapp-linux-$arch /opt/Pypilot_webapp
 mv /opt/bbn-launcher-linux-$arch /opt/bbn-launcher
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
-  chmod 4755 /opt/Pypilot_webapp/chrome-sandbox
   chmod 4755 /opt/AvNav/chrome-sandbox
+  chmod 4755 /opt/Pypilot_webapp/chrome-sandbox
   chmod 4755 /opt/bbn-launcher/chrome-sandbox
 fi
 
