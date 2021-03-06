@@ -15,7 +15,8 @@ case $input in
     Terminal=false
     Icon=gnome-globe
     Categories=System;GPS;Geography;Navigation;Chart;
-    Keywords=GPS;Navigation;Chart;';;
+    Keywords=GPS;Navigation;Chart;
+EOF';;
  [nN][oO]|[nN])
     echo "Exit"
     ;;
