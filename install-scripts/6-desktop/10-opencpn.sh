@@ -78,9 +78,10 @@ if [ $LMARCH == 'armhf' ]; then
     opencpn-plugin-watchdog                                     \
     opencpn-plugin-weatherfax                                   \
     opencpn-plugin-weatherrouting                               \
-    opencpn-tcdata                                              \
     opencpn-plugin-draw                                         \
     opencpn-sglock-arm32                                        \
     opencpn-plugin-oernc                                        \
     opencpn-plugin-oesenc
+
+#  apt-get install -y -q opencpn-tcdata
 fi
