@@ -25,7 +25,17 @@ wget -q -O - https://github.com/martinber/noaa-apt/raw/master/res/icon.png > "/u
 wget -q -O - https://github.com/martinber/noaa-apt/raw/master/res/shapefiles/countries.shp > "/usr/local/share/noaa-apt/res/shapefiles/countries.shp"
 wget -q -O - https://github.com/martinber/noaa-apt/raw/master/res/shapefiles/lakes.shp > "/usr/local/share/noaa-apt/res/shapefiles/lakes.shp"
 wget -q -O - https://github.com/martinber/noaa-apt/raw/master/res/shapefiles/states.shp > "/usr/local/share/noaa-apt/res/shapefiles/states.shp"
-apt-get -y -q install noaa-apt
+if [ $LMARCH == 'arm64' ]; then
+  apt-get -y -q install noaa-apt
+fi
+if [ $LMARCH == 'armhf' ]; then
+  pushd /usr/local/share/noaa-apt
+    wget -q -O - https://github.com/martinber/noaa-apt/releases/download/v1.3.0/noaa-apt-1.3.0-armv7-linux-gnueabihf.zip > noaa-apt.zip
+    unzip noaa-apt.zip
+    chmod 755 noaa-apt
+    mv noaa-apt /usr/bin/
+  popd
+fi
 
 install -v $FILE_FOLDER/gnuaisgui.desktop /usr/local/share/applications/
 install -v $FILE_FOLDER/previsat.desktop /usr/local/share/applications/
