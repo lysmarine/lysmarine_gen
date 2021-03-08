@@ -32,6 +32,7 @@ if [ $LMARCH == 'armhf' ]; then
   pushd /usr/local/share/noaa-apt
     wget -q -O - https://github.com/martinber/noaa-apt/releases/download/v1.3.0/noaa-apt-1.3.0-armv7-linux-gnueabihf.zip > noaa-apt.zip
     unzip noaa-apt.zip
+    rm noaa-apt.zip
     chmod 755 noaa-apt
     mv noaa-apt /usr/bin/
   popd
