@@ -11,7 +11,7 @@ case $input in
     Name=Navionics Demo
     GenericName=Navionics Demo
     Comment=Navionics Demo
-    Exec=chromium https://webapp.navionics.com/
+    Exec=gnome-www-browser https://webapp.navionics.com/
     Terminal=false
     Icon=gnome-globe
     Categories=System;GPS;Geography;Navigation;Chart;
