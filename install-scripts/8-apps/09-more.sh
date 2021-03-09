@@ -13,7 +13,7 @@ systemctl disable lircd
 
 apt-get clean
 
-apt-get -q -y install sysstat jq xmlstarlet uhubctl iotop rsync timeshift at unrar snapd
+apt-get -q -y install sysstat jq xmlstarlet uhubctl iotop rsync timeshift at snapd
 systemctl disable snapd snapd.socket
 
 #apt-get install software-properties-common
