@@ -1,2 +1,2 @@
 # https://github.com/candle-usb/candleLight_fw
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="606f", NAME="can_%s{serial}"
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="606f", MODE="660", GROUP="users", NAME="can_%s{serial}"
