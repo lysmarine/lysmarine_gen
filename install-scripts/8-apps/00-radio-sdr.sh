@@ -72,6 +72,7 @@ wget -q -O - https://arachnoid.com/JNX/JNX_source.tar.gz > /usr/local/share/jnx/
 wget -q -O - https://arachnoid.com/JWX/resources/JWX.jar > /usr/local/share/jwx/JWX.jar
 wget -q -O - https://arachnoid.com/JWX/resources/JWX_source.tar.bz2 > /usr/local/share/jwx/JWX_source.tar.bz2
 
+apt-get -y -q install fontconfig
 apt-get -y -q install default-jdk
 apt-get -y -q install hamfax
 
