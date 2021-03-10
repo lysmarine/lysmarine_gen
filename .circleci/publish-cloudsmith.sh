@@ -17,7 +17,11 @@ for pkg_file in cross-build-release/release/*/*.$EXT; do
   mkdir ./tmp
   chmod 755 ./tmp
   cd $zipDir || exit 255
-  xz -z -c -v -1 --memlimit=1200MiB --threads=2 ${zipName} > ../../../tmp/${zipName}.xz
+  if [ ${PKG_ARCH} == 'armhf' ]; then
+    xz -z -c -v -1 --memlimit=1800MiB --threads=2 ${zipName} > ../../../tmp/${zipName}.xz
+  else
+    xz -z -c -v --memlimit=2800MiB --threads=2 ${zipName} > ../../../tmp/${zipName}.xz
+  fi
   cd ../../..
   cloudsmith push raw $REPO ./tmp/${zipName}.xz --summary "LysMarine built by CircleCi on $(date)" --description "LysMarine BBN build"
   RESULT=$?
