@@ -34,8 +34,8 @@ install -v $FILE_FOLDER/piclone.desktop -o 1000 -g 1000 "/home/user/.local/share
 apt-get clean
 npm cache clean --force
 
-apt-get -q -y install ca-certificates-java default-jdk-headless default-jre default-jre-headless java-common
-#apt-get -q -y install arduino
+apt-get -q -y install fontconfig
+apt-get -q -y install arduino
 
 install -v -m 0755 $FILE_FOLDER/bbn-change-password.sh "/usr/local/bin/bbn-change-password"
 
