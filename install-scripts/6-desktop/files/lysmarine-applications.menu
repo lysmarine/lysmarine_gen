@@ -80,6 +80,9 @@
             <Filename>chromium.desktop</Filename>
         </Include>
         <Include>
+            <Filename>chromium-browser.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>dockwa.desktop</Filename>
         </Include>
         <Include>
