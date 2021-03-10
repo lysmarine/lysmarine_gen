@@ -2,6 +2,13 @@
 
 # See: https://wxtoimgrestored.xyz
 
+myArch=$(dpkg --print-architecture)
+
+if [ "armhf" != "$myArch" ] ; then
+    echo "armhf version of the distribution is required. Exiting..."
+    exit 1
+fi
+
 cd ~
 wget -q -O - https://wxtoimgrestored.xyz/beta/wxtoimg-armhf-2.11.2-beta.deb > wxtoimg-armhf-2.11.2-beta.deb
 
