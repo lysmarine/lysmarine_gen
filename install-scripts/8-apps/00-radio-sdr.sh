@@ -73,7 +73,12 @@ wget -q -O - https://arachnoid.com/JWX/resources/JWX.jar > /usr/local/share/jwx/
 wget -q -O - https://arachnoid.com/JWX/resources/JWX_source.tar.bz2 > /usr/local/share/jwx/JWX_source.tar.bz2
 
 apt-get -y -q install fontconfig
-apt-get -y -q install default-jdk
+if [ $LMARCH == 'armhf' ]; then
+  apt-get -y -q install openjdk-8-jdk
+else
+  apt-get -y -q install default-jdk
+fi
+
 apt-get -y -q install hamfax
 
 apt-get -y -q install chirp-daily
