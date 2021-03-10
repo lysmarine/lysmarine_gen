@@ -723,10 +723,6 @@
             </startupnotify>
         </application>
 
-        <application name="chromium-browser">
-            <decor>no</decor>
-        </application>
-
         <application name="XyGrib">
             <decor>yes</decor>
         </application>
