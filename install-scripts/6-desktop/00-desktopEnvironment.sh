@@ -15,6 +15,7 @@ fi
 apt-get -q -y install xserver-xorg-input-libinput
 apt-get -q -y install xinput libinput-tools
 apt-get -q -y install xinput-calibrator
+apt-get -q -y install gldriver-test
 
 apt-get install -q -y budgie-desktop
 
