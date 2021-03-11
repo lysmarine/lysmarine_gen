@@ -19,6 +19,7 @@ install -m 0644 -v $FILE_FOLDER/influxdb.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/grafana.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/openplotter.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/chirp.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/stellarium.list "/etc/apt/sources.list.d/"
 
 ## Prefer opencpn PPA to free-x (for mainly for the opencpn package)
 install -m 0644 -v $FILE_FOLDER/50-lysmarine.pref "/etc/apt/preferences.d/"
@@ -29,6 +30,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6AF0E1940624A220       
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 868273EDCE9979E7           # lysmarine (provide: createap, rtl-ais, fbpanel)
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 24A4598E769C8C51           # bbn PPAs on launchpad
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6EA1BC913BC5163F           # Chirp
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1932F485C68D72A5           # Stellarium
 
 wget -q -O - https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -    # NodeJs
 wget -q -O - https://www.free-x.de/debian/oss.boating.gpg.key     | apt-key add -    # XyGrib, AvNav
