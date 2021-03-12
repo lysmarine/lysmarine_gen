@@ -98,5 +98,5 @@ workflows:
           cpuArch: 'arm64'
       - build-in-arm-docker:
           name: armbian-pine64so
-          baseOs: 'armbian-pine64so'
+          baseOs: 'pine64so'
           cpuArch: 'arm64'
