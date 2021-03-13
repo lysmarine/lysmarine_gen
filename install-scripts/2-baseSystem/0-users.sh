@@ -72,11 +72,13 @@ if [[ -d /etc/polkit-1 ]]; then
 	install -v $FILE_FOLDER/org.freedesktop.NetworkManager.pkla  "/etc/polkit-1/localauthority/10-vendor.d/"
 fi
 
-if [[ -f /etc/sudoers.d/010_pi-nopasswd ]]; then # Remove the raspbian no-pwd sudo to user pi.
+## Remove the raspbian no-pwd sudo to user pi.
+if [[ -f /etc/sudoers.d/010_pi-nopasswd ]]; then
 	rm /etc/sudoers.d/010_pi-nopasswd
 fi
 
-echo 'PATH="/sbin:/usr/sbin:$PATH"' >> /home/user/.profile # Give user capability to halt and reboot.
+## Give user capability to halt and reboot.
+echo 'PATH="/sbin:/usr/sbin:$PATH"' >> /home/user/.profile
 
 if [ -f /root/.not_logged_in_yet ] ;then # Disable Armbian first login script.
 	rm /root/.not_logged_in_yet
@@ -89,7 +91,4 @@ if [ -f /etc/xdg/user-dirs.defaults ] ;then
   sed -i 's/^DESKTOP=/#&/'     /etc/xdg/user-dirs.defaults;
   sed -i 's/^TEMPLATES=/#&/'   /etc/xdg/user-dirs.defaults;
   sed -i 's/^PUBLICSHARE=/#&/' /etc/xdg/user-dirs.defaults;
-  sed -i 's/^MUSIC=/#&/'       /etc/xdg/user-dirs.defaults;
-  sed -i 's/^PICTURES=/#&/'    /etc/xdg/user-dirs.defaults;
-  sed -i 's/^VIDEOS=/#&/'      /etc/xdg/user-dirs.defaults;
 fi
