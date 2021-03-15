@@ -3,7 +3,7 @@
 
 
 ## Dependencys of signalk.
-apt-get install -y -q nodejs libavahi-compat-libdnssd-dev python-dev git servicemanager
+apt-get install -y -q nodejs libavahi-compat-libdnssd-dev python-dev git
 
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk"
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk/plugin-config-data"

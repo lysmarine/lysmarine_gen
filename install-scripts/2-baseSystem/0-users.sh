@@ -4,11 +4,8 @@ apt-get -y -q install sudo policykit-1
 ## Force keyboard layout to be EN US by default.
 sed -i "s/XKBLAYOUT=.*/XKBLAYOUT=\"us\"/g" /etc/default/keyboard
 
-
 ## Set root password.
 echo 'root:changeme' | chpasswd
-
-
 
 ## Remove default user (if any).
 oldUser=$(cat /etc/passwd | grep 1000:1000 | cut -f1 -d:) 
@@ -18,8 +15,6 @@ if [[ ! -z $oldUser ]]; then
 else
 	echo "No default user found !"
 fi
-
-
 
 ## Add default user.
 adduser --uid 1000 --home /home/user --quiet --disabled-password -gecos "lysmarine" user
@@ -33,8 +28,6 @@ if [ ! -d /home/signalk ] ; then
 	echo "Creating signalk user"
 	adduser --home /home/signalk --gecos --system --disabled-password --disabled-login signalk
 fi
-
-
 
 ## Create pypilot user to run the services.
 if [ ! -d /home/pypilot ] ; then
@@ -50,19 +43,13 @@ if ! grep -q charts /etc/group ; then
 	usermod -a -G charts root;
 fi
 
-
-
 ## Create the special charts folder.
 install -v -d -m 6775 -o signalk -g charts /srv/charts; 
-
-
 
 ## Link the chart folder to home for convenience.
 if [ ! -f /home/user/charts ] ; then
 	su user -c "ln -s /srv/charts /home/user/charts;"
 fi
-
-
 
 ## Manage the permissions and privileges.
 if [[ -d /etc/polkit-1 ]]; then
@@ -83,8 +70,6 @@ echo 'PATH="/sbin:/usr/sbin:$PATH"' >> /home/user/.profile
 if [ -f /root/.not_logged_in_yet ] ;then # Disable Armbian first login script.
 	rm /root/.not_logged_in_yet
 fi
-
-
 
 ## Prevent the creation of useless home folders on first boot.
 if [ -f /etc/xdg/user-dirs.defaults ] ;then
