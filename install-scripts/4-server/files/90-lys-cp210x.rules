@@ -1,7 +1,7 @@
 # Cygnal Integrated Products, Inc. CP210x Composite Device (Used by Holux m241 and Wintec grays2 wbt-201) [linux module: cp210x]
-SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", SYMLINK+="ttyLYS_cp210x_%s{serial}", RUN+="/lib/udev/manage_cp210x.sh %s{serial}"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", SYMLINK+="ttyLYS_cp210x_%s{serial}", RUN+="/lib/udev/manage_cp210x.sh '$env{ID_SERIAL_SHORT}'"
 
 # Cygnal Integrated Products, Inc. [linux module: cp210x]
-SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea71", SYMLINK="ttyLYS_cp210x_%s{serial}", RUN+="/lib/udev/manage_cp210x.sh %s{serial}"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea71", SYMLINK="ttyLYS_cp210x_%s{serial}", RUN+="/lib/udev/manage_cp210x.sh '$env{ID_SERIAL_SHORT}'"
 
-ACTION=="remove", SUBSYSTEM=="tty", RUN+="/lib/udev/manage_cp210x.sh %s{serial} remove"
+ACTION=="remove", SUBSYSTEM=="tty", RUN+="/lib/udev/manage_cp210x.sh '$env{ID_SERIAL_SHORT}' remove"

@@ -1,4 +1,4 @@
 # Prolific Technology, Inc. PL2303 Serial Port [linux module: pl2303]
-SUBSYSTEM=="tty", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", SYMLINK+="ttyLYS_prolific_%s{serial}", RUN+="/lib/udev/manage_prolific.sh %s{serial}"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", SYMLINK+="ttyLYS_prolific_%s{serial}", RUN+="/lib/udev/manage_prolific.sh '$env{ID_SERIAL_SHORT}'"
 
-ACTION=="remove", SUBSYSTEM=="tty", RUN+="/lib/udev/manage_prolific.sh %s{serial} remove"
+ACTION=="remove", SUBSYSTEM=="tty", RUN+="/lib/udev/manage_prolific.sh '$env{ID_SERIAL_SHORT}' remove"
