@@ -47,7 +47,7 @@ jobs:
           sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx xorriso
           cd cross-build-release; sudo chmod -v u+w *.sh;
       - run:
-          command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
+          command: cd cross-build-release; sudo ./build.sh -o <<parameters.baseOs>> -a <<parameters.cpuArch>> -v <<parameters.version>> -s "<<parameters.stage>>"
           no_output_timeout: 60m
       - publish
 

@@ -4,41 +4,85 @@
 	checkRoot
 	#################################################################################
 	##
-	##  Usage: build.sh baseOS processorArchitecture lmVersion stagesToBuild
+	##  SYNOPSIS
+	##      build.sh baseOS processorArchitecture [lmVersion] [stagesToBuild] [--ssh USER@HOST]
     ##
-	##  Note : baseOs options are raspios|armbian-pine64so|debian-live|debian-vbox
-	##  Note : processorArchitecture are armhf|arm64|amd64
+    ##  DESCRIPTION
+	##      -o
+	##         The base operating system to build on :
+	##         Supported option are raspios|armbian-pine64so|debian-live|debian-vbox
+	##
+	##      -a
+	##          The processor architecture to build on. If the architecture is not the same as the host qemu will be
+	##          used. Otherwise only chroot will be used.
+	##          Supported option are armhf|arm64|amd64
     ##
-	##  Example: sudo ./build.sh raspios arm64 0.9.0 "0 2 4 6 8"
+    ##      -v
+    ##          The name to include in the output file name. If none is provided, a timestamp will be used.
+	##
+	##      -s
+	##          A string of space separated stages to build. If nothing is provided, all stage will be build.
+	##
+	##      -h
+	##          Specify a remote location to build on via ssh and scp.
+	##
+	##  EXAMPLES:
+	##      sudo ./build.sh raspios arm64
+	##      sudo ./build.sh raspios arm64 0.9.0 "0 2 4 6 8"
+	##      sudo ./build.sh raspios arm64 0.9.0 "0 2.1 2.2 2.3 4 6.1 8"
+	##
 	##  To mount mount the image/iso and have a prompt inside the chroot: sudo ./build.sh raspios arm64 0.9.0 bash
 	##
 	#################################################################################
 
-	# Set variables.
-	baseOS="${1:-raspios}"
-	cpuArch="${2:-armhf}"
-	lmVersion="${3:-$EPOCHSECONDS}"
-	stagesToBuild="$4"
-	buildCmd="./install.sh $4"
-	[[ $4 == 'bash' ]] && buildCmd='/bin/bash' ;
 
-	# Validate arguments.
+	while getopts ":o:a:v:s:h" opt; do
+	  case $opt in
+		o)
+		  baseOS="$OPTARG"
+		  ;;
+		 a)
+		  cpuArch=$OPTARG
+		  ;;
+		 v)
+		  lmVersion=$OPTARG
+		  ;;
+		 s)
+		  stages=$OPTARG
+		  ;;
+		 h)
+		  sshConn=$OPTARG
+		  ;;
+	  esac
+	done
+
+	## Set default values if missing.
+	baseOS="${baseOS:-raspios}"
+	cpuArch="${cpuArch:-armhf}"
+	lmVersion="${lmVersion:-$EPOCHSECONDS}"
+	stagesToBuild="${stagesToBuild:-*}"
+	buildCmd="./install.sh $stages"
+	[[ $stages == 'bash' ]] && buildCmd='/bin/bash' ;
+
+	## Validate arguments.
 	supportedOS=(raspios debian-live pine64so)
 	if ! (printf '%s\n' "${supportedOS[@]}" | grep -xq $baseOS); then
-		echo "Unsupported os." ; exit 1
-	fi
-	supportedArch=(armhf arm64 amd64)
-	if ! (printf '%s\n' "${supportedArch[@]}" | grep -xq $cpuArch); then
-		echo "Unsupported cpu arch." ; exit 1
+		echo "ERROR: Unsupported os." ; exit 1
 	fi
 
-	# Setup the workspace
+	supportedArch=(armhf arm64 amd64)
+	if ! (printf '%s\n' "${supportedArch[@]}" | grep -xq $cpuArch); then
+		echo "ERROR: Unsupported cpu arch." ; exit 1
+	fi
+
+	## Setup the workspace
 	setupWorkSpace "$baseOS-$cpuArch"
 	cacheDir="./cache/$baseOS-$cpuArch"
 	workDir="./work/$baseOS-$cpuArch"
 	releaseDir="./release/"
 
-	# if the source OS is not found in cache, download it.
+
+	## if the source OS is not found in cache, download it.
 	if ! ls "$cacheDir/$baseOS-$cpuArch".base.??? >/dev/null 2>&1; then
 		if [[ "$baseOS" == "raspios" ]]; then
 			zipName="raspios_lite_${cpuArch}_latest"
@@ -57,15 +101,12 @@
 		elif [[ "$baseOS" =~ debian-* ]]; then
 			wget -P "$cacheDir/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/$cpuArch/iso-hybrid/debian-live-10.7.0-$cpuArch-standard+nonfree.iso"
 			mv "$cacheDir/debian-live-10.7.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
-
-		else
-			echo "Unknown baseOS"; exit 1
 		fi
 	fi
 
 
 
-	# if it's an image file, we assume that it will need to be inflated.
+	## if it's an image file, we assume that it will need to be inflated.
 	if [[ ! -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" && -f "$cacheDir/$baseOS-$cpuArch.base.img" ]]; then
 		inflateImage "$baseOS" "$cacheDir/$baseOS-$cpuArch.base.img"
 	fi
