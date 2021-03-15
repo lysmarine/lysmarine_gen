@@ -2,10 +2,9 @@
 
 apt-get install -yq rofi fonts-roboto xclip qt5-style-plugins materia-gtk-theme xbacklight
 
-
 ## Install icon theme Griffin-Icons-Griffin-Ghost
 wget https://github.com/LordShenron/Griffin-Icons/archive/Griffin-Ghost.zip -O /tmp/Griffin-Ghost.zip
-unzip /tmp/Griffin-Ghost.zip -d /usr/local/share/icons/
+unzip -q /tmp/Griffin-Ghost.zip -d /usr/local/share/icons/
 rm /tmp/Griffin-Ghost.zip
 
 cp -r $FILE_FOLDER/awesome /home/user/.config/awesome
