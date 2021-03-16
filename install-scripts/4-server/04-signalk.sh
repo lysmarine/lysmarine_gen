@@ -45,7 +45,6 @@ pushd /home/signalk/.signalk
   su signalk -c "npm install freeboard-sk-helper --unsafe-perm --loglevel error"
   su signalk -c "npm install skwiz --unsafe-perm --loglevel error"
   su signalk -c "npm install tuktuk-chart-plotter --unsafe-perm --loglevel error"
-  su signalk -c "npm install @mxtommy/kip --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-raspberry-pi-bme280 --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-raspberry-pi-1wire --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-venus-plugin --unsafe-perm --loglevel error"
@@ -60,6 +59,7 @@ pushd /home/signalk/.signalk
   su signalk -c "npm install @signalk/signalk-autopilot --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-sonoff-ewelink --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-raspberry-pi-monitoring --unsafe-perm --loglevel error"
+  su signalk -c "npm install @mxtommy/kip --unsafe-perm --loglevel error"
 popd
 
 sed -i "s#sudo ##g" /home/signalk/.signalk/node_modules/signalk-raspberry-pi-monitoring/index.js
