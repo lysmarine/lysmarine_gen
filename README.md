@@ -48,6 +48,8 @@ To get start it's easier to download pre-built image using the links below (or y
 following instructions in the next chapter). 
 CircleCI is the tool which is used to create the OS image.
 
+NOTE: Do not forget to set WiFi country after the installation.
+
 NOTE: Due to Cloudsmith bandwidth restrictions, please try to find your required image using
 this link first: <https://ln2.sync.com/dl/984201ff0/x7ysfgpw-zat4snnk-4zfc9ijn-35kwfxia>
 
