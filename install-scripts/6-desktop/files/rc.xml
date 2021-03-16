@@ -761,6 +761,11 @@
             <maximized>no</maximized>
             <decor>yes</decor>
         </application>
+        <application title="SdrGlut-825">
+            <maximized>no</maximized>
+            <decor>yes</decor>
+        </application>
+
         <application title="Open File">
             <maximized>no</maximized>
             <decor>yes</decor>
