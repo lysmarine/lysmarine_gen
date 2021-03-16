@@ -41,6 +41,10 @@ npm cache clean --force
 ## Install signalk published plugin
 pushd /home/signalk/.signalk
   su signalk -c "npm install @signalk/charts-plugin --unsafe-perm --loglevel error"
+  su signalk -c "npm install sk-resources-fs --unsafe-perm --loglevel error"
+  su signalk -c "npm install freeboard-sk-helper --unsafe-perm --loglevel error"
+  su signalk -c "npm install skwiz --unsafe-perm --loglevel error"
+  su signalk -c "npm install tuktuk-chart-plotter --unsafe-perm --loglevel error"
   su signalk -c "npm install @mxtommy/kip --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-raspberry-pi-bme280 --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-raspberry-pi-1wire --unsafe-perm --loglevel error"
@@ -48,18 +52,14 @@ pushd /home/signalk/.signalk
   su signalk -c "npm install signalk-mqtt-gw --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-mqtt-home-asisstant --unsafe-perm --loglevel error"
   su signalk -c "npm install @codekilo/signalk-modbus-client --unsafe-perm --loglevel error"
-  su signalk -c "npm install sk-resources-fs --unsafe-perm --loglevel error"
-  su signalk -c "npm install freeboard-sk-helper --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-derived-data --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-anchoralarm-plugin --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-simple-notifications --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-wilhelmsk-plugin --unsafe-perm --loglevel error"
-  su signalk -c "npm install skwiz --unsafe-perm --loglevel error"
   su signalk -c "npm install @signalk/sailgauge --unsafe-perm --loglevel error"
   su signalk -c "npm install @signalk/signalk-autopilot --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-sonoff-ewelink --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-raspberry-pi-monitoring --unsafe-perm --loglevel error"
-  su signalk -c "npm install tuktuk-chart-plotter --unsafe-perm --loglevel error"
 popd
 
 sed -i "s#sudo ##g" /home/signalk/.signalk/node_modules/signalk-raspberry-pi-monitoring/index.js
