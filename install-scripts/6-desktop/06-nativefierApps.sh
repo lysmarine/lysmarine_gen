@@ -67,11 +67,11 @@ npm cache clean --force
 ########################################################################################################################
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "SignalK" --icon /home/user/.local/share/icons/signalk.png --clear-cache \
+  --name "SignalK" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:80/admin/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "Freeboard-sk" --icon /home/user/.local/share/icons/freeboard-sk.png --clear-cache \
+  --name "Freeboard-sk" --icon /home/user/.local/share/icons/freeboard-sk.png \
   "http://localhost:80/@signalk/freeboard-sk/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
