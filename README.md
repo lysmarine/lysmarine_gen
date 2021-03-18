@@ -241,7 +241,7 @@ Windlass, Bow Thruster, Lights)
 ## Add-ons via install scripts
 
 - [QtVlm](https://www.meltemus.com/)
-- DeskPi Pro support
+- [DeskPi Pro](https://github.com/DeskPi-Team/deskpi) support
 - ArgonOne case support
 - Text-To-Speech App
 - [AnBox](https://anbox.io/) (experimental Android app support)
