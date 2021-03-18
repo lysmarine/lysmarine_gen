@@ -138,7 +138,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 
 - Chromium Web Browser
 - Email Client
-- Internet Messaging Client (Empathy)
+- Internet Messaging Client [Empathy](https://github.com/GNOME/empathy)
 - Youtube App
 - Facebook App
 - Internet Weather
@@ -184,15 +184,15 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - VNC (remote desktop)
 - SSH (remote shell)
 - NMEA 0183
-- SocketCAN, NMEA 2000, can-utils
+- SocketCAN, NMEA 2000, [can-utils](https://github.com/linux-can/can-utils)
 - OpenVPN (Virtual Private Networking)
-- MQTT (Mosquitto) for IoT (to talk to Sonoff smart switches to switch on several devices like Radar,
+- MQTT [Mosquitto](https://mosquitto.org/) for IoT (to talk to Sonoff smart switches to switch on several devices like Radar,
 Windlass, Bow Thruster, Lights)
 - WiFi (Access Point and Client)
-- SignalK
+- [SignalK](https://signalk.org/)
 - Seatalk 1, GPIO
 - ModBus (to talk to Victron Venus OS, etc)
-- Timeshift (backups), rsync
+- [Timeshift](https://github.com/teejee2008/timeshift) (backups), rsync
 - PPP, wvdial, picocom for satellite modem support
 - I2C tools
 - 1-Wire (sensors i.e. for temperature, humidity, pressure, tank levels)
@@ -226,17 +226,17 @@ Windlass, Bow Thruster, Lights)
 - NodeJS
 - C/C++ Compiler and Toolset
 - Debian, NPM, PIP, Snap package managers
-- rpi-clone (SSD cloning)
+- [rpi-clone](https://github.com/billw2/rpi-clone) (SSD cloning)
 - Pi Imager, piclone
-- seahorse (Password Management)
-- Gammu (SMS Client)
-- Timeshift (backups)
+- [seahorse](https://wiki.debian.org/Seahorse) (Password Management)
+- [Gammu](https://wammu.eu/smsd/) (SMS Client)
+- [Timeshift](https://github.com/teejee2008/timeshift) (backups)
 
 
 ## Data
 
-- InfluxDB
-- Grafana
+- [InfluxDB](https://www.influxdata.com/)
+- [Grafana](https://grafana.com/)
 
 ## Add-ons via install scripts
 
