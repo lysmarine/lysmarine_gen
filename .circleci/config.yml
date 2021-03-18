@@ -76,7 +76,7 @@ jobs:
       - run: |
           docker exec --privileged -ti CIarmBuilder apt-get update
           docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod rsync xz-utils
-      - run: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
+      - run: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh -o <<parameters.baseOs>> -a <<parameters.cpuArch>> -v <<parameters.version>> -s '<<parameters.stage>>'"
       - publish
 
 
