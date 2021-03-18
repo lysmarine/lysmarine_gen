@@ -170,11 +170,11 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - [JNX NavText](https://arachnoid.com/JNX/)
 - [JWX WeatherFax](https://arachnoid.com/JWX/)
 - [noaa-apt satellite weather](https://noaa-apt.mbernardi.com.ar/)
-- PreviSat Satellite Tracker
-- Quisk SDR
-- multimon-ng, netcat
-- Chirp
-- GNU AIS
+- [PreviSat Satellite Tracker](http://previsat.sourceforge.net/)
+- [Quisk SDR](https://james.ahlstrom.name/quisk/)
+- [multimon-ng](https://github.com/EliasOenal/multimon-ng), netcat
+- [Chirp](https://chirp.danplanet.com/)
+- [GNU AIS](http://gnuais.sourceforge.net/)
 
 
 ## Protocols
@@ -240,23 +240,23 @@ Windlass, Bow Thruster, Lights)
 
 ## Add-ons via install scripts
 
-- QtVlm
+- [QtVlm](https://www.meltemus.com/)
 - DeskPi Pro support
 - ArgonOne case support
 - Text-To-Speech App
-- AnBox (experimental Android app support)
+- [AnBox](https://anbox.io/) (experimental Android app support)
 - Touchscreen calibration
-- NMEA Sleuth Chromium Plugin
-- NodeRed
+- [NMEA Sleuth Chromium Plugin](https://chrome.google.com/webstore/detail/nmea-sleuth/pkikkfglomloligndkaibecgapljgjok?hl=en)
+- [NodeRed](https://nodered.org/)
 - PACTOR
-- SdrGlut
-- WxToImg
+- [SdrGlut](https://github.com/righthalfplane/SdrGlut)
+- [WxToImg](https://wxtoimgrestored.xyz/)
 - OS Settings
 - Timezone Setup
 - Change Password
 - Predict (Satellite Tracker for scripting)
-- Scytale-C Inmarsat Decoders
-- Pat SailMail / WinLink
+- [Scytale-C](https://bitbucket.org/scytalec/scytalec/) Inmarsat Decoders
+- [Pat SailMail / WinLink](https://github.com/la5nta/pat)
 
 # Getting Started
 
