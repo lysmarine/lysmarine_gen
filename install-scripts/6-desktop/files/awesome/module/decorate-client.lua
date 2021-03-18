@@ -8,7 +8,7 @@ local function renderClient(client, mode)
   end
 
   client.rendering_mode = mode
-  client.floating = false
+  -- client.floating = false    -- Break openCpn bars
   client.maximized = false
   client.above = false
   client.below = false

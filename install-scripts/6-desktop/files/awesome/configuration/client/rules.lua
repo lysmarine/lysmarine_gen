@@ -1,6 +1,5 @@
 local awful = require('awful')
 local gears = require('gears')
-
 local client_buttons = require('configuration.client.buttons')
 
 -- Rules
@@ -14,7 +13,7 @@ awful.rules.rules = {
       buttons = client_buttons,
       screen = awful.screen.preferred,
       placement = awful.placement.no_offscreen,
-      floating = false,
+      --floating = false, -- This break opencpn
       maximized = false,
       above = false,
       below = false,
@@ -27,10 +26,6 @@ awful.rules.rules = {
   {
     rule_any = { name = { 'QuakeTerminal' } },
     properties = { skip_decoration = true }
-  },
-  {
-    rule_any = { name = { 'OpenCPN' } },
-    properties = { floating = true }
   },
   {
     rule_any = { name = { 'Onboard' } },
@@ -48,6 +43,7 @@ awful.rules.rules = {
   -- Titlebars
   {
     rule_any = { type = { 'dialog' }, class = { 'Wicd-client.py', 'calendar.google.com' } },
+    except_any = { class = { "Opencpn" } },
     properties = {
       placement = awful.placement.centered,
       ontop = true,

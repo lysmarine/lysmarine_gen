@@ -22,8 +22,10 @@ local apps = {
     'nm-applet --indicator', -- wifi
     '/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 ', -- credential manager
     '~/.config/autostart',
-    "onboard",
-    'sleep 42 && xset s off && xset -dpms && xset s noblank',
+    "sleep 3 && onboard",
+    'xset s off ; xset -dpms ; xset s noblank',
+    '/usr/local/bin/wdash',
+    'evdev-rce'
   }
 }
 
