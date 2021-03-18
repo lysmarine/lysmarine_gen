@@ -159,17 +159,17 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 ## Radio
 
 - RTL AIS, RTL SDR, GNSS SDR
-- Cubic SDR
-- Flarq
-- Fldigi
-- GNU Radio Companion
-- CuteSdr
-- GPredict
-- Gqrx
-- Hamfax RadioFax
-- JNX NavText
-- JWX WeatherFax
-- noaa-apt satellite weather
+- [Cubic SDR](https://cubicsdr.com/)
+- [Flarq](http://www.w1hkj.com/flarq_main.html)
+- [Fldigi](http://www.w1hkj.com/)
+- [GNU Radio Companion](https://github.com/gnuradio/gnuradio)
+- [CuteSdr](https://directory.fsf.org/wiki/Cutesdr)
+- [GPredict](http://gpredict.oz9aec.net/)
+- [Gqrx](https://gqrx.dk/)
+- [Hamfax RadioFax](http://hamfax.sourceforge.net/)
+- [JNX NavText](https://arachnoid.com/JNX/)
+- [JWX WeatherFax](https://arachnoid.com/JWX/)
+- [noaa-apt satellite weather](https://noaa-apt.mbernardi.com.ar/)
 - PreviSat Satellite Tracker
 - Quisk SDR
 - multimon-ng, netcat
