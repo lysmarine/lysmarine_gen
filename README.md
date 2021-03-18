@@ -51,7 +51,9 @@ CircleCI is the tool which is used to create the OS image.
 NOTE: Do not forget to set WiFi country after the installation.
 
 NOTE: Due to Cloudsmith bandwidth restrictions, please try to find your required image using
-this link first: <https://ln2.sync.com/dl/984201ff0/x7ysfgpw-zat4snnk-4zfc9ijn-35kwfxia>
+this link first: <https://archive.org/download/lysmarine-bbn_2021-03-17-raspios-armhf.img>
+
+[//]: # (<https://ln2.sync.com/dl/984201ff0/x7ysfgpw-zat4snnk-4zfc9ijn-35kwfxia>)
 
 Binaries are downloadable from: 
  <https://cloudsmith.io/~bbn-projects/repos/bbn-repo/packages/?q=lysmarine>
