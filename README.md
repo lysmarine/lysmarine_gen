@@ -179,13 +179,13 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 
 ## Protocols
 
-- Samba (Windows Networking)
+- [Samba (Windows Networking)](https://www.samba.org/)
 - CUPS (printing)
 - VNC (remote desktop)
 - SSH (remote shell)
 - NMEA 0183
 - SocketCAN, NMEA 2000, [can-utils](https://github.com/linux-can/can-utils)
-- OpenVPN (Virtual Private Networking)
+- [OpenVPN (Virtual Private Networking)](https://openvpn.net/)
 - MQTT [Mosquitto](https://mosquitto.org/) for IoT (to talk to Sonoff smart switches to switch on several devices like Radar,
 Windlass, Bow Thruster, Lights)
 - WiFi (Access Point and Client)
@@ -217,13 +217,13 @@ Windlass, Bow Thruster, Lights)
 - Calendar
 - Weather App
 - Chess
-- Card Game (Preferans)
-- OnBoard touch screen keyboard
-- Right click support on touchscreens
-- Arduino IDE
-- Java (OpenJDK)
-- Python
-- NodeJS
+- [Card Game (Preferans)](http://openpref.sourceforge.net/)
+- [OnBoard](https://launchpad.net/onboard) touch screen keyboard
+- [Right click support on touchscreens](https://github.com/bareboat-necessities/evdev-right-click-emulation)
+- [Arduino IDE](https://www.arduino.cc/en/software)
+- [Java (OpenJDK)](https://openjdk.java.net/)
+- [Python](https://www.python.org/)
+- [NodeJS](https://nodejs.org/en/)
 - C/C++ Compiler and Toolset
 - Debian, NPM, PIP, Snap package managers
 - [rpi-clone](https://github.com/billw2/rpi-clone) (SSD cloning)
