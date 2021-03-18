@@ -109,29 +109,29 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 
 ## Navigation, Instruments
 
-- OpenCPN and plugins
-- AvNav
-- GPSD
-- KPlex
-- SignalK and plugins
-- Freeboard-SK
-- SK Instrument Panel 
-- KIP Dashboard
-- SKWiz Instrument Panel
-- PyPilot
-- BBN Launcher
-- SK Sail Gauge
-- XyGrib Weather GRIB Viewer App
-- Stellarium
-- CanBoat
-- Sail CAD
-- Race Instructions / Planning App
+- [OpenCPN](https://opencpn.org/) and plugins
+- [AvNav](https://github.com/wellenvogel/avnav)
+- [GPSD](https://en.wikipedia.org/wiki/Gpsd)
+- [KPlex](http://www.stripydog.com/kplex/)
+- [SignalK](https://signalk.org/) and plugins
+- [Freeboard-SK](https://github.com/SignalK/freeboard-sk)
+- [SK Instrument Panel](https://github.com/SignalK/instrumentpanel)
+- [KIP Dashboard](https://github.com/mxtommy/Kip)
+- [SKWiz Instrument Panel](https://www.npmjs.com/package/skwiz)
+- [PyPilot](https://pypilot.org/)
+- [BBN Launcher](https://github.com/bareboat-necessities/lysmarine_gen/tree/master/install-scripts/4-server/files/bbn-launcher)
+- [SK Sail Gauge](https://github.com/SignalK/sailgauge)
+- [XyGrib](https://opengribs.org/en/xygrib) Weather GRIB Viewer App
+- [Stellarium](http://stellarium.org/)
+- [CanBoat](https://github.com/canboat)
+- [Sail CAD](http://www.sailcut.com/)
+- [Race Instructions / Planning App](http://boats.sourceforge.net/)
 - Vessel Specs App
 - ColReg 
-- Sailing Trip and Provisioning Checklist
+- [Sailing Trip and Provisioning Checklist](https://bareboat-necessities.github.io/my-bareboat/bareboat-equipment-checklist)
 - Knots
-- JTides
-- TukTuk chartplotter
+- [JTides](https://arachnoid.com/JTides/)
+- [TukTuk chartplotter](https://github.com/vokkim/tuktuk-chart-plotter)
 
 
 ## Internet
@@ -148,12 +148,12 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 
 ## Multimedia
 
-- Mopidy Media Player with Web UI (Youtube, Local List, Internet Radio, MPD support)
-- MusicBox (Music Player)
-- VLC (with IP camera support)
-- Audacious
-- MotionEye (Cameras Control)
-- shairport-sync (AirPlay)
+- [Mopidy](https://mopidy.com/) Media Player with Web UI (Youtube, Local List, Internet Radio, MPD support)
+- [MusicBox](https://mopidy.com/ext/musicbox-webclient/) (Music Player)
+- [VLC](https://www.videolan.org/vlc/) (with IP camera support)
+- [Audacious](https://github.com/audacious-media-player)
+- [MotionEye](https://github.com/ccrisan/motioneye) (Cameras Control)
+- [shairport-sync](https://github.com/mikebrady/shairport-sync) (AirPlay)
 
 
 ## Radio
