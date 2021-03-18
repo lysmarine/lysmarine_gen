@@ -272,3 +272,4 @@ Copyright © 2020 Frederic Guilbault
 
 Copyright © 2021 mgrouch
 
+Included content copyrighted by other entities distributed under their respective licenses.
