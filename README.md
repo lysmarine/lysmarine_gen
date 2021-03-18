@@ -192,7 +192,7 @@ Windlass, Bow Thruster, Lights)
 - [SignalK](https://signalk.org/)
 - Seatalk 1, GPIO
 - ModBus (to talk to Victron Venus OS, etc)
-- [Timeshift](https://github.com/teejee2008/timeshift) (backups), rsync
+- [Timeshift](https://github.com/teejee2008/timeshift) (backups), [rsync](https://rsync.samba.org/)
 - PPP, wvdial, picocom for satellite modem support
 - I2C tools
 - 1-Wire (sensors i.e. for temperature, humidity, pressure, tank levels)
