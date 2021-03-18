@@ -1,5 +1,5 @@
 #!/bin/bash -e
-apt-get install -y -q git servicemanager
+apt-get install -y -q git
 ## this stage depend on stage 18-users for the pypilot user creation
 ## adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
 
@@ -48,3 +48,8 @@ install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applications/" 
 ## Give permission to sudo chrt without password for the user pypilot.
 echo "" >> /etc/sudoers
 echo 'pypilot ALL=(ALL) NOPASSWD: /usr/bin/chrt' >> /etc/sudoers
+
+## Set default state
+systemctl disable pypilot_web
+systemctl mask pypilot_web
+systemctl disable pypilot@pypilot.service

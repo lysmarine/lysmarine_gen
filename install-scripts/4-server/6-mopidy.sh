@@ -1,8 +1,6 @@
 #!/bin/bash -e
 
 # Install Mopidy and all dependencies:
-#apt-get -y install mopidy mopidy-mpd mopidy-spotify mopidy-tunein libspotify-dev xdotool
-
 apt-get -yq --no-install-recommends install mopidy mopidy-mpd mopidy-tunein
 
 usermod -a -G video mopidy
