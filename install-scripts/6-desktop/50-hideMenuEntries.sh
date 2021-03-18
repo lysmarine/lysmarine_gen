@@ -1,7 +1,9 @@
 #!/bin/bash -e
 
-echo "Hidden=true" >> /usr/share/applications/pcmanfm-desktop-pref.desktop
+## Install service manager after every services it manage
+apt-get install -yq servicemanager
 
+echo "Hidden=true" >> /usr/share/applications/pcmanfm-desktop-pref.desktop
 echo "Hidden=true" >> /usr/share/applications/vim.desktop
 echo "Hidden=true" >> /usr/share/applications/PyCrust.desktop
 echo "Hidden=true" >> /usr/share/applications/XRCed.desktop
