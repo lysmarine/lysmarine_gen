@@ -240,6 +240,7 @@ Windlass, Bow Thruster, Lights)
 - [InfluxDB](https://www.influxdata.com/)
 - [Grafana](https://grafana.com/)
 
+
 ## Add-ons via install scripts
 
 - [QtVlm](https://www.meltemus.com/)
@@ -259,6 +260,8 @@ Windlass, Bow Thruster, Lights)
 - Predict (Satellite Tracker for scripting)
 - [Scytale-C](https://bitbucket.org/scytalec/scytalec/) Inmarsat Decoders
 - [Pat SailMail / WinLink](https://github.com/la5nta/pat)
+- [Widevine](https://www.widevine.com/) Digital Content Protection
+
 
 # Getting Started
 
