@@ -37,7 +37,7 @@ local function list_update(w, buttons, label, data, objects)
   w:reset()
   for i, o in ipairs(objects) do
     local cache = data[o]
-    local ib, cb, tb, cbm, bgb, tbm, ibm, tt, l, ll, bg_clickable
+    local ib, cb, tb, cbm, bgb, tbm, ibm, tt, l, ll, bg_clickable, cbm2
     if cache then
       ib = cache.ib
       tb = cache.tb
@@ -56,7 +56,8 @@ local function list_update(w, buttons, label, data, objects)
         4))
       cb.shape = gears.shape.circle
       cbm = wibox.container.margin(cb, dpi(12), dpi(12), dpi(12), dpi(12))
-      cbm:buttons(gears.table.join(awful.button({},
+      cbm2 = wibox.container.place(cbm,'right')
+      cbm2:buttons(gears.table.join(awful.button({},
         1,
         nil,
         function()
@@ -71,11 +72,11 @@ local function list_update(w, buttons, label, data, objects)
       ll = wibox.layout.fixed.horizontal()
 
       -- All of this is added in a fixed widget
-      l:fill_space(true)
+      ll:fill_space(true)
       l:add(ibm)
       l:add(tbm)
       ll:add(l)
-      ll:add(cbm)
+      ll:add(cbm2)
 
       bg_clickable:set_widget(ll)
       -- And all of this gets a background
