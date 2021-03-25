@@ -20,8 +20,7 @@ fi
 adduser --uid 1000 --home /home/user --quiet --disabled-password -gecos "lysmarine" user
 echo 'user:changeme' | chpasswd
 echo "user ALL=(ALL:ALL) ALL" >> /etc/sudoers
-usermod -a -G netdev,tty,sudo,video,input user
-
+usermod -a -G netdev,tty,sudo,video,input,plugdev user
 
 ## Create signalk user to run the server.
 if [ ! -d /home/signalk ] ; then
@@ -33,6 +32,11 @@ fi
 if [ ! -d /home/pypilot ] ; then
 	echo "Creating pypilot user"
 	adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
+	usermod -a -G tty pypilot
+	usermod -a -G i2c pypilot || true
+	usermod -a -G spi pypilot || true
+	usermod -a -G gpio pypilot || true
+	usermod -a -G dialout pypilot || true
 fi
 
 ## Create the charts group and add users that have to write to that folder.
@@ -55,6 +59,7 @@ fi
 if [[ -d /etc/polkit-1 ]]; then
 	echo "polkit found, adding rules"
 	install -v $FILE_FOLDER/all_all_users_to_shutdown_reboot.pkla "/etc/polkit-1/localauthority/50-local.d/"
+	install -v $FILE_FOLDER/mount.pkla "/etc/polkit-1/localauthority/50-local.d/"
 	install -d "/etc/polkit-1/localauthority/10-vendor.d"
 	install -v $FILE_FOLDER/org.freedesktop.NetworkManager.pkla  "/etc/polkit-1/localauthority/10-vendor.d/"
 fi
