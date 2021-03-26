@@ -86,11 +86,11 @@ fi
 ## Manage the permissions and privileges.
 if [[ -d /etc/polkit-1 ]]; then
 	echo "polkit found, adding rules"
+	install -d "/etc/polkit-1/localauthority/50-local.d"
+	install -v $FILE_FOLDER/mount.pkla  "/etc/polkit-1/localauthority/50-local.d/"
 	install -v $FILE_FOLDER/all_all_users_to_shutdown_reboot.pkla "/etc/polkit-1/localauthority/50-local.d/"
 	install -d "/etc/polkit-1/localauthority/10-vendor.d"
 	install -v $FILE_FOLDER/org.freedesktop.NetworkManager.pkla  "/etc/polkit-1/localauthority/10-vendor.d/"
-	install -d "/etc/polkit-1/localauthority/50-local.d"
-	install -v $FILE_FOLDER/mount.pkla  "/etc/polkit-1/localauthority/50-local.d/"
 fi
 
 if [[ -f /etc/sudoers.d/010_pi-nopasswd ]]; then # Remove no-pwd sudo to user pi.
