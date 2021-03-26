@@ -63,8 +63,8 @@ install -v -m 0644 $FILE_FOLDER/pypilot_boatimu.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.socket "/etc/systemd/system/"
 
-systemctl disable pypilot@pypilot.service                              # listens on tcp 20220 and 23322
-systemctl enable pypilot_boatimu.service                               # listens on tcp 20220 and 23322
+systemctl disable pypilot_boatimu.service                              # listens on tcp 20220 and 23322
+systemctl enable pypilot@pypilot.service                               # listens on tcp 20220 and 23322
 systemctl enable pypilot_web.service                                   # listens on tcp 8080
 
 ## Install the user config files
