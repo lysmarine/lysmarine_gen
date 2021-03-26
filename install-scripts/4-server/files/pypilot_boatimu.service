@@ -1,7 +1,7 @@
 [Unit]
 Description=pypilot boatimu
 DefaultDependencies=false
-Conflicts=pypilot@.service
+Conflicts=pypilot@pypilot.service
 
 [Service]
 Type=simple
