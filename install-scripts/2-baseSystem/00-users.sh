@@ -65,6 +65,7 @@ usermod -a -G i2c pypilot
 usermod -a -G spi pypilot
 usermod -a -G gpio pypilot
 usermod -a -G dialout pypilot
+usermod -a -G plugdev pypilot
 
 ## Create the charts group and add users that have to write to that folder.
 if ! grep -q charts /etc/group; then
