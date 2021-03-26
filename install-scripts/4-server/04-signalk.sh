@@ -55,6 +55,7 @@ pushd /home/signalk/.signalk
   su signalk -c "npm install signalk-anchoralarm-plugin --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-simple-notifications --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-wilhelmsk-plugin --unsafe-perm --loglevel error"
+  su signalk -c "npm install signalk-to-nmea2000 --unsafe-perm --loglevel error"
   su signalk -c "npm install @signalk/sailgauge --unsafe-perm --loglevel error"
   su signalk -c "npm install @signalk/signalk-autopilot --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-sonoff-ewelink --unsafe-perm --loglevel error"
