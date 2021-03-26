@@ -8,6 +8,9 @@ apt-get install -y -q --no-install-recommends python3 python3-serial libpython3-
   python3-pyudev python3-pil python3-flask python3-opengl python3-pip python3-dev python3-setuptools python3-wxgtk4.0 \
   libffi-dev python3-gevent python3-zeroconf
 
+apt-get install -y -q watchdog
+systemctl enable watchdog
+
 pip3 install pywavefront pyglet gps gevent-websocket Flask-SocketIO python-socketio
 
 #if [ $LMOS == 'Raspbian' ]; then
