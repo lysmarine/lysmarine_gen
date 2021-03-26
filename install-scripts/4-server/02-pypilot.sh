@@ -61,6 +61,7 @@ install -v -o pypilot -g pypilot -m 0755 -d /home/pypilot/.pypilot
 install -v -o pypilot -g pypilot -m 0755 -d /home/tc/.pypilot
 install -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/signalk.conf "/home/pypilot/.pypilot/"
 install -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/webapp.conf "/home/pypilot/.pypilot/"
+install -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/pypilot_client.conf "/home/pypilot/.pypilot/"
 
 ## Install The .desktop files
 install -d /usr/local/share/applications
