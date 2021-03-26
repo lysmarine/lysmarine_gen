@@ -2,6 +2,7 @@
 Description=VNC Server for X11
 Requires=graphical.target
 After=graphical.target
+Conflicts=xrdp.service
 
 [Service]
 Type=simple
