@@ -13,6 +13,8 @@ apt-get install -y -q --no-install-recommends python3 python3-pip python3-dev py
 apt-get install -y -q watchdog
 systemctl enable watchdog
 
+install -v -m 0644 $FILE_FOLDER/60-watchdog.rules "/etc/udev/rules.d/60-watchdog.rules"
+
 if [ $LMARCH == 'arm64' ]; then
   pip3 install pywavefront pyglet gps gevent-websocket Flask-SocketIO "python-socketio<5"
 else

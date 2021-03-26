@@ -1,0 +1,1 @@
+KERNEL=="watchdog", OWNER="pypilot", GROUP="pypilot", MODE="0660"
