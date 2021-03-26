@@ -6,14 +6,19 @@ apt-get install -y -q git
 # Op way
 apt-get install -y -q --no-install-recommends python3 python3-pip python3-dev python3-setuptools libpython3-dev \
   python3-numpy python3-scipy swig python3-ujson \
-  python3-serial python3-pyudev python3-pil python3-flask python3-flask-socketio python3-engineio \
+  python3-serial python3-pyudev python3-pil python3-flask python3-engineio \
   python3-opengl  python3-wxgtk4.0 \
   libffi-dev python3-gevent python3-zeroconf
 
 apt-get install -y -q watchdog
 systemctl enable watchdog
 
-pip3 install pywavefront pyglet gps gevent-websocket "python-socketio<5" # Flask-SocketIO
+if [ $LMARCH == 'arm64' ]; then
+  pip3 install pywavefront pyglet gps gevent-websocket Flask-SocketIO "python-socketio<5"
+else
+  apt-get install -y -q python3-flask-socketio
+  pip3 install pywavefront pyglet gps gevent-websocket "python-socketio<5"
+fi
 
 #if [ $LMOS == 'Raspbian' ]; then
 #  apt-get install -y -q wiringpi
