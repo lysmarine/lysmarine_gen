@@ -52,6 +52,7 @@ popd
 
 ## Install the service files
 install -v -m 0644 $FILE_FOLDER/pypilot@.service "/etc/systemd/system/"
+install -v -m 0644 $FILE_FOLDER/pypilot_boatimu.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.socket "/etc/systemd/system/"
 
