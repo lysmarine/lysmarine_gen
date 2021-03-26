@@ -52,6 +52,7 @@ usermod -a -G i2c signalk
 usermod -a -G spi signalk
 usermod -a -G gpio signalk
 usermod -a -G dialout signalk
+usermod -a -G plugdev signalk
 
 ## Create pypilot user to run the services.
 if [ ! -d /home/pypilot ]; then
