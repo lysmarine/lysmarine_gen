@@ -11,7 +11,7 @@ apt-get install -y -q --no-install-recommends python3 python3-pip python3-dev py
   libffi-dev python3-gevent python3-zeroconf
 
 apt-get install -y -q watchdog
-systemctl enable watchdog
+systemctl disable watchdog
 
 install -v -m 0644 $FILE_FOLDER/60-watchdog.rules "/etc/udev/rules.d/60-watchdog.rules"
 
@@ -63,8 +63,8 @@ install -v -m 0644 $FILE_FOLDER/pypilot_boatimu.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.socket "/etc/systemd/system/"
 
-systemctl disable pypilot_boatimu.service                              # listens on tcp 20220 and 23322
-systemctl enable pypilot@pypilot.service                               # listens on tcp 20220 and 23322
+systemctl disable pypilot_boatimu.service
+systemctl disable pypilot@pypilot.service                              # listens on tcp 20220 and 23322
 systemctl enable pypilot_web.service                                   # listens on tcp 8080
 
 ## Install the user config files
