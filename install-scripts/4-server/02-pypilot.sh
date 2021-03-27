@@ -88,5 +88,6 @@ echo 'pypilot ALL=(ALL) NOPASSWD: /usr/bin/chrt' >>/etc/sudoers
 ## Reduce excessive logging
 sed '1 i :msg, contains, "autopilot failed to read imu at time" ~' -i /etc/rsyslog.conf
 sed '1 i :msg, contains, "No IMU detected" ~' -i /etc/rsyslog.conf
+sed '1 i :msg, contains, "No IMU Detected" ~' -i /etc/rsyslog.conf
 sed '1 i :msg, contains, "Failed to open I2C bus" ~' -i /etc/rsyslog.conf
 sed '1 i :msg, contains, "Using fusion algorithm Kalman" ~' -i /etc/rsyslog.conf
