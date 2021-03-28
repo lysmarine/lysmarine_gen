@@ -18,7 +18,7 @@ apt-get clean
 ## clean cache of others package managers
 # pip3 cache purge   # require pip version > 20.1
 rm -rf /root/.cache/pip
-npm cache clean --force
+npm cache clean --force || true
 su signalk -c "npm cache clean --force"
 
 ## Remove others cache
