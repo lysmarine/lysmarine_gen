@@ -11,7 +11,7 @@ cat $FILE_FOLDER/hosts >> /etc/hosts
 sed -i '/raspberrypi/d' /etc/hosts
 
 # Access Point management
-apt-get install -y -q createap
+apt-get install -y -q createap bridge-utils
 install -m0600 -v $FILE_FOLDER/lysmarine-hotspot.nmconnection "/etc/NetworkManager/system-connections/"
 systemctl disable dnsmasq
 
