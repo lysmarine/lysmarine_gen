@@ -92,15 +92,15 @@
 			rm "$cacheDir/$zipName"
 
 		elif [[ "$baseOS" == "pine64so" ]]; then
-			zipName="Armbian_21.02.1_Pine64so_buster_current_5.10.12.img.xz"
+			zipName="Armbian_21.02.3_Pine64so_buster_current_5.10.21.img.xz"
 			wget -P "${cacheDir}/" "https://dl.armbian.com/pine64so/archive/$zipName"
 			7z e -o"${cacheDir}/" "${cacheDir}/${zipName}"
 			mv "$cacheDir"/Armbian_??.??.?_Pine64so_buster_current_?.??.??.img "$cacheDir/$baseOS-$cpuArch.base.img"
 			rm "$cacheDir/$zipName"
 
 		elif [[ "$baseOS" =~ debian-* ]]; then
-			wget -P "$cacheDir/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/$cpuArch/iso-hybrid/debian-live-10.7.0-$cpuArch-standard+nonfree.iso"
-			mv "$cacheDir/debian-live-10.7.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
+			wget -P "$cacheDir/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/$cpuArch/iso-hybrid/debian-live-10.8.0-$cpuArch-standard+nonfree.iso"
+			mv "$cacheDir/debian-live-10.8.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
 		fi
 	fi
 
