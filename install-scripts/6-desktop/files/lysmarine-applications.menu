@@ -95,6 +95,9 @@
             <Filename>facebook.desktop</Filename>
         </Include>
         <Include>
+            <Filename>boatsetter.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>org.gnome.Weather.Application.desktop</Filename>
         </Include>
         <Include>
