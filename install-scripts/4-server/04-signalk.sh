@@ -61,6 +61,7 @@ pushd /home/signalk/.signalk
   su signalk -c "npm install signalk-sonoff-ewelink --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-raspberry-pi-monitoring --unsafe-perm --loglevel error"
   su signalk -c "npm install @mxtommy/kip --unsafe-perm --loglevel error"
+  su signalk -c "npm install signalk-fusion-stereo --unsafe-perm --loglevel error"
 popd
 
 sed -i "s#sudo ##g" /home/signalk/.signalk/node_modules/signalk-raspberry-pi-monitoring/index.js
