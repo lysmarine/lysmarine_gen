@@ -5,7 +5,7 @@
 	#################################################################################
 	##
 	##  SYNOPSIS
-	##      build.sh baseOS processorArchitecture [lmVersion] [stagesToBuild] [--ssh USER@HOST]
+	##      build.sh
     ##
     ##  DESCRIPTION
 	##      -o
@@ -23,20 +23,24 @@
 	##      -s
 	##          A string of space separated stages to build. If nothing is provided, all stage will be build.
 	##
-	##      -h
-	##          Specify a remote location to build on via ssh and scp.
-	##
 	##  EXAMPLES:
-	##      sudo ./build.sh raspios arm64
-	##      sudo ./build.sh raspios arm64 0.9.0 "0 2 4 6 8"
-	##      sudo ./build.sh raspios arm64 0.9.0 "0 2.1 2.2 2.3 4 6.1 8"
+	##      sudo ./build.sh -o raspios -a arm64
+	##      sudo ./build.sh -o raspios -a arm64 -v 0.9.0 -s "0 2 4"
+	##      sudo ./build.sh -o raspios -a arm64 -s "0 2.1 2.2 2.3 4 6.1 8"
+	##      sudo ./build.sh -o raspios -a arm64 -h pi@192.168.1.123
 	##
 	##  To mount mount the image/iso and have a prompt inside the chroot: sudo ./build.sh raspios arm64 0.9.0 bash
 	##
 	#################################################################################
 
 
-	while getopts ":o:a:v:s:h" opt; do
+
+###########
+### Preflight checks
+###########
+
+    ## Assign options
+	while getopts ":o:a:v:s:" opt; do
 	  case $opt in
 		o)
 		  baseOS="$OPTARG"
@@ -49,9 +53,6 @@
 		  ;;
 		 s)
 		  stages=$OPTARG
-		  ;;
-		 h)
-		  sshConn=$OPTARG
 		  ;;
 	  esac
 	done
@@ -82,7 +83,13 @@
 	releaseDir="./release/"
 
 
-	## if the source OS is not found in cache, download it.
+
+
+###########
+### Caching phase
+###########
+
+	## If the source OS is not found in cache, download it.
 	if ! ls "$cacheDir/$baseOS-$cpuArch".base.??? >/dev/null 2>&1; then
 		if [[ "$baseOS" == "raspios" ]]; then
 			zipName="raspios_lite_${cpuArch}_latest"
@@ -113,6 +120,9 @@
 
 
 
+###########
+### Build phase
+###########
 	# if it's an image file copy and mount it
 	if [ -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" ]; then
 		rsync -hPr "$cacheDir/$baseOS-$cpuArch.base.img-inflated" "$workDir/$baseOS-$cpuArch.base.img-inflated"
@@ -147,6 +157,7 @@
 		   rm -r $workDir/rootfs/*
 		   exit 1
 		fi
+
 
 		# Build lysmarine
 		cp -rp "$cacheDir/squashfs-root/"* "$workDir/rootfs"
