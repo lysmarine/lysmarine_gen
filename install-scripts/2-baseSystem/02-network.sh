@@ -30,7 +30,7 @@ systemctl disable ModemManager.service # for 2G/3G/4G
 systemctl disable pppd-dns.service # For dial-up Internet LOL
 
 install -v -m 0644 $FILE_FOLDER/wifi_powersave@.service "/etc/systemd/system/"
-systemctl enable wifi_powersave@on.service
+#systemctl enable wifi_powersave@on.service
 
 # See: http://downloads.fars-robotics.net/
 curl -1sLf http://downloads.fars-robotics.net/wifi-drivers/install-wifi > /usr/local/sbin/install-wifi
