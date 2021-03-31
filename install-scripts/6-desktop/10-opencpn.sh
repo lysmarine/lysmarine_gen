@@ -20,11 +20,10 @@ if [ $LMARCH == 'arm64' ]; then
   # Chart format plugins
   mkdir oe-tmp
   cd oe-tmp
-  wget https://dl.cloudsmith.io/public/david-register/ocpn-plugins-unstable/raw/names/oesenc-ubuntu-arm64-18.04-tarball/versions/4.2.18.2.0.c89a5c4/oesenc_pi-4.2.18.2-0_ubuntu-arm64-18.04.tar.gz
-  gzip -cd oesenc_pi-4.2.18.2-0_ubuntu-arm64-18.04.tar.gz | tar xvf -
-  cd oesenc_pi-4.2.18.2-0_ubuntu-arm64-18.04
-  cp -r usr/ /
-  cp -r etc/ /
+  wget 'https://dl.cloudsmith.io/public/david-register/ocpn-plugins-unstable/raw/names/oeSENC-4.2-ubuntu-arm64-18.04-tarball/versions/latest/oeSENC-4.2.19.22_ubuntu-18.04-arm64.tar.gz'
+  gzip -cd oeSENC-4.2.19.22_ubuntu-18.04-arm64.tar.gz | tar xvf -
+  cd oeSENC-4.2-ubuntu-arm64-18.04
+  cp -r bin/ lib/ share/ /usr
   cd ../../
   rm -rf oe-tmp
 
