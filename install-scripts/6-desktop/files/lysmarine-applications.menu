@@ -131,9 +131,9 @@
         <Include>
             <Filename>CubicSDR.desktop</Filename>
         </Include>
-        <!--<Include>
+        <Include>
             <Filename>xwxtoimg.desktop</Filename>
-        </Include>-->
+        </Include>
         <Include>
             <Filename>jnx.desktop</Filename>
         </Include>
