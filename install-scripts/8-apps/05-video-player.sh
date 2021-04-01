@@ -2,4 +2,4 @@
 
 apt-get clean
 
-apt-get -y -q install vlc
+apt-get -y -q install vlc # totem
