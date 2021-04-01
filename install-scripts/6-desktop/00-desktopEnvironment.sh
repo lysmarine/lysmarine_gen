@@ -17,7 +17,7 @@ apt-get -q -y install xinput libinput-tools
 apt-get -q -y install xinput-calibrator
 apt-get -q -y install gldriver-test
 
-apt-get install -q -y budgie-desktop
+apt-get install -q -y budgie-desktop budgie-weathershow-applet
 
 apt-get install -q -y \
 gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base \
