@@ -8,6 +8,9 @@ systemctl disable openvpn
 
 apt-get -q -y install dconf-editor gedit gnome-calculator gnome-weather gnome-chess openpref
 
+# Sensors
+apt-get -q -y install python3-bme680 python3-gpiozero python3-w1thermsensor gpio-utils
+
 apt-get -q -y install lirc
 systemctl disable lircd
 
