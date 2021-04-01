@@ -72,6 +72,9 @@
         <Include>
             <Filename>motioneye.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>org.gnome.Totem.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Internet</Name>
