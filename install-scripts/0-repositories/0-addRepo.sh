@@ -36,5 +36,6 @@ apt-get update  -yq || true
 apt-get upgrade -yq || true
 gpgconf --kill gpg-agent
 gpgconf --kill dirmngr
+
 ## Block vscode addition
 DEBIAN_FRONTEND=noninteractive apt-get install -yq -o Dpkg::Options::="--force-confnew" block-vscode-repository || true

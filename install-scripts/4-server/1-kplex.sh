@@ -1,7 +1,7 @@
 #!/bin/bash -e
 apt-get install -y -q libc6
 
-if [[ $LMARCH == 'amd64' ]]; then
+## Detect the right package to download.
 	package='kplex_1.4-1_amd64.deb'
 elif [[ $LMARCH == 'armhf' ]]; then
 	package='kplex_1.4-1_armhf.deb'
@@ -10,8 +10,7 @@ elif [[ $LMARCH == 'arm64' ]]; then
 	package='kplex_1.4-1_armhf.deb'
 fi
 
-install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/.kplex.conf "/home/user/.kplex.conf"
-
+## Download and install the package.
 wget http://www.stripydog.com/download/$package
 dpkg -i $package
 rm $package

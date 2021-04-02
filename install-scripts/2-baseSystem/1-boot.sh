@@ -34,10 +34,10 @@ install -v $FILE_FOLDER/ascii_logo.txt "/etc/motd"
 cp -r $FILE_FOLDER/dreams "/usr/share/plymouth/themes/"
 plymouth-set-default-theme dreams
 
-# Armbian
+## Armbian
 rm /etc/issue || true
 rm /etc/issue.net || true
 
 
-# Raspbian enable this to intercept keystroke during the boot process, (for ondemand cup freq management.) Lysmarine don't want to set it that way.
+## Raspbian enable this to intercept keystroke during the boot process, (for ondemand cup freq management.) Lysmarine don't want to set it that way.
 systemctl disable triggerhappy.service || /bin/true

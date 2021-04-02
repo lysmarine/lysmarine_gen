@@ -3,7 +3,7 @@
 
 apt install -y nodejs libavahi-compat-libdnssd-dev python-dev libsqlite3-0 g++
 npm cache verify
-if [ ! id -u www-data >/dev/null 2>&1 ] ; then
+if [ ! id -u www-data > /dev/null 2>&1 ] ; then
 	adduser --disabled-login --home /var/www www-data
 fi
 

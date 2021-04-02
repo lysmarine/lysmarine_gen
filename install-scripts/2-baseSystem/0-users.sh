@@ -57,7 +57,6 @@ fi
 
 ## Manage the permissions and privileges.
 if [[ -d /etc/polkit-1 ]]; then
-	echo "polkit found, adding rules"
 	install -v $FILE_FOLDER/all_all_users_to_shutdown_reboot.pkla "/etc/polkit-1/localauthority/50-local.d/"
 	install -v $FILE_FOLDER/mount.pkla "/etc/polkit-1/localauthority/50-local.d/"
 	install -d "/etc/polkit-1/localauthority/10-vendor.d"
@@ -72,7 +71,8 @@ fi
 ## Give user capability to halt and reboot.
 echo 'PATH="/sbin:/usr/sbin:$PATH"' >> /home/user/.profile
 
-if [ -f /root/.not_logged_in_yet ] ;then # Disable Armbian first login script.
+## Disable Armbian first login script.
+if [ -f /root/.not_logged_in_yet ] ;then
 	rm /root/.not_logged_in_yet
 fi
 
