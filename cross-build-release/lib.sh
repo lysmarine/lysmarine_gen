@@ -11,10 +11,20 @@ logErr() {
 setupWorkSpace() {
 	thisArch=$1
 	mkdir -p ./cache/${thisArch}/isoContent
-	mkdir -p ./work/${thisArch}/rootfs
-	mkdir -p ./work/${thisArch}/bootfs
-	mkdir -p ./release/
+	mkdir -p ./work/${thisArch}/rootfs #deprecated
+	mkdir -p ./work/${thisArch}/bootfs #deprecated
 
+	mkdir -p ./work/${thisArch}/releaseRootfs
+	mkdir -p ./work/${thisArch}/releaseBootfs
+	mkdir -p ./work/${thisArch}/originalRootfs
+	mkdir -p ./work/${thisArch}/originalBootfs
+	mkdir -p ./work/${thisArch}/originalBootfs/boot
+
+	mkdir -p ./work/${thisArch}/workdir
+	mkdir -p ./work/${thisArch}/upperLayer
+	mkdir -p ./work/${thisArch}/fakeLayer || true
+
+	mkdir -p ./release/
 }
 
 # Check if the user run with root privileges
@@ -25,17 +35,67 @@ checkRoot() {
 	fi
 }
 
-mountImageFile() {
+
+mountReleaseImage() {
+	log "Mounting release image File"
+	imageFile=$1
+
+	# Mount the image and make the binds required to chroot.
+	partitions=$(kpartx -sav $imageFile | cut -d' ' -f3)
+	partQty=$(echo $partitions | wc -w)
+	echo $partQty partitions detected.
+
+	## Mount partition table in /dev/loop
+	loopId=$(kpartx -sav $imageFile | cut -d' ' -f3 | grep -oh '[0-9]*' | head -n 1)
+
+ 	## Mount actual partitions
+	if [ $partQty == 2 ]; then
+		mount -v /dev/mapper/loop${loopId}p2 ./$workDir/releaseRootfs/
+		mount -v /dev/mapper/loop${loopId}p1 ./$workDir/releaseBootfs/
+
+
+	elif [ $partQty == 1 ]; then
+		mount -v /dev/mapper/loop${loopId}p1 ./$workDir/originalRootfs/
+		mount --bind ./$workDir/originalRootfs/boot ./$workDir/originalBootfs/
+	else
+		log "ERROR: unsuported amount of partitions."; exit 1
+	fi
+}
+
+mountSourceImage() {
+	log "Mounting Original Image File"
+	imageFile=$1
+
+	# Mount the image and make the binds required to chroot.
+	partitions=$(kpartx -sav $imageFile | cut -d' ' -f3)
+	partQty=$(echo $partitions | wc -w)
+	echo $partQty partitions detected.
+
+	## Mount partition table in /dev/loop
+	loopId=$(kpartx -sav $imageFile | cut -d' ' -f3 | grep -oh '[0-9]*' | head -n 1)
+
+ 	## Mount actual partitions
+	if [ $partQty == 2 ]; then
+		mount -v /dev/mapper/loop${loopId}p2 ./$workDir/originalRootfs/
+		mount -v /dev/mapper/loop${loopId}p1 ./$workDir/originalBootfs/boot
+
+	elif [ $partQty == 1 ]; then
+		mount -v /dev/mapper/loop${loopId}p1 ./$workDir/originalRootfs/
+	else
+		log "ERROR: unsuported amount of partitions."; exit 1
+	fi
+}
+
+
+
+mountImageFile() {  # deprecated
 	workDir=$1
 	imageFile=$2
 	rootfs=$workDir/rootfs
 
 	log "Mounting Image File"
-
-	## Make sure it's not already mounted
 	if [ -n "$(ls -A $rootfs)" ]; then
 		logErr "$rootfs is not empty. Previous failure to unmount?"
-		umountImageFile $1 $2
 		exit
 	fi
 
@@ -98,7 +158,7 @@ inflateImage() {
 		loopId=$(kpartx -sav "$imageLocationInflated" | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
 		sleep 3
 
-		e2fsck -f "/dev/mapper/loop${loopId}p${partQty}"
+		e2fsck -af "/dev/mapper/loop${loopId}p${partQty}"
 		resize2fs "/dev/mapper/loop${loopId}p${partQty}"
 		kpartx -d "$imageLocationInflated"
 	else
@@ -118,7 +178,7 @@ function chrootWithProot {
 	cpuArch=$2
 	buildCmd=$3
 
-	if [[ ! $(dpkg --print-architecture) == $cpuArch ]] || [[ $cpuArch == 'debian-live' ]]; then # if the target arch is not the same as the host arch use qemu.
+	if [[ ! $(dpkg --print-architecture) == $cpuArch ]] ; then # if the target arch is not the same as the host arch use qemu.
 
 	  if [[ $cpuArch == arm64 ]]; then
 		  qemuArch=" -q qemu-aarch64"
@@ -137,25 +197,75 @@ function chrootWithProot {
 
 
 	else # just chroot
-		mount --bind /dev $workDir/rootfs/dev
-		mount -t proc /proc $workDir/rootfs/proc
-		mount --bind /sys $workDir/rootfs/sys
-		mount --bind /tmp $workDir/rootfs/tmp
-#
-		cp /etc/resolv.conf  $workDir/rootfs/etc/
-		chroot $workDir/rootfs /bin/bash <<EOT
+
+
+
+
+	  mount --bind /dev $workDir/rootfs/dev
+	  mount -t proc /proc $workDir/rootfs/proc
+	  mount --bind /sys $workDir/rootfs/sys
+	  mount --bind /tmp $workDir/rootfs/tmp
+	  cp /etc/resolv.conf  $workDir/rootfs/etc/
+	  chroot $workDir/rootfs /bin/bash <<EOT
 cd /install-scripts ;
 $buildCmd
 EOT
-		rm $workDir/rootfs/etc/resolv.conf
-		umount $workDir/rootfs/dev
-		umount $workDir/rootfs/proc
-		umount $workDir/rootfs/sys
-		umount $workDir/rootfs/tmp
 
-	fi
+
+	 rm $workDir/rootfs/etc/resolv.conf
+	 umount $workDir/rootfs/dev
+	 umount $workDir/rootfs/proc
+	 umount $workDir/rootfs/sys
+	 umount $workDir/rootfs/tmp
+  fi
+
 
 }
+
+function chrootAndBuild {
+
+	# if the CPU arch is not the same on host then target, use qemu.
+	if [[ ! $(dpkg --print-architecture) == $cpuArch ]] ; then
+
+	  if [[ $cpuArch == arm64 ]]; then
+		  qemuArch=" -q qemu-aarch64"
+	  elif [[ $cpuArch == armhf ]]; then
+		  qemuArch=" -q qemu-arm"
+	  fi
+
+	  proot $qemuArch \
+		--root-id \
+		--rootfs=$workDir/fakeLayer \
+		--cwd=/install-scripts \
+		--mount=/etc/resolv.conf:/etc/resolv.conf \
+		--mount=/dev:/dev \
+		--mount=/sys:/sys \
+		--mount=/proc:/proc \
+		$buildCmd
+
+	else # just chroot
+
+	  mount --bind /dev $workDir/fakeLayer/dev
+	  mount -t proc /proc $workDir/fakeLayer/proc
+	  mount --bind /sys $workDir/fakeLayer/sys
+	  mount --bind /tmp $workDir/fakeLayer/tmp
+	  cp /etc/resolv.conf  $workDir/fakeLayer/etc/
+	  chroot $workDir/fakeLayer /bin/bash <<EOT
+cd /install-scripts ;
+$buildCmd
+EOT
+
+	 rm $workDir/fakeLayer/etc/resolv.conf
+	 umount $workDir/fakeLayer/dev
+	 umount $workDir/fakeLayer/proc
+	 umount $workDir/fakeLayer/sys
+	 umount $workDir/fakeLayer/tmp
+  fi
+
+
+}
+
+
 
 function shrinkWithPishrink {
 	cacheDir=$1
@@ -167,5 +277,54 @@ function shrinkWithPishrink {
 	fi
 
 	"$cacheDir"/pishrink.sh "$imgLocation"
+
+}
+
+
+
+function safetyChecks {
+     ## Make sure we have a clean workspace.
+    if [ "$(ls -A $workDir/rootfs/)" ] ; then
+		   logErr "$workDir/rootfs is not empty. Previous run have fail ?"
+		   umount $workDir/rootfs/dev  || umount -l $workDir/rootfs/dev || /bin/true
+		   umount $workDir/rootfs/proc || umount -l $workDir/rootfs/proc || /bin/true
+		   umount $workDir/rootfs/sys  || umount -l $workDir/rootfs/sys || /bin/true
+		   umount $workDir/rootfs/tmp  || umount -l $workDir/rootfs/tmp || /bin/true
+		   umount $workDir/rootfs/tmp  || umount -l $workDir/rootfs/tmp || /bin/true
+		   umount $workDir/rootfs/boot || umount -l $workDir/rootfs/boot || /bin/true
+		   umount $workDir/rootfs || umount -l $$workDir/rootfs || /bin/true
+		   rm -r $workDir/rootfs/*
+		   exit 1
+	fi
+
+	if [ "$(ls -A $workDir/fakeLayer/)" ] ; then
+		   logErr "$workDir/fakeLayer is not empty. Previous run have fail ?"
+		   umount $workDir/fakeLayer  || umount -l $workDir/fakeLayer || /bin/true
+		   rm -r $workDir/fakeLayer/*
+		   exit 1
+	fi
+
+	if [ "$(ls -A $workDir/originalRootfs/)" ] ; then
+		   logErr "$workDir/originalRootfs is not empty. Previous run have fail ?"
+		   umount $workDir/originalRootfs  || umount -l $workDir/originalRootfs || /bin/true
+		   exit 1
+	fi
+	if [ "$(ls -A $workDir/originalBootfs/boot)" ] ; then
+		   logErr "$workDir/originalBootfs is not empty. Previous run have fail ?"
+		   umount $workDir/originalBootfs/boot  || umount -l $workDir/originalBootfs/boot || /bin/true
+		   exit 1
+	fi
+	if [ "$(ls -A $workDir/releaseRootfs/)" ] ; then
+		   logErr "$workDir/releaseRootfs is not empty. Previous run have fail ?"
+		   umount $workDir/releaseRootfs  || umount -l $workDir/releaseRootfs || /bin/true
+		   umount $workDir/releaseBootfs  || umount -l $workDir/releaseBootfs || /bin/true
+		   exit 1
+	fi
+	if [ "$(ls -A $workDir/upperLayer/)" ] ; then
+		   logErr "$workDir/upperLayer is not empty. Previous run have fail ?"
+		  rm -rf $workDir/upperLayer/*
+		  rm -rf $workDir/upperLayer/.*
+		   exit 1
+	fi
 
 }

@@ -82,6 +82,8 @@
 	workDir="./work/$baseOS-$cpuArch"
 	releaseDir="./release/"
 
+	## Check if everything have been unmounted on the previous run.
+	safetyChecks
 
 
 
@@ -125,13 +127,35 @@
 ###########
 	# if it's an image file copy and mount it
 	if [ -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" ]; then
-		rsync -hPr "$cacheDir/$baseOS-$cpuArch.base.img-inflated" "$workDir/$baseOS-$cpuArch.base.img-inflated"
-		mountImageFile "$workDir" "$workDir/$baseOS-$cpuArch.base.img-inflated"
-		addLysmarineScripts "$workDir/rootfs"
-		chrootWithProot "$workDir" "$cpuArch" "$buildCmd"
-		umountImageFile "$workDir" "$workDir/$baseOS-$cpuArch.base.img-inflated"
-		shrinkWithPishrink "$cacheDir" "$workDir/$baseOS-$cpuArch.base.img-inflated"
-		rsync -hPr "$workDir/$baseOS-$cpuArch.base.img-inflated" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
+	 	cp "$cacheDir/$baseOS-$cpuArch.base.img-inflated" "$workDir/$baseOS-$cpuArch.base.img" &
+
+		mountSourceImage "$cacheDir/$baseOS-$cpuArch.base.img"
+
+		mount -t overlay -o lowerdir=$workDir/originalRootfs,upperdir=$workDir/upperLayer,workdir=$workDir/workdir  none $workDir/fakeLayer
+		if [ $partQty == 2 ]; then
+			cp -ar $workDir/originalBootfs/boot/* $workDir/fakeLayer/boot
+		fi
+
+		addLysmarineScripts "$workDir/fakeLayer"
+		chrootAndBuild
+
+		wait
+
+
+		mountReleaseImage "$workDir/$baseOS-$cpuArch.base.img"
+		if [ $partQty == 2 ]; then
+			cp -ar $workDir/fakeLayer/boot/* $workDir/releaseBootfs
+			rm -r $workDir/fakeLayer/boot/*
+		fi
+		cp -ar $workDir/fakeLayer/* $workDir/releaseRootfs
+
+		umount $workDir/fakeLayer || true
+		umount $workDir/originalRootfs || true
+		umount $workDir/originalBootfs || true
+		umount $workDir/releaseBootfs || true
+		umount $workDir/releaseRootfs || true
+
+		mv "$workDir/$baseOS-$cpuArch.base.img" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
 
 
 
@@ -146,28 +170,25 @@
 			rm -rf $cacheDir/isoContent/live/filesystem.squashfs
 		fi
 
-		# Safety check,
-		if [ "$(ls -A $workDir/rootfs/)" ] ; then
-		   logErr "$workDir/rootfs is not empty. Previous run have fail ?"
-		   umount $workDir/rootfs/dev  || umount -l $workDir/rootfs/dev || /bin/true
-		   umount $workDir/rootfs/proc || umount -l $workDir/rootfs/proc || /bin/true
-		   umount $workDir/rootfs/sys  || umount -l $$workDir/rootfs/sys || /bin/true
-		   umount $workDir/rootfs/tmp  || umount -l $$workDir/rootfs/tmp || /bin/true
-		   umount $workDir/rootfs/tmp  || umount -l $$workDir/rootfs/tmp || /bin/true
-		   rm -r $workDir/rootfs/*
-		   exit 1
-		fi
-
+		safetyChecks
 
 		# Build lysmarine
-		cp -rp "$cacheDir/squashfs-root/"* "$workDir/rootfs"
-		addLysmarineScripts "$workDir/rootfs"
-		chrootWithProot "$workDir" "$cpuArch" "$buildCmd"
+		#cp -rp "$cacheDir/squashfs-root/"* "$workDir/rootfs"
+
+		mount -t overlay -o lowerdir=$cacheDir/squashfs-root,upperdir=$workDir/upperLayer,workdir=$workDir/workdir  none $workDir/fakeLayer
+
+		ls -lah $workDir/fakeLayer
+		touch $workDir/fakeLayer/sdfsdfdsf
+
+
+		addLysmarineScripts "$workDir/fakeLayer"
+		chrootAndBuild
 
 		# Re-squash the file system.
 		mkdir -p "$workDir/isoContent/live/"
-		mksquashfs "$workDir/rootfs" "$workDir/isoContent/live/filesystem.squashfs" -comp xz -noappend
-		rm -r "$workDir"/rootfs/*
+		mksquashfs "$workDir/fakeLayer" "$workDir/isoContent/live/filesystem.squashfs" -comp xz -noappend
+
+		umount $workDir/fakeLayer
 
 		# Adapt the iso
 		ls -lah "$workDir/isoContent/live/filesystem.squashfs"
