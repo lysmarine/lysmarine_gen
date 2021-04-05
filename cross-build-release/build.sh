@@ -151,9 +151,12 @@
 
 		umount $workDir/fakeLayer || true
 		umount $workDir/originalRootfs || true
-		umount $workDir/originalBootfs || true
+		umount $workDir/originalBootfs/boot || true
 		umount $workDir/releaseBootfs || true
 		umount $workDir/releaseRootfs || true
+
+		rm -r $workDir/upperLayer &
+		shrinkWithPishrink $cacheDir $workDir/$baseOS-$cpuArch.base.img
 
 		mv "$workDir/$baseOS-$cpuArch.base.img" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
 
