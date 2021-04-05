@@ -12,7 +12,7 @@ fi
 
 ## RaspiOS
 if [ -f /boot/cmdline.txt ] ; then
-	sed -i '$s/$/\ loglevel=1\ splash\ quiet\ logo.nologo\ vt.global_cursor_default=0\ plymouth.ignore-serial-consoles\ console=tty3\ rd.systemd.show_status=false/' /boot/cmdline.txt
+	sed -i '$s/$/\ loglevel=1\ splash\ quiet\ logo.nologo\ plymouth.ignore-serial-consoles\ console=tty3\ rd.systemd.show_status=false/' /boot/cmdline.txt
 fi
 
 ## Armbian
