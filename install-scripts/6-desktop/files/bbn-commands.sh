@@ -7,8 +7,8 @@ ret=$?
 [[ $ret -eq 1 ]] && exit 0
 
 case $action in
-    reboot*) cmd='sh -c "kill $(pidof opencpn); /sbin/reboot"' ;;
-    shutdown*) cmd='sh -c "kill $(pidof opencpn); /sbin/poweroff"' ;;
+    reboot*) cmd='sh -c "kill $(pidof opencpn); sleep 1; /sbin/reboot"' ;;
+    shutdown*) cmd='sh -c "kill $(pidof opencpn); sleep 1; /sbin/poweroff"' ;;
     restartD*) cmd="budgie-panel --replace&" ;;
     restartSK*) cmd="/usr/local/sbin/signalk-restart" ;;
     *) exit 1 ;;
