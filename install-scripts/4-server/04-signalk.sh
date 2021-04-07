@@ -19,7 +19,6 @@ install -m 644 -o signalk -g signalk $FILE_FOLDER/charts.json "/home/signalk/.si
 install -m 644 -o signalk -g signalk $FILE_FOLDER/defaults.json "/home/signalk/.signalk/defaults.json"
 install -m 644 -o signalk -g signalk $FILE_FOLDER/package.json "/home/signalk/.signalk/package.json"
 install -m 644 -o signalk -g signalk $FILE_FOLDER/settings.json "/home/signalk/.signalk/settings.json"
-install -m 644 -o signalk -g signalk $FILE_FOLDER/security.json "/home/signalk/.signalk/security.json"
 install -m 755 -o signalk -g signalk $FILE_FOLDER/signalk-server "/home/signalk/.signalk/signalk-server"
 install -m 4755 -o 0 -g 0 $FILE_FOLDER/signalk-restart "/usr/local/sbin/signalk-restart"
 
