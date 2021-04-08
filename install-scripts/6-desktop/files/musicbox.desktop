@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=MusicBox
+GenericName=MusicBox
+Comment=Mopidy MusicBox
+Exec=sh -c "/usr/local/bin/MusicBox"
+Terminal=false
+Icon=sound
+Categories=AudioVideo;Multimedia;Sound
+Keywords=AudioVideo;Multimedia;Sound
+Hidden=false

@@ -3,7 +3,7 @@
 
 apt install -y nodejs libavahi-compat-libdnssd-dev python-dev libsqlite3-0 g++
 npm cache verify
-if [ ! id -u www-data >/dev/null 2>&1 ] ; then
+if [ ! id -u www-data > /dev/null 2>&1 ] ; then
 	adduser --disabled-login --home /var/www www-data
 fi
 
@@ -20,7 +20,3 @@ pushd /var/www/speedSample;
 npm install -g --unsafe-perm  --cache /tmp/empty-cache46;
 popd
 chown -R www-data:www-data /var/www/speedSample
-
-install -m 644 -v $FILE_FOLDER/speedsample.service  "/etc/systemd/system/speedsample.service"
-
-systemctl enable speedsample.service

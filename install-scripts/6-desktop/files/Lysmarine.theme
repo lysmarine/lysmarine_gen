@@ -1,0 +1,15 @@
+<theme name="Lysmarine" format="1.3">
+    <color_scheme>Charcoal</color_scheme>
+    <background_gradient>0.0</background_gradient>
+    <key_style>flat</key_style>
+    <roundrect_radius>23.0</roundrect_radius>
+    <key_size>93.0</key_size>
+    <key_stroke_width>5</key_stroke_width>
+    <key_fill_gradient>0</key_fill_gradient>
+    <key_stroke_gradient>0.0</key_stroke_gradient>
+    <key_gradient_direction>0</key_gradient_direction>
+    <key_label_font>Sans</key_label_font>
+    <key_label_overrides/>
+    <key_shadow_strength>0</key_shadow_strength>
+    <key_shadow_size>0</key_shadow_size>
+</theme>

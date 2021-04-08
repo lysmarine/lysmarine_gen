@@ -47,8 +47,8 @@ jobs:
           sudo apt-get -y -q install proot qemu qemu-user git p7zip-full parted kpartx xorriso
           cd cross-build-release; sudo chmod -v u+w *.sh;
       - run:
-          command: cd cross-build-release; sudo ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> "<<parameters.stage>>"
-          no_output_timeout: 30m
+          command: cd cross-build-release; sudo ./build.sh -o <<parameters.baseOs>> -a <<parameters.cpuArch>> -v <<parameters.version>> -s "<<parameters.stage>>"
+          no_output_timeout: 60m
       - publish
 
   build-in-arm-docker:
@@ -76,7 +76,7 @@ jobs:
       - run: |
           docker exec --privileged -ti CIarmBuilder apt-get update
           docker exec --privileged -ti CIarmBuilder apt-get -y install wget proot git kpartx p7zip p7zip-full parted e2fsprogs qemu-user kmod rsync xz-utils
-      - run: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh <<parameters.baseOs>> <<parameters.cpuArch>> <<parameters.version>> '<<parameters.stage>>'"
+      - run: docker exec --privileged -ti CIarmBuilder /bin/bash -xec "cd ci-source/cross-build-release; chmod -v u+w *.sh; /bin/bash -xe ./build.sh -o <<parameters.baseOs>> -a <<parameters.cpuArch>> -v <<parameters.version>> -s '<<parameters.stage>>'"
       - publish
 
 
@@ -101,6 +101,6 @@ workflows:
           version: '0.9.1'
       - build-in-arm-docker:
           name: armbian-pine64so
-          baseOs: 'armbian-pine64so'
+          baseOs: 'pine64so'
           cpuArch: 'arm64'
           version: '0.9.1'

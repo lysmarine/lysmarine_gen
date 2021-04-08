@@ -1,10 +1,9 @@
 #!/bin/bash
 
+apt-get install -yq git nodejs python-dev
 
-
-## Dependencys of signalk.
-apt-get install -y -q nodejs libavahi-compat-libdnssd-dev python-dev git
-
+## Dependencies of signalk.
+apt-get install -yq libavahi-compat-libdnssd-dev
 
 
 install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk"
@@ -20,20 +19,13 @@ install    -m 644 -o signalk -g signalk $FILE_FOLDER/settings.json  "/home/signa
 install    -m 644 -o signalk -g signalk $FILE_FOLDER/security.json  "/home/signalk/.signalk/security.json"
 install    -m 755 -o signalk -g signalk $FILE_FOLDER/signalk-server "/home/signalk/.signalk/signalk-server"
 
-install -d        -o signalk -g signalk "/home/user/.local/share/icons/"
-install    -m 644 -o 1000    -g 1000    $FILE_FOLDER/signalk.png "/home/user/.local/share/icons/"
+install -d "/usr/local/share/icons/"
+install -m 644  $FILE_FOLDER/signalk.png "/usr/local/share/icons/"
 
-install -d                              /etc/systemd/system
-install    -m 644                       $FILE_FOLDER/signalk.service "/etc/systemd/system/signalk.service"
-install    -m 644                       $FILE_FOLDER/signalk.socket  "/etc/systemd/system/signalk.socket"
-
-systemctl enable signalk.service
-systemctl enable signalk.socket
 
 
 ## Install signalk
 npm install -g --unsafe-perm signalk-server
-
 
 
 
@@ -50,15 +42,21 @@ popd
 pushd /home/signalk/.signalk/node_modules/@signalk/
 	su signalk -c "git clone https://github.com/lysmarine/lysmarine-dashboard"
 	pushd ./lysmarine-dashboard
-	  rm -r .git
-		npm install
-  popd
+	    rm -r .git
+	    npm install
+    popd
 popd
 
 ## Give set-system-time the possibility to change the date.
 echo "signalk ALL=(ALL) NOPASSWD: /bin/date" >> /etc/sudoers
 
+## For Seatalk
+#apt-get install -y -q pigpio python-pigpio python3-pigpio
+#systemctl disable pigpiod
 
+## For Seatalk
+# https://github.com/MatsA/seatalk1-to-NMEA0183
+# https://github.com/Thomas-GeDaD/Seatalk1-Raspi-reader
+#wget -q -O - https://raw.githubusercontent.com/MatsA/seatalk1-to-NMEA0183/master/STALK_read.py > /usr/local/sbin/STALK_read.py
 
-## Make some space on the drive for the next stages
-#rm -r /tmp/npm-*
+#apt-get install -y -q python3-rpi.gpio

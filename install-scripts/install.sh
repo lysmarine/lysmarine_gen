@@ -49,7 +49,7 @@ for argument in $argumentList; do # access each element of array
 	fi
 
 	set +f
-	for scriptLocation in ./$stage*/$script*.sh; do
+	for scriptLocation in `ls ./$stage*/$script*.sh | sort -V`; do
       if [ -f $scriptLocation ]; then
         echo '';
         echo '==========================================';
@@ -62,7 +62,6 @@ for argument in $argumentList; do # access each element of array
 
         $scriptLocation
         [[ ${PIPESTATUS[0]} -ne 0 ]] && exit ;
-
 
       fi
   done
