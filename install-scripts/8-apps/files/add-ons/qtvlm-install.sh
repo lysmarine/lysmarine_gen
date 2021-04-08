@@ -12,7 +12,7 @@ fi
 sudo apt-get -y install libsystemd0:armhf
 
 cd /home/user
-wget -q -O - https://download.meltemus.com/qtvlm/qtVlm-5.10.1-rpi.tar.gz > qtVlm-5.10.1-rpi.tar.gz
+wget -q -O - "https://www.meltemus.com/index.php/en/download?task=download.send&id=287&catid=9&m=0" > qtVlm-5.10.1-rpi.tar.gz
 gzip -cd < qtVlm-5.10.1-rpi.tar.gz | tar xvf -
 mkdir /home/user/.qtVlm
 wget -q -O - https://raw.githubusercontent.com/bareboat-necessities/my-bareboat/master/qtvlm-conf/qtVlm.ini > /home/user/.qtVlm/qtVlm.ini
