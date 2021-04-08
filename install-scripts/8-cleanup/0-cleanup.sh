@@ -19,7 +19,7 @@ apt-get clean
 # pip3 cache purge   # require pip version > 20.1
 rm -rf /root/.cache/pip
 npm cache clean --force || true
-su signalk -c "npm cache clean --force"
+su signalk -c "npm cache clean --force || true"
 
 ## Remove others cache
 rm -rf /root/.cache/electron

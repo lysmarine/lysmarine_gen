@@ -38,6 +38,5 @@ plymouth-set-default-theme dreams
 rm /etc/issue || true
 rm /etc/issue.net || true
 
-
 ## Raspbian enable this to intercept keystroke during the boot process, (for ondemand cup freq management.) Lysmarine don't want to set it that way.
 systemctl disable triggerhappy.service || /bin/true
