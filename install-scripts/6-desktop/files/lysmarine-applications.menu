@@ -245,6 +245,9 @@
         <Include>
             <Filename>realvnc-vncviewer.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>commands.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Settings</Name>

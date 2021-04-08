@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Commands
+GenericName=Commands
+Comment=Commands
+Exec=bbn-commands
+Terminal=false
+Icon=dialog-password
+Categories=System
+Keywords=System
