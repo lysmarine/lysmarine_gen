@@ -63,6 +63,8 @@ install -v -m 0644 $FILE_FOLDER/pypilot_boatimu.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.service "/etc/systemd/system/"
 install -v -m 0644 $FILE_FOLDER/pypilot_web.socket "/etc/systemd/system/"
 
+sed -i 's/_http._tcp.local./_signalk-http._tcp.local./' "$(find /usr/local/lib -name signalk.py)" || true
+
 systemctl disable pypilot_boatimu.service
 systemctl enable pypilot@pypilot.service                               # listens on tcp 20220 and 23322
 systemctl enable pypilot_web.service                                   # listens on tcp 8080
