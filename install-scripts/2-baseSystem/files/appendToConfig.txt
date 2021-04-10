@@ -1,4 +1,5 @@
 ### lysmarine ####################################
+#arm_64bit=1
 gpu_mem=512
 enable_uart=1
 disable_splash=1
