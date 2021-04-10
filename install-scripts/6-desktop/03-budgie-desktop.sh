@@ -12,7 +12,12 @@ apt-get install -y -q menulibre
 apt-get install -y -q gvfs-fuse gvfs-backends gnome-bluetooth ibus
 
 install -o 1000 -g 1000 -d /home/user/.config/openbox
-echo 'chromium --headless &' >>/home/user/.config/openbox/autostart
+
+if [ $LMARCH == 'arm64' ]; then
+  echo 'chromium --headless &' >>/home/user/.config/openbox/autostart
+else
+  echo 'chromium-browser --headless &' >>/home/user/.config/openbox/autostart
+fi
 
 ## Start budgie-desktop on openbox boot.
 echo 'export XDG_CURRENT_DESKTOP=Budgie:GNOME; budgie-desktop &' >>/home/user/.config/openbox/autostart
