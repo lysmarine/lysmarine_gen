@@ -1,3 +1,5 @@
 #!/bin/sh
 
-sudo systemctl restart signalk
+sudo systemctl stop signalk
+sleep 2
+sudo systemctl start signalk
