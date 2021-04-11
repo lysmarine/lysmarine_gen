@@ -14,7 +14,7 @@ install -d -o 1000 -g 1000 /home/user/.config/openbox/
   echo "dconf load / < /usr/share/onboard/a11y.dconf"
   echo "dconf write /org/gnome/system/location/enabled true"
   echo "dconf write /org/gnome/Weather/Application/automatic-location true"
-  echo "dconf write /org/ubuntubudgie/plugins/weathershow/windunit 'Miles'"
+  echo "dconf write /org/ubuntubudgie/plugins/weathershow/windunit \"'Miles'\""
   echo "dconf write /org/ubuntubudgie/plugins/weathershow/desktopweather false"
 } >> /home/user/.config/openbox/autostart
 
