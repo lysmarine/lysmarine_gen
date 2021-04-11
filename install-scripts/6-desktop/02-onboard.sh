@@ -10,10 +10,10 @@ install -v $FILE_FOLDER/a11y.dconf "/usr/share/onboard/"
 install -d -o 1000 -g 1000 /home/user/.config/openbox/
 
 {
-  echo "dconf load /org/onboard/ < /usr/share/onboard/onboard.dconf";
-  echo "dconf load / < /usr/share/onboard/a11y.dconf";
-  echo "dconf write /org/gnome/system/location/enabled true";
-  echo "dconf write /org/gnome/Weather/Application/automatic-location true";
+  echo "dconf load /org/onboard/ < /usr/share/onboard/onboard.dconf"
+  echo "dconf load / < /usr/share/onboard/a11y.dconf"
+  echo "dconf write /org/gnome/system/location/enabled true"
+  echo "dconf write /org/gnome/Weather/Application/automatic-location true"
 } >> /home/user/.config/openbox/autostart
 
 echo "sed -i 's/^dconf\ /#&/' /home/user/.config/openbox/autostart" >> /home/user/.config/openbox/autostart
