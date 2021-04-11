@@ -56,7 +56,7 @@
              We use autobaud between 4800 and 38400 here
              The data fed through the gpsd feeder
              -->
-        <AVNUsbSerialReader maxDevices="0" allowUnknown="false" baud="38400" minbaud="4800">
+        <AVNUsbSerialReader maxDevices="-1" allowUnknown="true" baud="38400" minbaud="4800">
             <!-- <UsbDevice usbid="1-1.2.1:1.0" baud="38400" minbaud="4800"/>-->
             <!-- a serial input + output device at one particular USB port
                  with this filter it will output only RMB NMEA records data
