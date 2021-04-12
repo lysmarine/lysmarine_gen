@@ -1,6 +1,6 @@
 #!/bin/bash
 
-action=$(yad --title "System Actions" --width=500 --height=300  --text-align=center --text "\n" --list --no-headers --dclick-action=none --print-column=1 --column "Choice":HD --column "Action" reboot Reboot shutdown Shutdown restartD "Restart Desktop" restartPyP "Restart PyPilot" restartSK "Restart SignalK")
+action=$(yad --title "System Actions" --width=500 --height=300  --text-align=center --text "\n" --list --no-headers --dclick-action=none --print-column=1 --column "Choice":HD --column "Action" reboot Reboot shutdown Shutdown restartD "Restart Desktop" restartPyP "Restart PyPilot" restartSK "Restart SignalK" restartAvN "Restart AvNav")
 
 ret=$?
 
@@ -12,7 +12,8 @@ case $action in
     restartD*) cmd="budgie-panel --replace&" ;;
     restartPyP*) cmd="/usr/local/sbin/pypilot-restart" ;;
     restartSK*) cmd="/usr/local/sbin/signalk-restart" ;;
-    *) exit 1 ;;
+    restartAvN*) cmd="/usr/local/sbin/avnav-restart" ;;
+  *) exit 1 ;;
 esac
 
 eval exec $cmd
