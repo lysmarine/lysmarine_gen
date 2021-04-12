@@ -21,3 +21,6 @@ systemctl enable avnav
 
 apt-get clean
 npm cache clean --force
+
+echo "" >>/etc/sudoers
+echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/avnav-restart' >>/etc/sudoers

@@ -10,10 +10,10 @@ case $action in
     reboot*) cmd='sh -c "kill $(pidof opencpn); sleep 1; /sbin/reboot"' ;;
     shutdown*) cmd='sh -c "kill $(pidof opencpn); sleep 1; /sbin/poweroff"' ;;
     restartD*) cmd="budgie-panel --replace&" ;;
-    restartPyP*) cmd="/usr/local/sbin/pypilot-restart" ;;
-    restartSK*) cmd="/usr/local/sbin/signalk-restart" ;;
-    restartAvN*) cmd="/usr/local/sbin/avnav-restart" ;;
-  *) exit 1 ;;
+    restartPyP*) cmd="sudo /usr/local/sbin/pypilot-restart" ;;
+    restartSK*) cmd="sudo /usr/local/sbin/signalk-restart" ;;
+    restartAvN*) cmd="sudo /usr/local/sbin/avnav-restart" ;;
+    *) exit 1 ;;
 esac
 
 eval exec $cmd
