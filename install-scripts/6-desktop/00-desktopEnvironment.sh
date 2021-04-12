@@ -82,3 +82,9 @@ apt-get install -y -q lxtask thunar
 
 # force polkit agent to start with openbox (this is needed for nm-applet hotspot)
 sed -i '/^OnlyShowIn=/ s/$/GNOME;/' /etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop
+
+install -v $FILE_FOLDER/scale-up.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/scale-down.desktop /usr/local/share/applications/
+
+install -v -m 755 $FILE_FOLDER/scale-up /usr/local/bin/
+install -v -m 755 $FILE_FOLDER/scale-down /usr/local/bin/

@@ -184,6 +184,12 @@
             <Filename>signalk.desktop</Filename>
         </Include>
         <Include>
+            <Filename>scale-up.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>scale-down.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>rpi-imager.desktop</Filename>
         </Include>
         <Include>
