@@ -31,7 +31,7 @@ systemctl disable pppd-dns.service # For dial-up Internet LOL
 
 install -v -m 0644 $FILE_FOLDER/wifi_powersave@.service "/etc/systemd/system/"
 systemctl disable wifi_powersave@on.service
-systemctl enable wifi_powersave@off.service
+systemctl disable wifi_powersave@off.service
 
 # See: http://downloads.fars-robotics.net/
 curl -1sLf http://downloads.fars-robotics.net/wifi-drivers/install-wifi > /usr/local/sbin/install-wifi
