@@ -111,6 +111,24 @@
       ],
       "id": "gps2",
       "enabled": true
+    },
+    {
+      "pipeElements": [
+        {
+          "type": "providers/simple",
+          "options": {
+            "logging": false,
+            "type": "NMEA0183",
+            "subOptions": {
+              "validateChecksum": false,
+              "type": "tcpserver",
+              "suppress0183event": false
+            }
+          }
+        }
+      ],
+      "id": "nmea0183_feed",
+      "enabled": true
     }
   ],
   "security": {
