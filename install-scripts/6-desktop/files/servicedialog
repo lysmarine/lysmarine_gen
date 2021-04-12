@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 ROWS=""
 
@@ -110,10 +110,14 @@ else
 
   if echo "$SAVE" | grep -q "PyPilot_web"; then
     echo "=== enable PyPilot_web ==="
+    sudo -A systemctl enable pypilot_web.socket
+    sudo -A systemctl start pypilot_web.socket
     sudo -A systemctl enable pypilot_web
     sudo -A systemctl start pypilot_web
   else
     echo "=== disable PyPilot_web ==="
+    sudo -A systemctl disable pypilot_web.socket
+    sudo -A systemctl stop pypilot_web.socket
     sudo -A systemctl disable pypilot_web
     sudo -A systemctl stop pypilot_web
   fi
@@ -130,10 +134,14 @@ else
 
   if echo "$SAVE" | grep -q "signal-K"; then
     echo "=== enable signalk ==="
+    sudo -A systemctl enable signalk.socket
+    sudo -A systemctl start signalk.socket
     sudo -A systemctl enable signalk
     sudo -A systemctl start signalk
   else
     echo "=== disable signalk ==="
+    sudo -A systemctl disable signalk.socket
+    sudo -A systemctl stop signalk.socket
     sudo -A systemctl disable signalk
     sudo -A systemctl stop signalk
   fi
@@ -176,6 +184,7 @@ else
     echo "=== disable mopidy ==="
     sudo -A systemctl disable mopidy
     sudo -A systemctl stop mopidy
+    sudo -A systemctl daemon-reload
   fi
 
   if echo "$SAVE" | grep -q "PiGPIOd"; then
