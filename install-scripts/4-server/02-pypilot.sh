@@ -83,7 +83,7 @@ install -d /usr/local/share/applications
 install -v $FILE_FOLDER/pypilot_calibration.desktop "/usr/local/share/applications/"
 install -v $FILE_FOLDER/pypilot_control.desktop "/usr/local/share/applications/"
 
-install -m 4755 -o 0 -g 0 $FILE_FOLDER/pypilot-restart "/usr/local/sbin/pypilot-restart"
+install -m 755 $FILE_FOLDER/pypilot-restart "/usr/local/sbin/pypilot-restart"
 
 ## Give permission to sudo chrt without a password for the user pypilot.
 echo "" >>/etc/sudoers
