@@ -10,5 +10,10 @@ update-mime-database /usr/share/mime
 # Keeping it enabled breaks wifi in nm-applet
 systemctl disable dhcpcd.service
 
+if [ -x /boot/first-boot.sh ]
+then
+  /boot/first-boot.sh || true
+fi
+
 touch /tmp/FIRSTRUN
 systemctl disable firstRun.service

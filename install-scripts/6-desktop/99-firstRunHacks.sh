@@ -6,3 +6,5 @@ install -m 755 -d "/usr/local/sbin"
 install -m 755 $FILE_FOLDER/firstrun "/usr/local/sbin/firstrun"
 
 systemctl enable firstRun.service
+
+install -m 755 $FILE_FOLDER/first-boot.sh "/boot/first-boot.sh"
