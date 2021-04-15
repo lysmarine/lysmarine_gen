@@ -63,6 +63,26 @@
             "logging": false,
             "type": "NMEA0183",
             "subOptions": {
+              "validateChecksum": false,
+              "type": "tcp",
+              "port": "20220",
+              "suppress0183event": true,
+              "host": "127.0.0.1"
+            }
+          }
+        }
+      ],
+      "id": "pypilot_nmea",
+      "enabled": true
+    },
+    {
+      "pipeElements": [
+        {
+          "type": "providers/simple",
+          "options": {
+            "logging": false,
+            "type": "NMEA0183",
+            "subOptions": {
               "type": "serial",
               "validateChecksum": false,
               "device": "/dev/ttyLYS_ais_0",
