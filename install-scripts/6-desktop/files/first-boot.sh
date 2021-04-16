@@ -19,3 +19,6 @@
 ## TimeZone
 #ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 #dpkg-reconfigure -f noninteractive tzdata
+
+## Enable Samba
+# systemctl enable smbd
