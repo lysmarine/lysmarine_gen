@@ -8,6 +8,6 @@ GenericName=Lightning Maps
 Comment=Lightning Maps
 Exec=gnome-www-browser https://www.lightningmaps.org/
 Terminal=false
-Icon=gnome-globe
+Icon=weather-storm
 Categories=WWW;Internet
 EOF'
