@@ -104,6 +104,9 @@
             <Filename>lightningmaps.desktop</Filename>
         </Include>
         <Include>
+            <Filename>marinetraffic.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>org.gnome.Weather.Application.desktop</Filename>
         </Include>
         <Include>
