@@ -67,6 +67,8 @@ install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/widevine-lib-install.sh 
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/wifi-drivers-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/boatsetter-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/java-upgrade.sh "/home/user/add-ons/"
+install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/lightningmaps-install.sh "/home/user/add-ons/"
+
 
 install -v $FILE_FOLDER/bbn-checklist.desktop "/usr/local/share/applications/"
 
