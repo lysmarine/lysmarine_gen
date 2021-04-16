@@ -6,5 +6,7 @@ echo "samba-common samba-common/do_debconf boolean true" | sudo debconf-set-sele
 
 apt-get -y -q install samba samba-common
 
+# systemctl enable smbd
+
 install -m 755 -d -o root -g adm "/var/log/samba"
 #install -m 755 -d -o root -g adm "/var/log/samba/cores"
