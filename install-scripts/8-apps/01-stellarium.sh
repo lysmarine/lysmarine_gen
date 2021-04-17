@@ -12,4 +12,6 @@ install -v -m 0755 $FILE_FOLDER/stellarium-augmented.sh /usr/local/bin/stellariu
 
 apt-get -y -q install geographiclib-tools
 
+geographiclib-get-magnetic all
+
 apt-get clean
