@@ -180,7 +180,7 @@ GenericName[zh]=桌面天文馆
 GenericName[zh_CN]=桌面天文馆
 GenericName[zh_HK]=桌面星象館
 GenericName[zh_TW]=桌上型星象儀
-Exec=stellarium-augmented
+Exec=stellarium-augmented --startup-script=%f
 Icon=stellarium
 StartupNotify=false
 Terminal=false
@@ -340,7 +340,7 @@ Name[zh]=在窗口中打开
 Name[zh_CN]=在窗口中打开
 Name[zh_HK]=開啟視窗模式
 Name[zh_TW]=以視窗模式開啟
-Exec=stellarium -f no
+Exec=stellarium-augmented -f no
 
 [Desktop Action Fullscreen]
 Name=Open in fullscreen
@@ -413,7 +413,7 @@ Name[zh]=在全屏模式下打开
 Name[zh_CN]=在全屏模式下打开
 Name[zh_HK]=開啟全螢幕模式
 Name[zh_TW]=以全螢幕開啟
-Exec=stellarium -f yes
+Exec=stellarium-augmented -f yes
 
 [Desktop Action Debugmode]
 Name=Open in debug mode
@@ -479,4 +479,4 @@ Name[zh]=在调试模式下打开
 Name[zh_CN]=在调试模式下打开
 Name[zh_HK]=開啟測試模式
 Name[zh_TW]=以除錯模式開啟
-Exec=stellarium --dump-opengl-details
+Exec=stellarium-augmented --dump-opengl-details
