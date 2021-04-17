@@ -10,4 +10,6 @@ install -v -o 1000 -g 1000 -m 0644 $FILE_FOLDER/stellarium-config.ini "/home/use
 install -v -m 0644 $FILE_FOLDER/stellarium.desktop /usr/share/applications/
 install -v -m 0755 $FILE_FOLDER/stellarium-augmented.sh /usr/local/bin/stellarium-augmented
 
+apt-get -y -q install geographiclib-tools
+
 apt-get clean
