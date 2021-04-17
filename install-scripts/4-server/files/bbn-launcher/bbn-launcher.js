@@ -24,7 +24,7 @@ const commands1 = [
     {name: 'social', title: 'Social', img: 'facebook', bg: 'ForestGreen', cmd: '/opt/facebook/facebook', args: []},
     {name: 'chess', title: 'Chess', img: 'chess', bg: 'RoyalBlue', cmd: 'onlyone', args: ['gnome-chess']},
     {name: 'cards', title: 'Cards', img: 'cards', bg: 'SeaGreen', cmd: 'onlyone', args: ['openpref']},
-    {name: 'sky', title: 'Sky', img: 'sky', bg: 'Olive', cmd: 'onlyone', args: ['stellarium']},
+    {name: 'sky', title: 'Sky', img: 'sky', bg: 'Olive', cmd: 'onlyone', args: ['stellarium-augmented']},
     {name: 'radio', title: 'Radio', img: 'radio', bg: 'IndianRed', cmd: 'onlyone', args: ['fldigi']},
     {name: 'email', title: 'Email', img: 'email', bg: 'SteelBlue', cmd: 'onlyone', args: ['geary']},
 ]
