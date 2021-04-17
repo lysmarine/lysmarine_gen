@@ -180,7 +180,7 @@ GenericName[zh]=桌面天文馆
 GenericName[zh_CN]=桌面天文馆
 GenericName[zh_HK]=桌面星象館
 GenericName[zh_TW]=桌上型星象儀
-Exec=stellarium --startup-script=%f
+Exec=stellarium-augmented
 Icon=stellarium
 StartupNotify=false
 Terminal=false
