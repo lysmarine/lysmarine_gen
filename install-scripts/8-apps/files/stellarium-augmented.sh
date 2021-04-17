@@ -15,5 +15,5 @@ do
   HT=$(echo $MH + $MV | bc)
   # control stellarium azimuth
   curl -X POST -d "az=$HT" http://localhost:8090/api/main/view
-  sleep 2
+  sleep 3
 done
