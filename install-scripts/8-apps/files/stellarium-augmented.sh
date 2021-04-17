@@ -3,7 +3,7 @@
 # hack to control stellarium azimuth by true north heading from signalK
 
 stellarium "$@"  &
-sleep 20
+sleep 30
 
 while [[ -n "$(pidof stellarium)" ]]
 do
