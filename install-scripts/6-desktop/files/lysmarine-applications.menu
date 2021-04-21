@@ -107,6 +107,9 @@
             <Filename>marinetraffic.desktop</Filename>
         </Include>
         <Include>
+            <Filename>windy.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>org.gnome.Weather.Application.desktop</Filename>
         </Include>
         <Include>
