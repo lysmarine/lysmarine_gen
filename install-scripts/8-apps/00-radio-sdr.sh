@@ -15,7 +15,7 @@ apt-get -y -q install gnuradio
 apt-get -y -q install gnuais
 apt-get -y -q install gnuaisgui
 
-apt-get -y -q install soapysdr-tools hackrf osmo-sdr airspy
+apt-get -y -q install soapysdr-tools hackrf osmo-sdr airspy sox
 
 apt-get -y -q install soundmodem
 
