@@ -15,6 +15,8 @@ apt-get -y -q install gnuradio
 apt-get -y -q install gnuais
 apt-get -y -q install gnuaisgui
 
+apt-get -y -q install soapysdr-tools hackrf osmo-sdr airspy
+
 apt-get -y -q install soundmodem
 
 install -d -m 755 "/usr/local/share/noaa-apt"
