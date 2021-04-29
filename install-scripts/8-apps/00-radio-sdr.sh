@@ -17,7 +17,13 @@ apt-get -y -q install gnuaisgui
 
 apt-get -y -q install soapysdr-tools hackrf osmo-sdr airspy sox
 
-apt-get -y -q install soundmodem
+apt-get -y -q install soundmodem morse2ascii
+
+apt-get -y -q install direwolf
+systemctl disable direwolf
+
+apt-get -y -q install aprx
+systemctl disable aprx
 
 install -d -m 755 "/usr/local/share/noaa-apt"
 install -d -m 755 "/usr/local/share/noaa-apt/res"
