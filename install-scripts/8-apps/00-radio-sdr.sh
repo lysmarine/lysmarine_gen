@@ -108,6 +108,32 @@ apt-get -y -q install wmctrl rtl-sdr dl-fldigi ssdv
 apt-get clean
 
 #####################################################################################################
+# YAAC https://www.ka2ddo.org/ka2ddo/YAAC.html
+
+MY_DIR_OLD=$(pwd)
+cd /home/user
+
+wget https://www.ka2ddo.org/ka2ddo/YAAC.zip
+mkdir YAAC && cd YAAC
+unzip ../YAAC.zip
+
+bash -c 'cat << EOF > /usr/local/share/applications/YAAC.desktop
+[Desktop Entry]
+Type=Application
+Name=YAAC
+GenericName=YAAC
+Comment=YAAC
+Exec=sh -c "cd /home/user/YAAC; java -jar YAAC.jar"
+Terminal=false
+Icon=radio
+Categories=HamRadio;Radio;Weather
+Keywords=HamRadio;Radio;Weather
+EOF'
+
+cd "$MY_DIR_OLD"
+rm -rf ~/.wget*
+
+#####################################################################################################
 # Inmarsat
 # See: https://bitbucket.org/scytalec/scytalec/src/develop/
 
