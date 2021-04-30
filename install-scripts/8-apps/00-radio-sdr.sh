@@ -2,6 +2,18 @@
 
 apt-get clean
 
+install -v -m 0644 $FILE_FOLDER/50-rtl-sdr.rules "/etc/udev/rules.d/"
+install -v -m 0644 $FILE_FOLDER/52-airspy.rules "/etc/udev/rules.d/"
+install -v -m 0644 $FILE_FOLDER/52-airspyhf.rules "/etc/udev/rules.d/"
+install -v -m 0644 $FILE_FOLDER/53-hackrf.rules "/etc/udev/rules.d/"
+install -v -m 0644 $FILE_FOLDER/66-mirics.rules "/etc/udev/rules.d/"
+install -v -m 0644 $FILE_FOLDER/88-nuand-bladerf1.rules "/etc/udev/rules.d/"
+install -v -m 0644 $FILE_FOLDER/88-nuand-bladerf2.rules "/etc/udev/rules.d/"
+install -v -m 0644 $FILE_FOLDER/88-nuand-bootloader.rules "/etc/udev/rules.d/"
+#install -v -m 0644 $FILE_FOLDER/99-com.rules "/etc/udev/rules.d/"
+install -v -m 0644 $FILE_FOLDER/99-direwolf-cmedia.rules "/etc/udev/rules.d/"
+install -v -m 0644 $FILE_FOLDER/99-thumbdv.rules "/etc/udev/rules.d/"
+
 apt-get -y -q install multimon-ng netcat
 apt-get -y -q install cubicsdr
 apt-get -y -q install cutesdr
