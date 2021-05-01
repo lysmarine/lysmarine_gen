@@ -175,6 +175,9 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - [multimon-ng](https://github.com/EliasOenal/multimon-ng), netcat
 - [Chirp](https://chirp.danplanet.com/)
 - [GNU AIS](http://gnuais.sourceforge.net/)
+- [DireWolf](https://github.com/wb2osz/direwolf)
+- [YAAC](https://www.ka2ddo.org/ka2ddo/YAAC.html)
+- [morse2ascii](https://packages.ubuntu.com/bionic/morse2ascii)
 
 
 ## Protocols
