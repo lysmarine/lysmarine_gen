@@ -158,7 +158,6 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 
 ## Radio
 
-- RTL AIS, RTL SDR, GNSS SDR
 - [Cubic SDR](https://cubicsdr.com/)
 - [Flarq](http://www.w1hkj.com/flarq_main.html)
 - [Fldigi](http://www.w1hkj.com/)
@@ -178,6 +177,14 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - [DireWolf](https://github.com/wb2osz/direwolf)
 - [YAAC](https://www.ka2ddo.org/ka2ddo/YAAC.html)
 - [morse2ascii](https://packages.ubuntu.com/bionic/morse2ascii)
+- [APRX](https://github.com/PhirePhly/aprx)
+- RTL AIS
+- RTL-SDR
+- GNSS-SDR
+- HackRF
+- AirSpy
+- OsmoSDR
+- soapysdr-tools
 
 
 ## Protocols
