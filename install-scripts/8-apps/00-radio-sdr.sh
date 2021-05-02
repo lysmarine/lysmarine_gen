@@ -33,7 +33,7 @@ apt-get -y -q install soundmodem morse2ascii
 
 apt-get -y -q install direwolf
 systemctl disable direwolf
-install -v $FILE_FOLDER/direwolf.config -o 1000 -g 1000 "/home/user/"
+install -v $FILE_FOLDER/direwolf.conf -o 1000 -g 1000 "/home/user/"
 
 apt-get -y -q install aprx
 systemctl disable aprx
