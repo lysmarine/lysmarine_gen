@@ -1,9 +1,12 @@
 #!/bin/bash -e
 
-apt-get -y -q install dump1090-fa piaware
+if [ $LMARCH != 'arm64' ]; then
 
-sed -i 's/= 80/= 8186/' /etc/lighttpd/lighttpd.conf
+  apt-get -y -q install dump1090-fa piaware
 
-systemctl disable lighttpd
-systemctl disable dump1090-fa
-systemctl disable piaware
+  sed -i 's/= 80/= 8186/' /etc/lighttpd/lighttpd.conf
+
+  systemctl disable lighttpd
+  systemctl disable dump1090-fa
+  systemctl disable piaware
+fi
