@@ -178,6 +178,8 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - [YAAC](https://www.ka2ddo.org/ka2ddo/YAAC.html)
 - [morse2ascii](https://packages.ubuntu.com/bionic/morse2ascii)
 - [APRX](https://github.com/PhirePhly/aprx)
+- [dump1090-fa](https://github.com/adsbxchange/dump1090-fa)
+- [PiAware](https://flightaware.com/adsb/piaware/)
 - RTL AIS
 - RTL-SDR
 - GNSS-SDR
