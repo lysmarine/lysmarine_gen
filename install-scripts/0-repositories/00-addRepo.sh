@@ -32,6 +32,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 868273EDCE9979E7       
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 24A4598E769C8C51           # bbn PPAs on launchpad
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6EA1BC913BC5163F           # Chirp
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1932F485C68D72A5           # Stellarium
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 684A14CF2582E0C5           # Influx
 
 wget -q -O - https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -    # NodeJs
 wget -q -O - https://www.free-x.de/debian/oss.boating.gpg.key     | apt-key add -    # XyGrib, AvNav
