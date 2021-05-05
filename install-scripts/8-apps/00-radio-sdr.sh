@@ -20,12 +20,16 @@ apt-get -y -q install cutesdr
 apt-get -y -q install fldigi
 apt-get -y -q install gpredict
 apt-get -y -q install previsat
-apt-get -y -q install gqrx-sdr
 apt-get -y -q install rtl-sdr rtl-ais
 apt-get -y -q install gnss-sdr
 apt-get -y -q install gnuradio
 apt-get -y -q install gnuais
 apt-get -y -q install gnuaisgui
+
+apt-get -y -q install gqrx-sdr
+install -d -m 755 -o 1000 -g 1000 "/home/user/.config/gqrx/"
+install -v $FILE_FOLDER/gqrx-default.conf -o 1000 -g 1000 "/home/user/.config/gqrx/default.conf"
+install -v $FILE_FOLDER/gqrx-bookmarks.csv -o 1000 -g 1000 "/home/user/.config/gqrx/bookmarks.csv"
 
 apt-get -y -q install soapysdr-tools hackrf osmo-sdr airspy sox
 
