@@ -112,3 +112,5 @@ if [ -f /etc/xdg/user-dirs.defaults ]; then
 #  sed -i 's/^PICTURES=/#&/'    /etc/xdg/user-dirs.defaults
 #  sed -i 's/^VIDEOS=/#&/'      /etc/xdg/user-dirs.defaults
 fi
+
+ln -s /root /home/root # for openplotter
