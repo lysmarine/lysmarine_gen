@@ -159,6 +159,9 @@
             <Filename>adsb.desktop</Filename>
         </Include>
         <Include>
+            <Filename>tvheadend.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>scytaleC.desktop</Filename>
         </Include>
         <Include>
