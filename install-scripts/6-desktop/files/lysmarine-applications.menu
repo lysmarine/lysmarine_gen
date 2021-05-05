@@ -156,6 +156,9 @@
             <Filename>cutesdr.desktop</Filename>
         </Include>
         <Include>
+            <Filename>adsb.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>scytaleC.desktop</Filename>
         </Include>
         <Include>

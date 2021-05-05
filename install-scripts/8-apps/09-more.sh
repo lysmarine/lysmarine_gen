@@ -70,6 +70,7 @@ install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/java-upgrade.sh "/home/u
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/lightningmaps-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/marinetraffic-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/windy-install.sh "/home/user/add-ons/"
+install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/ads-b-install.sh "/home/user/add-ons/"
 
 install -v $FILE_FOLDER/bbn-checklist.desktop "/usr/local/share/applications/"
 
