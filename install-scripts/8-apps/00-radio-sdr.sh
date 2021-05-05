@@ -31,6 +31,8 @@ apt-get -y -q install soapysdr-tools hackrf osmo-sdr airspy sox
 
 apt-get -y -q install soundmodem morse2ascii
 
+apt-get -y -q install w-scan # DVB-T
+
 apt-get -y -q install direwolf
 systemctl disable direwolf
 install -v $FILE_FOLDER/direwolf.conf -o 1000 -g 1000 "/home/user/"
