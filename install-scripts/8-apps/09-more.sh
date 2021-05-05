@@ -72,6 +72,7 @@ install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/marinetraffic-install.sh
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/windy-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/ads-b-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/tvheadend-install.sh "/home/user/add-ons/"
+install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/dvb-t-install.sh "/home/user/add-ons/"
 
 install -v $FILE_FOLDER/bbn-checklist.desktop "/usr/local/share/applications/"
 

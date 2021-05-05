@@ -70,6 +70,9 @@
             <Filename>vlc.desktop</Filename>
         </Include>
         <Include>
+            <Filename>DVB-T.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>motioneye.desktop</Filename>
         </Include>
         <Include>
