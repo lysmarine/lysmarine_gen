@@ -4,6 +4,8 @@ echo "Make sure your SDR radio is ready for DVB."
 echo "Starting TV channel scan for DE (Germany)."
 echo "If you want to scan for another country modify -c option of w_scan command in this script."
 
+mkdir /home/user/.dvb
+
 sleep 5
 
 w_scan -ft -c DE -L > /home/user/.dvb/dvb.xspf
