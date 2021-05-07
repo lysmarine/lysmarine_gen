@@ -16,10 +16,10 @@ systemctl disable watchdog
 install -v -m 0644 $FILE_FOLDER/60-watchdog.rules "/etc/udev/rules.d/60-watchdog.rules"
 
 if [ $LMARCH == 'arm64' ]; then
-  pip3 install pywavefront pyglet gps gevent-websocket "python-socketio" "flask-socketio"
+  pip3 install pywavefront pyglet gps gevent-websocket "python-socketio<5" "flask-socketio<5"
 else
   apt-get install -y -q python3-flask-socketio
-  pip3 install pywavefront pyglet gps gevent-websocket "python-socketio"
+  pip3 install pywavefront pyglet gps gevent-websocket "python-socketio<5"
 fi
 
 #if [ $LMOS == 'Raspbian' ]; then
@@ -43,6 +43,9 @@ pushd ./stageCache
   echo "Get pypilot"
   if [[ ! -d ./pypilot ]]; then
     git clone https://github.com/pypilot/pypilot.git
+    cd pypilot
+    git checkout 3818ecbc3f10c8afb6e5e21fd00c94859365d3b9
+    cd ..
     git clone --depth=1 https://github.com/pypilot/pypilot_data.git
     cp -rv ./pypilot_data/* ./pypilot
     rm -rf ./pypilot_data
