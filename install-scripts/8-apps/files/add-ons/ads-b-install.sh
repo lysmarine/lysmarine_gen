@@ -9,12 +9,12 @@ fi
 
 # See: https://flightaware.com/adsb/piaware/
 
-sudo systemctl enable lighttpd
 sudo systemctl enable dump1090-fa
+sudo systemctl enable lighttpd
 sudo systemctl enable piaware
 
-sudo systemctl start lighttpd
 sudo systemctl start dump1090-fa
+sudo systemctl start lighttpd
 sudo systemctl start piaware
 
 sudo bash -c 'cat << EOF > /usr/local/share/applications/adsb.desktop
@@ -28,3 +28,5 @@ Icon=gnome-globe
 Categories=HamRadio;SDR
 Keywords=HamRadio;SDR
 EOF'
+
+# reboot
