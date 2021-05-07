@@ -1,4 +1,25 @@
 # FTDI 8U232AM / FT232 [linux module: ftdi_sio]
 SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", SYMLINK+="ttyLYS_ftdi_%s{serial}", RUN+="/lib/udev/manage_ftdi.sh '$env{ID_SERIAL_SHORT}'"
 
+# Actisense USG
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="d9a8", SYMLINK+="ttyLYS_ftdi_%s{serial}", RUN+="/lib/udev/manage_ftdi.sh '$env{ID_SERIAL_SHORT}'"
+
+# Actisense NDC
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="d9a9", SYMLINK+="ttyLYS_ftdi_%s{serial}", RUN+="/lib/udev/manage_ftdi.sh '$env{ID_SERIAL_SHORT}'"
+
+# Actisense NGT
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="d9aa", SYMLINK+="ttyLYS_ftdi_%s{serial}", RUN+="/lib/udev/manage_ftdi.sh '$env{ID_SERIAL_SHORT}'"
+
+# Actisense NGW
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="d9ab", SYMLINK+="ttyLYS_ftdi_%s{serial}", RUN+="/lib/udev/manage_ftdi.sh '$env{ID_SERIAL_SHORT}'"
+
+# Actisense Future products
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="d9ac", SYMLINK+="ttyLYS_ftdi_%s{serial}", RUN+="/lib/udev/manage_ftdi.sh '$env{ID_SERIAL_SHORT}'"
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="d9ad", SYMLINK+="ttyLYS_ftdi_%s{serial}", RUN+="/lib/udev/manage_ftdi.sh '$env{ID_SERIAL_SHORT}'"
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="d9ae", SYMLINK+="ttyLYS_ftdi_%s{serial}", RUN+="/lib/udev/manage_ftdi.sh '$env{ID_SERIAL_SHORT}'"
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="d9af", SYMLINK+="ttyLYS_ftdi_%s{serial}", RUN+="/lib/udev/manage_ftdi.sh '$env{ID_SERIAL_SHORT}'"
+
 ACTION=="remove", SUBSYSTEM=="tty", RUN+="/lib/udev/manage_ftdi.sh '$env{ID_SERIAL_SHORT}' remove"
