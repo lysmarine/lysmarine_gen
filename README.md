@@ -63,18 +63,10 @@ Cloudsmith is the only fully hosted, cloud-native, universal package management 
 enables your organization to create, store and share packages in any format, to any place, with total
 confidence.
 
-# Steps to create your own LysMarine BBN Edition image
+# Getting Started
 
-* Create GitHub account
-* Fork this project on GitHub
-* Create CircleCi account (Use logging in with GitHub)
-* Register .circleci/config.yml in CircleCi
-* Create CloudSmith account (Use logging in with GitHub)
-* Import CloudSmith key into circleci project settings (via env variable)
-* Edit publish-cloudsmith.sh options in .circleci/config.yml to put location of your cloudsmith repository and push the changes into github
-* After circleci build completes it will create and upload image to cloudsmith
-* You can burn this image using RaspberryPi imager to SD card and use that SD card to boot your raspberry Pi
-* You can edit files inside install-scripts directory push them into github and customize your image.
+See:
+https://bareboat-necessities.github.io/my-bareboat/bareboat-os.html
 
 # Passwords
 
@@ -93,6 +85,7 @@ Brand Sihovision, Capacitive Touch Screen 7 inch, (1000 nits), IP65, 1024x600, C
 considering all waterproof connectors and hardware customization these commercial multiplexers be nicer choice):
 https://www.quark-elec.com/product-category/marine/multiplexers/
 * More about hardware: https://bareboat-necessities.github.io/my-bareboat/
+
 
 # Screenshots
 
@@ -273,10 +266,18 @@ Windlass, Bow Thruster, Lights)
 - [Widevine](https://www.widevine.com/) Digital Content Protection
 
 
-# Getting Started
+# Steps to create your own LysMarine BBN Edition image
 
-See:
-https://bareboat-necessities.github.io/my-bareboat/bareboat-os.html
+* Create GitHub account
+* Fork this project on GitHub
+* Create CircleCi account (Use logging in with GitHub)
+* Register .circleci/config.yml in CircleCi
+* Create CloudSmith account (Use logging in with GitHub)
+* Import CloudSmith key into circleci project settings (via env variable)
+* Edit publish-cloudsmith.sh options in .circleci/config.yml to put location of your cloudsmith repository and push the changes into github
+* After circleci build completes it will create and upload image to cloudsmith
+* You can burn this image using RaspberryPi imager to SD card and use that SD card to boot your raspberry Pi
+* You can edit files inside install-scripts directory push them into github and customize your image.
 
 
 # License
