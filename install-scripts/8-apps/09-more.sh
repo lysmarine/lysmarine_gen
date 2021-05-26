@@ -106,3 +106,4 @@ install -v -o 1000 -g 1000 -m 0644 $FILE_FOLDER/vessel.data "/home/user/.vessel/
 install -v -m 0755 $FILE_FOLDER/vessel-data.sh "/usr/local/bin/vessel-data"
 install -v $FILE_FOLDER/vessel-data.desktop "/usr/local/share/applications/"
 
+apt-get -q -y install nautic
