@@ -10,6 +10,7 @@ install -v -m 0644 $FILE_FOLDER/90-lys-ftdi.rules "/etc/udev/rules.d/90-lys-ftdi
 install -v -m 0644 $FILE_FOLDER/90-lys-gps.rules "/etc/udev/rules.d/90-lys-gps.rules"
 install -v -m 0644 $FILE_FOLDER/90-lys-prolific.rules "/etc/udev/rules.d/90-lys-prolific.rules"
 install -v -m 0644 $FILE_FOLDER/70-lys-can.rules "/etc/udev/rules.d/70-lys-can.rules"
+install -v -m 0644 $FILE_FOLDER/99-zzz-com.rules "/etc/udev/rules.d/99-zzz-com.rules"
 
 install -d /usr/local/bin
 install -v -m 0755 $FILE_FOLDER/manage_ais.sh "/lib/udev/manage_ais.sh"
