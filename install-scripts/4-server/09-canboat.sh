@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-apt-get -y -q install canboat can-utils
+apt-get -y -q install canboat can-utils dfu-util
 
 systemctl disable canboat.service
 
