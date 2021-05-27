@@ -63,9 +63,11 @@ EOF
   # Unmount
   umountImageFile $thisArch ./work/$thisArch/$imageName
 
-#  mountImageFile $thisArch ./work/$thisArch/$imageName "-r"
-#  zerofree -v /ci-source/cross-build-release/work/$thisArch/rootfs
-#  umountImageFile $thisArch ./work/$thisArch/$imageName
+  ls -l ./work/$thisArch/$imageName
+  wget "https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh" -P $myCache/
+  chmod +x "$myCache"/pishrink.sh
+  "$myCache"/pishrink.sh ./work/$thisArch/$imageName
+  ls -l ./work/$thisArch/$imageName
 
   # Renaming the OS and moving it to the release folder.
   cp -v ./work/$thisArch/$imageName ./release/$thisArch/lysmarine-bbn_${LYSMARINE_VER}-${thisArch}-${cpuArch}.img
