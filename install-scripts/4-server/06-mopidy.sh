@@ -23,6 +23,8 @@ pip3 install --upgrade requests
 #pip3 install install --pre Mopidy-YouTube
 pip3 install install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
 
+pip3 install "ytmusicapi<0.17"
+
 # Enable mopidy service
 systemctl enable mopidy
 
