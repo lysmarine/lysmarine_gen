@@ -17,10 +17,11 @@ pip3 install install Mopidy-MusicBox-Webclient
 
 # Install YouTube support
 apt-get -y install gstreamer1.0-plugins-bad
-#pip3 install install --pre Mopidy-YouTube
-pip3 install install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
 
 pip3 install --upgrade requests
+
+#pip3 install install --pre Mopidy-YouTube
+pip3 install install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
 
 # Enable mopidy service
 systemctl enable mopidy
