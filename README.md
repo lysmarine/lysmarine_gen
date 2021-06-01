@@ -137,6 +137,9 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - Internet Weather
 - Dockwa (Mooring and Marina Booking App)
 - NauticEd (Sailing Education)
+- Lightning Maps
+- Windy
+- Marine Traffic
 
 
 ## Multimedia
