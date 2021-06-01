@@ -1,0 +1,5 @@
+# QinHeng Electronics CH340 serial converter
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", SYMLINK+="ttyLYS_ch340_%s{serial}", RUN+="/lib/udev/manage_ch340.sh '$env{ID_SERIAL_SHORT}'"
+
+ACTION=="remove", SUBSYSTEM=="tty", RUN+="/lib/udev/manage_ch340.sh '$env{ID_SERIAL_SHORT}' remove"
