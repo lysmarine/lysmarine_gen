@@ -42,6 +42,7 @@ Another useful resource is our previous project (see: https://bareboat-necessiti
 Although it is based on OpenPlotter it still is useful to understand hardware and software set up of your marine
 raspberry pi.
 
+
 # Download
 
 To get start it's easier to download pre-built image using the links below (or you can build your own 
@@ -63,15 +64,18 @@ Cloudsmith is the only fully hosted, cloud-native, universal package management 
 enables your organization to create, store and share packages in any format, to any place, with total
 confidence.
 
+
 # Getting Started
 
 See:
 https://bareboat-necessities.github.io/my-bareboat/bareboat-os.html
 
+
 # Passwords
 
 Default passwords are set to 'changeme', which you are supposed to change.
 Default user name in login screens is basically 'user'.
+
 
 # System Requirements
 
@@ -213,6 +217,7 @@ Windlass, Bow Thruster, Lights)
 - SMS (Using Gammu)
 - Bluetooth (File Transfer)
 - AirPlay (via shairport-sync)
+
 
 ## Tools
 
