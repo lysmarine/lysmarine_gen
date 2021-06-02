@@ -244,6 +244,7 @@ Windlass, Bow Thruster, Lights)
 - [seahorse](https://wiki.debian.org/Seahorse) (Password Management)
 - [Gammu](https://wammu.eu/smsd/) (SMS Client)
 - [Timeshift](https://github.com/teejee2008/timeshift) (backups)
+- [scrcpy](https://github.com/Genymobile/scrcpy) (Android Mirroring)
 
 
 ## Data
