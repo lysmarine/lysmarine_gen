@@ -56,6 +56,9 @@
         <Include>
             <Filename>navionics-demo.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>pc-navtex.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Multimedia</Name>
@@ -206,6 +209,9 @@
         </Include>
         <Include>
             <Filename>scale-down.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>scrcpy.desktop</Filename>
         </Include>
         <Include>
             <Filename>rpi-imager.desktop</Filename>
