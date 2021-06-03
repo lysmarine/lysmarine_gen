@@ -11,6 +11,7 @@ install -m 0644 -v $FILE_FOLDER/xygrib.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/lysmarine.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/bbn-rce.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/bbn-kplex.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/bbn-navtex.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/bbn-noaa-apt.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/mopidy.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/avnav.list "/etc/apt/sources.list.d/"
@@ -39,6 +40,7 @@ wget -q -O - https://www.free-x.de/debian/oss.boating.gpg.key     | apt-key add 
 #curl -1sLf https://dl.cloudsmith.io/public/bbn-projects/bbn-rce/gpg.540A03461CECBA19.key | apt-key add -
 #curl -1sLf https://dl.cloudsmith.io/public/bbn-projects/bbn-kplex/gpg.B487196268D0D9B6.key | apt-key add -
 #curl -1sLf https://dl.cloudsmith.io/public/bbn-projects/bbn-noaa-apt/gpg.DB5121F72251E833.key | apt-key add -
+curl -1sLf https://dl.cloudsmith.io/public/bbn-projects/bbn-navtex/gpg.DCC56162C6CE6F68.key | apt-key add -
 curl -1sLf https://raw.githubusercontent.com/bareboat-necessities/lysmarine_gen/master/public-keys/cloudsmith-bbn-noaa-apt/gpg.DB5121F72251E833.key | apt-key add -
 wget -q -O - https://apt.mopidy.com/mopidy.gpg | apt-key add -
 curl -1sLf https://open-mind.space/repo/open-mind.space.gpg.key | apt-key add -     # AvNav
