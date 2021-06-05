@@ -63,6 +63,7 @@ pushd /home/signalk/.signalk
   su signalk -c "npm install signalk-fusion-stereo --unsafe-perm --loglevel error"
   su signalk -c "npm install signalk-barometer-trend --unsafe-perm --loglevel error"
   su signalk -c "npm install @oehoe83/signalk-raspberry-pi-bme680 --unsafe-perm --loglevel error"
+  su signalk -c "npm install signalk-threshold-notifier --unsafe-perm --loglevel error"
 popd
 
 sed -i "s#sudo ##g" /home/signalk/.signalk/node_modules/signalk-raspberry-pi-monitoring/index.js
