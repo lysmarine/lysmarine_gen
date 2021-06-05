@@ -18,5 +18,6 @@ evdev-rce &
 /usr/local/bin/bbn-launcherd &
 (sleep 4 && /opt/bbn-launcher/bbn-launcher) &
 
-(sleep 8 && nm-applet) &
+(sleep 7 && nm-applet) &
 (sleep 8 && onboard) &
+(sleep 9 && autoadb scrcpy -s '{}') &
