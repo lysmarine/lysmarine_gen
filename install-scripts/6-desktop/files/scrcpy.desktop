@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=scrcpy (Control Android Device)
-Comment=Control your Android device
+Comment=Connect and setup your Android device before
 Exec=/usr/local/bin/scrcpy
 Terminal=false
 X-MultipleArgs=false
