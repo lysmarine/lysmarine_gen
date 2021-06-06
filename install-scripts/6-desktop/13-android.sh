@@ -34,12 +34,7 @@ install -v -m 0644 $FILE_FOLDER/scrcpy.desktop "/usr/local/share/applications/"
 
 ############################
 
-git clone https://github.com/rom1v/autoadb
-cd autoadb
-
 apt-get install -y cargo
-cargo build --release
-cp target/release/autoadb /usr/local/bin/
 
-cd ..
-rm -rf autoadb
+apt-get install -y autoadb
+
