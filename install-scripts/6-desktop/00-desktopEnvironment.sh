@@ -12,20 +12,14 @@ if [ $LMOS == Armbian ]; then
 fi
 
 # Install touchscreen drivers
-apt-get -q -y install xserver-xorg-input-libinput
-apt-get -q -y install xinput libinput-tools
-apt-get -q -y install xinput-calibrator
-apt-get -q -y install gldriver-test
-
-apt-get install -q -y budgie-desktop budgie-weathershow-applet budgie-rotation-lock-applet
-
-apt-get install -q -y \
-gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base \
-gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-alsa \
-gstreamer1.0-libav alsa-utils libavahi-compat-libdnssd-dev git openbox \
-xbacklight lxappearance gmrun xsettingsd xserver-xorg \
-xinit libgtk2-perl cpanminus perl-base \
-dialog lxterminal network-manager-gnome
+apt-get -q -y install xserver-xorg-input-libinput xinput libinput-tools xinput-calibrator gldriver-test \
+ budgie-desktop budgie-weathershow-applet budgie-rotation-lock-applet \
+ gstreamer1.0-x gstreamer1.0-omx gstreamer1.0-plugins-base \
+ gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-alsa \
+ gstreamer1.0-libav alsa-utils libavahi-compat-libdnssd-dev git openbox \
+ xbacklight lxappearance gmrun xsettingsd xserver-xorg \
+ xinit libgtk2-perl cpanminus perl-base \
+ dialog lxterminal network-manager-gnome
 
 install -o 1000 -g 1000 -d /home/user/.local
 install -o 1000 -g 1000 -d /home/user/.local/share
@@ -74,11 +68,9 @@ fi
 # Adobe Flash Player. Copyright 1996-2015. Adobe Systems Incorporated. All Rights Reserved.
 DEBIAN_FRONTEND=noniterractive apt-get -o Dpkg::Options:=="--force-confnew" -q -y install rpi-chromium-mods
 
-apt-get install -y -q lxterminal gpsbabel file-roller
+apt-get install -y -q lxterminal gpsbabel file-roller lxtask thunar
 
 #apt-get install -y -q pcmanfm mousepad
-
-apt-get install -y -q lxtask thunar
 
 # force polkit agent to start with openbox (this is needed for nm-applet hotspot)
 sed -i '/^OnlyShowIn=/ s/$/GNOME;/' /etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop

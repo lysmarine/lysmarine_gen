@@ -3,20 +3,17 @@
 apt-get clean
 npm cache clean --force
 
-apt-get -q -y install i2c-tools python3-smbus dos2unix traceroute telnet whois socat gdal-bin openvpn seahorse inxi
+apt-get -q -y install i2c-tools python3-smbus dos2unix traceroute telnet whois socat gdal-bin openvpn seahorse inxi \
+  dconf-editor gedit gnome-calculator gnome-weather gnome-chess openpref \
+  python3-bme680 python3-gpiozero python3-w1thermsensor gpio-utils lm-sensors lirc \
+  sysstat jq xmlstarlet uhubctl iotop rsync timeshift at snapd \
+  rpi-imager piclone fontconfig nautic
+
 systemctl disable openvpn
-
-apt-get -q -y install dconf-editor gedit gnome-calculator gnome-weather gnome-chess openpref
-
-# Sensors
-apt-get -q -y install python3-bme680 python3-gpiozero python3-w1thermsensor gpio-utils lm-sensors
-
-apt-get -q -y install lirc
 systemctl disable lircd
 
 apt-get clean
 
-apt-get -q -y install sysstat jq xmlstarlet uhubctl iotop rsync timeshift at snapd
 systemctl disable snapd snapd.socket
 
 #apt-get install software-properties-common
@@ -31,13 +28,11 @@ cp rpi-clone rpi-clone-setup /usr/local/sbin
 cd ..
 rm -rf rpi-clone
 
-apt-get -q -y install rpi-imager piclone
 install -v $FILE_FOLDER/piclone.desktop -o 1000 -g 1000 "/home/user/.local/share/applications/piclone.desktop"
 
 apt-get clean
 npm cache clean --force
 
-apt-get -q -y install fontconfig
 apt-get -q -y install arduino
 
 install -v -m 0755 $FILE_FOLDER/bbn-change-password.sh "/usr/local/bin/bbn-change-password"
@@ -106,4 +101,3 @@ install -v -o 1000 -g 1000 -m 0644 $FILE_FOLDER/vessel.data "/home/user/.vessel/
 install -v -m 0755 $FILE_FOLDER/vessel-data.sh "/usr/local/bin/vessel-data"
 install -v $FILE_FOLDER/vessel-data.desktop "/usr/local/share/applications/"
 
-apt-get -q -y install nautic

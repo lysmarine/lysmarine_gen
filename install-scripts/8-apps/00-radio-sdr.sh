@@ -14,36 +14,32 @@ install -v -m 0644 $FILE_FOLDER/88-nuand-bootloader.rules "/etc/udev/rules.d/"
 install -v -m 0644 $FILE_FOLDER/99-direwolf-cmedia.rules "/etc/udev/rules.d/"
 install -v -m 0644 $FILE_FOLDER/99-thumbdv.rules "/etc/udev/rules.d/"
 
-apt-get -y -q install multimon-ng netcat
-apt-get -y -q install cubicsdr
-apt-get -y -q install cutesdr
-apt-get -y -q install fldigi
-apt-get -y -q install gpredict
-apt-get -y -q install previsat
-apt-get -y -q install rtl-sdr rtl-ais
-apt-get -y -q install gnss-sdr
-apt-get -y -q install gnuradio
-apt-get -y -q install gnuais
-apt-get -y -q install gnuaisgui
+apt-get -y -q install multimon-ng netcat\
+  cubicsdr                              \
+  cutesdr                               \
+  fldigi                                \
+  gpredict                              \
+  previsat                              \
+  rtl-sdr rtl-ais                       \
+  gnss-sdr                              \
+  gnuradio                              \
+  gnuais                                \
+  gnuaisgui                             \
+  dos2unix                              \
+  gqrx-sdr
 
-apt-get -y -q install gqrx-sdr
 install -d -m 755 -o 1000 -g 1000 "/home/user/.config/gqrx/"
 install -v $FILE_FOLDER/gqrx-default.conf -o 1000 -g 1000 "/home/user/.config/gqrx/default.conf"
 install -v $FILE_FOLDER/gqrx-bookmarks.csv -o 1000 -g 1000 "/home/user/.config/gqrx/bookmarks.csv"
 
-apt-get -y -q install soapysdr-tools hackrf osmo-sdr airspy sox
-
-apt-get -y -q install soundmodem morse2ascii
-
-apt-get -y -q install w-scan dvb-tools dvb-apps dtv-scan-tables # DVB-T
+apt-get -y -q install soapysdr-tools hackrf osmo-sdr airspy sox \
+  soundmodem morse2ascii \
+  w-scan dvb-tools dvb-apps dtv-scan-tables gr-dab aprx
 
 apt-get -y -q install direwolf
 systemctl disable direwolf
 install -v $FILE_FOLDER/direwolf.conf -o 1000 -g 1000 "/home/user/"
 
-apt-get -y -q install gr-dab # DAB
-
-apt-get -y -q install aprx
 systemctl disable aprx
 
 install -d -m 755 "/usr/local/share/noaa-apt"
@@ -110,11 +106,7 @@ else
   apt-get -y -q install default-jdk
 fi
 
-apt-get -y -q install hamfax
-
-apt-get -y -q install chirp-daily
-
-apt-get -y -q install wmctrl rtl-sdr dl-fldigi ssdv
+apt-get -y -q install hamfax chirp-daily wmctrl rtl-sdr dl-fldigi ssdv
 
 apt-get clean
 
@@ -148,7 +140,6 @@ rm -rf ~/.wget*
 # Inmarsat
 # See: https://bitbucket.org/scytalec/scytalec/src/develop/
 
-apt-get -y install dos2unix
 #apt-get -y install mono-complete
 
 MY_DIR_OLD=$(pwd)
