@@ -3,8 +3,7 @@
 # Install Mopidy and all dependencies:
 #apt-get -y install mopidy mopidy-mpd mopidy-spotify mopidy-tunein libspotify-dev xdotool
 
-apt-get -y --no-install-recommends install mopidy
-apt-get -y --no-install-recommends install mopidy-mpd mopidy-tunein xdotool
+apt-get -y --no-install-recommends install mopidy mopidy-mpd mopidy-tunein xdotool gstreamer1.0-plugins-bad
 
 adduser mopidy video
 adduser mopidy audio
@@ -14,9 +13,6 @@ pip3 install install systems
 
 # Install Mopidy MusicBox Web Client:
 pip3 install install Mopidy-MusicBox-Webclient
-
-# Install YouTube support
-apt-get -y install gstreamer1.0-plugins-bad
 
 pip3 install --upgrade requests
 

@@ -1,16 +1,15 @@
 #!/bin/bash -e
-apt-get install -y -q git
+
 ## this stage depends on stage 18-users for the pypilot user creation
 ## adduser --home /home/pypilot --gecos --system --disabled-password --disabled-login pypilot
 
 # Op way
-apt-get install -y -q --no-install-recommends python3 python3-pip python3-dev python3-setuptools libpython3-dev \
+apt-get install -y -q --no-install-recommends git python3 python3-pip python3-dev python3-setuptools libpython3-dev \
   python3-numpy python3-scipy swig python3-ujson \
   python3-serial python3-pyudev python3-pil python3-flask python3-engineio \
   python3-opengl  python3-wxgtk4.0 \
-  libffi-dev python3-gevent python3-zeroconf
+  libffi-dev python3-gevent python3-zeroconf watchdog
 
-apt-get install -y -q watchdog
 systemctl disable watchdog
 
 install -v -m 0644 $FILE_FOLDER/60-watchdog.rules "/etc/udev/rules.d/60-watchdog.rules"

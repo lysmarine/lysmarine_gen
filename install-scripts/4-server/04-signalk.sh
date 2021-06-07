@@ -1,9 +1,7 @@
 #!/bin/bash -e
 
-apt-get install -y -q python-dev git
-
 ## Dependencies of signalk.
-apt-get install -y -q nodejs \
+apt-get install -y -q python-dev git nodejs \
  libnss-mdns libavahi-compat-libdnssd-dev avahi-utils \
  node-abstract-leveldown node-nan libzmq3-dev libkrb5-dev
 
@@ -85,13 +83,11 @@ echo "signalk ALL=(ALL) NOPASSWD: /bin/date" >>/etc/sudoers
 npm cache clean --force
 
 # For Seatalk
-apt-get install -y -q pigpio python-pigpio python3-pigpio
+apt-get install -y -q pigpio python-pigpio python3-pigpio python3-rpi.gpio
 systemctl disable pigpiod
 
 # For Seatalk
 wget -q -O - https://raw.githubusercontent.com/MatsA/seatalk1-to-NMEA0183/master/STALK_read.py > /usr/local/sbin/STALK_read.py
-
-apt-get install -y -q python3-rpi.gpio
 
 echo "" >>/etc/sudoers
 echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/signalk-restart' >>/etc/sudoers
