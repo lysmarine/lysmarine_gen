@@ -21,3 +21,4 @@ evdev-rce &
 (sleep 7 && nm-applet) &
 (sleep 8 && onboard) &
 (sleep 9 && autoadb scrcpy -s '{}') &
+(sleep 9 && systemctl --user start raspotify) &
