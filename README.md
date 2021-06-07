@@ -153,6 +153,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - [Audacious](https://github.com/audacious-media-player)
 - [MotionEye](https://github.com/ccrisan/motioneye) (Cameras Control)
 - [shairport-sync](https://github.com/mikebrady/shairport-sync) (AirPlay)
+- [raspotify](https://github.com/dtcooper/raspotify) (Raspotify)
 
 
 ## Radio
