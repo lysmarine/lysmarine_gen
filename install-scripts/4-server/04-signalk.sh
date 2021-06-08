@@ -27,7 +27,7 @@ install -d /etc/systemd/system
 install -m 644 $FILE_FOLDER/signalk.service "/etc/systemd/system/signalk.service"
 install -m 644 $FILE_FOLDER/signalk.socket "/etc/systemd/system/signalk.socket"
 
-systemctl enable signalk.service
+systemctl disable signalk.service
 systemctl enable signalk.socket
 
 ## Install signalk
