@@ -1,5 +1,5 @@
 #!/bin/bash -e
-apt-get install -y -q plymouth  plymouth-label
+apt-get install -y -q plymouth plymouth-label liblockdev-mdraid2
 
 ## This override the default tty1 behaviour to make it more discrete during the boot process
 install -v -d "/etc/systemd/system/getty@tty1.service.d"
