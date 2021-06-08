@@ -32,8 +32,7 @@ USER_AGENT="Mozilla/5.0 (Linux; Android 10; SM-G960U) AppleWebKit/537.36 (KHTML,
 
 ########################################################################################################################
 
-echo "setCookie('theme', 'dark'); setTheme('dark');" >./pypilot_darktheme.js
-nativefier -a $arch --inject ./pypilot_darktheme.js --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --inject $FILE_FOLDER/pypilot_darktheme.js --disable-context-menu --disable-dev-tools --single-instance \
   --name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
   "http://localhost:8080" /opt/
 
