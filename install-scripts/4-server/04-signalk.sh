@@ -90,6 +90,7 @@ wget -q -O - https://raw.githubusercontent.com/MatsA/seatalk1-to-NMEA0183/master
 echo "" >>/etc/sudoers
 echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/signalk-restart' >>/etc/sudoers
 
-systemctl disable signalk.service
+systemctl enable signalk.service
 systemctl enable signalk.socket
+systemctl disable signalk.service
 
