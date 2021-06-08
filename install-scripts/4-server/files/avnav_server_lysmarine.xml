@@ -208,7 +208,7 @@
         -->
 
         <AVNPluginHandler>
-            <builtin-signalk enabled="false" port="80" />
+            <builtin-signalk enabled="false" port="3000" />
             <builtin-canboat enabled="false" port="6000" host="localhost" allowKeyOverwrite="true" autoSendRMC="30" sourceName="canboatgen"/>
         </AVNPluginHandler>
 

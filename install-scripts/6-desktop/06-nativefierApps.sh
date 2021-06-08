@@ -67,23 +67,23 @@ npm cache clean --force
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "SignalK" --icon /home/user/.local/share/icons/signalk.png \
-  "http://localhost:80/admin/" /opt/
+  "http://localhost:3000/admin/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "Freeboard-sk" --icon /home/user/.local/share/icons/freeboard-sk.png \
-  "http://localhost:80/@signalk/freeboard-sk/" /opt/
+  "http://localhost:3000/@signalk/freeboard-sk/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "kip-dash" --icon /home/user/.local/share/icons/signalk.png \
-  "http://localhost:80/@mxtommy/kip/" /opt/
+  "http://localhost:3000/@mxtommy/kip/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "instrumentpanel" --icon /home/user/.local/share/icons/signalk.png \
-  "http://localhost:80/@signalk/instrumentpanel/" /opt/
+  "http://localhost:3000/@signalk/instrumentpanel/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "sailgauge" --icon /home/user/.local/share/icons/signalk.png \
-  "http://localhost:80/@signalk/sailgauge/" /opt/
+  "http://localhost:3000/@signalk/sailgauge/" /opt/
 
 install -v $FILE_FOLDER/signalk.desktop /usr/local/share/applications/
 install -v $FILE_FOLDER/Freeboard-sk.desktop /usr/local/share/applications/
@@ -178,7 +178,7 @@ npm cache clean --force
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "skwiz" --icon /home/user/.local/share/icons/signalk.png \
-  "http://localhost:80/skwiz/" /opt/
+  "http://localhost:3000/skwiz/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "motioneye" --icon /usr/share/icons/gnome/32x32/devices/camera-web.png \
@@ -186,11 +186,11 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "tuktuk" --icon /home/user/.local/share/icons/signalk.png \
-  "http://localhost:80/tuktuk-chart-plotter/" /opt/
+  "http://localhost:3000/tuktuk-chart-plotter/" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "sk-autopilot" --icon /home/user/.local/share/icons/signalk.png \
-  "http://localhost:80/@signalk/signalk-autopilot/" /opt/
+  "http://localhost:3000/@signalk/signalk-autopilot/" /opt/
 
 install -v -m 0644 $FILE_FOLDER/skwiz.desktop "/usr/local/share/applications/"
 install -v -m 0644 $FILE_FOLDER/motioneye.desktop "/usr/local/share/applications/"
