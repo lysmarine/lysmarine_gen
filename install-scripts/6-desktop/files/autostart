@@ -21,5 +21,6 @@ evdev-rce &
 (sleep 7 && nm-applet) &
 (sleep 8 && onboard) &
 (sleep 30 && autoadb scrcpy -s '{}') &
-(sleep 60 && systemctl --user reenable raspotify.service && systemctl --user reenable raspotify.socket && \
+(sleep 60 && sh -c 'while ! ping -c 1 -n -w 1 spotify.com; do sleep 20; done;' && \
+  systemctl --user reenable raspotify.service && systemctl --user reenable raspotify.socket && \
   systemctl --user start raspotify) &
