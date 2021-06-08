@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Restart=always
-RestartSec=10
+RestartSec=600
 Environment="DEVICE_NAME=raspotify (%H)"
 Environment="BITRATE=160"
 Environment="CACHE_ARGS=--disable-audio-cache"
