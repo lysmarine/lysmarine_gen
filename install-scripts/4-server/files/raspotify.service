@@ -1,7 +1,6 @@
 [Unit]
 Description=Raspotify
 After=network.target
-Wants=pulseaudio.service
 
 [Service]
 Restart=always
