@@ -21,12 +21,13 @@ pip3 install install https://github.com/natumbri/mopidy-youtube/archive/develop.
 
 pip3 install "ytmusicapi<0.17"
 
-# Enable mopidy service
-systemctl enable mopidy
-
 install -m 644 $FILE_FOLDER/.asoundrc "/home/user/"
 install -m 644 $FILE_FOLDER/mopidy.conf "/etc/mopidy/"
 install -m 755 -d -o mopidy -g audio "/var/lib/mopidy/m3u"
 install -m 644 -o mopidy -g audio $FILE_FOLDER/BBN-Playlist.m3u8 "/var/lib/mopidy/m3u/"
 
 rm -rf ~/.cache/pip
+
+# Enable mopidy service
+systemctl enable mopidy
+
