@@ -15,10 +15,10 @@ install -o 0 -g 0 -m 0644 $FILE_FOLDER/avnav_server_lysmarine.xml "/usr/lib/avna
 
 install -m 755 $FILE_FOLDER/avnav-restart "/usr/local/sbin/avnav-restart"
 
-systemctl enable avnav
-
 apt-get clean
 npm cache clean --force
 
 echo "" >>/etc/sudoers
 echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/avnav-restart' >>/etc/sudoers
+
+systemctl enable avnav
