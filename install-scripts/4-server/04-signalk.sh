@@ -27,9 +27,6 @@ install -d /etc/systemd/system
 install -m 644 $FILE_FOLDER/signalk.service "/etc/systemd/system/signalk.service"
 install -m 644 $FILE_FOLDER/signalk.socket "/etc/systemd/system/signalk.socket"
 
-systemctl disable signalk.service
-systemctl enable signalk.socket
-
 ## Install signalk
 npm cache clean --force
 npm install -g --unsafe-perm signalk-server
@@ -92,3 +89,7 @@ wget -q -O - https://raw.githubusercontent.com/MatsA/seatalk1-to-NMEA0183/master
 
 echo "" >>/etc/sudoers
 echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/signalk-restart' >>/etc/sudoers
+
+systemctl disable signalk.service
+systemctl enable signalk.socket
+
