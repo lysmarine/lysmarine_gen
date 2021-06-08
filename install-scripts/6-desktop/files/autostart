@@ -21,4 +21,6 @@ evdev-rce &
 (sleep 7 && nm-applet) &
 (sleep 8 && onboard) &
 (sleep 9 && autoadb scrcpy -s '{}') &
-(sleep 60 && systemctl --user reenable raspotify.service && systemctl --user reenable raspotify.socket && systemctl --user start raspotify) &
+(sleep 60 && systemctl --user reenable raspotify.service && \
+  systemctl --user reenable raspotify.socket && \
+  systemctl --user start raspotify.service && systemctl --user start raspotify.socket) &
