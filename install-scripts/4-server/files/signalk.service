@@ -3,7 +3,7 @@ After=multi-user.target
 
 [Service]
 ExecStart=/home/signalk/.signalk/signalk-server
-Restart=on-failure
+Restart=always
 RestartSec=10
 StandardOutput=syslog
 StandardError=syslog
