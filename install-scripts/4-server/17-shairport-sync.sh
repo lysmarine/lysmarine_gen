@@ -4,8 +4,8 @@ apt-get -y -q install shairport-sync
 
 install -v -m 0644 $FILE_FOLDER/shairport-sync.conf "/etc/"
 
-systemctl enable shairport-sync
-
 usermod -aG gpio shairport-sync
+
+systemctl enable shairport-sync
 
 apt-get clean
