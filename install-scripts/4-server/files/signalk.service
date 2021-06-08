@@ -1,5 +1,5 @@
 [Unit]
-After=multi-user.target
+After=network.target
 
 [Service]
 ExecStart=/home/signalk/.signalk/signalk-server
