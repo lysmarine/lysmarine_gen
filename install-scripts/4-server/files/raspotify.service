@@ -5,7 +5,7 @@ StartLimitIntervalSec=18,000
 StartLimitBurst=900
 
 [Service]
-Restart=on-failure
+Restart=always
 RestartSec=20
 Environment="DEVICE_NAME=raspotify (%H)"
 Environment="BITRATE=160"
