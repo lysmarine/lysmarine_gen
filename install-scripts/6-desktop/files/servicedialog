@@ -1,45 +1,55 @@
 #!/bin/bash
 
+
+isEnabled () {
+   res="$(systemctl is-enabled $1)"
+   if [[ $res == "enabled" ]]; then
+      echo "TRUE"
+   else 
+      echo "FALSE"
+   fi
+}
+
 rows=""
 
 ## List services and their status
-status=$(systemctl -q is-enabled NetworkManager)
+status=$(isEnabled NetworkManager)
 rows="$rows $status NetworkManager"
 
-status=$(systemctl -q is-enabled create_ap)
+status=$(isEnabled create_ap)
 rows="$rows $status create_ap"
 
-status=$(systemctl -q is-enabled ssh)
+status=$(isEnabled ssh)
 rows="$rows $status SSH"
 
-status=$(systemctl -q is-enabled kplex)
+status=$(isEnabled kplex)
 rows="$rows $status kplex"
 
-status=$(systemctl -q is-enabled pypilot@pypilot.service)
+status=$(isEnabled pypilot@pypilot.service)
 rows="$rows $status PyPilot_srv"
 
-status=$(systemctl -q is-enabled pypilot_web)
+status=$(isEnabled pypilot_web)
 rows="$rows $status PyPilot_web"
 
-status=$(systemctl -q is-enabled rtl-ais)
+status=$(isEnabled rtl-ais)
 rows="$rows $status rtl-ais"
 
-status=$(systemctl -q is-enabled signalk)
+status=$(isEnabled signalk)
 rows="$rows $status signal-K"
 
-status=$(systemctl -q is-enabled vnc)
+status=$(isEnabled vnc)
 rows="$rows $status VNC"
 
-status=$(systemctl -q is-enabled xrdp)
+status=$(isEnabled xrdp)
 rows="$rows $status RDP"
 
-status=$(systemctl -q is-enabled avnav)
+status=$(isEnabled avnav)
 rows="$rows $status AvNav"
 
-status=$(systemctl -q is-enabled mopidy)
+status=$(isEnabled mopidy)
 rows="$rows $status mopidy"
 
-status=$(systemctl -q is-enabled pigpiod)
+status=$(isEnabled pigpiod)
 rows="$rows $status PiGPIOd"
 
 ## Dialog
@@ -54,8 +64,11 @@ save=$(
 )
 
 ret=$?
-## Quit if cancel button have been pressed
-[[ $ret -eq 1 ]] && exit 0
+
+echo $ret 
+
+## Quit if cancel or close button has been pressed
+[[ $ret -ne 0 ]] && exit 0
 
 export SUDO_ASKPASS="/usr/bin/ssh-askpass"
 
@@ -198,3 +211,4 @@ else
   sudo -A systemctl disable pigpiod
   sudo -A systemctl stop pigpiod
 fi
+
