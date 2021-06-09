@@ -122,14 +122,10 @@ fi
 
 if echo "$save" | grep -q "PyPilot_web"; then
   echo "=== enable PyPilot_web ==="
-  sudo -A systemctl enable pypilot_web.socket
-  sudo -A systemctl start pypilot_web.socket
   sudo -A systemctl enable pypilot_web
   sudo -A systemctl start pypilot_web
 else
   echo "=== disable PyPilot_web ==="
-  sudo -A systemctl disable pypilot_web.socket
-  sudo -A systemctl stop pypilot_web.socket
   sudo -A systemctl disable pypilot_web
   sudo -A systemctl stop pypilot_web
 fi
