@@ -43,157 +43,158 @@ $(systemctl -q is-enabled pigpiod) && STATUS=TRUE || STATUS=FALSE
 ROWS="$ROWS $STATUS PiGPIOd"
 
 ## Dialog
-SAVE=$(yad --list \
+SAVE=$(
+  yad --list \
   --height=400 \
   --text="Lysmarine has multiple services available. Enable and disable them based on what you need." \
   --column="Enable" \
   --column="Service" \
   --checklist \
-  $ROWS)
+  $ROWS
+)
 
-## Quit if cancell button have been pressed
-if [ "$?" == 1 ]; then
-  echo cancel
-  exit 0
+ret=$?
+
+## Quit if cancel button have been pressed
+[[ $ret -eq 1 ]] && exit 0
+
+export SUDO_ASKPASS="/usr/bin/ssh-askpass"
+## Take action
+if echo "$SAVE" | grep -q "NetworkManager"; then
+  echo "=== enable NetworkManager ==="
+  sudo -A systemctl enable NetworkManager
+  sudo -A systemctl start NetworkManager
 else
-  export SUDO_ASKPASS="/usr/bin/ssh-askpass"
-  ## Take action
-  if echo "$SAVE" | grep -q "NetworkManager"; then
-    echo "=== enable NetworkManager ==="
-    sudo -A systemctl enable NetworkManager
-    sudo -A systemctl start NetworkManager
-  else
-    echo "=== disable NetworkManager ==="
-    sudo -A systemctl disable NetworkManager
-    sudo -A systemctl stop NetworkManager
-  fi
+  echo "=== disable NetworkManager ==="
+  sudo -A systemctl disable NetworkManager
+  sudo -A systemctl stop NetworkManager
+fi
 
-  if echo "$SAVE" | grep -q "create_ap"; then
-    echo "=== enable create_ap ==="
-    sudo -A systemctl enable create_ap
-    sudo -A systemctl start create_ap
-  else
-    echo "=== disable create_ap ==="
-    sudo -A systemctl disable create_ap
-    sudo -A systemctl stop create_ap
-  fi
+if echo "$SAVE" | grep -q "create_ap"; then
+  echo "=== enable create_ap ==="
+  sudo -A systemctl enable create_ap
+  sudo -A systemctl start create_ap
+else
+  echo "=== disable create_ap ==="
+  sudo -A systemctl disable create_ap
+  sudo -A systemctl stop create_ap
+fi
 
-  if echo "$SAVE" | grep -q "SSH"; then
-    echo "=== enable SSH ==="
-    sudo -A systemctl enable ssh
-    sudo -A systemctl start ssh
-  else
-    echo "=== disable SSH ==="
-    sudo -A systemctl disable ssh
-    sudo -A systemctl stop ssh
-  fi
+if echo "$SAVE" | grep -q "SSH"; then
+  echo "=== enable SSH ==="
+  sudo -A systemctl enable ssh
+  sudo -A systemctl start ssh
+else
+  echo "=== disable SSH ==="
+  sudo -A systemctl disable ssh
+  sudo -A systemctl stop ssh
+fi
 
-  if echo "$SAVE" | grep -q "kplex"; then
-    echo "=== enable kplex ==="
-    sudo -A systemctl enable kplex
-    sudo -A systemctl daemon-reexec
-  else
-    echo "=== disable kplex ==="
-    sudo -A systemctl disable kplex
-    sudo -A systemctl daemon-reexec
-  fi
+if echo "$SAVE" | grep -q "kplex"; then
+  echo "=== enable kplex ==="
+  sudo -A systemctl enable kplex
+  sudo -A systemctl daemon-reexec
+else
+  echo "=== disable kplex ==="
+  sudo -A systemctl disable kplex
+  sudo -A systemctl daemon-reexec
+fi
 
-  if echo "$SAVE" | grep -q "PyPilot_srv"; then
-    echo "=== enable PyPilot_srv ==="
-    sudo -A systemctl enable pypilot@pypilot.service
-    sudo -A systemctl start pypilot@pypilot.service
-  else
-    echo "=== disable PyPilot_srv ==="
-    sudo -A systemctl disable pypilot@pypilot.service
-    sudo -A systemctl stop pypilot@pypilot.service
-  fi
+if echo "$SAVE" | grep -q "PyPilot_srv"; then
+  echo "=== enable PyPilot_srv ==="
+  sudo -A systemctl enable pypilot@pypilot.service
+  sudo -A systemctl start pypilot@pypilot.service
+else
+  echo "=== disable PyPilot_srv ==="
+  sudo -A systemctl disable pypilot@pypilot.service
+  sudo -A systemctl stop pypilot@pypilot.service
+fi
 
-  if echo "$SAVE" | grep -q "PyPilot_web"; then
-    echo "=== enable PyPilot_web ==="
-    sudo -A systemctl enable pypilot_web.socket
-    sudo -A systemctl start pypilot_web.socket
-    sudo -A systemctl enable pypilot_web
-    sudo -A systemctl start pypilot_web
-  else
-    echo "=== disable PyPilot_web ==="
-    sudo -A systemctl disable pypilot_web.socket
-    sudo -A systemctl stop pypilot_web.socket
-    sudo -A systemctl disable pypilot_web
-    sudo -A systemctl stop pypilot_web
-  fi
+if echo "$SAVE" | grep -q "PyPilot_web"; then
+  echo "=== enable PyPilot_web ==="
+  sudo -A systemctl enable pypilot_web.socket
+  sudo -A systemctl start pypilot_web.socket
+  sudo -A systemctl enable pypilot_web
+  sudo -A systemctl start pypilot_web
+else
+  echo "=== disable PyPilot_web ==="
+  sudo -A systemctl disable pypilot_web.socket
+  sudo -A systemctl stop pypilot_web.socket
+  sudo -A systemctl disable pypilot_web
+  sudo -A systemctl stop pypilot_web
+fi
 
-  if echo "$SAVE" | grep -q "rtl-ais"; then
-    echo "=== enable rtl-ais ==="
-    sudo -A systemctl enable rtl-ais
-    sudo -A systemctl start rtl-ais
-  else
-    echo "=== disable rtl-ais ==="
-    sudo -A systemctl disable rtl-ais
-    sudo -A systemctl stop rtl-ais
-  fi
+if echo "$SAVE" | grep -q "rtl-ais"; then
+  echo "=== enable rtl-ais ==="
+  sudo -A systemctl enable rtl-ais
+  sudo -A systemctl start rtl-ais
+else
+  echo "=== disable rtl-ais ==="
+  sudo -A systemctl disable rtl-ais
+  sudo -A systemctl stop rtl-ais
+fi
 
-  if echo "$SAVE" | grep -q "signal-K"; then
-    echo "=== enable signalk ==="
-    sudo -A systemctl enable signalk.socket
-    sudo -A systemctl start signalk.socket
-    sudo -A systemctl enable signalk
-    sudo -A systemctl start signalk
-  else
-    echo "=== disable signalk ==="
-    sudo -A systemctl disable signalk.socket
-    sudo -A systemctl stop signalk.socket
-    sudo -A systemctl disable signalk
-    sudo -A systemctl stop signalk
-  fi
+if echo "$SAVE" | grep -q "signal-K"; then
+  echo "=== enable signalk ==="
+  sudo -A systemctl enable signalk.socket
+  sudo -A systemctl start signalk.socket
+  sudo -A systemctl enable signalk
+  sudo -A systemctl start signalk
+else
+  echo "=== disable signalk ==="
+  sudo -A systemctl disable signalk.socket
+  sudo -A systemctl stop signalk.socket
+  sudo -A systemctl disable signalk
+  sudo -A systemctl stop signalk
+fi
 
-  if echo "$SAVE" | grep -q "VNC"; then
-    echo "=== enable vnc ==="
-    sudo -A systemctl enable vnc
-    sudo -A systemctl start vnc
-  else
-    echo "=== disable vnc ==="
-    sudo -A systemctl disable vnc
-    sudo -A systemctl stop vnc
-  fi
+if echo "$SAVE" | grep -q "VNC"; then
+  echo "=== enable vnc ==="
+  sudo -A systemctl enable vnc
+  sudo -A systemctl start vnc
+else
+  echo "=== disable vnc ==="
+  sudo -A systemctl disable vnc
+  sudo -A systemctl stop vnc
+fi
 
-  if echo "$SAVE" | grep -q "RDP"; then
-    echo "=== enable xrdp ==="
-    sudo -A systemctl enable xrdp
-    sudo -A systemctl start xrdp
-  else
-    echo "=== disable xrdp ==="
-    sudo -A systemctl disable xrdp
-    sudo -A systemctl stop xrdp
-  fi
+if echo "$SAVE" | grep -q "RDP"; then
+  echo "=== enable xrdp ==="
+  sudo -A systemctl enable xrdp
+  sudo -A systemctl start xrdp
+else
+  echo "=== disable xrdp ==="
+  sudo -A systemctl disable xrdp
+  sudo -A systemctl stop xrdp
+fi
 
-  if echo "$SAVE" | grep -q "AvNav"; then
-    echo "=== enable AvNav ==="
-    sudo -A systemctl enable avnav
-    sudo -A systemctl daemon-reexec
-  else
-    echo "=== disable AvNav ==="
-    sudo -A systemctl disable avnav
-    sudo -A systemctl daemon-reexec
-  fi
+if echo "$SAVE" | grep -q "AvNav"; then
+  echo "=== enable AvNav ==="
+  sudo -A systemctl enable avnav
+  sudo -A systemctl daemon-reexec
+else
+  echo "=== disable AvNav ==="
+  sudo -A systemctl disable avnav
+  sudo -A systemctl daemon-reexec
+fi
 
-  if echo "$SAVE" | grep -q "mopidy"; then
-    echo "=== enable mopidy ==="
-    sudo -A systemctl enable mopidy
-    sudo -A systemctl start mopidy
-  else
-    echo "=== disable mopidy ==="
-    sudo -A systemctl disable mopidy
-    sudo -A systemctl stop mopidy
-    sudo -A systemctl daemon-reload
-  fi
+if echo "$SAVE" | grep -q "mopidy"; then
+  echo "=== enable mopidy ==="
+  sudo -A systemctl enable mopidy
+  sudo -A systemctl start mopidy
+else
+  echo "=== disable mopidy ==="
+  sudo -A systemctl disable mopidy
+  sudo -A systemctl stop mopidy
+  sudo -A systemctl daemon-reload
+fi
 
-  if echo "$SAVE" | grep -q "PiGPIOd"; then
-    echo "=== enable PiGPIOd ==="
-    sudo -A systemctl enable pigpiod
-    sudo -A systemctl start pigpiod
-  else
-    echo "=== disable PiGPIOd ==="
-    sudo -A systemctl disable pigpiod
-    sudo -A systemctl stop pigpiod
-  fi
+if echo "$SAVE" | grep -q "PiGPIOd"; then
+  echo "=== enable PiGPIOd ==="
+  sudo -A systemctl enable pigpiod
+  sudo -A systemctl start pigpiod
+else
+  echo "=== disable PiGPIOd ==="
+  sudo -A systemctl disable pigpiod
+  sudo -A systemctl stop pigpiod
 fi
