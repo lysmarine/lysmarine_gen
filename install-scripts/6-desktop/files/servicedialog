@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 isEnabled () {
    res="$(systemctl is-enabled $1)"
    if [[ $res == "enabled" ]]; then
