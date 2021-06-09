@@ -9,7 +9,6 @@ StandardOutput=syslog
 StandardError=syslog
 WorkingDirectory=/home/signalk/.signalk
 User=signalk
-Environment=EXTERNALPORT=3000
 
 [Install]
 WantedBy=multi-user.target
