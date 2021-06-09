@@ -184,6 +184,7 @@ if echo "$save" | grep -q "mopidy"; then
   echo "=== enable mopidy ==="
   sudo -A systemctl enable mopidy
   sudo -A systemctl start mopidy
+  sudo -A systemctl daemon-reload
 else
   echo "=== disable mopidy ==="
   sudo -A systemctl disable mopidy
