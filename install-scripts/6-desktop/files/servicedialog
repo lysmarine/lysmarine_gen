@@ -64,9 +64,6 @@ save=$(
 )
 
 ret=$?
-
-echo $ret 
-
 ## Quit if cancel or close button has been pressed
 [[ $ret -ne 0 ]] && exit 0
 
