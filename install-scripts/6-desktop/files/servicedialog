@@ -1,66 +1,66 @@
 #!/bin/bash
 
-ROWS=""
+rows=""
 
 ## List services and their status
-$(systemctl -q is-enabled NetworkManager) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS NetworkManager"
+status=$(systemctl -q is-enabled NetworkManager)
+rows="$rows $status NetworkManager"
 
-$(systemctl -q is-enabled create_ap) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS create_ap"
+status=$(systemctl -q is-enabled create_ap)
+rows="$rows $status create_ap"
 
-$(systemctl -q is-enabled ssh) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS SSH"
+status=$(systemctl -q is-enabled ssh)
+rows="$rows $status SSH"
 
-$(systemctl -q is-enabled kplex) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS kplex"
+status=$(systemctl -q is-enabled kplex)
+rows="$rows $status kplex"
 
-$(systemctl -q is-enabled pypilot@pypilot.service) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS PyPilot_srv"
+status=$(systemctl -q is-enabled pypilot@pypilot.service)
+rows="$rows $status PyPilot_srv"
 
-$(systemctl -q is-enabled pypilot_web) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS PyPilot_web"
+status=$(systemctl -q is-enabled pypilot_web)
+rows="$rows $status PyPilot_web"
 
-$(systemctl -q is-enabled rtl-ais) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS rtl-ais"
+status=$(systemctl -q is-enabled rtl-ais)
+rows="$rows $status rtl-ais"
 
-$(systemctl -q is-enabled signalk) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS signal-K"
+status=$(systemctl -q is-enabled signalk)
+rows="$rows $status signal-K"
 
-$(systemctl -q is-enabled vnc) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS VNC"
+status=$(systemctl -q is-enabled vnc)
+rows="$rows $status VNC"
 
-$(systemctl -q is-enabled xrdp) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS RDP"
+status=$(systemctl -q is-enabled xrdp)
+rows="$rows $status RDP"
 
-$(systemctl -q is-enabled avnav) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS AvNav"
+status=$(systemctl -q is-enabled avnav)
+rows="$rows $status AvNav"
 
-$(systemctl -q is-enabled mopidy) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS mopidy"
+status=$(systemctl -q is-enabled mopidy)
+rows="$rows $status mopidy"
 
-$(systemctl -q is-enabled pigpiod) && STATUS=TRUE || STATUS=FALSE
-ROWS="$ROWS $STATUS PiGPIOd"
+status=$(systemctl -q is-enabled pigpiod)
+rows="$rows $status PiGPIOd"
 
 ## Dialog
-SAVE=$(
+save=$(
   yad --list \
   --height=400 \
   --text="Lysmarine has multiple services available. Enable and disable them based on what you need." \
   --column="Enable" \
   --column="Service" \
   --checklist \
-  $ROWS
+  $rows
 )
 
 ret=$?
-
 ## Quit if cancel button have been pressed
 [[ $ret -eq 1 ]] && exit 0
 
 export SUDO_ASKPASS="/usr/bin/ssh-askpass"
+
 ## Take action
-if echo "$SAVE" | grep -q "NetworkManager"; then
+if echo "$save" | grep -q "NetworkManager"; then
   echo "=== enable NetworkManager ==="
   sudo -A systemctl enable NetworkManager
   sudo -A systemctl start NetworkManager
@@ -70,7 +70,7 @@ else
   sudo -A systemctl stop NetworkManager
 fi
 
-if echo "$SAVE" | grep -q "create_ap"; then
+if echo "$save" | grep -q "create_ap"; then
   echo "=== enable create_ap ==="
   sudo -A systemctl enable create_ap
   sudo -A systemctl start create_ap
@@ -80,7 +80,7 @@ else
   sudo -A systemctl stop create_ap
 fi
 
-if echo "$SAVE" | grep -q "SSH"; then
+if echo "$save" | grep -q "SSH"; then
   echo "=== enable SSH ==="
   sudo -A systemctl enable ssh
   sudo -A systemctl start ssh
@@ -90,7 +90,7 @@ else
   sudo -A systemctl stop ssh
 fi
 
-if echo "$SAVE" | grep -q "kplex"; then
+if echo "$save" | grep -q "kplex"; then
   echo "=== enable kplex ==="
   sudo -A systemctl enable kplex
   sudo -A systemctl daemon-reexec
@@ -100,7 +100,7 @@ else
   sudo -A systemctl daemon-reexec
 fi
 
-if echo "$SAVE" | grep -q "PyPilot_srv"; then
+if echo "$save" | grep -q "PyPilot_srv"; then
   echo "=== enable PyPilot_srv ==="
   sudo -A systemctl enable pypilot@pypilot.service
   sudo -A systemctl start pypilot@pypilot.service
@@ -110,7 +110,7 @@ else
   sudo -A systemctl stop pypilot@pypilot.service
 fi
 
-if echo "$SAVE" | grep -q "PyPilot_web"; then
+if echo "$save" | grep -q "PyPilot_web"; then
   echo "=== enable PyPilot_web ==="
   sudo -A systemctl enable pypilot_web.socket
   sudo -A systemctl start pypilot_web.socket
@@ -124,7 +124,7 @@ else
   sudo -A systemctl stop pypilot_web
 fi
 
-if echo "$SAVE" | grep -q "rtl-ais"; then
+if echo "$save" | grep -q "rtl-ais"; then
   echo "=== enable rtl-ais ==="
   sudo -A systemctl enable rtl-ais
   sudo -A systemctl start rtl-ais
@@ -134,7 +134,7 @@ else
   sudo -A systemctl stop rtl-ais
 fi
 
-if echo "$SAVE" | grep -q "signal-K"; then
+if echo "$save" | grep -q "signal-K"; then
   echo "=== enable signalk ==="
   sudo -A systemctl enable signalk.socket
   sudo -A systemctl start signalk.socket
@@ -148,7 +148,7 @@ else
   sudo -A systemctl stop signalk
 fi
 
-if echo "$SAVE" | grep -q "VNC"; then
+if echo "$save" | grep -q "VNC"; then
   echo "=== enable vnc ==="
   sudo -A systemctl enable vnc
   sudo -A systemctl start vnc
@@ -158,7 +158,7 @@ else
   sudo -A systemctl stop vnc
 fi
 
-if echo "$SAVE" | grep -q "RDP"; then
+if echo "$save" | grep -q "RDP"; then
   echo "=== enable xrdp ==="
   sudo -A systemctl enable xrdp
   sudo -A systemctl start xrdp
@@ -168,7 +168,7 @@ else
   sudo -A systemctl stop xrdp
 fi
 
-if echo "$SAVE" | grep -q "AvNav"; then
+if echo "$save" | grep -q "AvNav"; then
   echo "=== enable AvNav ==="
   sudo -A systemctl enable avnav
   sudo -A systemctl daemon-reexec
@@ -178,7 +178,7 @@ else
   sudo -A systemctl daemon-reexec
 fi
 
-if echo "$SAVE" | grep -q "mopidy"; then
+if echo "$save" | grep -q "mopidy"; then
   echo "=== enable mopidy ==="
   sudo -A systemctl enable mopidy
   sudo -A systemctl start mopidy
@@ -189,7 +189,7 @@ else
   sudo -A systemctl daemon-reload
 fi
 
-if echo "$SAVE" | grep -q "PiGPIOd"; then
+if echo "$save" | grep -q "PiGPIOd"; then
   echo "=== enable PiGPIOd ==="
   sudo -A systemctl enable pigpiod
   sudo -A systemctl start pigpiod
