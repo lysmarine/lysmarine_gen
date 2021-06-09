@@ -1,7 +1,7 @@
 [Unit]
 Description=Raspotify
 After=network.target
-StartLimitIntervalSec=18,000
+StartLimitIntervalSec=18000
 StartLimitBurst=900
 
 [Service]
