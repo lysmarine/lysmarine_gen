@@ -146,14 +146,10 @@ fi
 
 if echo "$save" | grep -q "signal-K"; then
   echo "=== enable signalk ==="
-  sudo -A systemctl enable signalk.socket
-  sudo -A systemctl start signalk.socket
   sudo -A systemctl enable signalk
   sudo -A systemctl start signalk
 else
   echo "=== disable signalk ==="
-  sudo -A systemctl disable signalk.socket
-  sudo -A systemctl stop signalk.socket
   sudo -A systemctl disable signalk
   sudo -A systemctl stop signalk
 fi

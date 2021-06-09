@@ -1,7 +1,5 @@
 #!/bin/sh
 
-sudo systemctl stop signalk.socket
 sudo systemctl stop signalk
 sleep 2
-sudo systemctl start signalk.socket
 sudo systemctl start signalk
