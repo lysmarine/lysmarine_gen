@@ -104,6 +104,9 @@
             <Filename>facebook.desktop</Filename>
         </Include>
         <Include>
+            <Filename>caprine.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>boatsetter.desktop</Filename>
         </Include>
         <Include>

@@ -135,6 +135,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/
 - Chromium Web Browser
 - Email Client
 - Internet Messaging Client [Empathy](https://github.com/GNOME/empathy)
+- Facebook Messenger [Caprine](https://github.com/sindresorhus/caprine)
 - Youtube App
 - Facebook App
 - Internet Weather
