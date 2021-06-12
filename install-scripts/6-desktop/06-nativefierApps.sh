@@ -156,7 +156,7 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "facebook" --icon /usr/share/icons/Adwaita/256x256/emotes/face-cool.png \
   --internal-urls ".*" \
-  "http://localhost:4997/www?name=facebook" -u "$USER_AGENT" /opt/
+  "http://localhost:4997/www?name=facebook" /opt/
 
 mv /opt/youtube-linux-$arch /opt/youtube
 mv /opt/facebook-linux-$arch /opt/facebook
