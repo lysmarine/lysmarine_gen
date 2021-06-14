@@ -68,6 +68,7 @@ $(isEnabled pigpiod) \
 save=$(
   yad --list \
   --height=400 \
+  --title "Service Dialog" \
   --text="Lysmarine has multiple services available. Enable and disable them based on what you need." \
   --column="Enable" \
   --column="Service" \
@@ -81,17 +82,19 @@ ret=$?
 
 export SUDO_ASKPASS="/usr/bin/ssh-askpass"
 
-takeAction1 "$save" NetworkManager
-takeAction1 "$save" create_ap
-takeAction1 "$save" ssh
-takeAction1 "$save" kplex
-takeAction1 "$save" pypilot@pypilot.service
-takeAction1 "$save" pypilot_web
-takeAction1 "$save" rtl-ais
-takeAction1 "$save" signalk
-takeAction1 "$save" vnc
-takeAction1 "$save" xrdp
-takeAction2 "$save" avnav
-takeAction3 "$save" mopidy
-takeAction1 "$save" pigpiod
+{
+  echo 10; takeAction1 "$save" NetworkManager
+  echo 20; takeAction1 "$save" create_ap
+  echo 30; takeAction1 "$save" ssh
+  echo 40; takeAction1 "$save" kplex
+  echo 50; takeAction1 "$save" pypilot@pypilot.service
+  echo 60; takeAction1 "$save" pypilot_web
+  echo 65; takeAction1 "$save" rtl-ais
+  echo 70; takeAction1 "$save" signalk
+  echo 75; takeAction1 "$save" vnc
+  echo 80; takeAction1 "$save" xrdp
+  echo 85; takeAction2 "$save" avnav
+  echo 90; takeAction3 "$save" mopidy
+  echo 95; takeAction1 "$save" pigpiod
+} | yad --progress --title "Service Dialog" --text="Service reconfiguration" --auto-close
 
