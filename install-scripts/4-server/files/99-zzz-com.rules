@@ -2,4 +2,5 @@
 
 KERNEL=="ttyS*", MODE="0664", GROUP="dialout", OPTIONS="last_rule"
 KERNEL=="ttyACM*", MODE="0664", GROUP="dialout", OPTIONS="last_rule"
+KERNEL=="ttyUSB*", MODE="0664", GROUP="dialout", OPTIONS="last_rule"
 
