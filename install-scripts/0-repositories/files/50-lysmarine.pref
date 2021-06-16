@@ -1,3 +1,7 @@
 Package: *
 Pin: origin ppa.launchpad.net
 Pin-Priority: 900
+
+Package: *
+Pin: origin dl.cloudsmith.io
+Pin-Priority: 910
