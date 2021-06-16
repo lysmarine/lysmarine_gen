@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 apt-get install -y -q gpsd gpsd-clients gpsd-tools
+apt-get upgrade -y -q
 
 ## Automaticaly start gpsd when a USB gps detected, handle AIS
 install -d /etc/udev/rules.d
