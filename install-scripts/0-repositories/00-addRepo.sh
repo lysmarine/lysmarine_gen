@@ -46,6 +46,7 @@ wget -q -O - https://www.free-x.de/debian/oss.boating.gpg.key     | apt-key add 
 #curl -1sLf https://dl.cloudsmith.io/public/bbn-projects/bbn-noaa-apt/gpg.DB5121F72251E833.key | apt-key add -
 curl -1sLf https://dl.cloudsmith.io/public/bbn-projects/bbn-navtex/gpg.DCC56162C6CE6F68.key | apt-key add -
 curl -1sLf https://dl.cloudsmith.io/public/bbn-projects/bbn-autoadb/gpg.A63E85DF4575A096.key | apt-key add -
+curl -1sLf https://dl.cloudsmith.io/public/bbn-projects/bbn-gpsd/gpg.B3336FAFD344E1C5.key | apt-key add -
 curl -1sLf https://raw.githubusercontent.com/bareboat-necessities/lysmarine_gen/master/public-keys/cloudsmith-bbn-noaa-apt/gpg.DB5121F72251E833.key | apt-key add -
 wget -q -O - https://apt.mopidy.com/mopidy.gpg | apt-key add -
 curl -1sLf https://open-mind.space/repo/open-mind.space.gpg.key | apt-key add -     # AvNav
