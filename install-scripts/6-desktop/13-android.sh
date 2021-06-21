@@ -2,7 +2,7 @@
 
 apt-get install -y ffmpeg libsdl2-2.0-0 adb wget \
   gcc git pkg-config meson ninja-build \
-  libavcodec-dev libavformat-dev libavutil-dev libsdl2-dev
+  libavcodec-dev libavformat-dev libavutil-dev libsdl2-dev libavdevice-dev
 
 git clone https://github.com/Genymobile/scrcpy
 cd scrcpy
