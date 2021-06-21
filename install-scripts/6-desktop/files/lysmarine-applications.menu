@@ -246,6 +246,9 @@
             <Filename>orage.desktop</Filename>
         </Include>
         <Include>
+            <Filename>os-guide.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>org.gnome.gedit.desktop</Filename>
         </Include>
         <Include>
