@@ -33,32 +33,32 @@ npm cache clean --force
 
 ## Install signalk published plugin
 pushd /home/signalk/.signalk
-  su signalk -c "npm install @signalk/charts-plugin --unsafe-perm --loglevel error"
-  su signalk -c "npm install sk-resources-fs --unsafe-perm --loglevel error"
-  su signalk -c "npm install freeboard-sk-helper --unsafe-perm --loglevel error"
-  su signalk -c "npm install skwiz --unsafe-perm --loglevel error"
-  su signalk -c "npm install tuktuk-chart-plotter --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-raspberry-pi-bme280 --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-raspberry-pi-1wire --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-venus-plugin --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-mqtt-gw --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-mqtt-home-asisstant --unsafe-perm --loglevel error"
-  su signalk -c "npm install @codekilo/signalk-modbus-client --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-derived-data --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-anchoralarm-plugin --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-simple-notifications --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-wilhelmsk-plugin --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-to-nmea2000 --unsafe-perm --loglevel error"
-  su signalk -c "npm install @signalk/sailgauge --unsafe-perm --loglevel error"
-  su signalk -c "npm install @signalk/signalk-autopilot --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-sonoff-ewelink --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-raspberry-pi-monitoring --unsafe-perm --loglevel error"
-  su signalk -c "npm install @mxtommy/kip --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-fusion-stereo --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-barometer-trend --unsafe-perm --loglevel error"
-  su signalk -c "npm install @oehoe83/signalk-raspberry-pi-bme680 --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-threshold-notifier --unsafe-perm --loglevel error"
-  su signalk -c "npm install signalk-saillogger --unsafe-perm --loglevel error"
+  su signalk -c "npm install @signalk/charts-plugin  \
+                 sk-resources-fs  \
+                 freeboard-sk-helper  \
+                 skwiz  \
+                 tuktuk-chart-plotter  \
+                 signalk-raspberry-pi-bme280  \
+                 signalk-raspberry-pi-1wire  \
+                 signalk-venus-plugin  \
+                 signalk-mqtt-gw  \
+                 signalk-mqtt-home-asisstant  \
+                 @codekilo/signalk-modbus-client  \
+                 signalk-derived-data  \
+                 signalk-anchoralarm-plugin  \
+                 signalk-simple-notifications  \
+                 signalk-wilhelmsk-plugin  \
+                 signalk-to-nmea2000  \
+                 @signalk/sailgauge  \
+                 @signalk/signalk-autopilot  \
+                 signalk-sonoff-ewelink  \
+                 signalk-raspberry-pi-monitoring  \
+                 @mxtommy/kip  \
+                 signalk-fusion-stereo  \
+                 signalk-barometer-trend  \
+                 @oehoe83/signalk-raspberry-pi-bme680  \
+                 signalk-threshold-notifier  \
+                 signalk-saillogger --unsafe-perm --loglevel error"
 popd
 
 sed -i "s#sudo ##g" /home/signalk/.signalk/node_modules/signalk-raspberry-pi-monitoring/index.js
