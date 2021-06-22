@@ -28,8 +28,7 @@ docker run --privileged --cap-add=ALL --security-opt="seccomp=unconfined" -d -ti
 DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep $CONTAINER_DISTRO | awk '{print $1}')
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
-docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot
-docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install \
+docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot \
   proot git-core live-build kpartx p7zip p7zip-full parted e2fsprogs qemu-user zerofree
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
