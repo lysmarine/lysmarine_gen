@@ -5,7 +5,7 @@
 
 # Op way
 apt-get install -y -q --no-install-recommends git python3 python3-pip python3-dev python3-setuptools libpython3-dev \
-  python3-numpy python3-scipy swig python3-ujson \
+  python3-wheel python3-numpy python3-scipy swig python3-ujson \
   python3-serial python3-pyudev python3-pil python3-flask python3-engineio \
   python3-opengl  python3-wxgtk4.0 \
   libffi-dev python3-gevent python3-zeroconf watchdog

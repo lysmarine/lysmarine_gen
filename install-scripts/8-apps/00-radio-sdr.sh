@@ -67,7 +67,7 @@ install -v $FILE_FOLDER/gnuaisgui.desktop /usr/local/share/applications/
 install -v $FILE_FOLDER/previsat.desktop /usr/local/share/applications/
 install -v $FILE_FOLDER/hamfax.desktop -o 1000 -g 1000 "/home/user/.local/share/applications/hamfax.desktop"
 
-python3 -m pip install pyrtlsdr
+python3 -m pip install pyrtlsdr wheel
 
 # quisk
 apt-get -y -q --no-install-recommends --no-install-suggests install python3-wxgtk4.0 \
@@ -78,6 +78,7 @@ apt-get -y -q --no-install-recommends --no-install-suggests install python3-wxgt
     python3-dev                        \
     libpython3-dev                     \
     python3-usb                        \
+    python3-wheel                      \
     python3-setuptools                 \
     python3-pip
 python3 -m pip install --upgrade quisk
