@@ -84,7 +84,7 @@ Brand Sihovision, Capacitive Touch Screen 7 inch, (1000 nits), IP65, 1024x600, C
 * WiFi and LTE/4G router (not a requirement, gl-x750 Spitz OpenWrt router): https://www.gl-inet.com/products/gl-x750/
 * Quark-elec Marine multiplexers seems has a good product line (or you can just use this LysMarine OS image but
 considering all waterproof connectors and hardware customization these commercial multiplexers be nicer choice):
-https://www.quark-elec.com/product-category/marine/multiplexers/
+https://www.quark-elec.com/product-category/marine/multiplexers/ Another (even cheaper) option: http://www.yakbitz.com/
 * More about hardware: https://bareboat-necessities.github.io/my-bareboat/
 
 
