@@ -27,3 +27,4 @@ install -v -m 0755 $FILE_FOLDER/manage_prolific.sh "/lib/udev/manage_prolific.sh
 
 install -d /etc/systemd/system
 install -v -m 0644 $FILE_FOLDER/lysgpsd@.service "/etc/systemd/system/lysgpsd@.service"
+install -v -m 0644 $FILE_FOLDER/gpsd.conf "/etc/default/gpsd"
