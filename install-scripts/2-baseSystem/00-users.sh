@@ -83,6 +83,10 @@ if [ ! -f /home/user/charts ] ; then
 	su user -c "ln -s /srv/charts /home/user/charts"
 fi
 
+groupadd -r lirc
+useradd -r -g lirc -d /var/lib/lirc -s /usr/bin/nologin -c "LIRC daemon user" lirc
+usermod -a -G input lirc
+
 ## Manage the permissions and privileges.
 if [[ -d /etc/polkit-1 ]]; then
 	echo "polkit found, adding rules"

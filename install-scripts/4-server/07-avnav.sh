@@ -21,4 +21,6 @@ npm cache clean --force
 echo "" >>/etc/sudoers
 echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/avnav-restart' >>/etc/sudoers
 
+usermod -a -G lirc avnav
+
 systemctl enable avnav
