@@ -1,0 +1,15 @@
+[Unit]
+Description=pypilot hat
+DefaultDependencies=false
+
+[Service]
+Type=simple
+ExecStart=pypilot_hat
+StandardOutput=syslog
+StandardError=syslog
+User=pypilot
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=local-fs.target
