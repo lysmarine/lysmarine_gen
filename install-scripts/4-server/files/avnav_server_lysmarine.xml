@@ -203,12 +203,13 @@
         -->
 
         <AVNSocketReader host="localhost" port="10110" filter="" name="nmea0183" timeout="31104000"/>
+        <AVNSocketReader host="localhost" port="20220" filter="" name="nmea0183_pypilot" timeout="31104000"/>
         <!--
         <AVNSocketReader port="2599" host="localhost" filter="" name="canboatnmea0183" timeout="31104000"/>
         -->
 
         <AVNPluginHandler>
-            <builtin-signalk enabled="false" port="3000" />
+            <builtin-signalk enabled="true" port="3000" />
             <builtin-canboat enabled="false" port="6000" host="localhost" allowKeyOverwrite="true" autoSendRMC="30" sourceName="canboatgen"/>
         </AVNPluginHandler>
 
