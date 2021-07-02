@@ -16,6 +16,10 @@ install -d /etc/systemd/system/xrdp.d
 apt-get install -y -q xrdp
 install -v $FILE_FOLDER/Xwrapper.config "/etc/X11/Xwrapper.config"
 
+adduser xrdp ssl-cert
+touch /var/log/xrdp.log
+chown xrdp:adm /var/log/xrdp.log
+
 systemctl disable xrdp
 systemctl disable xrdp-sesman
 
