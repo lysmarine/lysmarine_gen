@@ -88,6 +88,8 @@ install -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/pypilot_client.conf "/home
 install -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/hat.conf "/home/pypilot/.pypilot/"
 install -v -o user -g user -m 0644 $FILE_FOLDER/pypilot_client.conf "/home/user/.pypilot/"
 
+install -v -m 0644 $FILE_FOLDER/lircd.conf "/etc/lirc/lircd.conf.d/lircd-pypilot.conf"
+
 ## Install The .desktop files
 install -d /usr/local/share/applications
 install -v $FILE_FOLDER/pypilot_calibration.desktop "/usr/local/share/applications/"
