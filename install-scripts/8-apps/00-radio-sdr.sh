@@ -217,3 +217,15 @@ Keywords=Hamradio
 EOF'
 
 
+#################################
+
+apt-get install -y cmake
+
+pushd /usr/local/share/aisdecoder
+  git clone https://github.com/bareboat-necessities/aisdecoder
+  mkdir build && cd build
+    cmake ../ -DCMAKE_BUILD_TYPE=RELEASE
+    make
+    cp aisdecoder /usr/local/bin/
+  cd ..
+popd
