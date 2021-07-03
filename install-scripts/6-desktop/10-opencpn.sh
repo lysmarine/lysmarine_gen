@@ -8,6 +8,7 @@ apt-get install -y -q opencpn opencpn-plugin-celestial opencpn-plugin-launcher o
 
 install -o 1000 -g 1000 -d "/home/user/.opencpn"
 install -o 1000 -g 1000 -v $FILE_FOLDER/opencpn.conf "/home/user/.opencpn/"
+install -o 1000 -g 1000 -v $FILE_FOLDER/opencpn.conf "/home/user/.opencpn/opencpn.conf-bbn"
 
 apt-get install -y -q -o Dpkg::Options::="--force-overwrite" oernc-pi
 
