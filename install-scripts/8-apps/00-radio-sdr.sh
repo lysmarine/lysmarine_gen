@@ -225,8 +225,9 @@ pushd /usr/local/share
   git clone https://github.com/bareboat-necessities/aisdecoder
   cd aisdecoder
   mkdir build && cd build
-  cmake ../ -DCMAKE_BUILD_TYPE=RELEASE
-  make
-  cp aisdecoder /usr/local/bin/
+  # Moving to first-run due to this bug: https://gitlab.kitware.com/cmake/cmake/-/issues/20568
+  # cmake ../ -DCMAKE_BUILD_TYPE=RELEASE
+  # make
+  # cp aisdecoder /usr/local/bin/
   cd ../..
 popd
