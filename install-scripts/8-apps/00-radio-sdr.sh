@@ -221,7 +221,7 @@ EOF'
 
 apt-get install -y cmake
 
-pushd /usr/local/share/aisdecoder
+pushd /usr/local/share
   git clone https://github.com/bareboat-necessities/aisdecoder
   cd aisdecoder
   mkdir build && cd build
