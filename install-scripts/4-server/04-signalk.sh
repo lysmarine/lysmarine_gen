@@ -64,6 +64,7 @@ pushd /home/signalk/.signalk
                  signalk-polar \
                  signalk-scheduler \
                  openweather-signalk \
+                 signalk-noaa-weather \
                  signalk-saillogger --unsafe-perm --loglevel error"
 popd
 
