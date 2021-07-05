@@ -97,5 +97,28 @@ echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/signalk-restart' >>/etc/sudoers
 
 systemctl enable signalk
 
+sudo bash -c 'cat << EOF > /usr/local/share/applications/signalk-node-red.desktop
+[Desktop Entry]
+Type=Application
+Name=SignalK-Node-Red
+GenericName=SignalK-Node-Red
+Comment=SignalK-Node-Red
+Exec=gnome-www-browser http://localhost:3000/plugins/signalk-node-red/redAdmin
+Terminal=false
+Icon=gtk-no
+Categories=Utility;
+EOF'
+
+sudo bash -c 'cat << EOF > /usr/local/share/applications/signalk-polar.desktop
+[Desktop Entry]
+Type=Application
+Name=SignalK-Polar
+GenericName=SignalK-Polar
+Comment=SignalK-Polar
+Exec=gnome-www-browser http://localhost:3000/signalk-polar
+Terminal=false
+Icon=gtk-about
+Categories=Utility;
+EOF'
 
 

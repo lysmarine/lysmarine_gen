@@ -276,6 +276,12 @@
             <Filename>marine-life.desktop</Filename>
         </Include>
         <Include>
+            <Filename>signalk-polar.desktop</Filename>
+        </Include>
+        <Include>
+            <Filename>signalk-node-red.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>vessel-data.desktop</Filename>
         </Include>
         <Include>
