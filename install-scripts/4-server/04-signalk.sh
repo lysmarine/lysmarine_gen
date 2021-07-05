@@ -59,6 +59,7 @@ pushd /home/signalk/.signalk
                  signalk-barometer-trend  \
                  @oehoe83/signalk-raspberry-pi-bme680  \
                  signalk-threshold-notifier  \
+                 signalk-barograph \
                  signalk-saillogger --unsafe-perm --loglevel error"
 popd
 
