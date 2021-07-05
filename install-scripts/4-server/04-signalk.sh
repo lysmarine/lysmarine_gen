@@ -61,6 +61,9 @@ pushd /home/signalk/.signalk
                  @oehoe83/signalk-raspberry-pi-bme680  \
                  signalk-threshold-notifier  \
                  signalk-barograph \
+                 signalk-polar \
+                 signalk-scheduler \
+                 openweather-signalk \
                  signalk-saillogger --unsafe-perm --loglevel error"
 popd
 
