@@ -4,6 +4,7 @@ apt-get clean
 
 apt-get -y -q install empathy
 
+apt-get clean
 
 # FB messenger
 
