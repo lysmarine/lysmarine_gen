@@ -15,6 +15,8 @@ if [ -f /boot/cmdline.txt ]; then
   sed -i '$s/$/\ loglevel=1\ splash\ quiet\ logo.nologo\ vt.global_cursor_default=1\ plymouth.ignore-serial-consoles\ console=tty3\ rd.systemd.show_status=false/' /boot/cmdline.txt
   sed -i 's#console=serial0,115200 ##' /boot/cmdline.txt
   sed -i 's#console=/dev/serial0,115200 ##' /boot/cmdline.txt
+  sed -i 's#console=serial0,9600 ##' /boot/cmdline.txt
+  sed -i 's#console=/dev/serial0,9600 ##' /boot/cmdline.txt
 	setterm -cursor on >> /etc/issue
 fi
 
