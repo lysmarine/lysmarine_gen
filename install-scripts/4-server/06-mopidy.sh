@@ -5,21 +5,27 @@
 
 apt-get -y --no-install-recommends install mopidy mopidy-mpd mopidy-tunein xdotool gstreamer1.0-plugins-bad
 
+if [ $LMARCH == 'armhf' ]; then
+  apt-get -y install mopidy-spotify libspotify-dev
+fi
+
 adduser mopidy video
 adduser mopidy audio
 
 # Install some needed packages
 pip3 install install systems
 
-# Install Mopidy MusicBox Web Client:
-pip3 install install Mopidy-MusicBox-Webclient
+# Install Mopidy Web Clients:
+pip3 install Mopidy-MusicBox-Webclient Mopidy-Iris
 
 pip3 install --upgrade requests
 
-#pip3 install install --pre Mopidy-YouTube
-pip3 install install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
+#pip3 install --pre Mopidy-YouTube
 
-pip3 install "ytmusicapi<0.17"
+#pip3 install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
+#pip3 install "ytmusicapi"
+
+pip3 install Mopidy-YouTube Mopidy-YTMusic Mopidy-Pandora Mopidy-SoundCloud
 
 install -m 644 $FILE_FOLDER/.asoundrc "/home/user/"
 install -m 644 $FILE_FOLDER/mopidy.conf "/etc/mopidy/"
