@@ -70,6 +70,9 @@
             <Filename>musicbox.desktop</Filename>
         </Include>
         <Include>
+            <Filename>iris.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>vlc.desktop</Filename>
         </Include>
         <Include>

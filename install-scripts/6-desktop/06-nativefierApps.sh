@@ -118,6 +118,10 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   "http://localhost:6680/musicbox_webclient" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+  --name "Iris" --icon /usr/share/icons/gnome/48x48/apps/multimedia-volume-control.png \
+  "http://localhost:6680/iris" /opt/
+
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "Dockwa" --icon /home/user/.local/share/icons/dockwa.png \
   --internal-urls ".*" \
   "http://localhost:4997/www?name=dockwa" -u "$USER_AGENT" /opt/
@@ -128,16 +132,19 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   "http://localhost:4997/www?name=nauticed" -u "$USER_AGENT" /opt/
 
 mv /opt/MusicBox-linux-$arch /opt/MusicBox
+mv /opt/Iris-linux-$arch /opt/Iris
 mv /opt/Dockwa-linux-$arch /opt/Dockwa
 mv /opt/Nauticed-linux-$arch /opt/Nauticed
 
 install -m 644 $FILE_FOLDER/musicbox.desktop "/usr/local/share/applications/"
+install -m 644 $FILE_FOLDER/iris.desktop "/usr/local/share/applications/"
 install -m 644 $FILE_FOLDER/dockwa.desktop "/usr/local/share/applications/"
 install -m 644 $FILE_FOLDER/nauticed.desktop "/usr/local/share/applications/"
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
   chmod 4755 /opt/MusicBox/chrome-sandbox
+  chmod 4755 /opt/Iris/chrome-sandbox
   chmod 4755 /opt/Dockwa/chrome-sandbox
   chmod 4755 /opt/Nauticed/chrome-sandbox
 fi
