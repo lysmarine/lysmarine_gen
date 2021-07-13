@@ -18,7 +18,6 @@ pip3 install install systems
 #pip3 install --pre Mopidy-YouTube
 
 pip3 install "ytmusicapi"
-pip3 install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
 
 pip3 install Mopidy-YTMusic Mopidy-Pandora Mopidy-SoundCloud
 
@@ -26,6 +25,8 @@ pip3 install Mopidy-YTMusic Mopidy-Pandora Mopidy-SoundCloud
 pip3 install Mopidy-MusicBox-Webclient Mopidy-Iris
 
 pip3 install --upgrade requests
+
+pip3 install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
 
 install -m 644 $FILE_FOLDER/.asoundrc "/home/user/"
 install -m 644 $FILE_FOLDER/mopidy.conf "/etc/mopidy/"
