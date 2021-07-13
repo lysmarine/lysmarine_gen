@@ -24,6 +24,8 @@ pip3 install Mopidy-YTMusic Mopidy-Pandora Mopidy-SoundCloud
 # Install Mopidy Web Clients:
 pip3 install Mopidy-MusicBox-Webclient Mopidy-Iris
 
+sh -c 'echo "mopidy ALL=NOPASSWD: /usr/local/lib/python3.7/dist-packages/mopidy_iris/system.sh" >> /etc/sudoers'
+
 pip3 install --upgrade requests
 
 pip3 install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
