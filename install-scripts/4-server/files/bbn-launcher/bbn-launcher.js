@@ -17,7 +17,7 @@ const commands1 = [
     {name: 'weather', title: 'Weather', img: 'weather', bg: 'RoyalBlue', cmd: 'onlyone', args: ['XyGrib']},
 //    {name: 'cam', title: 'Camera', img: 'camera', bg: 'SeaGreen', cmd: 'onlyone', args: ['vlc', 'rtsp://<ip-camera-host-or-ip>/channel1'*/]},
     {name: 'cam', title: 'Camera', img: 'camera', bg: 'SeaGreen', cmd: '/opt/motioneye/motioneye', args: []},
-    {name: 'music', title: 'Music', img: 'multimedia', bg: 'IndianRed', cmd: '/opt/MusicBox/MusicBox', args: []},
+    {name: 'music', title: 'Music', img: 'multimedia', bg: 'IndianRed', cmd: '/opt/Iris/Iris', args: []},
     {name: 'www', title: 'WWW', img: 'internet', bg: 'SteelBlue', cmd: 'onlyone', args: ['gnome-www-browser']},
     {name: 'marinas', title: 'Moorings', img: 'buoy', bg: 'SaddleBrown', cmd: '/opt/Dockwa/Dockwa', args: []},
     {name: 'video', title: 'Video', img: 'youtube', bg: 'Peru', cmd: '/opt/youtube/youtube', args: []},
