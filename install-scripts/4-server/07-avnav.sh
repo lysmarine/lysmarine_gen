@@ -23,4 +23,6 @@ echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/avnav-restart' >>/etc/sudoers
 
 usermod -a -G lirc avnav
 
+chown user:user /home/user/avnav/data/*
+
 systemctl enable avnav
