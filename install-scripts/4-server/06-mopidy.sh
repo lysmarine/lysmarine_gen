@@ -34,6 +34,7 @@ install -m 644 $FILE_FOLDER/.asoundrc "/home/user/"
 install -m 644 $FILE_FOLDER/mopidy.conf "/etc/mopidy/"
 install -m 755 -d -o mopidy -g audio "/var/lib/mopidy/m3u"
 install -m 644 -o mopidy -g audio $FILE_FOLDER/BBN-Playlist.m3u8 "/var/lib/mopidy/m3u/"
+install -m 644 $FILE_FOLDER/mopidy.service "/usr/lib/systemd/system/"
 
 rm -rf ~/.cache/pip
 
