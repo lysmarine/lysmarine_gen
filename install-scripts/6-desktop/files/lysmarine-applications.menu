@@ -249,6 +249,9 @@
             <Filename>orage.desktop</Filename>
         </Include>
         <Include>
+            <Filename>org.xfce.Catfish.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>os-guide.desktop</Filename>
         </Include>
         <Include>
