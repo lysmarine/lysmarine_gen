@@ -101,3 +101,12 @@ install -v -o 1000 -g 1000 -m 0644 $FILE_FOLDER/vessel.data "/home/user/.vessel/
 install -v -m 0755 $FILE_FOLDER/vessel-data.sh "/usr/local/bin/vessel-data"
 install -v $FILE_FOLDER/vessel-data.desktop "/usr/local/share/applications/"
 
+if [ $LMARCH == 'arm64' ]; then
+  wget https://downloads.rclone.org/rclone-current-linux-arm64.deb
+  dpkg -i rclone-current-linux-arm64.deb
+  rm rclone-current-linux-arm64.deb
+else
+  wget https://downloads.rclone.org/rclone-current-linux-arm.deb
+  dpkg -i rclone-current-linux-arm.deb
+  rm rclone-current-linux-arm.deb
+fi
