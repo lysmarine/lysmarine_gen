@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=WhatsappWeb
+Exec=/opt/WhatsappWeb/WhatsappWeb
+Terminal=false
+Icon=face-monkey
+Categories=WWW;Internet
