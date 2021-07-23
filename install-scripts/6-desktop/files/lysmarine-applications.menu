@@ -252,6 +252,9 @@
             <Filename>org.xfce.Catfish.desktop</Filename>
         </Include>
         <Include>
+            <Filename>org.gnome.DiskUtility.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>os-guide.desktop</Filename>
         </Include>
         <Include>
