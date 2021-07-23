@@ -57,7 +57,7 @@ $(isEnabled pypilot@pypilot.service) \
 $(isEnabled pypilot_web) \
 $(isEnabled rtl-ais) \
 $(isEnabled signalk) \
-$(isEnabled vnc) \
+$(isEnabled vncserver-x11-serviced) \
 $(isEnabled xrdp) \
 $(isEnabled avnav) \
 $(isEnabled mopidy) \
@@ -91,7 +91,7 @@ export SUDO_ASKPASS="/usr/bin/ssh-askpass"
   echo 60; takeAction1 "$save" pypilot_web
   echo 65; takeAction1 "$save" rtl-ais
   echo 70; takeAction1 "$save" signalk
-  echo 75; takeAction1 "$save" vnc
+  echo 75; takeAction1 "$save" vncserver-x11-serviced
   echo 80; takeAction1 "$save" xrdp
   echo 85; takeAction2 "$save" avnav
   echo 90; takeAction3 "$save" mopidy
