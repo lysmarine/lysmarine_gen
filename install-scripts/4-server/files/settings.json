@@ -149,7 +149,7 @@
         }
       ],
       "id": "ch340",
-      "enabled": true
+      "enabled": false
     },
     {
       "pipeElements": [
