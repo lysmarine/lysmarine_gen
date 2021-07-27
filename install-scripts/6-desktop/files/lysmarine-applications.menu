@@ -249,6 +249,9 @@
         <Name>Utilities</Name>
         <Directory>X-GNOME-Utilities.directory</Directory>
         <Include>
+            <Filename>xfce4-screenshooter.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>eog.desktop</Filename>
         </Include>
         <Include>
