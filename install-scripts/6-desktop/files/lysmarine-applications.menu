@@ -95,6 +95,9 @@
             <Filename>chromium.desktop</Filename>
         </Include>
         <Include>
+            <Filename>firefox-esr.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>chromium-browser.desktop</Filename>
         </Include>
         <Include>
