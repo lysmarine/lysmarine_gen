@@ -5,6 +5,7 @@ exit 1
 
 sudo apt-get -q -y install android-tools-adb git curl unzip
 
+sudo mkdir "/dev/binderfs"
 sudo mount -t binder binder /dev/binderfs
 sudo ln -s /dev/binderfs /dev/binder
 
