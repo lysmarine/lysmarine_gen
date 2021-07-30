@@ -51,7 +51,7 @@ const sites = [
     {name: 'google', url: 'https://google.com/'},
     {name: 'youtube', url: 'https://youtube.com/'},
     {name: 'facebook', url: 'https://m.facebook.com/'},
-    {name: 'whatsapp', url: 'https://web.whatsapp.com/'},
+    {name: 'WA-Web-Msg', url: 'https://web.whatsapp.com/'},
     {name: 'dockwa', url: 'https://dockwa.com/'},
     {name: 'nauticed', url: 'https://nauticed.org/'},
 ]

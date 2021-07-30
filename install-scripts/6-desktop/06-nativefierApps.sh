@@ -166,23 +166,23 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   "http://localhost:4997/www?name=facebook" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "WhatsappWeb" --icon /usr/share/icons/gnome/48x48/emotes/face-monkey.png \
+  --name "WA-Web-Msg" --icon /usr/share/icons/gnome/48x48/emotes/face-monkey.png \
   --internal-urls ".*" \
-  "http://localhost:4997/www?name=whatsapp" /opt/
+  "http://localhost:4997/www?name=WA-Web-Msg" /opt/
 
 mv /opt/youtube-linux-$arch /opt/youtube
 mv /opt/facebook-linux-$arch /opt/facebook
-mv /opt/WhatsappWeb-linux-$arch /opt/WhatsappWeb
+mv /opt/WA-Web-Msg-linux-$arch /opt/WA-Web-Msg
 
 install -v $FILE_FOLDER/youtube.desktop /usr/local/share/applications/
 install -v $FILE_FOLDER/facebook.desktop /usr/local/share/applications/
-install -v $FILE_FOLDER/WhatsappWeb.desktop /usr/local/share/applications/
+install -v $FILE_FOLDER/WA-Web-Msg.desktop /usr/local/share/applications/
 
 ## On debian, the sandbox environment fail without GUID/SUID
 if [ $LMOS == Debian ]; then
   chmod 4755 /opt/youtube/chrome-sandbox
   chmod 4755 /opt/facebook/chrome-sandbox
-  chmod 4755 /opt/WhatsappWeb/chrome-sandbox
+  chmod 4755 /opt/WA-Web-Msg/chrome-sandbox
 fi
 
 # Minimize space by linking identical files
