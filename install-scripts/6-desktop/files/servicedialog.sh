@@ -62,6 +62,7 @@ $(isEnabled xrdp) \
 $(isEnabled avnav) \
 $(isEnabled mopidy) \
 $(isEnabled pigpiod) \
+$(isEnabled usbmuxd) \
 "
 
 ## Dialog
@@ -96,5 +97,6 @@ export SUDO_ASKPASS="/usr/bin/ssh-askpass"
   echo 85; takeAction2 "$save" avnav
   echo 90; takeAction3 "$save" mopidy
   echo 95; takeAction1 "$save" pigpiod
+  echo 97; takeAction1 "$save" usbmuxd
 } | yad --progress --title "Service Dialog" --text="Service reconfiguration" --auto-close
 
