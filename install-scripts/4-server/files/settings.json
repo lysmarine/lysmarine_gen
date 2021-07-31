@@ -160,6 +160,26 @@
             "type": "NMEA0183",
             "subOptions": {
               "validateChecksum": false,
+              "type": "tcp",
+              "port": "11123",
+              "suppress0183event": false,
+              "host": "myPhone_Gps2IP_address"
+            }
+          }
+        }
+      ],
+      "id": "gps2ip_on_smartphone",
+      "enabled": false
+    },
+    {
+      "pipeElements": [
+        {
+          "type": "providers/simple",
+          "options": {
+            "logging": false,
+            "type": "NMEA0183",
+            "subOptions": {
+              "validateChecksum": false,
               "type": "tcpserver",
               "suppress0183event": false
             }
