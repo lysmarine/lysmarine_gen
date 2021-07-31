@@ -31,6 +31,11 @@ if [ $LMOS == 'Raspbian' ] && [ $LMARCH == 'armhf' ]; then
   dpkg -i wiringpi-latest.deb && rm wiringpi-latest.deb
 fi
 
+if [ $LMARCH == 'arm64' ]; then
+  wget https://github.com/guation/WiringPi-arm64/releases/download/2.61-g/wiringpi-2.61-g.deb
+  dpkg -i wiringpi-2.61-g.deb && rm wiringpi-2.61-g.deb
+fi
+
 pushd ./stageCache
   # Install RTIMULib2 as it's a dependency of pypilot
   if [[ ! -d ./RTIMULib2 ]]; then

@@ -26,6 +26,7 @@
               "type": "gpsd",
               "host": "localhost",
               "port": "2947",
+              "noDataReceivedTimeout": "10",
               "providerId": "gpsd"
             },
             "providerId": "gpsd"
@@ -47,7 +48,8 @@
               "type": "tcp",
               "port": "10115",
               "suppress0183event": true,
-              "host": "127.0.0.1"
+              "host": "127.0.0.1",
+              "noDataReceivedTimeout": "10"
             }
           }
         }
@@ -67,7 +69,8 @@
               "type": "tcp",
               "port": "20220",
               "suppress0183event": true,
-              "host": "127.0.0.1"
+              "host": "127.0.0.1",
+              "noDataReceivedTimeout": "10"
             }
           }
         }
