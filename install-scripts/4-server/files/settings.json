@@ -162,8 +162,10 @@
               "validateChecksum": false,
               "type": "tcp",
               "port": "11123",
+              "host": "myPhone_Gps2IP_address",
               "suppress0183event": false,
-              "host": "myPhone_Gps2IP_address"
+              "noDataReceivedTimeout": "10",
+              "appendChecksum": true
             }
           }
         }
