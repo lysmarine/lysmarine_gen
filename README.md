@@ -252,6 +252,7 @@ Windlass, Bow Thruster, Lights)
 
 - [InfluxDB](https://www.influxdata.com/)
 - [Grafana](https://grafana.com/)
+- [NodeRed embedded into SignalK](https://nodered.org/)
 
 
 ## Add-ons via install scripts
@@ -263,7 +264,6 @@ Windlass, Bow Thruster, Lights)
 - [AnBox](https://anbox.io/) (experimental Android app support)
 - Touchscreen calibration
 - [NMEA Sleuth Chromium Plugin](https://chrome.google.com/webstore/detail/nmea-sleuth/pkikkfglomloligndkaibecgapljgjok?hl=en)
-- [NodeRed](https://nodered.org/)
 - PACTOR
 - [SdrGlut](https://github.com/righthalfplane/SdrGlut)
 - [WxToImg](https://wxtoimgrestored.xyz/)
