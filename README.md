@@ -254,6 +254,8 @@ Windlass, Bow Thruster, Lights)
 - [InfluxDB](https://www.influxdata.com/)
 - [Grafana](https://grafana.com/)
 - [NodeRed embedded into SignalK](https://nodered.org/)
+- [Chronograf](https://github.com/influxdata/chronograf)
+- [Kapacitor](https://github.com/influxdata/kapacitor)
 
 
 ## Add-ons via install scripts
