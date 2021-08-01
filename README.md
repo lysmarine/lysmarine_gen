@@ -150,6 +150,7 @@ https://www.quark-elec.com/product-category/marine/multiplexers/ Another (even c
 
 - [Mopidy](https://mopidy.com/) Media Player with Web UI (Youtube, Local List, Internet Radio, MPD support)
 - [MusicBox](https://mopidy.com/ext/musicbox-webclient/) (Music Player)
+- [Iris](https://github.com/jaedb/Iris) (Music Player)
 - [VLC](https://www.videolan.org/vlc/) (with IP camera support)
 - [Audacious](https://github.com/audacious-media-player)
 - [MotionEye](https://github.com/ccrisan/motioneye) (Cameras Control)
