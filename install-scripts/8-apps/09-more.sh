@@ -34,6 +34,8 @@ npm cache clean --force
 
 apt-get -q -y install arduino
 
+pip3 install adafruit-ampy
+
 install -v -m 0755 $FILE_FOLDER/bbn-change-password.sh "/usr/local/bin/bbn-change-password"
 
 install -d -o 1000 -g 1000 -m 0755 "/home/user/add-ons"
