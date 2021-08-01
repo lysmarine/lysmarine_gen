@@ -10,6 +10,7 @@ amixer sset Master 98% unmute
 amixer -c 1 cset numid=1 98%
 
 (rm -rf ~/.config/*nativefier*/Cache/ || true) &
+(cp .config/signalk-nativefier-*/Cookies .config/sk-autopilot-nativefier-*/ || true) &
 
 xset s off &
 xset -dpms &
