@@ -33,11 +33,11 @@ USER_AGENT="Mozilla/5.0 (Linux; Android 10; SM-G960U) AppleWebKit/537.36 (KHTML,
 ########################################################################################################################
 
 nativefier -a $arch --inject $FILE_FOLDER/pypilot_darktheme.js --disable-context-menu --disable-dev-tools --single-instance \
-  --name "Pypilot_webapp" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
+  --name "Pypilot_webapp" --clear-cache --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
   "http://localhost:8080" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "AvNav" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
+  --name "AvNav" --clear-cache --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
   "http://localhost:8099/viewer/avnav_viewer.html?noCloseDialog=true" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
@@ -65,23 +65,23 @@ npm cache clean --force
 
 ########################################################################################################################
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "SignalK" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:3000/admin/" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "Freeboard-sk" --icon /home/user/.local/share/icons/freeboard-sk.png \
   "http://localhost:3000/@signalk/freeboard-sk/" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "kip-dash" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:3000/@mxtommy/kip/" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "instrumentpanel" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:3000/@signalk/instrumentpanel/" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "sailgauge" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:3000/@signalk/sailgauge/" /opt/
 
@@ -113,20 +113,20 @@ npm cache clean --force
 
 ########################################################################################################################
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "MusicBox" --icon /usr/share/icons/gnome/48x48/apps/multimedia-volume-control.png \
   "http://localhost:6680/musicbox_webclient" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "Iris" --icon /usr/share/icons/gnome/48x48/apps/multimedia-volume-control.png \
   "http://localhost:6680/iris" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "Dockwa" --icon /home/user/.local/share/icons/dockwa.png \
   --internal-urls ".*" \
   "http://localhost:4997/www?name=dockwa" -u "$USER_AGENT" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "Nauticed" --icon /usr/share/icons/gnome/256x256/actions/go-jump.png \
   --internal-urls ".*" \
   "http://localhost:4997/www?name=nauticed" -u "$USER_AGENT" /opt/
@@ -155,17 +155,17 @@ npm cache clean --force
 
 ########################################################################################################################
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "youtube" --icon /usr/share/icons/gnome/48x48/apps/multimedia-volume-control.png \
   --internal-urls ".*" \
   "http://localhost:4997/www?name=youtube" -u "$USER_AGENT" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "facebook" --icon /usr/share/icons/Adwaita/256x256/emotes/face-cool.png \
   --internal-urls ".*" \
   "http://localhost:4997/www?name=facebook" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "WA-Web-Msg" --icon /usr/share/icons/gnome/48x48/emotes/face-monkey.png \
   --internal-urls ".*" \
   "http://localhost:4997/www?name=WA-Web-Msg" /opt/
@@ -191,19 +191,19 @@ npm cache clean --force
 
 ########################################################################################################################
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "skwiz" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:3000/skwiz/" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "motioneye" --icon /usr/share/icons/gnome/32x32/devices/camera-web.png \
   "http://localhost:8765/" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "tuktuk" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:3000/tuktuk-chart-plotter/" /opt/
 
-nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
+nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance --clear-cache \
   --name "sk-autopilot" --icon /home/user/.local/share/icons/signalk.png \
   "http://localhost:3000/@signalk/signalk-autopilot/" /opt/
 
