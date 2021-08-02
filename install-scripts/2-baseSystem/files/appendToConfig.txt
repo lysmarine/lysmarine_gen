@@ -1,5 +1,4 @@
 ### lysmarine ####################################
-dtoverlay=cma-256
 #arm_64bit=1
 
 # See: https://www.reddit.com/r/raspberry_pi/comments/lahsow/raspberry_pi4_8gb_seems_useless_as_media_player/glsi86w?utm_source=share&utm_medium=web2x&context=3
@@ -9,7 +8,7 @@ disable_splash=1
 
 dtparam=i2c_arm=on
 dtparam=spi=on
-#dtoverlay=w1-gpio
+#dtoverlay=w1-gpi
 
 ### lysmarine - screen preset ####################
 
