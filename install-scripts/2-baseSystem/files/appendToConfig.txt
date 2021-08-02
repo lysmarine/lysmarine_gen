@@ -1,4 +1,5 @@
 ### lysmarine ####################################
+dtoverlay=cma-256
 #arm_64bit=1
 
 # See: https://www.reddit.com/r/raspberry_pi/comments/lahsow/raspberry_pi4_8gb_seems_useless_as_media_player/glsi86w?utm_source=share&utm_medium=web2x&context=3
