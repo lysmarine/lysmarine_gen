@@ -3,11 +3,7 @@
 ## Dependencies of signalk.
 apt-get install -y -q python-dev git nodejs \
  libnss-mdns avahi-utils \
- node-abstract-leveldown node-nan libzmq3-dev libkrb5-dev
-
-if [ $LMARCH == 'armhf' ]; then
-  apt-get install -y -q libavahi-compat-libdnssd-dev
-fi
+ node-abstract-leveldown node-nan libzmq3-dev libkrb5-dev libavahi-compat-libdnssd-dev
 
 npm install -g npm@latest
 
