@@ -8,7 +8,7 @@ disable_splash=1
 
 dtparam=i2c_arm=on
 dtparam=spi=on
-#dtoverlay=w1-gpi
+#dtoverlay=w1-gpio
 
 ### lysmarine - screen preset ####################
 
