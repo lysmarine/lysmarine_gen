@@ -66,6 +66,7 @@ pushd /home/signalk/.signalk
                  signalk-sbd signalk-sbd-msg \
                  openweather-signalk \
                  signalk-noaa-weather \
+                 xdr-parser-plugin \
                  signalk-saillogger --unsafe-perm --loglevel error"
 popd
 
