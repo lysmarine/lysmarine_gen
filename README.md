@@ -3,7 +3,7 @@
 
 This is the fork of the original LysMarine https://github.com/lysmarine/lysmarine_gen by Frederic Guilbault.
 It is based on the LysMarine OS, but differs from it in a number of included applications, and the UI features.
-Hopefully both forks will be merged eventually into one, but for now it is a distinct OS image.
+Now it is a distinct OS image.
 
 What started as an effort to build a marine linux OS turned out into much more interesting.
 Our focus was to build a marine computer OS to be used on boats for the navigation and on touch screens in a cockpit of a boat.
