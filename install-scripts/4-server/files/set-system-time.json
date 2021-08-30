@@ -4,6 +4,6 @@
     "sudo": true,
     "preferNetworkTime": true
   },
-  "enabled": false,
+  "enabled": true,
   "enabledLogging": false
 }
