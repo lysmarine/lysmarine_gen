@@ -278,8 +278,8 @@ function buildTiles(commands, mode) {
         let bg = ("Dark" === mode) ? '' : ' style="background: ' + value.bg + ';"';
         let color = ("Dark" === mode) ? ' style="color: #e00d0d;"' : '';
         items = items + '\n' +
-            '            <div class="tile" onclick="run(\'' + value.name + '\');">\n' +
-            '                <div class="tile-img'+ suffix + '"' + bg + '><img src="img?name=' + value.img + suffix + '" alt="' + value.title + '" class="main-icon"/></div>\n' +
+            '            <div class="tile">\n' +
+            '                <div class="tile-img'+ suffix + '"' + bg + ' onclick="run(\'' + value.name + '\');"><img src="img?name=' + value.img + suffix + '" alt="' + value.title + '" class="main-icon"/></div>\n' +
             '                <div class="tile-label" ' + color + '>' + value.title + '</div>\n' +
             '            </div>'
     });
