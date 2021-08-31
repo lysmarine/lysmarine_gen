@@ -47,6 +47,7 @@ pushd /home/signalk/.signalk
                  @codekilo/signalk-modbus-client  \
                  signalk-derived-data  \
                  signalk-anchoralarm-plugin  \
+                 signalk-alarm-silencer  \
                  signalk-simple-notifications  \
                  signalk-wilhelmsk-plugin  \
                  signalk-to-nmea2000  \
