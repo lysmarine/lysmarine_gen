@@ -17,7 +17,7 @@ xset -dpms &
 xset s noblank &
 
 evdev-rce &
-(twofing --click=first || true) &
+(twofing --click=first --grab-by-disabling || true) &
 
 /usr/local/bin/bbn-launcherd &
 (sleep 4 && /opt/bbn-launcher/bbn-launcher) &
