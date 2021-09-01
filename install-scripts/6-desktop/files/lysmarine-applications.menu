@@ -258,6 +258,9 @@
             <Filename>eog.desktop</Filename>
         </Include>
         <Include>
+            <Filename>foxtrotgps.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>orage.desktop</Filename>
         </Include>
         <Include>
