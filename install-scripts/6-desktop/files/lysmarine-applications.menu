@@ -322,6 +322,9 @@
             <Filename>pcmanfm-desktop-pref.desktop</Filename>
         </Include>
         <Include>
+            <Filename>synaptic.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>onboard-settings.desktop</Filename>
         </Include>
         <Include>
