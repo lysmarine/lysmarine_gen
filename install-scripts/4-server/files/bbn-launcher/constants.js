@@ -1,0 +1,47 @@
+module.exports = {
+  commands1 : [
+    {name: 'chart', title: 'Chart', img: 'chart', bg: 'Peru', cmd: 'onlyone', args: ['opencpn']},
+    {name: 'pilot', title: 'AutoPilot', img: 'autopilot', bg: 'ForestGreen', cmd: '/opt/Pypilot_webapp/Pypilot_webapp', args: []},
+    {name: 'dash', title: 'Dashboard', img: 'dashboard', bg: 'Olive', cmd: '/opt/kip-dash/kip-dash', args: []},
+    {name: 'weather', title: 'Weather', img: 'weather', bg: 'RoyalBlue', cmd: 'onlyone', args: ['XyGrib']},
+//  {name: 'cam', title: 'Camera', img: 'camera', bg: 'SeaGreen', cmd: 'onlyone', args: ['vlc', 'rtsp://<ip-camera-host-or-ip>/channel1'*/]},
+    {name: 'cam', title: 'Camera', img: 'camera', bg: 'SeaGreen', cmd: '/opt/motioneye/motioneye', args: []},
+    {name: 'music', title: 'Music', img: 'multimedia', bg: 'IndianRed', cmd: '/opt/Iris/Iris', args: []},
+    {name: 'www', title: 'WWW', img: 'internet', bg: 'SteelBlue', cmd: 'onlyone', args: ['gnome-www-browser']},
+    {name: 'marinas', title: 'Moorings', img: 'buoy', bg: 'SaddleBrown', cmd: '/opt/Dockwa/Dockwa', args: []},
+    {name: 'video', title: 'Video', img: 'youtube', bg: 'Peru', cmd: '/opt/youtube/youtube', args: []},
+    {name: 'social', title: 'Social', img: 'facebook', bg: 'ForestGreen', cmd: '/opt/facebook/facebook', args: []},
+    {name: 'chess', title: 'Chess', img: 'chess', bg: 'RoyalBlue', cmd: 'onlyone', args: ['gnome-chess']},
+    {name: 'cards', title: 'Cards', img: 'cards', bg: 'SeaGreen', cmd: 'onlyone', args: ['openpref']},
+    {name: 'sky', title: 'Sky', img: 'sky', bg: 'Olive', cmd: 'onlyone', args: ['stellarium-augmented']},
+    {name: 'radio', title: 'Radio', img: 'radio', bg: 'IndianRed', cmd: 'onlyone', args: ['fldigi']},
+    {name: 'email', title: 'Email', img: 'email', bg: 'SteelBlue', cmd: 'onlyone', args: ['geary']},
+  ],
+
+  commands2 : [
+    {name: 'avnav', title: 'AvNav', img: 'chart', bg: 'Peru', cmd: '/opt/AvNav/AvNav', args: []},
+    {name: 'freeboard', title: 'Freeboard', img: 'chart', bg: 'SteelBlue', cmd: '/opt/Freeboard-sk/Freeboard-sk', args: []},
+    {name: 'files', title: 'Files', img: 'folder', bg: 'ForestGreen', cmd: 'onlyone', args: ['thunar']},
+    {name: 'tasks', title: 'Tasks', img: 'tasks', bg: 'Olive',  cmd: 'onlyone', args: ['lxtask']},
+    {name: 'terminal', title: 'Terminal', img: 'terminal', bg: 'RoyalBlue',  cmd: 'onlyone', args: ['lxterminal']},
+    {name: 'race', title: 'Race', img: 'race', bg: 'SteelBlue',  cmd: 'onlyone', args: ['boats']},
+    {name: 'sail', title: 'Sails', img: 'vessel', bg: 'IndianRed',  cmd: 'onlyone', args: ['sailcut']},
+    {name: 'web-weather', title: 'Forecast', img: 'weather', bg: 'SeaGreen',  cmd: 'onlyone', args: ['gnome-weather']},
+    {name: 'instruments', title: 'Instruments', img: 'dashboard', bg: 'SaddleBrown', cmd: '/opt/skwiz/skwiz', args: []},
+    {name: 'provisioning', title: 'Provisioning', img: 'provisioning', bg: 'Peru',  cmd: 'onlyone', args: ['gnome-www-browser', '/usr/local/share/bbn-checklist/bbn-checklist.html']},
+    {name: 'knots', title: 'Knots', img: 'knot', bg: 'ForestGreen',  cmd: 'onlyone', args: ['gnome-www-browser', '/usr/local/share/knots/knots.html']},
+    {name: 'colreg', title: 'ColReg', img: 'colreg', bg: 'Olive',  cmd: 'onlyone', args: ['gnome-www-browser', '/usr/local/share/colreg/colreg.pdf']},
+    {name: 'commands', title: 'Commands', img: 'travel', bg: 'IndianRed',  cmd: '/usr/local/bin/bbn-commands', args: []},
+    {name: 'vessel', title: 'Vessel', img: 'ship', bg: 'RoyalBlue',  cmd: 'vessel-data', args: ['']},
+    {name: 'edu', title: 'Education', img: 'school', bg: 'SeaGreen',  cmd: '/opt/Nauticed/Nauticed', args: []},
+  ],
+
+  sites : [
+    {name: 'google', url: 'https://google.com/'},
+    {name: 'youtube', url: 'https://youtube.com/'},
+    {name: 'facebook', url: 'https://m.facebook.com/'},
+    {name: 'WA-Web-Msg', url: 'https://web.whatsapp.com/'},
+    {name: 'dockwa', url: 'https://dockwa.com/'},
+    {name: 'nauticed', url: 'https://nauticed.org/'},
+  ]
+}
