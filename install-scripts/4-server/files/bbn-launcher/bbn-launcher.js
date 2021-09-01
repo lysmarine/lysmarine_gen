@@ -1,7 +1,7 @@
 /*
  Copyright 2021, Bareboat Necessities
  */
-const { commands1, commands2, sites } = require('./constants');
+const {commands1, commands2, sites} = require('./constants');
 
 const http = require('http');
 const url = require('url');
