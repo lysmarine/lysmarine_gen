@@ -74,6 +74,7 @@ install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/hot-fixes-install.sh "/h
 /home/user/add-ons/windy-install.sh
 /home/user/add-ons/lightningmaps-install.sh
 /home/user/add-ons/marinetraffic-install.sh
+/home/user/add-ons/boatsetter-install.sh
 
 install -v $FILE_FOLDER/bbn-checklist.desktop "/usr/local/share/applications/"
 
