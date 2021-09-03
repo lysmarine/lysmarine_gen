@@ -103,9 +103,11 @@ install -v $FILE_FOLDER/pypilot_control.desktop "/usr/local/share/applications/"
 install -m 755 $FILE_FOLDER/pypilot-restart "/usr/local/sbin/pypilot-restart"
 
 ## Give permission to sudo chrt without a password for the user pypilot.
-echo "" >>/etc/sudoers
-echo 'pypilot ALL=(ALL) NOPASSWD: /usr/bin/chrt' >>/etc/sudoers
-echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/pypilot-restart' >>/etc/sudoers
+{
+  echo ""
+  echo 'pypilot ALL=(ALL) NOPASSWD: /usr/bin/chrt'
+  echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/pypilot-restart'
+} >>/etc/sudoers
 
 ## Reduce excessive logging
 sed '1 i :msg, contains, "autopilot failed to read imu at time" ~' -i /etc/rsyslog.conf
