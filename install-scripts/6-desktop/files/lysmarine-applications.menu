@@ -128,6 +128,9 @@
             <Filename>marinetraffic.desktop</Filename>
         </Include>
         <Include>
+            <Filename>findacrew.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>windy.desktop</Filename>
         </Include>
         <Include>
