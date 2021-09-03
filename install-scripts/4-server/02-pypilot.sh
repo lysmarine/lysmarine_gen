@@ -20,10 +20,10 @@ usermod -a -G lirc signalk
 install -v -m 0644 $FILE_FOLDER/60-watchdog.rules "/etc/udev/rules.d/60-watchdog.rules"
 
 if [ $LMARCH == 'arm64' ]; then
-  pip3 install pywavefront pyglet gps gevent-websocket jsonschema importlib-metadata "python-socketio<5" "flask-socketio<5"
+  pip3 install pywavefront pyglet gps gevent-websocket jsonschema==3.0.2 "python-socketio<5" "flask-socketio<5"
 else
   apt-get install -y -q python3-flask-socketio
-  pip3 install pywavefront pyglet gps gevent-websocket jsonschema importlib-metadata "python-socketio<5"
+  pip3 install pywavefront pyglet gps gevent-websocket jsonschema==3.0.2 "python-socketio<5"
 fi
 
 if [ $LMOS == 'Raspbian' ] && [ $LMARCH == 'armhf' ]; then
