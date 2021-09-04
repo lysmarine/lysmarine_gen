@@ -59,6 +59,9 @@
         <Include>
             <Filename>pc-navtex.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>navit.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Multimedia</Name>
