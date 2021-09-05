@@ -10,7 +10,7 @@ module.exports = {
     {name: 'freeboard', title: 'Freeboard', img: 'chart', bg: 'SteelBlue', cmd: '/opt/Freeboard-sk/Freeboard-sk', args: []},
     {name: 'pypilot', title: 'PyPilot', img: 'autopilot', bg: 'ForestGreen', cmd: '/opt/Pypilot_webapp/Pypilot_webapp', args: []},
     {name: 'winds', title: 'Winds', img: 'race', bg: 'DarkSeaGreen', cmd: 'gtk-launch', args: ['windy']},
-    {name: 't-storms', title: 'T-Storms', img: 'weather', bg: 'RoyalBlue', cmd: 'gtk-launch', args: ['lightningmaps']},
+    {name: 't-storms', title: 'T-Storms', img: 'weather', bg: 'Tan', cmd: 'gtk-launch', args: ['lightningmaps']},
 
     {name: 'music', title: 'Music', img: 'multimedia', bg: 'IndianRed', cmd: '/opt/Iris/Iris', args: []},
     {name: 'video', title: 'Video', img: 'youtube', bg: 'Peru', cmd: '/opt/youtube/youtube', args: []},
