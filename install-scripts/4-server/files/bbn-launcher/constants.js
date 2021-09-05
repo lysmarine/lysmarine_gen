@@ -32,11 +32,11 @@ module.exports = {
     {name: 'tasks', title: 'Tasks', img: 'tasks', bg: 'Olive',  cmd: 'onlyone', args: ['lxtask']},
     {name: 'files', title: 'Files', img: 'folder', bg: 'ForestGreen', cmd: 'onlyone', args: ['thunar']},
 
-    {name: 'chess', title: 'Chess', img: 'chess', bg: 'RoyalBlue', cmd: 'onlyone', args: ['gnome-chess']},
+    {name: 'chess', title: 'Chess', img: 'chess', bg: 'Tan', cmd: 'onlyone', args: ['gnome-chess']},
     {name: 'cards', title: 'Cards', img: 'cards', bg: 'SaddleBrown', cmd: 'onlyone', args: ['openpref']},
     {name: 'webcam', title: 'Web Cam', img: 'camera', bg: 'SeaGreen', cmd: 'onlyone', args: ['cheese']},
     {name: 'messenger', title: 'Messenger', img: 'email', bg: 'RoyalBlue', cmd: 'onlyone', args: ['caprine']},
-    {name: 'social', title: 'Social', img: 'facebook', bg: 'ForestGreen', cmd: '/opt/facebook/facebook', args: []},
+    {name: 'social', title: 'Social', img: 'facebook', bg: 'DarkSeaGreen', cmd: '/opt/facebook/facebook', args: []},
   ],
 
   commands3 : [
