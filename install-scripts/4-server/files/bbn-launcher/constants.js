@@ -35,7 +35,7 @@ module.exports = {
     {name: 'chess', title: 'Chess', img: 'chess', bg: 'Tan', cmd: 'onlyone', args: ['gnome-chess']},
     {name: 'cards', title: 'Cards', img: 'cards', bg: 'SaddleBrown', cmd: 'onlyone', args: ['openpref']},
     {name: 'webcam', title: 'Web Cam', img: 'camera', bg: 'SeaGreen', cmd: 'onlyone', args: ['cheese']},
-    {name: 'messenger', title: 'Messenger', img: 'email', bg: 'RoyalBlue', cmd: 'onlyone', args: ['caprine']},
+    {name: 'messenger', title: 'Messenger', img: 'email', bg: 'RoyalBlue', cmd: '/opt/WA-Web-Msg/WA-Web-Msg', args: []},
     {name: 'social', title: 'Social', img: 'facebook', bg: 'DarkSeaGreen', cmd: '/opt/facebook/facebook', args: []},
   ],
 
@@ -48,6 +48,7 @@ module.exports = {
 
     {name: 'edu', title: 'Education', img: 'school', bg: 'SeaGreen',  cmd: '/opt/Nauticed/Nauticed', args: []},
     {name: 'movies', title: 'Movies', img: 'camera', bg: 'Olive', cmd: 'onlyone', args: ['vlc']},
+    {name: 'caprine', title: 'Caprine', img: 'email', bg: 'RoyalBlue', cmd: 'onlyone', args: ['caprine']},
 //  {name: 'ipcam', title: 'IP Camera', img: 'camera', bg: 'SeaGreen', cmd: 'onlyone', args: ['vlc', 'rtsp://<ip-camera-host-or-ip>/channel1']},
   ],
 
