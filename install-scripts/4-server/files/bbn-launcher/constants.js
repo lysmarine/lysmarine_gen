@@ -27,7 +27,7 @@ module.exports = {
     {name: 'provisioning', title: 'Provisioning', img: 'provisioning', bg: 'Peru',  cmd: 'onlyone', args: ['gnome-www-browser', '/usr/local/share/bbn-checklist/bbn-checklist.html']},
 
     {name: 'vessel', title: 'Vessel', img: 'ship', bg: 'RoyalBlue',  cmd: 'vessel-data', args: ['']},
-    {name: 'signalk', title: 'Signal-K', img: 'dashboard', bg: 'ForestGreen', cmd: 'gtk-launch', args: ['signalk']},
+    {name: 'signalk', title: 'Signal K', img: 'dashboard', bg: 'ForestGreen', cmd: 'gtk-launch', args: ['signalk']},
     {name: 'terminal', title: 'Terminal', img: 'terminal', bg: 'RoyalBlue',  cmd: 'onlyone', args: ['lxterminal']},
     {name: 'tasks', title: 'Tasks', img: 'tasks', bg: 'Olive',  cmd: 'onlyone', args: ['lxtask']},
     {name: 'files', title: 'Files', img: 'folder', bg: 'ForestGreen', cmd: 'onlyone', args: ['thunar']},
