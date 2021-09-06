@@ -84,7 +84,6 @@ if [ $LMARCH == 'armhf' ]; then
 fi
 
 # Install plugin bundle
-rm -rf tmp-o-bundle-$LMARCH || exit 1
 mkdir tmp-o-bundle-$LMARCH || exit 2
 cd tmp-o-bundle-$LMARCH
 
