@@ -1,0 +1,12 @@
+{
+  "configuration": {
+    "paths": [
+      {
+        "path": "navigation.magneticVariation",
+        "wildcard": true,
+        "source": "gpsd.GN"
+      }
+    ]
+  },
+  "enabled": true
+}
