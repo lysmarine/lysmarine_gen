@@ -22,7 +22,7 @@
             "logging": false,
             "type": "NMEA0183",
             "subOptions": {
-              "validateChecksum": false,
+              "validateChecksum": true,
               "type": "gpsd",
               "host": "localhost",
               "port": "2947",
@@ -87,7 +87,7 @@
             "type": "NMEA0183",
             "subOptions": {
               "type": "serial",
-              "validateChecksum": false,
+              "validateChecksum": true,
               "device": "/dev/ttyLYS_ais_0",
               "baudrate": 38400
             }
@@ -105,7 +105,7 @@
             "logging": false,
             "type": "NMEA0183",
             "subOptions": {
-              "validateChecksum": false,
+              "validateChecksum": true,
               "type": "serial",
               "device": "/dev/ttyLYS_gps_1",
               "baudrate": 4800
@@ -124,7 +124,7 @@
             "logging": false,
             "type": "NMEA0183",
             "subOptions": {
-              "validateChecksum": false,
+              "validateChecksum": true,
               "type": "serial",
               "device": "/dev/ttyLYS_gps_2",
               "baudrate": 4800
@@ -143,7 +143,7 @@
             "logging": false,
             "type": "NMEA0183",
             "subOptions": {
-              "validateChecksum": false,
+              "validateChecksum": true,
               "type": "serial",
               "device": "/dev/ttyLYS_ch340",
               "baudrate": 4800
