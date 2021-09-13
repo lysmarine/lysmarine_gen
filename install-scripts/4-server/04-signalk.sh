@@ -13,6 +13,8 @@ install -d -m 755 -o signalk -g signalk "/home/signalk/.signalk/node_modules/"
 
 install -m 644 -o signalk -g signalk $FILE_FOLDER/set-system-time.json "/home/signalk/.signalk/plugin-config-data/"
 install -m 644 -o signalk -g signalk $FILE_FOLDER/sk-to-nmea0183.json "/home/signalk/.signalk/plugin-config-data/"
+install -m 644 -o signalk -g signalk $FILE_FOLDER/signalk-path-filter.json "/home/signalk/.signalk/plugin-config-data/"
+install -m 644 -o signalk -g signalk $FILE_FOLDER/derived-data.json "/home/signalk/.signalk/plugin-config-data/"
 install -m 644 -o signalk -g signalk $FILE_FOLDER/charts.json "/home/signalk/.signalk/plugin-config-data/"
 
 install -m 644 -o signalk -g signalk $FILE_FOLDER/defaults.json "/home/signalk/.signalk/defaults.json"
