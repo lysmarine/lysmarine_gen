@@ -29,21 +29,19 @@ cmd='curl --insecure -C - -LOJb /tmp/gcokie "${ggURL}&confirm=${getcode}&id=${gg
 echo -e "Downloading from "$gURL"...\n"
 eval $cmd
 
+# Public domain documents created by US federal government employee as part of their official duties
 unzip -jo OnboardComputerSystemDocuments.zip \
  "Documents/American Practical Navigator*" \
  "Documents/Atlas of Pilot Charts*" \
  "Documents/Distance Between Ports*" \
- "Documents/European Inland Waterways*" \
  "Documents/*World Map of Time Zones*" \
  "Documents/International Code of Signals*" \
- "Documents/Mariner's Weather Handbook*" \
  "Documents/Navigation Rules*" \
  "Documents/Radar Navigation and Maneuvering*" \
  "Documents/Sailing Directions Enroute*" \
  "Documents/Sailing Directions Planning Guides*" \
  "Documents/U.S. Chart No. 1*" \
- "Documents/World Port Index*" \
- "Documents/*One, Two & Three Cylinder Engines*"
+ "Documents/World Port Index*"
 
 rm OnboardComputerSystemDocuments.zip
 cd "$CUR_DIR"
