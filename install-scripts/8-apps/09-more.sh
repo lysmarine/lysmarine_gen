@@ -71,6 +71,7 @@ install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/tvheadend-install.sh "/h
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/dvb-t-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/hot-fixes-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/findacrew-install.sh "/home/user/add-ons/"
+install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/maritime-lib-install.sh "/home/user/add-ons/"
 
 /home/user/add-ons/windy-install.sh
 /home/user/add-ons/lightningmaps-install.sh
