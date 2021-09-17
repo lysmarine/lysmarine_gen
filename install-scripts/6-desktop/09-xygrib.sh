@@ -6,5 +6,5 @@ apt-get install -y -q xygrib
 install -o 1000 -g 1000 $FILE_FOLDER/icons/logo_grib.png /usr/share/icons/
 
 pushd /home/user
-  ln -s .xygrib/grib Grib
+  ln -s .xygrib/grib Gribs
 popd
