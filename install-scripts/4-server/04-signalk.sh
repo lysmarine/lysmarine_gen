@@ -98,6 +98,7 @@ pushd /home/signalk/.signalk
                  @codekilo/signalk-trigger-event \
                  @codekilo/signalk-twilio-notifications \
                  @meri-imperiumi/signalk-audio-notifications \
+                 signalk-buddylist-plugin \
                  signalk-saillogger --unsafe-perm --loglevel error"
 popd
 
