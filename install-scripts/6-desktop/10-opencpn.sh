@@ -96,3 +96,16 @@ cp -r -p share/* /usr/share/
 
 cd ..
 rm -rf tmp-o-bundle-$LMARCH
+
+
+# Polar Diagrams
+
+BK_DIR="$(pwd)"
+
+mkdir /home/user/Polars && cd /home/user/Polars
+
+wget https://www.seapilot.com/wp-content/uploads/2018/05/All_polar_files.zip
+unzip All_polar_files.zip
+rm All_polar_files.zip
+
+cd "$BK_DIR"
