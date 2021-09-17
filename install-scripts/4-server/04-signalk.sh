@@ -73,6 +73,31 @@ pushd /home/signalk/.signalk
                  signalk-to-influxdb \
                  nmea0183-to-nmea0183 \
                  signalk-path-filter \
+                 signalk-empirbusnxt-plugin \
+                 signalk-n2k-switch-alias \
+                 signalk-n2k-switching \
+                 signalk-n2k-switching-emulator \
+                 signalk-n2k-switching-translator \
+                 signalk-n2k-virtual-switch \
+                 signalk-switch-automation \
+                 signalk-shelly \
+                 @signalk/calibration \
+                 @signalk/tracks-plugin \
+                 signalk-datetime \
+                 signalk-net-relay \
+                 signalk-path-mapper \
+                 signalk-healthcheck \
+                 @signalk/vedirect-serial-usb \
+                 @signalk/udp-nmea-plugin \
+                 signalk-n2kais-to-nmea0183 \
+                 @codekilo/nmea0183-iec61121-450-server \
+                 signalk-generic-pgn-parser \
+                 signalk-maretron-proprietary \
+                 signalk-vessels-to-ais \
+                 @codekilo/signalk-notify \
+                 @codekilo/signalk-trigger-event \
+                 @codekilo/signalk-twilio-notifications \
+                 @meri-imperiumi/signalk-audio-notifications \
                  signalk-saillogger --unsafe-perm --loglevel error"
 popd
 
