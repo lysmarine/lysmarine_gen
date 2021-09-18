@@ -34,9 +34,10 @@ install -v $FILE_FOLDER/gqrx-bookmarks.csv -o 1000 -g 1000 "/home/user/.config/g
 
 apt-get -y -q install soapysdr-tools hackrf osmo-sdr airspy sox \
   soundmodem morse2ascii \
-  w-scan dvb-tools dvb-apps dtv-scan-tables gr-dab aprx
+  w-scan dvb-tools dvb-apps dtv-scan-tables gr-dab aprx \
+  hamfax chirp-daily wmctrl rtl-sdr dl-fldigi ssdv \
+  direwolf
 
-apt-get -y -q install direwolf
 systemctl disable direwolf
 install -v $FILE_FOLDER/direwolf.conf -o 1000 -g 1000 "/home/user/"
 
@@ -106,8 +107,6 @@ if [ $LMARCH == 'armhf' ]; then
 else
   apt-get -y -q install default-jdk
 fi
-
-apt-get -y -q install hamfax chirp-daily wmctrl rtl-sdr dl-fldigi ssdv
 
 apt-get clean
 
