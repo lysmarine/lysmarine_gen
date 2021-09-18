@@ -55,7 +55,7 @@ install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/calibrate-touchscreen.sh
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/os-settings.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/change-password.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/scytalec-inmarsat-install.sh "/home/user/add-ons/"
-install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/sailmail-pat-install.sh "/home/user/add-ons/"
+install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/winlink-pat-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/openplotter-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/argonOne-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/navionics-demo-install.sh "/home/user/add-ons/"

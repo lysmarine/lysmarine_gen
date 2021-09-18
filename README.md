@@ -216,7 +216,7 @@ Windlass, Bow Thruster, Lights)
 - NOAA Weather
 - NavTex
 - Inmarsat Fleet
-- SailMail / WinLink
+- WinLink
 - SMS (Using Gammu)
 - Bluetooth (File Transfer)
 - AirPlay (via shairport-sync)
@@ -276,7 +276,7 @@ Windlass, Bow Thruster, Lights)
 - Change Password
 - Predict (Satellite Tracker for scripting)
 - [Scytale-C](https://bitbucket.org/scytalec/scytalec/) Inmarsat Decoders
-- [Pat SailMail / WinLink](https://github.com/la5nta/pat)
+- [Pat / WinLink](https://github.com/la5nta/pat)
 - [Widevine](https://www.widevine.com/) Digital Content Protection
 
 
