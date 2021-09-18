@@ -26,17 +26,31 @@ apt-get -y -q install multimon-ng netcat\
   gnuais                                \
   gnuaisgui                             \
   dos2unix                              \
-  gqrx-sdr
+  gqrx-sdr                              \
+  soapysdr-tools                        \
+  hackrf                                \
+  osmo-sdr                              \
+  airspy                                \
+  sox                                   \
+  soundmodem                            \
+  morse2ascii                           \
+  w-scan                                \
+  dvb-tools                             \
+  dvb-apps                              \
+  dtv-scan-tables                       \
+  gr-dab                                \
+  aprx                                  \
+  hamfax                                \
+  chirp-daily                           \
+  wmctrl                                \
+  rtl-sdr                               \
+  dl-fldigi                             \
+  ssdv                                  \
+  direwolf
 
 install -d -m 755 -o 1000 -g 1000 "/home/user/.config/gqrx/"
 install -v $FILE_FOLDER/gqrx-default.conf -o 1000 -g 1000 "/home/user/.config/gqrx/default.conf"
 install -v $FILE_FOLDER/gqrx-bookmarks.csv -o 1000 -g 1000 "/home/user/.config/gqrx/bookmarks.csv"
-
-apt-get -y -q install soapysdr-tools hackrf osmo-sdr airspy sox \
-  soundmodem morse2ascii \
-  w-scan dvb-tools dvb-apps dtv-scan-tables gr-dab aprx \
-  hamfax chirp-daily wmctrl rtl-sdr dl-fldigi ssdv \
-  direwolf
 
 systemctl disable direwolf
 install -v $FILE_FOLDER/direwolf.conf -o 1000 -g 1000 "/home/user/"
