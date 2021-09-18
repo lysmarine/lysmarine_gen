@@ -15,3 +15,7 @@ if [ $LMARCH == 'armhf' ]; then
     echo 'pcm.ARDOP {type rate slave {pcm "hw:CARD=CODEC,DEV=0" rate 48000}}' >> ${HOME}/.asoundrc;
   fi
 fi
+
+# This is something else: https://www.pskmail.org/
+mkdir - ${HOME}/jpskmail
+wget -O ${HOME}/jpskmail/javapskmail.jar http://www.pskmail.org/downloads/javapskmail.jar
