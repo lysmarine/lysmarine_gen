@@ -14,6 +14,7 @@ if [ $LMARCH == 'armhf' ]; then
   if [ "$(grep 'pcm\.ARDOP' /home/user/.asoundrc |wc -l)" -lt "1" ]; then
     echo 'pcm.ARDOP {type rate slave {pcm "hw:CARD=CODEC,DEV=0" rate 48000}}' >> /home/user/.asoundrc
   fi
+  /home/user/add-ons/winlink-pat-install.sh
 fi
 
 # This is something else: https://bitbucket.org/VK2ETA/
