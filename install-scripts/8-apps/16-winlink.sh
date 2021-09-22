@@ -18,4 +18,5 @@ fi
 
 # This is something else: https://www.pskmail.org/
 mkdir - ${HOME}/jpskmail
-wget -O ${HOME}/jpskmail/javapskmail.jar http://www.pskmail.org/downloads/javapskmail.jar
+wget -O ${HOME}/jpskmail/jPSKmail-2.0.29.jar http://pskmail.org/downloads/jPSKmail-2.0.29.jar
+
