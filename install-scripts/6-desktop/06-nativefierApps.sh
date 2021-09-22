@@ -115,11 +115,12 @@ npm cache clean --force
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "MusicBox" --icon /usr/share/icons/gnome/48x48/apps/multimedia-volume-control.png \
+  --internal-urls ".*" \
   "http://localhost:6680/musicbox_webclient" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
   --name "Iris" --icon /usr/share/icons/gnome/48x48/apps/multimedia-volume-control.png \
-    --internal-urls ".*" \
+  --internal-urls ".*" \
   "http://localhost:6680/iris" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
