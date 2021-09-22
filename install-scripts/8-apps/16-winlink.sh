@@ -16,7 +16,24 @@ if [ $LMARCH == 'armhf' ]; then
   fi
 fi
 
-# This is something else: https://www.pskmail.org/
-mkdir - ${HOME}/jpskmail
-wget -O ${HOME}/jpskmail/jPSKmail-2.0.29.jar http://pskmail.org/downloads/jPSKmail-2.0.29.jar
+# This is something else: https://bitbucket.org/VK2ETA/
+my_dir="$(pwd)"
+mkdir -p ${HOME}/jpskmail && cd mkdir -p ${HOME}/jpskmail
+wget https://bitbucket.org/VK2ETA/javapskmailserver/downloads/JavaPskmailServer-0.9.4.a24-20210815.zip && \
+  unzip JavaPskmailServer-0.9.4.a24-20210815.zip
+rm JavaPskmailServer-0.9.4.a24-20210815.zip
 
+cd "$my_dir"
+
+bash -c 'cat << EOF > /usr/local/share/applications/jpskmail.desktop
+[Desktop Entry]
+Type=Application
+Name=jpskmail
+GenericName=jpskmail for WinLink
+Comment=jpskmail for WinLink
+Exec=sh -c "cd /home/user/jpskmail; java -jar JavaPskmailServer-0.9.4.a24-20210815.jar"
+Terminal=false
+Icon=radio
+Categories=HamRadio;Radio
+Keywords=HamRadio;Radio
+EOF'

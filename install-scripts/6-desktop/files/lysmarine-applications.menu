@@ -156,6 +156,9 @@
             <Filename>flarq.desktop</Filename>
         </Include>
         <Include>
+            <Filename>jpskmail.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>fldigi.desktop</Filename>
         </Include>
         <Include>
