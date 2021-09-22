@@ -11,8 +11,8 @@ if [ $LMARCH == 'armhf' ]; then
   # See: https://www.cantab.net/users/john.wiseman/Documents/ARDOPC.html
   wget -O ardopc http://www.cantab.net/users/john.wiseman/Downloads/Beta/piardopc
   install ardopc /usr/local/bin && rm ardopc
-  if [ "$(grep 'pcm\.ARDOP' ${HOME}/.asoundrc |wc -l)" -lt "1" ]; then
-    echo 'pcm.ARDOP {type rate slave {pcm "hw:CARD=CODEC,DEV=0" rate 48000}}' >> ${HOME}/.asoundrc;
+  if [ "$(grep 'pcm\.ARDOP' /home/user/.asoundrc |wc -l)" -lt "1" ]; then
+    echo 'pcm.ARDOP {type rate slave {pcm "hw:CARD=CODEC,DEV=0" rate 48000}}' >> /home/user/.asoundrc
   fi
 fi
 
