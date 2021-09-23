@@ -22,10 +22,6 @@ ufw allow from fd00::/8
 ufw allow from fe80::/10
 
 # Multicast
-ufw allow in proto udp from 239.0.0.0/4
-ufw allow in proto udp from 236.0.0.0/4
-ufw allow in proto udp from 232.0.0.0/4
-ufw allow in proto udp from 232.0.0.0/4
 ufw allow in proto udp from 224.0.0.0/4
 
 # IPv6
