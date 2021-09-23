@@ -105,7 +105,7 @@ inflateImage() {
     sleep 5
     ls -l /dev/mapper/
 
-    e2fsck -f /dev/mapper/loop${loopId}p$partQty
+    e2fsck -y -f /dev/mapper/loop${loopId}p$partQty
     resize2fs /dev/mapper/loop${loopId}p$partQty
     kpartx -d $imageLocationInflated
   else
