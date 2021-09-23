@@ -2,6 +2,8 @@
 
 apt-get -y -q install ufw
 
+# The rules are a bit loose
+
 ufw default deny incoming
 ufw default allow outgoing
 
