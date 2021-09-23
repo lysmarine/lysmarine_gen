@@ -1,4 +1,10 @@
 # Future Technology Devices International, Ltd ShipModul MiniPlex-4xUSB-AIS NMEA Multiplexer
-SUBSYSTEM=="tty", ATTRS{idVendor}=="fd49", ATTRS{idProduct}=="2303", SYMLINK+="ttyLYS_shipmodul_%s{serial}", RUN+="/lib/udev/manage_shipmodul.sh '$env{ID_SERIAL_SHORT}'"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="fd49", SYMLINK+="ttyLYS_shipmodul_%s{serial}", RUN+="/lib/udev/manage_shipmodul.sh '$env{ID_SERIAL_SHORT}'"
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="fd4a", SYMLINK+="ttyLYS_shipmodul_%s{serial}", RUN+="/lib/udev/manage_shipmodul.sh '$env{ID_SERIAL_SHORT}'"
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="fd4b", SYMLINK+="ttyLYS_shipmodul_%s{serial}", RUN+="/lib/udev/manage_shipmodul.sh '$env{ID_SERIAL_SHORT}'"
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="fd48", SYMLINK+="ttyLYS_shipmodul_%s{serial}", RUN+="/lib/udev/manage_shipmodul.sh '$env{ID_SERIAL_SHORT}'"
 
 ACTION=="remove", SUBSYSTEM=="tty", RUN+="/lib/udev/manage_shipmodul.sh '$env{ID_SERIAL_SHORT}' remove"
