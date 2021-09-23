@@ -14,7 +14,8 @@ ufw allow from 10.0.0.0/8
 ufw allow from 172.0.0.0/8
 
 # Multicast
-ufw allow from 239.0.0.0/8
-ufw allow from 224.0.0.0/8
+ufw allow in proto udp from 239.0.0.0/8
+ufw allow in proto udp from 236.0.0.0/8
+ufw allow in proto udp from 224.0.0.0/4
 
 ufw enable
