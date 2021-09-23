@@ -29,6 +29,6 @@ ufw allow in proto udp from 232.0.0.0/4
 ufw allow in proto udp from 224.0.0.0/4
 
 # IPv6
-ufw allow in proto udp from  ff00::/8
+ufw allow in proto udp from ff00::/8
 
 ufw enable
