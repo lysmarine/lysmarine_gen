@@ -2,7 +2,7 @@
 
 apt-get -y -q install ufw
 
-# The rules are a bit loose
+# The rules are a bit loose, but you are supposed to put your pi behind a separate internet router anyway
 
 ufw default deny incoming
 ufw default allow outgoing
