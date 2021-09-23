@@ -35,6 +35,11 @@ EndSection
 EOF'
 fi
 
+if [ -x /usr/local/sbin/ufw-init ]
+then
+  /usr/local/sbin/ufw-init # Init firewall
+fi
+
 if [ -x /boot/first-boot.sh ]
 then
   /boot/first-boot.sh || true
