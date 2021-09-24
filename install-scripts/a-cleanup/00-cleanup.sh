@@ -22,5 +22,10 @@ rm -rf $(find /var/log/ -type f)
 
 apt-get -q -y install --download-only avnav-update-plugin
 
+for f in /etc/apt/sources.list.d/bbn-*.list
+do
+  mv $f $f-orig
+done
+
 date --rfc-3339=seconds > /etc/bbn-build
 fake-hwclock save
