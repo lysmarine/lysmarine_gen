@@ -3,7 +3,7 @@
 ## Dependencies of signalk.
 apt-get install -y -q python-dev git nodejs \
  libnss-mdns avahi-utils \
- node-abstract-leveldown node-nan libzmq3-dev libkrb5-dev libavahi-compat-libdnssd-dev
+ node-abstract-leveldown node-nan libzmq3-dev libkrb5-dev libavahi-compat-libdnssd-dev jq
 
 npm install -g npm@latest
 
@@ -157,4 +157,8 @@ Icon=gtk-about
 Categories=Utility;
 EOF'
 
-
+bash -c 'cat << EOF > /usr/local/bin/gps-loc
+#!/bin/bash
+curl -s http://localhost:3000/signalk/v1/api/vessels/self/navigation/position/ | jq -M -jr '\''.value.latitude," ",.value.longitude','" ",.timestamp'\''
+EOF'
+chmod +x /usr/local/bin/gps-loc
