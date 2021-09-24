@@ -79,6 +79,7 @@ install -v -m 0644 $FILE_FOLDER/pypilot_hat.service "/etc/systemd/system/"
 
 sed -i 's/_http._tcp.local./_signalk-http._tcp.local./' "$(find /usr/local/lib -name signalk.py)" || true
 sed -i 's/ttyAMA0/serial0/' "$(find /usr/local/lib -name serialprobe.py)" || true
+sed -i 's/ttyAMA/serial/' "$(find /usr/local/lib -name serialprobe.py)" || true
 
 systemctl disable pypilot_boatimu.service
 systemctl enable pypilot_hat.service
