@@ -12,7 +12,7 @@ do
   # magnetic heading
   MH=$(curl -s http://localhost:3000/signalk/v1/api/vessels/self/navigation/headingMagnetic/value)
   # true heading
-  HT=$(echo $MH + $MV | bc)
+  HT=$(echo $MH + $MV - 3.1415926535 | bc)
   # control stellarium azimuth
   curl -X POST -d "az=$HT" 'http://localhost:8090/api/main/view'
   # control stellarium location  
