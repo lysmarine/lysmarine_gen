@@ -61,9 +61,9 @@
 }
 /var/log/messages
 {
-	rotate 4
-	weekly
-	missingok
+	rotate 7
+	daily
+	size 100k
 	notifempty
 	compress
 	delaycompress
