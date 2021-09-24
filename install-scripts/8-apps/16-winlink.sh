@@ -37,3 +37,6 @@ Icon=radio
 Categories=HamRadio;Radio
 Keywords=HamRadio;Radio
 EOF'
+
+## Reduce excessive logging
+sed '1 i :msg, contains, "Error reading from modem (Exception)" ~' -i /etc/rsyslog.conf
