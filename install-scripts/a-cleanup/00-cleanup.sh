@@ -27,5 +27,7 @@ do
   mv "$f" "$f"-orig
 done
 
+install -v -m 0644 $FILE_FOLDER/rsyslog "/etc/logrotate.d/rsyslog"
+
 date --rfc-3339=seconds > /etc/bbn-build
 fake-hwclock save
