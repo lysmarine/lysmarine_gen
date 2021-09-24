@@ -17,6 +17,6 @@ do
   curl -X POST -d "az=$HT" 'http://localhost:8090/api/main/view'
   # control stellarium location  
   POS="$(curl -s http://localhost:3000/signalk/v1/api/vessels/self/navigation/position/ | jq -M -jr '"latitude=",.value.latitude,"&longitude=",.value.longitude')"
-  curl -X POST -d "${POS}&name=Current Pos&altitude=0" 'http://localhost:8090/api/location/setlocationfields' 
+  curl -X POST -d "${POS}&altitude=0.0&name=Current Pos" 'http://localhost:8090/api/location/setlocationfields' 
   sleep 3
 done
