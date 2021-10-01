@@ -116,3 +116,14 @@ else
   dpkg -i rclone-current-linux-arm.deb
   rm rclone-current-linux-arm.deb
 fi
+
+
+# https://github.com/raspberrypi/usbboot
+CUR_DIR="$(pwd)"
+mkdir -p /home/user/usbboot && cd /home/user/usbboot
+git clone --depth=1 https://github.com/raspberrypi/usbboot
+cd usbboot
+make
+cp rpiboot /usr/local/sbin/
+rm -rf /home/user/usbboot
+cd "$CUR_DIR"
