@@ -20,7 +20,7 @@ do
   # control stellarium location
   POS="$(curl -s http://localhost:3000/signalk/v1/api/vessels/self/navigation/position/ | jq -M -jr '"latitude=",.value.latitude,"&longitude=",.value.longitude')"
   if [ -n "$POS" ] && [ "latitude=null&longitude=null" != "$POS" ]; then
-    curl -X POST -d "altitude=1&${POS}&name=Current" 'http://localhost:8090/api/location/setlocationfields'
+    curl -X POST -d "altitude=2&${POS}&name=Current" 'http://localhost:8090/api/location/setlocationfields'
   fi
   sleep 3
 done
