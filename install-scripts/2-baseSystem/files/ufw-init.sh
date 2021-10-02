@@ -25,4 +25,7 @@ ufw allow in proto udp from 224.0.0.0/4
 # IPv6
 ufw allow in proto udp from ff00::/8
 
+# CanBus
+ufw allow in on can0 to any
+
 ufw enable
