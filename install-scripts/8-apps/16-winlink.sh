@@ -20,7 +20,7 @@ fi
 # This is something else: https://bitbucket.org/VK2ETA/
 my_dir="$(pwd)"
 mkdir -p ${HOME}/jpskmail && cd ${HOME}/jpskmail
-wget https://bitbucket.org/VK2ETA/javapskmailserver/downloads/JavaPskmailServer-0.9.4.a24-20210815.zip && \
+wget https://github.com/bareboat-necessities/javapskmail-VK2ETA/raw/main/JavaPskmailServer-0.9.4.a24-20210815.zip && \
   unzip JavaPskmailServer-0.9.4.a24-20210815.zip
 rm JavaPskmailServer-0.9.4.a24-20210815.zip
 cd "$my_dir"
