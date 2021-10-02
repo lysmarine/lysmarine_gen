@@ -53,9 +53,9 @@ pushd ./stageCache
   echo "Get pypilot"
   if [[ ! -d ./pypilot ]]; then
     git clone https://github.com/pypilot/pypilot.git
-    #cd pypilot
-    #git checkout 4d9e58fbfef4689ccd40505c00a2c17869b724c2 # Sept 11, 2021
-    #cd ..
+    cd pypilot
+    git checkout 4d9e58fbfef4689ccd40505c00a2c17869b724c2 # Sept 11, 2021
+    cd ..
     git clone --depth=1 https://github.com/pypilot/pypilot_data.git
     cp -rv ./pypilot_data/* ./pypilot
     rm -rf ./pypilot_data
