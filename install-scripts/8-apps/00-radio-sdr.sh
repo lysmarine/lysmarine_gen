@@ -46,6 +46,7 @@ apt-get -y -q install multimon-ng netcat\
   rtl-sdr                               \
   dl-fldigi                             \
   ssdv                                  \
+  librxtx-java                          \
   direwolf
 
 install -d -m 755 -o 1000 -g 1000 "/home/user/.config/gqrx/"
