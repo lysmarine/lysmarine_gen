@@ -8,5 +8,7 @@ mkdir winlink-pat && cd winlink-pat
 
 curl https://raw.githubusercontent.com/bareboat-necessities/pat-on-a-pi/main/setup_pat.sh > setup_pat.sh; bash setup_pat.sh
 
+chmod +x /home/user/bin/*.sh
+
 cd ..
 
