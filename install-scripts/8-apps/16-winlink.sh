@@ -24,6 +24,7 @@ mkdir -p ${JPSKMAIL_HOME}/jpskmail && cd ${JPSKMAIL_HOME}/jpskmail
 wget https://github.com/bareboat-necessities/javapskmail-VK2ETA/raw/main/JavaPskmailServer-0.9.4.a24-20210815.zip && \
   unzip JavaPskmailServer-0.9.4.a24-20210815.zip
 chmod 644 ./*
+chmod 755 ./lib
 rm JavaPskmailServer-0.9.4.a24-20210815.zip
 cd "$my_dir"
 
