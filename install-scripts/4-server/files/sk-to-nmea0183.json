@@ -62,7 +62,7 @@
     "VLW_throttle": 0,
     "VTG": false,
     "VTG_throttle": 0,
-    "VWR": false,
+    "VWR": true,
     "VWR_throttle": 0,
     "VWT": false,
     "VWT_throttle": 0,
