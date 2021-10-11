@@ -82,6 +82,9 @@ function processReq(parsed) {
 
 const style =
     '\n' +
+    '* {\n' +
+    '    -webkit-user-select: none;\n' +
+    '}\n' +
     'html {\n' +
     '    font-family: Sans, Arial, Helvetica, sans-serif;\n' +
     '}\n' +
