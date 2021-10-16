@@ -28,7 +28,7 @@ pip3 install --upgrade requests
 
 pip3 install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
 
-pip3 install "ytmusicapi==0.19.1"
+pip3 install "ytmusicapi==0.19.2"
 
 install -m 644 $FILE_FOLDER/.asoundrc "/home/user/"
 install -m 644 $FILE_FOLDER/mopidy.conf "/etc/mopidy/"
