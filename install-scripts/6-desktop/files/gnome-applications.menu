@@ -185,7 +185,7 @@
         <Layout>
             <Merge type="menus"/>
             <Filename>chromium.desktop</Filename>
-            <Filename>dockwa.desktop</Filename>
+            <Filename>moorings.desktop</Filename>
             <Filename>org.gnome.Geary.desktop</Filename>
             <Filename>geary-autostart.desktop</Filename>
             <Merge type="files"/>

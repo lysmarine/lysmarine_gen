@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=Dockwa Marina Booking
-GenericName=Dockwa Marina Booking
-Comment=Dockwa Marina Booking
-Exec=sh -c "/opt/Dockwa/Dockwa"
+Name=Marina Booking
+GenericName=Marina Booking
+Comment=Marina Booking
+Exec=sh -c "/opt/Moorings/Moorings"
 Terminal=false
 Categories=Network;Internet;Travel
 Keywords=Network;Internet;Travel

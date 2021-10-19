@@ -22,7 +22,7 @@ module.exports = {
   commands2 : [
     {name: 'radio', title: 'Radio', img: 'radio', bg: 'IndianRed', cmd: 'onlyone', args: ['fldigi']},
     {name: 'sky', title: 'Sky', img: 'sky', bg: 'Olive', cmd: 'onlyone', args: ['stellarium-augmented']},
-    {name: 'marinas', title: 'Moorings', img: 'buoy', bg: 'SaddleBrown', cmd: '/opt/Dockwa/Dockwa', args: []},
+    {name: 'marinas', title: 'Moorings', img: 'buoy', bg: 'SaddleBrown', cmd: '/opt/Moorings/Moorings', args: []},
     {name: 'web-weather', title: 'Forecast', img: 'weather', bg: 'SeaGreen',  cmd: 'onlyone', args: ['gnome-weather']},
     {name: 'provisioning', title: 'Provisioning', img: 'provisioning', bg: 'Peru',  cmd: 'onlyone', args: ['gnome-www-browser', '/usr/local/share/bbn-checklist/bbn-checklist.html']},
 
@@ -57,7 +57,7 @@ module.exports = {
     {name: 'youtube', url: 'https://youtube.com/'},
     {name: 'facebook', url: 'https://m.facebook.com/'},
     {name: 'WA-Web-Msg', url: 'https://web.whatsapp.com/'},
-    {name: 'dockwa', url: 'https://dockwa.com/'},
+    {name: 'moorings', url: 'https://dockwa.com/'},
     {name: 'nauticed', url: 'https://nauticed.org/'},
   ]
 }
