@@ -14,7 +14,7 @@ make && cp twofing /usr/local/bin/
 cd .. && rm -rf twofing
 
 bash -c 'cat << EOF > /etc/udev/rules.d/70-touchscreen.rules
-SUBSYSTEMS=="input", KERNEL=="event[0-9]*", ENV{ID_INPUT_TOUCHSCREEN}=="1", SYMLINK+="touchscreen0"
+SUBSYSTEMS=="input", KERNEL=="event[0-9]*", ENV{ID_INPUT_TOUCHSCREEN}=="1", SYMLINK+="touchscreen%n"
 SUBSYSTEMS=="input", KERNEL=="event[0-9]*", ENV{ID_INPUT_TOUCHSCREEN}=="1", SYMLINK+="twofingtouch", RUN+="/bin/chmod a+r /dev/twofingtouch"
 EOF'
 
