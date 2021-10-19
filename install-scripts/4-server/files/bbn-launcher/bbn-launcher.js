@@ -301,6 +301,10 @@ function processSiteReq(name) {
         '    font-family: Sans, Arial, Helvetica, sans-serif;\n' +
         '    font-size: 24pt;\n' +
         '}\n' +
+        '.d1 {\n' +
+        '    color: white;\n' +
+        '    margin-top: 14px;\n' +
+        '}\n' +
         'a {\n' +
         '    color:orange;\n' +
         '    text-decoration:none;\n' +
@@ -312,8 +316,17 @@ function processSiteReq(name) {
         '</head>\n' +
         '<body style="background: black;">\n' +
         '<div style="text-align: center; margin-top: 120px; ">\n' +
-        '    <div style="color: white;"><a href="' + site.url + '">Press for:&nbsp; ' + site.url + '</a></div>\n' +
+        ((site.name === 'moorings') ? getMooringsLinks() : '    <div style="color: white;"><a href="' + site.url + '">Press for:&nbsp; ' + site.url + '</a></div>\n') +
         '</div>\n' +
         '</body>\n' +
         '</html>\n';
+}
+
+function getMooringsLinks() {
+    return '' +
+        '    <div class="d1"><a href="https://dockwa.com/">Dockwa &nbsp;(US and around)</a></div>\n' +
+        '    <div class="d1"><a href="https://www.snagaslip.com/">Snag-A-Slip &nbsp;(US and around)</a></div>\n' +
+        '    <div class="d1"><a href="https://my-sea.com/">My-Sea &nbsp;(Germany and Europe)</a></div>\n' +
+        '    <div class="d1"><a href="https://www.marinareservation.com/">MarinaReservation &nbsp;(Europe mostly)</a></div>\n' +
+        '    <div class="d1"><a href="https://www.bluewaterapp.com">BlueWaterApp &nbsp;(Nederlands)</a></div>\n';
 }
