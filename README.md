@@ -86,7 +86,7 @@ an alternative download location.
 # Passwords
 
 Default passwords are set to 'changeme', which you are supposed to change.
-Default user name in login screens is basically 'user'.
+Default user name in login screens is 'user'.
 
 
 # Screenshots
