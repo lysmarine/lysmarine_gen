@@ -26,6 +26,20 @@ function writeSvgResponse(res, status, contentType, parsed) {
     }
 }
 
+function writeJsResponse(res, status, contentType, parsed) {
+    const jsName = parsed.query['name'];
+    if (jsName && jsName.match(/^[0-9a-zA-Z_\-]+$/)) {
+        const filePath = path.join(__dirname, 'js/' + jsName + '.js');
+        const stat = fileSystem.statSync(filePath);
+        res.writeHead(status, {
+            'Content-Type': contentType,
+            'Content-Length': stat.size
+        });
+        const readStream = fileSystem.createReadStream(filePath);
+        readStream.pipe(res);
+    }
+}
+
 const server = http.createServer((req, res) => {
     //console.log(`req: ${req.url}`);
     const parsed = url.parse(req.url, true);
@@ -36,6 +50,8 @@ const server = http.createServer((req, res) => {
         writeResponse(res, 200, 'application/json', processReq(parsed), "");
     } else if (parsed.pathname === '/img') {
         writeSvgResponse(res, 200, 'image/svg+xml', parsed, processMain(parsed.query['m']));
+    } else if (parsed.pathname === '/js') {
+        writeJsResponse(res, 200, 'text/javascript', parsed, processMain(parsed.query['m']));
     } else {
         writeResponse(res,200, 'text/html', processMain(parsed.query['m']));
     }
@@ -262,7 +278,15 @@ function getStyle(mode) {
 
 function processMain(mode) {
     const header = '<head>\n<meta charset="UTF-8">\n' + getStyle(mode) + script +
-        '\n    <title>bbn-launcher</title>\n' + '\n</head>\n';
+        '\n    <title>bbn-launcher</title>\n' +
+        '\n    <script src = "js?name=swiped-events" type = "text/javascript"></script>\n' +
+        '\n    <script>document.addEventListener(\'swiped-left\', function(e) {\n' +
+        '        show(1); show(2);\n' +
+        '});</script>\n' +
+        '\n    <script>document.addEventListener(\'swiped-right\', function(e) {\n' +
+        '        show(2); show(1);\n' +
+        '});</script>\n' +
+        '\n</head>\n';
     const items1 = buildTiles(commands1, mode);
     const panel1 =
         '        <div id="panel1" class="main-panel" style="float: left;">' + items1 + '\n' +
