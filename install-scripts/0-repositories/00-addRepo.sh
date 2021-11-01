@@ -25,6 +25,7 @@ install -m 0644 -v $FILE_FOLDER/chirp.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/stellarium.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/flightaware.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/raspotify.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/jellyfin.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/debian-backports.list "/etc/apt/sources.list.d/"
 
 ## Prefer opencpn PPA to free-x (for mainly for the opencpn package)
@@ -58,6 +59,7 @@ wget -q -O - https://packages.grafana.com/gpg.key | apt-key add -
 wget -q -O - https://raw.githubusercontent.com/openplotter/openplotter-settings/master/openplotterSettings/data/sources/openplotter.gpg.key | apt-key add -
 curl -1sLf https://raw.githubusercontent.com/bareboat-necessities/lysmarine_gen/master/public-keys/flightaware/gpg.flightaware.key | apt-key add -
 curl -sSL https://dtcooper.github.io/raspotify/key.asc | apt-key add -
+wget -O - https://repo.jellyfin.org/jellyfin_team.gpg.key | apt-key add -
 
 ## Update && Upgrade
 apt-get update  -y -q
