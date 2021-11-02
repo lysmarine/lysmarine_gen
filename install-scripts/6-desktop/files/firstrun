@@ -1,5 +1,21 @@
 #!/bin/bash -e
 
+if [ -L /dev/twofingtouch ]
+then
+  MATCH_PRODUCT=$(udevadm info -a -n /dev/twofingtouch | grep "ATTRS{name}" | sed -e 's#.*=="##' -e 's#"$##')
+  bash -c 'cat << EOF > /usr/share/X11/xorg.conf.d/90-touchinput.conf
+Section "InputClass"
+    Identifier "calibration"
+    Driver "evdev"
+    MatchProduct "'"${MATCH_PRODUCT}"'"
+    MatchDevicePath "/dev/input/event*"
+    Option "EmulateThirdButton" "1"
+    Option "EmulateThirdButtonTimeout" "750"
+    Option "EmulateThirdButtonMoveThreshold" "30"
+EndSection
+EOF'
+fi
+
 # this plugin needs systemd running during install
 apt-get -q -y install avnav-update-plugin || true
 systemctl restart avnav
@@ -18,22 +34,6 @@ pushd /usr/local/share/aisdecoder
   cp aisdecoder /usr/local/bin/
   cd ..
 popd
-
-if [ -L /dev/twofingtouch ]
-then
-  MATCH_PRODUCT=$(udevadm info -a -n /dev/twofingtouch | grep "ATTRS{name}" | sed -e 's#.*=="##' -e 's#"$##')
-  bash -c 'cat << EOF > /usr/share/X11/xorg.conf.d/90-touchinput.conf
-Section "InputClass"
-    Identifier "calibration"
-    Driver "evdev"
-    MatchProduct "'"${MATCH_PRODUCT}"'"
-    MatchDevicePath "/dev/input/event*"
-    Option "EmulateThirdButton" "1"
-    Option "EmulateThirdButtonTimeout" "750"
-    Option "EmulateThirdButtonMoveThreshold" "30"
-EndSection
-EOF'
-fi
 
 if [ -x /usr/local/sbin/ufw-init ]
 then
