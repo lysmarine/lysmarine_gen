@@ -17,7 +17,7 @@ xset -dpms &
 xset s noblank &
 
 evdev-rce &
-(twofing --click=first --grab-by-disabling /dev/touchscreen0 || true) &
+(twofing --click=first --grab-by-disabling /dev/twofingtouch || true) &
 
 /usr/local/bin/bbn-launcherd &
 (sleep 4 && /opt/bbn-launcher/bbn-launcher) &
