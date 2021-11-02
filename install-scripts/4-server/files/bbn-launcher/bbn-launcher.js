@@ -140,6 +140,9 @@ const style =
     '    font-size: 15pt;\n' +
     '}\n' +
     '\n' +
+    'img {\n' +
+    '    -webkit-user-drag: none;\n' +
+    '}\n' +
     '.tile-img2 {\n' +
     '    border-radius: 14px;\n' +
     '    width: 55px;\n' +
@@ -280,11 +283,11 @@ function processMain(mode) {
     const header = '<head>\n<meta charset="UTF-8">\n' + getStyle(mode) + script +
         '\n    <title>bbn-launcher</title>\n' +
         '\n    <script src = "js?name=swiped-events" type = "text/javascript"></script>\n' +
-        '\n    <script>document.addEventListener(\'swiped-left\', function(e) {\n' +
-        '        show(1); show(2);\n' +
+        '\n    <script>document.addEventListener(\'swipeleft\', function(e) {\n' +
+        '    show(1); show(2);\n' +
         '});</script>\n' +
-        '\n    <script>document.addEventListener(\'swiped-right\', function(e) {\n' +
-        '        show(2); show(1);\n' +
+        '\n    <script>document.addEventListener(\'swiperight\', function(e) {\n' +
+        '    show(2); show(1);\n' +
         '});</script>\n' +
         '\n</head>\n';
     const items1 = buildTiles(commands1, mode);
