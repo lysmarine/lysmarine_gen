@@ -8,7 +8,7 @@ apt-get upgrade -y -q
 install -m 0644 -v $FILE_FOLDER/nodesource.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/opencpn.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/xygrib.list "/etc/apt/sources.list.d/"
-#install -m 0644 -v $FILE_FOLDER/lysmarine.list "/etc/apt/sources.list.d/"
+install -m 0644 -v $FILE_FOLDER/lysmarine.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/bbn-autoadb.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/bbn-rce.list "/etc/apt/sources.list.d/"
 install -m 0644 -v $FILE_FOLDER/bbn-kplex.list "/etc/apt/sources.list.d/"
