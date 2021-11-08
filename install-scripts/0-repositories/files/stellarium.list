@@ -1,2 +1,2 @@
-deb http://ppa.launchpad.net/stellarium/stellarium-releases/ubuntu bionic main
-#deb-src http://ppa.launchpad.net/stellarium/stellarium-releases/ubuntu bionic main
+deb http://ppa.launchpad.net/stellarium/stellarium-releases/ubuntu focal main
+#deb-src http://ppa.launchpad.net/stellarium/stellarium-releases/ubuntu focal main

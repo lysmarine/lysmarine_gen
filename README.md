@@ -179,7 +179,7 @@ Default user name in login screens is 'user'.
 - [GNU AIS](http://gnuais.sourceforge.net/)
 - [DireWolf](https://github.com/wb2osz/direwolf)
 - [YAAC](https://www.ka2ddo.org/ka2ddo/YAAC.html)
-- [morse2ascii](https://packages.ubuntu.com/bionic/morse2ascii)
+- [morse2ascii](https://packages.ubuntu.com/focal/morse2ascii)
 - [APRX](https://github.com/PhirePhly/aprx)
 - [dump1090-fa](https://github.com/adsbxchange/dump1090-fa)
 - [PiAware](https://flightaware.com/adsb/piaware/)

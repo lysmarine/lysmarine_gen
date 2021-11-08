@@ -1,5 +1,5 @@
-deb http://ppa.launchpad.net/bbn-projects/bbn-kplex/ubuntu bionic main
-#deb-src http://ppa.launchpad.net/bbn-projects/bbn-kplex/ubuntu bionic main
+deb http://ppa.launchpad.net/bbn-projects/bbn-kplex/ubuntu focal main
+#deb-src http://ppa.launchpad.net/bbn-projects/bbn-kplex/ubuntu focal main
 
-#deb https://dl.cloudsmith.io/public/bbn-projects/bbn-kplex/deb/debian buster main
-#deb-src https://dl.cloudsmith.io/public/bbn-projects/bbn-kplex/deb/debian buster main
+#deb https://dl.cloudsmith.io/public/bbn-projects/bbn-kplex/deb/debian bullseye main
+#deb-src https://dl.cloudsmith.io/public/bbn-projects/bbn-kplex/deb/debian bullseye main

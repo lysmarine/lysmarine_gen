@@ -40,7 +40,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6EA1BC913BC5163F       
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1932F485C68D72A5           # Stellarium
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 684A14CF2582E0C5           # Influx
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 04EE7237B7D453EC           # debian backports (stretch)
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138           # debian backports (buster)
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138           # debian backports (bullseye)
 
 wget -q -O - https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -    # NodeJs
 wget -q -O - https://www.free-x.de/debian/oss.boating.gpg.key     | apt-key add -    # XyGrib, AvNav

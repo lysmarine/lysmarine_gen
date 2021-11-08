@@ -1,4 +1,4 @@
-deb http://ppa.launchpad.net/lysmarine/upstream-projects/ubuntu bionic main
-deb http://ppa.launchpad.net/lysmarine/lxde-gtk3/ubuntu bionic main
-deb http://ppa.launchpad.net/lysmarine/rtl-ais/ubuntu bionic main
+deb http://ppa.launchpad.net/lysmarine/upstream-projects/ubuntu focal main
+deb http://ppa.launchpad.net/lysmarine/lxde-gtk3/ubuntu focal main
+deb http://ppa.launchpad.net/lysmarine/rtl-ais/ubuntu focal main
 deb http://ppa.launchpad.net/lysmarine/pypilot/ubuntu focal main
