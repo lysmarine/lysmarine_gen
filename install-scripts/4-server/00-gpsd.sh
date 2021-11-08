@@ -3,7 +3,7 @@
 apt-get install -y -q gpsd gpsd-clients gpsd-tools
 apt-get upgrade -y -q
 
-ln -s /usr/lib/python3/dist-packages/gps /usr/local/lib/python3.7/dist-packages/
+ln -s /usr/lib/python3/dist-packages/gps /usr/local/lib/python3.9/dist-packages/
 
 ## Automaticaly start gpsd when a USB gps detected, handle AIS
 install -d /etc/udev/rules.d
