@@ -40,7 +40,6 @@ apt-get -y -q install multimon-ng netcat\
   dtv-scan-tables                       \
   gr-dab                                \
   aprx                                  \
-  chirp-daily                           \
   wmctrl                                \
   rtl-sdr                               \
   librxtx-java                          \
@@ -49,6 +48,7 @@ apt-get -y -q install multimon-ng netcat\
 # TODO:
 #  dl-fldigi                             \
 #  ssdv                                  \
+#  chirp-daily                           \
 #  hamfax                                \
 
 install -d -m 755 -o 1000 -g 1000 "/home/user/.config/gqrx/"
