@@ -36,12 +36,13 @@ npm cache clean --force
 
 ## Install signalk published plugin
 pushd /home/signalk/.signalk
+
+  #    TODO: add signalk-raspberry-pi-bme280
   su signalk -c "npm install @signalk/charts-plugin  \
                  sk-resources-fs  \
                  freeboard-sk-helper  \
                  skwiz  \
                  tuktuk-chart-plotter  \
-                 signalk-raspberry-pi-bme280  \
                  signalk-raspberry-pi-1wire  \
                  signalk-venus-plugin  \
                  signalk-mqtt-gw  \
