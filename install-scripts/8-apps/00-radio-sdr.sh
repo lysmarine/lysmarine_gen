@@ -51,6 +51,7 @@ apt-get -y -q install multimon-ng netcat\
 #  chirp-daily                           \
 #  hamfax                                \
 
+install -d -m 755 -o 1000 -g 1000 "/home/user/.local/share/applications/"
 install -d -m 755 -o 1000 -g 1000 "/home/user/.config/gqrx/"
 install -v $FILE_FOLDER/gqrx-default.conf -o 1000 -g 1000 "/home/user/.config/gqrx/default.conf"
 install -v $FILE_FOLDER/gqrx-bookmarks.csv -o 1000 -g 1000 "/home/user/.config/gqrx/bookmarks.csv"
