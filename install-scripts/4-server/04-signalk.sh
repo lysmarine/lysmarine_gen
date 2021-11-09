@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 ## Dependencies of signalk.
-apt-get install -y -q python-dev git nodejs \
+apt-get install -y -q python-dev git nodejs npm \
  libnss-mdns avahi-utils \
  node-abstract-leveldown node-nan libzmq3-dev libkrb5-dev libavahi-compat-libdnssd-dev jq
 
