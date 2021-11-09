@@ -168,7 +168,7 @@ nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance
   "http://localhost:4997/www?name=facebook" /opt/
 
 nativefier -a $arch --disable-context-menu --disable-dev-tools --single-instance \
-  --name "WA-Web-Msg" --icon /usr/share/icons/gnome/48x48/legacy/face-monkey.png \
+  --name "WA-Web-Msg" --icon /usr/share/icons/gnome/48x48/emotes/face-monkey.png \
   --internal-urls ".*" \
   "http://localhost:4997/www?name=WA-Web-Msg" /opt/
 
