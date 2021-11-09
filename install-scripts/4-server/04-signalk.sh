@@ -2,8 +2,8 @@
 
 ## Dependencies of signalk.
 apt-get install -y -q python-dev git nodejs npm \
- libnss-mdns avahi-utils \
- node-abstract-leveldown node-nan libzmq3-dev libkrb5-dev libavahi-compat-libdnssd-dev jq
+libnss-mdns avahi-utils \
+node-abstract-leveldown node-nan libzmq3-dev libkrb5-dev libavahi-compat-libdnssd-dev jq
 
 npm install -g npm@latest
 
@@ -37,8 +37,8 @@ npm cache clean --force
 ## Install signalk published plugin
 pushd /home/signalk/.signalk
 
-  #    TODO: add signalk-raspberry-pi-bme280
-  su signalk -c "npm install @signalk/charts-plugin  \
+#    TODO: add signalk-raspberry-pi-bme280 signalk-sbd signalk-sbd-msg
+su signalk -c "npm install @signalk/charts-plugin  \
                  sk-resources-fs  \
                  freeboard-sk-helper  \
                  skwiz  \
@@ -67,7 +67,6 @@ pushd /home/signalk/.signalk
                  signalk-barograph \
                  signalk-polar \
                  signalk-scheduler \
-                 signalk-sbd signalk-sbd-msg \
                  openweather-signalk \
                  signalk-noaa-weather \
                  xdr-parser-plugin \
@@ -127,7 +126,7 @@ apt-get install -y -q pigpio python-pigpio python3-pigpio python3-rpi.gpio
 systemctl disable pigpiod
 
 # For Seatalk
-wget -q -O - https://raw.githubusercontent.com/MatsA/seatalk1-to-NMEA0183/master/STALK_read.py > /usr/local/sbin/STALK_read.py
+wget -q -O - https://raw.githubusercontent.com/MatsA/seatalk1-to-NMEA0183/master/STALK_read.py >/usr/local/sbin/STALK_read.py
 
 echo "" >>/etc/sudoers
 echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/signalk-restart' >>/etc/sudoers
