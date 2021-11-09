@@ -40,14 +40,16 @@ apt-get -y -q install multimon-ng netcat\
   dtv-scan-tables                       \
   gr-dab                                \
   aprx                                  \
-  hamfax                                \
   chirp-daily                           \
   wmctrl                                \
   rtl-sdr                               \
-  dl-fldigi                             \
-  ssdv                                  \
   librxtx-java                          \
   direwolf
+
+# TODO:
+#  dl-fldigi                             \
+#  ssdv                                  \
+#  hamfax                                \
 
 install -d -m 755 -o 1000 -g 1000 "/home/user/.config/gqrx/"
 install -v $FILE_FOLDER/gqrx-default.conf -o 1000 -g 1000 "/home/user/.config/gqrx/default.conf"
