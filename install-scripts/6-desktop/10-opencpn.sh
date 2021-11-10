@@ -48,29 +48,28 @@ if [ $LMARCH == 'arm64' ]; then
 fi
 
 if [ $LMARCH == 'armhf' ]; then
-  apt-get install -y -q                                         \
-    ofc-pi                                                      \
-    opencpn-doc                                                 \
-    opencpn-plugin-calculator                                   \
-    opencpn-plugin-chartscale                                   \
-    opencpn-plugin-climatology                                  \
-    opencpn-plugin-climatology-data                             \
-    opencpn-plugin-logbookkonni                                 \
-    opencpn-plugin-nmeaconverter                                \
-    opencpn-plugin-ocpndebugger                                 \
-    opencpn-plugin-plots                                        \
-    opencpn-plugin-polar                                        \
-    opencpn-plugin-s63                                          \
-    opencpn-plugin-sar                                          \
-    opencpn-plugin-shipdriver                                   \
-    opencpn-plugin-tactics                                      \
-    opencpn-plugin-watchdog                                     \
-    opencpn-plugin-weatherfax                                   \
-    opencpn-plugin-weatherrouting                               \
-    opencpn-plugin-draw                                         \
-    opencpn-sglock-arm32
-
 # TODO:
+#  apt-get install -y -q                                         \
+#    ofc-pi                                                      \
+#    opencpn-doc                                                 \
+#    opencpn-sglock-arm32
+#    opencpn-plugin-calculator                                   \
+#    opencpn-plugin-chartscale                                   \
+#    opencpn-plugin-climatology                                  \
+#    opencpn-plugin-climatology-data                             \
+#    opencpn-plugin-logbookkonni                                 \
+#    opencpn-plugin-nmeaconverter                                \
+#    opencpn-plugin-ocpndebugger                                 \
+#    opencpn-plugin-plots                                        \
+#    opencpn-plugin-polar                                        \
+#    opencpn-plugin-s63                                          \
+#    opencpn-plugin-sar                                          \
+#    opencpn-plugin-shipdriver                                   \
+#    opencpn-plugin-tactics                                      \
+#    opencpn-plugin-watchdog                                     \
+#    opencpn-plugin-weatherfax                                   \
+#    opencpn-plugin-weatherrouting                               \
+#    opencpn-plugin-draw                                         \
 #    oernc-pi                                                    \
 #    oesenc-pi                                                   \
 #    opencpn-plugin-celestial                                    \
@@ -84,6 +83,7 @@ if [ $LMARCH == 'armhf' ]; then
 #  apt-get install -y -q opencpn-tcdata                         \
 #    opencpn-plugin-oernc                                       \
 #    opencpn-plugin-oesenc
+  echo "plugins"
 fi
 
 # Install plugin bundle
