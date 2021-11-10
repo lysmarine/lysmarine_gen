@@ -2,10 +2,10 @@
 
 apt-get clean
 
-apt-get -y -q install influxdb chronograf kapacitor
+apt-get -y -q install influxdb chronograf # TODO: kapacitor
 
 systemctl unmask influxdb
 systemctl disable influxdb
 
 systemctl disable chronograf
-systemctl disable kapacitor
+# TODO: systemctl disable kapacitor
