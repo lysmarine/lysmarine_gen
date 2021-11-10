@@ -14,7 +14,7 @@ install -v -m 0644 $FILE_FOLDER/88-nuand-bootloader.rules "/etc/udev/rules.d/"
 install -v -m 0644 $FILE_FOLDER/99-direwolf-cmedia.rules "/etc/udev/rules.d/"
 install -v -m 0644 $FILE_FOLDER/99-thumbdv.rules "/etc/udev/rules.d/"
 
-apt-get -y -q --no-install-recommends --no-install-suggests install python3-wxgtk4.0 \
+apt-get -y -q --no-install-recommends --no-install-suggests install git python3-wxgtk4.0 \
     libfftw3-dev                       \
     libasound2-dev                     \
     portaudio19-dev                    \
