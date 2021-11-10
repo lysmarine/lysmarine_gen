@@ -18,10 +18,12 @@ else
   arch=$LMARCH
 fi
 
-apt-get -y install libappindicator3-1 libindicator3-7
 
-wget https://github.com/mquevill/caprine/releases/download/v2.53.0-ARM/caprine_2.53.0_${arch}.deb
+# TODO: apt-get -y install libappindicator3-1 libindicator3-7
 
-dpkg -i caprine_2.53.0_${arch}.deb
+wget https://github.com/mquevill/caprine/releases/download/v2.54.1-ARM/caprine_2.54.1_${arch}.deb
 
-rm caprine_2.53.0_${arch}.deb
+dpkg -i caprine_2.54.1_${arch}.deb
+
+rm caprine_2.54.1_${arch}.deb
+
