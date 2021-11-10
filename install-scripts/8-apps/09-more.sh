@@ -18,7 +18,7 @@ systemctl disable snapd snapd.socket
 #apt-get install software-properties-common
 
 # Budgie settings
-gsettings set com.solus-project.budgie-wm focus-mode true
+# TODO: gsettings set com.solus-project.budgie-wm focus-mode true
 
 # rpi-clone
 git clone https://github.com/billw2/rpi-clone.git
