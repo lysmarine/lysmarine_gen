@@ -49,7 +49,6 @@ install -o 1000 -g 1000 -v $FILE_FOLDER/openplotter.directory /home/user/.local/
 
 install -m 755 -v $FILE_FOLDER/bbn-commands.sh /usr/local/bin/bbn-commands
 
-install -d /usr/local/share/applications
 install -v $FILE_FOLDER/commands.desktop /usr/local/share/applications/
 
 install -d /etc/budgie-desktop
