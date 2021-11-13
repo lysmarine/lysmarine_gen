@@ -11,7 +11,7 @@ install -o 1000 -g 1000 -d "/home/user/.opencpn"
 install -o 1000 -g 1000 -v $FILE_FOLDER/opencpn.conf "/home/user/.opencpn/"
 install -o 1000 -g 1000 -v $FILE_FOLDER/opencpn.conf "/home/user/.opencpn/opencpn.conf-bbn"
 
-# TODO: apt-get install -y -q -o Dpkg::Options::="--force-overwrite" oernc-pi
+apt-get install -y -q -o Dpkg::Options::="--force-overwrite" oernc-pi
 
 if [ $LMARCH == 'arm64' ]; then
   # See https://cloudsmith.io/~david-register/repos/ocpn-plugins-unstable/
@@ -49,6 +49,8 @@ fi
 
 if [ $LMARCH == 'armhf' ]; then
   apt-get install -y -q                                         \
+    oernc-pi                                                    \
+    oesenc-pi                                                   \
     ofc-pi                                                      \
     opencpn-doc                                                 \
     opencpn-plugin-calculator                                   \
@@ -71,8 +73,6 @@ if [ $LMARCH == 'armhf' ]; then
     opencpn-sglock-arm32
 
 # TODO:
-#    oernc-pi                                                    \
-#    oesenc-pi                                                   \
 #    opencpn-plugin-celestial                                    \
 #    opencpn-plugin-iacfleet                                     \
 #    opencpn-plugin-launcher                                     \
