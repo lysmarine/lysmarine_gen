@@ -5,9 +5,9 @@ npm cache clean --force
 
 apt-get -q -y install i2c-tools python3-smbus dos2unix traceroute telnet whois socat gdal-bin openvpn seahorse inxi \
   dconf-editor gedit gnome-calculator gnome-weather gnome-chess openpref \
-  python3-gpiozero   \
+  python3-bme680 python3-gpiozero python3-w1thermsensor  \
   sysstat jq xmlstarlet uhubctl iotop rsync timeshift at snapd \
-  rpi-imager piclone fontconfig nautic gnome-disk-utility catfish xfce4-screenshooter # TODO: python3-bme680 python3-w1thermsensor
+  rpi-imager piclone fontconfig nautic gnome-disk-utility catfish xfce4-screenshooter # foxtrotgps
 
 systemctl disable openvpn
 
