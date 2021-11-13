@@ -1,3 +1,3 @@
 #!/bin/bash -e
 
-apt-get -y -q install libcanberra-gtk-module # TODO: orage
+apt-get -y -q install orage libcanberra-gtk-module
