@@ -3,6 +3,8 @@
 ## Needed to allow the service file start X
 install  -v $FILE_FOLDER/Xwrapper.config "/etc/X11/"
 
+arch=$(dpkg --print-architecture)
+
 if [ $LMOS == Raspbian ]; then
   apt-get -q -y install xserver-xorg-video-fbturbo
 fi
@@ -21,11 +23,11 @@ apt-get -q -y install xserver-xorg-input-libinput xinput libinput-tools xinput-c
  xinit libgtk2-perl cpanminus perl-base \
  dialog lxterminal network-manager-gnome system-config-printer
 
-wget https://dl.cloudsmith.io/public/bbn-projects/bbn-budgie/deb/debian/pool/buster/main/b/bu/budgie-core_10.5-2/budgie-core_10.5-2_"$LMARCH".deb
-wget https://dl.cloudsmith.io/public/bbn-projects/bbn-budgie/deb/debian/pool/buster/main/l/li/libbudgie-plugin0_10.5-2/libbudgie-plugin0_10.5-2_"$LMARCH".deb
-wget https://dl.cloudsmith.io/public/bbn-projects/bbn-budgie/deb/debian/pool/buster/main/l/li/libbudgie-private0_10.5-2/libbudgie-private0_10.5-2_"$LMARCH".deb
+wget https://dl.cloudsmith.io/public/bbn-projects/bbn-budgie/deb/debian/pool/buster/main/b/bu/budgie-core_10.5-2/budgie-core_10.5-2_${arch}.deb
+wget https://dl.cloudsmith.io/public/bbn-projects/bbn-budgie/deb/debian/pool/buster/main/l/li/libbudgie-plugin0_10.5-2/libbudgie-plugin0_10.5-2_${arch}.deb
+wget https://dl.cloudsmith.io/public/bbn-projects/bbn-budgie/deb/debian/pool/buster/main/l/li/libbudgie-private0_10.5-2/libbudgie-private0_10.5-2_${arch}.deb
 
-dpkg -i budgie-core_10.5-2_"$LMARCH".deb libbudgie-plugin0_10.5-2_"$LMARCH".deb libbudgie-private0_10.5-2_"$LMARCH".deb
+dpkg -i budgie-core_10.5-2_${arch}.deb libbudgie-plugin0_10.5-2_${arch}.deb libbudgie-private0_10.5-2_${arch}.deb
 
 rm *budgie*.deb
 
