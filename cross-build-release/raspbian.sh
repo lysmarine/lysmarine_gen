@@ -7,10 +7,11 @@
 
   thisArch="raspios"
   cpuArch="armhf"
+  zipName="https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-lite.zip"
   if [ "arm64" == "$MY_CPU_ARCH" ]; then
     cpuArch="arm64"
+    zipName="https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2021-05-28/2021-05-07-raspios-buster-arm64-lite.zip"
   fi
-  zipName="raspios_lite_${cpuArch}_latest"
   imageSource="https://downloads.raspberrypi.org/${zipName}"
 
   checkRoot
