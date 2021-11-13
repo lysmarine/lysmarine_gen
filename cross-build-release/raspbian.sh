@@ -23,8 +23,8 @@
   log "Downloading official image from internet."
   myCache=./cache/$thisArch
   wget -P $myCache/ $imageSource
-  7z e -o$myCache/ $myCache/$zipName
-  rm $myCache/$zipName
+  7z e -o$myCache/ $myCache/$(basename $zipName)
+  rm $myCache/$(basename $zipName)
 
   # Copy image file to work folder add temporary space to it.
   imageName=$(
