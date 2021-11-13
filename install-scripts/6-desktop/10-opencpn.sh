@@ -1,8 +1,9 @@
 #!/bin/bash -e
 
-apt-get install -y -q opencpn libsglock
+apt-get install -y -q opencpn  opencpn-plugin-radar \
+    libsglock
 
-# TODO: opencpn-plugin-celestial opencpn-plugin-launcher opencpn-plugin-pypilot opencpn-plugin-objsearch opencpn-plugin-iacfleet opencpn-plugin-radar imgkap
+# TODO: opencpn-plugin-celestial opencpn-plugin-launcher opencpn-plugin-pypilot opencpn-plugin-objsearch opencpn-plugin-iacfleet imgkap
 
 #apt-get install -y -q opencpn-gshhs-full opencpn-gshhs-high opencpn-gshhs-intermediate opencpn-gshhs-low opencpn-gshhs-crude
 #apt-get install -y -q opencpn-tcdata
@@ -62,6 +63,7 @@ if [ $LMARCH == 'armhf' ]; then
     opencpn-plugin-ocpndebugger                                 \
     opencpn-plugin-plots                                        \
     opencpn-plugin-polar                                        \
+    opencpn-plugin-radar                                        \
     opencpn-plugin-s63                                          \
     opencpn-plugin-sar                                          \
     opencpn-plugin-shipdriver                                   \
@@ -79,7 +81,6 @@ if [ $LMARCH == 'armhf' ]; then
 #    opencpn-plugin-objsearch                                    \
 #    opencpn-plugin-pypilot                                      \
 #    opencpn-plugin-vfkaps                                       \
-#    opencpn-plugin-radar                                        \
 
 #  apt-get install -y -q opencpn-tcdata                         \
 #    opencpn-plugin-oernc                                       \
