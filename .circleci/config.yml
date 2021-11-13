@@ -24,7 +24,7 @@ commands:
       - cloudsmith/install-cli
       - run:
           command: |
-            .circleci/publish-cloudsmith.sh img bbn-cica/bbn-open ${PKG_DISTRO}/${PKG_RELEASE}
+            .circleci/publish-cloudsmith.sh img bbn-cica/bbn ${PKG_DISTRO}/${PKG_RELEASE}
           no_output_timeout: 40m
   do-all:
     steps:
