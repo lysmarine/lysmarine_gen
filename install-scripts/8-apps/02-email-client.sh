@@ -1,3 +1,3 @@
 #!/bin/bash -e
 
-apt-get -y -q install geary/bullseye-backports
+apt-get -y -q install geary/buster-backports
