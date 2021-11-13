@@ -5,8 +5,6 @@ After=network.target
 ExecStart=/home/signalk/.signalk/signalk-server
 Restart=always
 RestartSec=10
-StandardOutput=syslog
-StandardError=syslog
 WorkingDirectory=/home/signalk/.signalk
 User=signalk
 

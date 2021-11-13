@@ -4,8 +4,6 @@ Description=pypilot web
 [Service]
 Type=simple
 ExecStart=pypilot_web 8080
-StandardOutput=syslog
-StandardError=syslog
 User=pypilot
 Restart=always
 RestartSec=3

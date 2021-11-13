@@ -6,8 +6,6 @@ ConditionPathExists=/proc/device-tree/hat/custom_0
 [Service]
 Type=simple
 ExecStart=pypilot_hat
-StandardOutput=syslog
-StandardError=syslog
 User=pypilot
 Restart=always
 RestartSec=2
