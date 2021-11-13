@@ -2,7 +2,7 @@
 
 apt-get clean
 
-apt-get -y -q install nodejs npm libnss3 gnome-icon-theme unzip
+apt-get -y -q install nodejs libnss3 gnome-icon-theme unzip
 npm install nativefier@43.1.3 -g --unsafe-perm
 
 install -d '/usr/local/share/bbn-checklist'
