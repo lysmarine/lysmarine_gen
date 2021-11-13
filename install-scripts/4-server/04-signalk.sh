@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-exit 0
-
 ## Dependencies of signalk.
 apt-get install -y -q python-dev git nodejs npm \
 libnss-mdns avahi-utils \
