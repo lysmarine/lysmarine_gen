@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-apt-get install -y -q opencpn opencpn-plugin-celestial opencpn-plugin-launcher opencpn-plugin-radar \
+apt-get install -y -q opencpn=5.2.4-1 opencpn-plugin-celestial opencpn-plugin-launcher opencpn-plugin-radar \
    opencpn-plugin-pypilot opencpn-plugin-objsearch opencpn-plugin-iacfleet imgkap libsglock
 
 #apt-get install -y -q opencpn-gshhs-full opencpn-gshhs-high opencpn-gshhs-intermediate opencpn-gshhs-low opencpn-gshhs-crude
