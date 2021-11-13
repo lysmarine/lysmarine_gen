@@ -64,12 +64,10 @@ if [ $LMARCH == 'armhf' ]; then
     opencpn-plugin-objsearch                                    \
     opencpn-plugin-ocpndebugger                                 \
     opencpn-plugin-plots                                        \
-    opencpn-plugin-polar                                        \
     opencpn-plugin-pypilot                                      \
     opencpn-plugin-radar                                        \
     opencpn-plugin-s63                                          \
     opencpn-plugin-sar                                          \
-    opencpn-plugin-shipdriver                                   \
     opencpn-plugin-tactics                                      \
     opencpn-plugin-vfkaps                                       \
     opencpn-plugin-watchdog                                     \
