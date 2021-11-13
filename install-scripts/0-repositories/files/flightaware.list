@@ -1,2 +1,2 @@
-deb http://flightaware.com/adsb/piaware/files/packages buster piaware
+deb http://flightaware.com/adsb/piaware/files/packages bullseye piaware
 
