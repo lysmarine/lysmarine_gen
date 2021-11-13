@@ -18,7 +18,7 @@ apt-get -q -y install xserver-xorg-input-libinput xinput libinput-tools xinput-c
  gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-alsa \
  gstreamer1.0-libav alsa-utils libavahi-compat-libdnssd-dev git openbox \
  xbacklight lxappearance gmrun xsettingsd xserver-xorg \
- xinit libgtk3-perl cpanminus perl-base \
+ xinit libgtk2-perl cpanminus perl-base \
  dialog lxterminal network-manager-gnome system-config-printer
 
 install -o 1000 -g 1000 -d /home/user/.local
