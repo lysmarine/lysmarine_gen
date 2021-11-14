@@ -50,7 +50,6 @@ if [ $LMARCH == 'armhf' ]; then
   apt-get install -y -q                                         \
     oernc-pi                                                    \
     oesenc-pi                                                   \
-    ofc-pi                                                      \
     opencpn-doc                                                 \
     opencpn-plugin-calculator                                   \
     opencpn-plugin-celestial                                    \
