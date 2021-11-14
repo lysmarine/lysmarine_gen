@@ -7,6 +7,9 @@ install -v -m0644 $FILE_FOLDER/skip-prompt.conf "/etc/systemd/system/getty@tty1.
 
 ## RaspOS
 if [ -f /boot/config.txt ]; then
+  if [ $LMARCH == 'armhf' ]; then
+    echo "arm_64bit=1" >> /boot/config.txt
+  fi
 	cat $FILE_FOLDER/appendToConfig.txt >> /boot/config.txt
 	sed -i 's/kms-v3d$/kms-v3d,cma-256/' /boot/config.txt
 fi
