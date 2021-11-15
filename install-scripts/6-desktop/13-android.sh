@@ -6,7 +6,6 @@ apt-get install -y ffmpeg libsdl2-2.0-0 adb wget \
 
 git clone https://github.com/Genymobile/scrcpy
 cd scrcpy
-git checkout aa011832c155ad57230e8241932c3331218c95b3
 chmod +x ./install_release.sh
 ./install_release.sh
 cd ..
