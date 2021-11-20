@@ -32,7 +32,7 @@ install -v $FILE_FOLDER/piclone.desktop -o 1000 -g 1000 "/home/user/.local/share
 apt-get clean
 npm cache clean --force
 
-apt-get -q -y install arduino
+#apt-get -q -y install arduino
 
 pip3 install adafruit-ampy
 
