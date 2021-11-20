@@ -7,6 +7,7 @@ executors:
     machine:
       enabled: true
       image: ubuntu-1604:202010-01
+      resource_class: large
 commands:
   git-checkout:
     steps:
