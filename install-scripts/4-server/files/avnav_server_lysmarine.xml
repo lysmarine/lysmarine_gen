@@ -39,7 +39,7 @@
              if one is found, it will try to connect and feed the data through the gpsd feeder
              this avoids the need for more or less broken rfcomm stuff
               -->
-        <AVNBlueToothReader maxDevices="5"/>
+        <AVNBlueToothReader maxDevices="-1"/>
 
 
         <!-- udev based detection of serial devices
