@@ -5,8 +5,6 @@
     logger "The USB device /dev/ttyLYS_ftdi_$1 has been disconnected"
   else
     logger "This USB device is known as FTDI and will be linked on /dev/ttyLYS_ftdi_$1"
-    systemctl restart kplex.service
-    sleep 1
-    systemctl restart signalk
+    /usr/local/sbin/bounce-mux
   fi
 }&

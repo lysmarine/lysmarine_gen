@@ -18,6 +18,9 @@ install -v -m 0644 $FILE_FOLDER/70-lys-can.rules "/etc/udev/rules.d/70-lys-can.r
 install -v -m 0644 $FILE_FOLDER/91-pc-navtex.rules "/etc/udev/rules.d/91-pc-navtex.rules"
 install -v -m 0644 $FILE_FOLDER/99-zzz-com.rules "/etc/udev/rules.d/99-zzz-com.rules"
 
+install -d /usr/local/sbin
+install -v -m 0755 $FILE_FOLDER/bounce-mux.sh "/usr/local/sbin/bounce-mux"
+
 install -d /usr/local/bin
 install -v -m 0755 $FILE_FOLDER/manage_ais.sh "/lib/udev/manage_ais.sh"
 install -v -m 0755 $FILE_FOLDER/manage_cp210x.sh "/lib/udev/manage_cp210x.sh"
