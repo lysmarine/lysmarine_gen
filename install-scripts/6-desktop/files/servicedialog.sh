@@ -60,7 +60,9 @@ $(isEnabled signalk) \
 $(isEnabled vncserver-x11-serviced) \
 $(isEnabled xrdp) \
 $(isEnabled avnav) \
+$(isEnabled avnavupdater) \
 $(isEnabled mopidy) \
+$(isEnabled motioneye) \
 $(isEnabled pigpiod) \
 "
 
@@ -87,14 +89,16 @@ export SUDO_ASKPASS="/usr/bin/ssh-askpass"
   echo 20; takeAction1 "$save" create_ap
   echo 30; takeAction1 "$save" ssh
   echo 40; takeAction1 "$save" kplex
-  echo 50; takeAction1 "$save" pypilot@pypilot.service
-  echo 60; takeAction1 "$save" pypilot_web
-  echo 65; takeAction1 "$save" rtl-ais
-  echo 70; takeAction1 "$save" signalk
-  echo 75; takeAction1 "$save" vncserver-x11-serviced
-  echo 80; takeAction1 "$save" xrdp
-  echo 85; takeAction2 "$save" avnav
-  echo 90; takeAction3 "$save" mopidy
+  echo 45; takeAction1 "$save" pypilot@pypilot.service
+  echo 50; takeAction1 "$save" pypilot_web
+  echo 55; takeAction1 "$save" rtl-ais
+  echo 60; takeAction1 "$save" signalk
+  echo 65; takeAction1 "$save" vncserver-x11-serviced
+  echo 70; takeAction1 "$save" xrdp
+  echo 75; takeAction2 "$save" avnav
+  echo 80; takeAction2 "$save" avnavupdater
+  echo 85; takeAction3 "$save" mopidy
+  echo 90; takeAction1 "$save" motioneye
   echo 95; takeAction1 "$save" pigpiod
 } | yad --progress --title "Service Dialog" --text="Service reconfiguration" --auto-close
 
