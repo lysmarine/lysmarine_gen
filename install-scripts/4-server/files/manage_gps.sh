@@ -11,6 +11,7 @@
   else
     logger "This USB device is known as GPS and will be connected to gpsd on port 2947 /dev/ttyLYS_gps_$1"
     if [[ $1 == "0" ]] ; then
+      systemctl restart gpsd
       export GPSD_OPTIONS="-p"
       gpsdctl add /dev/ttyLYS_gps_0
     else
