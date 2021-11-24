@@ -71,7 +71,7 @@ save=$(
   yad --list \
   --height=400 \
   --title "Service Dialog" \
-  --text="Lysmarine has multiple services available. Enable and disable them based on what you need." \
+  --text="BBN OS has multiple services available. Enable and disable them based on what you need." \
   --column="Enable" \
   --column="Service" \
   --checklist \
