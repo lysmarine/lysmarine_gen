@@ -7,7 +7,7 @@
 # License as published by the Free Software Foundation; either
 # version 3 of the License, or (at your option) any later version.
 
-from pypilot.autopilot import HeadingOffset, resolv
+from pypilot.autopilot import resolv
 from pilot import AutopilotPilot, AutopilotGain
 from pypilot.values import *
 
@@ -18,6 +18,7 @@ from pypilot.values import *
 
 class WindPilot(AutopilotPilot):
   def __init__(self, ap):
+    from pypilot.autopilot import HeadingOffset
     super(WindPilot, self).__init__('wind', ap)
 
     # create filters
