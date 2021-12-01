@@ -3,6 +3,21 @@ xhost +SI:localuser:mopidy
 
 export MOZ_USE_XINPUT2=1
 
+if [ -L /dev/twofingtouch -a ! -f /usr/share/X11/xorg.conf.d/90-touchinput.conf ]; then
+  MATCH_PRODUCT=$(udevadm info -a -n /dev/twofingtouch | grep "ATTRS{name}" | sed -e 's#.*=="##' -e 's#"$##')
+  bash -c 'cat << EOF > /usr/share/X11/xorg.conf.d/90-touchinput.conf
+Section "InputClass"
+    Identifier "calibration"
+    Driver "evdev"
+    MatchProduct "'"${MATCH_PRODUCT}"'"
+    MatchDevicePath "/dev/input/event*"
+    Option "EmulateThirdButton" "1"
+    Option "EmulateThirdButtonTimeout" "750"
+    Option "EmulateThirdButtonMoveThreshold" "30"
+EndSection
+EOF'
+fi
+
 # Setting sound
 amixer cset numid=3 1
 amixer sset -D pulse Master 98% unmute
