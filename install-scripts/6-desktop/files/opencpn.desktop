@@ -2,7 +2,7 @@
 Version=1.0
 Name=Chart Plotter (OpenCPN)
 Comment=Open source chart plotter / navigator
-Exec=onlyone /usr/bin/opencpn
+Exec=onlyone /usr/bin/opencpn -l=error
 Icon=opencpn
 StartupNotify=true
 Terminal=false
