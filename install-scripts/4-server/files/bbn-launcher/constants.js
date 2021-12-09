@@ -1,6 +1,6 @@
 module.exports = {
   commands1 : [
-    {name: 'chart', title: 'Chart', img: 'chart', bg: 'Peru', cmd: 'onlyone', args: ['opencpn']},
+    {name: 'chart', title: 'Chart', img: 'chart', bg: 'Peru', cmd: 'onlyone', args: ['opencpn', '-l=error']},
     {name: 'dash', title: 'Dashboard', img: 'dashboard', bg: 'Olive', cmd: '/opt/kip-dash/kip-dash', args: []},
     {name: 'autopilot', title: 'Autopilot', img: 'autopilot', bg: 'IndianRed', cmd: '/opt/sk-autopilot/sk-autopilot', args: []},
     {name: 'weather', title: 'Weather', img: 'weather', bg: 'RoyalBlue', cmd: 'onlyone', args: ['XyGrib']},
