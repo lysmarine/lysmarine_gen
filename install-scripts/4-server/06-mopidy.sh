@@ -26,7 +26,7 @@ sh -c 'echo "mopidy ALL=NOPASSWD: /usr/local/lib/python3.7/dist-packages/mopidy_
 
 pip3 install --upgrade requests
 
-pip3 install https://github.com/natumbri/mopidy-youtube/archive/develop.zip
+pip3 install --upgrade https://github.com/natumbri/mopidy-youtube/archive/develop.zip
 
 pip3 install "ytmusicapi==0.19.2"
 
