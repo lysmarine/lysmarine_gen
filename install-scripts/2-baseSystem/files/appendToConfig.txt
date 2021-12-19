@@ -13,6 +13,9 @@ dtparam=i2c_arm=on
 dtparam=spi=on
 #dtoverlay=w1-gpio
 
+# Enable USB on some CM4 boards
+#dtoverlay=dwc2,dr_mode=host
+
 ### lysmarine - screen preset ####################
 
 ## http://www.raspberrypiwiki.com/index.php/7_inch_HDMI_TFT_Capacitive_Touch_Screen_800x480_SKU:400579
