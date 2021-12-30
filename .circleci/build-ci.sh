@@ -10,6 +10,9 @@ set -xe
 LYSMARINE_VER=$(date +%Y-%m-%d)
 DOCKER_SOCK="unix:///var/run/docker.sock"
 
+# load loop module on host system
+modprobe loop || true
+
 echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H $DOCKER_SOCK -s overlay2\"" | sudo tee /etc/default/docker >/dev/null
 sudo service docker restart
 sleep 5
