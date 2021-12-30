@@ -39,6 +39,7 @@ mountImageFile() {
   fi
 
   # Mount the image and make the binds required to chroot.
+  losetup -f
   partitions=$(kpartx -sav $imageFile | cut -d' ' -f3)
   partQty=$(echo $partitions | wc -w)
   echo $partQty partitions detected.
