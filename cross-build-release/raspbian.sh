@@ -5,8 +5,6 @@
   MY_CPU_ARCH=$1
   LYSMARINE_VER=$2
 
-https://downloads.raspberrypi.org/
-
   thisArch="raspios"
   cpuArch="armhf"
   zipName="raspios_oldstable_lite_armhf/images/raspios_oldstable_lite_armhf-2021-12-02/2021-12-02-raspios-buster-armhf-lite.zip"
