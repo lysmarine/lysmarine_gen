@@ -5,9 +5,11 @@
   MY_CPU_ARCH=$1
   LYSMARINE_VER=$2
 
+https://downloads.raspberrypi.org/
+
   thisArch="raspios"
   cpuArch="armhf"
-  zipName="raspios_lite_armhf/images/raspios_lite_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-lite.zip"
+  zipName="raspios_oldstable_lite_armhf/images/raspios_oldstable_lite_armhf-2021-12-02/2021-12-02-raspios-buster-armhf-lite.zip"
   if [ "arm64" == "$MY_CPU_ARCH" ]; then
     cpuArch="arm64"
     zipName="raspios_lite_arm64/images/raspios_lite_arm64-2021-05-28/2021-05-07-raspios-buster-arm64-lite.zip"
