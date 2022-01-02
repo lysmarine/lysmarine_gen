@@ -12,6 +12,6 @@ pushd /opt
   pushd arduino-1.8.16
     install -d /root/.config
     ./install.sh
-    ./arduino-linux-setup.sh user
+    ./arduino-linux-setup.sh root
   popd
 popd
