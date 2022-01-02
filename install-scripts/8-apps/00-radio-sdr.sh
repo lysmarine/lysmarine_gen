@@ -170,7 +170,7 @@ wget https://bitbucket.org/scytalec/scytalec/downloads/SDRSharp.ScytaleC.5004.NE
 wget https://bitbucket.org/scytalec/scytalec/downloads/x64-ScytaleC.QuickUI-17010.zip
 wget https://bitbucket.org/scytalec/scytalec/downloads/x64-FramePlayer-1002Beta.zip
 wget https://bitbucket.org/scytalec/scytalec/downloads/x64-SDRSharp.ScytaleC-10213.zip
-wget https://bitbucket.org/scytalec/scytalec/downloads/ScytaleC-1408.zip
+wget https://bitbucket.org/scytalec/scytalec/downloads/ScytaleC.1408.zip
 wget https://bitbucket.org/scytalec/scytalec/downloads/x64-DebugHelpers.zip
 wget https://bitbucket.org/scytalec/scytalec.decoder/downloads/x64_Scytalec.Decoder.UI_1.0.0.1.zip
 wget https://bitbucket.org/scytalec/scytalec.decoder/downloads/x64_Scytalec.Decoder.Cmd_1.0.zip
@@ -179,7 +179,7 @@ wget https://bitbucket.org/scytalec/scytalec.decoder/downloads/x64_Scytalec.Deco
 
 mkdir ScytaleC
 cd ScytaleC/
-unzip ../ScytaleC-1408.zip
+unzip ../ScytaleC.1408.zip
 chmod +x ./*.exe
 cd ..
 
