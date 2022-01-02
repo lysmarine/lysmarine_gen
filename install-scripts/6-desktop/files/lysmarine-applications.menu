@@ -214,6 +214,9 @@
             <Filename>pcmanfm.desktop</Filename>
         </Include>
         <Include>
+            <Filename>hardinfo.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>onboard.desktop</Filename>
         </Include>
         <Include>
