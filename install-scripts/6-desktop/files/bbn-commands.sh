@@ -1,6 +1,6 @@
 #!/bin/bash
 
-action=$(yad --title "System Actions" --width=500 --height=300  --text-align=center --text "\n" --list --no-headers --dclick-action=none --print-column=1 --column "Choice":HD --column "Action" reboot Reboot shutdown Shutdown restartD "Restart Desktop" restartPyP "Restart PyPilot" restartSK "Restart SignalK" restartAvN "Restart AvNav")
+action=$(yad --title "System Actions" --width=500 --height=300  --text-align=center --text "\n" --list --no-headers --dclick-action=none --print-column=1 --column "Choice":HD --column "Action" reboot Reboot shutdown Shutdown restartD "Restart Desktop" restartPyP "Restart PyPilot" restartSK "Restart SignalK" restartAvN "Restart AvNav" restartMpd "Restart Mopidy")
 
 ret=$?
 
@@ -13,6 +13,7 @@ case $action in
     restartPyP*) cmd="sudo /usr/local/sbin/pypilot-restart" ;;
     restartSK*) cmd="sudo /usr/local/sbin/signalk-restart" ;;
     restartAvN*) cmd="sudo /usr/local/sbin/avnav-restart" ;;
+    restartMpd*) cmd="sudo /usr/local/sbin/mopidy-restart" ;;
     *) exit 1 ;;
 esac
 

@@ -36,8 +36,12 @@ install -m 755 -d -o mopidy -g audio "/var/lib/mopidy/m3u"
 install -m 644 -o mopidy -g audio $FILE_FOLDER/BBN-Playlist.m3u8 "/var/lib/mopidy/m3u/"
 install -m 644 $FILE_FOLDER/mopidy.service "/usr/lib/systemd/system/"
 
+install -m 755 $FILE_FOLDER/mopidy-restart "/usr/local/sbin/mopidy-restart"
+
+echo "" >>/etc/sudoers
+echo 'user ALL=(ALL) NOPASSWD: /usr/local/sbin/mopidy-restart' >>/etc/sudoers
+
 rm -rf ~/.cache/pip
 
 # Enable mopidy service
 systemctl enable mopidy
-
