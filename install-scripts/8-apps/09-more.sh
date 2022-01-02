@@ -21,10 +21,11 @@ systemctl disable snapd snapd.socket
 gsettings set com.solus-project.budgie-wm focus-mode true
 
 # rpi-clone
-git clone https://github.com/billw2/rpi-clone.git
+git clone https://github.com/bareboat-necessities/rpi-clone.git
 cd rpi-clone
 cp rpi-clone rpi-clone-setup /usr/local/sbin
 cd ..
+chmod +x /usr/local/sbin/rpi-clone*
 rm -rf rpi-clone
 
 install -v $FILE_FOLDER/piclone.desktop -o 1000 -g 1000 "/home/user/.local/share/applications/piclone.desktop"
