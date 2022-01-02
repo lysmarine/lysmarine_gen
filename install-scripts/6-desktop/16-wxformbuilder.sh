@@ -19,3 +19,16 @@ cd ..
 
 cd ..
 rm -rf wxFormBuilder
+
+
+sudo bash -c 'cat << EOF > /usr/local/share/applications/wxformbuilder.desktop
+[Desktop Entry]
+Type=Application
+Name=WxFormBuilder
+GenericName=WxFormBuilder
+Comment=WxFormBuilder
+Exec=onlyone wxformbuilder
+Terminal=false
+Icon=document
+Categories=Utility;
+EOF'
