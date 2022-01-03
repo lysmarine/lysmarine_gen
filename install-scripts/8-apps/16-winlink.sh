@@ -5,8 +5,8 @@
 apt-get -y -q install libhamlib-utils
 
 if [ $LMARCH == 'armhf' ]; then
-  wget https://github.com/la5nta/pat/releases/download/v0.12.0/pat_0.12.0_linux_armhf.deb
-  dpkg -i pat_0.12.0_linux_armhf.deb && rm pat_0.12.0_linux_armhf.deb
+  wget https://github.com/la5nta/pat/releases/download/v0.12.1/pat_0.12.1_linux_armhf.deb
+  dpkg -i pat_0.12.1_linux_armhf.deb && rm pat_0.12.1_linux_armhf.deb
 
   # See: https://www.cantab.net/users/john.wiseman/Documents/ARDOPC.html
   wget -O ardopc http://www.cantab.net/users/john.wiseman/Downloads/Beta/piardopc
