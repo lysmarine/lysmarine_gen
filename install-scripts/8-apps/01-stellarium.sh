@@ -2,7 +2,7 @@
 
 apt-get clean
 
-apt-get -y -q install stellarium geographiclib-tools
+apt-get -y -q install stellarium libqt5webengine5 geographiclib-tools
 
 install -d -o 1000 -g 1000 -m 0755 "/home/user/.stellarium"
 install -v -o 1000 -g 1000 -m 0644 $FILE_FOLDER/stellarium-config.ini "/home/user/.stellarium/config.ini"
