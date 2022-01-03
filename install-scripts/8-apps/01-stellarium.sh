@@ -2,7 +2,13 @@
 
 apt-get clean
 
-apt-get -y -q install stellarium libqt5webengine5 geographiclib-tools
+apt-get -y -q install geographiclib-tools
+
+wget https://launchpad.net/~stellarium/+archive/ubuntu/stellarium-releases/+files/stellarium_0.21.2-upstream1~ubuntu18.04.1_${LMARCH}.deb
+wget https://launchpad.net/~stellarium/+archive/ubuntu/stellarium-releases/+files/stellarium-data_0.21.2-upstream1~ubuntu18.04.1_all.deb
+
+dpkg -i stellarium_0.21.2-upstream1~ubuntu18.04.1_${LMARCH}.deb stellarium-data_0.21.2-upstream1~ubuntu18.04.1_all.deb
+rm -f stellarium_0.21.2-upstream1~ubuntu18.04.1_${LMARCH}.deb stellarium-data_0.21.2-upstream1~ubuntu18.04.1_all.deb
 
 install -d -o 1000 -g 1000 -m 0755 "/home/user/.stellarium"
 install -v -o 1000 -g 1000 -m 0644 $FILE_FOLDER/stellarium-config.ini "/home/user/.stellarium/config.ini"
