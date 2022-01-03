@@ -2,7 +2,7 @@
 
 apt-get clean
 
-apt-get -y -q install stellarium=0.21.2-upstream1~ubuntu18.04.1 geographiclib-tools
+apt-get -y -q install stellarium geographiclib-tools
 
 install -d -o 1000 -g 1000 -m 0755 "/home/user/.stellarium"
 install -v -o 1000 -g 1000 -m 0644 $FILE_FOLDER/stellarium-config.ini "/home/user/.stellarium/config.ini"
