@@ -252,6 +252,9 @@
         <Include>
             <Filename>piclone.desktop</Filename>
         </Include>
+        <Include>
+            <Filename>org.gnome.baobab.desktop</Filename>
+        </Include>
     </Menu>
     <Menu>
         <Name>Games</Name>
