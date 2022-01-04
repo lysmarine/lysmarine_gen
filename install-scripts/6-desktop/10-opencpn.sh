@@ -94,6 +94,7 @@ cp -r -p share/* /usr/share/
 cd ..
 rm -rf tmp-o-bundle-$LMARCH
 
+mv /usr/lib/opencpn/libPolar_pi.so /usr/lib/opencpn/libpolar_pi.so
 
 # Polar Diagrams
 
