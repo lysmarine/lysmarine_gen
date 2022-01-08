@@ -8,16 +8,16 @@ sudo useradd -rm homeassistant -G dialout,gpio,i2c
 sudo mkdir -p /srv/homeassistant
 sudo chown homeassistant:homeassistant /srv/homeassistant
 
-sudo -u homeassistant -H -s
-cd /srv/homeassistant
-python3 -m venv .
-source bin/activate
-
-python3 -m pip install wheel
-
-pip3 install homeassistant
-
-hass
+{
+cat << EOF
+  cd /srv/homeassistant
+  python3 -m venv .
+  source bin/activate
+  python3 -m pip install wheel
+  pip3 install homeassistant
+  hass
+EOF
+} | sudo -u homeassistant -H -s
 
 # After 15 mins
 # Visit http://localhost:8123/
