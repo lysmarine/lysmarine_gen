@@ -15,9 +15,26 @@ cat << EOF
   source bin/activate
   python3 -m pip install wheel
   pip3 install homeassistant
-  hass
 EOF
 } | sudo -u homeassistant -H -s
+
+sudo bash -c 'cat << EOF > /etc/systemd/system/home-assistant@homeassistant.service
+[Unit]
+Description=Home Assistant
+After=network-online.target
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/home/%i/.homeassistant
+ExecStart=/srv/homeassistant/bin/hass -c "/home/%i/.homeassistant"
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+
+sudo systemctl --system daemon-reload
+sudo systemctl enable home-assistant@homeassistant
+sudo systemctl start home-assistant@homeassistant
 
 # After 15 mins
 # Visit http://localhost:8123/
