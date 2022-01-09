@@ -8,7 +8,7 @@ GenericName=Jellyfin
 Comment=Jellyfin
 Exec=gnome-www-browser http://localhost:8096/
 Terminal=false
-Icon=user-home
+Icon=video
 Categories=WWW;Internet
 EOF'
 
