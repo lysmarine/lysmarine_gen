@@ -98,6 +98,9 @@
             <Filename>chromium.desktop</Filename>
         </Include>
         <Include>
+            <Filename>homeassistant.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>firefox-esr.desktop</Filename>
         </Include>
         <Include>
