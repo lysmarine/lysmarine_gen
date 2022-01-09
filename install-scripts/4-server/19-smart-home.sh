@@ -15,6 +15,8 @@ cat << EOF
   source bin/activate
   python3 -m pip install wheel
   pip3 install homeassistant
+  mkdir -p /home/homeassistant/.homeassistant
+  rm -rf /home/homeassistant/.cache
 EOF
 } | sudo -u homeassistant -H -s
 
