@@ -12,8 +12,8 @@ Icon=user-home
 Categories=WWW;Internet
 EOF'
 
-sudo systemctl enable home-assistant@homeassistant
 sudo systemctl --system daemon-reload
+sudo systemctl enable home-assistant@homeassistant
 sudo systemctl start home-assistant@homeassistant
 
 echo "Wait for 15-20 min if starting for the first time."

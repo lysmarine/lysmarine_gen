@@ -101,6 +101,9 @@
             <Filename>homeassistant.desktop</Filename>
         </Include>
         <Include>
+            <Filename>jellyfin.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>firefox-esr.desktop</Filename>
         </Include>
         <Include>

@@ -1,9 +1,19 @@
 #!/bin/bash -e
 
-sudo apt install jellyfin
+sudo bash -c 'cat << EOF > /usr/local/share/applications/jellyfin.desktop
+[Desktop Entry]
+Type=Application
+Name=Jellyfin
+GenericName=Jellyfin
+Comment=Jellyfin
+Exec=gnome-www-browser http://localhost:8096/
+Terminal=false
+Icon=user-home
+Categories=WWW;Internet
+EOF'
 
 sudo systemctl enable jellyfin
 sudo systemctl start jellyfin
 
-# visit http://localhost:8096/
-# to continue set up
+echo "visit http://localhost:8096/ to continue set up"
+
