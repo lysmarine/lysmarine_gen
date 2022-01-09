@@ -160,3 +160,9 @@ bash -c 'cat << EOF > /usr/local/bin/gps-loc
 curl -s http://localhost:3000/signalk/v1/api/vessels/self/navigation/position/ | jq -M -jr '\''.value.latitude," ",.value.longitude','" ",.timestamp'\''
 EOF'
 chmod +x /usr/local/bin/gps-loc
+
+rm -rf /home/signalk/.cache
+rm -rf /home/signalk/.npm
+rm -rf /home/signalk/.node-*
+
+
