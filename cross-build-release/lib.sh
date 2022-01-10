@@ -82,6 +82,7 @@ umountImageFile() {
   umount $rootfs
 
   kpartx -d $imageFile
+  losetup -d $imageFile
 }
 
 inflateImage() {
@@ -109,6 +110,7 @@ inflateImage() {
     e2fsck -y -f /dev/mapper/loop${loopId}p$partQty
     resize2fs /dev/mapper/loop${loopId}p$partQty
     kpartx -d $imageLocationInflated
+    losetup -d $imageLocationInflated
   else
     log "Using Ready to build image from cache"
   fi
