@@ -19,6 +19,7 @@ rm -rf ~/.config
 rm -rf ~/.npm
 rm -rf ~/.wget*
 rm -rf $(find /var/log/ -type f)
+rf -f /opt/vc/src/hello_pi/hello_video/test.h264
 
 apt-get -q -y install --download-only avnav-update-plugin
 
