@@ -33,5 +33,9 @@ mv /etc/apt/sources.list.d/bbn-kplex.list-orig /etc/apt/sources.list.d/bbn-kplex
 
 install -v -m 0644 $FILE_FOLDER/rsyslog "/etc/logrotate.d/rsyslog"
 
+# Fill free space with zeros
+cat /dev/zero > /zer0s || true
+rm -f /zer0s
+
 date --rfc-3339=seconds > /etc/bbn-build
 fake-hwclock save
