@@ -11,9 +11,9 @@ ninja -C _build install
 
 cd _install
 
-cp -r bin/* /usr/local/bin/
-cp -r share/* /usr/local/share/
-cp -r lib/arm*-linux-*/* /usr/local/lib/
+mv bin/* /usr/local/bin/
+mv share/* /usr/local/share/
+mv lib/arm*-linux-*/* /usr/local/lib/
 
 cd ..
 
