@@ -78,6 +78,7 @@ if [ $LMARCH == 'armhf' ]; then
     mv noaa-apt /usr/bin/
   popd
 fi
+rm -f /usr/local/share/noaa-apt/test/test*.wav
 
 install -v $FILE_FOLDER/gnuaisgui.desktop /usr/local/share/applications/
 install -v $FILE_FOLDER/previsat.desktop /usr/local/share/applications/
