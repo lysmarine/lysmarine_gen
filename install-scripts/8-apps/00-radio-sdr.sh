@@ -134,6 +134,7 @@ cd /home/user
 wget https://www.ka2ddo.org/ka2ddo/YAAC.zip
 mkdir YAAC && cd YAAC
 unzip ../YAAC.zip
+rm -f ../YAAC.zip
 
 bash -c 'cat << EOF > /usr/local/share/applications/YAAC.desktop
 [Desktop Entry]
