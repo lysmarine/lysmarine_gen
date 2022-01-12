@@ -79,6 +79,9 @@
             <Filename>iris.desktop</Filename>
         </Include>
         <Include>
+            <Filename>openshot-qt.desktop</Filename>
+        </Include>
+        <Include>
             <Filename>vlc.desktop</Filename>
         </Include>
         <Include>
