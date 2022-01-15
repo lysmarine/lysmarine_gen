@@ -232,6 +232,30 @@ Categories=Hamradio
 Keywords=Hamradio
 EOF'
 
+#################################
+
+apt-get -y install libaudiofile-dev
+
+git clone https://github.com/cropinghigh/inmarsatc
+
+cd inmarsatc
+mkdir build && cd build
+cmake ..
+make
+make install
+cd ../../
+rm -rf inmarsatc
+
+git clone https://github.com/cropinghigh/stdcdec
+
+cd stdcdec
+mkdir build && cd build
+cmake ..
+make
+make install
+cd ../../
+rm -rf stdcdec
+
 
 #################################
 
