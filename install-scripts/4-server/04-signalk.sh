@@ -40,6 +40,8 @@ pushd /home/signalk/.signalk
                  skwiz  \
                  tuktuk-chart-plotter  \
                  signalk-raspberry-pi-bme280  \
+                 signalk-raspberry-pi-bmp180  \
+                 signalk-raspberry-pi-ina219  \
                  signalk-raspberry-pi-1wire  \
                  signalk-venus-plugin  \
                  signalk-mqtt-gw  \
