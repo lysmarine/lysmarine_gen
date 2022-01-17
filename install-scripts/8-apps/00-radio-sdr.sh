@@ -236,26 +236,13 @@ EOF'
 
 apt-get -y install libaudiofile-dev
 
+mdir=$(pwd)
+
+cd /usr/local/share
 git clone https://github.com/cropinghigh/inmarsatc
-
-cd inmarsatc
-mkdir build && cd build
-cmake ..
-make
-make install
-cd ../../
-rm -rf inmarsatc
-
 git clone https://github.com/cropinghigh/stdcdec
 
-cd stdcdec
-mkdir build && cd build
-cmake ..
-make
-make install
-cd ../../
-rm -rf stdcdec
-
+cd $mdir
 
 #################################
 
