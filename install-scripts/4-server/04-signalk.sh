@@ -43,6 +43,7 @@ pushd /home/signalk/.signalk
                  signalk-raspberry-pi-bmp180  \
                  signalk-raspberry-pi-ina219  \
                  signalk-raspberry-pi-1wire  \
+                 signalk-raspberry-mcs  \
                  signalk-venus-plugin  \
                  signalk-mqtt-gw  \
                  signalk-mqtt-home-asisstant  \
