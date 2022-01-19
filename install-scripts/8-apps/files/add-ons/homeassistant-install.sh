@@ -19,6 +19,7 @@ sudo systemctl start home-assistant@homeassistant
 echo "Wait for 15-20 min if starting for the first time."
 echo "Visit http://localhost:8123/ to continue set up."
 
+echo "Going to sleep for 15 mins... Come back later to see ESPHome installation."
 sleep 900
 
 echo "Enabling ESPHome..."
