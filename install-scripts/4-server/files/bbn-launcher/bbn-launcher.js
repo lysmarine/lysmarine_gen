@@ -354,6 +354,8 @@ function getMooringsLinks() {
         '    <div class="d1"><a href="https://dockwa.com/">Dockwa &nbsp;(US and around)</a></div>\n' +
         '    <div class="d1"><a href="https://www.snagaslip.com/">Snag-A-Slip &nbsp;(US and around)</a></div>\n' +
         '    <div class="d1"><a href="https://my-sea.com/">My-Sea &nbsp;(Germany and Europe)</a></div>\n' +
+        '    <div class="d1"><a href="https://www.visitmyharbour.com/">visitMyHarbour &nbsp;(UK)</a></div>\n' +
         '    <div class="d1"><a href="https://www.marinareservation.com/">MarinaReservation &nbsp;(Europe mostly)</a></div>\n' +
         '    <div class="d1"><a href="https://www.bluewaterapp.com">BlueWaterApp &nbsp;(Nederlands)</a></div>\n';
 }
+
