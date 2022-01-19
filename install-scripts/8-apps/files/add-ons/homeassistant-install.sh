@@ -18,3 +18,13 @@ sudo systemctl start home-assistant@homeassistant
 
 echo "Wait for 15-20 min if starting for the first time."
 echo "Visit http://localhost:8123/ to continue set up."
+
+sleep 900
+
+echo "Enabling ESPHome..."
+sudo systemctl --system daemon-reload
+sudo systemctl enable esphome@homeassistant
+sudo systemctl start esphome@homeassistant
+sudo journalctl -f -u esphome@homeassistant
+
+echo "done."
