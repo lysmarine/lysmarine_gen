@@ -26,6 +26,5 @@ echo "Enabling ESPHome..."
 sudo systemctl --system daemon-reload
 sudo systemctl enable esphome@homeassistant
 sudo systemctl start esphome@homeassistant
-sudo journalctl -f -u esphome@homeassistant
 
 echo "done."
