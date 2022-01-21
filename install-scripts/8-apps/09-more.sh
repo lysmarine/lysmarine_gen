@@ -76,6 +76,7 @@ install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/maritime-lib-install.sh 
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/homeassistant-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/jellyfin-install.sh "/home/user/add-ons/"
 install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/stdc-install.sh "/home/user/add-ons/"
+install -v -o 1000 -g 1000 -m 0755 $FILE_FOLDER/add-ons/sailorhat-install.sh "/home/user/add-ons/"
 
 /home/user/add-ons/windy-install.sh
 /home/user/add-ons/lightningmaps-install.sh

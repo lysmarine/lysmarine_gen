@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+# See: https://github.com/cropinghigh/stdcdec
+
 cd /usr/local/share
 cd inmarsatc
 sudo mkdir -p build && cd build
