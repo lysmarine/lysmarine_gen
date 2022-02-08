@@ -7,21 +7,46 @@ logErr() {
 	echo -e "\e[91m [$(date +'%T')] ---> $1 \e[0m"
 }
 
+function showHelp() {
+ echo '
+ 	  SYNOPSIS
+ 	      build.sh
+
+      DESCRIPTION
+ 	      -b
+ 	         The base operating system to build on :
+ 	         Supported option are raspios|armbian-pine64so|debian-live|debian-vbox
+
+ 	      -a
+ 	          The processor architecture to build on. If the architecture is not the same as the host qemu will be
+ 	          used. Otherwise only chroot will be used.
+ 	          Supported option are armhf|arm64|amd64
+          -v
+              The name to include in the output file name. If none is provided, a timestamp will be used.
+
+ 	      -s
+ 	          A string of space separated stages to build. If nothing is provided, all stage will be build.
+
+	EXAMPLES:
+		sudo ./build.sh -o raspios -a arm64
+		sudo ./build.sh -o raspios -a arm64 -v 0.9.0 -s "0 2 4"
+		sudo ./build.sh -o raspios -a arm64 -s "0 2.1 2.2 2.3 4 6.1 8"
+
+'
+}
+
 # Create caching folder hierarchy to work with this architecture
 setupWorkSpace() {
 	thisArch=$1
-	mkdir -p ./cache/${thisArch}/isoContent
-	mkdir -p ./work/${thisArch}/rootfs #deprecated
-	mkdir -p ./work/${thisArch}/bootfs #deprecated
 
-	mkdir -p ./work/${thisArch}/releaseRootfs
-	mkdir -p ./work/${thisArch}/releaseBootfs
-	mkdir -p ./work/${thisArch}/originalRootfs
-	mkdir -p ./work/${thisArch}/originalBootfs
-	mkdir -p ./work/${thisArch}/originalBootfs/boot
+	mkdir -p ./cache/${thisArch}/iso
+	mkdir -p ./cache/${thisArch}/mnt
+	mkdir -p ./cache/${thisArch}/baseOS
 
+	mkdir -p ./work/${thisArch}/mnt
 	mkdir -p ./work/${thisArch}/workdir
-	mkdir -p ./work/${thisArch}/upperLayer
+	mkdir -p ./work/${thisArch}/oldstage
+	mkdir -p ./work/${thisArch}/newstage
 	mkdir -p ./work/${thisArch}/fakeLayer || true
 
 	mkdir -p ./release/
@@ -53,7 +78,6 @@ mountReleaseImage() {
 		mount -v /dev/mapper/loop${loopId}p2 ./$workDir/releaseRootfs/
 		mount -v /dev/mapper/loop${loopId}p1 ./$workDir/releaseBootfs/
 
-
 	elif [ $partQty == 1 ]; then
 		mount -v /dev/mapper/loop${loopId}p1 ./$workDir/originalRootfs/
 		mount --bind ./$workDir/originalRootfs/boot ./$workDir/originalBootfs/
@@ -76,13 +100,14 @@ mountSourceImage() {
 
  	## Mount actual partitions
 	if [ $partQty == 2 ]; then
-		mount -v /dev/mapper/loop${loopId}p2 ./$workDir/originalRootfs/
-		mount -v /dev/mapper/loop${loopId}p1 ./$workDir/originalBootfs/boot
+		mount -v /dev/mapper/loop${loopId}p2 ./$workDir/mnt/
+		mount -v /dev/mapper/loop${loopId}p1 ./$workDir/mnt/boot
 
 	elif [ $partQty == 1 ]; then
-		mount -v /dev/mapper/loop${loopId}p1 ./$workDir/originalRootfs/
+		mount -v /dev/mapper/loop${loopId}p1 ./$workDir/mnt/
+
 	else
-		log "ERROR: unsuported amount of partitions."; exit 1
+		log "ERROR: unsupported amount of partitions."; exit 1
 	fi
 }
 
@@ -284,17 +309,10 @@ function shrinkWithPishrink {
 
 function safetyChecks {
      ## Make sure we have a clean workspace.
-    if [ "$(ls -A $workDir/rootfs/)" ] ; then
-		   logErr "$workDir/rootfs is not empty. Previous run have fail ?"
-		   umount $workDir/rootfs/dev  || umount -l $workDir/rootfs/dev || /bin/true
-		   umount $workDir/rootfs/proc || umount -l $workDir/rootfs/proc || /bin/true
-		   umount $workDir/rootfs/sys  || umount -l $workDir/rootfs/sys || /bin/true
-		   umount $workDir/rootfs/tmp  || umount -l $workDir/rootfs/tmp || /bin/true
-		   umount $workDir/rootfs/tmp  || umount -l $workDir/rootfs/tmp || /bin/true
-		   umount $workDir/rootfs/boot || umount -l $workDir/rootfs/boot || /bin/true
-		   umount $workDir/rootfs || umount -l $$workDir/rootfs || /bin/true
-		   rm -r $workDir/rootfs/*
-		   exit 1
+
+	if [ "$(ls -A $workDir/fakeLayer/boot)" ] ; then
+		   logErr "$workDir/fakeLayer/boot is not empty. Previous run have fail ?"
+		   umount $workDir/fakeLayer/boot  || umount -l $workDir/fakeLayer/boot || /bin/true
 	fi
 
 	if [ "$(ls -A $workDir/fakeLayer/)" ] ; then

@@ -2,36 +2,6 @@
 {
 	source lib.sh
 	checkRoot
-	#################################################################################
-	##
-	##  SYNOPSIS
-	##      build.sh
-    ##
-    ##  DESCRIPTION
-	##      -o
-	##         The base operating system to build on :
-	##         Supported option are raspios|armbian-pine64so|debian-live|debian-vbox
-	##
-	##      -a
-	##          The processor architecture to build on. If the architecture is not the same as the host qemu will be
-	##          used. Otherwise only chroot will be used.
-	##          Supported option are armhf|arm64|amd64
-    ##
-    ##      -v
-    ##          The name to include in the output file name. If none is provided, a timestamp will be used.
-	##
-	##      -s
-	##          A string of space separated stages to build. If nothing is provided, all stage will be build.
-	##
-	##  EXAMPLES:
-	##      sudo ./build.sh -o raspios -a arm64
-	##      sudo ./build.sh -o raspios -a arm64 -v 0.9.0 -s "0 2 4"
-	##      sudo ./build.sh -o raspios -a arm64 -s "0 2.1 2.2 2.3 4 6.1 8"
-	##      sudo ./build.sh -o raspios -a arm64 -h pi@192.168.1.123
-	##
-	##  To mount mount the image/iso and have a prompt inside the chroot: sudo ./build.sh raspios arm64 0.9.0 bash
-	##
-	#################################################################################
 
 
 
@@ -40,9 +10,9 @@
 ###########
 
     ## Assign options
-	while getopts ":o:a:v:s:" opt; do
+	while getopts ":b:a:v:s:r:h" opt; do
 	  case $opt in
-		o)
+		b)
 		  baseOS="$OPTARG"
 		  ;;
 		 a)
@@ -54,14 +24,22 @@
 		 s)
 		  stages=$OPTARG
 		  ;;
+		 r)
+		  remove="$OPTARG"
+		  ;;
+		 h)
+		   showHelp
+		 ;;
 	  esac
 	done
 
 	## Set default values if missing.
+
 	baseOS="${baseOS:-raspios}"
 	cpuArch="${cpuArch:-armhf}"
 	lmVersion="${lmVersion:-$EPOCHSECONDS}"
-	stagesToBuild="${stagesToBuild:-*}"
+	#stages="${$stages:-$defaultStages}"
+	[[  -z  $stages  ]] && 	stages='0 2 4 6 8'
 	buildCmd="./install.sh $stages"
 	[[ $stages == 'bash' ]] && buildCmd='/bin/bash' ;
 
@@ -76,7 +54,7 @@
 		echo "ERROR: Unsupported cpu arch." ; exit 1
 	fi
 
-	## Setup the workspace
+	## Setup the workspaces
 	setupWorkSpace "$baseOS-$cpuArch"
 	cacheDir="./cache/$baseOS-$cpuArch"
 	workDir="./work/$baseOS-$cpuArch"
@@ -88,7 +66,7 @@
 
 
 ###########
-### Caching phase
+### Get the base OS
 ###########
 
 	## If the source OS is not found in cache, download it.
@@ -97,123 +75,123 @@
 			zipName="raspios_lite_${cpuArch}_latest"
 			wget -P "$cacheDir/" "https://downloads.raspberrypi.org/$zipName"
 			7z e -o"$cacheDir/" "$cacheDir/$zipName"
-			mv "$cacheDir"/????-??-??-"$baseOS"-buster-"$cpuArch"-lite.img "$cacheDir/$baseOS-$cpuArch.base.img"
+			mv "$cacheDir"/????-??-??-"$baseOS"-bullseye-"$cpuArch"-lite.img "$cacheDir/$baseOS-$cpuArch.base.img"
 			rm "$cacheDir/$zipName"
 
 		elif [[ "$baseOS" == "pine64so" ]]; then
-			zipName="Armbian_21.02.3_Pine64so_buster_current_5.10.21.img.xz"
-			wget -P "${cacheDir}/" "https://dl.armbian.com/pine64so/archive/$zipName"
+			zipName="Armbian_21.08.1_Pine64_bullseye_current_5.10.60.img.xz"
+			wget -P "${cacheDir}/" "https://armbian.tnahosting.net/dl/pine64/archive/$zipName"
 			7z e -o"${cacheDir}/" "${cacheDir}/${zipName}"
-			mv "$cacheDir"/Armbian_??.??.?_Pine64so_buster_current_?.??.??.img "$cacheDir/$baseOS-$cpuArch.base.img"
+			mv "$cacheDir"/Armbian_??.??.?_Pine64_bullseye_current_?.??.??.img "$cacheDir/$baseOS-$cpuArch.base.img"
 			rm "$cacheDir/$zipName"
 
 		elif [[ "$baseOS" =~ debian-* ]]; then
-			wget -P "$cacheDir/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/$cpuArch/iso-hybrid/debian-live-10.9.0-$cpuArch-standard+nonfree.iso"
-			mv "$cacheDir/debian-live-10.9.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
+			wget -P "$cacheDir/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/$cpuArch/iso-hybrid/debian-live-11.2.0-$cpuArch-standard+nonfree.iso"
+			mv "$cacheDir/debian-live-11.2.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
+
 		fi
 	fi
 
 
+###########
+### Extract the base OS
+###########
 
-	## if it's an image file, we assume that it will need to be inflated.
-	if [[ ! -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" && -f "$cacheDir/$baseOS-$cpuArch.base.img" ]]; then
+	if [[ -z "$(ls -A $cacheDir/baseOS)" && -f "$cacheDir/$baseOS-$cpuArch.base.img" ]]; then
 		inflateImage "$baseOS" "$cacheDir/$baseOS-$cpuArch.base.img"
+		mountSourceImage "$cacheDir/$baseOS-$cpuArch.base.img"
+		cp -R $workDir/mnt/. $cacheDir/baseOS
+		umount $workDir/mnt/boot || true
+		umount $workDir/mnt || true
+
+	elif [[ -z "$(ls -A $cacheDir/baseOS)"  && -f "$cacheDir/$baseOS-$cpuArch.base.iso" ]]; then
+	 	7z x "$cacheDir/${baseOS}-${cpuArch}.base.iso" -o$cacheDir/iso
+	 	unsquashfs  -f -d $cacheDir/baseOS $cacheDir/iso/live/filesystem.squashfs
+
 	fi
 
-
-
 ###########
-### Build phase
+### Build lysmarine
 ###########
-	# if it's an image file copy and mount it
-	if [ -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" ]; then
-	 	cp "$cacheDir/$baseOS-$cpuArch.base.img-inflated" "$workDir/$baseOS-$cpuArch.base.img" &
 
-		mountSourceImage "$cacheDir/$baseOS-$cpuArch.base.img"
+	# start copying the baseOs from cache to workspace in the background to save time.
+	cp $cacheDir/${baseOS}-${cpuArch}.base.img-inflated $workDir/ &
+	cp -r $cacheDir/iso/. $workDir/iso &
 
-		mount -t overlay -o lowerdir=$workDir/originalRootfs,upperdir=$workDir/upperLayer,workdir=$workDir/workdir  none $workDir/fakeLayer
-		if [ $partQty == 2 ]; then
-			cp -ar $workDir/originalBootfs/boot/* $workDir/fakeLayer/boot
+	# delete requested build layers from cache.
+	set -f
+	log "Deleting cached layers"
+	for layer in $remove; do
+		rm -r "./$cacheDir/$layer" || true
+	done
+
+# Overlay the work area over the exposed baseOS in the cache to start building right away
+	cachedLayers="";
+	for argument in $stages; do # Loop each requested stages to build
+		if [ -d ./$cacheDir/$argument ] ; then # if the stage is already available in the cache, use it instead of building it,
+				cachedLayers=":$cachedLayers"
+			cachedLayers="$cacheDir/$argument$cachedLayers"
+
+		else # mount and build
+			stage=$(echo $argument | cut -d '.' -f 1)
+			script=$(echo $argument | cut -s -d '.' -f 2)
+			if [ ! $script ]; then script="*" ; fi
+			rm -r "./$workDir/$argument" || true
+			mkdir $workDir/$argument
+			mount -t overlay -o lowerdir=$cachedLayers$cacheDir/baseOS,upperdir=$workDir/$argument,workdir=$workDir/workdir none $workDir/fakeLayer
+
+			addLysmarineScripts "$workDir/fakeLayer"
+			buildCmd="./install.sh $stage.$script"
+    		chrootAndBuild
+
+			umount $workDir/fakeLayer || true
+			cp -r $workDir/$argument  $cacheDir/$argument
+			[ -f cachedLayers ] && cachedLayers=":"
+			cachedLayers="$cacheDir/$argument:$cachedLayers"
 		fi
+		set +f
+	done
 
-		addLysmarineScripts "$workDir/fakeLayer"
-		chrootAndBuild
 
+###########
+### Repackage the OS for shipping
+###########
+	mount -t overlay overlay -o lowerdir=$cachedLayers$cacheDir/baseOS,upperdir=$workDir/oldstage,workdir=$workDir/workdir $workDir/fakeLayer
+
+	# Merging build layers in the BaseOs that will be shipped.
+	if [ -f "$cacheDir/$baseOS-$cpuArch.base.iso" ]; then
+
+		mkdir -p "$workDir/iso/live/"
+		mksquashfs "$workDir/fakeLayer" "$workDir/iso/live/filesystem.squashfs" -comp xz -noappend
+		md5sum "$workDir/iso/live/filesystem.squashfs"
+		rsync -hPr  "$cacheDir/iso/.disk" "$workDir/iso"
+
+		cp files/preseed.cfg "$workDir/iso"
+		cp files/splash.png "$workDir/iso/isolinux/"
+		cp files/menu.cfg "$workDir/iso/isolinux/"
+		cp files/stdmenu.cfg "$workDir/iso/isolinux/"
 		wait
 
+		xorriso -as mkisofs -V 'lysmarineOSlive-amd64' -o "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.iso" -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus "$workDir/iso"
 
-		mountReleaseImage "$workDir/$baseOS-$cpuArch.base.img"
-		if [ $partQty == 2 ]; then
-			cp -ar $workDir/fakeLayer/boot/* $workDir/releaseBootfs
-			rm -r $workDir/fakeLayer/boot/*
-		fi
-		cp -ar $workDir/fakeLayer/* $workDir/releaseRootfs
+	elif [ -f "$cacheDir/$baseOS-$cpuArch.base.img" ]; then
+		wait
+	 	mountSourceImage "$workDir/$baseOS-$cpuArch.base.img-inflated"
+	 	cp -ar $workDir/fakeLayer/* $workDir/mnt
 
-		umount $workDir/fakeLayer || true
-		umount $workDir/originalRootfs || true
-		umount $workDir/originalBootfs/boot || true
-		umount $workDir/releaseBootfs || true
-		umount $workDir/releaseRootfs || true
-
-		rm -r $workDir/upperLayer &
-		shrinkWithPishrink $cacheDir $workDir/$baseOS-$cpuArch.base.img
-
-		mv "$workDir/$baseOS-$cpuArch.base.img" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
-
-
-
-	elif [[ "$baseOS" == 'debian-live' ]]; then # if it's an ISO file extract it and mount it
-		if [[ ! -n "$(ls -A $cacheDir/isoContent/)" ]]; then
-		 	7z x "$cacheDir/${baseOS}-${cpuArch}.base.iso" -o$cacheDir/isoContent
-		fi
-		if [[ ! -d "$cacheDir/squashfs-root" ]]; then
-		    mount -t squashfs -o loop "$cacheDir/isoContent/live/filesystem.squashfs" $workDir/rootfs
-			cp -a $workDir/rootfs "$cacheDir/squashfs-root"
-			umount $workDir/rootfs
-			rm -rf $cacheDir/isoContent/live/filesystem.squashfs
-		fi
-
-		safetyChecks
-
-		# Build lysmarine
-		#cp -rp "$cacheDir/squashfs-root/"* "$workDir/rootfs"
-
-		mount -t overlay -o lowerdir=$cacheDir/squashfs-root,upperdir=$workDir/upperLayer,workdir=$workDir/workdir  none $workDir/fakeLayer
-
-		ls -lah $workDir/fakeLayer
-		touch $workDir/fakeLayer/sdfsdfdsf
-
-
-		addLysmarineScripts "$workDir/fakeLayer"
-		chrootAndBuild
-
-		# Re-squash the file system.
-		mkdir -p "$workDir/isoContent/live/"
-		mksquashfs "$workDir/fakeLayer" "$workDir/isoContent/live/filesystem.squashfs" -comp xz -noappend
-
-		umount $workDir/fakeLayer
-
-		# Adapt the iso
-		ls -lah "$workDir/isoContent/live/filesystem.squashfs"
-		md5sum "$workDir/isoContent/live/filesystem.squashfs"
-		rsync -Prq --exclude=*"/filesystem.squashfs" "$cacheDir"/isoContent/ "$workDir/isoContent"
-		ls -lah "$workDir/isoContent/live/filesystem.squashfs"
-		md5sum "$workDir/isoContent/live/filesystem.squashfs"
-
-		rsync -hPr  "$cacheDir/isoContent/.disk" "$workDir/isoContent"
-		cp files/preseed.cfg "$workDir/isoContent"
-		cp files/splash.png "$workDir/isoContent/isolinux/"
-		cp files/menu.cfg "$workDir/isoContent/isolinux/"
-		cp files/stdmenu.cfg "$workDir/isoContent/isolinux/"
-
-		# Create the iso
-		xorriso -as mkisofs -V 'lysmarineOSlive-amd64' -o "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.iso" -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus "$workDir/isoContent"
-		rm -r $workDir/isoContent
-
-	else
-		echo "Unknown base OS"
-		exit 1
+		shrinkWithPishrink $cacheDir $workDir/$baseOS-$cpuArch.base.img-inflated
+		mv "$workDir/$baseOS-$cpuArch.base.img-inflated" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
 	fi
 
-	exit 0
+
+
+###########
+### Cleanup workspace
+###########
+
+	umount $workDir/fakeLayer || true
+	umount $workDir/mnt/boot || true
+	umount $workDir/mnt || true
+	rm -r $workDir/iso || true
+exit 0
 }
