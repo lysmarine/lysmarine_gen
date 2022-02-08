@@ -1,1 +1,1 @@
-deb https://www.free-x.de/debian/ buster main contrib non-free
+deb [signed-by=/usr/share/keyrings/oss.boating-archive-keyring.gpg] https://www.free-x.de/debian/ buster main contrib non-free
