@@ -14,6 +14,3 @@ apt-get -yq install \
 
 ## Give volume and device management capabilities to the user user.
 usermod -a -G audio user
-
-## Use earplug instead of HDMI py default
-echo "set-default-source alsa_output.platform-bcm2835_audio.analog-mono.2.monitor" >> /etc/pulse/default.pa
