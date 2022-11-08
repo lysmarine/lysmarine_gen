@@ -1,0 +1,7 @@
+Package: *
+Pin: origin raspbian.raspberrypi.org
+Pin-Priority: 800
+
+Package: *
+Pin: origin deb.debian.org
+Pin-Priority: 600
