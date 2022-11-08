@@ -3,9 +3,10 @@
 # Fix a bug documented somewhere in gentoo bug tracker
 update-mime-database /usr/share/mime &
 
-# Setting sound
+# Setting sound to be on the earplugs by default not the hdmi
 amixer cset numid=3 1 &
 amixer -D pulse set Master 90% unmute &
 amixer set Master 90% unmute &
 
+# Self disable
 systemctl disable firstRun.service ;

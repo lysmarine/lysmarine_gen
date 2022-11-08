@@ -12,7 +12,7 @@ apt-get -yq install \
 	gstreamer1.0-plugins-good \
 	gstreamer1.0-x
 
-## Give volume and device management capabilites to the user user.
+## Give volume and device management capabilities to the user user.
 usermod -a -G audio user
 
 ## Use earplug instead of HDMI py default

@@ -9,7 +9,7 @@ install -v $FILE_FOLDER/hostname "/etc/"
 sed -i '/raspberrypi/d' /etc/hosts
 cat $FILE_FOLDER/hosts >> /etc/hosts
 
-## By default, network manager will connect as a preconfigured hotspot.
+### By default, network manager will connect as a preconfigured hotspot.
 install -m0600 -v $FILE_FOLDER/lysmarine-hotspot.nmconnection "/etc/NetworkManager/system-connections/"
 systemctl disable dnsmasq
 
