@@ -10,7 +10,7 @@
 ###########
 
     ## Assign options
-	while getopts ":b:a:v:s:r:h" opt; do
+	while getopts ":b:a:v:s:r:h:d" opt; do
 	  case $opt in
 		b)
 		  baseOS="$OPTARG"
@@ -27,6 +27,11 @@
 		 r)
 		  remove="$OPTARG"
 		  ;;
+		 d)
+		  vbox=1
+		  baseOS="debian-vbox"
+		  cpuArch="amd64"
+		  ;;
 		 h)
 		   showHelp
 		 ;;
@@ -34,17 +39,16 @@
 	done
 
 	## Set default values if missing.
-
 	baseOS="${baseOS:-raspios}"
 	cpuArch="${cpuArch:-armhf}"
 	lmVersion="${lmVersion:-$EPOCHSECONDS}"
-	#stages="${$stages:-$defaultStages}"
+
 	[[  -z  $stages  ]] && 	stages='0 2 4 6 8'
 	buildCmd="./install.sh $stages"
 	[[ $stages == 'bash' ]] && buildCmd='/bin/bash' ;
 
 	## Validate arguments.
-	supportedOS=(raspios debian-live pine64so)
+	supportedOS=(raspios debian-live debian-vbox pine64so)
 	if ! (printf '%s\n' "${supportedOS[@]}" | grep -xq $baseOS); then
 		echo "ERROR: Unsupported os." ; exit 1
 	fi
@@ -59,6 +63,7 @@
 	cacheDir="./cache/$baseOS-$cpuArch"
 	workDir="./work/$baseOS-$cpuArch"
 	releaseDir="./release/"
+    vboxDir=$(pwd)/$workDir
 
 	## Check if everything have been unmounted on the previous run.
 	safetyChecks
@@ -75,7 +80,7 @@
 			zipName="raspios_lite_${cpuArch}_latest"
 			wget -P "$cacheDir/" "https://downloads.raspberrypi.org/$zipName"
 			7z e -o"$cacheDir/" "$cacheDir/$zipName"
-			mv "$cacheDir"/????-??-??-"$baseOS"-bullseye-"$cpuArch"-lite.img "$cacheDir/$baseOS-$cpuArch.base.img"
+			mv "$cacheDir"/"$zipName"~ "$cacheDir/$baseOS-$cpuArch.base.img"
 			rm "$cacheDir/$zipName"
 
 		elif [[ "$baseOS" == "pine64so" ]]; then
@@ -86,11 +91,12 @@
 			rm "$cacheDir/$zipName"
 
 		elif [[ "$baseOS" =~ debian-* ]]; then
-			wget -P "$cacheDir/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/$cpuArch/iso-hybrid/debian-live-11.2.0-$cpuArch-standard+nonfree.iso"
-			mv "$cacheDir/debian-live-11.2.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
+			wget -P "$cacheDir/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/$cpuArch/iso-hybrid/debian-live-11.5.0-$cpuArch-standard+nonfree.iso"
+			mv "$cacheDir/debian-live-11.5.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
 
 		fi
 	fi
+
 
 
 ###########
@@ -110,9 +116,43 @@
 
 	fi
 
+	#If no base vbox image exist
+	if [[ $vbox && ! -f $vboxDir/lysmarine_dev_box.vdi ]]; then
+		createVboxImage
+	fi
+
+
+
 ###########
 ### Build lysmarine
 ###########
+	if [[ $vbox && -f $vboxDir/lysmarine_dev_box.vdi ]]; then
+		log "Mounting Vbox drive on host And copy lysmarine into it."
+		cp $vboxDir/lysmarine_dev_box.vdi $vboxDir/lysmarine_dev_box.vdi.live
+
+		vboxmanage list hdds
+		vboximg-mount -i fb90d472-32ad-46bf-9257-9d29bce9e703 --rw --root  $vboxDir/dev/
+
+        sleep 1 ; wait
+        mount -v $vboxDir/dev/vol0 $vboxDir/mnt
+		cp -r "../install-scripts" "$vboxDir/mnt"
+		chmod 0775 "$vboxDir/mnt/install-scripts/install.sh"
+ 		ls -lah $vboxDir/mnt
+		sync; wait; sleep 1
+
+		umount $vboxDir/mnt
+		umount $vboxDir/dev
+		sync; wait; sleep 1
+
+		vboxmanage closemedium disk fb90d472-32ad-46bf-9257-9d29bce9e703 || true
+		sync; wait; sleep 1
+
+		log "Start the machine "
+		VBoxManage startvm lysmarine_dev_box --type=gui
+		log "Vbox machine should be running by now, User and passwords are:  "
+		log "ssh is port forwarded to 3022"
+		exit
+	fi
 
 	# start copying the baseOs from cache to workspace in the background to save time.
 	cp $cacheDir/${baseOS}-${cpuArch}.base.img-inflated $workDir/ &
@@ -145,12 +185,13 @@
     		chrootAndBuild
 
 			umount $workDir/fakeLayer || true
-			cp -r $workDir/$argument  $cacheDir/$argument
+			cp -ra $workDir/$argument  $cacheDir/$argument
 			[ -f cachedLayers ] && cachedLayers=":"
 			cachedLayers="$cacheDir/$argument:$cachedLayers"
 		fi
 		set +f
 	done
+
 
 
 ###########
@@ -164,7 +205,7 @@
 		mkdir -p "$workDir/iso/live/"
 		mksquashfs "$workDir/fakeLayer" "$workDir/iso/live/filesystem.squashfs" -comp xz -noappend
 		md5sum "$workDir/iso/live/filesystem.squashfs"
-		rsync -hPr  "$cacheDir/iso/.disk" "$workDir/iso"
+		rsync -haPr  "$cacheDir/iso/.disk" "$workDir/iso"
 
 		cp files/preseed.cfg "$workDir/iso"
 		cp files/splash.png "$workDir/iso/isolinux/"
@@ -175,11 +216,11 @@
 		xorriso -as mkisofs -V 'lysmarineOSlive-amd64' -o "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.iso" -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus "$workDir/iso"
 
 	elif [ -f "$cacheDir/$baseOS-$cpuArch.base.img" ]; then
+	 	cp $cacheDir/$baseOS-$cpuArch.base.img-inflated $workDir/$baseOS-$cpuArch.base.img-inflated
 		wait
 	 	mountSourceImage "$workDir/$baseOS-$cpuArch.base.img-inflated"
-	 	cp -ar $workDir/fakeLayer/* $workDir/mnt
+	 	cp -far $workDir/fakeLayer/* $workDir/mnt || true
 
-		shrinkWithPishrink $cacheDir $workDir/$baseOS-$cpuArch.base.img-inflated
 		mv "$workDir/$baseOS-$cpuArch.base.img-inflated" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
 	fi
 
@@ -189,9 +230,8 @@
 ### Cleanup workspace
 ###########
 
-	umount $workDir/fakeLayer || true
+	umount -l $workDir/fakeLayer || true
 	umount $workDir/mnt/boot || true
 	umount $workDir/mnt || true
-	rm -r $workDir/iso || true
 exit 0
 }

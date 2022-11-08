@@ -15,7 +15,7 @@ function showHelp() {
       DESCRIPTION
  	      -b
  	         The base operating system to build on :
- 	         Supported option are raspios|armbian-pine64so|debian-live|debian-vbox
+ 	         Supported option are raspios|armbian-pine64so|debian-live
 
  	      -a
  	          The processor architecture to build on. If the architecture is not the same as the host qemu will be
@@ -27,11 +27,20 @@ function showHelp() {
  	      -s
  	          A string of space separated stages to build. If nothing is provided, all stage will be build.
 
+ 	      -r
+			  A string of space separated stages to remove from cache. If nothing is provided, no stages will be removed.
+
+		  -d
+		     Build a virtualbox image for development and testing purpose.
+
+		  -h
+		     Help
+
 	EXAMPLES:
 		sudo ./build.sh -o raspios -a arm64
 		sudo ./build.sh -o raspios -a arm64 -v 0.9.0 -s "0 2 4"
 		sudo ./build.sh -o raspios -a arm64 -s "0 2.1 2.2 2.3 4 6.1 8"
-
+ 		sudo ./build.sh -b raspios -a armhf -s "0 2 6 8" -r "0 2 4 6 8"
 '
 }
 
@@ -42,7 +51,7 @@ setupWorkSpace() {
 	mkdir -p ./cache/${thisArch}/iso
 	mkdir -p ./cache/${thisArch}/mnt
 	mkdir -p ./cache/${thisArch}/baseOS
-
+	mkdir -p ./work/${thisArch}/dev
 	mkdir -p ./work/${thisArch}/mnt
 	mkdir -p ./work/${thisArch}/workdir
 	mkdir -p ./work/${thisArch}/oldstage
@@ -194,6 +203,7 @@ inflateImage() {
 function addLysmarineScripts {
 	rootfs=$1
 	log "copying lysmarine on the image"
+	rm -r "$rootfs/install-scripts" || true
 	cp -r "../install-scripts" "$rootfs/"
 	chmod 0775 "$rootfs/install-scripts/install.sh"
 }
@@ -237,7 +247,7 @@ $buildCmd
 EOT
 
 
-	 rm $workDir/rootfs/etc/resolv.conf
+	 rm $workDir/rootfs/etc/resolv.conf || true
 	 umount $workDir/rootfs/dev
 	 umount $workDir/rootfs/proc
 	 umount $workDir/rootfs/sys
@@ -269,7 +279,6 @@ function chrootAndBuild {
 		$buildCmd
 
 	else # just chroot
-
 	  mount --bind /dev $workDir/fakeLayer/dev
 	  mount -t proc /proc $workDir/fakeLayer/proc
 	  mount --bind /sys $workDir/fakeLayer/sys
@@ -281,7 +290,7 @@ $buildCmd
 EOT
 
 	 rm $workDir/fakeLayer/etc/resolv.conf
-	 umount $workDir/fakeLayer/dev
+	 umount $workDir/fakeLayer/dev || true
 	 umount $workDir/fakeLayer/proc
 	 umount $workDir/fakeLayer/sys
 	 umount $workDir/fakeLayer/tmp
@@ -340,9 +349,47 @@ function safetyChecks {
 	fi
 	if [ "$(ls -A $workDir/upperLayer/)" ] ; then
 		   logErr "$workDir/upperLayer is not empty. Previous run have fail ?"
-		  rm -rf $workDir/upperLayer/*
-		  rm -rf $workDir/upperLayer/.*
+		   rm -rf $workDir/upperLayer/*
+		   rm -rf $workDir/upperLayer/.*
 		   exit 1
 	fi
 
+}
+
+
+
+function createVboxImage {
+  if [[ ! -f $vboxDir/lysmarine_dev_box.vdi ]]; then
+ 		pushd $vboxDir/
+    		log "Creating VBox image"
+
+    		# create the machine
+    		VBoxManage createvm --name lysmarine_dev_box --ostype "Debian_64" --register --basefolder ./
+
+    		#port fowarding
+    		VBoxManage modifyvm lysmarine_dev_box --natpf1 "ssh,tcp,,3022,,22"
+
+    		#Set memory and network
+    		VBoxManage modifyvm lysmarine_dev_box --ioapic on
+    		VBoxManage modifyvm lysmarine_dev_box --memory 2048 --vram 128
+    		VBoxManage modifyvm lysmarine_dev_box --cpus 4
+
+    		#Create Disk and load the iso file
+    		log "Creating VBox drive"
+    		VBoxManage createhd --filename ./lysmarine_dev_box.vdi --size 32768
+    		VBoxManage storagectl lysmarine_dev_box --name "SATA Controller" --add sata --controller IntelAhci
+    		VBoxManage storageattach lysmarine_dev_box --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium ./lysmarine_dev_box.vdi
+    		VBoxManage storagectl lysmarine_dev_box --name "IDE Controller" --add ide --controller PIIX4
+    		VBoxManage storageattach lysmarine_dev_box --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium ../../$cacheDir/$baseOS-$cpuArch.base.iso
+    		VBoxManage modifyvm lysmarine_dev_box --boot1 dvd --boot2 disk
+
+    		#Start the VM to do the initial install
+    		log "This is your first run, Install base debian and rerun this script."
+    		VBoxManage startvm lysmarine_dev_box --type=gui
+
+    		read -n 1 -r -s -p $'When done with the vurtual machine, press enter to continue...\n'
+    		VBoxManage modifyvm lysmarine_dev_box --boot1 disk --boot2 none
+
+    	popd
+  fi
 }
