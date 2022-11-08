@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Pypilot Webapp
-Exec=onlyone /usr/local/bin/Pypilot_webapp
+Exec=/usr/local/bin/Pypilot_webapp
 Terminal=false
 Icon=go-jump
 Categories=Utility

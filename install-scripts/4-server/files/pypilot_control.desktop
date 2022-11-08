@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Pypilot Control
-Exec=onlyone pypilot_control
+Exec=pypilot_control
 Terminal=false
 Icon=go-jump
 Categories=Utility
