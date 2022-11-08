@@ -1,4 +1,4 @@
 deb [signed-by=/usr/share/keyrings/fredericguilbaultppa-archive-keyring.gpg] http://ppa.launchpad.net/lysmarine/rtl-ais/ubuntu bionic main
 deb [signed-by=/usr/share/keyrings/fredericguilbaultppa-archive-keyring.gpg] http://ppa.launchpad.net/lysmarine/kplex/ubuntu bionic main
-deb [signed-by=/usr/share/keyrings/fredericguilbaultppa-archive-keyring.gpg] http://ppa.launchpad.net/lysmarine/ppa/ubuntu focal main
+deb [signed-by=/usr/share/keyrings/fredericguilbaultppa-archive-keyring.gpg] http://ppa.launchpad.net/lysmarine/ppa/ubuntu jammy main
 deb [signed-by=/usr/share/keyrings/fredericguilbaultppa-archive-keyring.gpg] http://ppa.launchpad.net/lysmarine/pypilot/ubuntu focal main
