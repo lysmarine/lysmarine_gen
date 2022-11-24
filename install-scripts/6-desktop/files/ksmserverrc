@@ -1,0 +1,7 @@
+[$Version]
+update_info=ksmserver_update_loginMode_value.upd:ksmserver_update_loginMode_value_default_enum
+
+[General]
+confirmLogout=false
+offerShutdown=false
+shutdownType=2
