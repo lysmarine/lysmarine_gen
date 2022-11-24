@@ -1,0 +1,15 @@
+[$Version]
+update_info=kwinrules.udp:replace-placement-string-to-enum
+
+[1]
+Description=opencpn
+maximizehoriz=true
+maximizehorizrule=2
+maximizevert=true
+maximizevertrule=2
+wmclass=opencpn*
+wmclasscomplete=true
+wmclassmatch=3
+
+[General]
+count=1
