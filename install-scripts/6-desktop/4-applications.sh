@@ -6,8 +6,8 @@ apt-get -yq install \
 	nautic \
 	chromium \
 	elisa \
-	kalk \
-	index
+	index \
+	kwrite
 
 ## Rpi specific packages
 apt-get install -yq --no-install-recommends piclone pigpio libturbojpeg0 raspi-copies-and-fills || true
