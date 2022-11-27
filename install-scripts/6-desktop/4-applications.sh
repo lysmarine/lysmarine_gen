@@ -1,13 +1,16 @@
 #!/bin/bash -e
 ## Apps
 apt-get -yq install \
-	kgx \
-	gpsbabel \
-	nautic \
-	chromium \
-	elisa \
-	index \
-	kwrite
+	kgx        \
+	gpsbabel   \
+	nautic     \
+	chromium   \
+	elisa      \
+	index      \
+	kwrite     \
+	calindori  \
+	kronometer \
+
 
 ## Rpi specific packages
 apt-get install -yq --no-install-recommends piclone pigpio libturbojpeg0 raspi-copies-and-fills || true
