@@ -9,13 +9,12 @@ install -v -o 1000 -g 1000 -m 600 $FILE_FOLDER/kscreenlockerrc "/home/user/.conf
 install -v -o 1000 -g 1000 -m 600 $FILE_FOLDER/ksmserverrc "/home/user/.config/"
 install -v -o 1000 -g 1000 -m 600 $FILE_FOLDER/powermanagementprofilesrc "/home/user/.config/"
 
-### chromium config. change landings page.
-#sed -i 's/"first_run_tabs":["*"]/"first_run_tabs":["https://lysmarine.org"]/' /etc/chromium/master_preferences
-# "first_run_tabs":["https://welcome.raspberrypi.org/raspberry-pi-os?id=UNIDENTIFIED"]
-# rm /etc/chromium/master_preferences
+## As this file is not populated yet in build time, we hold an original copy of it. Then we remove krunner
+install -v -o 1000 -g 1000 -m 644 $FILE_FOLDER/plasma-org.kde.plasma.phone-appletsrc "/home/user/.config/"
+sed  -i -e  's/plugin=org.kde.phone.krunner//' /home/user/.config/plasma-org.kde.plasma.phone-appletsrc
 
-## Copy and dummy the krunner plasmoid to disable it without breaking the debian package.
-install -o 1000 -g 1000 -d -m 0755 /home/user/.local/share/plasma/plasmoids/org.kde.phone.krunner/
-cp -r /usr/share/plasma/plasmoids/org.kde.phone.krunner /home/user/.local/share/plasma/plasmoids/
-chown -R user:user /home/user/.local/share/plasma/plasmoids/org.kde.phone.krunner
-install -v -o 1000 -g 1000 -m 600 $FILE_FOLDER/main.qml "/home/user/.local/share/plasma/plasmoids/org.kde.phone.krunner/contents/ui/"
+## Inject our own set of Favorites Application.
+cat <<EOT >> /usr/share/plasma/look-and-feel/org.kde.plasma.phone/contents/plasmoidsetupscripts/org.kde.phone.homescreen.js
+applet.writeConfig("Favorites", ["opencpn.desktop", "signalk.desktop", "xygrib.desktop"])
+applet.reloadConfig()
+EOT
