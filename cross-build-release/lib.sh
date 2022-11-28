@@ -61,6 +61,42 @@ setupWorkSpace() {
 	mkdir -p ./release/
 }
 
+## Get the requested stage list and populate split it apart to separate each script.
+populateStageList() {
+ 	newlist=' '
+	for stage in $stages ; do
+	   script=$(echo $stage | cut -s -d '.' -f 2)
+	   if [ ! $script ]; then # list all scripts
+		   for scriptpath in $(find ../install-scripts/$stage-*/ -maxdepth 1 -type f) ;do
+			   scriptNumber=$(basename $scriptpath | cut -s -d '-' -f 1)
+			   newlist+="$stage.$scriptNumber "
+		   done
+	   else
+		   newlist+="$stage "
+	   fi
+	done
+
+	stages=$(echo $newlist | xargs -n1 | sort -n | xargs)
+}
+
+populateRemoveList() {
+ 	newlist=' '
+	for stage in $remove ; do
+	   script=$(echo $stage | cut -s -d '.' -f 2)
+	   if [ ! $script ]; then # list all scripts
+		   for scriptpath in $(find ../install-scripts/$stage-*/ -maxdepth 1 -type f) ;do
+			   scriptNumber=$(basename $scriptpath | cut -s -d '-' -f 1)
+			   newlist+="$stage.$scriptNumber "
+		   done
+	   else
+		   newlist+="$stage "
+	   fi
+	done
+
+	remove=$(echo $newlist | xargs -n1 | sort -n | xargs)
+}
+
+
 # Check if the user run with root privileges
 checkRoot() {
 	if [ $EUID -ne 0 ]; then

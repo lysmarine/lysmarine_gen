@@ -43,7 +43,9 @@
 	cpuArch="${cpuArch:-armhf}"
 	lmVersion="${lmVersion:-$EPOCHSECONDS}"
 
+	## Define the stage list requested.
 	[[  -z  $stages  ]] && 	stages='0 2 4 6 8'
+	populateStageList
 	buildCmd="./install.sh $stages"
 	[[ $stages == 'bash' ]] && buildCmd='/bin/bash' ;
 
@@ -52,6 +54,9 @@
 	if ! (printf '%s\n' "${supportedOS[@]}" | grep -xq $baseOS); then
 		echo "ERROR: Unsupported os." ; exit 1
 	fi
+
+	## Populate remove list
+	populateRemoveList
 
 	supportedArch=(armhf arm64 amd64)
 	if ! (printf '%s\n' "${supportedArch[@]}" | grep -xq $cpuArch); then
