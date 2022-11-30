@@ -20,7 +20,7 @@
                settimeperiod="3600"/>
                -->
     <AVNConfig loglevel="INFO"
-               logfile="/home/user/avnav/log/avnav.log"
+               logfile="/var/log/avnav.log"
                debugToLog="true"/>
 
     <!-- the workers section -->
@@ -29,7 +29,7 @@
              the gpsd is only here for compatibility with old set-ups
              if you still enable it here, a couple of features will not work
              as gpsd lacks some decoders we need
-             so leave this entry untouched
+             so leave thi s entry untouched
              -->
         <AVNGpsdFeeder useGpsd="false" listenerPort="4020" port="2948" gpsdcommand="/usr/sbin/gpsd -b -n -N -G"/>
 
@@ -152,8 +152,8 @@
         <AVNHttpServer navurl="/viewer/avnav_navi.php" index="/viewer/avnav_viewer.html" httpPort="8099"
                        chartbase="maps" empty="nonexistent" upzoom="0" numThreads="5">
             <!-- chartbaseurl="http://$host/Karten/anav"> -->
-            <Directory urlpath="maps"   path="/home/user/avnav/data/charts"/>
-            <Directory urlpath="log"    path="/home/user/avnav/data/log"/>
+            <Directory urlpath="maps"   path="/srv/charts"/>
+            <Directory urlpath="log"    path="/var/log"/>
             <Directory urlpath="tracks" path="/home/user/avnav/data/tracks"/>
             <Directory urlpath="routes" path="/home/user/avnav/data/routes"/>
             <MimeType extension=".avt"  type="text/plain"/>
