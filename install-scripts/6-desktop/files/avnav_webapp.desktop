@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Pypilot Webapp
+Exec=/usr/local/bin/avnav_webapp
+Terminal=false
+Icon=go-jump
+Categories=Utility

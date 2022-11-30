@@ -171,10 +171,10 @@
 	done
 
 # Overlay the work area over the exposed baseOS in the cache to start building right away
-	cachedLayers="";
+	cachedLayers=""
 	for argument in $stages; do # Loop each requested stages to build
 		if [ -d ./$cacheDir/$argument ] ; then # if the stage is already available in the cache, use it instead of building it,
-				cachedLayers=":$cachedLayers"
+			cachedLayers=":$cachedLayers"
 			cachedLayers="$cacheDir/$argument$cachedLayers"
 
 		else # mount and build

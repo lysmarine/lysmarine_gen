@@ -75,8 +75,7 @@ populateStageList() {
 		   newlist+="$stage "
 	   fi
 	done
-
-	stages=$(echo $newlist | xargs -n1 | sort -n | xargs)
+	stages=$(echo $newlist | xargs -n1 | sort -V | xargs)
 }
 
 populateRemoveList() {
@@ -92,8 +91,7 @@ populateRemoveList() {
 		   newlist+="$stage "
 	   fi
 	done
-
-	remove=$(echo $newlist | xargs -n1 | sort -n | xargs)
+	remove=$(echo $newlist | xargs -n1 | sort -V | xargs)
 }
 
 
