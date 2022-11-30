@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Signalk Marine data server
-Exec=onlyone /usr/local/bin/SignalK
+Exec=/usr/local/bin/signalk_webapp
 Terminal=false
 Icon=/home/user/.local/share/icons/signalk.png
 Categories=System

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=Pypilot Webapp
+Name=Avnav Webapp
 Exec=/usr/local/bin/avnav_webapp
 Terminal=false
-Icon=go-jump
+Icon=flag-blue
 Categories=Utility
