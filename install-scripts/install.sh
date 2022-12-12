@@ -1,5 +1,4 @@
 #! /bin/bash -e
-
 echo "";
 echo "Install script for Lysmarine :)"
 echo "";

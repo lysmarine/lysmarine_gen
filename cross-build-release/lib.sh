@@ -164,7 +164,7 @@ mountImageFile() {  # deprecated
 	log "Mounting Image File"
 	if [ -n "$(ls -A $rootfs)" ]; then
 		logErr "$rootfs is not empty. Previous failure to unmount?"
-		exit
+		exit 1
 	fi
 
 	# Mount the image and make the binds required to chroot.
@@ -264,6 +264,8 @@ function chrootWithProot {
 		--mount=/proc:/proc \
 		$buildCmd
 
+	  return=$?
+	  [ $return -ne 0 ] && exit 1
 
 	else # just chroot
 
@@ -280,7 +282,7 @@ cd /install-scripts ;
 $buildCmd
 EOT
 
-
+	 return=$?
 	 rm $workDir/rootfs/etc/resolv.conf || true
 	 umount $workDir/rootfs/dev
 	 umount $workDir/rootfs/proc
@@ -312,6 +314,9 @@ function chrootAndBuild {
 		--mount=/proc:/proc \
 		$buildCmd
 
+	  return=$?
+	  [ $return -ne 0 ] && exit 1
+
 	else # just chroot
 	  mount --bind /dev $workDir/fakeLayer/dev
 	  mount -t proc /proc $workDir/fakeLayer/proc
@@ -323,11 +328,13 @@ cd /install-scripts ;
 $buildCmd
 EOT
 
+	return=$? 	 [ $return -ne 0 ] && exit 1
 	 rm $workDir/fakeLayer/etc/resolv.conf
 	 umount $workDir/fakeLayer/dev || true
 	 umount $workDir/fakeLayer/proc
 	 umount $workDir/fakeLayer/sys
 	 umount $workDir/fakeLayer/tmp
+	 [ $return -ne 0 ] && exit 1
   fi
 
 

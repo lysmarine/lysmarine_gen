@@ -1,13 +1,12 @@
-#!/bin/bash -xe
-{
-	source lib.sh
+#!/bin/bash
+source lib.sh
+
+(
+  	###########
+	### Preflight checks
+	###########
+	set -Eevo pipefail
 	checkRoot
-
-
-
-###########
-### Preflight checks
-###########
 
     ## Assign options
 	while getopts ":b:a:v:s:r:h:d" opt; do
@@ -238,5 +237,8 @@
 	umount -l $workDir/fakeLayer || true
 	umount $workDir/mnt/boot || true
 	umount $workDir/mnt || true
-exit 0
+
+) || {
+	safetyChecks
+	logErr "Build failed... :("
 }
