@@ -1,11 +1,9 @@
 #!/bin/bash
 source lib.sh
 
-(
   	###########
 	### Preflight checks
 	###########
-	set -Eevo pipefail
 	checkRoot
 
     ## Assign options
@@ -77,7 +75,8 @@ source lib.sh
 ###########
 ### Get the base OS
 ###########
-
+(
+	set -Eevo pipefail
 	## If the source OS is not found in cache, download it.
 	if ! ls "$cacheDir/$baseOS-$cpuArch".base.??? >/dev/null 2>&1; then
 		if [[ "$baseOS" == "raspios" ]]; then
@@ -239,6 +238,7 @@ source lib.sh
 	umount $workDir/mnt || true
 
 ) || {
-	safetyChecks
-	logErr "Build failed... :("
+ 	logErr "Build failed... cleaning the workspace." ;
+	safetyChecks ;
+	logErr "Build failed... :(" ;
 }

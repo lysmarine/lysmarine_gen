@@ -328,7 +328,7 @@ cd /install-scripts ;
 $buildCmd
 EOT
 
-	return=$? 	 [ $return -ne 0 ] && exit 1
+	 return=$?
 	 rm $workDir/fakeLayer/etc/resolv.conf
 	 umount $workDir/fakeLayer/dev || true
 	 umount $workDir/fakeLayer/proc
