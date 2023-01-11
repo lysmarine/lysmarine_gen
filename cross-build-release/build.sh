@@ -49,15 +49,15 @@ source lib.sh
 	## Validate arguments.
 	supportedOS=(raspios debian-live debian-vbox pine64so)
 	if ! (printf '%s\n' "${supportedOS[@]}" | grep -xq $baseOS); then
-		echo "ERROR: Unsupported os." ; exit 1
+		logErr "ERROR: Unsupported os." ; exit 1
 	fi
 
-	## Populate remove list
+	## Populate the list of cached build stage to remove.
 	populateRemoveList
 
 	supportedArch=(armhf arm64 amd64)
 	if ! (printf '%s\n' "${supportedArch[@]}" | grep -xq $cpuArch); then
-		echo "ERROR: Unsupported cpu arch." ; exit 1
+		logErr "ERROR: Unsupported cpu arch." ; exit 1
 	fi
 
 	## Setup the workspaces
@@ -70,10 +70,8 @@ source lib.sh
 	## Check if everything have been unmounted on the previous run.
 	safetyChecks
 
-
-
 ###########
-### Get the base OS
+### Download the base OS
 ###########
 (
 	set -Eevo pipefail
@@ -93,9 +91,9 @@ source lib.sh
 			mv "$cacheDir"/Armbian_??.??.?_Pine64_bullseye_current_?.??.??.img "$cacheDir/$baseOS-$cpuArch.base.img"
 			rm "$cacheDir/$zipName"
 
-		elif [[ "$baseOS" =~ debian-* ]]; then
-			wget -P "$cacheDir/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/$cpuArch/iso-hybrid/debian-live-11.5.0-$cpuArch-standard+nonfree.iso"
-			mv "$cacheDir/debian-live-11.5.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
+		elif [[ "$baseOS" =~ debian-* ]]; then	#debian-live-11.6.0-amd64-standard+nonfree.iso
+			wget -P "$cacheDir/" "http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current-live/$cpuArch/iso-hybrid/debian-live-11.6.0-$cpuArch-standard+nonfree.iso"
+			mv "$cacheDir/debian-live-11.6.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
 
 		fi
 	fi
@@ -105,109 +103,131 @@ source lib.sh
 ###########
 ### Extract the base OS
 ###########
-
-	if [[ -z "$(ls -A $cacheDir/baseOS)" && -f "$cacheDir/$baseOS-$cpuArch.base.img" ]]; then
+	if [[  -f "$cacheDir/$baseOS-$cpuArch.base.img" && ! -f $cacheDir/$baseOS-$cpuArch.base.img-inflated ]]; then
+	  log "Inflating base image"
 		inflateImage "$baseOS" "$cacheDir/$baseOS-$cpuArch.base.img"
-		mountSourceImage "$cacheDir/$baseOS-$cpuArch.base.img"
-		cp -R $workDir/mnt/. $cacheDir/baseOS
-		umount $workDir/mnt/boot || true
-		umount $workDir/mnt || true
 
-	elif [[ -z "$(ls -A $cacheDir/baseOS)"  && -f "$cacheDir/$baseOS-$cpuArch.base.iso" ]]; then
+	elif [[ -f "$cacheDir/$baseOS-$cpuArch.base.iso" && ! "$(ls -A $cacheDir/mnt/*)" ]]; then
+	 	log "Extracting filesystem from base iso"
 	 	7z x "$cacheDir/${baseOS}-${cpuArch}.base.iso" -o$cacheDir/iso
-	 	unsquashfs  -f -d $cacheDir/baseOS $cacheDir/iso/live/filesystem.squashfs
-
+	 	unsquashfs  -f -d $cacheDir/mnt $cacheDir/iso/live/filesystem.squashfs
 	fi
 
 	#If no base vbox image exist
-	if [[ $vbox && ! -f $vboxDir/lysmarine_dev_box.vdi ]]; then
-		createVboxImage
-	fi
+#	if [[ $vbox && ! -f $vboxDir/lysmarine_dev_box.vdi ]]; then
+#		createVboxImage
+#	fi
+
+
+
+
+
+#	if [[ $vbox && -f $vboxDir/lysmarine_dev_box.vdi ]]; then
+#		log "Mounting Vbox drive on host And copy lysmarine into it."
+#		cp $vboxDir/lysmarine_dev_box.vdi $vboxDir/lysmarine_dev_box.vdi.live
+#		vboxmanage list hdds | grep "^UUID:"
+#		vboxdisk=fb90d472-32ad-46bf-9257-9d29bce9e703
+#		vboximg-mount -i $vboxdisk --rw --root  $vboxDir/dev/
+#
+#        sleep 1 ; wait
+#        mount -v $vboxDir/dev/vol0 $vboxDir/mnt
+#		cp -r "../install-scripts" "$vboxDir/mnt"
+#		chmod 0775 "$vboxDir/mnt/install-scripts/install.sh"
+#		sync; wait; sleep 1
+#
+#		umount $vboxDir/mnt
+#		umount $vboxDir/dev
+#		sync; wait; sleep 1
+#
+#		vboxmanage closemedium disk $vboxdisk || vboxmanage startvm $vboxdisk --type emergencystop
+#
+#		sync; wait; sleep 1
+#
+#		log "Start the machine "
+#		VBoxManage startvm lysmarine_dev_box --type=gui
+#		log "Vbox machine should be running by now, User and passwords are:  "
+#		log "ssh is port forwarded to 3022"
+#		exit
+#	fi
+
+	# For better performance, preemptively start copying the baseOs from cache for the Repackage phase .
 
 
 
 ###########
-### Build lysmarine
+### Prepare to Build lysmarine
 ###########
-	if [[ $vbox && -f $vboxDir/lysmarine_dev_box.vdi ]]; then
-		log "Mounting Vbox drive on host And copy lysmarine into it."
-		cp $vboxDir/lysmarine_dev_box.vdi $vboxDir/lysmarine_dev_box.vdi.live
+	log "Mounting base image"
 
-		vboxmanage list hdds
-		vboximg-mount -i fb90d472-32ad-46bf-9257-9d29bce9e703 --rw --root  $vboxDir/dev/
+  if [ -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" ]; then
+    rm $workDir/$baseOS-$cpuArch.base.img-inflated || true
+    cp $cacheDir/$baseOS-$cpuArch.base.img-inflated $workDir/$baseOS-$cpuArch.base.img-inflated &
+    mountSourceImage $cacheDir/$baseOS-$cpuArch.base.img $workDir/mnt
 
-        sleep 1 ; wait
-        mount -v $vboxDir/dev/vol0 $vboxDir/mnt
-		cp -r "../install-scripts" "$vboxDir/mnt"
-		chmod 0775 "$vboxDir/mnt/install-scripts/install.sh"
- 		ls -lah $vboxDir/mnt
-		sync; wait; sleep 1
+  elif [ -f "$cacheDir/$baseOS-$cpuArch.base.iso" ]; then
+    cp -r $cacheDir/iso/. $workDir/iso &
+    mount --bind $cacheDir/mnt $workDir/mnt
+    # TODO mount directly the squashfs # sudo mount -o loop -t squashfs /path/to/sage-x.y.z.sqfs /path/to/sage-x.y.z.
 
-		umount $vboxDir/mnt
-		umount $vboxDir/dev
-		sync; wait; sleep 1
+  else
+    logErr "No base layer found for overlayFS"
+    exit 1
 
-		vboxmanage closemedium disk fb90d472-32ad-46bf-9257-9d29bce9e703 || true
-		sync; wait; sleep 1
+  fi
 
-		log "Start the machine "
-		VBoxManage startvm lysmarine_dev_box --type=gui
-		log "Vbox machine should be running by now, User and passwords are:  "
-		log "ssh is port forwarded to 3022"
-		exit
-	fi
 
-	# start copying the baseOs from cache to workspace in the background to save time.
-	cp $cacheDir/${baseOS}-${cpuArch}.base.img-inflated $workDir/ &
-	cp -r $cacheDir/iso/. $workDir/iso &
 
-	# delete requested build layers from cache.
+###########
+### Loop stages
+###########
 	set -f
-	log "Deleting cached layers"
-	for layer in $remove; do
-		rm -r "./$cacheDir/$layer" || true
-	done
-
-# Overlay the work area over the exposed baseOS in the cache to start building right away
 	cachedLayers=""
 	for argument in $stages; do # Loop each requested stages to build
-		if [ -d ./$cacheDir/$argument ] ; then # if the stage is already available in the cache, use it instead of building it,
-			cachedLayers=":$cachedLayers"
-			cachedLayers="$cacheDir/$argument$cachedLayers"
+
+    if [[ "$remove" == *"$argument"* ]]; then
+      log "    Removing stage $argument"
+      rm -r $cacheDir/$argument
+    fi
+
+		if [ -d $cacheDir/$argument ] ; then # if the stage is already available in the cache, use it instead of building it.
+			log "    Stage $argument have been found in cache, adding it as lowerdir"
+			cachedLayers="$cacheDir/$argument:$cachedLayers"
 
 		else # mount and build
-			stage=$(echo $argument | cut -d '.' -f 1)
-			script=$(echo $argument | cut -s -d '.' -f 2)
-			if [ ! $script ]; then script="*" ; fi
-			rm -r "./$workDir/$argument" || true
+	  	log     "Building stage $argument"
+      rm -r "$workDir/$argument" || true
 			mkdir $workDir/$argument
-			mount -t overlay -o lowerdir=$cachedLayers$cacheDir/baseOS,upperdir=$workDir/$argument,workdir=$workDir/workdir none $workDir/fakeLayer
 
-			addLysmarineScripts "$workDir/fakeLayer"
-			buildCmd="./install.sh $stage.$script"
-    		chrootAndBuild
+			mount -t overlay -o lowerdir=${cachedLayers}$workDir/mnt,upperdir=$workDir/$argument,workdir=$workDir/workdir none $workDir/fakeLayer
+	    addLysmarineScripts "$workDir/fakeLayer"
+			buildCmd="./install.sh $argument"
+    	chrootAndBuild
 
-			umount $workDir/fakeLayer || true
-			cp -ra $workDir/$argument  $cacheDir/$argument
+			umount $workDir/fakeLayer || umount -l $workDir/fakeLayer || logErr "Fail to unmount $workDir/fakeLayer"
+			rm -r $cacheDir/$argument || true ;
+			mv $workDir/$argument  $cacheDir/$argument ;
+			rm -r "$workDir/$argument" &
+
 			[ -f cachedLayers ] && cachedLayers=":"
 			cachedLayers="$cacheDir/$argument:$cachedLayers"
 		fi
-		set +f
-	done
 
+	done
+  set +f
 
 
 ###########
 ### Repackage the OS for shipping
 ###########
-	mount -t overlay overlay -o lowerdir=$cachedLayers$cacheDir/baseOS,upperdir=$workDir/oldstage,workdir=$workDir/workdir $workDir/fakeLayer
+  log "Packaging OS"
+	mount -t overlay overlay -o lowerdir=${cachedLayers}$cacheDir/mnt $workDir/fakeLayer
 
 	# Merging build layers in the BaseOs that will be shipped.
-	if [ -f "$cacheDir/$baseOS-$cpuArch.base.iso" ]; then
+	if [ -d "$workDir/iso" ]; then
+		mkdir "$workDir/iso/live"
 
-		mkdir -p "$workDir/iso/live/"
-		mksquashfs "$workDir/fakeLayer" "$workDir/iso/live/filesystem.squashfs" -comp xz -noappend
-		md5sum "$workDir/iso/live/filesystem.squashfs"
+		mksquashfs "$workDir/fakeLayer" "$workDir/iso/live/test.squashfs" -comp gzip -noappend &
+		#md5sum "$workDir/iso/live/filesystem.squashfs"
 		rsync -haPr  "$cacheDir/iso/.disk" "$workDir/iso"
 
 		cp files/preseed.cfg "$workDir/iso"
@@ -216,15 +236,25 @@ source lib.sh
 		cp files/stdmenu.cfg "$workDir/iso/isolinux/"
 		wait
 
-		xorriso -as mkisofs -V 'lysmarineOSlive-amd64' -o "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.iso" -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus "$workDir/iso"
+		xorriso -as mkisofs -V 'lysmarineOSlive-amd64' -o "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.iso" -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus $workDir/iso ;
+    rm -r "$workDir/iso" &
 
-	elif [ -f "$cacheDir/$baseOS-$cpuArch.base.img" ]; then
-	 	cp $cacheDir/$baseOS-$cpuArch.base.img-inflated $workDir/$baseOS-$cpuArch.base.img-inflated
+
+	elif [ -f "$workDir/$baseOS-$cpuArch.base.img-inflated" ]; then
+
 		wait
-	 	mountSourceImage "$workDir/$baseOS-$cpuArch.base.img-inflated"
-	 	cp -far $workDir/fakeLayer/* $workDir/mnt || true
+	 	mountSourceImage "$workDir/$baseOS-$cpuArch.base.img-inflated" $workDir/releaseMnt
 
-		mv "$workDir/$baseOS-$cpuArch.base.img-inflated" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
+	 	cp -far $workDir/fakeLayer/* $workDir/releaseMnt
+
+    umount $workDir/releaseMnt/boot || true
+    umount $workDir/releaseMnt || true
+
+		mv -v "$workDir/$baseOS-$cpuArch.base.img-inflated" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
+
+		echo "PRO-TIP: \e[2m sudo su -c 'pv -tpreb ./release/lysmarine-$lmVersion-$baseOS-$cpuArch.img | dd of=/dev/mmcblk0 status=noxfer ; sync' "
+	else
+	  logErr "Nothing to package"
 	fi
 
 
@@ -236,7 +266,7 @@ source lib.sh
 	umount -l $workDir/fakeLayer || true
 	umount $workDir/mnt/boot || true
 	umount $workDir/mnt || true
-
+wait
 ) || {
  	logErr "Build failed... cleaning the workspace." ;
 	safetyChecks ;
