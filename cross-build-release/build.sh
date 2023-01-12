@@ -1,80 +1,34 @@
 #!/bin/bash
 source lib.sh
+###########
+### Setup
+###########
 
-  	###########
-	### Preflight checks
-	###########
-	checkRoot
+  checkRoot
 
-    ## Assign options
-	while getopts ":b:a:v:s:r:h:d" opt; do
-	  case $opt in
-		b)
-		  baseOS="$OPTARG"
-		  ;;
-		 a)
-		  cpuArch=$OPTARG
-		  ;;
-		 v)
-		  lmVersion=$OPTARG
-		  ;;
-		 s)
-		  stages=$OPTARG
-		  ;;
-		 r)
-		  remove="$OPTARG"
-		  ;;
-		 d)
-		  vbox=1
-		  baseOS="debian-vbox"
-		  cpuArch="amd64"
-		  ;;
-		 h)
-		   showHelp
-		 ;;
-	  esac
-	done
-
-	## Set default values if missing.
-	baseOS="${baseOS:-raspios}"
-	cpuArch="${cpuArch:-armhf}"
-	lmVersion="${lmVersion:-$EPOCHSECONDS}"
-
-	## Define the stage list requested.
-	[[  -z  $stages  ]] && 	stages='0 2 4 6 8'
-	populateStageList
-	buildCmd="./install.sh $stages"
-	[[ $stages == 'bash' ]] && buildCmd='/bin/bash' ;
-
-	## Validate arguments.
-	supportedOS=(raspios debian-live debian-vbox pine64so)
-	if ! (printf '%s\n' "${supportedOS[@]}" | grep -xq $baseOS); then
-		logErr "ERROR: Unsupported os." ; exit 1
-	fi
-
-	## Populate the list of cached build stage to remove.
-	populateRemoveList
-
-	supportedArch=(armhf arm64 amd64)
-	if ! (printf '%s\n' "${supportedArch[@]}" | grep -xq $cpuArch); then
-		logErr "ERROR: Unsupported cpu arch." ; exit 1
-	fi
+  supportedOS=(raspios debian-live debian-vbox pine64so)
+  supportedArch=(armhf arm64 amd64)
+  setArguments "$@"
 
 	## Setup the workspaces
-	setupWorkSpace "$baseOS-$cpuArch"
 	cacheDir="./cache/$baseOS-$cpuArch"
 	workDir="./work/$baseOS-$cpuArch"
 	releaseDir="./release/"
-    vboxDir=$(pwd)/$workDir
 
-	## Check if everything have been unmounted on the previous run.
+	setupWorkSpace
+
 	safetyChecks
+
+	populateStageList
+
+	populateRemoveList
 
 ###########
 ### Download the base OS
 ###########
 (
 	set -Eevo pipefail
+
 	## If the source OS is not found in cache, download it.
 	if ! ls "$cacheDir/$baseOS-$cpuArch".base.??? >/dev/null 2>&1; then
 		if [[ "$baseOS" == "raspios" ]]; then
@@ -96,12 +50,14 @@ source lib.sh
 			mv "$cacheDir/debian-live-11.6.0-$cpuArch-standard+nonfree.iso" "$cacheDir/$baseOS-$cpuArch.base.iso"
 
 		fi
+  else
+    log "Original image found in cache."
 	fi
 
 
 
 ###########
-### Extract the base OS
+### Prepare the base OS
 ###########
 	if [[  -f "$cacheDir/$baseOS-$cpuArch.base.img" && ! -f $cacheDir/$baseOS-$cpuArch.base.img-inflated ]]; then
 	  log "Inflating base image"
@@ -110,16 +66,15 @@ source lib.sh
 	elif [[ -f "$cacheDir/$baseOS-$cpuArch.base.iso" && ! "$(ls -A $cacheDir/mnt/*)" ]]; then
 	 	log "Extracting filesystem from base iso"
 	 	7z x "$cacheDir/${baseOS}-${cpuArch}.base.iso" -o$cacheDir/iso
-	 	unsquashfs  -f -d $cacheDir/mnt $cacheDir/iso/live/filesystem.squashfs
+	 	unsquashfs s -f -d $cacheDir/mnt $cacheDir/iso/live/filesystem.squashfs
+  else
+    log "Reusing base image from cache."
 	fi
 
-	#If no base vbox image exist
+# If no base vbox image exist
 #	if [[ $vbox && ! -f $vboxDir/lysmarine_dev_box.vdi ]]; then
 #		createVboxImage
 #	fi
-
-
-
 
 
 #	if [[ $vbox && -f $vboxDir/lysmarine_dev_box.vdi ]]; then
@@ -149,8 +104,6 @@ source lib.sh
 #		log "ssh is port forwarded to 3022"
 #		exit
 #	fi
-
-	# For better performance, preemptively start copying the baseOs from cache for the Repackage phase .
 
 
 
@@ -266,7 +219,8 @@ source lib.sh
 	umount -l $workDir/fakeLayer || true
 	umount $workDir/mnt/boot || true
 	umount $workDir/mnt || true
-wait
+  wait
+
 ) || {
  	logErr "Build failed... cleaning the workspace." ;
 	safetyChecks ;
