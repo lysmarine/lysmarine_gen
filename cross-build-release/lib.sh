@@ -79,9 +79,9 @@ setArguments() {
 		  remove="$OPTARG"
 		  ;;
 		 d)
-		  vbox=1
-		  baseOS="debian-vbox"
-		  cpuArch="amd64"
+		  vagrant=true
+		  baseOS="vagrant-debian"
+      cpuArch="amd64"
 		  ;;
 		 h)
 		  showHelp
@@ -321,41 +321,3 @@ function safetyChecks {
 		   rm -r $workDir/mnt/*
 	fi
 }
-
-
-
-#function createVboxImage {
-#  if [[ ! -f $vboxDir/lysmarine_dev_box.vdi ]]; then
-# 		pushd $vboxDir/
-#    		log "Creating VBox image"
-#
-#    		# create the machine
-#    		VBoxManage createvm --name lysmarine_dev_box --ostype "Debian_64" --register --basefolder ./
-#
-#    		#port fowarding
-#    		VBoxManage modifyvm lysmarine_dev_box --natpf1 "ssh,tcp,,3022,,22"
-#
-#    		#Set memory and network
-#    		VBoxManage modifyvm lysmarine_dev_box --ioapic on
-#    		VBoxManage modifyvm lysmarine_dev_box --memory 2048 --vram 128
-#    		VBoxManage modifyvm lysmarine_dev_box --cpus 4
-#
-#    		#Create Disk and load the iso file
-#    		log "Creating VBox drive"
-#    		VBoxManage createhd --filename ./lysmarine_dev_box.vdi --size 32768
-#    		VBoxManage storagectl lysmarine_dev_box --name "SATA Controller" --add sata --controller IntelAhci
-#    		VBoxManage storageattach lysmarine_dev_box --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium ./lysmarine_dev_box.vdi
-#    		VBoxManage storagectl lysmarine_dev_box --name "IDE Controller" --add ide --controller PIIX4
-#    		VBoxManage storageattach lysmarine_dev_box --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium ../../$cacheDir/$baseOS-$cpuArch.base.iso
-#    		VBoxManage modifyvm lysmarine_dev_box --boot1 dvd --boot2 disk
-#
-#    		#Start the VM to do the initial install
-#    		log "This is your first run, Install base debian and rerun this script."
-#    		VBoxManage startvm lysmarine_dev_box --type=gui
-#
-#    		read -n 1 -r -s -p $'When done with the vurtual machine, press enter to continue...\n'
-#    		VBoxManage modifyvm lysmarine_dev_box --boot1 disk --boot2 none
-#
-#    	popd
-#  fi
-#}

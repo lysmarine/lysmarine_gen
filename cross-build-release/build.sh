@@ -6,7 +6,7 @@ source lib.sh
 
   checkRoot
 
-  supportedOS=(raspios debian-live debian-vbox pine64so)
+  supportedOS=(raspios debian-live vagrant-debian pine64so)
   supportedArch=(armhf arm64 amd64)
   setArguments "$@"
 
@@ -30,7 +30,18 @@ source lib.sh
 	set -Eevo pipefail
 
 	## If the source OS is not found in cache, download it.
-	if ! ls "$cacheDir/$baseOS-$cpuArch".base.??? >/dev/null 2>&1; then
+	if [[ "$baseOS" == "vagrant-debian"  ]]; then
+	  if [[ ! -d $cacheDir/Vagrant ]]; then
+	    log "Init vagrant"
+      mkdir $cacheDir/Vagrant
+      cp ./files/Vagrantfile $cacheDir/Vagrant/
+      vagrant plugin install vagrant-scp
+      pushd $cacheDir/Vagrant/
+        vagrant init
+      popd
+    fi
+
+	elif ! ls "$cacheDir/$baseOS-$cpuArch".base.??? >/dev/null 2>&1; then
 		if [[ "$baseOS" == "raspios" ]]; then
 			zipName="raspios_lite_${cpuArch}_latest"
 			wget -P "$cacheDir/" "https://downloads.raspberrypi.org/$zipName"
@@ -55,7 +66,6 @@ source lib.sh
 	fi
 
 
-
 ###########
 ### Prepare the base OS
 ###########
@@ -71,48 +81,26 @@ source lib.sh
     log "Reusing base image from cache."
 	fi
 
-# If no base vbox image exist
-#	if [[ $vbox && ! -f $vboxDir/lysmarine_dev_box.vdi ]]; then
-#		createVboxImage
-#	fi
-
-
-#	if [[ $vbox && -f $vboxDir/lysmarine_dev_box.vdi ]]; then
-#		log "Mounting Vbox drive on host And copy lysmarine into it."
-#		cp $vboxDir/lysmarine_dev_box.vdi $vboxDir/lysmarine_dev_box.vdi.live
-#		vboxmanage list hdds | grep "^UUID:"
-#		vboxdisk=fb90d472-32ad-46bf-9257-9d29bce9e703
-#		vboximg-mount -i $vboxdisk --rw --root  $vboxDir/dev/
-#
-#        sleep 1 ; wait
-#        mount -v $vboxDir/dev/vol0 $vboxDir/mnt
-#		cp -r "../install-scripts" "$vboxDir/mnt"
-#		chmod 0775 "$vboxDir/mnt/install-scripts/install.sh"
-#		sync; wait; sleep 1
-#
-#		umount $vboxDir/mnt
-#		umount $vboxDir/dev
-#		sync; wait; sleep 1
-#
-#		vboxmanage closemedium disk $vboxdisk || vboxmanage startvm $vboxdisk --type emergencystop
-#
-#		sync; wait; sleep 1
-#
-#		log "Start the machine "
-#		VBoxManage startvm lysmarine_dev_box --type=gui
-#		log "Vbox machine should be running by now, User and passwords are:  "
-#		log "ssh is port forwarded to 3022"
-#		exit
-#	fi
-
-
 
 ###########
 ### Prepare to Build lysmarine
 ###########
 	log "Mounting base image"
+  if [[ $vagrant ]]; then
+	  log "vagrant up"
+        installDirLocation=$(pwd)/../install-scripts
+        pushd $cacheDir/Vagrant/
+        vagrant destroy -f
+        vagrant up
+        vagrant ssh -c "sudo mkdir /install-scripts"
+        vagrant ssh -c "sudo chmod 0777 /install-scripts"
+        vagrant scp $installDirLocation/ :/
+        vagrant ssh -c "sudo chmod 0755 /install-scripts"
+        vagrant ssh -c "cd /install-scripts ; sudo ./install.sh ${stages}"
+        popd
+    exit 0
 
-  if [ -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" ]; then
+  elif [ -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" ]; then
     rm $workDir/$baseOS-$cpuArch.base.img-inflated || true
     cp $cacheDir/$baseOS-$cpuArch.base.img-inflated $workDir/$baseOS-$cpuArch.base.img-inflated &
     mountSourceImage $cacheDir/$baseOS-$cpuArch.base.img $workDir/mnt
@@ -138,8 +126,7 @@ source lib.sh
 	for argument in $stages; do # Loop each requested stages to build
 
     if [[ "$remove" == *"$argument"* ]]; then
-      log "    Removing stage $argument"
-      rm -r $cacheDir/$argument
+      [[ -d $cacheDir/$argument ]] && rm -r $cacheDir/$argument && log "    $argument removed"
     fi
 
 		if [ -d $cacheDir/$argument ] ; then # if the stage is already available in the cache, use it instead of building it.
@@ -166,7 +153,7 @@ source lib.sh
 		fi
 
 	done
-  set +f
+
 
 
 ###########
