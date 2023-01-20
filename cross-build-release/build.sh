@@ -138,12 +138,14 @@ source lib.sh
       rm -r "$workDir/$argument" || true
 			mkdir $workDir/$argument
 
-			mount -t overlay -o lowerdir=${cachedLayers}$workDir/mnt,upperdir=$workDir/$argument,workdir=$workDir/workdir none $workDir/fakeLayer
+      mount.mergerfs $workDir/mnt $workDir/mergedMnt
+      mount -t overlay overlay -o lowerdir=${cachedLayers}$workDir/mergedMnt,upperdir=$workDir/$argument,workdir=$workDir/workdir $workDir/fakeLayer
 	    addLysmarineScripts "$workDir/fakeLayer"
 			buildCmd="./install.sh $argument"
     	chrootAndBuild
 
 			umount $workDir/fakeLayer || umount -l $workDir/fakeLayer || logErr "Fail to unmount $workDir/fakeLayer"
+      umount $workDir/mergedMnt
 			rm -r $cacheDir/$argument || true ;
 			mv $workDir/$argument  $cacheDir/$argument ;
 			rm -r "$workDir/$argument" &
@@ -160,39 +162,38 @@ source lib.sh
 ### Repackage the OS for shipping
 ###########
   log "Packaging OS"
-	mount -t overlay overlay -o lowerdir=${cachedLayers}$cacheDir/mnt $workDir/fakeLayer
+  mount.mergerfs $workDir/mnt $workDir/mergedMnt
+  mount -t overlay overlay -olowerdir=${cachedLayers}$workDir/mergedMnt $workDir/fakeLayer
+  wait
 
-	# Merging build layers in the BaseOs that will be shipped.
 	if [ -d "$workDir/iso" ]; then
 		mkdir "$workDir/iso/live"
-
-		mksquashfs "$workDir/fakeLayer" "$workDir/iso/live/test.squashfs" -comp gzip -noappend &
-		#md5sum "$workDir/iso/live/filesystem.squashfs"
+    #mksquashfs "$workDir/fakeLayer" "$workDir/iso/live/filesystem.squashfs" -comp xz -noappend
+    mksquashfs "$workDir/fakeLayer" "$workDir/iso/live/filesystem.squashfs" -comp gzip -noappend
+    md5sum "$workDir/iso/live/filesystem.squashfs"
 		rsync -haPr  "$cacheDir/iso/.disk" "$workDir/iso"
 
 		cp files/preseed.cfg "$workDir/iso"
 		cp files/splash.png "$workDir/iso/isolinux/"
 		cp files/menu.cfg "$workDir/iso/isolinux/"
 		cp files/stdmenu.cfg "$workDir/iso/isolinux/"
-		wait
+    #	header image of the GUI installer is in :  iso/d-i/gtk/ initrd --> /usr/share/graphics.
 
-		xorriso -as mkisofs -V 'lysmarineOSlive-amd64' -o "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.iso" -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus $workDir/iso ;
+    xorriso -as mkisofs -V 'lysmarineOSlive-amd64' -o "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.iso" -J -J -joliet-long -cache-inodes -b isolinux/isolinux.bin -c isolinux/boot.cat -boot-load-size 4 -boot-info-table -no-emul-boot -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -isohybrid-apm-hfsplus "$workDir/iso" ;
     rm -r "$workDir/iso" &
 
-
 	elif [ -f "$workDir/$baseOS-$cpuArch.base.img-inflated" ]; then
-
-		wait
 	 	mountSourceImage "$workDir/$baseOS-$cpuArch.base.img-inflated" $workDir/releaseMnt
-
-	 	cp -far $workDir/fakeLayer/* $workDir/releaseMnt
+    rsync -arHAX $workDir/fakeLayer/  $workDir/releaseMnt --delete
 
     umount $workDir/releaseMnt/boot || true
     umount $workDir/releaseMnt || true
+    kpartx -d "$workDir/$baseOS-$cpuArch.base.img-inflated"
+    mv $workDir/$baseOS-$cpuArch.base.img-inflated $releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img
+    kpartx -d $cacheDir/$baseOS-$cpuArch.base.img
 
-		mv -v "$workDir/$baseOS-$cpuArch.base.img-inflated" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
+	  echo -e "PRO-TIP: \033[1;34m sudo su -c 'pv -tpreb ./release/lysmarine-$lmVersion-$baseOS-$cpuArch.img | dd of=/dev/mmcblk0 status=noxfer ; sync' \e[0m"
 
-		echo "PRO-TIP: \e[2m sudo su -c 'pv -tpreb ./release/lysmarine-$lmVersion-$baseOS-$cpuArch.img | dd of=/dev/mmcblk0 status=noxfer ; sync' "
 	else
 	  logErr "Nothing to package"
 	fi
@@ -204,9 +205,9 @@ source lib.sh
 ###########
 
 	umount -l $workDir/fakeLayer || true
+  umount $workDir/mergedMnt
 	umount $workDir/mnt/boot || true
 	umount $workDir/mnt || true
-  wait
 
 ) || {
  	logErr "Build failed... cleaning the workspace." ;
