@@ -43,7 +43,8 @@ When the build script is done, you need to reboot. Few things are configured on 
 
 Install Dependencies
 ``` 
-apt install proot qemu qemu-user git live-build (v1:20190311)
+`apt install proot xorriso qemu kpartx vagrant mergerfs qemu-user p7zip-full git squashfs-tools
+ live-build` (v1:20190311)
 ```
 
 Clone repository 
