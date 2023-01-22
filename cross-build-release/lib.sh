@@ -184,7 +184,11 @@ mountSourceImage() {
 	partQty=$( echo $partitions | wc -w )
 	loopId=$( echo $partitions | grep -oh '[0-9]*' | head -n 1 )
 
-	if [ $partQty == 2 ]; then
+	if [ $partQty == 3 ]; then
+		mount -v /dev/mapper/loop${loopId}p2 $mountPoint
+		mount -v /dev/mapper/loop${loopId}p1 $mountPoint/boot
+
+	elif [ $partQty == 2 ]; then
 		mount -v /dev/mapper/loop${loopId}p2 $mountPoint
 		mount -v /dev/mapper/loop${loopId}p1 $mountPoint/boot
 
@@ -208,10 +212,10 @@ inflateImage() {
 		log "truncate image to 8G"
 		truncate -s "8G" ${imageLocation}-inflated
 
-		log "resize last partition to 100%"
+		log "resize last partition to 95%"
 		partQty=$(fdisk -l ${imageLocation}-inflated | grep -o "^${imageLocation}-inflated" | wc -l)
 
-		parted ${imageLocation}-inflated --script "resizepart $partQty 100%"
+		parted ${imageLocation}-inflated --script "resizepart $partQty 95%"
 		fdisk -l ${imageLocation}-inflated
   	log "Resize the filesystem to fit the partition."
 		loopId=$(kpartx -sav "${imageLocation}-inflated" | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
@@ -221,6 +225,17 @@ inflateImage() {
 		resize2fs "/dev/mapper/loop${loopId}p${partQty}"
 		kpartx -d "${imageLocation}-inflated"
 		partx ${imageLocation}-inflated #inform the kernel
+    log "Add New user overlay partition."
+    newPartitionStartSector=$(sfdisk --list-free -q ${imageLocation}-inflated | tail -n1 | cut -d" " -f1)
+    parted ${imageLocation}-inflated --script "mkpart primary ext4 ${newPartitionStartSector}s -1s"
+
+    newPartitionNumber=$(sfdisk -q -l ${imageLocation}-inflated |tail -n1 | cut -f1 -d" " | grep -oh "[0-9]*")
+    log "New partition number is ${newPartitionNumber}"
+    loopId=$(kpartx -sav "${imageLocation}-inflated" | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
+    mkfs.ext4 "/dev/mapper/loop${loopId}p${newPartitionNumber}"
+    e2label "/dev/mapper/loop${loopId}p${newPartitionNumber}" useroverlay
+    tune2fs -L useroverlay "/dev/mapper/loop${loopId}p${newPartitionNumber}"
+    kpartx -d "${imageLocation}-inflated"
 }
 
 
