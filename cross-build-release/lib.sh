@@ -122,6 +122,8 @@ setupWorkSpace() {
 	mkdir -p $workDir/fakeLayer
 	# Where the final lysmarine OS is stored.
 	mkdir -p $releaseDir
+	# mergerFS location for where overlayfs need can't see mounts.
+	mkdir -p $workDir/mergedMnt
 }
 
 
