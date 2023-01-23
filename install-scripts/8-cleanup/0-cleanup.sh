@@ -3,7 +3,7 @@ rm -rf  /tmp/empty-cache46
 rm -rvf /home/user/Public /home/user/Templates /home/user/Videos /home/user/Desktop
 
 ## Remove unused package
-apt-get purge --auto-remove -yq gnome-keyring # chromium and others install a keyring service but we don't need it
+#apt-get purge --auto-remove -yq gnome-keyring # chromium and others install a keyring service but we don't need it
 apt-get -yq remove --auto-remove khmerconverter  || true
 apt-get -yq remove --auto-remove mlterm || true
 apt-get -yq remove --auto-remove debian-reference-common || true
