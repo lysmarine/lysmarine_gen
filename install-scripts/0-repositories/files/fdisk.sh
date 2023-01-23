@@ -4,4 +4,4 @@ case $1 in
         prereqs) echo "${PREREQS}"; exit 0;;
 esac
 . /usr/share/initramfs-tools/hook-functions
-copy_exec /usr/sbin/parted /usr/sbin/
+copy_exec /usr/sbin/fdisk /usr/sbin/
