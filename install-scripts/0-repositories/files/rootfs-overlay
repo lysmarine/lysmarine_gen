@@ -15,25 +15,31 @@ esac
 
 . /scripts/functions
 
-msgPrefix=" Lysmarine : "
+msgPrefix=' Lysmarine '
 
 # NOTE: ${ROOT} and ${rootmnt} are set by parent script, their values might be:
 # ${ROOT} = /dev/mmcblk0p2
 # ${rootmnt} = /root
 
+# The linux kernel have a arbitrary wait time before mounting the USB drives.
+sleep  $(cat /sys/module/usb_storage/parameters/delay_use)
+
+# NOTE: In case of many partition having the label, blkid will only return the last one.
 userOverlayDevice=$(blkid -L useroverlay)
+rootfsDevice=$(blkid -L rootfs)
 
 if [ -z "${userOverlayDevice}" ]; then
-  echo "${$msgPrefix} No partition name useroverlay have been found. No overlay will be setup over rootfs."
-  exit 0
+  echo "${msgPrefix} No partition name useroverlay have been found. No overlay will be setup over rootfs."
+  echo 0
 fi
 
-rootfsDevice=$(blkid -L rootfs)
-userOverlayDevicePartNo=$(echo "${userOverlayDevice}" | grep -o '[^p]*$')
-userOverlayDisc=$(echo "${userOverlayDevice}" | sed 's/p[0-9].*$//')
+userOverlayDevicePartNo=$(echo "${userOverlayDevice}" | grep -o '[0-9]*$')
+partField=$(echo "${userOverlayDevice}" | grep -Eo "p?${userOverlayDevicePartNo}$")
+userOverlayDisc=$(echo "${userOverlayDevice}" | sed "s/${partField}$//")
 
-# Get the last sector of the current partiton so we can check if there is empty space after it.
+# Get the last sector of the current partition so we can check if there is empty space after it.
 userOverlayDeviceLastSector=$( fdisk -l $userOverlayDisc | grep $userOverlayDevice | tr -s ' ' | cut  -d ' ' -f3 )
+echo "userOverlayDeviceLastSector $userOverlayDeviceLastSector"
 emptySpaceStartSector=$(($userOverlayDeviceLastSector+1))
 unusedSpaceAllocation=$(echo "F\n" | fdisk /dev/mmcblk0 | grep -e "^ *${emptySpaceStartSector} ")
 
@@ -49,10 +55,10 @@ fi
 
 [[ ! -d /run/lysmarine/useroverlay ]] && mkdir -p /run/lysmarine/useroverlay
 
-echo "${$msgPrefix} Mounting useroverlay partition over rootfs"
+echo "${msgPrefix} Mounting useroverlay partition over rootfs"
 mount $userOverlayDevice -o defaults,noatime /run/lysmarine/useroverlay
 if [ $? -ne 0 ]; then
-  echo "${$msgPrefix} Failed to mount ${userOverlayDevice}"
+  echo "${msgPrefix} Failed to mount ${userOverlayDevice}"
 fi
 
 [[ ! -d /run/lysmarine/useroverlay/rootfs ]] && mkdir -p /run/lysmarine/useroverlay/rootfs
@@ -71,11 +77,11 @@ if [ $? -ne 0 ]; then
   panic "${$msgPrefix} Merge failed"
 fi
 
-echo "${$msgPrefix} Moving mount points to the new merged rootfs"
+echo "${msgPrefix} Moving mount points to the new merged rootfs"
 mkdir -p ${rootmnt}/run/lysmarine/useroverlay
 mount -o move /run/lysmarine/useroverlay ${rootmnt}/run/lysmarine/useroverlay
 
-echo "${$msgPrefix} Adjusting fstab"
+echo "${msgPrefix} Adjusting fstab"
 rootfsFilesystemType=$(grep $rootfsDevice /proc/mounts | cut -d' ' -f3)
 rootfsMountOpt=$(grep $rootfsDevice /proc/mounts | cut -d' ' -f4)
 rootfsFstabEntry="${ROOT} /run/lysmarine/useroverlay/rootfs ${rootfsFilesystemType} ${rootfsMountOpt} 0 0"
