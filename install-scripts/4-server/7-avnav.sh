@@ -1,4 +1,8 @@
 #!/bin/bash -e
+
+# dirty fix to mitigate the dependency problem between rpi and debian repo.
+apt-get -q -y install libbluetooth-dev=5.55-3.1+rpt2
+
 apt-get -q -y --no-install-recommends install avnav # mpg123
 apt-get -q -y install avnav-history-plugin || true  # avnav-ocharts-plugin
 apt-get -q -y -o Dpkg::Options::="--force-overwrite" install avnav-oesenc || true
