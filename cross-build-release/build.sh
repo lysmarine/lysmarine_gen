@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# shellcheck disable=SC2115
+
 source lib.sh
 ###########
 ### Setup
@@ -6,8 +8,6 @@ source lib.sh
 
   checkRoot
 
-  supportedOS=(raspios debian-live vagrant-debian pine64so)
-  supportedArch=(armhf arm64 amd64)
   setArguments "$@"
 
 	## Setup the workspaces
@@ -30,7 +30,7 @@ source lib.sh
 	set -Eevo pipefail
 
 	## If the source OS is not found in cache, download it.
-	if [[ "$baseOS" == "vagrant-debian"  ]]; then
+	if [[ "$baseOS" == "vagrant-debian" ]]; then
 	  if [[ ! -d $cacheDir/Vagrant ]]; then
 	    log "Init vagrant"
       mkdir $cacheDir/Vagrant
@@ -71,7 +71,7 @@ source lib.sh
 ###########
 	if [[  -f "$cacheDir/$baseOS-$cpuArch.base.img" && ! -f $cacheDir/$baseOS-$cpuArch.base.img-inflated ]]; then
 	  log "Inflating base image"
-		inflateImage "$baseOS" "$cacheDir/$baseOS-$cpuArch.base.img"
+		inflateImage "$cacheDir/$baseOS-$cpuArch.base.img" "8000M"
 
 	elif [[ -f "$cacheDir/$baseOS-$cpuArch.base.iso" && ! "$(ls -A $cacheDir/mnt/*)" ]]; then
 	 	log "Extracting filesystem from base iso"
@@ -86,7 +86,7 @@ source lib.sh
 ### Prepare to Build lysmarine
 ###########
 	log "Mounting base image"
-  if [[ $vagrant ]]; then
+  if [[ "$baseOS" == "vagrant-debian"  ]]; then
 	  log "vagrant up"
         installDirLocation=$(pwd)/../install-scripts
         pushd $cacheDir/Vagrant/
@@ -94,7 +94,7 @@ source lib.sh
         vagrant up
         vagrant ssh -c "sudo mkdir /install-scripts"
         vagrant ssh -c "sudo chmod 0777 /install-scripts"
-        vagrant scp $installDirLocation/ :/
+        vagrant scp "$installDirLocation/" :/
         vagrant ssh -c "sudo chmod 0755 /install-scripts"
         vagrant ssh -c "cd /install-scripts ; sudo ./install.sh ${stages}"
         popd
@@ -126,28 +126,29 @@ source lib.sh
 	for argument in $stages; do # Loop each requested stages to build
 
     if [[ "$remove" == *"$argument"* ]]; then
-      [[ -d $cacheDir/$argument ]] && rm -r $cacheDir/$argument && log "    $argument removed"
+      [[ -d $cacheDir/$argument ]] && rm -r "${cacheDir}/${argument}" && log "    $argument removed"
     fi
 
-		if [ -d $cacheDir/$argument ] ; then # if the stage is already available in the cache, use it instead of building it.
+		if [ -d "$cacheDir/$argument" ] ; then # if the stage is already available in the cache, use it instead of building it.
 			log "    Stage $argument have been found in cache, adding it as lowerdir"
 			cachedLayers="$cacheDir/$argument:$cachedLayers"
 
 		else # mount and build
 	  	log     "Building stage $argument"
       rm -r "$workDir/$argument" || true
-			mkdir $workDir/$argument
+			mkdir "$workDir/$argument"
 
-      mount.mergerfs $workDir/mnt $workDir/mergedMnt
-      mount -t overlay overlay -o lowerdir=${cachedLayers}$workDir/mergedMnt,upperdir=$workDir/$argument,workdir=$workDir/workdir $workDir/fakeLayer
+      mount.mergerfs "$workDir/mnt" "$workDir/mergedMnt"
+
+      mount -t overlay overlay -o "lowerdir=${cachedLayers}${workDir}/mergedMnt,upperdir=${workDir}/${argument},workdir=${workDir}/workdir" "${workDir}/fakeLayer"
 	    addLysmarineScripts "$workDir/fakeLayer"
 			buildCmd="./install.sh $argument"
     	chrootAndBuild
 
-			umount $workDir/fakeLayer || umount -l $workDir/fakeLayer || logErr "Fail to unmount $workDir/fakeLayer"
-      umount $workDir/mergedMnt
-			rm -r $cacheDir/$argument || true ;
-			mv $workDir/$argument  $cacheDir/$argument ;
+			umount "$workDir/fakeLayer" || umount -l "$workDir/fakeLayer" || logErr "Fail to unmount $workDir/fakeLayer"
+      umount "$workDir/mergedMnt"
+			rm -r "$cacheDir/$argument" || true ;
+			mv "$workDir/$argument" "$cacheDir/$argument" ;
 			rm -r "$workDir/$argument" &
 
 			[ -f cachedLayers ] && cachedLayers=":"
@@ -163,7 +164,7 @@ source lib.sh
 ###########
   log "Packaging OS"
   mount.mergerfs $workDir/mnt $workDir/mergedMnt
-  mount -t overlay overlay -olowerdir=${cachedLayers}$workDir/mergedMnt $workDir/fakeLayer
+  mount -t overlay overlay -o "lowerdir=${cachedLayers}$workDir/mergedMnt" "$workDir/fakeLayer"
   wait
 
 	if [ -d "$workDir/iso" ]; then
@@ -184,13 +185,14 @@ source lib.sh
 
 	elif [ -f "$workDir/$baseOS-$cpuArch.base.img-inflated" ]; then
 	 	mountSourceImage "$workDir/$baseOS-$cpuArch.base.img-inflated" $workDir/releaseMnt
-    rsync -arHAX $workDir/fakeLayer/  $workDir/releaseMnt --delete
+    rsync -arHAX "$workDir/fakeLayer/" "$workDir/releaseMnt" --delete
 
-    umount $workDir/releaseMnt/boot || true
-    umount $workDir/releaseMnt || true
+    umount "$workDir/releaseMnt/boot" || true
+    umount "$workDir/releaseMnt" || true
+
     kpartx -d "$workDir/$baseOS-$cpuArch.base.img-inflated"
-    mv $workDir/$baseOS-$cpuArch.base.img-inflated $releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img
-    kpartx -d $cacheDir/$baseOS-$cpuArch.base.img
+    mv "$workDir/$baseOS-$cpuArch.base.img-inflated" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
+    kpartx -d "$cacheDir/$baseOS-$cpuArch.base.img"
 
 	  echo -e "PRO-TIP: \033[1;34m sudo su -c 'pv -tpreb ./release/lysmarine-$lmVersion-$baseOS-$cpuArch.img | dd of=/dev/mmcblk0 status=noxfer ; sync' \e[0m"
 
@@ -204,10 +206,10 @@ source lib.sh
 ### Cleanup workspace
 ###########
 
-	umount -l $workDir/fakeLayer || true
-  umount $workDir/mergedMnt
-	umount $workDir/mnt/boot || true
-	umount $workDir/mnt || true
+	umount -l "$workDir/fakeLayer" || true
+  umount "$workDir/mergedMnt"
+	umount "$workDir/mnt/boot" || true
+	umount "$workDir/mnt" || true
 
 ) || {
  	logErr "Build failed... cleaning the workspace." ;
