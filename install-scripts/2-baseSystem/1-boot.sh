@@ -8,7 +8,8 @@ fi
 
 ## RaspiOS boot config
 if [ -f /boot/cmdline.txt ] ; then
-	sed -i '$s/$/\ loglevel=1\ splash\ quiet\ logo.nologo\ plymouth.ignore-serial-consoles\ console=tty3\ rd.systemd.show_status=false/' /boot/cmdline.txt
+  #console=serial0,115200 console=tty1 root=PARTUUID=b1214a26-02 rootfstype=ext4 fsck.repair=yes rootwait quiet init=/usr/lib/raspberrypi-sys-mods/firstboot
+  sed -i '$s/$/\ loglevel=1\ splash\ quiet\ logo.nologo\ plymouth.ignore-serial-consoles\ console=tty3\ rd.systemd.show_status=false/' /boot/cmdline.txt
 fi
 
 ## Armbian boot config

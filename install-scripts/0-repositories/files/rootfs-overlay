@@ -30,7 +30,7 @@ rootfsDevice=$(blkid -L rootfs)
 
 if [ -z "${userOverlayDevice}" ]; then
   echo "${msgPrefix} No partition name useroverlay have been found. No overlay will be setup over rootfs."
-  echo 0
+  exit 0
 fi
 
 userOverlayDevicePartNo=$(echo "${userOverlayDevice}" | grep -o '[0-9]*$')

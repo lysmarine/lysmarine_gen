@@ -2,7 +2,9 @@
 apt-get install -yq initramfs-tools
 
 if [[ $LMOS = Raspbian ]]; then
+
   apt-get install -yq busybox
+
   install -m0755 -v $FILE_FOLDER/rootfs-overlay "/etc/initramfs-tools/scripts/init-bottom/"
 
   mkdir -p /etc/initramfs-tools/hooks
@@ -20,22 +22,42 @@ if [[ $LMOS = Raspbian ]]; then
 
 
   echo "overlay" >>/etc/initramfs-tools/modules
-  echo "ramfsfile=initrd" >>/boot/config.txt
-  echo "initramfs init.gz " >>/boot/config.txt
+
 
   echo "INITRD=Yes" >>/etc/default/raspberrypi-kernel
   echo "RPI_INITRD=Yes" >>/etc/default/raspberrypi-kernel
 
-  sed -i 's/\/usr\/lib\/raspberrypi-sys-mods\/firstboot/\/init.gz/' /boot/cmdline.txt
+  sed -i 's/init=\/usr\/lib\/raspberrypi-sys-mods\/firstboot//' /boot/cmdline.txt
+
 
   # Build one initramfs for each arm architecture supported by raspbian
-  for kernelLocation in /lib/modules/*v7+/; do
+  for kernelLocation in /lib/modules/*/; do
     kernelName=$(basename $kernelLocation)
+    kernelVersionNumber=$(echo $kernelName | cut -d"-" -f1 )
     mkinitramfs -k -o /boot/initramfs-$kernelName $kernelName
   done
+ 
+  echo "include lysmarine_config.txt" >> /boot/config.txt
+  touch lysmarine_config.txt
+  echo "ramfsfile=initrd" >> /boot/lysmarine_config.txt
 
+
+  cat >> /boot/lysmarine_config.txt <<EOL
+[pi1]
+initramfs initramfs-${kernelVersionNumber}+
+
+[pi2]
+initramfs initramfs-${kernelVersionNumber}-v7l+
+
+[pi3]
+initramfs initramfs-${kernelVersionNumber}-v7+
+
+[pi4]
+initramfs initramfs-${kernelVersionNumber}-v8+
+EOL
+ 
   # Instruct the kernel to load initramfs
-  cp $(ls /boot/initramfs*v7+) /boot/init.gz
-  cp $(ls /boot/initramfs*v7+) /host-rootfs/lysmarine_gen/
+  cp $(ls /boot/initramfs*7l+) /boot/init.gz
+  cp $(ls /boot/initramfs*) /host-rootfs/lysmarine_gen/
   rm /etc/init.d/resize2fs_once
 fi
