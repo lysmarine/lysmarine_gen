@@ -13,7 +13,7 @@ cat $FILE_FOLDER/hosts >> /etc/hosts
 install -m0600 -v $FILE_FOLDER/lysmarine-hotspot.nmconnection "/etc/NetworkManager/system-connections/"
 
 ## Disable some useless networking services.
-systemctl disable NetworkManager-wait-online.service # If we do not boot remote user over the network this is not needed
-systemctl disable ModemManager.service # for 2G/3G/4G
-systemctl disable pppd-dns.service # For dial-up Internet
+systemctl disable NetworkManager-wait-online.service || true # If we do not boot remote user over the network this is not needed
+systemctl disable ModemManager.service || true # for 2G/3G/4G
+systemctl disable pppd-dns.service || true # For dial-up Internet
 
