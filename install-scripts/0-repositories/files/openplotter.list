@@ -1,9 +1,3 @@
-# Source: OpenPlotter
-# Site: https://github.com/openplotter
-# Repository: OpenPlotter / OpenPlotter
-# Description: The open-source sailing platform
-
-
 deb [signed-by=/usr/share/keyrings/openplotter-openplotter-archive-keyring.gpg] https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian bullseye main
-
 deb-src [signed-by=/usr/share/keyrings/openplotter-openplotter-archive-keyring.gpg] https://dl.cloudsmith.io/public/openplotter/openplotter/deb/debian bullseye main
+deb [signed-by=/usr/share/keyrings/oss.boating-archive-keyring.gpg] https://www.free-x.de/deb4op bullseye main
