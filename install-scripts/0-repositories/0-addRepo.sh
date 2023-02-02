@@ -3,22 +3,22 @@
 apt-get install -y -q wget gnupg dirmngr
 gpg --list-keys
 ## Add the extended sources software source for Debian
-sed -i "s/deb\.debian\.org\/debian\/\ bullseye\ main/deb\.debian\.org\/debian\/\ bullseye\ main\ contrib\ non-free/g" /etc/apt/sources.list
+#sed -i "s/deb\.debian\.org\/debian\/\ bullseye\ main/deb\.debian\.org\/debian\/\ bullseye\ main\ contrib\ non-free/g" /etc/apt/sources.list
 
 ## Add the extended sources software source for Debian
 if [ "$(lsb_release -id -s | head -1)" = "Raspbian" ]  ; then
-apt-get install -y debian-keyring  # debian only
-apt-get install -y debian-archive-keyring  # debian only
-apt-get install -y apt-transport-https
+  apt-get install -y debian-keyring  # debian only
+  apt-get install -y debian-archive-keyring  # debian only
+  apt-get install -y apt-transport-https
 fi
 
 if [ "$(lsb_release -id -s | head -1)" = "Raspbian" ]  ; then
-    gpg --no-default-keyring --keyring /usr/share/keyrings/debian-release-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 0E98404D386FA1D9
-    gpg --no-default-keyring --keyring /usr/share/keyrings/debian-release-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 605C66F00D6C9793
-    gpg --no-default-keyring --keyring /usr/share/keyrings/debian-release-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 648ACFD622F3D138
+  gpg --no-default-keyring --keyring /usr/share/keyrings/debian-release-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 0E98404D386FA1D9
+  gpg --no-default-keyring --keyring /usr/share/keyrings/debian-release-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 605C66F00D6C9793
+  gpg --no-default-keyring --keyring /usr/share/keyrings/debian-release-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 648ACFD622F3D138
 
-   	install -m0644 -v $FILE_FOLDER/debian.list  "/etc/apt/sources.list.d/"
-	install -m0644 -v $FILE_FOLDER/40-debian.pref "/etc/apt/preferences.d/"
+  install -m0644 -v $FILE_FOLDER/debian.list  "/etc/apt/sources.list.d/"
+  install -m0644 -v $FILE_FOLDER/40-debian.pref "/etc/apt/preferences.d/"
 fi
 
 ## Add repository sources
@@ -30,6 +30,8 @@ install -m0644 -v $FILE_FOLDER/openplotter.list  "/etc/apt/sources.list.d/"
 
 ## Prefer opencpn's PPA to free-x
 install -m0644 -v $FILE_FOLDER/50-lysmarine.pref "/etc/apt/preferences.d/"
+
+install -m0644 -v $FILE_FOLDER/60-nodesource.pref "/etc/apt/preferences.d/"
 
 ## Get the signatures
 gpg --list-keys

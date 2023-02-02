@@ -19,8 +19,6 @@ install    -m 644 -o signalk -g signalk $FILE_FOLDER/settings.json  "/home/signa
 install    -m 644 -o signalk -g signalk $FILE_FOLDER/security.json  "/home/signalk/.signalk/security.json"
 install    -m 755 -o signalk -g signalk $FILE_FOLDER/signalk-server "/home/signalk/.signalk/signalk-server"
 
-install -d "/usr/local/share/icons/"
-install -m 644  $FILE_FOLDER/signalk.png "/usr/local/share/icons/"
 
 
 
