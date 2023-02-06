@@ -6,6 +6,7 @@ Conflicts=getty@tty1.service
 [Service]
 ExecStart=/usr/bin/simplelogin --user user --exec "dbus-run-session /usr/local/bin/LMkwinwrapper"
 Restart=always
+StartLimitBurst=3
 
 [Install]
 Alias=display-manager.service

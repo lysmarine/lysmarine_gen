@@ -5,5 +5,5 @@ def setTheme(window):
 	window.evaluate_js('')
 
 if __name__ == '__main__':
-	window = webview.create_window('S-K', "http://localhost:80/admin/", background_color='#000000')
+	window = webview.create_window('S-K', "http://localhost/admin/#/dashboard", background_color='#000000', frameless=True)
 	webview.start(setTheme, window)

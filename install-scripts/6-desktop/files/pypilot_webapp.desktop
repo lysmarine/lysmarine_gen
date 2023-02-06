@@ -3,5 +3,5 @@ Type=Application
 Name=Pypilot Webapp
 Exec=/usr/local/bin/Pypilot_webapp
 Terminal=false
-Icon=go-jump
+Icon=vcs-push
 Categories=Utility
