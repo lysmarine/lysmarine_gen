@@ -321,23 +321,30 @@ function safetyChecks {
      ## Make sure we have a clean workspace.
 
 	if [ "$(ls -A "$workDir/fakeLayer/boot" 2> /dev/null)" ] ; then
-		   logErr "${workDir}/fakeLayer/boot is not empty. Previous run have fail ?"
-		   umount "$workDir/fakeLayer/boot"  || umount -l "$workDir/fakeLayer/boot" || /bin/true
+		logErr "${workDir}/fakeLayer/boot is not empty. Previous run have fail ?"
+		umount "$workDir/fakeLayer/boot"  || umount -l "$workDir/fakeLayer/boot" || /bin/true
 	fi
 
 	if [ "$(ls -A "$workDir/fakeLayer/" 2> /dev/null)" ] ; then
-		   logErr "$workDir/fakeLayer is not empty. Previous run have fail ?"
-		   umount "$workDir/fakeLayer"  || umount -l "$workDir/fakeLayer" || /bin/true
+		logErr "$workDir/fakeLayer is not empty. Previous run have fail ?"
+		umount "$workDir/fakeLayer"  || umount -l "$workDir/fakeLayer" || /bin/true
+		rm -r "$workDir/fakeLayer/*"
 	fi
 
 	if [ "$(ls -A "$workDir/mnt/boot" 2> /dev/null)" ] ; then
-		   logErr "${workDir}/mnt/boot is not empty. Previous run have fail ?"
-		   umount "$workDir/mnt/boot"  || umount -l "$workDir/mnt/boot" || /bin/true
+		logErr "${workDir}/mnt/boot is not empty. Previous run have fail ?"
+		umount "$workDir/mnt/boot"  || umount -l "$workDir/mnt/boot" || /bin/true
 	fi
 
 	if [ "$(ls -A "$workDir/mnt" 2> /dev/null)" ] ; then
-		   logErr "${workDir}/mnt is not empty. Previous run have fail ?"
-		   umount "$workDir/mnt"  || umount -l "$workDir/mnt" || /bin/true
-		   rm -r "$workDir/mnt/*"
+		logErr "${workDir}/mnt is not empty. Previous run have fail ?"
+		umount "$workDir/mnt"  || umount -l "$workDir/mnt" || /bin/true
+		rm -r "$workDir/mnt/*"
 	fi
+	if [ "$(ls -A "$workDir/mergedMnt" 2> /dev/null)" ] ; then
+		logErr "${workDir}/mergedMnt is not empty. Previous run have fail ?"
+		umount "$workDir/mergedMnt"  || umount -l "$workDir/mergedMnt" || /bin/true
+		rm -r "$workDir/mergedMnt/*"
+	fi
+
 }

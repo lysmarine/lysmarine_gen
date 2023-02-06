@@ -134,19 +134,20 @@ source lib.sh
 			cachedLayers="$cacheDir/$argument:$cachedLayers"
 
 		else # mount and build
-	  	log     "Building stage $argument"
-      rm -r "$workDir/$argument" || true
+	  		log     "Building stage $argument"
+			rm -r "$workDir/$argument" || true
 			mkdir "$workDir/$argument"
 
-      mount.mergerfs "$workDir/mnt" "$workDir/mergedMnt"
 
-      mount -t overlay overlay -o "lowerdir=${cachedLayers}${workDir}/mergedMnt,upperdir=${workDir}/${argument},workdir=${workDir}/workdir" "${workDir}/fakeLayer"
-	    addLysmarineScripts "$workDir/fakeLayer"
+      		mount.mergerfs "$workDir/mnt" "$workDir/mergedMnt"
+
+      		mount -t overlay overlay -o "lowerdir=${cachedLayers}${workDir}/mergedMnt,upperdir=${workDir}/${argument},workdir=${workDir}/workdir" "${workDir}/fakeLayer"
+			addLysmarineScripts "$workDir/fakeLayer"
 			buildCmd="./install.sh $argument"
-    	chrootAndBuild
+    		chrootAndBuild
 
 			umount "$workDir/fakeLayer" || umount -l "$workDir/fakeLayer" || logErr "Fail to unmount $workDir/fakeLayer"
-      umount "$workDir/mergedMnt"
+			umount "$workDir/mergedMnt"
 			rm -r "$cacheDir/$argument" || true ;
 			mv "$workDir/$argument" "$cacheDir/$argument" ;
 			rm -r "$workDir/$argument" &
@@ -169,9 +170,9 @@ source lib.sh
 
 	if [ -d "$workDir/iso" ]; then
 		mkdir "$workDir/iso/live"
-    #mksquashfs "$workDir/fakeLayer" "$workDir/iso/live/filesystem.squashfs" -comp xz -noappend
-    mksquashfs "$workDir/fakeLayer" "$workDir/iso/live/filesystem.squashfs" -comp gzip -noappend
-    md5sum "$workDir/iso/live/filesystem.squashfs"
+    	#mksquashfs "$workDir/fakeLayer" "$workDir/iso/live/filesystem.squashfs" -comp xz -noappend
+    	mksquashfs "$workDir/fakeLayer" "$workDir/iso/live/filesystem.squashfs" -comp gzip -noappend
+    	md5sum "$workDir/iso/live/filesystem.squashfs"
 		rsync -haPr  "$cacheDir/iso/.disk" "$workDir/iso"
 
 		cp files/preseed.cfg "$workDir/iso"
@@ -214,5 +215,5 @@ source lib.sh
 ) || {
  	logErr "Build failed... cleaning the workspace." ;
 	safetyChecks ;
-	logErr "Build failed... :(" ;
+	logErr "Build failed... " ;
 }
