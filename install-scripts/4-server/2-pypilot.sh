@@ -60,18 +60,13 @@ install -d -v -o pypilot -g pypilot -m 0755 /home/pypilot/.pypilot
 install    -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/signalk.conf "/home/pypilot/.pypilot/"
 install    -v -o pypilot -g pypilot -m 0644 $FILE_FOLDER/webapp.conf  "/home/pypilot/.pypilot/"
 
-## Install The .desktop files.
-install -d /usr/local/share/applications
-install -v $FILE_FOLDER/pypilot_calibration.desktop "/usr/local/share/applications/"
-install -v $FILE_FOLDER/pypilot_webapp.desktop "/usr/local/share/applications/" # NOTE Depend on stage 6.6
-
 ## Give permission to sudo chrt without password for the user pypilot.
 echo "" >> /etc/sudoers
 echo 'pypilot ALL=(ALL) NOPASSWD: /usr/bin/chrt' >> /etc/sudoers
 
 ## Set default state.
-systemctl disable pypilot_web
-systemctl mask pypilot_web
+#systemctl disable pypilot_web
+#systemctl mask pypilot_web
 systemctl disable pypilot@pypilot.service
 
 ## Reduce excessive logging.

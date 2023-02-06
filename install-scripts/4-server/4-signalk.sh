@@ -19,8 +19,7 @@ install    -m 644 -o signalk -g signalk $FILE_FOLDER/settings.json  "/home/signa
 install    -m 644 -o signalk -g signalk $FILE_FOLDER/security.json  "/home/signalk/.signalk/security.json"
 install    -m 755 -o signalk -g signalk $FILE_FOLDER/signalk-server "/home/signalk/.signalk/signalk-server"
 
-
-
+install  $FILE_FOLDER/signalk.service "/etc/systemd/system/"
 
 ## Install signalk
 npm install -g --unsafe-perm signalk-server

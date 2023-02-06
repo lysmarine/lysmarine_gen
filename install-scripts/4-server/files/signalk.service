@@ -1,0 +1,10 @@
+[Unit]
+
+[Service]
+ExecStart=/home/signalk/.signalk/signalk-server
+WorkingDirectory=/home/signalk/.signalk
+User=signalk
+Environement=EXTERNALPORT=80
+
+[Install]
+WantedBy=multi-user.target
