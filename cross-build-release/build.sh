@@ -2,6 +2,7 @@
 # shellcheck disable=SC2115
 
 source lib.sh
+
 ###########
 ### Setup
 ###########
@@ -29,24 +30,12 @@ source lib.sh
 (
 	set -Eevo pipefail
 
-	## If the source OS is not found in cache, download it.
-	if [[ "$baseOS" == "vagrant-debian" ]]; then
-	  if [[ ! -d $cacheDir/Vagrant ]]; then
-	    log "Init vagrant"
-      mkdir $cacheDir/Vagrant
-      cp ./files/Vagrantfile $cacheDir/Vagrant/
-      vagrant plugin install vagrant-scp
-      pushd $cacheDir/Vagrant/
-        vagrant init
-      popd
-    fi
-
-	elif ! ls "$cacheDir/$baseOS-$cpuArch".base.??? >/dev/null 2>&1; then
+	if ! ls "$cacheDir/$baseOS-$cpuArch".base.??? >/dev/null 2>&1; then
 		if [[ "$baseOS" == "raspios" ]]; then
-			zipName="raspios_lite_${cpuArch}_latest"
-			wget -P "$cacheDir/" "https://downloads.raspberrypi.org/$zipName"
-			7z e -o"$cacheDir/" "$cacheDir/$zipName"
-			mv "$cacheDir"/"$zipName"~ "$cacheDir/$baseOS-$cpuArch.base.img"
+		  zipName="2023-10-10-raspios-bookworm-${cpuArch}-lite.img"
+			wget -P "$cacheDir/" "https://downloads.raspberrypi.org/raspios_lite_${cpuArch}/images/raspios_lite_${cpuArch}-2023-10-10/$zipName".xz
+			7z e -o"$cacheDir/" "$cacheDir/$zipName".xz
+			mv "$cacheDir"/"$zipName" "$cacheDir/$baseOS-$cpuArch.base.img"
 			rm "$cacheDir/$zipName"
 
 		elif [[ "$baseOS" == "pine64so" ]]; then
@@ -65,7 +54,6 @@ source lib.sh
     log "Original image found in cache."
 	fi
 
-
 ###########
 ### Prepare the base OS
 ###########
@@ -81,9 +69,8 @@ source lib.sh
     log "Reusing base image from cache."
 	fi
 
-
 ###########
-### Prepare to Build lysmarine
+### Create a base image to build on
 ###########
 	log "Mounting base image"
   if [[ "$baseOS" == "vagrant-debian"  ]]; then
@@ -103,7 +90,7 @@ source lib.sh
   elif [ -f "$cacheDir/$baseOS-$cpuArch.base.img-inflated" ]; then
     rm $workDir/$baseOS-$cpuArch.base.img-inflated || true
     cp $cacheDir/$baseOS-$cpuArch.base.img-inflated $workDir/$baseOS-$cpuArch.base.img-inflated &
-    mountSourceImage $cacheDir/$baseOS-$cpuArch.base.img $workDir/mnt
+    mountSourceImage $cacheDir/$baseOS-$cpuArch.base.img-inflated $workDir/mnt
 
   elif [ -f "$cacheDir/$baseOS-$cpuArch.base.iso" ]; then
     cp -r $cacheDir/iso/. $workDir/iso &
@@ -119,15 +106,16 @@ source lib.sh
 
 
 ###########
-### Loop stages
+### Build stages by stages
 ###########
 	set -f
 	cachedLayers=""
 	for argument in $stages; do # Loop each requested stages to build
 
-    if [[ "$remove" == *"$argument"* ]]; then
-      [[ -d $cacheDir/$argument ]] && rm -r "${cacheDir}/${argument}" && log "    $argument removed"
-    fi
+		# Remove requested stages from cache
+		if [[ "$remove" == *"$argument"* ]]; then
+			[[ -d $cacheDir/$argument ]] && rm -r "${cacheDir}/${argument}" && log "    $argument removed"
+		fi
 
 		if [ -d "$cacheDir/$argument" ] ; then # if the stage is already available in the cache, use it instead of building it.
 			log "    Stage $argument have been found in cache, adding it as lowerdir"
@@ -137,17 +125,14 @@ source lib.sh
 	  		log     "Building stage $argument"
 			rm -r "$workDir/$argument" || true
 			mkdir "$workDir/$argument"
-
-
-      		mount.mergerfs "$workDir/mnt" "$workDir/mergedMnt"
-
+       		mount.mergerfs "$workDir/mnt" "$workDir/mergedMnt"
       		mount -t overlay overlay -o "lowerdir=${cachedLayers}${workDir}/mergedMnt,upperdir=${workDir}/${argument},workdir=${workDir}/workdir" "${workDir}/fakeLayer"
-			addLysmarineScripts "$workDir/fakeLayer"
+			
 			buildCmd="./install.sh $argument"
     		chrootAndBuild
 
 			umount "$workDir/fakeLayer" || umount -l "$workDir/fakeLayer" || logErr "Fail to unmount $workDir/fakeLayer"
-			umount "$workDir/mergedMnt"
+			umount "$workDir/mergedMnt" || umount -l "$workDir/mergedMnt" || logErr "Fail to unmount $workDir/mergedMnt"
 			rm -r "$cacheDir/$argument" || true ;
 			mv "$workDir/$argument" "$cacheDir/$argument" ;
 			rm -r "$workDir/$argument" &
@@ -186,13 +171,16 @@ source lib.sh
 
 	elif [ -f "$workDir/$baseOS-$cpuArch.base.img-inflated" ]; then
 	 	mountSourceImage "$workDir/$baseOS-$cpuArch.base.img-inflated" $workDir/releaseMnt
+	 	parted "$workDir/$baseOS-$cpuArch.base.img-inflated" --script "print"
     rsync -arHAX "$workDir/fakeLayer/" "$workDir/releaseMnt" --delete
 
     umount "$workDir/releaseMnt/boot" || true
     umount "$workDir/releaseMnt" || true
 
     kpartx -d "$workDir/$baseOS-$cpuArch.base.img-inflated"
+    parted "$workDir/$baseOS-$cpuArch.base.img-inflated" --script "print"
     mv "$workDir/$baseOS-$cpuArch.base.img-inflated" "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img"
+    parted "$releaseDir/lysmarine-$lmVersion-$baseOS-$cpuArch.img" --script "print"
     kpartx -d "$cacheDir/$baseOS-$cpuArch.base.img"
 
 	  echo -e "PRO-TIP: \033[1;34m sudo su -c 'pv -tpreb ./release/lysmarine-$lmVersion-$baseOS-$cpuArch.img | dd of=/dev/mmcblk0 status=noxfer ; sync' \e[0m"

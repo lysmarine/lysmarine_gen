@@ -191,7 +191,10 @@ mountSourceImage() {
 	partQty=$( echo "$partitions" | wc -w )
 	loopId=$( echo "$partitions" | grep -oh '[0-9]*' | head -n 1 )
 
-	if [ "$partQty" == 3 ]; then
+	if [ "$partQty" == 4 ]; then
+		mount -v "/dev/mapper/loop${loopId}p2" "$mountPoint"
+		mount -v "/dev/mapper/loop${loopId}p1" "$mountPoint/boot"
+	elif [ "$partQty" == 3 ]; then
 		mount -v "/dev/mapper/loop${loopId}p2" "$mountPoint"
 		mount -v "/dev/mapper/loop${loopId}p1" "$mountPoint/boot"
 
@@ -210,17 +213,16 @@ mountSourceImage() {
 
 inflateImage() {
 	imageLocation=$1
-  size=$2
+  	size=$2
 		log "Inflating OS image to have enough space to build lysmarine. "
 		cp -fv "$imageLocation" "${imageLocation}-inflated"
 
 		log "truncate image to 8G"
 		truncate -s "$size" "${imageLocation}-inflated"
 
-		log "resize last partition to 98%"
+		log "resize last partition to 90%"
 		partQty=$(fdisk -l "${imageLocation}-inflated" | grep -o "^${imageLocation}-inflated" | wc -l)
-
-		parted "${imageLocation}-inflated" --script "resizepart $partQty 98%"
+		parted "${imageLocation}-inflated" --script "resizepart $partQty 7G"
 		fdisk -l "${imageLocation}-inflated"
   	log "Resize the filesystem to fit the partition."
 		loopId=$(kpartx -sav "${imageLocation}-inflated" | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
@@ -229,16 +231,24 @@ inflateImage() {
 		resize2fs "/dev/mapper/loop${loopId}p${partQty}"
 		kpartx -d "${imageLocation}-inflated"
 
-    log "Add New user overlay partition."
-    newPartitionStartSector=$(sfdisk --list-free -q "${imageLocation}-inflated" | tail -n1 | cut -d" " -f1)
-    parted "${imageLocation}-inflated" --script "mkpart primary ext4 ${newPartitionStartSector}s -1s"
+    log "Add swap partition."
 
-    newPartitionNumber=$(sfdisk -q -l "${imageLocation}-inflated" |tail -n1 | cut -f1 -d" " | grep -oh "[0-9]*")
-    log "New partition number is ${newPartitionNumber}"
+    parted "${imageLocation}-inflated" --script "mkpart primary linux-swap 7G -100m"
+    newPartitionNumber=$(sfdisk -q -l "${imageLocation}-inflated" |tail -n1 | cut -f1 -d" " | grep -oh "[0-9]*$")
+    loopId=$(kpartx -sav "${imageLocation}-inflated" | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
+
+     mkswap "/dev/mapper/loop${loopId}p${newPartitionNumber}"
+    kpartx -d "${imageLocation}-inflated"
+    log "Add New user overlay partition."
+    parted "${imageLocation}-inflated" --script "mkpart primary ext4 -100m -1s"
+    parted "${imageLocation}-inflated" --script "print"
+    newPartitionNumber=$(sfdisk -q -l "${imageLocation}-inflated" |tail -n1 | cut -f1 -d" " | grep -oh "[0-9]*$")
     loopId=$(kpartx -sav "${imageLocation}-inflated" | cut -d" " -f3 | grep -oh '[0-9]*' | head -n 1)
     mkfs.ext4 "/dev/mapper/loop${loopId}p${newPartitionNumber}"
+    parted "${imageLocation}-inflated" --script "print"
     e2label "/dev/mapper/loop${loopId}p${newPartitionNumber}" useroverlay
     tune2fs -L useroverlay "/dev/mapper/loop${loopId}p${newPartitionNumber}"
+    parted "${imageLocation}-inflated" --script "print"
     kpartx -d "${imageLocation}-inflated"
 }
 
@@ -259,21 +269,29 @@ function chrootAndBuild {
 	if [[ ! $(dpkg --print-architecture) == "$cpuArch" ]] ; then
 
 	  if [[ $cpuArch == "arm64" ]]; then
-		  qemuArch=" -q qemu-aarch64"
+		  qemuArch="qemu-aarch64-static"
 	  elif [[ $cpuArch == armhf ]]; then
-		  qemuArch=" -q qemu-arm"
+		  qemuArch="qemu-arm-static"
 	  fi
+	
+		mount -o bind /dev $workDir/fakeLayer/dev
+		mount -t proc none $workDir/fakeLayer/proc
+		mount -t sysfs /sys $workDir/fakeLayer/sys
+		mount -o bind /etc/resolv.conf $workDir/fakeLayer/etc/resolv.conf
+		mount --bind /dev/pts $workDir/fakeLayer/dev/pts
+		addLysmarineScripts "$workDir/fakeLayer"
 
+		cp /usr/bin/$qemuArch $workDir/fakeLayer/usr/bin
+		echo  "cd /install-scripts ;uname -a ; $qemuArch /usr/bin/uname -a ; $qemuArch /usr/bin/pwd; $qemuArch /bin/bash ./${buildCmd}" > $workDir/fakeLayer/run.sh
+		chmod a+x $workDir/fakeLayer/run.sh
+		chroot $workDir/fakeLayer/ /run.sh
 
-	  proot $qemuArch \
-		--root-id \
-		--rootfs=$workDir/fakeLayer \
-		--cwd=/install-scripts \
-		--mount=/etc/resolv.conf:/etc/resolv.conf \
-		--mount=/dev:/dev \
-		--mount=/sys:/sys \
-		--mount=/proc:/proc \
-		$buildCmd
+		umount $workDir/fakeLayer/dev/pts
+		umount $workDir/fakeLayer/dev
+		umount $workDir/fakeLayer/proc
+		umount $workDir/fakeLayer/sys
+	    umount $workDir/fakeLayer/etc/resolv.conf
+		rm $workDir/fakeLayer/usr/bin/$qemuArch
 
 	  return=$?
 	  [ $return -ne 0 ] && exit 1
