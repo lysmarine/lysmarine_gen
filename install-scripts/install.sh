@@ -11,10 +11,14 @@ fi
 echo "Architecture : $LMARCH"
 
 if [[ -z $LMOS ]];then
-  if [ ! -f /usr/bin/lsb_release ]; then
-      apt-get install -y -q lsb-release
+  if [[ -f /etc/rpi-issue ]]; then
+    export LMOS=Raspbian
+  else
+    if [ ! -f /usr/bin/lsb_release ]; then
+        apt-get install -y -q lsb-release
+    fi
+    export LMOS="$(lsb_release -id -s | head -1)"
   fi
-  export LMOS="$(lsb_release -id -s | head -1)"
 fi
 echo "Base OS : $LMOS"
 
@@ -53,7 +57,8 @@ for argument in $argumentList; do # access each element of array
         echo '';
         echo '==========================================';
         echo "From request $argument "
-        echo "Running stage $stage -> $script ( $scriptLocation )"
+        echo "Running stage $stage script $script ( $scriptLocation )"
+        echo "OS:$LMOS    Arch:$LMARCH"
         echo '==========================================';
         echo '';
 

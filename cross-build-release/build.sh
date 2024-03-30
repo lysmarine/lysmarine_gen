@@ -32,8 +32,8 @@ source lib.sh
 
 	if ! ls "$cacheDir/$baseOS-$cpuArch".base.??? >/dev/null 2>&1; then
 		if [[ "$baseOS" == "raspios" ]]; then
-		  zipName="2023-10-10-raspios-bookworm-${cpuArch}-lite.img"
-			wget -P "$cacheDir/" "https://downloads.raspberrypi.org/raspios_lite_${cpuArch}/images/raspios_lite_${cpuArch}-2023-10-10/$zipName".xz
+		  zipName="2024-03-15-raspios-bookworm-${cpuArch}-lite.img"
+			wget -P "$cacheDir/" "https://downloads.raspberrypi.org/raspios_lite_${cpuArch}/images/raspios_lite_${cpuArch}-2024-03-15/$zipName".xz
 			7z e -o"$cacheDir/" "$cacheDir/$zipName".xz
 			mv "$cacheDir"/"$zipName" "$cacheDir/$baseOS-$cpuArch.base.img"
 			rm "$cacheDir/$zipName"
