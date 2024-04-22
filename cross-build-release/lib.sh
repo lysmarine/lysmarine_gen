@@ -193,14 +193,14 @@ mountSourceImage() {
 
 	if [ "$partQty" == 4 ]; then
 		mount -v "/dev/mapper/loop${loopId}p2" "$mountPoint"
-		mount -v "/dev/mapper/loop${loopId}p1" "$mountPoint/boot"
+		mount -v "/dev/mapper/loop${loopId}p1" "$mountPoint/boot/firmware"
 	elif [ "$partQty" == 3 ]; then
 		mount -v "/dev/mapper/loop${loopId}p2" "$mountPoint"
-		mount -v "/dev/mapper/loop${loopId}p1" "$mountPoint/boot"
+		mount -v "/dev/mapper/loop${loopId}p1" "$mountPoint/boot/firmware"
 
 	elif [ "$partQty" == 2 ]; then
 		mount -v "/dev/mapper/loop${loopId}p2" "$mountPoint"
-		mount -v "/dev/mapper/loop${loopId}p1" "$mountPoint/boot"
+		mount -v "/dev/mapper/loop${loopId}p1" "$mountPoint/boot/firmware"
 
 	elif [ "$partQty" == 1 ]; then
 		mount -v "/dev/mapper/loop${loopId}p1" "$mountPoint"
