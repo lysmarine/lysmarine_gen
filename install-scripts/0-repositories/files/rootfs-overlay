@@ -27,6 +27,7 @@ sleep  $(cat /sys/module/usb_storage/parameters/delay_use)
 # NOTE: In case of many partition having the label, blkid will only return the last one.
 userOverlayDevice=$(blkid -L useroverlay)
 rootfsDevice=$(blkid -L rootfs)
+swapfdDevice=$(blkid -t TYPE=swap | cut -f1 -d":"  )
 
 if [ -z "${userOverlayDevice}" ]; then
   echo "${msgPrefix} No partition name useroverlay have been found. No overlay will be setup over rootfs."
@@ -41,7 +42,7 @@ userOverlayDisc=$(echo "${userOverlayDevice}" | sed "s/${partField}$//")
 userOverlayDeviceLastSector=$( fdisk -l $userOverlayDisc | grep $userOverlayDevice | tr -s ' ' | cut  -d ' ' -f3 )
 echo "userOverlayDeviceLastSector $userOverlayDeviceLastSector"
 emptySpaceStartSector=$(($userOverlayDeviceLastSector+1))
-unusedSpaceAllocation=$(echo "F\n" | fdisk /dev/mmcblk0 | grep -e "^ *${emptySpaceStartSector} ")
+unusedSpaceAllocation=$(parted /dev/mmcblk0 unit b print free | grep "Free Space" | grep ${emptySpaceStartSector})
 
 # If there is unused space found after the "useroverlay" partition, expends the partition to use it all.
 if [ ! -z "${unusedSpaceAllocation}" ]; then
@@ -49,6 +50,8 @@ if [ ! -z "${unusedSpaceAllocation}" ]; then
   parted ${userOverlayDisc}  --script "resizepart ${userOverlayDevicePartNo} 100%"
   resize2fs "${userOverlayDevice}"
   echo "${msgPrefix} Done Resizing partition."
+else
+  echo "${msgPrefix} not resizing partition  "
 fi
 
 #List chunks of free space :
@@ -86,9 +89,10 @@ rootfsFilesystemType=$(grep $rootfsDevice /proc/mounts | cut -d' ' -f3)
 rootfsMountOpt=$(grep $rootfsDevice /proc/mounts | cut -d' ' -f4)
 rootfsFstabEntry="${ROOT} /run/lysmarine/useroverlay/rootfs ${rootfsFilesystemType} ${rootfsMountOpt} 0 0"
 overlayfsFstabEntry="${userOverlayDevice} /run/lysmarine/useroverlay ext4 defaults,noatime 0 0"
+swapFsTabEntry="${swapfdDevice}   swap             swap        defaults         0   0"
 
-grep -v ' / ' ${rootmnt}/run/lysmarine/useroverlay/rootfs/etc/fstab >${rootmnt}/etc/fstab
-echo $rootfsFstabEntry >>${rootmnt}/etc/fstab
-echo $overlayfsFstabEntry >>${rootmnt}/etc/fstab
-
+grep -v ' / ' ${rootmnt}/run/lysmarine/useroverlay/rootfs/etc/fstab > ${rootmnt}/etc/fstab
+echo $rootfsFstabEntry >> ${rootmnt}/etc/fstab
+echo $overlayfsFstabEntry >> ${rootmnt}/etc/fstab
+echo $swapFsTabEntry >> ${rootmnt}/etc/fstab
 exit 0

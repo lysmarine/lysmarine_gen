@@ -1,6 +1,7 @@
 #!/bin/bash -e
 apt-get install -yq initramfs-tools
 
+set -x
 if [[ $LMOS = Raspbian ]]; then
 
   apt-get install -yq busybox
@@ -28,21 +29,14 @@ if [[ $LMOS = Raspbian ]]; then
   sed -i 's/init=\/usr\/lib\/raspberrypi-sys-mods\/firstboot//' /boot/firmware/cmdline.txt
 
   echo " debug " >> /boot/firmware/cmdline.txt
-  echo "RPI_INITRD=Yes" >>/etc/default/raspberrypi-kernel
-
-  sed -i 's/init=\/usr\/lib\/raspberrypi-sys-mods\/firstboot//' /boot/cmdline.txt
-
 
   # Build one initramfs for each arm architecture supported by raspbian
   for kernelLocation in /lib/modules/*/; do
     kernelName=$(basename $kernelLocation)
     kernelVersionNumber=$(echo $kernelName | cut -d"-" -f1 )
-    mkinitramfs -k -o /boot/initramfs-$kernelName $kernelName
+    mkinitramfs -k -o /boot/firmware/initramfs-$kernelName $kernelName
   done
- 
-  echo "include lysmarine_config.txt" >> /boot/config.txt
-  touch lysmarine_config.txt
-  echo "ramfsfile=initrd" >> /boot/lysmarine_config.txt
+
 
  # tell RPI to user our custom initramfs
 
@@ -61,10 +55,7 @@ initramfs $(basename -a /boot/firmware/initramfs*v8 | tail -n1 ) followkernel
 initramfs $(basename -a /boot/firmware/initramfs*2712 | tail -n1 ) followkernel
 
 EOL
- 
-  # Instruct the kernel to load initramfs
-  cp $(ls /boot/initramfs*7l+) /boot/init.gz
-  cp $(ls /boot/initramfs*) /host-rootfs/lysmarine_gen/
+
   rm /etc/init.d/resize2fs_once
   systemctl disable dphys-swapfile
 fi
